@@ -1,4 +1,5 @@
 import { combineReducers, createStore, applyMiddleware } from "redux";
+import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
 
 const rootReducer = combineReducers({});
@@ -16,7 +17,7 @@ const loadState = () => {
 const saveState = (state) => {
   try {
     const serializedState = JSON.stringify(state);
-    localStorage.setItem(LOCAL_STORAGE_KEY, serializedState);
+    localStorage.setItem(process.env.LOCAL_STORAGE_KEY, serializedState);
   } catch (err) {
     console.error("Error saving User details", err);
   }
@@ -25,8 +26,7 @@ const saveState = (state) => {
 const store = createStore(
   rootReducer,
   loadState(),
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-  applyMiddleware(thunk)
+  composeWithDevTools(applyMiddleware(thunk))
 );
 
 store.subscribe(() => {
