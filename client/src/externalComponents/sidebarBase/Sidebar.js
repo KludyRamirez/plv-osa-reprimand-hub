@@ -24,6 +24,9 @@ import {
   BsStickyFill,
 } from "react-icons/bs";
 
+import plvLogo from "../../images/login/PLVlogo.png";
+import osaLogo from "../../images/login/osalogo.jpg";
+
 const AppNavBar = styled(AppBar)({
   background: "transparent",
   boxShadow: "none",
@@ -116,6 +119,14 @@ function Sidebar(props) {
               padding: "20px",
             }}
           >
+            <div className="w-full flex justify-start items-center gap-[24px] font-semibold text-white mb-[12px]">
+              <img src={plvLogo} alt="" className="w-[80px] h-[80px] " />
+              <img
+                src={osaLogo}
+                alt=""
+                className="w-[80px] h-[80px] rounded-[40px]"
+              />
+            </div>
             <div className="w-full">
               <Link to="/dashboard">
                 {activeItem === "/dashboard" ? (
@@ -383,11 +394,11 @@ function Sidebar(props) {
             </IconButton>
           </Toolbar>
           <div className="flex justify-center items-center mt-[-1px] gap-[20px]">
-            <div className="flex justify-center items-center gap-[14px]">
+            <div className="flex justify-center items-center gap-[12px]">
               <BsBell className="text-[20px]" />
               <div className="text-[16px]">Notifications</div>
             </div>
-            <div className="flex justify-center items-center gap-[14px]">
+            <div className="flex justify-center items-center gap-[12px]">
               <BsPersonCircle className="text-[20px]" />
               <div className="text-[16px]">Admin</div>
             </div>
