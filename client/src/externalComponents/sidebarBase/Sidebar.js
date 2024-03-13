@@ -11,56 +11,70 @@ import { useLocation } from "react-router-dom";
 import { AiOutlineLogout } from "react-icons/ai";
 import { CgMenuLeft } from "react-icons/cg";
 import {
-  BsArchive,
-  BsArchiveFill,
-  BsCalendarPlus,
-  BsCalendarPlusFill,
-  BsCalendarWeek,
-  BsCalendarWeekFill,
-  BsChat,
-  BsChatHeartFill,
-  BsFolder2Open,
-  BsFolderFill,
+  BsCaretRight,
+  BsDiamondHalf,
   BsGear,
   BsGearFill,
-  BsPSquare,
-  BsPSquareFill,
+  BsGrid1X2,
+  BsGrid1X2Fill,
+  BsLayoutWtf,
   BsPeople,
   BsPeopleFill,
+  BsPerson,
+  BsPersonBadge,
+  BsPersonBadgeFill,
+  BsPersonFill,
+  BsPersonSquare,
+  BsPieChart,
+  BsPieChartFill,
   BsSticky,
   BsStickyFill,
 } from "react-icons/bs";
 
 const AppNavBar = styled(AppBar)({
-  background: "transparent",
+  background: "#007bff",
   boxShadow: "none",
   width: { sm: "calc(100% - 40px)" },
   ml: { sm: "40px" },
-  height: "36px",
+  height: "60px",
 });
 
-const RouteCon = styled("div")({
-  margin: "6px 0",
+const SidebarOptions = styled("div")({
   display: "flex",
+  justifyContent: "flex-start",
   alignItems: "center",
-  cursor: "pointer",
-  color: "rgba(255, 255, 255, 1)",
   listStyle: "none",
   overflow: "hidden",
-  position: "relative",
   textDecoration: "none",
   transition: "box-shadow .15s, transform .15s",
   userSelect: "none",
   WebkitUserSelect: "none",
   touchAction: "manipulation",
-  willChange: "box-shadow, transform",
+  willChange: "transform",
+  color: "white",
+  padding: "8px 13px",
+  fontSize: "18px",
+  width: "100%",
+  cursor: "pointer",
+
   "&:hover": {
     transform: "translateY(-1px)",
-    color: "rgba(255, 255, 255, 1)",
+    background: "rgba(255, 255, 255, 0.6)",
+    borderRadius: "6px",
+    color: "black",
   },
   "&:active": {
     transform: "translateY(1px)",
   },
+});
+
+const RouteCon = styled("div")({
+  display: "flex",
+  justifyContent: "flex-start",
+  alignItems: "center",
+  gap: "14px",
+  cursor: "pointer",
+  width: "100%",
 });
 
 function Sidebar(props) {
@@ -84,7 +98,7 @@ function Sidebar(props) {
         style={{
           height: "100vh",
           display: "flex",
-          justifyContent: "space-between",
+          justifyContent: "center",
         }}
       >
         <div
@@ -103,310 +117,244 @@ function Sidebar(props) {
               display: "flex",
               flexDirection: "column",
               justifyContent: "flex-start",
-              alignItems: "center",
-              gap: "12px",
-              paddingRight: "1px",
+              alignItems: "flex-start",
+              gap: "8px",
+              width: "100%",
+              padding: "20px",
             }}
           >
-            <div style={{ padding: "28px 0 8px 0" }}></div>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <Link to="/timetable">
-                {activeItem === "/timetable" ? (
-                  <RouteCon>
-                    <BsCalendarWeekFill
-                      className={
-                        activeItem === "/timetable" ? "icon-active" : ""
-                      }
-                      style={{ fontSize: "20px" }}
-                    />
-                  </RouteCon>
+            <div className="w-full">
+              <Link to="/dashboard">
+                {activeItem === "/dashboard" ? (
+                  <SidebarOptions
+                    sx={{
+                      color: "black",
+                      background: "rgba(255, 255, 255, 0.6)",
+                      borderRadius: "6px",
+                      "&:hover": { transform: "translateY(0px)" },
+                      "&:active": { transform: "translateY(0px)" },
+                    }}
+                  >
+                    <RouteCon>
+                      <BsGrid1X2
+                        className={
+                          activeItem === "/dashboard" ? "icon-active" : ""
+                        }
+                      />
+                      <p className="text-[16px]">Dashboard</p>
+                    </RouteCon>
+                  </SidebarOptions>
                 ) : (
-                  <RouteCon>
-                    <BsCalendarWeek
-                      style={{
-                        fontSize: "20px",
-                        padding: "2px 0",
-                      }}
-                    />
-                  </RouteCon>
-                )}
-              </Link>
-            </div>
-            <div
-              style={{
-                display: "flex",
-
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <Link to="/children">
-                {activeItem === "/children" ? (
-                  <RouteCon>
-                    <BsPSquareFill
-                      className={
-                        activeItem === "/children" ? "icon-active" : ""
-                      }
-                      style={{ fontSize: "20px" }}
-                    />
-                  </RouteCon>
-                ) : (
-                  <RouteCon>
-                    <BsPSquare
-                      style={{
-                        padding: "2px 0",
-                        fontSize: "20px",
-                      }}
-                    />
-                  </RouteCon>
-                )}
-              </Link>
-            </div>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <Link to="/chat">
-                {activeItem === "/chat" ? (
-                  <RouteCon>
-                    <BsChatHeartFill
-                      className={activeItem === "/chat" ? "icon-active" : ""}
-                      style={{
-                        fontSize: "20px",
-                      }}
-                    />
-                  </RouteCon>
-                ) : (
-                  <RouteCon>
-                    <BsChat
-                      style={{
-                        padding: "2px 0",
-                        fontSize: "20px",
-                      }}
-                    />
-                  </RouteCon>
+                  <SidebarOptions>
+                    <RouteCon>
+                      <BsGrid1X2 />
+                      <p className="text-[16px]">Dashboard</p>
+                    </RouteCon>
+                  </SidebarOptions>
                 )}
               </Link>
             </div>
 
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <Link to="/logs">
-                {activeItem === "/logs" ? (
-                  <RouteCon>
-                    <BsFolderFill
-                      className={activeItem === "/logs" ? "icon-active" : ""}
-                      style={{ fontSize: "20px" }}
-                    />
-                  </RouteCon>
+            <div className="w-full">
+              <Link to="/statistics">
+                {activeItem === "/statistics" ? (
+                  <SidebarOptions
+                    sx={{
+                      color: "black",
+                      background: "rgba(255, 255, 255, 0.6)",
+                      borderRadius: "6px",
+                      "&:hover": { transform: "translateY(0px)" },
+                      "&:active": { transform: "translateY(0px)" },
+                    }}
+                  >
+                    <RouteCon>
+                      <BsPieChartFill
+                        className={
+                          activeItem === "/statistics" ? "icon-active" : ""
+                        }
+                      />
+                      <p className="text-[16px]">Statistics</p>
+                    </RouteCon>
+                  </SidebarOptions>
                 ) : (
-                  <RouteCon>
-                    <BsFolder2Open
-                      style={{
-                        padding: "2px 0",
-                        fontSize: "20px",
-                      }}
-                    />
-                  </RouteCon>
+                  <SidebarOptions>
+                    <RouteCon>
+                      <BsPieChart />
+                      <p className="text-[16px]">Statistics</p>
+                    </RouteCon>
+                  </SidebarOptions>
                 )}
               </Link>
             </div>
-
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <Link to="/report">
-                {activeItem === "/report" ? (
-                  <RouteCon>
-                    <BsStickyFill
-                      className={activeItem === "/report" ? "icon-active" : ""}
-                      style={{ fontSize: "20px", transform: "rotate(180deg)" }}
-                    />
-                  </RouteCon>
+            <div className="w-full">
+              <Link to="/cases">
+                {activeItem === "/cases" ? (
+                  <SidebarOptions
+                    sx={{
+                      color: "black",
+                      background: "rgba(255, 255, 255, 0.6)",
+                      borderRadius: "6px",
+                      "&:hover": { transform: "translateY(0px)" },
+                      "&:active": { transform: "translateY(0px)" },
+                    }}
+                  >
+                    <RouteCon>
+                      <BsStickyFill
+                        className={activeItem === "/cases" ? "icon-active" : ""}
+                      />
+                      <p className="text-[16px]">Cases</p>
+                    </RouteCon>
+                  </SidebarOptions>
                 ) : (
-                  <RouteCon>
-                    <BsSticky
-                      style={{
-                        padding: "2px 0",
-                        fontSize: "20px",
-                        transform: "rotate(180deg)",
-                      }}
-                    />
-                  </RouteCon>
+                  <SidebarOptions>
+                    <RouteCon>
+                      <BsSticky />
+                      <p className="text-[16px]">Cases</p>
+                    </RouteCon>
+                  </SidebarOptions>
                 )}
               </Link>
             </div>
-
-            <>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  height: "1px",
-                  background: "rgba(255, 255, 255, 0.4)",
-                  width: "54%",
-                }}
-              ></div>
-
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <Link to="/user">
-                  {activeItem === "/user" ? (
+            <div className="w-full">
+              <Link to="/student">
+                {activeItem === "/student" ? (
+                  <SidebarOptions
+                    sx={{
+                      color: "black",
+                      background: "rgba(255, 255, 255, 0.6)",
+                      borderRadius: "6px",
+                      "&:hover": { transform: "translateY(0px)" },
+                      "&:active": { transform: "translateY(0px)" },
+                    }}
+                  >
                     <RouteCon>
                       <BsPeopleFill
+                        className={
+                          activeItem === "/student" ? "icon-active" : ""
+                        }
+                      />
+                      <p className="text-[16px]">Students</p>
+                    </RouteCon>
+                  </SidebarOptions>
+                ) : (
+                  <SidebarOptions>
+                    <RouteCon>
+                      <BsPeople />
+                      <p className="text-[16px]">Students</p>
+                    </RouteCon>
+                  </SidebarOptions>
+                )}
+              </Link>
+            </div>
+            <div className="w-full">
+              <Link to="/user">
+                {activeItem === "/user" ? (
+                  <SidebarOptions
+                    sx={{
+                      color: "black",
+                      background: "rgba(255, 255, 255, 0.6)",
+                      borderRadius: "6px",
+                      "&:hover": { transform: "translateY(0px)" },
+                      "&:active": { transform: "translateY(0px)" },
+                    }}
+                  >
+                    <RouteCon>
+                      <BsPersonSquare
                         className={activeItem === "/user" ? "icon-active" : ""}
-                        style={{ fontSize: "20px" }}
                       />
+                      <p className="text-[16px]">Users</p>
                     </RouteCon>
-                  ) : (
+                  </SidebarOptions>
+                ) : (
+                  <SidebarOptions>
                     <RouteCon>
-                      <BsPeople
-                        style={{
-                          padding: "2px 0",
-                          fontSize: "20px",
-                        }}
-                      />
+                      <BsPersonSquare />
+                      <p className="text-[16px]">Users</p>
                     </RouteCon>
-                  )}
-                </Link>
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <Link to="/schedule">
-                  {activeItem === "/schedule" ? (
-                    <RouteCon>
-                      <BsCalendarPlusFill
-                        className={
-                          activeItem === "/schedule" ? "icon-active" : ""
-                        }
-                        style={{ fontSize: "20px" }}
-                      />
-                    </RouteCon>
-                  ) : (
-                    <RouteCon>
-                      <BsCalendarPlus
-                        style={{
-                          padding: "2px 0",
-                          fontSize: "20px",
-                        }}
-                      />
-                    </RouteCon>
-                  )}
-                </Link>
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <Link to="/waitlist">
-                  {activeItem === "/waitlist" ? (
-                    <RouteCon>
-                      <BsArchiveFill
-                        className={
-                          activeItem === "/waitlist" ? "icon-active" : ""
-                        }
-                        style={{ fontSize: "20px" }}
-                      />
-                    </RouteCon>
-                  ) : (
-                    <RouteCon>
-                      <BsArchive
-                        style={{
-                          padding: "2px 0",
-                          fontSize: "20px",
-                        }}
-                      />
-                    </RouteCon>
-                  )}
-                </Link>
-              </div>
-            </>
+                  </SidebarOptions>
+                )}
+              </Link>
+            </div>
           </div>
           <div
             style={{
               display: "flex",
               flexDirection: "column",
               justifyContent: "flex-start",
-              alignItems: "center",
+              alignItems: "flex-start",
               gap: "12px",
-              paddingRight: "1px",
-              paddingBottom: "100px",
+              width: "100%",
+              padding: "20px",
             }}
           >
             <div
               style={{
+                width: "100%",
                 display: "flex",
-                justifyContent: "center",
+                justifyContent: "flex-start",
                 alignItems: "center",
               }}
             >
-              <Link to="/account">
-                {activeItem === "/account" ? (
-                  <RouteCon>
-                    <BsGearFill
-                      className={activeItem === "/account" ? "icon-active" : ""}
-                      style={{ fontSize: "20px" }}
-                    />
-                  </RouteCon>
-                ) : (
-                  <RouteCon>
-                    <BsGear
-                      style={{
-                        padding: "2px 0",
-                        fontSize: "20px",
+              <div className="w-full">
+                <Link to="/settings">
+                  {activeItem === "/settings" ? (
+                    <SidebarOptions
+                      sx={{
+                        color: "black",
+                        background: "rgba(255, 255, 255, 0.6)",
+                        borderRadius: "6px",
+                        "&:hover": { transform: "translateY(0px)" },
+                        "&:active": { transform: "translateY(0px)" },
                       }}
-                    />
-                  </RouteCon>
-                )}
-              </Link>
+                    >
+                      <RouteCon>
+                        <BsGear
+                          className={
+                            activeItem === "/settings" ? "icon-active" : ""
+                          }
+                        />
+                        <p className="text-[16px]">Settings</p>
+                      </RouteCon>
+                    </SidebarOptions>
+                  ) : (
+                    <SidebarOptions>
+                      <RouteCon>
+                        <BsGear />
+                        <p className="text-[16px]">Settings</p>
+                      </RouteCon>
+                    </SidebarOptions>
+                  )}
+                </Link>
+              </div>
             </div>
             <div
               style={{
+                width: "100%",
                 display: "flex",
-                justifyContent: "center",
+                justifyContent: "flex-start",
                 alignItems: "center",
               }}
             >
-              <RouteCon>
-                <AiOutlineLogout
-                  style={{
-                    fontSize: "20px",
-                    padding: "2px 0",
+              <div className="w-full">
+                <SidebarOptions
+                  sx={{
+                    background: "rgba(0, 0, 0, 0.1)",
+                    borderRadius: "6px",
+                    boxShadow: "none",
+                    "&:hover": {
+                      transform: "translateY(-1px)",
+                      background: "#FF4433",
+                      color: "white",
+                    },
+                    "&:active": { transform: "translateY(1px)" },
                   }}
-                />
-              </RouteCon>
+                >
+                  <RouteCon>
+                    <AiOutlineLogout />
+                    <p className="text-[16px]">Sign Out</p>
+                  </RouteCon>
+                </SidebarOptions>
+              </div>
             </div>
           </div>
         </div>
@@ -420,6 +368,7 @@ function Sidebar(props) {
   return (
     <Box sx={{ display: "flex" }}>
       <AppNavBar>
+        <p>Kludycdfdsfsfsdfsdfsdfsdf</p>
         <Toolbar
           sx={{
             minHeight: "0px",
@@ -444,7 +393,7 @@ function Sidebar(props) {
       <Box
         component="nav"
         sx={{
-          width: { sm: "80px" },
+          width: { sm: "240px" },
           flexShrink: { sm: 0 },
         }}
         aria-label="mailbox folders"
@@ -461,7 +410,7 @@ function Sidebar(props) {
             display: { xs: "block", sm: "none" },
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
-              width: "80px",
+              width: "240px",
               border: "none",
               overflow: "hidden",
             },
@@ -475,7 +424,7 @@ function Sidebar(props) {
             display: { xs: "none", sm: "block" },
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
-              width: "80px",
+              width: "240px",
               border: "none",
             },
           }}
