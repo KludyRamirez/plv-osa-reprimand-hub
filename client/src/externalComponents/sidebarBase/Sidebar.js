@@ -11,19 +11,10 @@ import { useLocation } from "react-router-dom";
 import { AiOutlineLogout } from "react-icons/ai";
 import { CgMenuLeft } from "react-icons/cg";
 import {
-  BsCaretRight,
-  BsDiamondHalf,
   BsGear,
-  BsGearFill,
   BsGrid1X2,
-  BsGrid1X2Fill,
-  BsLayoutWtf,
   BsPeople,
   BsPeopleFill,
-  BsPerson,
-  BsPersonBadge,
-  BsPersonBadgeFill,
-  BsPersonFill,
   BsPersonSquare,
   BsPieChart,
   BsPieChartFill,
