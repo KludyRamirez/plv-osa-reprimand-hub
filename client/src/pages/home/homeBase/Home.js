@@ -6,7 +6,9 @@ const Home = () => {
     <>
       <div className="w-full h-screen flex justify-start">
         <Sidebar />
-        <div className="w-full h-screen flex justify-start">Kludy</div>
+        <div className="w-full h-screen flex justify-start bg-[#007bff]">
+          <div className="w-full h-[screen] bg-[white] mt-[60px] rounded-tl-[18px]"></div>
+        </div>
       </div>
     </>
   );

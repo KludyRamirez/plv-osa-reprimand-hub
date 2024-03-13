@@ -11,10 +11,12 @@ import { useLocation } from "react-router-dom";
 import { AiOutlineLogout } from "react-icons/ai";
 import { CgMenuLeft } from "react-icons/cg";
 import {
+  BsBell,
   BsGear,
   BsGrid1X2,
   BsPeople,
   BsPeopleFill,
+  BsPersonCircle,
   BsPersonSquare,
   BsPieChart,
   BsPieChartFill,
@@ -23,7 +25,7 @@ import {
 } from "react-icons/bs";
 
 const AppNavBar = styled(AppBar)({
-  background: "#007bff",
+  background: "transparent",
   boxShadow: "none",
   width: { sm: "calc(100% - 40px)" },
   ml: { sm: "40px" },
@@ -359,27 +361,38 @@ function Sidebar(props) {
   return (
     <Box sx={{ display: "flex" }}>
       <AppNavBar>
-        <p>Kludycdfdsfsfsdfsdfsdfsdf</p>
-        <Toolbar
-          sx={{
-            minHeight: "0px",
-            display: "flex",
-            justifyContent: "space-between",
-          }}
-        >
-          <IconButton
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
+        <div className="flex justify-between items-center px-[20px]">
+          <Toolbar
             sx={{
-              mr: 2,
-              display: { sm: "none" },
-              color: "white",
+              display: "flex",
+              justifyContent: "flex-start",
+              padding: "0",
             }}
           >
-            <CgMenuLeft />
-          </IconButton>
-        </Toolbar>
+            <IconButton
+              aria-label="open drawer"
+              edge="start"
+              onClick={handleDrawerToggle}
+              sx={{
+                mr: 2,
+                display: { sm: "none" },
+                color: "white",
+              }}
+            >
+              <CgMenuLeft />
+            </IconButton>
+          </Toolbar>
+          <div className="flex justify-center items-center mt-[-1px] gap-[20px]">
+            <div className="flex justify-center items-center gap-[14px]">
+              <BsBell className="text-[20px]" />
+              <div className="text-[16px]">Notifications</div>
+            </div>
+            <div className="flex justify-center items-center gap-[14px]">
+              <BsPersonCircle className="text-[20px]" />
+              <div className="text-[16px]">Admin</div>
+            </div>
+          </div>
+        </div>
       </AppNavBar>
       <Box
         component="nav"
