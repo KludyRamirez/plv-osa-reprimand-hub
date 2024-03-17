@@ -13,6 +13,7 @@ function App() {
         <Route path="/student" element={<></>}></Route>
         <Route path="/user" element={<></>}></Route>
         <Route path="/announcement" element={<></>}></Route>
+        <Route path="/faq" element={<></>}></Route>
       </Routes>
     </Router>
   );
