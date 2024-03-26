@@ -3,7 +3,6 @@ import { useLocation, Navigate, Outlet } from "react-router-dom";
 const SecureRoles = ({ allowedRoles }) => {
   const location = useLocation();
 
-  //nahuhuli yung render
   return auth?.roles?.find((role) => allowedRoles?.includes(role)) ? (
     <Outlet />
   ) : auth?.accessToken ? (

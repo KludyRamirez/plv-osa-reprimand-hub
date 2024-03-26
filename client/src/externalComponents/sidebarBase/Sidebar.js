@@ -32,13 +32,12 @@ const AppNavBar = styled(AppBar)({
   boxShadow: "none",
   width: { sm: "calc(100% - 40px)" },
   ml: { sm: "40px" },
-  height: "60px",
+  height: "80px",
 });
 
 const SidebarOptions = styled("div")({
   display: "flex",
   justifyContent: "flex-start",
-  alignItems: "center",
   listStyle: "none",
   overflow: "hidden",
   textDecoration: "none",
@@ -48,16 +47,16 @@ const SidebarOptions = styled("div")({
   touchAction: "manipulation",
   willChange: "transform",
   color: "white",
-  padding: "8px 13px",
-  fontSize: "18px",
+  padding: "10px 13px",
+  fontSize: "24px",
   width: "100%",
   cursor: "pointer",
 
   "&:hover": {
     transform: "translateY(-1px)",
-    background: "rgba(255, 255, 255, 0.6)",
+    background: "rgba(255, 255, 255, 0.2)",
     borderRadius: "6px",
-    color: "black",
+    color: "white",
   },
   "&:active": {
     transform: "translateY(1px)",
@@ -119,21 +118,16 @@ function Sidebar(props) {
               padding: "20px",
             }}
           >
-            <div className="w-full flex justify-between items-center font-semibold text-white mb-[18px]">
-              <img src={plvLogo} alt="" className="w-[92px] h-[92px]" />
-              <img
-                src={osaLogo}
-                alt=""
-                className="w-[92px] h-[92px] rounded-[50%]"
-              />
+            <div className="w-full flex justify-center items-center font-semibold text-white mb-[20px] mt-[8px]">
+              <img src={plvLogo} alt="" className="w-[100px] h-[100px]" />
             </div>
             <div className="w-full">
               <Link to="/dashboard">
                 {activeItem === "/dashboard" ? (
                   <SidebarOptions
                     sx={{
-                      color: "black",
-                      background: "rgba(255, 255, 255, 0.6)",
+                      color: "#007bff",
+                      background: "white",
                       borderRadius: "6px",
                       "&:hover": { transform: "translateY(0px)" },
                       "&:active": { transform: "translateY(0px)" },
@@ -145,14 +139,14 @@ function Sidebar(props) {
                           activeItem === "/dashboard" ? "icon-active" : ""
                         }
                       />
-                      <p className="text-[16px]">Dashboard</p>
+                      <p className="text-[18px]">Dashboard</p>
                     </RouteCon>
                   </SidebarOptions>
                 ) : (
                   <SidebarOptions>
                     <RouteCon>
                       <BsGrid1X2 />
-                      <p className="text-[16px]">Dashboard</p>
+                      <p className="text-[18px]">Dashboard</p>
                     </RouteCon>
                   </SidebarOptions>
                 )}
@@ -164,8 +158,8 @@ function Sidebar(props) {
                 {activeItem === "/statistics" ? (
                   <SidebarOptions
                     sx={{
-                      color: "black",
-                      background: "rgba(255, 255, 255, 0.6)",
+                      color: "#007bff",
+                      background: "white",
                       borderRadius: "6px",
                       "&:hover": { transform: "translateY(0px)" },
                       "&:active": { transform: "translateY(0px)" },
@@ -177,14 +171,14 @@ function Sidebar(props) {
                           activeItem === "/statistics" ? "icon-active" : ""
                         }
                       />
-                      <p className="text-[16px]">Statistics</p>
+                      <p className="text-[18px]">Statistics</p>
                     </RouteCon>
                   </SidebarOptions>
                 ) : (
                   <SidebarOptions>
                     <RouteCon>
                       <BsPieChart />
-                      <p className="text-[16px]">Statistics</p>
+                      <p className="text-[18px]">Statistics</p>
                     </RouteCon>
                   </SidebarOptions>
                 )}
@@ -195,8 +189,8 @@ function Sidebar(props) {
                 {activeItem === "/cases" ? (
                   <SidebarOptions
                     sx={{
-                      color: "black",
-                      background: "rgba(255, 255, 255, 0.6)",
+                      color: "#007bff",
+                      background: "white",
                       borderRadius: "6px",
                       "&:hover": { transform: "translateY(0px)" },
                       "&:active": { transform: "translateY(0px)" },
@@ -206,26 +200,26 @@ function Sidebar(props) {
                       <BsStickyFill
                         className={activeItem === "/cases" ? "icon-active" : ""}
                       />
-                      <p className="text-[16px]">Cases</p>
+                      <p className="text-[18px]">Cases</p>
                     </RouteCon>
                   </SidebarOptions>
                 ) : (
                   <SidebarOptions>
                     <RouteCon>
                       <BsSticky />
-                      <p className="text-[16px]">Cases</p>
+                      <p className="text-[18px]">Cases</p>
                     </RouteCon>
                   </SidebarOptions>
                 )}
               </Link>
             </div>
             <div className="w-full">
-              <Link to="/student">
-                {activeItem === "/student" ? (
+              <Link to="/students">
+                {activeItem === "/students" ? (
                   <SidebarOptions
                     sx={{
-                      color: "black",
-                      background: "rgba(255, 255, 255, 0.6)",
+                      color: "#007bff",
+                      background: "white",
                       borderRadius: "6px",
                       "&:hover": { transform: "translateY(0px)" },
                       "&:active": { transform: "translateY(0px)" },
@@ -237,14 +231,14 @@ function Sidebar(props) {
                           activeItem === "/student" ? "icon-active" : ""
                         }
                       />
-                      <p className="text-[16px]">Students</p>
+                      <p className="text-[18px]">Students</p>
                     </RouteCon>
                   </SidebarOptions>
                 ) : (
                   <SidebarOptions>
                     <RouteCon>
                       <BsPeople />
-                      <p className="text-[16px]">Students</p>
+                      <p className="text-[18px]">Students</p>
                     </RouteCon>
                   </SidebarOptions>
                 )}
@@ -255,8 +249,8 @@ function Sidebar(props) {
                 {activeItem === "/user" ? (
                   <SidebarOptions
                     sx={{
-                      color: "black",
-                      background: "rgba(255, 255, 255, 0.6)",
+                      color: "#007bff",
+                      background: "white",
                       borderRadius: "6px",
                       "&:hover": { transform: "translateY(0px)" },
                       "&:active": { transform: "translateY(0px)" },
@@ -266,14 +260,14 @@ function Sidebar(props) {
                       <BsPersonSquare
                         className={activeItem === "/user" ? "icon-active" : ""}
                       />
-                      <p className="text-[16px]">Users</p>
+                      <p className="text-[18px]">Users</p>
                     </RouteCon>
                   </SidebarOptions>
                 ) : (
                   <SidebarOptions>
                     <RouteCon>
                       <BsPersonSquare />
-                      <p className="text-[16px]">Users</p>
+                      <p className="text-[18px]">Users</p>
                     </RouteCon>
                   </SidebarOptions>
                 )}
@@ -294,8 +288,8 @@ function Sidebar(props) {
                   {activeItem === "/settings" ? (
                     <SidebarOptions
                       sx={{
-                        color: "black",
-                        background: "rgba(255, 255, 255, 0.6)",
+                        color: "#007bff",
+                        background: "white",
                         borderRadius: "6px",
                         "&:hover": { transform: "translateY(0px)" },
                         "&:active": { transform: "translateY(0px)" },
@@ -307,14 +301,14 @@ function Sidebar(props) {
                             activeItem === "/settings" ? "icon-active" : ""
                           }
                         />
-                        <p className="text-[16px]">Settings</p>
+                        <p className="text-[18px]">Settings</p>
                       </RouteCon>
                     </SidebarOptions>
                   ) : (
                     <SidebarOptions>
                       <RouteCon>
                         <BsGear />
-                        <p className="text-[16px]">Settings</p>
+                        <p className="text-[18px]">Settings</p>
                       </RouteCon>
                     </SidebarOptions>
                   )}
@@ -345,7 +339,7 @@ function Sidebar(props) {
                 >
                   <RouteCon>
                     <AiOutlineLogout />
-                    <p className="text-[16px]">Sign Out</p>
+                    <p className="text-[18px]">Sign Out</p>
                   </RouteCon>
                 </SidebarOptions>
               </div>
@@ -362,7 +356,7 @@ function Sidebar(props) {
   return (
     <Box sx={{ display: "flex" }}>
       <AppNavBar>
-        <div className="flex justify-between items-center px-[20px]">
+        <div className="flex h-[100%] justify-between items-center px-[20px]">
           <Toolbar
             sx={{
               display: "flex",
@@ -383,14 +377,14 @@ function Sidebar(props) {
               <CgMenuLeft />
             </IconButton>
           </Toolbar>
-          <div className="flex justify-center items-center mt-[-1px] gap-[20px]">
+          <div className="flex justify-center items-center gap-[20px]">
             <div className="flex justify-center items-center gap-[12px]">
-              <BsBell className="text-[20px]" />
-              <div className="text-[16px]">Notifications</div>
+              <BsBell className="text-[24px]" />
+              <div className="text-[18px]">Notifications</div>
             </div>
             <div className="flex justify-center items-center gap-[12px]">
-              <BsPersonCircle className="text-[20px]" />
-              <div className="text-[16px]">Admin</div>
+              <BsPersonCircle className="text-[24px]" />
+              <div className="text-[18px]">Admin</div>
             </div>
           </div>
         </div>
