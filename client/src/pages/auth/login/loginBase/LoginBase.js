@@ -7,9 +7,6 @@ const LoginBase = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // You can add login logic here
-    console.log("Username:", username);
-    console.log("Password:", password);
   };
 
   return (

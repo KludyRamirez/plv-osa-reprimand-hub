@@ -10,7 +10,7 @@ const VerifyJWT = (req, res, next) => {
   }
   try {
     token = token.replace(/^Bearer\s+/, "");
-    const decoded = jwt.verify(token, config.TOKEN_KEY);
+    const decoded = jwt.verify(token, config.ACCESS_TOKEN);
     req.user = decoded;
   } catch (err) {
     return res.status(401).send("Invalid authentication token!");

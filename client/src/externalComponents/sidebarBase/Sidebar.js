@@ -119,12 +119,12 @@ function Sidebar(props) {
               padding: "20px",
             }}
           >
-            <div className="w-full flex justify-start items-center gap-[24px] font-semibold text-white mb-[12px]">
-              <img src={plvLogo} alt="" className="w-[80px] h-[80px] " />
+            <div className="w-full flex justify-between items-center font-semibold text-white mb-[18px]">
+              <img src={plvLogo} alt="" className="w-[92px] h-[92px]" />
               <img
                 src={osaLogo}
                 alt=""
-                className="w-[80px] h-[80px] rounded-[40px]"
+                className="w-[92px] h-[92px] rounded-[50%]"
               />
             </div>
             <div className="w-full">
@@ -280,17 +280,7 @@ function Sidebar(props) {
               </Link>
             </div>
           </div>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "flex-start",
-              alignItems: "flex-start",
-              gap: "12px",
-              width: "100%",
-              padding: "20px",
-            }}
-          >
+          <div className="flex flex-col justify-start items-start gap-[12px] w-full p-[20px]">
             <div
               style={{
                 width: "100%",

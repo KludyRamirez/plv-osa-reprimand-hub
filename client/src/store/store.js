@@ -1,6 +1,6 @@
-import { combineReducers, createStore, applyMiddleware } from "redux";
+import { legacy_createStore, applyMiddleware, combineReducers } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
-import thunk from "redux-thunk";
+import { thunk } from "redux-thunk";
 
 const rootReducer = combineReducers({});
 
@@ -23,14 +23,14 @@ const saveState = (state) => {
   }
 };
 
-const store = createStore(
+const Store = legacy_createStore(
   rootReducer,
   loadState(),
   composeWithDevTools(applyMiddleware(thunk))
 );
 
-store.subscribe(() => {
-  saveState(store.getState());
+Store.subscribe(() => {
+  saveState(Store.getState());
 });
 
-export default store;
+export default Store;
