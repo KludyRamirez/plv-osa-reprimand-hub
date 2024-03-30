@@ -37,14 +37,14 @@ const StudentsFilter = () => {
         Students List
       </div>
       <div className="w-100 bg-blue-100 rounded-[12px] flex flex-col">
-        <div className="w-100 pt-2 px-4 flex justify-start gap-1">
-          <div className="p-3 hover:border-b-2 border-blue-600 flex justify-center items-center text-[18px]">
+        <div className="px-4 w-100 h-[60px] flex justify-start gap-1 border-b-2 border-white">
+          <div className="px-3 h-[60px] hover:border-b-2 border-blue-600 flex justify-center items-center text-[18px]">
             All Students
           </div>
-          <div className="p-3 hover:border-b-2 border-blue-600 flex justify-center items-center text-[18px]">
+          <div className="px-3 h-[60px] hover:border-b-2 border-blue-600 flex justify-center items-center text-[18px]">
             Pending
           </div>
-          <div className="p-3 hover:border-b-2 border-blue-600 flex justify-center items-center text-[18px]">
+          <div className="px-3 h-[60px] hover:border-b-2 border-blue-600 flex justify-center items-center text-[18px]">
             Inactive
           </div>
         </div>
@@ -61,7 +61,7 @@ const StudentsFilter = () => {
           </div>
           <div className="w-100 pt-4">
             <label>Month</label>
-            <select onChange={(e) => setSelectedCategory(e.target.value)}>
+            <select>
               <option value="All">All</option>
               <option value="Fruit">Fruit</option>
               <option value="Vegetable">Vegetable</option>
