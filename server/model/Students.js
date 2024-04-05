@@ -5,18 +5,15 @@ const studentsSchema = new mongoose.Schema(
     firstName: { type: String },
     lastName: { type: String },
     middleName: { type: String },
-    course: { type: String },
-    year: { type: Number },
-    section: { type: Number },
+    college: { type: String },
+    department: { type: String },
+    yearAndSection: {
+      type: String,
+    },
     sex: { type: String },
     contactNo: { type: Number },
     guardianContactNo: { type: Number },
     email: { type: String },
-    role: {
-      type: String,
-      default: "Student",
-      enum: ["Student", "Instructor", "Administrator"],
-    },
     statusOfStudent: {
       type: String,
       default: "Active",

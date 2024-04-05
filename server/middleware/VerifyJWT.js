@@ -1,5 +1,4 @@
 const jwt = require("jsonwebtoken");
-
 const config = process.env;
 
 const VerifyJWT = (req, res, next) => {
