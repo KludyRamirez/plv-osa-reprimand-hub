@@ -13,10 +13,7 @@ const createStudent = async (req, res) => {
 
 const getStudents = async (req, res) => {
   try {
-    const students = await Student.find()
-      // .populate("schedules.schedule")
-      // .populate("orderdBy", "fullname mail")
-      .exec();
+    const students = await Student.find();
     res.json(students);
   } catch (error) {
     return res.status(500).send("An error occurred, please try again!");

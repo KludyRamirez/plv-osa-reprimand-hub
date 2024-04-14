@@ -1,18 +1,17 @@
 const mongoose = require("mongoose");
 const studentsSchema = new mongoose.Schema(
   {
-    studentNo: { type: Number },
+    studentNo: { type: String },
     firstName: { type: String },
     lastName: { type: String },
     middleName: { type: String },
     college: { type: String },
     department: { type: String },
-    yearAndSection: {
-      type: String,
-    },
+    year: { type: String },
+    section: { type: String },
     sex: { type: String },
-    contactNo: { type: Number },
-    guardianContactNo: { type: Number },
+    contactNo: { type: String },
+    guardianContactNo: { type: String },
     email: { type: String },
     statusOfStudent: {
       type: String,
