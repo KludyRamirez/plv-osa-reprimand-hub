@@ -3,7 +3,7 @@ import React from "react";
 const StudentsTable = () => {
   return (
     <>
-      <div className="w-100 h-[390px] bg-white flex flex-col rounded-[10px] border-[1px]">
+      <div className="w-100 h-[380px] bg-white flex flex-col rounded-[10px] border-[1px]">
         <div className="w-100 h-[60px] flex items-center gap-4">
           <div className="w-[60px] h-[100%] flex justify-center items-center">
             <input type="checkbox" className="w-[18px] h-[18px]" />
@@ -34,6 +34,9 @@ const StudentsTable = () => {
           </div>
           <div className="pr-12 h-[100%] flex justify-center items-center">
             Cases
+          </div>
+          <div className="pr-12 h-[100%] flex justify-center items-center">
+            Sex
           </div>
           <div className="pr-12 h-[100%] flex justify-center items-center">
             Status

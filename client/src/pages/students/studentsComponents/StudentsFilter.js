@@ -7,6 +7,7 @@ import {
   BsCheckCircle,
   BsColumns,
   BsFilter,
+  BsGenderMale,
 } from "react-icons/bs";
 import { VscFilter } from "react-icons/vsc";
 import StudentsTable from "./StudentsTable";
@@ -16,10 +17,9 @@ const StudentsFilter = ({ students }) => {
   const [selectedStatus, setSelectedStatus] = useState("All");
   const [college, setCollege] = useState("");
   const [department, setDepartment] = useState("");
-  const [month, setMonth] = useState("");
-  const [date, setDate] = useState("");
   const [year, setYear] = useState("");
   const [section, setSection] = useState("");
+  const [sex, setSex] = useState("");
 
   const schoolYearArray = [];
   for (let i = 1; i <= 4; i++) {
@@ -34,20 +34,16 @@ const StudentsFilter = ({ students }) => {
   const filteredByStatus =
     selectedStatus === "All"
       ? students
-      : students?.filter((student) => student.category === selectedStatus);
+      : students?.filter(
+          (student) => student.statusOfStudent === selectedStatus
+        );
 
   const filteredBySearch = students?.filter((student) => {
     const nameMatch =
       searchTerm.toLowerCase() === "All" ||
       student.name.toLowerCase().includes(searchTerm.toLowerCase());
 
-    const monthMatch =
-      month.toLowerCase() === "All" ||
-      student.name.toLowerCase().includes(month.toLowerCase());
-
     const yearMatch = year === "All" || student.name.includes(year);
-
-    const dateMatch = date === "All" || student.name.includes(date);
 
     const collegeMatch =
       college.toLowerCase() === "All" ||
@@ -59,14 +55,17 @@ const StudentsFilter = ({ students }) => {
 
     const sectionMatch = section === "All" || student.name.includes(section);
 
+    const sexMatch =
+      sex.toLowerCase() === "All" ||
+      student.sex.toLowerCase().includes(sex.toLowerCase());
+
     return (
       nameMatch &&
-      monthMatch &&
       yearMatch &&
-      dateMatch &&
       collegeMatch &&
       departmentMatch &&
-      sectionMatch
+      sectionMatch &&
+      sexMatch
     );
   });
 
@@ -79,12 +78,6 @@ const StudentsFilter = ({ students }) => {
 
   return (
     <>
-      <div className="w-100 text-[14px] text-[#404040] pb-6 ">
-        Office of Student Affairs / Students
-      </div>
-      <div className="w-100 text-[24px] text-[#077bff] font-bold pb-6">
-        Students List
-      </div>
       <div className="w-100 bg-[white] text-[#404040] rounded-[10px] flex flex-col border-[1px]">
         <div className="px-3 w-100 h-[58px] flex justify-start gap-1 border-b-2 border-white ">
           <div className="px-3 h-[58px] hover:border-b-2 border-blue-600 flex justify-center items-center text-[18px]">
@@ -114,14 +107,14 @@ const StudentsFilter = ({ students }) => {
             Filter by <BsFilter className="text-[24px]" />
           </div>
         </div>
-        <div className=" w-100 flex justify-start bg-[#f5f5f5] flex gap-8 p-4 rounded-bl-[10px] rounded-br-[10px]">
+        <div className=" w-100 flex justify-start bg-[#f5f5f5] flex p-4 rounded-bl-[10px] rounded-br-[10px]">
           <div className="flex justify-start items-center gap-4">
             <div className="flex flex-col items-start gap-2">
               <div className="pl-2 w-[160px] flex justify-between items-center">
-                <div>Status</div>
                 <div className="flex gap-2 items-center">
-                  <BsCheckCircle /> <BsCaretDown />
+                  <div>Status</div> <BsCaretDown />
                 </div>
+                <BsCheckCircle />
               </div>
               <select
                 onChange={(e) => setSelectedStatus(e.target.value)}
@@ -132,8 +125,25 @@ const StudentsFilter = ({ students }) => {
                 <option value="Inactive">Inactive</option>
               </select>
             </div>
-          </div>
-          {/* <div className="flex justify-start items-center gap-4">
+
+            <div className="flex flex-col items-start gap-2">
+              <div className="pl-2 w-[160px] flex justify-between items-center">
+                <div className="flex gap-2 items-center">
+                  <div>Sex</div> <BsCaretDown />
+                </div>
+                <BsGenderMale />
+              </div>
+              <select
+                onChange={(e) => setSex(e.target.value)}
+                className="px-3 py-2 w-[160px] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
+              >
+                <option value="All">All</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+            </div>
+
+            {/* <div className="flex justify-start items-center gap-4">
             <div className="flex flex-col items-start gap-2">
               <div className="pl-1 w-[160px] flex justify-between items-center">
                 <div>Date</div>
@@ -209,13 +219,13 @@ const StudentsFilter = ({ students }) => {
               </select>
             </div>
           </div> */}
-          <div className="flex justify-start items-center gap-4">
+
             <div className="flex flex-col items-start gap-2">
               <div className="pl-1 w-[160px] flex justify-between items-center">
-                <div>Year</div>
                 <div className="flex gap-2 items-center">
-                  <BsCalendar4Week /> <BsCaretDown />
+                  <div>Year</div> <BsCaretDown />
                 </div>
+                <BsCalendar4Week />
               </div>
               <select
                 onChange={(e) => setYear(e.target.value)}
@@ -231,10 +241,10 @@ const StudentsFilter = ({ students }) => {
             </div>
             <div className="flex flex-col items-start gap-2">
               <div className="pl-1 w-[160px] flex justify-between items-center">
-                <div>Section</div>
                 <div className="flex gap-2 items-center">
-                  <BsColumns /> <BsCaretDown />
+                  <div>Section</div> <BsCaretDown />
                 </div>
+                <BsColumns />
               </div>
               <select
                 onChange={(e) => setSection(e.target.value)}
@@ -249,15 +259,15 @@ const StudentsFilter = ({ students }) => {
               </select>
             </div>
             <div className="flex flex-col items-start gap-2">
-              <div className="pl-1 w-[160px] flex justify-between items-center">
-                <div>College</div>
+              <div className="pl-1 w-[320px] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
-                  <BsBuildings /> <BsCaretDown />
+                  <div>College</div> <BsCaretDown />
                 </div>
+                <BsBuildings />
               </div>
               <select
                 onChange={(e) => setCollege(e.target.value)}
-                className="px-3 py-2 w-[160px] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px]"
+                className="px-3 py-2 w-[320px] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px]"
               >
                 <option value="All">All</option>
                 <option value="(COED) College of Education">
@@ -276,15 +286,15 @@ const StudentsFilter = ({ students }) => {
               </select>
             </div>
             <div className="flex flex-col items-start gap-2">
-              <div className="pl-1 w-[160px] flex justify-between items-center">
-                <div>Department</div>
+              <div className="pl-1 w-[320px] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
-                  <BsBuilding /> <BsCaretDown />
+                  <div>Department</div> <BsCaretDown />
                 </div>
+                <BsBuilding />
               </div>
               <select
                 onChange={(e) => setDepartment(e.target.value)}
-                className="px-3 py-2 w-[160px] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px]"
+                className="px-3 py-2 w-[320px] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px]"
               >
                 <option value="All">All</option>
                 {college === "(COED) College of Education" ||
@@ -322,7 +332,7 @@ const StudentsFilter = ({ students }) => {
                   </>
                 ) : null}
 
-                {college === "College of Arts and Sciences" ||
+                {college === "(CAS) College of Arts and Sciences" ||
                 college === "All" ? (
                   <>
                     <option value="Bachelor of Arts in Communication (BAC)">
@@ -338,7 +348,7 @@ const StudentsFilter = ({ students }) => {
                 ) : null}
 
                 {college ===
-                  "College of Engineering and Information Technology" ||
+                  "(CEIT) College of Engineering and Information Technology" ||
                 college === "All" ? (
                   <>
                     <option value="Bachelor of Science in Civil Engineering (BSCE)">
@@ -354,7 +364,7 @@ const StudentsFilter = ({ students }) => {
                 ) : null}
 
                 {college ===
-                  "College of Business Administration, Public Administration and Accountancy" ||
+                  "(CABA) College of Business Administration, Public Administration and Accountancy" ||
                 college === "All" ? (
                   <>
                     <option value="Bachelor of Science in Accountancy (BSA)">
