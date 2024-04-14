@@ -67,7 +67,7 @@ const RouteCon = styled("div")({
   display: "flex",
   justifyContent: "flex-start",
   alignItems: "center",
-  gap: "14px",
+  gap: "16px",
   cursor: "pointer",
   width: "100%",
 });
