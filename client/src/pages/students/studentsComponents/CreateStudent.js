@@ -12,7 +12,7 @@ const ModalBox = styled("div")({
   top: "50%",
   left: "50%",
   width: "48%",
-  height: "730px",
+  padding: "8px",
   transform: "translate(-50%, -50%)",
   background: "white",
   borderRadius: "12px",
@@ -84,6 +84,9 @@ const initialState = {
 const CreateStudent = () => {
   const [values, setValues] = useState(initialState);
   const [showCreateStudentModal, setShowCreateStudentModal] = useState(false);
+  const [errors, setErrors] = useState({
+    studentNo: "",
+  });
 
   // const auth = useSelector(authSelector);
 
@@ -105,8 +108,21 @@ const CreateStudent = () => {
     }
   };
 
+  // dynamic value getting and DYNAMIC use of error messages -kludy
+
   const handleChange = (e) => {
-    setValues({ ...values, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setValues({ ...values, [name]: value });
+
+    // Check conditions for the student number input
+    if (name === "studentNo" && value.length < 5) {
+      setErrors({
+        ...errors,
+        [name]: "Student No. must be at least 5 characters long.",
+      });
+    } else {
+      setErrors({ ...errors, [name]: "" });
+    }
   };
 
   // create student modal functions
@@ -142,6 +158,7 @@ const CreateStudent = () => {
       >
         <ModalBox>
           <CreateStudentFormModal
+            errors={errors}
             values={values}
             handleChange={handleChange}
             handleCreateStudent={handleCreateStudent}

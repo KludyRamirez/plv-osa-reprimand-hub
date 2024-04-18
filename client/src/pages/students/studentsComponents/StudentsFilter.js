@@ -40,24 +40,24 @@ const StudentsFilter = ({ students }) => {
 
   const filteredBySearch = students?.filter((student) => {
     const nameMatch =
-      searchTerm.toLowerCase() === "All" ||
-      student.name.toLowerCase().includes(searchTerm.toLowerCase());
+      searchTerm?.toLowerCase() === "All" ||
+      student?.name?.toLowerCase().includes(searchTerm?.toLowerCase());
 
-    const yearMatch = year === "All" || student.name.includes(year);
+    const yearMatch = year === "All" || student?.name?.includes(year);
 
     const collegeMatch =
-      college.toLowerCase() === "All" ||
-      student.name.toLowerCase().includes(college.toLowerCase());
+      college?.toLowerCase() === "All" ||
+      student?.name?.toLowerCase().includes(college?.toLowerCase());
 
     const departmentMatch =
-      department.toLowerCase() === "All" ||
-      student.name.toLowerCase().includes(department.toLowerCase());
+      department?.toLowerCase() === "All" ||
+      student?.name?.toLowerCase().includes(department?.toLowerCase());
 
-    const sectionMatch = section === "All" || student.name.includes(section);
+    const sectionMatch = section === "All" || student?.name?.includes(section);
 
     const sexMatch =
-      sex.toLowerCase() === "All" ||
-      student.sex.toLowerCase().includes(sex.toLowerCase());
+      sex?.toLowerCase() === "All" ||
+      student?.sex?.toLowerCase().includes(sex?.toLowerCase());
 
     return (
       nameMatch &&

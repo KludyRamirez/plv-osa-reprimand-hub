@@ -7,6 +7,7 @@ const CreateStudentFormModal = ({
   handleCreateStudent,
   handleCloseModal,
   values,
+  errors,
   coedDepartments,
   casDepartments,
   ceitDepartments,
@@ -28,6 +29,8 @@ const CreateStudentFormModal = ({
     email,
   } = values;
 
+  const { studentNo: studentNoError } = errors;
+
   const handleNumericInput = (e) => {
     const allowedKeys = [
       "0",
@@ -40,6 +43,7 @@ const CreateStudentFormModal = ({
       "7",
       "8",
       "9",
+      "-",
       "Backspace",
     ];
 
@@ -64,11 +68,16 @@ const CreateStudentFormModal = ({
               value={studentNo}
               onChange={handleChange}
               type="text"
+              maxLength="11"
+              onKeyDown={handleNumericInput}
               autoComplete="off"
               placeholder="e.g. 20-1130"
               className="border-[1px] p-3 rounded-[6px] w-[100%] bg-[#f5f5f5] focus:outline-none focus:border-[#bbbbbb]"
             />
           </div>
+          {studentNoError && (
+            <p className="text-red-500 pt-2">{studentNoError}</p>
+          )}
           <div className="text-[#606060] pt-6 flex gap-2">
             <div className="flex flex-col gap-2 w-[100%]">
               <div className="">First Name</div>
