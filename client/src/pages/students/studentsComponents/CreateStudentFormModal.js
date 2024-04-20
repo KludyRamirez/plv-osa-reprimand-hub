@@ -72,7 +72,9 @@ const CreateStudentFormModal = ({
               onKeyDown={handleNumericInput}
               autoComplete="off"
               placeholder="e.g. 20-1130"
-              className="border-[1px] p-3 rounded-[6px] w-[100%] bg-[#f5f5f5] focus:outline-none focus:border-[#bbbbbb]"
+              className={`border-[1px] p-3 rounded-[6px] w-[100%] bg-[#f5f5f5] ${
+                studentNoError === "" ? "" : "border-[red]"
+              } focus:outline-none`}
             />
           </div>
           {studentNoError && (
@@ -123,6 +125,7 @@ const CreateStudentFormModal = ({
                 <BsCaretDown />
               </div>
               <select
+                required
                 name="college"
                 value={college}
                 onChange={handleChange}
@@ -277,20 +280,31 @@ const CreateStudentFormModal = ({
                 type="tel"
                 autoComplete="off"
                 placeholder="e.g. 09123456789"
-                maxLength="11"
+                maxLength="7"
                 onKeyDown={handleNumericInput}
                 className="p-3 rounded-[6px] bg-[#f5f5f5] focus:outline-none border-[1px] focus:border-[#bbbbbb]"
               />
             </div>
           </div>
           <div className="w-100 pt-10 flex justify-end items-center">
-            <button
-              type="submit"
-              className="py-3 px-3 bg-[#007bff] text-[white] text-[16px] flex gap-2 items-center rounded-[8px]"
-            >
-              <FaPlus />
-              <div>Add Student</div>
-            </button>
+            {studentNoError === "" ? (
+              <button
+                type="submit"
+                className="py-3 px-3 bg-[#007bff] text-[white] text-[16px] flex gap-2 items-center rounded-[8px]"
+              >
+                <FaPlus />
+                <div>Add Student</div>
+              </button>
+            ) : (
+              <button
+                disabled
+                type="submit"
+                className="py-3 px-3 bg-blue-300 text-[white] text-[16px] flex gap-2 items-center rounded-[8px]"
+              >
+                <FaPlus />
+                <div>Add Student</div>
+              </button>
+            )}
           </div>
         </div>
       </form>

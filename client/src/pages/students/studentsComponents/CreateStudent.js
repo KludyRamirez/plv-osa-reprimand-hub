@@ -94,7 +94,7 @@ const CreateStudent = () => {
     e.preventDefault();
 
     try {
-      console.log("Sending request with data:", values); // Debugging
+      console.log("Sending request with data:", values);
       const res = await axios.post(
         `${process.env.REACT_APP_API_URI}/student`,
         values
@@ -102,9 +102,10 @@ const CreateStudent = () => {
       console.log("Successfully added new student!", res.data.firstName);
     } catch (error) {
       const errorMessage = error.response ? error.response.data : "Error.";
-      console.error("API Error:", errorMessage); // Enhanced logging
+      console.error("API Error:", errorMessage);
     } finally {
       handleCloseModal();
+      window.location.reload();
     }
   };
 
@@ -115,10 +116,15 @@ const CreateStudent = () => {
     setValues({ ...values, [name]: value });
 
     // Check conditions for the student number input
-    if (name === "studentNo" && value.length < 5) {
+    if (name === "studentNo" && value.length < 7) {
       setErrors({
         ...errors,
-        [name]: "Student No. must be at least 5 characters long.",
+        [name]: "Student No. must be at least 7 characters long.",
+      });
+    } else if (name === "studentNo" && value.length > 7) {
+      setErrors({
+        ...errors,
+        [name]: "Student No. must be at most 7 characters long.",
       });
     } else {
       setErrors({ ...errors, [name]: "" });
