@@ -60,7 +60,7 @@ const cabaDepartments = [
 const initialState = {
   studentNo: "",
   firstName: "",
-  lastName: "",
+  surName: "",
   middleName: "",
   colleges: [
     "(COED) College of Education",
@@ -86,6 +86,9 @@ const CreateStudent = () => {
   const [showCreateStudentModal, setShowCreateStudentModal] = useState(false);
   const [errors, setErrors] = useState({
     studentNo: "",
+    firstName: "",
+    surName: "",
+    middleName: "",
   });
 
   // const auth = useSelector(authSelector);
@@ -113,22 +116,51 @@ const CreateStudent = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    let newErrors = { ...errors };
+
     setValues({ ...values, [name]: value });
 
-    // Check conditions for the student number input
-    if (name === "studentNo" && value.length < 7) {
-      setErrors({
-        ...errors,
-        [name]: "Student No. must be at least 7 characters long.",
-      });
-    } else if (name === "studentNo" && value.length > 7) {
-      setErrors({
-        ...errors,
-        [name]: "Student No. must be at most 7 characters long.",
-      });
-    } else {
-      setErrors({ ...errors, [name]: "" });
+    if (name === "studentNo") {
+      if (value.length < 7) {
+        newErrors[name] = "Student No. must be at least 7 characters long.";
+      } else if (value.length > 7) {
+        newErrors[name] = "Student No. must be at most 7 characters long.";
+      } else {
+        newErrors[name] = "";
+      }
     }
+
+    if (name === "firstName") {
+      if (value.length < 3) {
+        newErrors[name] = "First name must be at least 3 characters long.";
+      } else if (value.length > 48) {
+        newErrors[name] = "First name must be at most 48 characters long.";
+      } else {
+        newErrors[name] = "";
+      }
+    }
+
+    if (name === "middleName") {
+      if (value.length < 3) {
+        newErrors[name] = "Middlename must be at least 3 characters long.";
+      } else if (value.length > 48) {
+        newErrors[name] = "Middlename must be at most 48 characters long.";
+      } else {
+        newErrors[name] = "";
+      }
+    }
+
+    if (name === "surName") {
+      if (value.length < 3) {
+        newErrors[name] = "Surname must be at least 3 characters long.";
+      } else if (value.length > 48) {
+        newErrors[name] = "Surname must be at most 48 characters long.";
+      } else {
+        newErrors[name] = "";
+      }
+    }
+
+    setErrors(newErrors);
   };
 
   // create student modal functions

@@ -16,7 +16,7 @@ const CreateStudentFormModal = ({
   const {
     studentNo,
     firstName,
-    lastName,
+    surName,
     middleName,
     colleges,
     college,
@@ -29,28 +29,33 @@ const CreateStudentFormModal = ({
     email,
   } = values;
 
-  const { studentNo: studentNoError } = errors;
+  const {
+    studentNo: studentNoError,
+    firstName: firstNameError,
+    middleName: middleNameError,
+    surName: surNameError,
+  } = errors;
 
-  const handleNumericInput = (e) => {
-    const allowedKeys = [
-      "0",
-      "1",
-      "2",
-      "3",
-      "4",
-      "5",
-      "6",
-      "7",
-      "8",
-      "9",
-      "-",
-      "Backspace",
-    ];
+  // const handleNumericInput = (e) => {
+  //   const allowedKeys = [
+  //     "0",
+  //     "1",
+  //     "2",
+  //     "3",
+  //     "4",
+  //     "5",
+  //     "6",
+  //     "7",
+  //     "8",
+  //     "9",
+  //     "-",
+  //     "Backspace",
+  //   ];
 
-    if (!allowedKeys.includes(e.key)) {
-      e.preventDefault();
-    }
-  };
+  //   if (!allowedKeys.includes(e.key)) {
+  //     e.preventDefault();
+  //   }
+  // };
 
   return (
     <>
@@ -65,11 +70,10 @@ const CreateStudentFormModal = ({
             <div>Student No.</div>
             <input
               name="studentNo"
-              value={studentNo}
+              value={studentNo.replace(/[^0-9-]/g, "")}
               onChange={handleChange}
               type="text"
-              maxLength="11"
-              onKeyDown={handleNumericInput}
+              maxLength="7"
               autoComplete="off"
               placeholder="e.g. 20-1130"
               className={`border-[1px] p-3 rounded-[6px] w-[100%] bg-[#f5f5f5] ${
@@ -92,7 +96,11 @@ const CreateStudentFormModal = ({
                 placeholder="e.g. Kludy"
                 className="p-3 rounded-[6px] bg-[#f5f5f5] focus:outline-none border-[1px] focus:border-[#bbbbbb]"
               />
+              {firstNameError && (
+                <p className="text-red-500 pt-2">{firstNameError}</p>
+              )}
             </div>
+
             <div className="flex flex-col gap-2 w-[100%]">
               <div className="">Middle Name</div>
               <input
@@ -101,21 +109,27 @@ const CreateStudentFormModal = ({
                 onChange={handleChange}
                 type="text"
                 autoComplete="off"
-                placeholder="e.g. Kludy"
+                placeholder="e.g. Sabordo"
                 className="p-3 rounded-[6px] w-[100%] bg-[#f5f5f5] focus:outline-none border-[1px] focus:border-[#bbbbbb]"
               />
+              {middleNameError && (
+                <p className="text-red-500 pt-2">{middleNameError}</p>
+              )}
             </div>
             <div className="flex flex-col gap-2 w-[100%]">
               <div className="">Surname</div>
               <input
-                name="lastName"
-                value={lastName}
+                name="surName"
+                value={surName}
                 onChange={handleChange}
                 type="text"
                 autoComplete="off"
-                placeholder="e.g. Kludy"
+                placeholder="e.g. Ramirez"
                 className="p-3 rounded-[6px] w-[100%] bg-[#f5f5f5] focus:outline-none border-[1px] focus:border-[#bbbbbb]"
               />
+              {surNameError && (
+                <p className="text-red-500 pt-2">{surNameError}</p>
+              )}
             </div>
           </div>
           <div className="text-[#606060] pt-6 flex gap-2">
@@ -250,6 +264,7 @@ const CreateStudentFormModal = ({
                 value={email}
                 onChange={handleChange}
                 type="email"
+                maxLength="32"
                 autoComplete="off"
                 placeholder="e.g. example@gmail.com"
                 className="p-3 rounded-[6px] w-[100%] bg-[#f5f5f5] focus:outline-none border-[1px] focus:border-[#bbbbbb]"
@@ -261,13 +276,12 @@ const CreateStudentFormModal = ({
               <div className="">Contact No.</div>
               <input
                 name="contactNo"
-                value={contactNo}
+                value={contactNo.replace(/[^0-9+]/g, "")}
                 onChange={handleChange}
-                type="tel"
+                type="text"
                 autoComplete="off"
                 placeholder="e.g. 09123456789"
-                maxLength="11"
-                onKeyDown={handleNumericInput}
+                maxLength="13"
                 className="p-3 rounded-[6px] bg-[#f5f5f5] focus:outline-none border-[1px] focus:border-[#bbbbbb]"
               />
             </div>
@@ -275,13 +289,12 @@ const CreateStudentFormModal = ({
               <div className="">Guardian Contact No.</div>
               <input
                 name="guardianContactNo"
-                value={guardianContactNo}
+                value={guardianContactNo.replace(/[^0-9+]/g, "")}
                 onChange={handleChange}
-                type="tel"
+                type="text"
                 autoComplete="off"
                 placeholder="e.g. 09123456789"
-                maxLength="7"
-                onKeyDown={handleNumericInput}
+                maxLength="13"
                 className="p-3 rounded-[6px] bg-[#f5f5f5] focus:outline-none border-[1px] focus:border-[#bbbbbb]"
               />
             </div>
