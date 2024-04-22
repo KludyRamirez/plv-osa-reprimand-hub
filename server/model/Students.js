@@ -3,7 +3,7 @@ const studentsSchema = new mongoose.Schema(
   {
     studentNo: { type: String },
     firstName: { type: String },
-    lastName: { type: String },
+    surName: { type: String },
     middleName: { type: String },
     college: { type: String },
     department: { type: String },

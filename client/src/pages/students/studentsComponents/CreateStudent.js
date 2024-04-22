@@ -81,7 +81,7 @@ const initialState = {
 // const selectAuth = (state) => state.auth;
 // const authSelector = createSelector([selectAuth], (auth) => auth);
 
-const CreateStudent = () => {
+const CreateStudent = ({ toast }) => {
   const [values, setValues] = useState(initialState);
   const [showCreateStudentModal, setShowCreateStudentModal] = useState(false);
   const [errors, setErrors] = useState({
@@ -89,6 +89,9 @@ const CreateStudent = () => {
     firstName: "",
     surName: "",
     middleName: "",
+    email: "",
+    contactNo: "",
+    guardianContactNo: "",
   });
 
   // const auth = useSelector(authSelector);
@@ -102,13 +105,12 @@ const CreateStudent = () => {
         `${process.env.REACT_APP_API_URI}/student`,
         values
       );
-      console.log("Successfully added new student!", res.data.firstName);
-    } catch (error) {
-      const errorMessage = error.response ? error.response.data : "Error.";
-      console.error("API Error:", errorMessage);
+      toast.success(res?.data?.message);
+    } catch (err) {
+      toast.error(err?.response?.data);
     } finally {
+      setValues({});
       handleCloseModal();
-      window.location.reload();
     }
   };
 
@@ -155,6 +157,36 @@ const CreateStudent = () => {
         newErrors[name] = "Surname must be at least 3 characters long.";
       } else if (value.length > 48) {
         newErrors[name] = "Surname must be at most 48 characters long.";
+      } else {
+        newErrors[name] = "";
+      }
+    }
+
+    if (name === "email") {
+      if (value.length < 11) {
+        newErrors[name] = "Email must be at least 11 characters long.";
+      } else if (value.length > 48) {
+        newErrors[name] = "Email must be at most 48 characters long.";
+      } else {
+        newErrors[name] = "";
+      }
+    }
+
+    if (name === "contactNo") {
+      if (value.length < 11) {
+        newErrors[name] = "Contact No. must be at least 11 characters long.";
+      } else if (value.length > 48) {
+        newErrors[name] = "Contact No. must be at most 48 characters long.";
+      } else {
+        newErrors[name] = "";
+      }
+    }
+
+    if (name === "guardianContactNo") {
+      if (value.length < 11) {
+        newErrors[name] = "Guardian No. must be at least 11 characters long.";
+      } else if (value.length > 48) {
+        newErrors[name] = "Guardian No. must be at most 48 characters long.";
       } else {
         newErrors[name] = "";
       }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   BsBuilding,
   BsBuildings,
@@ -39,28 +39,29 @@ const StudentsFilter = ({ students }) => {
         );
 
   const filteredBySearch = students?.filter((student) => {
-    const nameMatch =
-      searchTerm?.toLowerCase() === "All" ||
-      student?.name?.toLowerCase().includes(searchTerm?.toLowerCase());
+    const searchMatch =
+      searchTerm === "All" ||
+      student?.firstName?.toLowerCase().includes(searchTerm?.toLowerCase()) ||
+      student?.middleName?.toLowerCase().includes(searchTerm?.toLowerCase()) ||
+      student?.surName?.toLowerCase().includes(searchTerm?.toLowerCase());
 
-    const yearMatch = year === "All" || student?.name?.includes(year);
+    const yearMatch = year === "All" || student?.year?.includes(year);
 
     const collegeMatch =
       college?.toLowerCase() === "All" ||
-      student?.name?.toLowerCase().includes(college?.toLowerCase());
+      student?.college?.toLowerCase().includes(college?.toLowerCase());
 
     const departmentMatch =
       department?.toLowerCase() === "All" ||
-      student?.name?.toLowerCase().includes(department?.toLowerCase());
+      student?.department?.toLowerCase().includes(department?.toLowerCase());
 
-    const sectionMatch = section === "All" || student?.name?.includes(section);
+    const sectionMatch =
+      section === "All" || student?.section?.includes(section);
 
-    const sexMatch =
-      sex?.toLowerCase() === "All" ||
-      student?.sex?.toLowerCase().includes(sex?.toLowerCase());
+    const sexMatch = sex === "All" || student?.sex.includes(sex);
 
     return (
-      nameMatch &&
+      searchMatch &&
       yearMatch &&
       collegeMatch &&
       departmentMatch &&
@@ -393,7 +394,7 @@ const StudentsFilter = ({ students }) => {
         </div>
       </div>
       <div className="py-8">
-        <StudentsTable />
+        <StudentsTable students={combinedFilteredStudents} />
       </div>
     </>
   );
