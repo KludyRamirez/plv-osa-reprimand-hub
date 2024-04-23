@@ -12,11 +12,14 @@ import { AiOutlineLogout } from "react-icons/ai";
 import { CgMenuLeft } from "react-icons/cg";
 import {
   BsBell,
+  BsBellFill,
   BsGear,
   BsGrid1X2,
   BsPeople,
   BsPeopleFill,
+  BsPerson,
   BsPersonCircle,
+  BsPersonFill,
   BsPersonSquare,
   BsPieChart,
   BsPieChartFill,
@@ -378,13 +381,12 @@ function Sidebar(props) {
             </IconButton>
           </Toolbar>
           <div className="flex justify-center items-center gap-[20px]">
-            <div className="flex justify-center items-center gap-[12px]">
-              <BsBell className="text-[24px]" />
-              <div className="text-[18px]">Notifications</div>
+            <div className="border-[1px] border-white bg-white p-2 flex justify-center items-center rounded-[8px] ">
+              <BsBellFill className="text-[22px] text-[#007bff]" />
             </div>
-            <div className="flex justify-center items-center gap-[12px]">
-              <BsPersonCircle className="text-[24px]" />
-              <div className="text-[18px]">Admin</div>
+            <div className="border-[1px] border-white py-2 px-3 flex justify-center items-center gap-[12px] rounded-[6px]">
+              <BsPersonFill className="text-[22px]" />
+              <div className="text-[16px]">Hello, Clinton Yu!</div>
             </div>
           </div>
         </div>

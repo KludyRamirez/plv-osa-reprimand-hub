@@ -38,4 +38,35 @@ const getStudents = async (req, res) => {
   }
 };
 
-module.exports = { createStudent, getStudents };
+const deleteOneStudent = async (req, res) => {
+  try {
+    const deletedStudent = await Student.findByIdAndDelete(req.params.id);
+    if (!deletedStudent) {
+      return res.status(404).json({ error: "Student not found!" });
+    }
+    res.status(200).json({
+      message: "Successfully deleted a student!",
+    });
+  } catch (err) {
+    res.status(400).json({
+      message: "Deletion failed!",
+    });
+  }
+};
+
+const deleteManyStudent = async (req, res) => {
+  try {
+    const { students } = req.body;
+    await Student.deleteMany({ _id: { $in: students } });
+    res.status(200).json({ message: "Selected tasks deleted successfully." });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+module.exports = {
+  createStudent,
+  getStudents,
+  deleteOneStudent,
+  deleteManyStudent,
+};

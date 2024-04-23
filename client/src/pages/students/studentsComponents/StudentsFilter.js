@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   BsBuilding,
   BsBuildings,
@@ -12,7 +12,7 @@ import {
 import { VscFilter } from "react-icons/vsc";
 import StudentsTable from "./StudentsTable";
 
-const StudentsFilter = ({ students }) => {
+const StudentsFilter = ({ students, getStudents }) => {
   const [searchTerm, setSearchTerm] = useState("All");
   const [selectedStatus, setSelectedStatus] = useState("All");
   const [college, setCollege] = useState("");
@@ -20,6 +20,7 @@ const StudentsFilter = ({ students }) => {
   const [year, setYear] = useState("");
   const [section, setSection] = useState("");
   const [sex, setSex] = useState("");
+  const [selectedStudents, setSelectedStudents] = useState([]);
 
   const schoolYearArray = [];
   for (let i = 1; i <= 4; i++) {
@@ -48,11 +49,11 @@ const StudentsFilter = ({ students }) => {
     const yearMatch = year === "All" || student?.year?.includes(year);
 
     const collegeMatch =
-      college?.toLowerCase() === "All" ||
+      college === "All" ||
       student?.college?.toLowerCase().includes(college?.toLowerCase());
 
     const departmentMatch =
-      department?.toLowerCase() === "All" ||
+      department === "All" ||
       student?.department?.toLowerCase().includes(department?.toLowerCase());
 
     const sectionMatch =
@@ -318,7 +319,7 @@ const StudentsFilter = ({ students }) => {
                       (BSED Filipino) Bachelor of Secondary Education Major in
                       Filipino
                     </option>
-                    <option value="(BSED Mathematics) Bachelor of Secondary Education Major in Mathematics ">
+                    <option value="(BSED Mathematics) Bachelor of Secondary Education Major in Mathematics">
                       (BSED Mathematics) Bachelor of Secondary Education Major
                       in Mathematics
                     </option>
@@ -326,7 +327,7 @@ const StudentsFilter = ({ students }) => {
                       (BSED Science) Bachelor of Secondary Education Major in
                       Science
                     </option>
-                    <option value="(BSED Social Studies) Bachelor of Secondary Education Major in Social Studies ">
+                    <option value="(BSED Social Studies) Bachelor of Secondary Education Major in Social Studies">
                       (BSED Social Studies) Bachelor of Secondary Education
                       Major in Social Studies
                     </option>
@@ -336,14 +337,14 @@ const StudentsFilter = ({ students }) => {
                 {college === "(CAS) College of Arts and Sciences" ||
                 college === "All" ? (
                   <>
-                    <option value="Bachelor of Arts in Communication (BAC)">
-                      Bachelor of Arts in Communication (BAC)
+                    <option value="(BAC) Bachelor of Arts in Communication">
+                      (BAC) Bachelor of Arts in Communication
                     </option>
-                    <option value="Bachelor of Science in Psychology (BSP)">
-                      Bachelor of Science in Psychology (BSP)
+                    <option value="(BSP) Bachelor of Science in Psychology">
+                      (BSP) Bachelor of Science in Psychology
                     </option>
-                    <option value="Bachelor of Science in Social Work (BSSW)">
-                      Bachelor of Science in Social Work (BSSW)
+                    <option value="(BSSW) Bachelor of Science in Social Work">
+                      (BSSW) Bachelor of Science in Social Work
                     </option>
                   </>
                 ) : null}
@@ -352,14 +353,14 @@ const StudentsFilter = ({ students }) => {
                   "(CEIT) College of Engineering and Information Technology" ||
                 college === "All" ? (
                   <>
-                    <option value="Bachelor of Science in Civil Engineering (BSCE)">
-                      Bachelor of Science in Civil Engineering (BSCE)
+                    <option value="(BSCE) Bachelor of Science in Civil Engineering">
+                      (BSCE) Bachelor of Science in Civil Engineering
                     </option>
-                    <option value="Bachelor of Science in Electrical Engineering (BSEE)">
-                      Bachelor of Science in Electrical Engineering (BSEE)
+                    <option value="(BSEE) Bachelor of Science in Electrical Engineering">
+                      (BSEE) Bachelor of Science in Electrical Engineering
                     </option>
-                    <option value="Bachelor of Science in Information Technology (BSIT)">
-                      Bachelor of Science in Information Technology (BSIT)
+                    <option value="(BSIT) Bachelor of Science in Information Technology">
+                      (BSIT) Bachelor of Science in Information Technology
                     </option>
                   </>
                 ) : null}
@@ -368,23 +369,23 @@ const StudentsFilter = ({ students }) => {
                   "(CABA) College of Business Administration, Public Administration and Accountancy" ||
                 college === "All" ? (
                   <>
-                    <option value="Bachelor of Science in Accountancy (BSA)">
-                      Bachelor of Science in Accountancy (BSA)
+                    <option value="(BSA) Bachelor of Science in Accountancy">
+                      (BSA) Bachelor of Science in Accountancy
                     </option>
-                    <option value="Bachelor of Science in Business Administration Major in Financial Management (BSBA FM)">
-                      Bachelor of Science in Business Administration Major in
-                      Financial Management (BSBA FM)
+                    <option value="(BSBA FM) Bachelor of Science in Business Administration Major in Financial Management">
+                      (BSBA FM) Bachelor of Science in Business Administration
+                      Major in Financial Management
                     </option>
-                    <option value="Bachelor of Science in Business Administration Major in Human Resource Development Management (BSBA HRDM)">
-                      Bachelor of Science in Business Administration Major in
-                      Human Resource Development Management (BSBA HRDM)
+                    <option value="(BSBA HRDM) Bachelor of Science in Business Administration Major in Human Resource Development Management">
+                      (BSBA HRDM) Bachelor of Science in Business Administration
+                      Major in Human Resource Development Management
                     </option>
-                    <option value="Bachelor of Science in Business Administration Major in Marketing Management (BSBA MM)">
-                      Bachelor of Science in Business Administration Major in
-                      Marketing Management (BSBA MM)
+                    <option value="(BSBA MM) Bachelor of Science in Business Administration Major in Marketing Management">
+                      (BSBA MM) Bachelor of Science in Business Administration
+                      Major in Marketing Management
                     </option>
-                    <option value="Bachelor of Science in Public Administration (BSPA)">
-                      Bachelor of Science in Public Administration (BSPA)
+                    <option value="(BSPA) Bachelor of Science in Public Administration">
+                      (BSPA) Bachelor of Science in Public Administration
                     </option>
                   </>
                 ) : null}
@@ -394,7 +395,12 @@ const StudentsFilter = ({ students }) => {
         </div>
       </div>
       <div className="py-8">
-        <StudentsTable students={combinedFilteredStudents} />
+        <StudentsTable
+          students={combinedFilteredStudents}
+          getStudents={getStudents}
+          selectedStudents={selectedStudents}
+          setSelectedStudents={setSelectedStudents}
+        />
       </div>
     </>
   );

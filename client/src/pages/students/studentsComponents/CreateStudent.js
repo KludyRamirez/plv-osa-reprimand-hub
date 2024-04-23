@@ -81,7 +81,7 @@ const initialState = {
 // const selectAuth = (state) => state.auth;
 // const authSelector = createSelector([selectAuth], (auth) => auth);
 
-const CreateStudent = ({ toast }) => {
+const CreateStudent = ({ toast, getStudents }) => {
   const [values, setValues] = useState(initialState);
   const [showCreateStudentModal, setShowCreateStudentModal] = useState(false);
   const [errors, setErrors] = useState({
@@ -109,14 +109,17 @@ const CreateStudent = ({ toast }) => {
     } catch (err) {
       toast.error(err?.response?.data);
     } finally {
-      setValues({});
+      setValues(initialState);
       handleCloseModal();
+      getStudents();
     }
   };
 
   // dynamic value getting and DYNAMIC use of error messages -kludy
 
   const handleChange = (e) => {
+    e.preventDefault();
+
     const { name, value } = e.target;
     let newErrors = { ...errors };
 

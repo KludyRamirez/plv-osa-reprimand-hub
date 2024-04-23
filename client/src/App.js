@@ -8,10 +8,10 @@ function App() {
   return (
     <>
       <Toaster
-        position="bottom-center"
+        position="top-center"
         reverseOrder={false}
         toastOptions={{
-          duration: 4000,
+          duration: 3000,
         }}
       />
       <Router>

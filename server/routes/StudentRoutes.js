@@ -12,4 +12,11 @@ router.post("/student", mainController.controllers.createStudent);
 
 router.get("/student", mainController.controllers.getStudents);
 
+router.delete("/student/:id", mainController.controllers.deleteOneStudent);
+
+router.delete(
+  "/students/deleteSelected",
+  mainController.controllers.deleteManyStudent
+);
+
 module.exports = router;

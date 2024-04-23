@@ -2,7 +2,11 @@ import { legacy_createStore, applyMiddleware, combineReducers } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { thunk } from "redux-thunk";
 
-const rootReducer = combineReducers({});
+import AuthReducer from "./reducers/AuthReducers";
+
+const rootReducer = combineReducers({
+  auth: AuthReducer,
+});
 
 const loadState = () => {
   try {
