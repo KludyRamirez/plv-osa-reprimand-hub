@@ -4,14 +4,6 @@ const LoginInputs = ({ username, setUsername, password, setPassword }) => {
   const [usernameError, setUsernameError] = useState("");
   const [passwordError, setPasswordError] = useState("");
 
-  useEffect(() => {
-    validateUsername(username);
-  }, [username]);
-
-  useEffect(() => {
-    validatePassword(password);
-  }, [password]);
-
   const validateUsername = (value) => {
     if (value.length < 3) {
       setUsernameError("Username must be at least 3 characters long.");
@@ -45,9 +37,9 @@ const LoginInputs = ({ username, setUsername, password, setPassword }) => {
   };
 
   return (
-    <div className="flex flex-col gap-24 w-full">
-      <div className="flex flex-col gap-8">
-        <div className="w-200 h-20 text-base font-medium text-blue-600">
+    <form className="flex flex-col gap-8 w-full">
+      <div className="flex flex-col gap-4">
+        <div className="w-100 text-base font-large text-[#303030]">
           Username
         </div>
         <input
@@ -56,11 +48,14 @@ const LoginInputs = ({ username, setUsername, password, setPassword }) => {
           label="Username"
           type="text"
           placeholder="Enter username"
+          className={`p-3 border-[1px] rounded-[6px] w-[100%] bg-white ${
+            usernameError === "" ? "border-[#07bbff]" : "border-[red]"
+          } focus:outline-none`}
         />
-        {usernameError && <p className="text-red-500 pt-2">{usernameError}</p>}
+        {usernameError && <p className="text-red-500">{usernameError}</p>}
       </div>
-      <div className="flex flex-col gap-8">
-        <div className="w-200 h-20 text-base font-medium text-blue-600">
+      <div className="flex flex-col gap-4">
+        <div className="w-100 text-base font-large text-[#303030]">
           Password
         </div>
         <input
@@ -69,10 +64,33 @@ const LoginInputs = ({ username, setUsername, password, setPassword }) => {
           label="Password"
           type="password"
           placeholder="Enter password"
+          className={`p-3 border-[1px] rounded-[6px] w-[100%] bg-white ${
+            passwordError === "" ? "border-[#07bbff]" : "border-[red]"
+          } focus:outline-none`}
         />
-        {passwordError && <p className="text-red-500 pt-2">{passwordError}</p>}
+        {passwordError && <p className="text-red-500">{passwordError}</p>}
       </div>
-    </div>
+      <div className="w-100 mt-4 flex justify-end items-center">
+        {usernameError === "" &&
+        passwordError === "" &&
+        username !== "" &&
+        password !== "" ? (
+          <button
+            type="submit"
+            className="py-2 px-4 bg-[#007bff] text-[white] text-[16px] flex gap-2 items-center rounded-[6px]"
+          >
+            <div>Sign In</div>
+          </button>
+        ) : (
+          <button
+            disabled
+            className="py-2 px-4 bg-blue-400 text-[white] text-[16px] flex gap-2 items-center rounded-[6px]"
+          >
+            <div>Sign In</div>
+          </button>
+        )}
+      </div>
+    </form>
   );
 };
 

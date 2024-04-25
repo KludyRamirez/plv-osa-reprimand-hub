@@ -7,9 +7,9 @@ export const AuthActions = {
 
 export const getActions = (dispatch) => {
   return {
-    login: (userDetails, history) => dispatch(login(userDetails, history)),
-    register: (userDetails, history) =>
-      dispatch(register(userDetails, history)),
+    login: (userDetails, navigate) => dispatch(login(userDetails, navigate)),
+    register: (userDetails, navigate) =>
+      dispatch(register(userDetails, navigate)),
     setUserDetails: (userDetails) => dispatch(setUserDetails(userDetails)),
   };
 };
@@ -21,7 +21,7 @@ const setUserDetails = (userDetails) => {
   };
 };
 
-const login = (userDetails, history) => {
+const login = (userDetails, navigate) => {
   return async (dispatch) => {
     const response = await api.login(userDetails);
     console.log(response);
@@ -31,7 +31,7 @@ const login = (userDetails, history) => {
       const { userDetails } = response?.data;
       localStorage.setItem("user", JSON.stringify(userDetails));
       dispatch(setUserDetails(userDetails));
-      history.push("/statistics");
+      navigate("/statistics");
     }
   };
 };
