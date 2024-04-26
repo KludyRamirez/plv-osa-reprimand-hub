@@ -6,19 +6,13 @@ import { styled } from "@mui/material/styles";
 import osaLogo from "../../../../images/login/osalogo.jpg";
 import plvLogo from "../../../../images/login/PLVlogo.png";
 import LoginInputs from "../loginComponents/LoginInputs";
-import { HiOutlineUserGroup } from "react-icons/hi2";
 
-import {
-  BsCheckCircle,
-  BsCheckCircleFill,
-  BsMegaphoneFill,
-} from "react-icons/bs";
+import { BsLink, BsMegaphoneFill } from "react-icons/bs";
 
 const Login = ({ login }) => {
   const FormTitle = styled("div")({
-    fontWeight: "500",
     backgroundImage:
-      "radial-gradient(100% 100% at 100% 0, #007bff 0, #122c8e 100%)",
+      "radial-gradient(100% 100% at 100% 0, #122c8e 0, #07bbff 100%)",
     backgroundSize: "100%",
     backgroundRepeat: "repeat",
     WebkitBackgroundClip: "text",
@@ -26,6 +20,10 @@ const Login = ({ login }) => {
     MozBackgroundClip: "text",
     MozTextFillColor: "transparent",
     textShadow: "none",
+    fontSize: "120px",
+    fontWeight: "600",
+    lineHeight: "110px",
+    zIndex: "2",
   });
 
   const [username, setUsername] = useState("");
@@ -76,16 +74,10 @@ const Login = ({ login }) => {
           </div>
         </div>
         <div className="w-100 flex justify-center items-center gap-12">
-          <div
-            className="p-8 gap-8 w-[500px] flex flex-col self-center rounded-[8px] shadow-sm"
-            style={{
-              background:
-                "radial-gradient(at bottom left, rgba(255, 255, 255, 0.15) 6%, rgba(7, 187, 255, 0.20) 47.6%, rgba(204, 251, 241, 0.15) 87.8%)",
-            }}
-          >
+          <div className="p-8 gap-8 w-[500px] flex flex-col self-center rounded-[8px]">
             {activeSelect === "Login" && (
               <>
-                <div className="w-100 flex justify-between items-center text-3xl font-semibold text-[#303030]">
+                <div className="w-100 flex justify-between items-center text-3xl font-semibold text-[#007bff]">
                   <span>Sign in</span>
                   <div className="flex justify-center items-center gap-2">
                     <img
@@ -111,18 +103,32 @@ const Login = ({ login }) => {
             )}
           </div>
           <div className="flex flex-col h-[100%] items-center justify-center gap-2">
-            <div className="w-[1px] h-[30%] bg-[#07bbff]"></div>
-            <BsCheckCircleFill className="text-[#07bbff]" />
-            <div className="w-[1px] h-[30%] bg-[#07bbff]"></div>
+            <div className="w-[1px] h-[25%] bg-gray-200"></div>
+            <BsLink className="text-[#077bff] text-[24px]" />
+            <div className="w-[1px] h-[25%] bg-gray-200"></div>
           </div>
-          <div className="h-[100%] flex flex-col ">
-            <span className="text-[100px] text-[#007bff] font-bold">
-              Serving
-            </span>
-            <span className="text-[100px] text-[#007bff] font-bold">You</span>
-            <span className="text-[100px] text-[#007bff] font-bold">
-              Diligently.
-            </span>
+          <div className="relative">
+            <div className="h-[100%] flex flex-col  p-4 rounded-[8px] z-2">
+              <FormTitle
+                sx={{
+                  backgroundImage:
+                    "radial-gradient(100% 100% at 100% 0, #07bbff 0, #007bff 100%)",
+                }}
+              >
+                Serving
+              </FormTitle>
+              <FormTitle>You</FormTitle>
+              <FormTitle
+                sx={{
+                  backgroundImage:
+                    "radial-gradient(100% 100% at 100% 0, #07bbff 0, #007bff 100%)",
+                }}
+              >
+                Diligently.
+              </FormTitle>
+            </div>
+            <div className="absolute bottom-[-100px] right-[-100px] w-[300px] h-[300px] bg-blue-100 z-1 rounded-[150px]"></div>
+            <div className="absolute bottom-[-60px] right-[-60px] w-[150px] h-[150px] bg-[yellow] z-1 rounded-[150px]"></div>
           </div>
         </div>
       </div>

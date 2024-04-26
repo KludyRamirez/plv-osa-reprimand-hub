@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const LoginInputs = ({ username, setUsername, password, setPassword }) => {
   const [usernameError, setUsernameError] = useState("");
@@ -48,9 +49,9 @@ const LoginInputs = ({ username, setUsername, password, setPassword }) => {
           label="Username"
           type="text"
           placeholder="Enter username"
-          className={`p-3 border-[1px] rounded-[6px] w-[100%] bg-white ${
-            usernameError === "" ? "border-[#07bbff]" : "border-[red]"
-          } focus:outline-none`}
+          className={`p-3  border-[1px] rounded-[6px] w-[100%] bg-white ${
+            usernameError === "" ? "" : "border-[red]"
+          } focus:outline-none focus:border-[#007bff]`}
         />
         {usernameError && <p className="text-red-500">{usernameError}</p>}
       </div>
@@ -65,30 +66,35 @@ const LoginInputs = ({ username, setUsername, password, setPassword }) => {
           type="password"
           placeholder="Enter password"
           className={`p-3 border-[1px] rounded-[6px] w-[100%] bg-white ${
-            passwordError === "" ? "border-[#07bbff]" : "border-[red]"
-          } focus:outline-none`}
+            passwordError === "" ? "" : "border-[red]"
+          } focus:outline-none focus:border-[#007bff]`}
         />
         {passwordError && <p className="text-red-500">{passwordError}</p>}
       </div>
-      <div className="w-100 mt-4 flex justify-end items-center">
-        {usernameError === "" &&
-        passwordError === "" &&
-        username !== "" &&
-        password !== "" ? (
-          <button
-            type="submit"
-            className="py-2 px-4 bg-[#007bff] text-[white] text-[16px] flex gap-2 items-center rounded-[6px]"
-          >
-            <div>Sign In</div>
-          </button>
-        ) : (
-          <button
-            disabled
-            className="py-2 px-4 bg-blue-400 text-[white] text-[16px] flex gap-2 items-center rounded-[6px]"
-          >
-            <div>Sign In</div>
-          </button>
-        )}
+      <div className="w-100 mt-4 flex justify-between items-center">
+        <div className="hover:underline">
+          <Link to="/forgot-password">Oops! Forgot password?</Link>
+        </div>
+        <div>
+          {usernameError === "" &&
+          passwordError === "" &&
+          username !== "" &&
+          password !== "" ? (
+            <button
+              type="submit"
+              className="py-2 px-4 bg-[#007bff] text-[white] text-[16px] flex gap-2 items-center rounded-[6px]"
+            >
+              <div>Sign In</div>
+            </button>
+          ) : (
+            <button
+              disabled
+              className="py-2 px-4 bg-blue-400 text-[white] text-[16px] flex gap-2 items-center rounded-[6px]"
+            >
+              <div>Sign In</div>
+            </button>
+          )}
+        </div>
       </div>
     </form>
   );
