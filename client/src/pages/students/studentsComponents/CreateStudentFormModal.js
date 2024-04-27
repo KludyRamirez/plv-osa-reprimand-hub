@@ -264,7 +264,9 @@ const CreateStudentFormModal = ({
                 maxLength="32"
                 autoComplete="off"
                 placeholder="e.g. example@gmail.com"
-                className="p-3 rounded-[6px] w-[100%] bg-[#f5f5f5] focus:outline-none border-[1px] focus:border-[#bbbbbb]"
+                className={`border-[1px] p-3 rounded-[6px] w-[100%] bg-[#f5f5f5] ${
+                  emailError === "" ? "" : "border-[red]"
+                } focus:outline-none`}
               />
               {emailError && <p className="text-red-500 pt-2">{emailError}</p>}
             </div>
@@ -281,7 +283,9 @@ const CreateStudentFormModal = ({
                 autoComplete="off"
                 placeholder="e.g. 09123456789"
                 maxLength="13"
-                className="p-3 rounded-[6px] bg-[#f5f5f5] focus:outline-none border-[1px] focus:border-[#bbbbbb]"
+                className={`border-[1px] p-3 rounded-[6px] w-[100%] bg-[#f5f5f5] ${
+                  contactNoError === "" ? "" : "border-[red]"
+                } focus:outline-none`}
               />
               {contactNoError && (
                 <p className="text-red-500 pt-2">{contactNoError}</p>
@@ -298,7 +302,9 @@ const CreateStudentFormModal = ({
                 autoComplete="off"
                 placeholder="e.g. 09123456789"
                 maxLength="13"
-                className="p-3 rounded-[6px] bg-[#f5f5f5] focus:outline-none border-[1px] focus:border-[#bbbbbb]"
+                className={`border-[1px] p-3 rounded-[6px] w-[100%] bg-[#f5f5f5] ${
+                  guardianContactNoError === "" ? "" : "border-[red]"
+                } focus:outline-none`}
               />
               {guardianContactNoError && (
                 <p className="text-red-500 pt-2">{guardianContactNoError}</p>

@@ -36,7 +36,7 @@ const login = (userDetails, navigate) => {
   };
 };
 
-const register = (userDetails) => {
+const register = (userDetails, navigate) => {
   return async (dispatch) => {
     const response = await api.register(userDetails);
     console.log(response);
@@ -44,6 +44,7 @@ const register = (userDetails) => {
       dispatch(toast.error(response?.exception?.response?.data));
     } else {
       dispatch(toast.success("A user has been successfully added!"));
+      navigate("/login");
     }
   };
 };

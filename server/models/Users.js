@@ -6,14 +6,15 @@ const usersSchema = new mongoose.Schema(
     surName: { type: String },
     email: { type: String },
     password: { type: String },
+    contactNo: { type: String },
     role: {
       type: String,
       enum: ["Student", "Instructor", "Administrator"],
     },
     statusOfUser: {
       type: String,
-      default: "Active",
-      enum: ["Active", "Disabled"],
+      default: "Enabled",
+      enum: ["Enabled", "Disabled"],
     },
   },
   { timestamps: true }

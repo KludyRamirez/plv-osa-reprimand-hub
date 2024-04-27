@@ -6,6 +6,7 @@ import { styled } from "@mui/material/styles";
 import osaLogo from "../../../../images/login/osalogo.jpg";
 import plvLogo from "../../../../images/login/PLVlogo.png";
 import folder from "../../../../images/login/folder.png";
+import mail from "../../../../images/login/mail.png";
 import LoginInputs from "../loginComponents/LoginInputs";
 
 import {
@@ -27,7 +28,7 @@ const Login = ({ login }) => {
     MozTextFillColor: "transparent",
     fontSize: "120px",
     fontWeight: "600",
-    lineHeight: "112px",
+    lineHeight: "134px",
     zIndex: "2",
   });
 
@@ -52,7 +53,7 @@ const Login = ({ login }) => {
   return (
     <div className="w-full h-screen flex justify-center bg-white">
       <div className="w-full flex flex-col gap-40">
-        <div className="px-6 shadow-sm zIndex-2">
+        <div className="px-6 shadow-sm bg-white zIndex-2">
           <div className="h-[90px] flex justify-between items-center gap-10">
             <div className="flex justify-center items-center gap-10">
               <div className="flex items-center gap-6">
@@ -134,9 +135,10 @@ const Login = ({ login }) => {
               >
                 Serving
               </FormTitle>
-              <FormTitle>You</FormTitle>
+              <FormTitle sx={{ marginTop: "-16px" }}>You</FormTitle>
               <FormTitle
                 sx={{
+                  marginTop: "-16px",
                   backgroundImage:
                     "radial-gradient(100% 100% at 100% 0, #07bbff 0, #007bff 100%)",
                 }}
@@ -144,21 +146,23 @@ const Login = ({ login }) => {
                 Digitally.
               </FormTitle>
             </div>
-            <div className="absolute flex p-2 justify-end items-start top-[0px] right-[-100px] w-[300px] h-[100px] bg-blue-100 z-1 rounded-[4px] gap-2 ">
-              <div className="mt-[-30px] w-[60px] h-[60px] flex justify-center items-center bg-white rounded-[50%] border-[1px] border-blue-100 hover:border-[#007bff] cursor-pointer">
-                <BsArrowLeft className="text-[24px] text-[#007bff]" />
+            <div className="absolute flex p-2 justify-end items-start top-[0px] right-[-100px] w-[300px] h-[100px] z-1 rounded-[4px] gap-2 ">
+              <div className="mt-[-30px] w-[60px] h-[60px] flex justify-center items-center bg-white rounded-[50%] border-[1px] border-[#007bff] text-[#007bff] cursor-pointer hover:bg-[#007bff] hover:text-white">
+                <BsArrowLeft className="text-[24px] " />
               </div>
-              <div className="mt-[-30px] w-[60px] h-[60px] flex justify-center items-center bg-white rounded-[50%] border-[1px] border-blue-100 hover:border-[#007bff] cursor-pointer">
-                <BsArrowRight className="text-[24px] text-[#007bff]" />
+              <div className="mt-[-30px] w-[60px] h-[60px] flex justify-center items-center bg-white rounded-[50%] border-[1px] border-[#007bff] text-[#007bff] cursor-pointer hover:bg-[#007bff] hover:text-white">
+                <BsArrowRight className="text-[24px]" />
               </div>
             </div>
             <img
               src={folder}
               alt=""
-              className="absolute top-[74px] right-[-150px] w-[200px] h-[200px] zIndex-2"
+              className="absolute top-[80px] right-[-150px] w-[200px] h-[200px] zIndex-2"
             />
-            <div className="absolute bottom-[-110px] right-[-110px] w-[320px] h-[320px] bg-blue-100 z-1 rounded-[50%]"></div>
-            <div className="absolute bottom-[-70px] right-[-70px] w-[150px] h-[150px] bg-[yellow] z-1 rounded-[50%]"></div>
+            <div className="absolute top-[150px] right-[100px] w-[150px] h-[150px] bg-[white] border-[1px] border-[yellow] rounded-[50%]"></div>
+            <div className="absolute top-[250px] right-[200px] w-[20px] h-[20px] bg-blue-100 rounded-[50%]"></div>
+            <div className="absolute bottom-[-100px] right-[-110px] w-[320px] h-[320px] bg-blue-100 rounded-[50%]"></div>
+            <div className="absolute bottom-[-60px] right-[-70px] w-[150px] h-[150px] bg-[yellow]  rounded-[50%]"></div>
           </div>
         </div>
       </div>

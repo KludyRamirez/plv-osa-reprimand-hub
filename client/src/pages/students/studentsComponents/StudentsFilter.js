@@ -21,6 +21,11 @@ const StudentsFilter = ({ students, getStudents }) => {
   const [section, setSection] = useState("");
   const [sex, setSex] = useState("");
   const [selectedStudents, setSelectedStudents] = useState([]);
+  const [activeMainFilter, setActiveMainFilter] = useState("All");
+
+  const handleMainFilterChange = (filter) => {
+    setActiveMainFilter(filter);
+  };
 
   const schoolYearArray = [];
   for (let i = 1; i <= 4; i++) {
@@ -81,15 +86,14 @@ const StudentsFilter = ({ students, getStudents }) => {
   return (
     <>
       <div className="w-100 bg-[white] text-[#404040] rounded-[10px] flex flex-col border-[1px]">
-        <div className="px-3 w-100 h-[58px] flex justify-start gap-1 border-b-2 border-white ">
-          <div className="px-3 h-[58px] hover:border-b-2 border-blue-600 flex justify-center items-center text-[18px]">
+        <div className="px-3 w-100 h-[58px] flex justify-start gap-1 border-b-2 border-white">
+          <div
+            onClick={() => handleMainFilterChange("All")}
+            className={`px-3 h-[58px] hover:border-b-2 border-blue-600 flex justify-center items-center text-[18px] ${
+              activeMainFilter === "All" ? "border-b-2 border-blue-600" : ""
+            }`}
+          >
             All Students
-          </div>
-          <div className="px-3 h-[58px] hover:border-b-2 border-blue-600 flex justify-center items-center text-[18px]">
-            Pending
-          </div>
-          <div className="px-3 h-[58px] hover:border-b-2 border-blue-600 flex justify-center items-center text-[18px]">
-            Inactive
           </div>
         </div>
         <div className="w-100 p-4">

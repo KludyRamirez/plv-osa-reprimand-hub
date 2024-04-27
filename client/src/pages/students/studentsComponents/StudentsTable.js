@@ -1,6 +1,15 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { BsEyeFill, BsPenFill, BsTrash2Fill } from "react-icons/bs";
+import {
+  BsEye,
+  BsEyeFill,
+  BsPen,
+  BsPenFill,
+  BsTrash2,
+  BsTrash2Fill,
+  BsTrash3,
+  BsTrash3Fill,
+} from "react-icons/bs";
 import Modal from "@mui/material/Modal";
 import { styled } from "@mui/system";
 import DeleteStudentModal from "./DeleteStudentModal";
@@ -174,8 +183,8 @@ const StudentsTable = ({
           students && students.length > 5 ? "overflow-y-scroll" : ""
         }`}
       >
-        <div className="w-100 flex items-center gap-4">
-          <div className="w-[60px] h-[60px] flex justify-center items-center">
+        <div className="w-100 flex items-center gap-4 px-6">
+          <div className="w-[30px] h-[60px] flex justify-start items-center">
             <input
               type="checkbox"
               className="w-[18px] h-[18px]"
@@ -183,62 +192,63 @@ const StudentsTable = ({
               onChange={toggleSelectAll}
             />
           </div>
-          <div className="w-[100px] flex justify-start items-center">
+          <div className="w-[118px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-2 rounded-[4px]">
             Student No.
           </div>
-          <div className="w-[100px] flex justify-start items-center">
+          <div className="w-[118px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-2 rounded-[4px]">
             Surname
           </div>
-          <div className="w-[100px] flex justify-start items-center">
+          <div className="w-[118px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-2 rounded-[4px]">
             First name
           </div>
-          <div className="w-[120px] flex justify-start items-center">
-            Middle name
+          <div className=" w-[118px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-2 rounded-[4px]">
+            Year
           </div>
-          <div className=" w-[80px] flex justify-start items-center">Year</div>
-          <div className=" w-[100px] flex justify-start items-center">
+          <div className=" w-[118px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-2 rounded-[4px]">
             Section
           </div>
-          <div className=" w-[100px] flex justify-start items-center">
+          <div className=" w-[118px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-2 rounded-[4px]">
             College
           </div>
-          <div className=" w-[120px] flex justify-start items-center">
+          <div className=" w-[118px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-2 rounded-[4px]">
             Department
           </div>
-          <div className=" w-[80px] flex justify-start items-center">Sex</div>
-          <div className=" w-[100px] flex justify-start items-center">
+          <div className=" w-[118px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-2 rounded-[4px]">
+            Sex
+          </div>
+          <div className=" w-[118px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-2 rounded-[4px]">
             Status
           </div>
-          <div className=" w-[120px] flex justify-start items-center">
+          <div className=" w-[118px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-2 rounded-[4px]">
             No. of Cases
           </div>
-          <div className=" w-[174px] flex justify-between items-center gap-4">
-            <span>Actions</span>
-            {selectedStudents.length > 1 ? (
-              <>
-                <div className="w-[1px] h-[20px] border-[1px]"></div>
-                <div
-                  className="flex gap-2 items-center p-2 bg-[#ff3131] text-white text-[14px] rounded-[6px]"
-                  onClick={handleOpenModalDeleteMany}
-                >
-                  <BsTrash2Fill />
-                  <span>Delete</span>
-                </div>
-              </>
-            ) : (
-              ""
-            )}
-          </div>
+
+          {selectedStudents.length > 1 ? (
+            <>
+              <div className="w-[1px] h-[20px] border-[1px]"></div>
+              <div
+                className="flex gap-2 justify-start items-center py-1 px-2 bg-[#ff3131] border-[1px] border-[#ff3131] text-white text-[14px] rounded-[4px] cursor-pointer"
+                onClick={handleOpenModalDeleteMany}
+              >
+                <span>Delete</span>
+                <BsTrash3Fill className="text-[14px]" />
+              </div>
+            </>
+          ) : (
+            <div className="w-[118px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-2 rounded-[4px]">
+              <span>Actions</span>
+            </div>
+          )}
         </div>
 
         {students?.map((student, k) => (
           <div
-            className={`w-100 flex items-center gap-4 ${
+            className={`w-100 flex items-center gap-4 px-6 ${
               k % 2 === 0 ? "bg-[#f5f5f5]" : "bg-white"
             }`}
             key={k}
           >
-            <div className="w-[60px] h-[60px] flex justify-center items-center">
+            <div className="w-[30px] h-[60px] flex justify-start items-center">
               <input
                 type="checkbox"
                 checked={selectedStudents?.includes(student?._id)}
@@ -246,53 +256,50 @@ const StudentsTable = ({
                 className="w-[18px] h-[18px]"
               />
             </div>
-            <div className="w-[100px] flex justify-start items-center">
+            <div className="w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-2 rounded-[4px]">
               {student?.studentNo}
             </div>
-            <div className="w-[100px] flex justify-start items-center">
+            <div className="w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-2 rounded-[4px]">
               {student?.surName}
             </div>
-            <div className="w-[100px] flex justify-start items-center">
+            <div className="w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-2 rounded-[4px]">
               {student?.firstName}
             </div>
-            <div className="w-[120px] flex justify-start items-center">
-              {student?.middleName}
-            </div>
-            <div className="w-[80px] flex justify-start items-center">
+            <div className="w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-2 rounded-[4px]">
               {student?.year}
             </div>
-            <div className="w-[100px] flex justify-start items-center">
+            <div className="w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-2 rounded-[4px]">
               {student?.section}
             </div>
-            <div className="w-[100px] flex justify-start items-center">
+            <div className="w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-2 rounded-[4px]">
               {student?.college?.slice(0, 6)}
             </div>
-            <div className="w-[120px] flex justify-start items-center">
+            <div className="w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-2 rounded-[4px]">
               {student?.department?.slice(0, 6)}
             </div>
-            <div className="w-[80px] flex justify-start items-center">
+            <div className="w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-2 rounded-[4px]">
               {student?.sex?.slice(0, 6)}
             </div>
-            <div className="w-[100px] flex justify-start items-center">
+            <div className="w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-2 rounded-[4px]">
               {student?.statusOfStudent.slice(0, 6)}
             </div>
-            <div className="w-[120px] flex justify-start items-center">
+            <div className="w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-2 rounded-[4px]">
               {student?.department?.slice(0, 6)}
             </div>
-            <div className="w-[100px] flex justify-start items-center gap-2">
+            <div className="w-[130px] whitespace-nowrap flex justify-start items-center gap-2">
               {selectedStudents.length < 2 ? (
                 <>
-                  <div className="p-2 bg-[#007bff] rounded-[18px]">
-                    <BsEyeFill className="text-[18px] text-[white]" />
+                  <div className="p-2 bg-[white] border-[1px] border-[#007bff] rounded-[18px] cursor-pointer">
+                    <BsEye className="text-[18px] text-[#007bff]" />
                   </div>
-                  <div className="p-2 bg-[#FFBF00] rounded-[18px]">
-                    <BsPenFill className="text-[18px] text-white" />
+                  <div className="p-2 bg-[white] border-[1px] border-[#FFBF00] rounded-[18px] cursor-pointer">
+                    <BsPen className="text-[18px] text-[#FFBF00]" />
                   </div>
                   <div
                     onClick={() => handleClickDelete(student?._id)}
-                    className="p-2 bg-[#ff3131] rounded-[18px]"
+                    className="p-2 bg-[white] border-[1px] border-[#FF3131] rounded-[18px] cursor-pointer"
                   >
-                    <BsTrash2Fill className="text-[18px] text-white" />
+                    <BsTrash3 className="text-[18px] text-[#FF3131]" />
                   </div>
                 </>
               ) : (
@@ -304,7 +311,7 @@ const StudentsTable = ({
                     <BsPenFill className="text-[18px] text-white" />
                   </div>
                   <div className="p-2 bg-[#efefef] rounded-[18px]">
-                    <BsTrash2Fill className="text-[18px] text-white" />
+                    <BsTrash3Fill className="text-[18px] text-white" />
                   </div>
                 </>
               )}

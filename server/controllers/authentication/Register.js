@@ -42,10 +42,8 @@ const Register = async (req, res) => {
       userDetails: {
         _id: user._id,
         token: token,
-        cardId: user.cardId,
-        role: user.role,
-        fullname: user.fullname,
         username: user.username,
+        role: user.role,
       },
     });
   } catch (err) {

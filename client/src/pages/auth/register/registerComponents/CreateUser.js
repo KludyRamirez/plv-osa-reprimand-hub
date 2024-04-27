@@ -42,36 +42,45 @@ const initialState = {
   password: "",
   roles: ["Student", "Instructor", "Administrator"],
   role: "",
+  contactNo: "",
   statusOfUsers: ["Active", "Disabled"],
   statusOfUser: "",
+};
+
+const errorsInitialState = {
+  userName: "",
+  firstName: "",
+  surName: "",
+  email: "",
+  password: "",
+  contactNo: "",
 };
 
 const CreateUser = ({ toast, register }) => {
   const [values, setValues] = useState(initialState);
   const [showCreateUserModal, setShowCreateUserModal] = useState(false);
-  const [errors, setErrors] = useState({
-    userName: "",
-    firstName: "",
-    surName: "",
-    email: "",
-    password: "",
-  });
+  const [errors, setErrors] = useState(errorsInitialState);
 
   // const auth = useSelector(authSelector);
 
   const navigate = useNavigate();
 
-  const handleCreateUser = async (e) => {
+  const handleCreateUser = async () => {
+    const { userName, firstName, surName, email, password, role, contactNo } =
+      values;
+
     const userDetails = {
+      userName,
       firstName,
       surName,
+      email,
       password,
-      userName,
       role,
+      contactNo,
     };
 
     register(userDetails, navigate);
-    setValues({});
+    setValues(initialState);
   };
 
   // dynamic value getting and DYNAMIC use of error messages -kludy
@@ -83,6 +92,16 @@ const CreateUser = ({ toast, register }) => {
     let newErrors = { ...errors };
 
     setValues({ ...values, [name]: value });
+
+    if (name === "userName") {
+      if (value.length < 3) {
+        newErrors[name] = "Username must be at least 3 characters long.";
+      } else if (value.length > 48) {
+        newErrors[name] = "Username must be at most 48 characters long.";
+      } else {
+        newErrors[name] = "";
+      }
+    }
 
     if (name === "firstName") {
       if (value.length < 3) {
@@ -96,9 +115,9 @@ const CreateUser = ({ toast, register }) => {
 
     if (name === "surName") {
       if (value.length < 3) {
-        newErrors[name] = "surName must be at least 3 characters long.";
+        newErrors[name] = "Surname must be at least 3 characters long.";
       } else if (value.length > 48) {
-        newErrors[name] = "surName name must be at most 48 characters long.";
+        newErrors[name] = "Surname must be at most 48 characters long.";
       } else {
         newErrors[name] = "";
       }
@@ -124,6 +143,16 @@ const CreateUser = ({ toast, register }) => {
       }
     }
 
+    if (name === "contactNo") {
+      if (value.length < 3) {
+        newErrors[name] = "Contact No. must be at least 3 characters long.";
+      } else if (value.length > 48) {
+        newErrors[name] = "Contact No. must be at most 48 characters long.";
+      } else {
+        newErrors[name] = "";
+      }
+    }
+
     setErrors(newErrors);
   };
 
@@ -134,6 +163,8 @@ const CreateUser = ({ toast, register }) => {
   };
   const handleCloseModal = () => {
     setShowCreateUserModal(false);
+    setValues(initialState);
+    setErrors(errorsInitialState);
   };
 
   return (

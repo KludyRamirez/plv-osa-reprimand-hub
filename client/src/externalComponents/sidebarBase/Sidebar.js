@@ -264,8 +264,8 @@ function Sidebar(props) {
               </Link>
             </div>
             <div className="w-full">
-              <Link to="/user">
-                {activeItem === "/user" ? (
+              <Link to="/users">
+                {activeItem === "/users" ? (
                   <SidebarOptions
                     sx={{
                       color: "#007bff",
@@ -281,7 +281,7 @@ function Sidebar(props) {
                   >
                     <RouteCon>
                       <BsPersonSquare
-                        className={activeItem === "/user" ? "icon-active" : ""}
+                        className={activeItem === "/users" ? "icon-active" : ""}
                       />
                       <p className="text-[18px]">Users</p>
                     </RouteCon>

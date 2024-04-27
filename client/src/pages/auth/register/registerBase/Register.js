@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import Sidebar from "../../../externalComponents/sidebarBase/Sidebar";
-import StudentsFilter from "../studentsComponents/StudentsFilter";
-import CreateStudent from "../studentsComponents/CreateStudent";
+import Sidebar from "../../../../externalComponents/sidebarBase/Sidebar";
+import CreateUser from "../registerComponents/CreateUser";
+import UsersFilter from "../registerComponents/UsersFilter";
 import axios from "axios";
 
 const Register = ({ toast }) => {
@@ -27,8 +27,8 @@ const Register = ({ toast }) => {
         <Sidebar />
         <div className="w-full h-screen flex justify-start bg-[#007bff]">
           <div className="w-full bg-[#fefefe] mt-[80px] rounded-tl-[24px] p-8">
-            <CreateStudent toast={toast} getStudents={getStudents} />
-            <StudentsFilter students={students} getStudents={getStudents} />
+            <CreateUser toast={toast} getStudents={getStudents} />
+            <UsersFilter students={students} getStudents={getStudents} />
           </div>
         </div>
       </div>

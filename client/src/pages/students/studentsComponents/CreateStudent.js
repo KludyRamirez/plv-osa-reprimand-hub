@@ -78,21 +78,23 @@ const initialState = {
   email: "",
 };
 
+const errorsInitialState = {
+  studentNo: "",
+  firstName: "",
+  surName: "",
+  middleName: "",
+  email: "",
+  contactNo: "",
+  guardianContactNo: "",
+};
+
 // const selectAuth = (state) => state.auth;
 // const authSelector = createSelector([selectAuth], (auth) => auth);
 
 const CreateStudent = ({ toast, getStudents }) => {
   const [values, setValues] = useState(initialState);
   const [showCreateStudentModal, setShowCreateStudentModal] = useState(false);
-  const [errors, setErrors] = useState({
-    studentNo: "",
-    firstName: "",
-    surName: "",
-    middleName: "",
-    email: "",
-    contactNo: "",
-    guardianContactNo: "",
-  });
+  const [errors, setErrors] = useState(errorsInitialState);
 
   // const auth = useSelector(authSelector);
 
@@ -205,6 +207,8 @@ const CreateStudent = ({ toast, getStudents }) => {
   };
   const handleCloseModal = () => {
     setShowCreateStudentModal(false);
+    setValues(initialState);
+    setErrors(errorsInitialState);
   };
 
   return (
