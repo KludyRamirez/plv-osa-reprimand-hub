@@ -38,7 +38,7 @@ const LoginInputs = ({ username, setUsername, password, setPassword }) => {
   };
 
   return (
-    <form className="flex flex-col gap-8 w-full">
+    <form className="flex flex-col gap-8 w-full zIndex-2">
       <div className="flex flex-col gap-4">
         <div className="w-100 text-base font-large text-[#303030]">
           Username
@@ -73,7 +73,9 @@ const LoginInputs = ({ username, setUsername, password, setPassword }) => {
       </div>
       <div className="w-100 mt-4 flex justify-between items-center">
         <div className="hover:underline">
-          <Link to="/forgot-password">Oops! Forgot password?</Link>
+          <Link to="/forgot-password" className="text-[#303030]">
+            Oops! Forgot password?
+          </Link>
         </div>
         <div>
           {usernameError === "" &&

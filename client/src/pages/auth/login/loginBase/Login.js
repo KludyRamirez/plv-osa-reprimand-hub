@@ -5,9 +5,15 @@ import { getActions } from "../../../../store/actions/AuthActions";
 import { styled } from "@mui/material/styles";
 import osaLogo from "../../../../images/login/osalogo.jpg";
 import plvLogo from "../../../../images/login/PLVlogo.png";
+import folder from "../../../../images/login/folder.png";
 import LoginInputs from "../loginComponents/LoginInputs";
 
-import { BsLink, BsMegaphoneFill } from "react-icons/bs";
+import {
+  BsArrowLeft,
+  BsArrowRight,
+  BsLink,
+  BsMegaphoneFill,
+} from "react-icons/bs";
 
 const Login = ({ login }) => {
   const FormTitle = styled("div")({
@@ -19,10 +25,9 @@ const Login = ({ login }) => {
     WebkitTextFillColor: "transparent",
     MozBackgroundClip: "text",
     MozTextFillColor: "transparent",
-    textShadow: "none",
     fontSize: "120px",
     fontWeight: "600",
-    lineHeight: "110px",
+    lineHeight: "112px",
     zIndex: "2",
   });
 
@@ -47,13 +52,20 @@ const Login = ({ login }) => {
   return (
     <div className="w-full h-screen flex justify-center bg-white">
       <div className="w-full flex flex-col gap-40">
-        <div className="px-8 shadow-sm bg-white">
-          <div className="h-[86px] flex justify-between items-center gap-10">
+        <div className="px-6 shadow-sm zIndex-2">
+          <div className="h-[90px] flex justify-between items-center gap-10">
             <div className="flex justify-center items-center gap-10">
-              <div className="flex items-center gap-4">
-                <span className="font-semibold text-xl text-[#007bff]">
+              <div className="flex items-center gap-6">
+                <img src={plvLogo} alt="" className="w-[60px] h-[60px]" />
+                <FormTitle
+                  sx={{
+                    fontSize: "22px",
+                    backgroundImage:
+                      "radial-gradient(100% 100% at 100% 0, #077bff 0, #122c8e 100%)",
+                  }}
+                >
                   Office of Student Affairs
-                </span>
+                </FormTitle>
               </div>
             </div>
             <div className="flex justify-center items-center gap-3">
@@ -73,42 +85,47 @@ const Login = ({ login }) => {
             </div>
           </div>
         </div>
-        <div className="w-100 flex justify-center items-center gap-12">
-          <div className="p-8 gap-8 w-[500px] flex flex-col self-center rounded-[8px]">
-            {activeSelect === "Login" && (
-              <>
-                <div className="w-100 flex justify-between items-center text-3xl font-semibold text-[#007bff]">
-                  <span>Sign in</span>
-                  <div className="flex justify-center items-center gap-2">
-                    <img
-                      src={plvLogo}
-                      alt=""
-                      className="w-[50px] h-[50px] rounded-[30px]"
-                    />
-                    <img
-                      src={osaLogo}
-                      alt=""
-                      className="w-[50px] h-[50px] rounded-[30px]"
-                    />
+        <div className="w-100 flex justify-center items-center gap-12 ">
+          <div className="relative">
+            <div className="p-8 gap-8 w-[500px] flex flex-col self-center rounded-[8px]">
+              {activeSelect === "Login" && (
+                <>
+                  <div className="w-100 flex justify-between items-center text-3xl font-semibold text-[#007bff] zIndex-2">
+                    <span>Sign in</span>
+                    <div className="flex justify-center items-center gap-2">
+                      <img
+                        src={osaLogo}
+                        alt=""
+                        className="w-[50px] h-[50px] rounded-[25px]"
+                      />
+                    </div>
                   </div>
-                </div>
-                <LoginInputs
-                  username={username}
-                  setUsername={setUsername}
-                  password={password}
-                  setPassword={setPassword}
-                  handleLogin={handleLogin}
-                />
-              </>
-            )}
+                  <LoginInputs
+                    username={username}
+                    setUsername={setUsername}
+                    password={password}
+                    setPassword={setPassword}
+                    handleLogin={handleLogin}
+                  />
+                </>
+              )}
+            </div>
+            <div className="absolute flex justify-center items-center w-[800px] h-[800px] rounded-[50%] border-[1px] border-[#dedede] top-[-200px] left-[-400px] zIndex-1">
+              <div className="w-[100px] h-[100px] bg-blue-100 rounded-[50%] relative">
+                <div className="absolute w-[50px] h-[50px] rounded-[50%] bg-[white] zIndex-3"></div>
+                <div className="absolute w-[20px] h-[20px] rounded-[50%] bg-[#ff3131] top-[-254px] left-[310px]"></div>
+                <div className="absolute w-[20px] h-[20px] rounded-[50%] bg-[#007bff] top-[352px] left-[-210px]"></div>
+              </div>
+            </div>
           </div>
-          <div className="flex flex-col h-[100%] items-center justify-center gap-2">
+
+          <div className="flex flex-col h-[100%] items-center justify-center gap-4">
             <div className="w-[1px] h-[25%] bg-gray-200"></div>
             <BsLink className="text-[#077bff] text-[24px]" />
             <div className="w-[1px] h-[25%] bg-gray-200"></div>
           </div>
           <div className="relative">
-            <div className="h-[100%] flex flex-col  p-4 rounded-[8px] z-2">
+            <div className="h-[100%] flex flex-col p-4 rounded-[8px] z-2">
               <FormTitle
                 sx={{
                   backgroundImage:
@@ -124,11 +141,24 @@ const Login = ({ login }) => {
                     "radial-gradient(100% 100% at 100% 0, #07bbff 0, #007bff 100%)",
                 }}
               >
-                Diligently.
+                Digitally.
               </FormTitle>
             </div>
-            <div className="absolute bottom-[-100px] right-[-100px] w-[300px] h-[300px] bg-blue-100 z-1 rounded-[150px]"></div>
-            <div className="absolute bottom-[-60px] right-[-60px] w-[150px] h-[150px] bg-[yellow] z-1 rounded-[150px]"></div>
+            <div className="absolute flex p-2 justify-end items-start top-[0px] right-[-100px] w-[300px] h-[100px] bg-blue-100 z-1 rounded-[4px] gap-2 ">
+              <div className="mt-[-30px] w-[60px] h-[60px] flex justify-center items-center bg-white rounded-[50%] border-[1px] border-blue-100 hover:border-[#007bff] cursor-pointer">
+                <BsArrowLeft className="text-[24px] text-[#007bff]" />
+              </div>
+              <div className="mt-[-30px] w-[60px] h-[60px] flex justify-center items-center bg-white rounded-[50%] border-[1px] border-blue-100 hover:border-[#007bff] cursor-pointer">
+                <BsArrowRight className="text-[24px] text-[#007bff]" />
+              </div>
+            </div>
+            <img
+              src={folder}
+              alt=""
+              className="absolute top-[74px] right-[-150px] w-[200px] h-[200px] zIndex-2"
+            />
+            <div className="absolute bottom-[-110px] right-[-110px] w-[320px] h-[320px] bg-blue-100 z-1 rounded-[50%]"></div>
+            <div className="absolute bottom-[-70px] right-[-70px] w-[150px] h-[150px] bg-[yellow] z-1 rounded-[50%]"></div>
           </div>
         </div>
       </div>

@@ -132,7 +132,11 @@ function Sidebar(props) {
                       color: "#007bff",
                       background: "white",
                       borderRadius: "6px",
-                      "&:hover": { transform: "translateY(0px)" },
+                      "&:hover": {
+                        transform: "translateY(0px)",
+                        color: "#007bff",
+                        background: "white",
+                      },
                       "&:active": { transform: "translateY(0px)" },
                     }}
                   >
@@ -164,7 +168,11 @@ function Sidebar(props) {
                       color: "#007bff",
                       background: "white",
                       borderRadius: "6px",
-                      "&:hover": { transform: "translateY(0px)" },
+                      "&:hover": {
+                        transform: "translateY(0px)",
+                        color: "#007bff",
+                        background: "white",
+                      },
                       "&:active": { transform: "translateY(0px)" },
                     }}
                   >
@@ -195,7 +203,11 @@ function Sidebar(props) {
                       color: "#007bff",
                       background: "white",
                       borderRadius: "6px",
-                      "&:hover": { transform: "translateY(0px)" },
+                      "&:hover": {
+                        transform: "translateY(0px)",
+                        color: "#007bff",
+                        background: "white",
+                      },
                       "&:active": { transform: "translateY(0px)" },
                     }}
                   >
@@ -224,7 +236,11 @@ function Sidebar(props) {
                       color: "#007bff",
                       background: "white",
                       borderRadius: "6px",
-                      "&:hover": { transform: "translateY(0px)" },
+                      "&:hover": {
+                        transform: "translateY(0px)",
+                        color: "#007bff",
+                        background: "white",
+                      },
                       "&:active": { transform: "translateY(0px)" },
                     }}
                   >
@@ -255,7 +271,11 @@ function Sidebar(props) {
                       color: "#007bff",
                       background: "white",
                       borderRadius: "6px",
-                      "&:hover": { transform: "translateY(0px)" },
+                      "&:hover": {
+                        transform: "translateY(0px)",
+                        color: "#007bff",
+                        background: "white",
+                      },
                       "&:active": { transform: "translateY(0px)" },
                     }}
                   >
@@ -294,7 +314,11 @@ function Sidebar(props) {
                         color: "#007bff",
                         background: "white",
                         borderRadius: "6px",
-                        "&:hover": { transform: "translateY(0px)" },
+                        "&:hover": {
+                          transform: "translateY(0px)",
+                          color: "#007bff",
+                          background: "white",
+                        },
                         "&:active": { transform: "translateY(0px)" },
                       }}
                     >
