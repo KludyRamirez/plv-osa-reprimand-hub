@@ -6,6 +6,7 @@ import { styled } from "@mui/material/styles";
 import osaLogo from "../../../../images/login/osalogo.jpg";
 import plvLogo from "../../../../images/login/PLVlogo.png";
 import folder from "../../../../images/login/folder.png";
+import like from "../../../../images/login/like.png";
 import LoginInputs from "../loginComponents/LoginInputs";
 
 import {
@@ -120,6 +121,9 @@ const Login = ({ login }) => {
                 <div className="absolute w-[50px] h-[50px] rounded-[50%] bg-[white] zIndex-3"></div>
                 <div className="absolute w-[20px] h-[20px] rounded-[50%] bg-[#ff3131] top-[-254px] left-[310px]"></div>
                 <div className="absolute w-[20px] h-[20px] rounded-[50%] bg-[#007bff] top-[352px] left-[-210px]"></div>
+                <div className="absolute w-[240px] h-[240px] rounded-[50%] top-[170px] right-[0px] bg-[white] border-[1px] border-[yellow] zIndex-1"></div>
+                <div className="absolute w-[50px] h-[50px] rounded-[50%] top-[170px] right-[0px] bg-[white] border-[1px] border-[yellow] zIndex-1"></div>
+                <div className="absolute w-[100px] h-[100px] rounded-[50%] top-[270px] right-[300px] bg-[white] border-[1px] border-[yellow] zIndex-1"></div>
               </div>
             </div>
           </div>
@@ -150,7 +154,7 @@ const Login = ({ login }) => {
                 Digitally.
               </FormTitle>
             </div>
-            <div className="absolute flex p-2 justify-end items-start top-[0px] right-[-100px] w-[300px] h-[100px] z-1 rounded-[4px] gap-2 ">
+            <div className="absolute flex p-2 justify-end items-start top-[0px] right-[-100px] w-[300px] h-[100px] zIndex-2 rounded-[4px] gap-2 ">
               <div className="mt-[-30px] w-[60px] h-[60px] flex justify-center items-center bg-white rounded-[50%] border-[1px] border-[#007bff] text-[#007bff] cursor-pointer hover:bg-[#007bff] hover:text-white">
                 <BsArrowLeft className="text-[24px] " />
               </div>
@@ -163,10 +167,15 @@ const Login = ({ login }) => {
               alt=""
               className="absolute top-[80px] right-[-150px] w-[200px] h-[200px] zIndex-2"
             />
-            <div className="absolute top-[150px] right-[100px] w-[150px] h-[150px] bg-[white] border-[1px] border-[yellow] rounded-[50%]"></div>
-            <div className="absolute top-[250px] right-[200px] w-[20px] h-[20px] bg-blue-100 rounded-[50%]"></div>
+
+            <div className="absolute top-[160px] right-[100px] w-[140px] h-[140px] bg-[white] border-[1px] border-[yellow] rounded-[50%] "></div>
+            <div className="absolute top-[240px] right-[198px] w-[20px] h-[20px] bg-blue-100 rounded-[50%]"></div>
             <div className="absolute bottom-[-100px] right-[-110px] w-[320px] h-[320px] bg-blue-100 rounded-[50%]"></div>
-            <div className="absolute bottom-[-60px] right-[-70px] w-[150px] h-[150px] bg-[yellow]  rounded-[50%]"></div>
+            <div className="absolute bottom-[-60px] right-[-70px] w-[150px] h-[150px] bg-[yellow] rounded-[50%]"></div>
+            <div className="absolute top-[20px] right-[-300px] w-[100px] h-[100px] border-[1px] border-[yellow] rounded-[50%] zIndex-2"></div>
+            <div className="absolute top-[20px] right-[-200px] w-[40px] h-[40px] border-[1px] border-[yellow] rounded-[50%] zIndex-2"></div>
+            <div className="absolute top-[440px] right-[-200px] w-[120px] h-[120px] border-[1px] border-[#007bff] bg-white rounded-[50%] zIndex-2"></div>
+            <div className="absolute top-[520px] right-[-84px] w-[60px] h-[60px] border-[1px] border-[#007bff] bg-white rounded-[50%] zIndex-2"></div>
           </div>
         </div>
       </div>

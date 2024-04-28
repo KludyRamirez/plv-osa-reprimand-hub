@@ -15,13 +15,14 @@ import toast from "react-hot-toast";
 import DeleteManyUserModal from "./DeleteManyUserModal";
 import { useSelector } from "react-redux";
 import { createSelector } from "reselect";
+import { useNavigate } from "react-router-dom";
 
 const ModalBox = styled("div")({
   position: "absolute",
   top: "50%",
   left: "50%",
   width: "25%",
-  height: "400px",
+  height: "392px",
   padding: "20px",
   transform: "translate(-50%, -50%)",
   background: "white",
@@ -51,6 +52,7 @@ const UsersTable = ({ users, getUsers, selectedUsers, setSelectedUsers }) => {
   const [showDeleteManyUserModal, setShowDeleteManyUserModal] = useState(false);
 
   const auth = useSelector(authSelector);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (users?.length > 0 && selectedUsers?.length === users?.length) {
@@ -92,11 +94,9 @@ const UsersTable = ({ users, getUsers, selectedUsers, setSelectedUsers }) => {
         `${process.env.REACT_APP_API_URI}/users/deleteSelected`,
         {
           data: { users: selectedUsers },
-        },
-        {
           withCredentials: true,
           headers: {
-            Authorization: `Bearer ${auth?.userDetails?.token}`,
+            Authorization: `Bearer ${auth.userDetails.token}`,
           },
         }
       );
@@ -107,9 +107,14 @@ const UsersTable = ({ users, getUsers, selectedUsers, setSelectedUsers }) => {
     } catch (error) {
       console.error("Error deleting selected users:", error);
       if (error.response) {
-        toast.error(error.response.data.message);
+        if (error.response.status === 403) {
+          console.error("Unauthorized access. Please check your permissions.");
+          navigate("/forbidden");
+        } else {
+          toast.error(error.response.data.message);
+        }
       } else {
-        toast.error("An error occurred while deleting the selected users.");
+        toast.error("An error occurred while deleting the selected students.");
       }
     }
   };

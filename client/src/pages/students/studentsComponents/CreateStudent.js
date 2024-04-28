@@ -135,17 +135,14 @@ const CreateStudent = ({ toast, getStudents }) => {
     const { name, value } = e.target;
     let newErrors = { ...errors };
 
-    setValues({ ...values, [name]: value });
+    let formattedValue = value;
 
-    if (name === "studentNo") {
-      if (value.length < 7) {
-        newErrors[name] = "Student No. must be at least 7 characters long.";
-      } else if (value.length > 7) {
-        newErrors[name] = "Student No. must be at most 7 characters long.";
-      } else {
-        newErrors[name] = "";
-      }
+    if (name === "firstName" || name === "middleName" || name === "surName") {
+      formattedValue =
+        value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
     }
+
+    setValues({ ...values, [name]: formattedValue });
 
     if (name === "firstName") {
       if (value.length < 3) {
@@ -155,9 +152,7 @@ const CreateStudent = ({ toast, getStudents }) => {
       } else {
         newErrors[name] = "";
       }
-    }
-
-    if (name === "middleName") {
+    } else if (name === "middleName") {
       if (value.length < 3) {
         newErrors[name] = "Middlename must be at least 3 characters long.";
       } else if (value.length > 48) {
@@ -165,9 +160,7 @@ const CreateStudent = ({ toast, getStudents }) => {
       } else {
         newErrors[name] = "";
       }
-    }
-
-    if (name === "surName") {
+    } else if (name === "surName") {
       if (value.length < 3) {
         newErrors[name] = "Surname must be at least 3 characters long.";
       } else if (value.length > 48) {
@@ -175,38 +168,41 @@ const CreateStudent = ({ toast, getStudents }) => {
       } else {
         newErrors[name] = "";
       }
-    }
-
-    if (name === "email") {
-      if (value.length < 11) {
-        newErrors[name] = "Email must be at least 11 characters long.";
-      } else if (value.length > 48) {
-        newErrors[name] = "Email must be at most 48 characters long.";
-      } else {
-        newErrors[name] = "";
+    } else {
+      if (name === "studentNo") {
+        if (value.length < 7) {
+          newErrors[name] = "Student No. must be at least 7 characters long.";
+        } else if (value.length > 7) {
+          newErrors[name] = "Student No. must be at most 7 characters long.";
+        } else {
+          newErrors[name] = "";
+        }
+      } else if (name === "email") {
+        if (value.length < 11) {
+          newErrors[name] = "Email must be at least 11 characters long.";
+        } else if (value.length > 48) {
+          newErrors[name] = "Email must be at most 48 characters long.";
+        } else {
+          newErrors[name] = "";
+        }
+      } else if (name === "contactNo") {
+        if (value.length < 11) {
+          newErrors[name] = "Contact No. must be at least 11 characters long.";
+        } else if (value.length > 48) {
+          newErrors[name] = "Contact No. must be at most 48 characters long.";
+        } else {
+          newErrors[name] = "";
+        }
+      } else if (name === "guardianContactNo") {
+        if (value.length < 11) {
+          newErrors[name] = "Guardian No. must be at least 11 characters long.";
+        } else if (value.length > 48) {
+          newErrors[name] = "Guardian No. must be at most 48 characters long.";
+        } else {
+          newErrors[name] = "";
+        }
       }
     }
-
-    if (name === "contactNo") {
-      if (value.length < 11) {
-        newErrors[name] = "Contact No. must be at least 11 characters long.";
-      } else if (value.length > 48) {
-        newErrors[name] = "Contact No. must be at most 48 characters long.";
-      } else {
-        newErrors[name] = "";
-      }
-    }
-
-    if (name === "guardianContactNo") {
-      if (value.length < 11) {
-        newErrors[name] = "Guardian No. must be at least 11 characters long.";
-      } else if (value.length > 48) {
-        newErrors[name] = "Guardian No. must be at most 48 characters long.";
-      } else {
-        newErrors[name] = "";
-      }
-    }
-
     setErrors(newErrors);
   };
 

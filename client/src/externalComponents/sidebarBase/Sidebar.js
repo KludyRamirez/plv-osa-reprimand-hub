@@ -351,6 +351,7 @@ function Sidebar(props) {
             >
               <div className="w-full">
                 <SidebarOptions
+                  onClick={logoutUtil}
                   sx={{
                     background: "rgba(0, 0, 0, 0.1)",
                     borderRadius: "6px",
@@ -364,7 +365,7 @@ function Sidebar(props) {
                   }}
                 >
                   <RouteCon>
-                    <AiOutlineLogout onClick={logoutUtil} />
+                    <AiOutlineLogout />
                     <p className="text-[18px]">Sign Out</p>
                   </RouteCon>
                 </SidebarOptions>

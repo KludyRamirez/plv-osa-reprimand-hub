@@ -50,6 +50,7 @@ const LoginInputs = ({
           Username
         </div>
         <input
+          autoFocus
           value={username}
           onChange={handleUsernameChange}
           label="Username"
@@ -79,7 +80,7 @@ const LoginInputs = ({
       </div>
       <div className="w-100 mt-4 flex justify-between items-center">
         <div className="hover:underline">
-          <Link to="/forgot-password" className="text-[#303030]">
+          <Link to="/forgot-password" className="text-[#ff3131]">
             Oops! Forgot password?
           </Link>
         </div>

@@ -95,68 +95,66 @@ const CreateUser = ({ toast, register }) => {
     const { name, value } = e.target;
     let newErrors = { ...errors };
 
-    setValues({ ...values, [name]: value });
+    let formattedValue = value;
 
-    if (name === "userName") {
-      if (value.length < 3) {
-        newErrors[name] = "Username must be at least 3 characters long.";
-      } else if (value.length > 48) {
-        newErrors[name] = "Username must be at most 48 characters long.";
-      } else {
-        newErrors[name] = "";
-      }
+    if (name === "firstName" || name === "surName") {
+      formattedValue =
+        value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
     }
 
+    setValues({ ...values, [name]: formattedValue });
+
     if (name === "firstName") {
-      if (value.length < 3) {
+      if (formattedValue.length < 3) {
         newErrors[name] = "First name must be at least 3 characters long.";
-      } else if (value.length > 48) {
+      } else if (formattedValue.length > 48) {
         newErrors[name] = "First name must be at most 48 characters long.";
       } else {
         newErrors[name] = "";
       }
-    }
-
-    if (name === "surName") {
-      if (value.length < 3) {
+    } else if (name === "surName") {
+      if (formattedValue.length < 3) {
         newErrors[name] = "Surname must be at least 3 characters long.";
-      } else if (value.length > 48) {
+      } else if (formattedValue.length > 48) {
         newErrors[name] = "Surname must be at most 48 characters long.";
       } else {
         newErrors[name] = "";
       }
-    }
-
-    if (name === "email") {
-      if (value.length < 3) {
-        newErrors[name] = "Email must be at least 3 characters long.";
-      } else if (value.length > 48) {
-        newErrors[name] = "Email must be at most 48 characters long.";
-      } else {
-        newErrors[name] = "";
+    } else {
+      if (name === "userName") {
+        if (value.length < 3) {
+          newErrors[name] = "Username must be at least 3 characters long.";
+        } else if (value.length > 48) {
+          newErrors[name] = "Username must be at most 48 characters long.";
+        } else {
+          newErrors[name] = "";
+        }
+      } else if (name === "email") {
+        if (value.length < 3) {
+          newErrors[name] = "Email must be at least 3 characters long.";
+        } else if (value.length > 48) {
+          newErrors[name] = "Email must be at most 48 characters long.";
+        } else {
+          newErrors[name] = "";
+        }
+      } else if (name === "password") {
+        if (value.length < 3) {
+          newErrors[name] = "Password must be at least 3 characters long.";
+        } else if (value.length > 48) {
+          newErrors[name] = "Password must be at most 48 characters long.";
+        } else {
+          newErrors[name] = "";
+        }
+      } else if (name === "contactNo") {
+        if (value.length < 3) {
+          newErrors[name] = "Contact No. must be at least 3 characters long.";
+        } else if (value.length > 48) {
+          newErrors[name] = "Contact No. must be at most 48 characters long.";
+        } else {
+          newErrors[name] = "";
+        }
       }
     }
-
-    if (name === "password") {
-      if (value.length < 3) {
-        newErrors[name] = "Password must be at least 3 characters long.";
-      } else if (value.length > 48) {
-        newErrors[name] = "Password must be at most 48 characters long.";
-      } else {
-        newErrors[name] = "";
-      }
-    }
-
-    if (name === "contactNo") {
-      if (value.length < 3) {
-        newErrors[name] = "Contact No. must be at least 3 characters long.";
-      } else if (value.length > 48) {
-        newErrors[name] = "Contact No. must be at most 48 characters long.";
-      } else {
-        newErrors[name] = "";
-      }
-    }
-
     setErrors(newErrors);
   };
 

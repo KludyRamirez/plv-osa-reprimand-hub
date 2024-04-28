@@ -3,7 +3,7 @@ const Notification = require("../models/Notifications");
 
 const createStudent = async (req, res) => {
   try {
-    const { firstName, lastName } = req.body;
+    const { firstName, surName } = req.body;
 
     const userData = req.user;
 
@@ -11,7 +11,7 @@ const createStudent = async (req, res) => {
 
     await Notification.create({
       userId: userData._id,
-      message: `Successfully added ${firstName} ${lastName} as a student`,
+      message: `Successfully added ${firstName} ${surName} as a student`,
       createdAt: new Date(),
     });
 

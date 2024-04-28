@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { createSelector } from "reselect";
 import axios from "axios";
 import {
   BsEye,
@@ -13,15 +15,14 @@ import { styled } from "@mui/system";
 import DeleteStudentModal from "./DeleteStudentModal";
 import toast from "react-hot-toast";
 import DeleteManyStudentModal from "./DeleteManyStudentModal";
-
-import { useSelector } from "react-redux";
-import { createSelector } from "reselect";
+import { useNavigate } from "react-router-dom";
 
 const ModalBox = styled("div")({
   position: "absolute",
   top: "50%",
   left: "50%",
-  width: "30%",
+  width: "25%",
+  height: "392px",
   padding: "20px",
   transform: "translate(-50%, -50%)",
   background: "white",
@@ -65,6 +66,7 @@ const StudentsTable = ({
   }, [selectedStudents, students]);
 
   const auth = useSelector(authSelector);
+  const navigate = useNavigate();
 
   const toggleStudentSelection = (studentId) => {
     let updatedSelectedStudents = [...selectedStudents];
@@ -92,19 +94,20 @@ const StudentsTable = ({
 
   const deleteSelectedStudents = async () => {
     try {
-      if (!auth.userDetails.token) {
+      if (!auth.userDetails || !auth.userDetails.token) {
         console.error("Authentication token not found.");
+        // Redirect to login page or handle unauthorized access as per your application's logic
+        navigate("/login");
         return;
       }
+
       const res = await axios.delete(
         `${process.env.REACT_APP_API_URI}/students/deleteSelected`,
         {
           data: { students: selectedStudents },
-        },
-        {
           withCredentials: true,
           headers: {
-            Authorization: `Bearer ${auth?.userDetails?.token}`,
+            Authorization: `Bearer ${auth.userDetails.token}`,
           },
         }
       );
@@ -115,7 +118,12 @@ const StudentsTable = ({
     } catch (error) {
       console.error("Error deleting selected students:", error);
       if (error.response) {
-        toast.error(error.response.data.message);
+        if (error.response.status === 403) {
+          console.error("Unauthorized access. Please check your permissions.");
+          navigate("/forbidden");
+        } else {
+          toast.error(error.response.data.message);
+        }
       } else {
         toast.error("An error occurred while deleting the selected students.");
       }
@@ -124,9 +132,21 @@ const StudentsTable = ({
 
   const deleteOneStudent = async (id) => {
     try {
-      await axios.delete(`${process.env.REACT_APP_API_URI}/student/${id}`);
+      if (!auth.userDetails.token) {
+        console.error("Authentication token not found.");
+        return;
+      }
+      const res = await axios.delete(
+        `${process.env.REACT_APP_API_URI}/student/${id}`,
+        {
+          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${auth?.userDetails?.token}`,
+          },
+        }
+      );
       getStudents();
-      toast.success("Student has been deleted.");
+      toast.success(res.data.message);
     } catch (error) {
       console.error("Error deleting student:", error);
     }
