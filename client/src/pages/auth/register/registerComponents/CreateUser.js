@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { createSelector } from "reselect";
+// import { useSelector } from "react-redux";
+// import { createSelector } from "reselect";
 import Modal from "@mui/material/Modal";
 import { FaPlus } from "react-icons/fa6";
 import { styled } from "@mui/system";
+import { connect } from "react-redux";
+import { getActions } from "../../../../store/actions/AuthActions";
 import { useNavigate } from "react-router-dom";
 import CreateUserFormModal from "./CreateUserFormModal";
 
@@ -43,8 +45,6 @@ const initialState = {
   roles: ["Student", "Instructor", "Administrator"],
   role: "",
   contactNo: "",
-  statusOfUsers: ["Active", "Disabled"],
-  statusOfUser: "",
 };
 
 const errorsInitialState = {
@@ -65,10 +65,10 @@ const CreateUser = ({ toast, register }) => {
 
   const navigate = useNavigate();
 
-  const handleCreateUser = async () => {
-    const { userName, firstName, surName, email, password, role, contactNo } =
-      values;
+  const { userName, firstName, surName, email, password, role, contactNo } =
+    values;
 
+  const handleCreateUser = async () => {
     const userDetails = {
       userName,
       firstName,
@@ -79,8 +79,12 @@ const CreateUser = ({ toast, register }) => {
       contactNo,
     };
 
-    register(userDetails, navigate);
-    setValues(initialState);
+    try {
+      await register(userDetails, navigate);
+      setValues(initialState);
+    } catch (error) {
+      console.error("Error while registering user:", error);
+    }
   };
 
   // dynamic value getting and DYNAMIC use of error messages -kludy
@@ -203,4 +207,10 @@ const CreateUser = ({ toast, register }) => {
   );
 };
 
-export default CreateUser;
+const mapActionsToProps = (dispatch) => {
+  return {
+    ...getActions(dispatch),
+  };
+};
+
+export default connect(null, mapActionsToProps)(CreateUser);

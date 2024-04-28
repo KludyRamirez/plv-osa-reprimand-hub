@@ -13,12 +13,15 @@ import { styled } from "@mui/system";
 import DeleteUserModal from "./DeleteUserModal";
 import toast from "react-hot-toast";
 import DeleteManyUserModal from "./DeleteManyUserModal";
+import { useSelector } from "react-redux";
+import { createSelector } from "reselect";
 
 const ModalBox = styled("div")({
   position: "absolute",
   top: "50%",
   left: "50%",
-  width: "30%",
+  width: "25%",
+  height: "400px",
   padding: "20px",
   transform: "translate(-50%, -50%)",
   background: "white",
@@ -38,11 +41,16 @@ const ModalBox = styled("div")({
   },
 });
 
+const selectAuth = (state) => state.auth;
+const authSelector = createSelector([selectAuth], (auth) => auth);
+
 const UsersTable = ({ users, getUsers, selectedUsers, setSelectedUsers }) => {
   const [selectAll, setSelectAll] = useState(false);
   const [userDeleteId, setUserDeleteId] = useState("");
   const [showDeleteUserModal, setShowDeleteUserModal] = useState(false);
   const [showDeleteManyUserModal, setShowDeleteManyUserModal] = useState(false);
+
+  const auth = useSelector(authSelector);
 
   useEffect(() => {
     if (users?.length > 0 && selectedUsers?.length === users?.length) {
@@ -76,16 +84,26 @@ const UsersTable = ({ users, getUsers, selectedUsers, setSelectedUsers }) => {
 
   const deleteSelectedUsers = async () => {
     try {
-      await axios.delete(
+      if (!auth.userDetails.token) {
+        console.error("Authentication token not found.");
+        return;
+      }
+      const res = await axios.delete(
         `${process.env.REACT_APP_API_URI}/users/deleteSelected`,
         {
           data: { users: selectedUsers },
+        },
+        {
+          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${auth?.userDetails?.token}`,
+          },
         }
       );
       setSelectedUsers([]);
       setSelectAll(false);
       getUsers();
-      toast.success("Selected users have been deleted.");
+      toast.success(res.data.message);
     } catch (error) {
       console.error("Error deleting selected users:", error);
       if (error.response) {
@@ -98,9 +116,21 @@ const UsersTable = ({ users, getUsers, selectedUsers, setSelectedUsers }) => {
 
   const deleteOneUser = async (id) => {
     try {
-      await axios.delete(`${process.env.REACT_APP_API_URI}/user/${id}`);
+      if (!auth.userDetails.token) {
+        console.error("Authentication token not found.");
+        return;
+      }
+      const res = await axios.delete(
+        `${process.env.REACT_APP_API_URI}/user/${id}`,
+        {
+          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${auth?.userDetails?.token}`,
+          },
+        }
+      );
       getUsers();
-      toast.success("user has been deleted.");
+      toast.success(res.data.message);
     } catch (error) {
       console.error("Error deleting user:", error);
     }
@@ -191,13 +221,13 @@ const UsersTable = ({ users, getUsers, selectedUsers, setSelectedUsers }) => {
           <div className="w-[160px] flex justify-start items-center border-[1px] py-1 px-2 rounded-[4px]">
             First name
           </div>
-          <div className="w-[160px] flex justify-start items-center border-[1px] py-1 px-2 rounded-[4px]">
+          <div className="w-[220px] flex justify-start items-center border-[1px] py-1 px-2 rounded-[4px]">
             Email
           </div>
           <div className=" w-[160px] flex justify-start items-center border-[1px] py-1 px-2 rounded-[4px]">
             Role
           </div>
-          <div className=" w-[240px] flex justify-start items-center border-[1px] py-1 px-2 rounded-[4px]">
+          <div className=" w-[160px] flex justify-start items-center border-[1px] py-1 px-2 rounded-[4px]">
             Contact No.
           </div>
           <div className=" w-[160px] flex justify-start items-center border-[1px] py-1 px-2 rounded-[4px]">
@@ -245,11 +275,14 @@ const UsersTable = ({ users, getUsers, selectedUsers, setSelectedUsers }) => {
             <div className="w-[160px] flex justify-start items-center py-1 px-2 rounded-[4px]">
               {user?.firstName}
             </div>
-            <div className="w-[160px] flex justify-start items-center py-1 px-2 rounded-[4px]">
+            <div className="w-[220px] flex justify-start items-center py-1 px-2 rounded-[4px]">
               {user?.email}
             </div>
             <div className="w-[160px] flex justify-start items-center py-1 px-2 rounded-[4px]">
               {user?.role}
+            </div>
+            <div className="w-[160px] flex justify-start items-center py-1 px-2 rounded-[4px]">
+              {user?.contactNo}
             </div>
             <div className="w-[160px] flex justify-start items-center py-1 px-2 rounded-[4px]">
               {user?.statusOfUser}

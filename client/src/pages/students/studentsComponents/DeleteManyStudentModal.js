@@ -17,7 +17,7 @@ const DeleteManyStudentModal = ({
   return (
     <>
       <div className="flex flex-col gap-4 text-[#505050]">
-        <div className="flex justify-between items-center text-[24px] ">
+        <div className="flex justify-between items-center text-[24px]">
           <span>
             Do you want to{" "}
             <span className="text-[red] text-semibold">delete</span> this

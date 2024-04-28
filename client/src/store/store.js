@@ -1,6 +1,6 @@
-import { legacy_createStore, applyMiddleware, combineReducers } from "redux";
+import { createStore, applyMiddleware, combineReducers } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
-import { thunk } from "redux-thunk";
+import thunk from "redux-thunk";
 
 import AuthReducer from "./reducers/AuthReducers";
 
@@ -10,7 +10,7 @@ const rootReducer = combineReducers({
 
 const loadState = () => {
   try {
-    const serializedState = localStorage.getItem(process.env.LOCAL_STORAGE_KEY);
+    const serializedState = localStorage.getItem("user");
     return serializedState ? JSON.parse(serializedState) : undefined;
   } catch (err) {
     console.error("Error loading User details", err);
@@ -21,13 +21,13 @@ const loadState = () => {
 const saveState = (state) => {
   try {
     const serializedState = JSON.stringify(state);
-    localStorage.setItem(process.env.LOCAL_STORAGE_KEY, serializedState);
+    localStorage.setItem("user", serializedState);
   } catch (err) {
     console.error("Error saving User details", err);
   }
 };
 
-const Store = legacy_createStore(
+const Store = createStore(
   rootReducer,
   loadState(),
   composeWithDevTools(applyMiddleware(thunk))

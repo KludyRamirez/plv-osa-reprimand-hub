@@ -88,24 +88,34 @@ const errorsInitialState = {
   guardianContactNo: "",
 };
 
-// const selectAuth = (state) => state.auth;
-// const authSelector = createSelector([selectAuth], (auth) => auth);
+const selectAuth = (state) => state.auth;
+const authSelector = createSelector([selectAuth], (auth) => auth);
 
 const CreateStudent = ({ toast, getStudents }) => {
   const [values, setValues] = useState(initialState);
   const [showCreateStudentModal, setShowCreateStudentModal] = useState(false);
   const [errors, setErrors] = useState(errorsInitialState);
 
-  // const auth = useSelector(authSelector);
+  const auth = useSelector(authSelector);
 
   const handleCreateStudent = async (e) => {
     e.preventDefault();
 
     try {
-      console.log("Sending request with data:", values);
+      if (!auth.userDetails.token) {
+        console.error("Authentication token not found.");
+        return;
+      }
+
       const res = await axios.post(
         `${process.env.REACT_APP_API_URI}/student`,
-        values
+        values,
+        {
+          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${auth.userDetails.token}`,
+          },
+        }
       );
       toast.success(res?.data?.message);
     } catch (err) {

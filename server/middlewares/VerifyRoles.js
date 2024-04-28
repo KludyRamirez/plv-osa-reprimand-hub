@@ -1,10 +1,10 @@
 const VerifyRoles = (allowedRoles) => {
   return (req, res, next) => {
-    if (!req?.role) {
+    if (!req?.user?.role) {
       return res.status(401).send("Error 401 Unauthorized");
     }
 
-    const result = allowedRoles.includes(req?.role);
+    const result = allowedRoles.includes(req?.user?.role);
 
     if (!result) {
       return res.status(401).send("Error 401 Unauthorized");

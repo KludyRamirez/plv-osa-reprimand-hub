@@ -6,7 +6,6 @@ import { styled } from "@mui/material/styles";
 import osaLogo from "../../../../images/login/osalogo.jpg";
 import plvLogo from "../../../../images/login/PLVlogo.png";
 import folder from "../../../../images/login/folder.png";
-import mail from "../../../../images/login/mail.png";
 import LoginInputs from "../loginComponents/LoginInputs";
 
 import {
@@ -38,12 +37,17 @@ const Login = ({ login }) => {
 
   const navigate = useNavigate();
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     const userDetails = {
-      password,
       username,
+      password,
     };
-    login(userDetails, navigate);
+
+    try {
+      await login(userDetails, navigate);
+    } catch (error) {
+      console.error("Error while registering user:", error);
+    }
   };
 
   const handleActiveChange = (option) => {

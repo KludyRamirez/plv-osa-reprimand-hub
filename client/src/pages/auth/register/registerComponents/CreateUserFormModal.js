@@ -18,8 +18,6 @@ const CreateUserFormModal = ({
     roles,
     role,
     contactNo,
-    statusOfUsers,
-    statusOfUser,
   } = values;
 
   const {
@@ -159,30 +157,6 @@ const CreateUserFormModal = ({
             </div>
 
             <div className="flex flex-col gap-2 w-[50%]">
-              <div className="flex gap-2 items-center">
-                <span>Status</span>
-                <BsCaretDown />
-              </div>
-              <select
-                name="statusOfUser"
-                value={statusOfUser}
-                onChange={handleChange}
-                className="appearance-none p-3 rounded-[6px] bg-[#f5f5f5] focus:outline-none border-[1px] focus:border-[#bbbbbb]"
-              >
-                <option key="" value="">
-                  Select Status
-                </option>
-                {statusOfUsers.map((s) => (
-                  <option key={s} value={s}>
-                    {s}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
-
-          <div className="text-[#606060] pt-6 flex gap-2">
-            <div className="flex flex-col gap-2 w-[100%]">
               <div>Contact No.</div>
               <input
                 required
@@ -209,8 +183,7 @@ const CreateUserFormModal = ({
             surNameError === "" &&
             emailError === "" &&
             passwordError === "" &&
-            role !== "" &&
-            statusOfUser !== "" ? (
+            role !== "" ? (
               <button
                 type="submit"
                 className="py-3 px-3 bg-[#007bff] text-[white] text-[16px] flex gap-2 items-center rounded-[8px]"

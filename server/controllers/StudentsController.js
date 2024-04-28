@@ -1,31 +1,29 @@
 const Student = require("../models/Students");
+const Notification = require("../models/Notifications");
 
 const createStudent = async (req, res) => {
-  const { firstName, lastName } = req.body;
-
-  const userData = req.user;
-
   try {
-    const newStudent = await new Student({
-      ...req.body,
-    }).save();
+    const { firstName, lastName } = req.body;
 
-    // const notification = new Notification({
-    //   userId: userData._id,
-    //   message: `Successfully added ${firstName} ${lastName} as a student`,
-    //   createdAt: new Date(),
-    // });
+    const userData = req.user;
 
-    // await notification.save();
+    const newStudent = await Student.create(req.body);
+
+    await Notification.create({
+      userId: userData._id,
+      message: `Successfully added ${firstName} ${lastName} as a student`,
+      createdAt: new Date(),
+    });
 
     res.status(200).json({
       message: "Successfully added new student!",
       data: newStudent,
     });
   } catch (error) {
-    return res
+    console.error("Error adding student:", error);
+    res
       .status(400)
-      .send("An error occurred on adding student, please try again!");
+      .send("An error occurred while adding the student, please try again!");
   }
 };
 

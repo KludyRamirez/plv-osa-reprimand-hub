@@ -1,17 +1,13 @@
 import axios from "axios";
+import { logoutUtil } from "./pages/auth/login/loginUtils/logoutUtil";
 
 const apiClient = axios.create({
   baseURL: process.env.REACT_APP_API_URI,
-  timeout: 1000,
+  headers: {
+    "Content-Type": "application/json",
+  },
+  withCredentials: true,
 });
-
-// export const axiosPrivate = axios.create({
-//   baseURL: process.env.REACT_APP_API_URI,
-//   headers: {
-//     "Content-Type": "application/json",
-//   },
-//   withCredentials: true,
-// });
 
 export const login = async (data) => {
   try {
@@ -32,5 +28,13 @@ export const register = async (data) => {
       error: true,
       exception,
     };
+  }
+};
+
+const checkResponseCode = (exception) => {
+  const responseCode = exception?.response?.status;
+
+  if (responseCode) {
+    (responseCode === 401 || responseCode === 403) && logoutUtil();
   }
 };

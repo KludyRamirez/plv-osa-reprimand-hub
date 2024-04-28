@@ -1,21 +1,37 @@
 //auth
 
-const { Login } = require("../controllers/authentication/Login");
-const { Register } = require("../controllers/authentication/Register");
+const { login } = require("../controllers/authentication/Login");
+const { register } = require("../controllers/authentication/Register");
 
-//create student
+//students
 
 const { createStudent } = require("../controllers/StudentsController");
 const { getStudents } = require("../controllers/StudentsController");
 const { deleteOneStudent } = require("../controllers/StudentsController");
 const { deleteManyStudent } = require("../controllers/StudentsController");
 
-exports.controllers = {
-  Login,
-  Register,
+//users
 
+const { getUsers } = require("../controllers/UsersController");
+const { deleteOneUser } = require("../controllers/UsersController");
+const { deleteManyUser } = require("../controllers/UsersController");
+
+//notification
+
+const { getNotifications } = require("../controllers/NotificationsController");
+
+exports.controllers = {
+  login,
+  register,
+  //
   createStudent,
   getStudents,
   deleteOneStudent,
   deleteManyStudent,
+  //
+  getUsers,
+  deleteOneUser,
+  deleteManyUser,
+  //
+  getNotifications,
 };

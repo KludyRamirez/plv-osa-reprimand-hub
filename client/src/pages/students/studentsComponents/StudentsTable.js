@@ -5,8 +5,6 @@ import {
   BsEyeFill,
   BsPen,
   BsPenFill,
-  BsTrash2,
-  BsTrash2Fill,
   BsTrash3,
   BsTrash3Fill,
 } from "react-icons/bs";
@@ -15,6 +13,9 @@ import { styled } from "@mui/system";
 import DeleteStudentModal from "./DeleteStudentModal";
 import toast from "react-hot-toast";
 import DeleteManyStudentModal from "./DeleteManyStudentModal";
+
+import { useSelector } from "react-redux";
+import { createSelector } from "reselect";
 
 const ModalBox = styled("div")({
   position: "absolute",
@@ -40,6 +41,9 @@ const ModalBox = styled("div")({
   },
 });
 
+const selectAuth = (state) => state.auth;
+const authSelector = createSelector([selectAuth], (auth) => auth);
+
 const StudentsTable = ({
   students,
   getStudents,
@@ -59,6 +63,8 @@ const StudentsTable = ({
       setSelectAll(false);
     }
   }, [selectedStudents, students]);
+
+  const auth = useSelector(authSelector);
 
   const toggleStudentSelection = (studentId) => {
     let updatedSelectedStudents = [...selectedStudents];
@@ -86,16 +92,26 @@ const StudentsTable = ({
 
   const deleteSelectedStudents = async () => {
     try {
-      await axios.delete(
+      if (!auth.userDetails.token) {
+        console.error("Authentication token not found.");
+        return;
+      }
+      const res = await axios.delete(
         `${process.env.REACT_APP_API_URI}/students/deleteSelected`,
         {
           data: { students: selectedStudents },
+        },
+        {
+          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${auth?.userDetails?.token}`,
+          },
         }
       );
       setSelectedStudents([]);
       setSelectAll(false);
       getStudents();
-      toast.success("Selected students have been deleted.");
+      toast.success(res.data.message);
     } catch (error) {
       console.error("Error deleting selected students:", error);
       if (error.response) {

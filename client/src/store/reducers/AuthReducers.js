@@ -11,6 +11,11 @@ const reducer = (state = initState, action) => {
         ...state,
         userDetails: action.userDetails,
       };
+    case AuthActions.LOGOUT:
+      return {
+        ...state,
+        userDetails: null,
+      };
     default:
       return state;
   }

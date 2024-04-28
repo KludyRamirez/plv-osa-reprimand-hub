@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-const LoginInputs = ({ username, setUsername, password, setPassword }) => {
+const LoginInputs = ({
+  username,
+  setUsername,
+  password,
+  setPassword,
+  handleLogin,
+}) => {
   const [usernameError, setUsernameError] = useState("");
   const [passwordError, setPasswordError] = useState("");
 
@@ -38,7 +44,7 @@ const LoginInputs = ({ username, setUsername, password, setPassword }) => {
   };
 
   return (
-    <form className="flex flex-col gap-8 w-full zIndex-2">
+    <div className="flex flex-col gap-8 w-full zIndex-2">
       <div className="flex flex-col gap-4">
         <div className="w-100 text-base font-large text-[#303030]">
           Username
@@ -83,22 +89,23 @@ const LoginInputs = ({ username, setUsername, password, setPassword }) => {
           username !== "" &&
           password !== "" ? (
             <button
-              type="submit"
+              type="button"
+              onClick={handleLogin}
               className="py-2 px-4 bg-[#007bff] text-[white] text-[16px] flex gap-2 items-center rounded-[6px]"
             >
-              <div>Sign In</div>
+              Sign In
             </button>
           ) : (
             <button
               disabled
               className="py-2 px-4 bg-blue-400 text-[white] text-[16px] flex gap-2 items-center rounded-[6px]"
             >
-              <div>Sign In</div>
+              Sign In
             </button>
           )}
         </div>
       </div>
-    </form>
+    </div>
   );
 };
 

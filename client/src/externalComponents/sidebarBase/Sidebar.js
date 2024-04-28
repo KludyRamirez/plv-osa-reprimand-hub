@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { createSelector } from "reselect";
 import { styled } from "@mui/system";
 import PropTypes from "prop-types";
 import Box from "@mui/material/Box";
@@ -11,14 +14,11 @@ import { useLocation } from "react-router-dom";
 import { AiOutlineLogout } from "react-icons/ai";
 import { CgMenuLeft } from "react-icons/cg";
 import {
-  BsBell,
   BsBellFill,
   BsGear,
   BsGrid1X2,
   BsPeople,
   BsPeopleFill,
-  BsPerson,
-  BsPersonCircle,
   BsPersonFill,
   BsPersonSquare,
   BsPieChart,
@@ -26,9 +26,8 @@ import {
   BsSticky,
   BsStickyFill,
 } from "react-icons/bs";
-
+import { logoutUtil } from "../../pages/auth/login/loginUtils/logoutUtil";
 import plvLogo from "../../images/login/PLVlogo.png";
-import osaLogo from "../../images/login/osalogo.jpg";
 
 const AppNavBar = styled(AppBar)({
   background: "transparent",
@@ -365,7 +364,7 @@ function Sidebar(props) {
                   }}
                 >
                   <RouteCon>
-                    <AiOutlineLogout />
+                    <AiOutlineLogout onClick={logoutUtil} />
                     <p className="text-[18px]">Sign Out</p>
                   </RouteCon>
                 </SidebarOptions>

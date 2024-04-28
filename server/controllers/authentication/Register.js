@@ -2,15 +2,16 @@ const User = require("../../models/Users");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-const Register = async (req, res) => {
+const register = async (req, res) => {
   try {
-    const { username, password } = req.body;
+    const { userName, firstName, surName, password, email, contactNo, role } =
+      req.body;
 
-    const usernameExists = await User.exists({
-      username: username,
+    const userNameExists = await User.exists({
+      userName: userName,
     });
 
-    if (usernameExists) {
+    if (userNameExists) {
       return res.status(409).send("Username already exists");
     }
 
@@ -20,36 +21,41 @@ const Register = async (req, res) => {
     // create user document and save in database
 
     const user = await User.create({
+      userName,
+      firstName,
+      surName,
       password: encryptedPassword,
-      ...req.body,
+      email,
+      contactNo,
+      role,
     });
 
     // create JWT token
     const token = jwt.sign(
       {
         _id: user._id,
-        role: user.role,
-        username: username,
+        userName: user.userName,
         email: user.email,
+        role: user.role,
       },
-      process.env.TOKEN_KEY,
+      process.env.ACCESS_TOKEN,
       {
         expiresIn: "24h",
       }
     );
 
-    res.status(201).json({
+    res.status(200).json({
       userDetails: {
         _id: user._id,
         token: token,
-        username: user.username,
+        userName: user.userName,
+        email: user.email,
         role: user.role,
       },
     });
   } catch (err) {
-    console.error(err);
     return res.status(500).send("Error occurred. Please try again");
   }
 };
 
-module.exports = { Register };
+module.exports = { register };

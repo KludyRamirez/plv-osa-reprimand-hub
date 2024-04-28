@@ -8,11 +8,14 @@ export const AuthActions = {
 export const getActions = (dispatch) => {
   return {
     login: (userDetails, navigate) => dispatch(login(userDetails, navigate)),
-    register: (userDetails, navigate) =>
-      dispatch(register(userDetails, navigate)),
+    register: (userDetails) => dispatch(register(userDetails)),
     setUserDetails: (userDetails) => dispatch(setUserDetails(userDetails)),
   };
 };
+
+export const logout = () => ({
+  type: AuthActions.LOGOUT,
+});
 
 const setUserDetails = (userDetails) => {
   return {
@@ -31,20 +34,23 @@ const login = (userDetails, navigate) => {
       const { userDetails } = response?.data;
       localStorage.setItem("user", JSON.stringify(userDetails));
       dispatch(setUserDetails(userDetails));
-      navigate("/statistics");
+      navigate("/students");
     }
   };
 };
 
-const register = (userDetails, navigate) => {
+const register = (userDetails) => {
   return async (dispatch) => {
-    const response = await api.register(userDetails);
-    console.log(response);
-    if (response.error) {
-      dispatch(toast.error(response?.exception?.response?.data));
-    } else {
-      dispatch(toast.success("A user has been successfully added!"));
-      navigate("/login");
+    try {
+      const response = await api.register(userDetails);
+      console.log(response);
+      if (response.error) {
+        dispatch(toast.error(response?.exception?.response?.data));
+      } else {
+        dispatch(toast.success("A user has been successfully added!"));
+      }
+    } catch (error) {
+      console.error("Error occurred while registering:", error);
     }
   };
 };
