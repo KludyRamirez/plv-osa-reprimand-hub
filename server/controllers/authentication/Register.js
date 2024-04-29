@@ -4,8 +4,16 @@ const jwt = require("jsonwebtoken");
 
 const register = async (req, res) => {
   try {
-    const { userName, firstName, surName, password, email, contactNo, role } =
-      req.body;
+    const {
+      uid,
+      userName,
+      firstName,
+      surName,
+      password,
+      email,
+      contactNo,
+      role,
+    } = req.body;
 
     const userNameExists = await User.exists({
       userName: userName,
@@ -15,12 +23,12 @@ const register = async (req, res) => {
       return res.status(409).send("Username already exists");
     }
 
-    // encrypt password
     const encryptedPassword = await bcrypt.hash(password, 10);
 
-    // create user document and save in database
+    let number = 0;
 
     const user = await User.create({
+      uid: ++number,
       userName,
       firstName,
       surName,

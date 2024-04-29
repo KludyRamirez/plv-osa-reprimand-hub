@@ -36,6 +36,23 @@ const getStudents = async (req, res) => {
   }
 };
 
+const editStudent = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updatedValues = req.body;
+    const student = await Student.findByIdAndUpdate(id, updatedValues, {
+      new: true,
+    });
+    res.status(200).json({
+      data: student,
+      message: "Successfully edited student values.",
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Failed to edit student values!" });
+  }
+};
+
 const deleteOneStudent = async (req, res) => {
   try {
     const deletedStudent = await Student.findByIdAndDelete(req.params.id);
@@ -65,6 +82,7 @@ const deleteManyStudent = async (req, res) => {
 module.exports = {
   createStudent,
   getStudents,
+  editStudent,
   deleteOneStudent,
   deleteManyStudent,
 };

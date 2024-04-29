@@ -22,6 +22,13 @@ router.get(
   mainController.controllers.getStudents
 );
 
+router.put(
+  "/student/:id",
+  auth,
+  role(["Administrator"]),
+  mainController.controllers.editStudent
+);
+
 router.delete(
   "/student/:id",
   auth,

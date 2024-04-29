@@ -6,15 +6,25 @@ import { styled } from "@mui/material/styles";
 import osaLogo from "../../../../images/login/osalogo.jpg";
 import plvLogo from "../../../../images/login/PLVlogo.png";
 import folder from "../../../../images/login/folder.png";
-import like from "../../../../images/login/like.png";
+import flash from "../../../../images/login/flash.png";
 import LoginInputs from "../loginComponents/LoginInputs";
 
 import {
   BsArrowLeft,
   BsArrowRight,
+  BsFacebook,
+  BsGlobe2,
+  BsInstagram,
   BsLink,
+  BsLinkedin,
+  BsMailbox,
   BsMegaphoneFill,
+  BsRobot,
+  BsThreads,
+  BsTwitter,
 } from "react-icons/bs";
+
+import { FaRegCopyright } from "react-icons/fa6";
 
 const Login = ({ login }) => {
   const FormTitle = styled("div")({
@@ -57,7 +67,7 @@ const Login = ({ login }) => {
 
   return (
     <div className="w-full h-screen flex justify-center bg-white">
-      <div className="w-full flex flex-col gap-40">
+      <div className="w-full flex flex-col gap-[88px]">
         <div className="px-6 shadow-sm bg-white zIndex-2">
           <div className="h-[90px] flex justify-between items-center gap-10">
             <div className="flex justify-center items-center gap-10">
@@ -91,7 +101,7 @@ const Login = ({ login }) => {
             </div>
           </div>
         </div>
-        <div className="w-100 flex justify-center items-center gap-12 ">
+        <div className="w-100 flex justify-center items-center gap-12">
           <div className="relative">
             <div className="p-8 gap-8 w-[500px] flex flex-col self-center rounded-[8px]">
               {activeSelect === "Login" && (
@@ -171,11 +181,59 @@ const Login = ({ login }) => {
             <div className="absolute top-[160px] right-[100px] w-[140px] h-[140px] bg-[white] border-[1px] border-[yellow] rounded-[50%] "></div>
             <div className="absolute top-[240px] right-[198px] w-[20px] h-[20px] bg-blue-100 rounded-[50%]"></div>
             <div className="absolute bottom-[-100px] right-[-110px] w-[320px] h-[320px] bg-blue-100 rounded-[50%]"></div>
-            <div className="absolute bottom-[-60px] right-[-70px] w-[150px] h-[150px] bg-[yellow] rounded-[50%]"></div>
+            <div className="absolute bottom-[-60px] right-[-70px] w-[150px] h-[150px] bg-yellow-100 rounded-[50%]"></div>
             <div className="absolute top-[20px] right-[-300px] w-[100px] h-[100px] border-[1px] border-[yellow] rounded-[50%] zIndex-2"></div>
             <div className="absolute top-[20px] right-[-200px] w-[40px] h-[40px] border-[1px] border-[yellow] rounded-[50%] zIndex-2"></div>
-            <div className="absolute top-[440px] right-[-200px] w-[120px] h-[120px] border-[1px] border-[#007bff] bg-white rounded-[50%] zIndex-2"></div>
-            <div className="absolute top-[520px] right-[-84px] w-[60px] h-[60px] border-[1px] border-[#007bff] bg-white rounded-[50%] zIndex-2"></div>
+            <div className="absolute top-[440px] right-[-200px] w-[120px] h-[120px] border-[1px] border-[#007bff] bg-white rounded-[50%] zIndex-3"></div>
+            <div className="absolute top-[520px] right-[-84px] w-[60px] h-[60px] border-[1px] border-[#007bff] bg-white rounded-[50%] zIndex-3"></div>
+            <img
+              src={flash}
+              alt=""
+              className="absolute top-[260px] right-[-160px] w-[200px] h-[200px] zIndex-2 transform rotate-[30deg] scale-x-[-1]"
+            />
+          </div>
+        </div>
+        <div className="py-6 px-8 w-[100%] fixed left-0 bottom-0 flex justify-between items-center bg-[#007bff]">
+          <div className="flex flex-col gap-2">
+            <div className="flex justify-start items-center gap-2 w-[400px]">
+              <div className="text-[16px] text-white">
+                Subscribe to our newsletter
+              </div>
+              <BsMailbox className="text-[20px] text-white" />
+            </div>
+            <div className="flex justify-center items-center gap-2 w-[400px]">
+              <input
+                type="text"
+                placeholder="e.g. example@domain.com"
+                className={`py-2 px-3 rounded-[4px] w-[100%] bg-white focus:outline-none`}
+              />
+              <div className="flex justify-center items-center p-2 border-[1px] border-white rounded-[4px]">
+                <BsArrowRight className="text-[20px] text-white" />
+              </div>
+            </div>
+          </div>
+          <div className="flex flex-col gap-1">
+            <div className="flex justify-start items-center gap-2">
+              <div className="text-[18px] font-bold text-white">Kludev</div>
+              <BsRobot className="text-[18px] text-white" />
+            </div>
+            <div className="flex justify-start items-center text-[16px] text-white gap-2">
+              <FaRegCopyright />
+              <span>Copyright 2024 Office of Student Affairs</span>
+            </div>
+          </div>
+          <div className="flex flex-col gap-3">
+            <div className="flex justify-end items-center gap-2">
+              <div className="text-[16px] text-white">Follow our socials</div>
+              <BsGlobe2 className="text-[18px] text-white" />
+            </div>
+            <div className="flex justify-start items-center gap-6">
+              <BsFacebook className="text-[32px] text-white" />
+              <BsTwitter className="text-[32px] text-white" />
+              <BsInstagram className="text-[32px] text-white" />
+              <BsThreads className="text-[32px] text-white" />
+              <BsLinkedin className="text-[32px] text-white" />
+            </div>
           </div>
         </div>
       </div>

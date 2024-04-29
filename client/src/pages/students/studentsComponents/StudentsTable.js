@@ -16,6 +16,7 @@ import DeleteStudentModal from "./DeleteStudentModal";
 import toast from "react-hot-toast";
 import DeleteManyStudentModal from "./DeleteManyStudentModal";
 import { useNavigate } from "react-router-dom";
+import EditStudent from "./EditStudent";
 
 const ModalBox = styled("div")({
   position: "absolute",
@@ -56,6 +57,9 @@ const StudentsTable = ({
   const [showDeleteStudentModal, setShowDeleteStudentModal] = useState(false);
   const [showDeleteManyStudentModal, setShowDeleteManyStudentModal] =
     useState(false);
+  const [showEditStudentModal, setShowEditStudentModal] = useState(false);
+
+  const [selectedStudentEdit, setSelectedStudentEdit] = useState("");
 
   useEffect(() => {
     if (students.length > 0 && selectedStudents.length === students.length) {
@@ -184,8 +188,43 @@ const StudentsTable = ({
     setShowDeleteManyStudentModal(false);
   };
 
+  // edit student functions
+
+  const handleStudentEditClick = (student) => {
+    setSelectedStudentEdit(student);
+    setShowEditStudentModal(true);
+  };
+
+  const handleCloseModalEdit = () => {
+    setShowEditStudentModal(false);
+  };
+
   return (
     <>
+      <Modal
+        sx={{ border: "none", outline: "none" }}
+        open={showEditStudentModal}
+        onClose={handleCloseModalEdit}
+        aria-labelledby="parent-modal-title"
+        aria-describedby="parent-modal-description"
+      >
+        <ModalBox
+          sx={{
+            top: "50%",
+            left: "50%",
+            width: "48%",
+            height: "fit-content",
+            padding: "8px",
+          }}
+        >
+          <EditStudent
+            handleCloseModalEdit={handleCloseModalEdit}
+            selectedStudentEdit={selectedStudentEdit}
+            toast={toast}
+            getStudents={getStudents}
+          />
+        </ModalBox>
+      </Modal>
       <Modal
         sx={{ border: "none", outline: "none" }}
         open={showDeleteStudentModal}
@@ -328,7 +367,10 @@ const StudentsTable = ({
                   <div className="p-2 bg-[white] border-[1px] border-[#007bff] rounded-[18px] cursor-pointer">
                     <BsEye className="text-[18px] text-[#007bff]" />
                   </div>
-                  <div className="p-2 bg-[white] border-[1px] border-[#FFBF00] rounded-[18px] cursor-pointer">
+                  <div
+                    onClick={() => handleStudentEditClick(student)}
+                    className="p-2 bg-[white] border-[1px] border-[#FFBF00] rounded-[18px] cursor-pointer"
+                  >
                     <BsPen className="text-[18px] text-[#FFBF00]" />
                   </div>
                   <div

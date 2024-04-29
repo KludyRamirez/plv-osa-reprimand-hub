@@ -7,6 +7,7 @@ const { register } = require("../controllers/authentication/Register");
 
 const { createStudent } = require("../controllers/StudentsController");
 const { getStudents } = require("../controllers/StudentsController");
+const { editStudent } = require("../controllers/StudentsController");
 const { deleteOneStudent } = require("../controllers/StudentsController");
 const { deleteManyStudent } = require("../controllers/StudentsController");
 
@@ -26,6 +27,7 @@ exports.controllers = {
   //
   createStudent,
   getStudents,
+  editStudent,
   deleteOneStudent,
   deleteManyStudent,
   //
