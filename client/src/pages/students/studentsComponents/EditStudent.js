@@ -1,36 +1,8 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { createSelector } from "reselect";
-import Modal from "@mui/material/Modal";
-import CreateStudentFormModal from "./CreateStudentFormModal";
-import { FaPlus } from "react-icons/fa6";
-import { styled } from "@mui/system";
 import axios from "axios";
 import EditStudentFormModal from "./EditStudentFormModal";
-
-const ModalBox = styled("div")({
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  width: "48%",
-  padding: "8px",
-  transform: "translate(-50%, -50%)",
-  background: "white",
-  borderRadius: "12px",
-  border: "none",
-  outline: "none",
-
-  "&:focus": {
-    border: "none",
-  },
-
-  "@media (max-width: 767px)": {
-    width: "100%",
-    height: "100%",
-    borderRadius: "0px",
-    border: "none",
-  },
-});
 
 const coedDepartments = [
   "(BECED) Bachelor of Early Childhood Education",

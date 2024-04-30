@@ -4,16 +4,16 @@ const jwt = require("jsonwebtoken");
 
 const login = async (req, res) => {
   try {
-    const { username, password } = req.body;
+    const { userName, password } = req.body;
 
-    const user = await User.findOne({ username: username });
+    const user = await User.findOne({ userName: userName });
 
     if (user && (await bcrypt.compare(password, user.password))) {
       const token = jwt.sign(
         {
           _id: user._id,
           role: user.role,
-          username: username,
+          userName: userName,
           email: user.email,
         },
         process.env.ACCESS_TOKEN,
@@ -27,7 +27,7 @@ const login = async (req, res) => {
           _id: user._id,
           token: token,
           role: user.role,
-          username: username,
+          userName: userName,
           email: user.email,
         },
       });

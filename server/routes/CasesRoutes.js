@@ -8,32 +8,39 @@ const { VerifyRoles } = require("../middlewares/VerifyRoles");
 const auth = VerifyJWT;
 const role = VerifyRoles;
 
-router.get(
-  "/user",
+router.post(
+  "/case",
   auth,
   role(["Administrator"]),
-  mainController.controllers.getUsers
+  mainController.controllers.createCase
+);
+
+router.get(
+  "/case",
+  auth,
+  role(["Administrator"]),
+  mainController.controllers.getCases
 );
 
 router.put(
-  "/user/:id",
+  "/case/:id",
   auth,
   role(["Administrator"]),
-  mainController.controllers.editUser
+  mainController.controllers.editCase
 );
 
 router.delete(
-  "/user/:id",
+  "/case/:id",
   auth,
   role(["Administrator"]),
-  mainController.controllers.deleteOneUser
+  mainController.controllers.deleteOneCase
 );
 
 router.delete(
-  "/users/deleteSelected",
+  "/cases/deleteSelected",
   auth,
   role(["Administrator"]),
-  mainController.controllers.deleteManyUser
+  mainController.controllers.deleteManyCase
 );
 
 module.exports = router;

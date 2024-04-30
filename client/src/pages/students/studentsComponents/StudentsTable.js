@@ -58,8 +58,10 @@ const StudentsTable = ({
   const [showDeleteManyStudentModal, setShowDeleteManyStudentModal] =
     useState(false);
   const [showEditStudentModal, setShowEditStudentModal] = useState(false);
-
   const [selectedStudentEdit, setSelectedStudentEdit] = useState("");
+
+  const auth = useSelector(authSelector);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (students.length > 0 && selectedStudents.length === students.length) {
@@ -68,9 +70,6 @@ const StudentsTable = ({
       setSelectAll(false);
     }
   }, [selectedStudents, students]);
-
-  const auth = useSelector(authSelector);
-  const navigate = useNavigate();
 
   const toggleStudentSelection = (studentId) => {
     let updatedSelectedStudents = [...selectedStudents];

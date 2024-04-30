@@ -1,29 +1,42 @@
 const mongoose = require("mongoose");
-const studentsSchema = new mongoose.Schema(
+const { ObjectId } = mongoose.Schema;
+
+const casesSchema = new mongoose.Schema(
   {
     caseNo: { type: Number },
-    firstName: { type: String },
-    lastName: { type: String },
-    middleName: { type: String },
-    course: { type: String },
-    year: { type: Number },
-    section: { type: Number },
-    sex: { type: String },
-    contactNo: { type: Number },
-    guardianContactNo: { type: Number },
-    email: { type: String },
-    role: {
-      type: String,
-      default: "Student",
-      enum: ["Student", "Instructor", "Administrator"],
+    student: {
+      type: ObjectId,
+      ref: "Students",
     },
-    statusOfStudent: {
+    reportedViolation: {
       type: String,
-      default: "Active",
-      enum: ["Active", "Disabled"],
+      enum: ["Stealing", "Bullying", "Subdued Hair Color", "Sexual Harassment"],
+    },
+    typeOfViolation: {
+      type: String,
+      enum: ["Major", "Minor", "Complex"],
+    },
+    dateOfIncident: {
+      type: Date,
+    },
+    dateReported: {
+      type: Date,
+    },
+    statusOfCase: {
+      type: String,
+      enum: [
+        "Pending",
+        "Investigation",
+        "Evaluation",
+        "Referral",
+        "Hearing",
+        "Decision",
+        "Implementation",
+        "Case Solved",
+      ],
     },
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.model("Students", studentsSchema);
+module.exports = mongoose.model("Cases", casesSchema);

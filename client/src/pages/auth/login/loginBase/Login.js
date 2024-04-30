@@ -10,17 +10,21 @@ import flash from "../../../../images/login/flash.png";
 import LoginInputs from "../loginComponents/LoginInputs";
 
 import {
+  BsAlexa,
   BsArrowLeft,
   BsArrowRight,
   BsFacebook,
+  BsGithub,
   BsGlobe2,
   BsInstagram,
+  BsLightningCharge,
   BsLink,
   BsLinkedin,
   BsMailbox,
+  BsMailbox2,
+  BsMailbox2Flag,
   BsMegaphoneFill,
-  BsRobot,
-  BsThreads,
+  BsThunderbolt,
   BsTwitter,
 } from "react-icons/bs";
 
@@ -42,7 +46,7 @@ const Login = ({ login }) => {
     zIndex: "2",
   });
 
-  const [username, setUsername] = useState("");
+  const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [activeSelect, setActiveSelect] = useState("Login");
 
@@ -50,7 +54,7 @@ const Login = ({ login }) => {
 
   const handleLogin = async () => {
     const userDetails = {
-      username,
+      userName,
       password,
     };
 
@@ -67,7 +71,7 @@ const Login = ({ login }) => {
 
   return (
     <div className="w-full h-screen flex justify-center bg-white">
-      <div className="w-full flex flex-col gap-[88px]">
+      <div className="w-full flex flex-col gap-[80px]">
         <div className="px-6 shadow-sm bg-white zIndex-2">
           <div className="h-[90px] flex justify-between items-center gap-10">
             <div className="flex justify-center items-center gap-10">
@@ -117,8 +121,8 @@ const Login = ({ login }) => {
                     </div>
                   </div>
                   <LoginInputs
-                    username={username}
-                    setUsername={setUsername}
+                    userName={userName}
+                    setUserName={setUserName}
                     password={password}
                     setPassword={setPassword}
                     handleLogin={handleLogin}
@@ -140,7 +144,7 @@ const Login = ({ login }) => {
 
           <div className="flex flex-col h-[100%] items-center justify-center gap-4">
             <div className="w-[1px] h-[25%] bg-gray-200"></div>
-            <BsLink className="text-[#077bff] text-[24px]" />
+            <BsLightningCharge className="text-[#077bff] text-[24px]" />
             <div className="w-[1px] h-[25%] bg-gray-200"></div>
           </div>
           <div className="relative">
@@ -149,16 +153,25 @@ const Login = ({ login }) => {
                 sx={{
                   backgroundImage:
                     "radial-gradient(100% 100% at 100% 0, #07bbff 0, #007bff 100%)",
+                  textShadow: "0px 0px 4px rgba(0, 123, 255, 0.4)",
                 }}
               >
                 Serving
               </FormTitle>
-              <FormTitle sx={{ marginTop: "-16px" }}>You</FormTitle>
+              <FormTitle
+                sx={{
+                  marginTop: "-17px",
+                  textShadow: "0px 0px 4px rgba(0, 123, 255, 0.4)",
+                }}
+              >
+                You
+              </FormTitle>
               <FormTitle
                 sx={{
                   marginTop: "-16px",
                   backgroundImage:
                     "radial-gradient(100% 100% at 100% 0, #07bbff 0, #007bff 100%)",
+                  textShadow: "0px 0px 4px rgba(0, 123, 255, 0.4)",
                 }}
               >
                 Digitally.
@@ -178,14 +191,14 @@ const Login = ({ login }) => {
               className="absolute top-[80px] right-[-150px] w-[200px] h-[200px] zIndex-2"
             />
 
-            <div className="absolute top-[160px] right-[100px] w-[140px] h-[140px] bg-[white] border-[1px] border-[yellow] rounded-[50%] "></div>
+            <div className="absolute top-[160px] right-[100px] w-[100px] h-[100px] bg-[white] border-[1px] border-[#07bbff] rounded-[50%] "></div>
             <div className="absolute top-[240px] right-[198px] w-[20px] h-[20px] bg-blue-100 rounded-[50%]"></div>
-            <div className="absolute bottom-[-100px] right-[-110px] w-[320px] h-[320px] bg-blue-100 rounded-[50%]"></div>
-            <div className="absolute bottom-[-60px] right-[-70px] w-[150px] h-[150px] bg-yellow-100 rounded-[50%]"></div>
-            <div className="absolute top-[20px] right-[-300px] w-[100px] h-[100px] border-[1px] border-[yellow] rounded-[50%] zIndex-2"></div>
-            <div className="absolute top-[20px] right-[-200px] w-[40px] h-[40px] border-[1px] border-[yellow] rounded-[50%] zIndex-2"></div>
-            <div className="absolute top-[440px] right-[-200px] w-[120px] h-[120px] border-[1px] border-[#007bff] bg-white rounded-[50%] zIndex-3"></div>
-            <div className="absolute top-[520px] right-[-84px] w-[60px] h-[60px] border-[1px] border-[#007bff] bg-white rounded-[50%] zIndex-3"></div>
+            <div className="absolute bottom-[-100px] right-[-110px] w-[320px] h-[320px] border-[1px] border-[#07bbff] rounded-[50%]"></div>
+            <div className="absolute bottom-[-60px] right-[-70px] w-[150px] h-[150px] bg-white rounded-[50%]"></div>
+            <div className="absolute top-[20px] right-[-300px] w-[100px] h-[100px] border-[1px] border-[#007bff] rounded-[50%] zIndex-2"></div>
+            <div className="absolute top-[20px] right-[-200px] w-[40px] h-[40px] border-[1px] border-[#007bff] rounded-[50%] zIndex-2"></div>
+            <div className="absolute top-[448px] right-[-200px] w-[120px] h-[120px] border-[1px] border-[#007bff] bg-white rounded-[50%] zIndex-3"></div>
+            <div className="absolute top-[528px] right-[-84px] w-[60px] h-[60px] border-[1px] border-[#007bff] bg-white rounded-[50%] zIndex-3"></div>
             <img
               src={flash}
               alt=""
@@ -193,48 +206,51 @@ const Login = ({ login }) => {
             />
           </div>
         </div>
-        <div className="py-6 px-8 w-[100%] fixed left-0 bottom-0 flex justify-between items-center bg-[#007bff]">
-          <div className="flex flex-col gap-2">
-            <div className="flex justify-start items-center gap-2 w-[400px]">
-              <div className="text-[16px] text-white">
-                Subscribe to our newsletter
+        <div className="flex flex-col items-center zIndex-2">
+          <div className="py-6 px-8 w-[96%] mt-10 left-0 bottom-0 flex justify-between items-center bg-[#007bff] relative rounded-tl-[32px] rounded-tr-[32px] border-[1px] border-[#007bff]">
+            <div className="flex flex-col gap-2">
+              <div className="flex justify-start items-center gap-2 w-[330px]">
+                <div className="text-[16px] text-white">
+                  Subscribe to our newsletter
+                </div>
+                <BsMailbox2Flag className="text-[20px] text-white" />
               </div>
-              <BsMailbox className="text-[20px] text-white" />
+              <div className="flex justify-center items-center gap-2 w-[330px]">
+                <input
+                  type="text"
+                  placeholder="e.g. example@domain.com"
+                  className={`py-2 px-3 bg-white rounded-[4px] w-[100%] bg-transparent focus:outline-none`}
+                />
+                <div className="flex justify-center items-center w-[48px] h-[40px] border-[1px] text-white border-white rounded-[4px] hover:bg-[white] hover:text-[#007bff] cursor-pointer">
+                  <BsArrowRight className="text-[20px] " />
+                </div>
+              </div>
             </div>
-            <div className="flex justify-center items-center gap-2 w-[400px]">
-              <input
-                type="text"
-                placeholder="e.g. example@domain.com"
-                className={`py-2 px-3 rounded-[4px] w-[100%] bg-white focus:outline-none`}
-              />
-              <div className="flex justify-center items-center p-2 border-[1px] border-white rounded-[4px]">
-                <BsArrowRight className="text-[20px] text-white" />
+            <div className="flex flex-col gap-1">
+              <div className="flex justify-start items-center gap-2">
+                <div className="text-[16px] font-bold text-white">PLV</div>
+                <BsAlexa className="text-[18px] text-white" />
+              </div>
+              <div className="flex justify-start items-center text-[16px] text-white gap-2">
+                <FaRegCopyright />
+                <span>Copyright 2024 Office of Student Affairs</span>
+              </div>
+            </div>
+            <div className="flex flex-col gap-3">
+              <div className="flex justify-end items-center gap-2">
+                <div className="text-[16px] text-white">Follow our socials</div>
+                <BsGlobe2 className="text-[18px] text-white" />
+              </div>
+              <div className="flex justify-start items-center gap-5">
+                <BsFacebook className="text-[30px] text-white" />
+                <BsTwitter className="text-[30px] text-white" />
+                <BsInstagram className="text-[30px] text-white" />
+                <BsGithub className="text-[30px] text-white" />
+                <BsLinkedin className="text-[30px] text-white" />
               </div>
             </div>
           </div>
-          <div className="flex flex-col gap-1">
-            <div className="flex justify-start items-center gap-2">
-              <div className="text-[18px] font-bold text-white">Kludev</div>
-              <BsRobot className="text-[18px] text-white" />
-            </div>
-            <div className="flex justify-start items-center text-[16px] text-white gap-2">
-              <FaRegCopyright />
-              <span>Copyright 2024 Office of Student Affairs</span>
-            </div>
-          </div>
-          <div className="flex flex-col gap-3">
-            <div className="flex justify-end items-center gap-2">
-              <div className="text-[16px] text-white">Follow our socials</div>
-              <BsGlobe2 className="text-[18px] text-white" />
-            </div>
-            <div className="flex justify-start items-center gap-6">
-              <BsFacebook className="text-[32px] text-white" />
-              <BsTwitter className="text-[32px] text-white" />
-              <BsInstagram className="text-[32px] text-white" />
-              <BsThreads className="text-[32px] text-white" />
-              <BsLinkedin className="text-[32px] text-white" />
-            </div>
-          </div>
+          <div className="w-[96%] h-[770px] border-[1px] border-[#007bff] mb-10 rounded-bl-[32px] rounded-br-[32px]"></div>
         </div>
       </div>
     </div>

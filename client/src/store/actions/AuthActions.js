@@ -17,7 +17,7 @@ export const logout = () => ({
   type: AuthActions.LOGOUT,
 });
 
-const setUserDetails = (userDetails) => {
+export const setUserDetails = (userDetails) => {
   return {
     type: AuthActions.SET_USER_DETAILS,
     userDetails,

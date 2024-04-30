@@ -9,7 +9,7 @@ import { createSelector } from "reselect";
 const selectAuth = (state) => state.auth;
 const authSelector = createSelector([selectAuth], (auth) => auth);
 
-const Student = ({ toast }) => {
+const Students = ({ toast }) => {
   const [students, setStudents] = useState([]);
 
   const auth = useSelector(authSelector);
@@ -52,4 +52,4 @@ const Student = ({ toast }) => {
   );
 };
 
-export default Student;
+export default Students;

@@ -16,6 +16,7 @@ import DeleteManyUserModal from "./DeleteManyUserModal";
 import { useSelector } from "react-redux";
 import { createSelector } from "reselect";
 import { useNavigate } from "react-router-dom";
+import EditUser from "./EditUser";
 
 const ModalBox = styled("div")({
   position: "absolute",
@@ -50,6 +51,8 @@ const UsersTable = ({ users, getUsers, selectedUsers, setSelectedUsers }) => {
   const [userDeleteId, setUserDeleteId] = useState("");
   const [showDeleteUserModal, setShowDeleteUserModal] = useState(false);
   const [showDeleteManyUserModal, setShowDeleteManyUserModal] = useState(false);
+  const [showEditUserModal, setShowEditUserModal] = useState(false);
+  const [selectedUserEdit, setSelectedUserEdit] = useState("");
 
   const auth = useSelector(authSelector);
   const navigate = useNavigate();
@@ -173,8 +176,43 @@ const UsersTable = ({ users, getUsers, selectedUsers, setSelectedUsers }) => {
     setShowDeleteManyUserModal(false);
   };
 
+  // edit user functions
+
+  const handleUserEditClick = (user) => {
+    setSelectedUserEdit(user);
+    setShowEditUserModal(true);
+  };
+
+  const handleCloseModalEdit = () => {
+    setShowEditUserModal(false);
+  };
+
   return (
     <>
+      <Modal
+        sx={{ border: "none", outline: "none" }}
+        open={showEditUserModal}
+        onClose={handleCloseModalEdit}
+        aria-labelledby="parent-modal-title"
+        aria-describedby="parent-modal-description"
+      >
+        <ModalBox
+          sx={{
+            top: "50%",
+            left: "50%",
+            width: "48%",
+            height: "fit-content",
+            padding: "8px",
+          }}
+        >
+          <EditUser
+            handleCloseModalEdit={handleCloseModalEdit}
+            selectedUserEdit={selectedUserEdit}
+            toast={toast}
+            getUsers={getUsers}
+          />
+        </ModalBox>
+      </Modal>
       <Modal
         sx={{ border: "none", outline: "none" }}
         open={showDeleteUserModal}
@@ -304,7 +342,10 @@ const UsersTable = ({ users, getUsers, selectedUsers, setSelectedUsers }) => {
                   <div className="p-2 bg-[white] border-[1px] border-[#007bff] rounded-[18px] cursor-pointer">
                     <BsEye className="text-[18px] text-[#007bff]" />
                   </div>
-                  <div className="p-2 bg-[white] border-[1px] border-[#FFBF00] rounded-[18px] cursor-pointer">
+                  <div
+                    onClick={() => handleUserEditClick(user)}
+                    className="p-2 bg-[white] border-[1px] border-[#FFBF00] rounded-[18px] cursor-pointer"
+                  >
                     <BsPen className="text-[18px] text-[#FFBF00]" />
                   </div>
                   <div

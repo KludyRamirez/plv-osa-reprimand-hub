@@ -4,16 +4,8 @@ const jwt = require("jsonwebtoken");
 
 const register = async (req, res) => {
   try {
-    const {
-      uid,
-      userName,
-      firstName,
-      surName,
-      password,
-      email,
-      contactNo,
-      role,
-    } = req.body;
+    const { userName, firstName, surName, password, email, contactNo, role } =
+      req.body;
 
     const userNameExists = await User.exists({
       userName: userName,
@@ -25,7 +17,7 @@ const register = async (req, res) => {
 
     const encryptedPassword = await bcrypt.hash(password, 10);
 
-    let number = 0;
+    let number = 1;
 
     const user = await User.create({
       uid: ++number,

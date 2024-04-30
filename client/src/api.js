@@ -1,5 +1,4 @@
 import axios from "axios";
-import { logoutUtil } from "./pages/auth/login/loginUtils/logoutUtil";
 
 const apiClient = axios.create({
   baseURL: process.env.REACT_APP_API_URI,
@@ -28,13 +27,5 @@ export const register = async (data) => {
       error: true,
       exception,
     };
-  }
-};
-
-const checkResponseCode = (exception) => {
-  const responseCode = exception?.response?.status;
-
-  if (responseCode) {
-    (responseCode === 401 || responseCode === 403) && logoutUtil();
   }
 };

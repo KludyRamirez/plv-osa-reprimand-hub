@@ -14,7 +14,7 @@ const EditStudentFormModal = ({
   ceitDepartments,
   cabaDepartments,
 }) => {
-  const { colleges, college, department, year, section, sex } = values;
+  const { colleges } = values;
 
   const {
     studentNo: studentNoError,
@@ -324,7 +324,7 @@ const EditStudentFormModal = ({
                 className="py-3 px-3 bg-blue-300 text-[white] text-[16px] flex gap-2 items-center rounded-[8px]"
               >
                 <FaPlus />
-                <div>Add Student</div>
+                <div>Edit Student</div>
               </button>
             )}
           </div>
