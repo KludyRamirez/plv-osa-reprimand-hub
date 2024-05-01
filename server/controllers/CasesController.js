@@ -7,7 +7,18 @@ const createCase = async (req, res) => {
 
     const userData = req.user;
 
-    const newCase = await Case.create(req.body);
+    const latestCase = await Case.findOne({}).sort({ caseNo: -1 }).limit(1);
+
+    let newCaseNo = 1;
+
+    if (latestCase && !isNaN(parseInt(latestCase.caseNo))) {
+      newCaseNo = parseInt(latestCase.caseNo) + 1;
+    }
+
+    const newCase = await Case.create({
+      ...req.body,
+      caseNo: newCaseNo,
+    });
 
     await Notification.create({
       userId: userData._id,
@@ -29,7 +40,9 @@ const createCase = async (req, res) => {
 
 const getCases = async (req, res) => {
   try {
-    const cases = await Case.find();
+    const cases = await Case.find()
+      .populate("student", "caseNo studentNo firstName surName")
+      .exec();
     res.json(cases);
   } catch (error) {
     return res.status(500).send("An error occurred, please try again!");

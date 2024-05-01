@@ -15,12 +15,18 @@ const register = async (req, res) => {
       return res.status(409).send("Username already exists");
     }
 
+    const latestUser = await User.findOne({}).sort({ uid: -1 }).limit(1);
+
+    let newUid = 1;
+
+    if (latestUser && !isNaN(parseInt(latestUser.uid))) {
+      newUid = parseInt(latestUser.uid) + 1;
+    }
+
     const encryptedPassword = await bcrypt.hash(password, 10);
 
-    let number = 1;
-
     const user = await User.create({
-      uid: ++number,
+      uid: newUid,
       userName,
       firstName,
       surName,

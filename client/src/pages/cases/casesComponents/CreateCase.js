@@ -103,13 +103,12 @@ const CreateCase = ({ toast, getCases }) => {
           },
         }
       );
-      toast.success(res?.data?.message);
+      await toast.success(res?.data?.message);
     } catch (err) {
       toast.error(err?.response?.data);
     } finally {
-      setValues(initialState);
       handleCloseModal();
-      getCases();
+      window.location.reload();
     }
   };
 

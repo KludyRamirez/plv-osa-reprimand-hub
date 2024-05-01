@@ -14,12 +14,13 @@ import { useLocation } from "react-router-dom";
 import { AiOutlineLogout } from "react-icons/ai";
 import { CgMenuLeft } from "react-icons/cg";
 import {
-  BsBellFill,
+  BsBell,
   BsGear,
   BsGrid1X2,
   BsPeople,
   BsPeopleFill,
-  BsPersonFill,
+  BsPerson,
+  BsPersonBoundingBox,
   BsPersonSquare,
   BsPieChart,
   BsPieChartFill,
@@ -74,10 +75,15 @@ const RouteCon = styled("div")({
   width: "100%",
 });
 
+const selectAuth = (state) => state.auth;
+const authSelector = createSelector([selectAuth], (auth) => auth);
+
 function Sidebar(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeItem, setActiveItem] = useState("");
+
+  const auth = useSelector(authSelector);
 
   const { pathname } = useLocation();
 
@@ -404,13 +410,15 @@ function Sidebar(props) {
               <CgMenuLeft />
             </IconButton>
           </Toolbar>
-          <div className="flex justify-center items-center gap-[20px]">
-            <div className="border-[1px] border-white bg-white p-2 flex justify-center items-center rounded-[8px] ">
-              <BsBellFill className="text-[22px] text-[#007bff]" />
+          <div className="flex justify-center items-center gap-[8px]">
+            <div className="border-[1px] border-white text-white py-2 px-3 flex justify-center items-center rounded-[6px] hover:bg-white hover:text-[#007bff] cursor-pointer ">
+              <BsBell className="text-[24px] " />
             </div>
-            <div className="border-[1px] border-white py-2 px-3 flex justify-center items-center gap-[12px] rounded-[6px]">
-              <BsPersonFill className="text-[22px]" />
-              <div className="text-[16px]">Hello, Clinton Yu!</div>
+            <div className="border-[1px] border-white text-white py-2 px-3 flex justify-center items-center rounded-[6px] hover:bg-white hover:text-[#007bff] cursor-pointer gap-2 ">
+              <div className="text-[16px]">
+                {`${auth?.userDetails?.userName}`}
+              </div>
+              <BsPerson className="text-[24px] " />
             </div>
           </div>
         </div>
