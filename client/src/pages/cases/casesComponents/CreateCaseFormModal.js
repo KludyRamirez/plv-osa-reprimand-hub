@@ -1,9 +1,14 @@
 import React, { useState } from "react";
 import { BsCaretDown, BsX } from "react-icons/bs";
 import { FaPlus } from "react-icons/fa6";
+import DatePicker from "react-datepicker";
+import moment from "moment";
+import "react-datepicker/dist/react-datepicker.css";
 
 const CreateCaseFormModal = ({
   handleChange,
+  handleDateOfIncidentChange,
+  handleDateReportedChange,
   handleCreateCase,
   handleCloseModal,
   values,
@@ -21,6 +26,8 @@ const CreateCaseFormModal = ({
 
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredStudents, setFilteredStudents] = useState(students);
+  const [selectedDateOfIncident, setSelectedDateOfIncident] = useState("");
+  const [selectedDateReported, setSelectedDateReported] = useState("");
 
   const handleSearchStudents = (e) => {
     const searchText = e.target.value.toLowerCase();
@@ -44,13 +51,44 @@ const CreateCaseFormModal = ({
   //     guardianContactNo: guardianContactNoError,
   //   } = errors;
 
+  const isSunday = (date) => {
+    return date.getDay() === 0; // 0 represents Sunday
+  };
+
+  const isDisabled = (date) => {
+    return (
+      (moment(date).isBefore(moment(), "day") && !isSunday(date)) ||
+      (moment(date).isAfter(moment(), "day") && !isSunday(date))
+    );
+  };
+
+  const isDisabledDateReported = (date) => {
+    return (
+      moment(date).isAfter(moment(selectedDateOfIncident), "day") &&
+      !isSunday(date)
+    );
+  };
+
+  const handleDateOfIncidentChangeCombined = (date) => {
+    handleDateOfIncidentChange(date);
+    setSelectedDateOfIncident(date);
+  };
+
+  const handleDateReportedChangeCombined = (date) => {
+    handleDateReportedChange(date);
+    setSelectedDateReported(date);
+  };
+
   return (
     <>
       <form onSubmit={handleCreateCase}>
         <div className="p-8">
           <div className="text-[28px] text-[#077bff] font-semibold flex justify-between">
             Create New Case
-            <BsX onClick={handleCloseModal} className="text-[36px]" />
+            <BsX
+              onClick={handleCloseModal}
+              className="text-[36px] cursor-pointer"
+            />
           </div>
 
           <div className="text-[#606060] pt-8 flex flex-col gap-2">
@@ -86,21 +124,21 @@ const CreateCaseFormModal = ({
           <div className="text-[#606060] pt-6 flex gap-2">
             <div className="flex flex-col gap-2 w-[100%]">
               <div className="">Date of Incident</div>
-              <input
-                name="dateOfIncident"
-                value={dateOfIncident}
-                onChange={handleChange}
-                type="date"
+              <DatePicker
+                filterDate={isDisabled}
+                placeholderText="Enter Date"
+                selected={selectedDateOfIncident}
+                onChange={(date) => handleDateOfIncidentChangeCombined(date)}
                 className={`border-[1px] p-3 rounded-[6px] w-[100%] bg-[#f5f5f5] focus:outline-none`}
               />
             </div>
             <div className="flex flex-col gap-2 w-[100%]">
               <div className="">Date Reported</div>
-              <input
-                name="dateReported"
-                value={dateReported}
-                onChange={handleChange}
-                type="date"
+              <DatePicker
+                filterDate={isDisabledDateReported}
+                placeholderText="Enter Date"
+                selected={selectedDateReported}
+                onChange={(date) => handleDateReportedChangeCombined(date)}
                 className={`border-[1px] p-3 rounded-[6px] w-[100%] bg-[#f5f5f5] focus:outline-none`}
               />
             </div>

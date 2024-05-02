@@ -24,6 +24,7 @@ const casesSchema = new mongoose.Schema(
     },
     statusOfCase: {
       type: String,
+      default: "Pending",
       enum: [
         "Pending",
         "Investigation",

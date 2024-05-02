@@ -108,7 +108,7 @@ const CreateCase = ({ toast, getCases }) => {
       toast.error(err?.response?.data);
     } finally {
       handleCloseModal();
-      window.location.reload();
+      getCases();
     }
   };
 
@@ -141,15 +141,52 @@ const CreateCase = ({ toast, getCases }) => {
     // setErrors(newErrors);
   };
 
+  const handleDateOfIncidentChange = (date) => {
+    const dateObj = new Date(date);
+    const dayOfWeek = dateObj.toLocaleDateString("en-US", { weekday: "long" });
+
+    if (dayOfWeek === "Sunday") {
+      toast.error(
+        "Office of Student Affairs does not process cases on Sundays. Please try again on another day!"
+      );
+    } else {
+      setValues({
+        ...values,
+        dateOfIncident: date,
+      });
+    }
+  };
+
+  const handleDateReportedChange = (date) => {
+    const dateObj = new Date(date);
+    const dayOfWeek = dateObj.toLocaleDateString("en-US", { weekday: "long" });
+
+    if (dayOfWeek === "Sunday") {
+      toast.error("Closed on Sundays");
+    } else {
+      setValues({
+        ...values,
+        dateReported: date,
+      });
+    }
+  };
+
   // create student modal functions
 
   const handleOpenModal = () => {
     setShowCreateCaseModal(true);
   };
-  const handleCloseModal = () => {
-    setShowCreateCaseModal(false);
-    setValues(initialState);
-    // setErrors(errorsInitialState);
+  const handleCloseModal = async () => {
+    try {
+      await setValues(initialState);
+      await setShowCreateCaseModal(false);
+      // setErrors(errorsInitialState);
+    } catch (error) {
+      console.error("An error occurred while handling modal closure:", error);
+      // Handle the error gracefully, if needed
+    } finally {
+      getStudents();
+    }
   };
 
   return (
@@ -170,7 +207,6 @@ const CreateCase = ({ toast, getCases }) => {
       <Modal
         sx={{ border: "none", outline: "none" }}
         open={showCreateCaseModal}
-        onClose={handleCloseModal}
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
@@ -178,6 +214,8 @@ const CreateCase = ({ toast, getCases }) => {
           <CreateCaseFormModal
             values={values}
             handleChange={handleChange}
+            handleDateOfIncidentChange={handleDateOfIncidentChange}
+            handleDateReportedChange={handleDateReportedChange}
             handleCreateCase={handleCreateCase}
             handleCloseModal={handleCloseModal}
           />

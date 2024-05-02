@@ -23,6 +23,7 @@ const { deleteManyUser } = require("../controllers/UsersController");
 const { createCase } = require("../controllers/CasesController");
 const { getCases } = require("../controllers/CasesController");
 const { editCase } = require("../controllers/CasesController");
+const { patchCase } = require("../controllers/CasesController");
 const { deleteOneCase } = require("../controllers/CasesController");
 const { deleteManyCase } = require("../controllers/CasesController");
 
@@ -48,6 +49,7 @@ exports.controllers = {
   createCase,
   getCases,
   editCase,
+  patchCase,
   deleteOneCase,
   deleteManyCase,
   //

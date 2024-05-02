@@ -41,7 +41,10 @@ const createCase = async (req, res) => {
 const getCases = async (req, res) => {
   try {
     const cases = await Case.find()
-      .populate("student", "caseNo studentNo firstName surName")
+      .populate(
+        "student",
+        "caseNo studentNo firstName surName department year section"
+      )
       .exec();
     res.json(cases);
   } catch (error) {
@@ -63,6 +66,18 @@ const editCase = async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Failed to edit case values !" });
+  }
+};
+
+const patchCase = async (req, res) => {
+  try {
+    const { statusOfCase } = req.body;
+    await Case.findByIdAndUpdate(req.params.id, { statusOfCase });
+    res
+      .status(200)
+      .json({ message: "Case status has been successfully changed." });
+  } catch (error) {
+    res.status(500).json({ error: "Failed to change case status." });
   }
 };
 
@@ -98,6 +113,7 @@ module.exports = {
   createCase,
   getCases,
   editCase,
+  patchCase,
   deleteOneCase,
   deleteManyCase,
 };

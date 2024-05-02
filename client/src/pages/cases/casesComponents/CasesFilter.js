@@ -8,12 +8,15 @@ import {
 } from "react-icons/bs";
 import { VscFilter } from "react-icons/vsc";
 import CasesTable from "./CasesTable";
+import DatePicker from "react-datepicker";
+import moment from "moment";
+import "react-datepicker/dist/react-datepicker.css";
 
 const CasesFilter = ({ cases, getCases }) => {
   const [searchTerm, setSearchTerm] = useState("All");
   const [selectedStatus, setSelectedStatus] = useState("All");
-  const [dateOfIncident, setDateOfIncident] = useState("All");
-  const [dateReported, setDateReported] = useState("All");
+  const [dateOfIncident, setDateOfIncident] = useState(null);
+  const [dateReported, setDateReported] = useState(null);
   const [reportedViolation, setReportedViolation] = useState("All");
   const [selectedCases, setSelectedCases] = useState([]);
   const [activeMainFilter, setActiveMainFilter] = useState("All");
@@ -35,26 +38,52 @@ const CasesFilter = ({ cases, getCases }) => {
       const searchMatch =
         searchTerm === "All" ||
         c.caseNo.toLowerCase().includes(searchTerm.toLowerCase());
+
       const dateOfIncidentMatch =
-        dateOfIncident === "All" ||
-        new Date(c.dateOfIncident) >= new Date(dateOfIncident);
+        dateOfIncident === null ||
+        new Date(c.dateOfIncident).toLocaleDateString("en-US", {
+          month: "long",
+          day: "numeric",
+          year: "numeric",
+        }) ===
+          new Date(dateOfIncident).toLocaleDateString("en-US", {
+            month: "long",
+            day: "numeric",
+            year: "numeric",
+          });
+
       const dateReportedMatch =
-        dateReported === "All" ||
-        new Date(c.dateReported) >= new Date(dateReported);
+        dateReported === null ||
+        new Date(c.dateReported).toLocaleDateString("en-US", {
+          month: "long",
+          day: "numeric",
+          year: "numeric",
+        }) ===
+          new Date(dateReported).toLocaleDateString("en-US", {
+            month: "long",
+            day: "numeric",
+            year: "numeric",
+          });
+
       const reportedViolationMatch =
         reportedViolation === "All" ||
         c.reportedViolation
           .toLowerCase()
           .includes(reportedViolation.toLowerCase());
 
+      const mainFilterMatch =
+        activeMainFilter === "All" || c.typeOfViolation === activeMainFilter;
+
+      const statusMatch =
+        selectedStatus === "All" || c.statusOfCase === selectedStatus;
+
       return (
         searchMatch &&
         dateOfIncidentMatch &&
         dateReportedMatch &&
         reportedViolationMatch &&
-        (activeMainFilter === "All" ||
-          c.typeOfViolation === activeMainFilter) &&
-        (selectedStatus === "All" || c.statusOfCase === selectedStatus)
+        mainFilterMatch &&
+        statusMatch
       );
     });
   };
@@ -71,6 +100,23 @@ const CasesFilter = ({ cases, getCases }) => {
   );
 
   let combinedFilteredCases = [...filteredCases];
+
+  const isSunday = (date) => {
+    return date.getDay() === 0; // 0 represents Sunday
+  };
+
+  const isDisabled = (date) => {
+    return (
+      (moment(date).isBefore(moment(), "day") && !isSunday(date)) ||
+      (moment(date).isAfter(moment(), "day") && !isSunday(date))
+    );
+  };
+
+  const isDisabledDateReported = (date) => {
+    return (
+      moment(date).isAfter(moment(dateOfIncident), "day") && !isSunday(date)
+    );
+  };
 
   return (
     <>
@@ -185,9 +231,13 @@ const CasesFilter = ({ cases, getCases }) => {
                 </div>
                 <BsCalendar4Week />
               </div>
-              <input
-                type="date"
-                onChange={(e) => setDateOfIncident(e.target.value)}
+              <DatePicker
+                filterDate={isDisabled}
+                placeholderText="Enter Date"
+                selected={dateOfIncident}
+                onChange={(date) => {
+                  setDateOfIncident(date);
+                }}
                 className="px-3 py-2 w-[242px] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
               />
             </div>
@@ -199,9 +249,13 @@ const CasesFilter = ({ cases, getCases }) => {
                 </div>
                 <BsCalendar4 />
               </div>
-              <input
-                type="date"
-                onChange={(e) => setDateReported(e.target.value)}
+              <DatePicker
+                filterDate={isDisabledDateReported}
+                placeholderText="Enter Date"
+                selected={dateReported}
+                onChange={(date) => {
+                  setDateReported(date);
+                }}
                 className="px-3 py-2 w-[242px] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
               />
             </div>

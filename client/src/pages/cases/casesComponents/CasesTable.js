@@ -3,10 +3,12 @@ import { useSelector } from "react-redux";
 import { createSelector } from "reselect";
 import axios from "axios";
 import {
+  BsCapslock,
   BsEye,
   BsEyeFill,
   BsPen,
   BsPenFill,
+  BsTrash,
   BsTrash3,
   BsTrash3Fill,
 } from "react-icons/bs";
@@ -48,7 +50,7 @@ const authSelector = createSelector([selectAuth], (auth) => auth);
 
 const CasesTable = ({ cases, getCases, selectedCases, setSelectedCases }) => {
   const [selectAll, setSelectAll] = useState(false);
-  const [CaseDeleteId, setCaseDeleteId] = useState("");
+  const [caseDeleteId, setCaseDeleteId] = useState("");
   const [showDeleteCaseModal, setShowDeleteCaseModal] = useState(false);
   const [showDeleteManyCaseModal, setShowDeleteManyCaseModal] = useState(false);
   const [showEditCaseModal, setShowEditCaseModal] = useState(false);
@@ -153,8 +155,8 @@ const CasesTable = ({ cases, getCases, selectedCases, setSelectedCases }) => {
 
   const handleConfirmDelete = async () => {
     try {
-      if (CaseDeleteId) {
-        await deleteOneCase(CaseDeleteId);
+      if (caseDeleteId) {
+        await deleteOneCase(caseDeleteId);
       }
     } catch (error) {
       console.error("Error deleting schedule:", error);
@@ -187,6 +189,51 @@ const CasesTable = ({ cases, getCases, selectedCases, setSelectedCases }) => {
 
   const handleCloseModalEdit = () => {
     setShowEditCaseModal(false);
+  };
+
+  // patch statusOfCase
+
+  const handlePatchStatusOfCase = async (id, statusCase) => {
+    try {
+      if (!auth.userDetails.token) {
+        console.error("Authentication token not found.");
+        return;
+      }
+
+      const caseMapping = {
+        Pending: "Investigation",
+        Investigation: "Evaluation",
+        Evaluation: "Referral",
+        Referral: "Hearing",
+        Hearing: "Decision",
+        Decision: "Implementation",
+        Implementation: "Case Solved",
+      };
+
+      const caseStatus = caseMapping[statusCase];
+
+      if (!caseStatus) {
+        console.error("Invalid case status:", statusCase);
+        return;
+      }
+
+      // Make the API request with the determined case status
+      await axios.patch(
+        `${process.env.REACT_APP_API_URI}/case/${id}/patchCase`,
+        {
+          statusOfCase: caseStatus,
+        },
+        {
+          headers: {
+            withCredentials: true,
+            Authorization: `Bearer ${auth?.userDetails?.token}`,
+          },
+        }
+      );
+      getCases();
+    } catch (error) {
+      console.error("Error fetching schedules:", error);
+    }
   };
 
   return (
@@ -258,10 +305,10 @@ const CasesTable = ({ cases, getCases, selectedCases, setSelectedCases }) => {
             />
           </div>
           <div className="w-[90px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-2 rounded-[4px]">
-            Case No
+            Case No.
           </div>
           <div className="w-[110px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-2 rounded-[4px]">
-            Student No
+            Student No.
           </div>
           <div className="w-[160px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-2 rounded-[4px]">
             Name
@@ -269,14 +316,14 @@ const CasesTable = ({ cases, getCases, selectedCases, setSelectedCases }) => {
           <div className=" w-[118px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-2 rounded-[4px]">
             Department
           </div>
-          <div className=" w-[80px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-2 rounded-[4px]">
+          <div className=" w-[60px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-2 rounded-[4px]">
             Year
           </div>
           <div className=" w-[80px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-2 rounded-[4px]">
             Section
           </div>
-          <div className=" w-[140px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-2 rounded-[4px]">
-            Reported V.
+          <div className=" w-[160px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-2 rounded-[4px]">
+            Reported Violation
           </div>
           <div className=" w-[118px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-2 rounded-[4px]">
             Incident Date
@@ -317,8 +364,8 @@ const CasesTable = ({ cases, getCases, selectedCases, setSelectedCases }) => {
               <input
                 type="checkbox"
                 className="w-[18px] h-[18px]"
-                checked={selectAll}
-                onChange={toggleSelectAll}
+                checked={selectedCases?.includes(c?._id)}
+                onChange={() => toggleCaseSelection(c?._id)}
               />
             </div>
             <div className="w-[90px] whitespace-nowrap flex justify-start items-center py-1 px-2 rounded-[4px]">
@@ -331,34 +378,47 @@ const CasesTable = ({ cases, getCases, selectedCases, setSelectedCases }) => {
               {c?.student?.firstName} {c?.student?.surName}
             </div>
             <div className=" w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-2 rounded-[4px]">
-              {c?.student?.studentNo}
+              {c?.student?.department?.slice(0, 6)}
+            </div>
+            <div className=" w-[60px] whitespace-nowrap flex justify-start items-center py-1 px-2 rounded-[4px]">
+              {c?.student?.year}
             </div>
             <div className=" w-[80px] whitespace-nowrap flex justify-start items-center py-1 px-2 rounded-[4px]">
-              Year
+              {c?.student?.section}
             </div>
-            <div className=" w-[80px] whitespace-nowrap flex justify-start items-center py-1 px-2 rounded-[4px]">
-              Section
-            </div>
-            <div className=" w-[140px] whitespace-nowrap flex justify-start items-center py-1 px-2 rounded-[4px]">
-              Reported V.
+            <div className=" w-[160px] whitespace-nowrap flex justify-start items-center py-1 px-2 rounded-[4px]">
+              {c?.reportedViolation}
             </div>
             <div className=" w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-2 rounded-[4px]">
-              Incident Date
+              {new Date(c?.dateOfIncident)?.toLocaleDateString("en-US", {
+                month: "long",
+                day: "numeric",
+                year: "numeric",
+              })}
             </div>
             <div className=" w-[130px] whitespace-nowrap flex justify-start items-center py-1 px-2 rounded-[4px]">
-              Date Reported
+              {new Date(c?.dateReported)?.toLocaleDateString("en-US", {
+                month: "long",
+                day: "numeric",
+                year: "numeric",
+              })}
             </div>
-            <div className=" w-[140px] whitespace-nowrap flex justify-start items-center py-1 px-2 rounded-[4px]">
-              Case Status
+            <div className=" w-[140px] font-bold whitespace-nowrap flex justify-start items-center py-1 px-2 rounded-[4px]">
+              {c?.statusOfCase}
             </div>
             <div className="w-[130px] whitespace-nowrap flex justify-start items-center gap-2">
               {selectedCases.length < 2 ? (
                 <>
-                  <div className="p-2 bg-[white] border-[1px] border-[#007bff] rounded-[18px] cursor-pointer">
-                    <BsEye className="text-[18px] text-[#007bff]" />
+                  <div
+                    onClick={() =>
+                      handlePatchStatusOfCase(c?._id, c?.statusOfCase)
+                    }
+                    className="p-2 bg-[white] border-[1px] border-[#007bff] rounded-[18px] cursor-pointer"
+                  >
+                    <BsCapslock className="text-[18px] text-[#007bff]" />
                   </div>
                   <div
-                    onClick={() => handleCaseEditClick(c)}
+                    onClick={() => handleCaseEditClick(c?._id)}
                     className="p-2 bg-[white] border-[1px] border-[#FFBF00] rounded-[18px] cursor-pointer"
                   >
                     <BsPen className="text-[18px] text-[#FFBF00]" />
@@ -372,14 +432,14 @@ const CasesTable = ({ cases, getCases, selectedCases, setSelectedCases }) => {
                 </>
               ) : (
                 <>
-                  <div className="p-2 bg-[#efefef] rounded-[18px]">
-                    <BsEyeFill className="text-[18px] text-[white]" />
+                  <div className="p-2 bg-[#f0f0f0] rounded-[18px]">
+                    <BsCapslock className="text-[18px] text-[white]" />
                   </div>
-                  <div className="p-2 bg-[#efefef] rounded-[18px]">
-                    <BsPenFill className="text-[18px] text-white" />
+                  <div className="p-2 bg-[#f0f0f0] rounded-[18px]">
+                    <BsPen className="text-[18px] text-white" />
                   </div>
-                  <div className="p-2 bg-[#efefef] rounded-[18px]">
-                    <BsTrash3Fill className="text-[18px] text-white" />
+                  <div className="p-2 bg-[#f0f0f0] rounded-[18px]">
+                    <BsTrash className="text-[18px] text-white" />
                   </div>
                 </>
               )}

@@ -29,6 +29,13 @@ router.put(
   mainController.controllers.editCase
 );
 
+router.patch(
+  "/case/:id/patchCase",
+  auth,
+  role(["Administrator"]),
+  mainController.controllers.patchCase
+);
+
 router.delete(
   "/case/:id",
   auth,
