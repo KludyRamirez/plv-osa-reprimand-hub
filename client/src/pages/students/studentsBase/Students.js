@@ -11,11 +11,13 @@ const authSelector = createSelector([selectAuth], (auth) => auth);
 
 const Students = ({ toast }) => {
   const [students, setStudents] = useState([]);
+  const [cases, setCases] = useState([]);
 
   const auth = useSelector(authSelector);
 
   useEffect(() => {
     getStudents();
+    getCases();
   }, []);
 
   const getStudents = async () => {
@@ -37,6 +39,25 @@ const Students = ({ toast }) => {
     }
   };
 
+  const getCases = async () => {
+    try {
+      if (!auth.userDetails.token) {
+        console.error("Authentication token not found.");
+        return;
+      }
+      const url = `${process.env.REACT_APP_API_URI}/case`;
+      const res = await axios.get(url, {
+        withCredentials: true,
+        headers: {
+          Authorization: `Bearer ${auth.userDetails.token}`,
+        },
+      });
+      setCases(res.data);
+    } catch (err) {
+      console.error("Error fetching users!", err);
+    }
+  };
+
   return (
     <>
       <div className="flex justify-start">
@@ -44,7 +65,11 @@ const Students = ({ toast }) => {
         <div className="w-full h-screen flex justify-start bg-[#007bff]">
           <div className="w-full bg-[#fefefe] mt-[80px] rounded-tl-[24px] p-8">
             <CreateStudent toast={toast} getStudents={getStudents} />
-            <StudentsFilter students={students} getStudents={getStudents} />
+            <StudentsFilter
+              students={students}
+              cases={cases}
+              getStudents={getStudents}
+            />
           </div>
         </div>
       </div>

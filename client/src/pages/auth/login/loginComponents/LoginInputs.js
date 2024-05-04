@@ -78,7 +78,7 @@ const LoginInputs = ({
         />
         {passwordError && <p className="text-red-500">{passwordError}</p>}
       </div>
-      <div className="w-100 mt-4 flex justify-between items-center">
+      <div className="w-100 mt-6 flex justify-between items-center">
         <div className="hover:underline">
           <Link to="/forgot-password" className="text-[#ff3131]">
             Oops! Forgot password?

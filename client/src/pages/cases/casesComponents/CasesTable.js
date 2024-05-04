@@ -304,37 +304,37 @@ const CasesTable = ({ cases, getCases, selectedCases, setSelectedCases }) => {
               onChange={toggleSelectAll}
             />
           </div>
-          <div className="w-[90px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-2 rounded-[4px]">
+          <div className="w-[90px] whitespace-nowrap flex justify-start items-center bg-[#007bff] border-[1px] border-[#007bff] text-[white] py-1 px-3 rounded-[24px]">
             Case No.
           </div>
-          <div className="w-[110px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-2 rounded-[4px]">
+          <div className="w-[110px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
             Student No.
           </div>
-          <div className="w-[160px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-2 rounded-[4px]">
+          <div className="w-[160px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
             Name
           </div>
-          <div className=" w-[118px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-2 rounded-[4px]">
+          <div className=" w-[118px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
             Department
           </div>
-          <div className=" w-[60px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-2 rounded-[4px]">
+          <div className=" w-[60px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
             Year
           </div>
-          <div className=" w-[80px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-2 rounded-[4px]">
+          <div className=" w-[80px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
             Section
           </div>
-          <div className=" w-[160px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-2 rounded-[4px]">
+
+          <div className=" w-[160px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
             Reported Violation
           </div>
-          <div className=" w-[118px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-2 rounded-[4px]">
+          <div className=" w-[118px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
             Incident Date
           </div>
-          <div className=" w-[130px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-2 rounded-[4px]">
+          <div className=" w-[130px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
             Date Reported
           </div>
-          <div className=" w-[140px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-2 rounded-[4px]">
+          <div className=" w-[140px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
             Case Status
           </div>
-
           {selectedCases.length > 1 ? (
             <>
               <div className="w-[1px] h-[20px] border-[1px]"></div>
@@ -347,7 +347,7 @@ const CasesTable = ({ cases, getCases, selectedCases, setSelectedCases }) => {
               </div>
             </>
           ) : (
-            <div className="w-[118px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-2 rounded-[4px]">
+            <div className="w-[118px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
               <span>Actions</span>
             </div>
           )}
@@ -356,7 +356,9 @@ const CasesTable = ({ cases, getCases, selectedCases, setSelectedCases }) => {
         {cases?.map((c, k) => (
           <div
             className={`w-100 flex items-center gap-4 px-6 ${
-              k % 2 === 0 ? "bg-[#f5f5f5]" : "bg-white"
+              k % 2 === 0
+                ? "bg-gradient-to-br from-gray-100 to-gray-100"
+                : "bg-white"
             }`}
             key={k}
           >
@@ -368,42 +370,42 @@ const CasesTable = ({ cases, getCases, selectedCases, setSelectedCases }) => {
                 onChange={() => toggleCaseSelection(c?._id)}
               />
             </div>
-            <div className="w-[90px] whitespace-nowrap flex justify-start items-center py-1 px-2 rounded-[4px]">
+            <div className="w-[90px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
               {c?.caseNo}
             </div>
-            <div className="w-[110px] whitespace-nowrap flex justify-start items-center py-1 px-2 rounded-[4px]">
+            <div className="w-[110px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
               {c?.student?.studentNo}
             </div>
-            <div className="w-[160px] whitespace-nowrap flex justify-start items-center py-1 px-2 rounded-[4px]">
+            <div className="w-[160px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
               {c?.student?.firstName} {c?.student?.surName}
             </div>
-            <div className=" w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-2 rounded-[4px]">
+            <div className=" w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
               {c?.student?.department?.slice(0, 6)}
             </div>
-            <div className=" w-[60px] whitespace-nowrap flex justify-start items-center py-1 px-2 rounded-[4px]">
+            <div className=" w-[60px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
               {c?.student?.year}
             </div>
-            <div className=" w-[80px] whitespace-nowrap flex justify-start items-center py-1 px-2 rounded-[4px]">
+            <div className=" w-[80px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
               {c?.student?.section}
             </div>
-            <div className=" w-[160px] whitespace-nowrap flex justify-start items-center py-1 px-2 rounded-[4px]">
+            <div className=" w-[160px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
               {c?.reportedViolation}
             </div>
-            <div className=" w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-2 rounded-[4px]">
+            <div className=" w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
               {new Date(c?.dateOfIncident)?.toLocaleDateString("en-US", {
                 month: "long",
                 day: "numeric",
                 year: "numeric",
               })}
             </div>
-            <div className=" w-[130px] whitespace-nowrap flex justify-start items-center py-1 px-2 rounded-[4px]">
+            <div className=" w-[130px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
               {new Date(c?.dateReported)?.toLocaleDateString("en-US", {
                 month: "long",
                 day: "numeric",
                 year: "numeric",
               })}
             </div>
-            <div className=" w-[140px] font-bold whitespace-nowrap flex justify-start items-center py-1 px-2 rounded-[4px]">
+            <div className=" w-[140px] font-bold whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
               {c?.statusOfCase}
             </div>
             <div className="w-[130px] whitespace-nowrap flex justify-start items-center gap-2">

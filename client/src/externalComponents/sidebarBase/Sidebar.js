@@ -20,7 +20,6 @@ import {
   BsPeople,
   BsPeopleFill,
   BsPerson,
-  BsPersonBoundingBox,
   BsPersonSquare,
   BsPieChart,
   BsPieChartFill,
@@ -411,14 +410,14 @@ function Sidebar(props) {
             </IconButton>
           </Toolbar>
           <div className="flex justify-center items-center gap-[8px]">
-            <div className="border-[1px] border-white text-white py-2 px-3 flex justify-center items-center rounded-[6px] hover:bg-white hover:text-[#007bff] cursor-pointer ">
-              <BsBell className="text-[24px] " />
+            <div className="text-white py-2 px-2 flex justify-center items-center rounded-[6px] cursor-pointer">
+              <BsBell className="text-[26px]" />
             </div>
-            <div className="border-[1px] border-white text-white py-2 px-3 flex justify-center items-center rounded-[6px] hover:bg-white hover:text-[#007bff] cursor-pointer gap-2 ">
-              <div className="text-[16px]">
+            <div className="text-white py-2 px-3 flex justify-center items-center rounded-[6px] cursor-pointer gap-4">
+              <div className="w-[40px] h-[40px] rounded-[50%] bg-white"></div>
+              <div className="text-[18px]">
                 {`${auth?.userDetails?.userName}`}
               </div>
-              <BsPerson className="text-[24px] " />
             </div>
           </div>
         </div>

@@ -130,7 +130,7 @@ const Login = ({ login }) => {
                 </>
               )}
             </div>
-            <div className="absolute flex justify-center items-center w-[800px] h-[800px] rounded-[50%] border-[1px] border-[#dedede] top-[-200px] left-[-400px] zIndex-1">
+            <div className="absolute flex justify-center items-center w-[800px] h-[800px] rounded-[50%] border-[1px] top-[-200px] left-[-400px] zIndex-1">
               <div className="w-[100px] h-[100px] bg-blue-100 rounded-[50%] relative">
                 <div className="absolute w-[50px] h-[50px] rounded-[50%] bg-[white] zIndex-3"></div>
                 <div className="absolute w-[20px] h-[20px] rounded-[50%] bg-[#ff3131] top-[-254px] left-[310px]"></div>
@@ -144,7 +144,7 @@ const Login = ({ login }) => {
 
           <div className="flex flex-col h-[100%] items-center justify-center gap-4">
             <div className="w-[1px] h-[25%] bg-gray-200"></div>
-            <BsLightningCharge className="text-[#077bff] text-[24px]" />
+            <div className="absolute w-[20px] h-[20px] bg-blue-100 rounded-[50%]"></div>
             <div className="w-[1px] h-[25%] bg-gray-200"></div>
           </div>
           <div className="relative">
@@ -160,7 +160,7 @@ const Login = ({ login }) => {
               </FormTitle>
               <FormTitle
                 sx={{
-                  marginTop: "-17px",
+                  marginTop: "-20px",
                   textShadow: "0px 0px 4px rgba(0, 123, 255, 0.4)",
                 }}
               >
@@ -168,7 +168,7 @@ const Login = ({ login }) => {
               </FormTitle>
               <FormTitle
                 sx={{
-                  marginTop: "-16px",
+                  marginTop: "-15px",
                   backgroundImage:
                     "radial-gradient(100% 100% at 100% 0, #07bbff 0, #007bff 100%)",
                   textShadow: "0px 0px 4px rgba(0, 123, 255, 0.4)",
@@ -178,18 +178,13 @@ const Login = ({ login }) => {
               </FormTitle>
             </div>
             <div className="absolute flex p-2 justify-end items-start top-[0px] right-[-100px] w-[300px] h-[100px] zIndex-2 rounded-[4px] gap-2 ">
-              <div className="mt-[-30px] w-[60px] h-[60px] flex justify-center items-center bg-white rounded-[50%] border-[1px] border-[#007bff] text-[#007bff] cursor-pointer hover:bg-[#007bff] hover:text-white">
+              <div className="mt-[-40px] w-[60px] h-[60px] flex justify-center items-center bg-white rounded-[50%] border-[1px] border-[#007bff] text-[#007bff] cursor-pointer hover:bg-[#007bff] hover:text-white">
                 <BsArrowLeft className="text-[24px] " />
               </div>
-              <div className="mt-[-30px] w-[60px] h-[60px] flex justify-center items-center bg-white rounded-[50%] border-[1px] border-[#007bff] text-[#007bff] cursor-pointer hover:bg-[#007bff] hover:text-white">
+              <div className="mt-[-40px] w-[60px] h-[60px] flex justify-center items-center bg-white rounded-[50%] border-[1px] border-[#007bff] text-[#007bff] cursor-pointer hover:bg-[#007bff] hover:text-white">
                 <BsArrowRight className="text-[24px]" />
               </div>
             </div>
-            <img
-              src={folder}
-              alt=""
-              className="absolute top-[80px] right-[-150px] w-[200px] h-[200px] zIndex-2"
-            />
 
             <div className="absolute top-[160px] right-[100px] w-[100px] h-[100px] bg-[white] border-[1px] border-[#07bbff] rounded-[50%] "></div>
             <div className="absolute top-[240px] right-[198px] w-[20px] h-[20px] bg-blue-100 rounded-[50%]"></div>
@@ -207,7 +202,7 @@ const Login = ({ login }) => {
           </div>
         </div>
         <div className="flex flex-col items-center zIndex-2">
-          <div className="py-6 px-8 w-[96%] mt-10 left-0 bottom-0 flex justify-between items-center bg-[#007bff] relative rounded-tl-[32px] rounded-tr-[32px] border-[1px] border-[#007bff]">
+          <div className="py-6 px-8 w-[96%] mt-20 left-0 bottom-0 flex justify-between items-center bg-[#007bff] relative rounded-tl-[32px] rounded-tr-[32px]">
             <div className="flex flex-col gap-2">
               <div className="flex justify-start items-center gap-2 w-[330px]">
                 <div className="text-[16px] text-white">
@@ -250,7 +245,6 @@ const Login = ({ login }) => {
               </div>
             </div>
           </div>
-          <div className="w-[96%] h-[770px] border-[1px] border-[#007bff] mb-10 rounded-bl-[32px] rounded-br-[32px]"></div>
         </div>
       </div>
     </div>

@@ -164,16 +164,16 @@ const CasesFilter = ({ cases, getCases }) => {
           </div>
         </div>
 
-        <div className="px-4 pt-4 flex justify-center">
+        <div className="px-4 pt-4 flex justify-center gap-3">
           <input
             onChange={(e) => setSearchTerm(e.target.value)}
             type="text"
             autoComplete="off"
             placeholder="Search by case number, student name, etc."
-            className="p-3 rounded-tl-[6px] rounded-bl-[6px] w-[97%] bg-[#f5f5f5] focus:outline-none focus:border-[1px] focus:border-[#cdcdcd]"
+            className="p-3 rounded-[6px] w-[97%] bg-gradient-to-br from-gray-100 to-gray-100 focus:outline-none focus:border-[1px] focus:border-[#cdcdcd]"
           />
-          <div className="flex justify-center items-center w-[3%] rounded-tr-[6px] rounded-br-[6px] bg-[#007bff] font-semibold text-[white] gap-3">
-            <VscFilter className="text-[24px]" />
+          <div className="flex justify-center items-center w-[50px] h-[48px] rounded-[8px] bg-gradient-to-br from-gray-400 to-gray-200 text-[white] gap-3">
+            <BsFilter className="text-[24px]" />
           </div>
         </div>
 
@@ -181,7 +181,7 @@ const CasesFilter = ({ cases, getCases }) => {
           Filter by <BsFilter className="text-[24px]" />
         </div>
 
-        <div className=" w-100 flex justify-start bg-[#f5f5f5] flex p-4 rounded-bl-[10px] rounded-br-[10px]">
+        <div className=" w-100 flex justify-start bg-gradient-to-br from-gray-100 to-gray-200 flex p-4 rounded-bl-[10px] rounded-br-[10px]">
           <div className="flex justify-start items-center gap-4">
             <div className="flex flex-col items-start gap-2">
               <div className="pl-2 w-[242px] flex justify-between items-center">

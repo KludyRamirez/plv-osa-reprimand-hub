@@ -12,7 +12,7 @@ import {
 import { VscFilter } from "react-icons/vsc";
 import StudentsTable from "./StudentsTable";
 
-const StudentsFilter = ({ students, getStudents }) => {
+const StudentsFilter = ({ students, cases, getStudents }) => {
   const [searchTerm, setSearchTerm] = useState("All");
   const [selectedStatus, setSelectedStatus] = useState("All");
   const [college, setCollege] = useState("");
@@ -405,6 +405,7 @@ const StudentsFilter = ({ students, getStudents }) => {
           getStudents={getStudents}
           selectedStudents={selectedStudents}
           setSelectedStudents={setSelectedStudents}
+          cases={cases}
         />
       </div>
     </>

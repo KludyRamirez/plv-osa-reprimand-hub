@@ -23,7 +23,7 @@ const ModalBox = styled("div")({
   top: "50%",
   left: "50%",
   width: "25%",
-  height: "392px",
+  height: "fit-content",
   padding: "20px",
   transform: "translate(-50%, -50%)",
   background: "white",
@@ -51,6 +51,7 @@ const StudentsTable = ({
   getStudents,
   selectedStudents,
   setSelectedStudents,
+  cases,
 }) => {
   const [selectAll, setSelectAll] = useState(false);
   const [studentDeleteId, setStudentDeleteId] = useState("");
@@ -198,6 +199,8 @@ const StudentsTable = ({
     setShowEditStudentModal(false);
   };
 
+  const casesData = [...cases];
+
   return (
     <>
       <Modal
@@ -315,86 +318,94 @@ const StudentsTable = ({
           )}
         </div>
 
-        {students?.map((student, k) => (
-          <div
-            className={`w-100 flex items-center gap-4 px-6 ${
-              k % 2 === 0 ? "bg-[#f5f5f5]" : "bg-white"
-            }`}
-            key={k}
-          >
-            <div className="w-[30px] h-[60px] flex justify-start items-center">
-              <input
-                type="checkbox"
-                checked={selectedStudents?.includes(student?._id)}
-                onChange={() => toggleStudentSelection(student?._id)}
-                className="w-[18px] h-[18px]"
-              />
+        {students?.map((student, k) => {
+          const casesCount = casesData.filter(
+            (c) =>
+              `${c?.student?.firstName} ${c?.student?.surName}` ===
+              `${student?.firstName} ${student?.surName}`
+          ).length;
+
+          return (
+            <div
+              className={`w-100 flex items-center gap-4 px-6 ${
+                k % 2 === 0 ? "bg-[#f5f5f5]" : "bg-white"
+              }`}
+              key={k}
+            >
+              <div className="w-[30px] h-[60px] flex justify-start items-center">
+                <input
+                  type="checkbox"
+                  checked={selectedStudents?.includes(student?._id)}
+                  onChange={() => toggleStudentSelection(student?._id)}
+                  className="w-[18px] h-[18px]"
+                />
+              </div>
+              <div className="w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-2 rounded-[4px]">
+                {student?.studentNo}
+              </div>
+              <div className="w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-2 rounded-[4px]">
+                {student?.surName}
+              </div>
+              <div className="w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-2 rounded-[4px]">
+                {student?.firstName}
+              </div>
+              <div className="w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-2 rounded-[4px]">
+                {student?.year}
+              </div>
+              <div className="w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-2 rounded-[4px]">
+                {student?.section}
+              </div>
+              <div className="w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-2 rounded-[4px]">
+                {student?.college?.slice(0, 6)}
+              </div>
+              <div className="w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-2 rounded-[4px]">
+                {student?.department?.slice(0, 6)}
+              </div>
+              <div className="w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-2 rounded-[4px]">
+                {student?.sex?.slice(0, 6)}
+              </div>
+              <div className="w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-2 rounded-[4px]">
+                {student?.statusOfStudent.slice(0, 6)}
+              </div>
+              <div className="w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-2 rounded-[4px]">
+                {casesCount}
+              </div>
+              <div className="w-[130px] whitespace-nowrap flex justify-start items-center gap-2">
+                {selectedStudents.length < 2 ? (
+                  <>
+                    <div className="p-2 bg-[white] border-[1px] border-[#007bff] rounded-[18px] cursor-pointer">
+                      <BsEye className="text-[18px] text-[#007bff]" />
+                    </div>
+                    <div
+                      onClick={() => handleStudentEditClick(student)}
+                      className="p-2 bg-[white] border-[1px] border-[#FFBF00] rounded-[18px] cursor-pointer"
+                    >
+                      <BsPen className="text-[18px] text-[#FFBF00]" />
+                    </div>
+                    <div
+                      onClick={() => handleClickDelete(student?._id)}
+                      className="p-2 bg-[white] border-[1px] border-[#FF3131] rounded-[18px] cursor-pointer"
+                    >
+                      <BsTrash3 className="text-[18px] text-[#FF3131]" />
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="p-2 bg-[#efefef] rounded-[18px]">
+                      <BsEyeFill className="text-[18px] text-[white]" />
+                    </div>
+                    <div className="p-2 bg-[#efefef] rounded-[18px]">
+                      <BsPenFill className="text-[18px] text-white" />
+                    </div>
+                    <div className="p-2 bg-[#efefef] rounded-[18px]">
+                      <BsTrash3Fill className="text-[18px] text-white" />
+                    </div>
+                  </>
+                )}
+              </div>
             </div>
-            <div className="w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-2 rounded-[4px]">
-              {student?.studentNo}
-            </div>
-            <div className="w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-2 rounded-[4px]">
-              {student?.surName}
-            </div>
-            <div className="w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-2 rounded-[4px]">
-              {student?.firstName}
-            </div>
-            <div className="w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-2 rounded-[4px]">
-              {student?.year}
-            </div>
-            <div className="w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-2 rounded-[4px]">
-              {student?.section}
-            </div>
-            <div className="w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-2 rounded-[4px]">
-              {student?.college?.slice(0, 6)}
-            </div>
-            <div className="w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-2 rounded-[4px]">
-              {student?.department?.slice(0, 6)}
-            </div>
-            <div className="w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-2 rounded-[4px]">
-              {student?.sex?.slice(0, 6)}
-            </div>
-            <div className="w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-2 rounded-[4px]">
-              {student?.statusOfStudent.slice(0, 6)}
-            </div>
-            <div className="w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-2 rounded-[4px]">
-              {student?.department?.slice(0, 6)}
-            </div>
-            <div className="w-[130px] whitespace-nowrap flex justify-start items-center gap-2">
-              {selectedStudents.length < 2 ? (
-                <>
-                  <div className="p-2 bg-[white] border-[1px] border-[#007bff] rounded-[18px] cursor-pointer">
-                    <BsEye className="text-[18px] text-[#007bff]" />
-                  </div>
-                  <div
-                    onClick={() => handleStudentEditClick(student)}
-                    className="p-2 bg-[white] border-[1px] border-[#FFBF00] rounded-[18px] cursor-pointer"
-                  >
-                    <BsPen className="text-[18px] text-[#FFBF00]" />
-                  </div>
-                  <div
-                    onClick={() => handleClickDelete(student?._id)}
-                    className="p-2 bg-[white] border-[1px] border-[#FF3131] rounded-[18px] cursor-pointer"
-                  >
-                    <BsTrash3 className="text-[18px] text-[#FF3131]" />
-                  </div>
-                </>
-              ) : (
-                <>
-                  <div className="p-2 bg-[#efefef] rounded-[18px]">
-                    <BsEyeFill className="text-[18px] text-[white]" />
-                  </div>
-                  <div className="p-2 bg-[#efefef] rounded-[18px]">
-                    <BsPenFill className="text-[18px] text-white" />
-                  </div>
-                  <div className="p-2 bg-[#efefef] rounded-[18px]">
-                    <BsTrash3Fill className="text-[18px] text-white" />
-                  </div>
-                </>
-              )}
-            </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </>
   );

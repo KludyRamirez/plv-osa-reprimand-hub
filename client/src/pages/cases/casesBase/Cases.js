@@ -31,7 +31,7 @@ const Cases = ({ toast }) => {
       const res = await axios.get(url, {
         withCredentials: true,
         headers: {
-          Authorization: `Bearer ${auth.userDetails.token}`,
+          Authorization: `Bearer ${auth?.userDetails?.token}`,
         },
       });
 
