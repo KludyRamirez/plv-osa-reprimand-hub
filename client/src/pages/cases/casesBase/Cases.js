@@ -11,14 +11,13 @@ const authSelector = createSelector([selectAuth], (auth) => auth);
 
 const Cases = ({ toast }) => {
   const [cases, setCases] = useState([]);
-  const [majorCases, setMajorCases] = useState([]);
-  const [minorCases, setMinorCases] = useState([]);
-  const [complexCases, setComplexCases] = useState([]);
+  const [students, setStudents] = useState([]);
 
   const auth = useSelector(authSelector);
 
   useEffect(() => {
     getCases();
+    getStudents();
   }, []);
 
   const getCases = async () => {
@@ -35,22 +34,27 @@ const Cases = ({ toast }) => {
         },
       });
 
-      const majorCaseFilter = res.data.filter(
-        (c) => c.typeOfViolation === "Major"
-      );
-
-      const minorCaseFilter = res.data.filter(
-        (c) => c.typeOfViolation === "Minor"
-      );
-
-      const complexCaseFilter = res.data.filter(
-        (c) => c.typeOfViolation === "Complex"
-      );
-
       setCases(res.data);
-      setMajorCases(majorCaseFilter);
-      setMinorCases(minorCaseFilter);
-      setComplexCases(complexCaseFilter);
+    } catch (err) {
+      console.error("Error fetching users!", err);
+    }
+  };
+
+  const getStudents = async () => {
+    try {
+      if (!auth.userDetails.token) {
+        console.error("Authentication token not found.");
+        return;
+      }
+      const url = `${process.env.REACT_APP_API_URI}/student`;
+      const res = await axios.get(url, {
+        withCredentials: true,
+        headers: {
+          Authorization: `Bearer ${auth.userDetails.token}`,
+        },
+      });
+      setStudents(res.data);
+      console.log(students);
     } catch (err) {
       console.error("Error fetching users!", err);
     }
@@ -60,14 +64,12 @@ const Cases = ({ toast }) => {
     <>
       <div className="flex justify-start">
         <Sidebar />
-        <div className="w-full h-screen flex justify-start bg-[#007bff]">
-          <div className="w-full bg-[#fefefe] mt-[80px] rounded-tl-[24px] p-8">
+        <div className="w-full flex justify-start bg-[#007bff]">
+          <div className="w-full bg-[#fefefe] mt-[80px] rounded-tl-[24px] phone:rounded-tl-[0px] px-8 phone:px-4 pt-8">
             <CreateCase toast={toast} getCases={getCases} />
             <CasesFilter
               cases={cases}
-              majorCases={majorCases}
-              minorCases={minorCases}
-              complexCases={complexCases}
+              students={students}
               getCases={getCases}
             />
           </div>

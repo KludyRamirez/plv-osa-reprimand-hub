@@ -1,9 +1,10 @@
 const Case = require("../models/Cases");
 const Notification = require("../models/Notifications");
+const moment = require("moment");
 
 const createCase = async (req, res) => {
   try {
-    const { firstName, surName } = req.body;
+    const { reportedViolation, dateOfIncident, dateReported } = req.body;
 
     const userData = req.user;
 
@@ -15,19 +16,31 @@ const createCase = async (req, res) => {
       newCaseNo = parseInt(latestCase.caseNo) + 1;
     }
 
+    // const formattedDateOfIncident = moment.utc(
+    //   dateOfIncident,
+    //   "YYYY-MM-DDTHH:mm:ss.SSS[Z]"
+    // );
+
+    // const formattedDateReported = moment.utc(
+    //   dateReported,
+    //   "YYYY-MM-DDTHH:mm:ss.SSS[Z]"
+    // );
+
     const newCase = await Case.create({
       ...req.body,
       caseNo: newCaseNo,
+      // dateOfIncident: formattedDateOfIncident?.format("MM/DD/YYYY"),
+      // dateReported: formattedDateReported?.format("MM/DD/YYYY"),
     });
 
     await Notification.create({
       userId: userData._id,
-      message: `Successfully added a new case !`,
+      message: `Successfully added a new case!`,
       createdAt: new Date(),
     });
 
     res.status(200).json({
-      message: "Successfully added new case !",
+      message: `[Case no. ${newCaseNo} was successfully added]`,
       data: newCase,
     });
   } catch (error) {

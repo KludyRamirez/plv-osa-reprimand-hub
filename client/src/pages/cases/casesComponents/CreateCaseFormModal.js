@@ -12,16 +12,14 @@ const CreateCaseFormModal = ({
   handleCreateCase,
   handleCloseModal,
   values,
+  students,
 }) => {
   const {
-    students,
     student,
     reportedViolations,
     reportedViolation,
     typeOfViolations,
     typeOfViolation,
-    dateOfIncident,
-    dateReported,
   } = values;
 
   const [searchTerm, setSearchTerm] = useState("");
@@ -56,16 +54,14 @@ const CreateCaseFormModal = ({
   };
 
   const isDisabled = (date) => {
-    return (
-      (moment(date).isBefore(moment(), "day") && !isSunday(date)) ||
-      (moment(date).isAfter(moment(), "day") && !isSunday(date))
-    );
+    return !isSunday(date);
   };
 
   const isDisabledDateReported = (date) => {
     return (
       moment(date).isAfter(moment(selectedDateOfIncident), "day") &&
-      !isSunday(date)
+      (!isSunday(date) ||
+        moment(date).isSame(moment(selectedDateOfIncident), "day"))
     );
   };
 
@@ -81,7 +77,7 @@ const CreateCaseFormModal = ({
 
   return (
     <>
-      <form onSubmit={handleCreateCase}>
+      <form onSubmit={(e) => handleCreateCase(e)}>
         <div className="p-8">
           <div className="text-[28px] text-[#077bff] font-semibold flex justify-between">
             Create New Case
@@ -180,13 +176,13 @@ const CreateCaseFormModal = ({
 
           <div className="w-100 pt-10 flex justify-end items-center">
             {student !== "" &&
-            dateOfIncident !== "" &&
-            dateReported !== "" &&
+            selectedDateOfIncident !== "" &&
+            selectedDateReported !== "" &&
             reportedViolation !== "" &&
             typeOfViolation !== "" ? (
               <button
                 type="submit"
-                className="py-3 px-3 bg-[#007bff] text-[white] text-[16px] flex gap-2 items-center rounded-[8px]"
+                className="cursor-pointer py-3 px-3 bg-[#007bff] text-[white] text-[16px] flex gap-2 items-center rounded-[8px]"
               >
                 <FaPlus />
                 <div>Add Case</div>

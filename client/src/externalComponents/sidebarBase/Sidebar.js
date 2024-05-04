@@ -15,11 +15,15 @@ import { AiOutlineLogout } from "react-icons/ai";
 import { CgMenuLeft } from "react-icons/cg";
 import {
   BsBell,
+  BsBellFill,
+  BsClockHistory,
   BsGear,
+  BsGitlab,
   BsGrid1X2,
   BsPeople,
   BsPeopleFill,
   BsPerson,
+  BsPersonFill,
   BsPersonSquare,
   BsPieChart,
   BsPieChartFill,
@@ -409,14 +413,18 @@ function Sidebar(props) {
               <CgMenuLeft />
             </IconButton>
           </Toolbar>
-          <div className="flex justify-center items-center gap-[8px]">
-            <div className="text-white py-2 px-2 flex justify-center items-center rounded-[6px] cursor-pointer">
-              <BsBell className="text-[26px]" />
+          <div className="flex justify-center items-center gap-[24px]">
+            <div className="text-white flex w-[44px] h-[44px] rounded-[50%] border-[1px] border-[lightgray] justify-center items-center cursor-pointer hover:bg-white hover:text-[#007bff]">
+              <BsClockHistory className="text-[22px]" />
             </div>
-            <div className="text-white py-2 px-3 flex justify-center items-center rounded-[6px] cursor-pointer gap-4">
-              <div className="w-[40px] h-[40px] rounded-[50%] bg-white"></div>
+
+            <div className="w-[1px] h-[24px] bg-[lightgray]"></div>
+            <div className="text-white flex justify-center items-center rounded-[6px] cursor-pointer gap-4">
               <div className="text-[18px]">
                 {`${auth?.userDetails?.userName}`}
+              </div>
+              <div className="flex justify-center items-center w-[44px] h-[44px] rounded-[50%] border-[1px] border-white bg-white text-[#007bff] text-[22px] hover:bg-transparent hover:text-white">
+                <BsGitlab className="mt-[4px]" />
               </div>
             </div>
           </div>

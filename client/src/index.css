@@ -34,3 +34,16 @@ body {
   color: transparent;
   -webkit-text-stroke: 1px red;
 }
+
+.container {
+  position: relative;
+}
+
+.additional-content {
+  position: absolute;
+  visibility: hidden;
+}
+
+.container:hover .additional-content {
+  visibility: visible;
+}

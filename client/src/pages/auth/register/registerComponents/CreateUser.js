@@ -56,7 +56,7 @@ const errorsInitialState = {
   contactNo: "",
 };
 
-const CreateUser = ({ toast, register }) => {
+const CreateUser = ({ register, getUsers }) => {
   const [values, setValues] = useState(initialState);
   const [showCreateUserModal, setShowCreateUserModal] = useState(false);
   const [errors, setErrors] = useState(errorsInitialState);
@@ -68,7 +68,9 @@ const CreateUser = ({ toast, register }) => {
   const { userName, firstName, surName, email, password, role, contactNo } =
     values;
 
-  const handleCreateUser = async () => {
+  const handleCreateUser = async (e) => {
+    e.preventDefault();
+
     const userDetails = {
       userName,
       firstName,
@@ -84,6 +86,9 @@ const CreateUser = ({ toast, register }) => {
       setValues(initialState);
     } catch (error) {
       console.error("Error while registering user:", error);
+    } finally {
+      handleCloseModal();
+      getUsers();
     }
   };
 

@@ -22,7 +22,7 @@ const ModalBox = styled("div")({
   position: "absolute",
   top: "50%",
   left: "50%",
-  width: "25%",
+  width: "22%",
   height: "fit-content",
   padding: "20px",
   transform: "translate(-50%, -50%)",
@@ -320,9 +320,7 @@ const StudentsTable = ({
 
         {students?.map((student, k) => {
           const casesCount = casesData.filter(
-            (c) =>
-              `${c?.student?.firstName} ${c?.student?.surName}` ===
-              `${student?.firstName} ${student?.surName}`
+            (c) => c?.student?.studentNo === student?.studentNo
           ).length;
 
           return (

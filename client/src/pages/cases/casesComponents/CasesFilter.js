@@ -12,7 +12,7 @@ import DatePicker from "react-datepicker";
 import moment from "moment";
 import "react-datepicker/dist/react-datepicker.css";
 
-const CasesFilter = ({ cases, getCases }) => {
+const CasesFilter = ({ cases, students, getCases }) => {
   const [searchTerm, setSearchTerm] = useState("All");
   const [selectedStatus, setSelectedStatus] = useState("All");
   const [dateOfIncident, setDateOfIncident] = useState(null);
@@ -41,12 +41,12 @@ const CasesFilter = ({ cases, getCases }) => {
 
       const dateOfIncidentMatch =
         dateOfIncident === null ||
-        new Date(c.dateOfIncident).toLocaleDateString("en-US", {
+        new Date(c.dateOfIncident).toLocaleDateString("en-PH", {
           month: "long",
           day: "numeric",
           year: "numeric",
         }) ===
-          new Date(dateOfIncident).toLocaleDateString("en-US", {
+          new Date(dateOfIncident).toLocaleDateString("en-PH", {
             month: "long",
             day: "numeric",
             year: "numeric",
@@ -54,12 +54,12 @@ const CasesFilter = ({ cases, getCases }) => {
 
       const dateReportedMatch =
         dateReported === null ||
-        new Date(c.dateReported).toLocaleDateString("en-US", {
+        new Date(c.dateReported).toLocaleDateString("en-PH", {
           month: "long",
           day: "numeric",
           year: "numeric",
         }) ===
-          new Date(dateReported).toLocaleDateString("en-US", {
+          new Date(dateReported).toLocaleDateString("en-PH", {
             month: "long",
             day: "numeric",
             year: "numeric",
@@ -172,7 +172,7 @@ const CasesFilter = ({ cases, getCases }) => {
             placeholder="Search by case number, student name, etc."
             className="p-3 rounded-[6px] w-[97%] bg-gradient-to-br from-gray-100 to-gray-100 focus:outline-none focus:border-[1px] focus:border-[#cdcdcd]"
           />
-          <div className="flex justify-center items-center w-[50px] h-[48px] rounded-[8px] bg-gradient-to-br from-gray-400 to-gray-200 text-[white] gap-3">
+          <div className="flex justify-center items-center w-[50px] h-[48px] rounded-[8px] bg-gradient-to-br from-[#07bbff] to-[#007bff] text-white">
             <BsFilter className="text-[24px]" />
           </div>
         </div>
@@ -181,18 +181,18 @@ const CasesFilter = ({ cases, getCases }) => {
           Filter by <BsFilter className="text-[24px]" />
         </div>
 
-        <div className=" w-100 flex justify-start bg-gradient-to-br from-gray-100 to-gray-200 flex p-4 rounded-bl-[10px] rounded-br-[10px]">
-          <div className="flex justify-start items-center gap-4">
-            <div className="flex flex-col items-start gap-2">
-              <div className="pl-2 w-[242px] flex justify-between items-center">
+        <div className="w-100 flex justify-start bg-gradient-to-br from-gray-100 to-gray-100 p-4 rounded-bl-[10px] rounded-br-[10px]">
+          <div className="w-100 flex flex-wrap justify-start items-center gap-4 phone:gap-2">
+            <div className="phone:w-[50%] flex flex-col items-start gap-2">
+              <div className="pl-2 w-[242px] phone:w-[100%] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
-                  <div>Reported Violation</div> <BsCaretDown />
+                  <div>Violation</div> <BsCaretDown />
                 </div>
                 <BsCalendar4 />
               </div>
               <select
                 onChange={(e) => setReportedViolation(e.target.value)}
-                className="px-3 py-2 w-[242px] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
+                className="px-3 py-2 w-[242px] phone:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
               >
                 <option value="All">All</option>
                 <option value="Stealing">Stealing</option>
@@ -201,8 +201,8 @@ const CasesFilter = ({ cases, getCases }) => {
                 <option value="Sexual Harassment">Sexual Harassment</option>
               </select>
             </div>
-            <div className="flex flex-col items-start gap-2">
-              <div className="pl-2 w-[242px] flex justify-between items-center">
+            <div className="phone:w-[47.8%] flex flex-col items-start gap-2">
+              <div className="pl-2 w-[242px] phone:w-[100%] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
                   <div>Status of Case</div> <BsCaretDown />
                 </div>
@@ -210,7 +210,7 @@ const CasesFilter = ({ cases, getCases }) => {
               </div>
               <select
                 onChange={(e) => setSelectedStatus(e.target.value)}
-                className="px-3 py-2 w-[242px] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
+                className="px-3 py-2 w-[242px] phone:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
               >
                 <option value="All">All</option>
                 <option value="Pending">Pending</option>
@@ -224,8 +224,8 @@ const CasesFilter = ({ cases, getCases }) => {
               </select>
             </div>
 
-            <div className="flex flex-col items-start gap-2">
-              <div className="pl-2 w-[242px] flex justify-between items-center">
+            <div className="phone:w-[50%] flex flex-col items-start gap-2">
+              <div className="pl-2 w-[242px] phone:w-[100%] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
                   <div>Date of Incident</div> <BsCaretDown />
                 </div>
@@ -238,12 +238,12 @@ const CasesFilter = ({ cases, getCases }) => {
                 onChange={(date) => {
                   setDateOfIncident(date);
                 }}
-                className="px-3 py-2 w-[242px] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
+                className="phone:w-[100%] px-3 py-2 w-[242px] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
               />
             </div>
 
-            <div className="flex flex-col items-start gap-2">
-              <div className="pl-2 w-[242px] flex justify-between items-center">
+            <div className="phone:w-[47.8%] flex flex-col items-start gap-2">
+              <div className="pl-2 w-[242px] phone:w-[100%] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
                   <div>Date Reported</div> <BsCaretDown />
                 </div>
@@ -256,7 +256,7 @@ const CasesFilter = ({ cases, getCases }) => {
                 onChange={(date) => {
                   setDateReported(date);
                 }}
-                className="px-3 py-2 w-[242px] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
+                className="px-3 py-2 w-[242px] phone:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
               />
             </div>
 
@@ -342,6 +342,7 @@ const CasesFilter = ({ cases, getCases }) => {
       <div className="py-8">
         <CasesTable
           cases={combinedFilteredCases}
+          students={students}
           getCases={getCases}
           selectedCases={selectedCases}
           setSelectedCases={setSelectedCases}

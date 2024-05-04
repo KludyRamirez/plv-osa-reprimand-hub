@@ -6,6 +6,7 @@ import { FaPlus } from "react-icons/fa6";
 import { styled } from "@mui/system";
 import axios from "axios";
 import CreateCaseFormModal from "./CreateCaseFormModal";
+import moment from "moment";
 
 const ModalBox = styled("div")({
   position: "absolute",
@@ -32,7 +33,6 @@ const ModalBox = styled("div")({
 });
 
 const initialState = {
-  students: [],
   student: "",
   reportedViolations: [
     "Stealing",
@@ -42,9 +42,9 @@ const initialState = {
   ],
   reportedViolation: "",
   typeOfViolations: ["Major", "Minor", "Complex"],
-  typeOfViolaton: "",
-  dateOfIncident: "",
-  dateReported: "",
+  typeOfViolation: "",
+  dateOfIncident: Date,
+  dateReported: Date,
 };
 
 // const errorsInitialState = {
@@ -59,6 +59,7 @@ const authSelector = createSelector([selectAuth], (auth) => auth);
 const CreateCase = ({ toast, getCases }) => {
   const [values, setValues] = useState(initialState);
   const [showCreateCaseModal, setShowCreateCaseModal] = useState(false);
+  const [students, setStudents] = useState([]);
   //   const [errors, setErrors] = useState(errorsInitialState);
 
   const auth = useSelector(authSelector);
@@ -74,11 +75,12 @@ const CreateCase = ({ toast, getCases }) => {
         return;
       }
       const res = await axios.get(`${process.env.REACT_APP_API_URI}/student`, {
+        withCredentials: true,
         headers: {
           Authorization: `Bearer ${auth?.userDetails?.token}`,
         },
       });
-      setValues({ ...values, students: res.data });
+      setStudents(res.data);
     } catch (err) {
       console.error("Error fetching cases:", err);
     }
@@ -104,6 +106,7 @@ const CreateCase = ({ toast, getCases }) => {
         }
       );
       await toast.success(res?.data?.message);
+      setValues(initialState);
     } catch (err) {
       toast.error(err?.response?.data);
     } finally {
@@ -115,8 +118,6 @@ const CreateCase = ({ toast, getCases }) => {
   // dynamic value getting and DYNAMIC use of error messages -kludy
 
   const handleChange = (e) => {
-    e.preventDefault();
-
     const { name, value } = e.target;
     // let newErrors = { ...errors };
 
@@ -176,10 +177,11 @@ const CreateCase = ({ toast, getCases }) => {
   const handleOpenModal = () => {
     setShowCreateCaseModal(true);
   };
+
   const handleCloseModal = async () => {
     try {
-      await setValues(initialState);
-      await setShowCreateCaseModal(false);
+      setShowCreateCaseModal(false);
+      setValues(initialState);
       // setErrors(errorsInitialState);
     } catch (error) {
       console.error("An error occurred while handling modal closure:", error);
@@ -198,7 +200,7 @@ const CreateCase = ({ toast, getCases }) => {
         <div>Cases List</div>
         <div
           onClick={handleOpenModal}
-          className="py-3 px-3 bg-[#007bff] text-[white] text-[16px] flex gap-2 items-center rounded-[8px]"
+          className="cursor-pointer py-3 px-3 bg-gradient-to-br from-[#07bbff] to-[#007bff] text-[white] text-[16px] flex gap-2 items-center rounded-[8px]"
         >
           <FaPlus />
           <div>Add Case</div>
@@ -212,6 +214,7 @@ const CreateCase = ({ toast, getCases }) => {
       >
         <ModalBox>
           <CreateCaseFormModal
+            students={students}
             values={values}
             handleChange={handleChange}
             handleDateOfIncidentChange={handleDateOfIncidentChange}

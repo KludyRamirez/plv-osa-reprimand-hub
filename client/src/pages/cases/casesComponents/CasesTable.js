@@ -6,6 +6,7 @@ import {
   BsCapslock,
   BsEye,
   BsEyeFill,
+  BsLink45Deg,
   BsPen,
   BsPenFill,
   BsTrash,
@@ -18,14 +19,14 @@ import DeleteCaseModal from "./DeleteCaseModal";
 import toast from "react-hot-toast";
 import DeleteManyCaseModal from "./DeleteManyCaseModal";
 import { useNavigate } from "react-router-dom";
-// import EditCase from "./EditCase";
+import EditCase from "./EditCase";
 
 const ModalBox = styled("div")({
   position: "absolute",
   top: "50%",
   left: "50%",
-  width: "25%",
-  height: "392px",
+  width: "22%",
+  height: "fit-content",
   padding: "20px",
   transform: "translate(-50%, -50%)",
   background: "white",
@@ -48,7 +49,13 @@ const ModalBox = styled("div")({
 const selectAuth = (state) => state.auth;
 const authSelector = createSelector([selectAuth], (auth) => auth);
 
-const CasesTable = ({ cases, getCases, selectedCases, setSelectedCases }) => {
+const CasesTable = ({
+  cases,
+  students,
+  getCases,
+  selectedCases,
+  setSelectedCases,
+}) => {
   const [selectAll, setSelectAll] = useState(false);
   const [caseDeleteId, setCaseDeleteId] = useState("");
   const [showDeleteCaseModal, setShowDeleteCaseModal] = useState(false);
@@ -182,8 +189,9 @@ const CasesTable = ({ cases, getCases, selectedCases, setSelectedCases }) => {
 
   // edit Case functions
 
-  const handleCaseEditClick = (Case) => {
-    setSelectedCaseEdit(Case);
+  const handleCaseEditClick = (c) => {
+    setSelectedCaseEdit(c);
+    console.log(c);
     setShowEditCaseModal(true);
   };
 
@@ -254,12 +262,14 @@ const CasesTable = ({ cases, getCases, selectedCases, setSelectedCases }) => {
             padding: "8px",
           }}
         >
-          {/* <EditCase
+          <EditCase
             handleCloseModalEdit={handleCloseModalEdit}
             selectedCaseEdit={selectedCaseEdit}
+            setSelectedCaseEdit={setSelectedCaseEdit}
             toast={toast}
             getCases={getCases}
-          /> */}
+            students={students}
+          />
         </ModalBox>
       </Modal>
       <Modal
@@ -291,11 +301,11 @@ const CasesTable = ({ cases, getCases, selectedCases, setSelectedCases }) => {
         </ModalBox>
       </Modal>
       <div
-        className={`w-100 h-[380px] bg-white flex flex-col rounded-[10px] border-[1px] text-[#505050] ${
+        className={`h-[362px] bg-white flex flex-col rounded-[10px] border-[1px] text-[#505050] phone:overflow-x-scroll ${
           cases && cases.length > 5 ? "overflow-y-scroll" : ""
         }`}
       >
-        <div className="w-100 flex items-center gap-4 px-6">
+        <div className="phone:w-[fit-content] flex items-center gap-4 px-6">
           <div className="w-[30px] h-[60px] flex justify-start items-center">
             <input
               type="checkbox"
@@ -304,7 +314,7 @@ const CasesTable = ({ cases, getCases, selectedCases, setSelectedCases }) => {
               onChange={toggleSelectAll}
             />
           </div>
-          <div className="w-[90px] whitespace-nowrap flex justify-start items-center bg-[#007bff] border-[1px] border-[#007bff] text-[white] py-1 px-3 rounded-[24px]">
+          <div className="w-[90px] whitespace-nowrap flex justify-start items-center bg-gradient-to-br from-[#07bbff] to-[#007bff] border-[1px] border-white text-[white] py-1 px-3 rounded-[24px]">
             Case No.
           </div>
           <div className="w-[110px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
@@ -322,9 +332,8 @@ const CasesTable = ({ cases, getCases, selectedCases, setSelectedCases }) => {
           <div className=" w-[80px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
             Section
           </div>
-
-          <div className=" w-[160px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
-            Reported Violation
+          <div className=" w-[120px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+            Violation
           </div>
           <div className=" w-[118px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
             Incident Date
@@ -332,7 +341,7 @@ const CasesTable = ({ cases, getCases, selectedCases, setSelectedCases }) => {
           <div className=" w-[130px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
             Date Reported
           </div>
-          <div className=" w-[140px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+          <div className=" w-[180px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
             Case Status
           </div>
           {selectedCases.length > 1 ? (
@@ -355,11 +364,12 @@ const CasesTable = ({ cases, getCases, selectedCases, setSelectedCases }) => {
 
         {cases?.map((c, k) => (
           <div
-            className={`w-100 flex items-center gap-4 px-6 ${
-              k % 2 === 0
-                ? "bg-gradient-to-br from-gray-100 to-gray-100"
-                : "bg-white"
-            }`}
+            className={`phone:w-[fit-content]
+              flex items-center gap-4 px-6 ${
+                k % 2 === 0
+                  ? "bg-gradient-to-br from-gray-100 to-gray-100"
+                  : "bg-white"
+              }`}
             key={k}
           >
             <div className="w-[30px] h-[60px] flex justify-start items-center">
@@ -388,7 +398,7 @@ const CasesTable = ({ cases, getCases, selectedCases, setSelectedCases }) => {
             <div className=" w-[80px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
               {c?.student?.section}
             </div>
-            <div className=" w-[160px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
+            <div className=" w-[120px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
               {c?.reportedViolation}
             </div>
             <div className=" w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
@@ -405,8 +415,29 @@ const CasesTable = ({ cases, getCases, selectedCases, setSelectedCases }) => {
                 year: "numeric",
               })}
             </div>
-            <div className=" w-[140px] font-bold whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
+            <div className="container flex justify-between items-center w-[180px] font-bold whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
               {c?.statusOfCase}
+              <div
+                onClick={() => handlePatchStatusOfCase(c?._id, c?.statusOfCase)}
+                className="p-2 bg-[white] border-[1px] rounded-[6px] cursor-pointer hover:bg-[#007bff] text-[#707070] hover:text-white hover:border-[0px]"
+              >
+                <BsCapslock className="text-[18px] " />
+              </div>
+              <div className="absolute top-[-96px] right-[12px] w-[160px] h-[94px] bg-white border-[1px] rounded-[6px] additional-content">
+                <div className="py-2 px-4 text-[14px] font-normal flex flex-col items-start gap-1">
+                  <div className="mt-1 text-[#606060] font-semibold">
+                    Update Status?
+                  </div>
+                  <div className="flex flex-col items-start">
+                    <div className="text-[14px] text-[#ff3131]">
+                      This process cannot
+                    </div>
+                    <div className="text-[14px] text-[#ff3131]">
+                      not be reverted.
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
             <div className="w-[130px] whitespace-nowrap flex justify-start items-center gap-2">
               {selectedCases.length < 2 ? (
@@ -417,10 +448,10 @@ const CasesTable = ({ cases, getCases, selectedCases, setSelectedCases }) => {
                     }
                     className="p-2 bg-[white] border-[1px] border-[#007bff] rounded-[18px] cursor-pointer"
                   >
-                    <BsCapslock className="text-[18px] text-[#007bff]" />
+                    <BsEye className="text-[18px] text-[#007bff]" />
                   </div>
                   <div
-                    onClick={() => handleCaseEditClick(c?._id)}
+                    onClick={() => handleCaseEditClick(c)}
                     className="p-2 bg-[white] border-[1px] border-[#FFBF00] rounded-[18px] cursor-pointer"
                   >
                     <BsPen className="text-[18px] text-[#FFBF00]" />
@@ -435,7 +466,7 @@ const CasesTable = ({ cases, getCases, selectedCases, setSelectedCases }) => {
               ) : (
                 <>
                   <div className="p-2 bg-[#f0f0f0] rounded-[18px]">
-                    <BsCapslock className="text-[18px] text-[white]" />
+                    <BsEye className="text-[18px] text-[white]" />
                   </div>
                   <div className="p-2 bg-[#f0f0f0] rounded-[18px]">
                     <BsPen className="text-[18px] text-white" />

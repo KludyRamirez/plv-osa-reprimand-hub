@@ -20,7 +20,7 @@ const DeleteStudentModal = ({ handleConfirmDelete, handleCloseModal }) => {
             <BsX className="text-[60px] text-[white] " />
           </div>
         </div>
-        <div class="flex justify-center text-[24px] pt-2"></div>
+        <div className="flex justify-center text-[24px] pt-2"></div>
 
         <div className="flex flex-col justify-center items-center text-[18px] text-[#606060] pt-2">
           <div>
