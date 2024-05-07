@@ -5,6 +5,8 @@ import axios from "axios";
 import {
   BsCapslock,
   BsCaretUp,
+  BsChevronDoubleUp,
+  BsChevronUp,
   BsEye,
   BsFolder2Open,
   BsPen,
@@ -190,7 +192,6 @@ const CasesTable = ({
 
   const handleCaseEditClick = (c) => {
     setSelectedCaseEdit(c);
-    console.log(c);
     setShowEditCaseModal(true);
   };
 
@@ -200,7 +201,7 @@ const CasesTable = ({
 
   // patch statusOfCase
 
-  const handlePatchStatusOfCase = async (id, statusCase) => {
+  const handlePatchStatusOfCase = async (id, statusCase, caseNo) => {
     try {
       if (!auth.userDetails.token) {
         console.error("Authentication token not found.");
@@ -225,9 +226,10 @@ const CasesTable = ({
       }
 
       // Make the API request with the determined case status
-      await axios.patch(
+      const res = await axios.patch(
         `${process.env.REACT_APP_API_URI}/case/${id}/patchCase`,
         {
+          caseNo,
           statusOfCase: caseStatus,
         },
         {
@@ -237,9 +239,11 @@ const CasesTable = ({
           },
         }
       );
+
+      toast.success(res.data.message);
       getCases();
     } catch (error) {
-      console.error("Error fetching schedules:", error);
+      console.error("Error fetching cases!", error);
     }
   };
 
@@ -314,7 +318,7 @@ const CasesTable = ({
             />
           </div>
           <div className="w-[90px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
-            Case No.
+            No. | Off
           </div>
           <div className="w-[110px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
             Student No.
@@ -381,8 +385,9 @@ const CasesTable = ({
                     onChange={() => toggleCaseSelection(c?._id)}
                   />
                 </div>
-                <div className="w-[90px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
+                <div className="w-[90px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px] ">
                   {c?.caseNo}
+                  <div>{c?.offense}</div>
                 </div>
                 <div className="w-[110px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
                   {c?.student?.studentNo}
@@ -417,26 +422,37 @@ const CasesTable = ({
                   })}
                 </div>
                 <div className="container flex justify-start items-center w-[120px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px] gap-3">
-                  <div className="w-[14px] h-[14px] rounded-[50%] bg-[#FFBF00]"></div>
-                  <div className="text-[#FFBF00]">{c?.statusOfCase}</div>
+                  <div
+                    className={`${
+                      c?.statusOfCase === "Case Solved"
+                        ? "text-[#32CD32]"
+                        : "text-[#007bff]"
+                    }`}
+                  >
+                    {c?.statusOfCase}
+                  </div>
                 </div>
                 <div className="w-[130px] whitespace-nowrap flex justify-start items-center gap-2">
                   {selectedCases.length < 2 ? (
                     <>
                       <div
                         onClick={() =>
-                          handlePatchStatusOfCase(c?._id, c?.statusOfCase)
+                          handlePatchStatusOfCase(
+                            c?._id,
+                            c?.statusOfCase,
+                            c?.caseNo
+                          )
                         }
                         className="container w-[36px] h-[36px] flex justify-center items-center bg-[white] border-[1px] border-[#007bff] rounded-[18px] cursor-pointer"
                       >
-                        <BsCaretUp className="text-[18px] text-[#007bff]" />
-                        <div className=" absolute p-4 top-[-110px] left-[-66px] w-[170px] h-[98px] bg-gradient-to-br from-[#07bbff] to-[#007bff] rounded-[8px] text-white additional-content">
+                        <BsChevronUp className="text-[18px] text-[#007bff]" />
+                        <div className="absolute bg-white p-4 top-[-120px] left-[-66px] w-[170px] h-[108px] border-[1px] rounded-[4px] text-[#606060] additional-content">
                           <div className="font-semibold text-[16px]">
-                            <span className="text-[yellow]">
+                            <span className="text-[#007bff]">
                               Update status?
                             </span>
                           </div>
-                          <div className="flex flex-col items-start">
+                          <div className="pt-2 flex flex-col items-start">
                             <div className="text-[14px]">
                               This certain process
                             </div>
@@ -462,7 +478,7 @@ const CasesTable = ({
                   ) : (
                     <>
                       <div className="p-2 bg-[#f0f0f0] rounded-[18px]">
-                        <BsCaretUp className="text-[18px] text-[white]" />
+                        <BsChevronUp className="text-[18px] text-[white]" />
                       </div>
                       <div className="p-2 bg-[#f0f0f0] rounded-[18px]">
                         <BsPen className="text-[18px] text-white" />
@@ -477,9 +493,9 @@ const CasesTable = ({
             ))}
           </>
         ) : (
-          <div className="w-100 h-[323px] flex flex-col justify-center items-center gap-2 text-[#909090] border-t-[1px] border-t-[#f0f0f0]">
+          <div className="w-100 h-[306px] flex flex-col justify-center items-center gap-2 text-[#707070] border-t-[1px] border-t-[#f0f0f0]">
             <BsFolder2Open className="text-[42px]" />
-            <div className="text-[16px]">Empty</div>
+            <div className="text-[16px]">No cases available</div>
           </div>
         )}
       </div>

@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import {
   BsCalendar4,
   BsCalendar4Week,
-  BsCaretDown,
   BsCheckCircle,
   BsFilter,
+  BsChevronBarDown,
 } from "react-icons/bs";
 import CasesTable from "./CasesTable";
 import DatePicker from "react-datepicker";
@@ -63,7 +63,22 @@ const CasesFilter = ({ cases, students, getCases }) => {
     return cases.filter((c) => {
       const searchMatch =
         searchTerm === "All" ||
-        c.caseNo.toLowerCase().includes(searchTerm.toLowerCase());
+        c.caseNo.toString().includes(searchTerm) ||
+        (c.student &&
+          (c.student.studentNo
+            .toLowerCase()
+            .includes(searchTerm.toLowerCase()) ||
+            c.student.firstName
+              .toLowerCase()
+              .includes(searchTerm.toLowerCase()) ||
+            c.student.surName
+              .toLowerCase()
+              .includes(searchTerm.toLowerCase()) ||
+            c.student.department
+              .toLowerCase()
+              .includes(searchTerm.toLowerCase()) ||
+            c.student.year.includes(searchTerm) ||
+            c.student.section.includes(searchTerm)));
 
       const dateOfIncidentMatch =
         dateOfIncident === null ||
@@ -200,7 +215,7 @@ const CasesFilter = ({ cases, students, getCases }) => {
             <div className="phone:w-[50%] flex flex-col items-start gap-2">
               <div className="pl-2 w-[242px] phone:w-[100%] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
-                  <div>Violation</div> <BsCaretDown />
+                  <div>Violation</div> <BsChevronBarDown />
                 </div>
                 <BsCalendar4 />
               </div>
@@ -232,7 +247,7 @@ const CasesFilter = ({ cases, students, getCases }) => {
             <div className="phone:w-[47.8%] flex flex-col items-start gap-2">
               <div className="pl-2 w-[242px] phone:w-[100%] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
-                  <div>Status of Case</div> <BsCaretDown />
+                  <div>Status of Case</div> <BsChevronBarDown />
                 </div>
                 <BsCheckCircle />
               </div>
@@ -255,7 +270,7 @@ const CasesFilter = ({ cases, students, getCases }) => {
             <div className="phone:w-[50%] flex flex-col items-start gap-2">
               <div className="pl-2 w-[242px] phone:w-[100%] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
-                  <div>Date of Incident</div> <BsCaretDown />
+                  <div>Date of Incident</div> <BsChevronBarDown />
                 </div>
                 <BsCalendar4Week />
               </div>
@@ -273,7 +288,7 @@ const CasesFilter = ({ cases, students, getCases }) => {
             <div className="phone:w-[47.8%] flex flex-col items-start gap-2">
               <div className="pl-2 w-[242px] phone:w-[100%] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
-                  <div>Date Reported</div> <BsCaretDown />
+                  <div>Date Reported</div> <BsChevronBarDown />
                 </div>
                 <BsCalendar4 />
               </div>

@@ -1,9 +1,12 @@
 const User = require("../../models/Users");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const Notification = require("../../models/Notifications");
 
 const register = async (req, res) => {
   try {
+    const userData = req.user;
+
     const { userName, firstName, surName, password, email, contactNo, role } =
       req.body;
 
@@ -50,6 +53,12 @@ const register = async (req, res) => {
       }
     );
 
+    await Notification.create({
+      userId: userData._id,
+      message: `${user.userName} account has been created!`,
+      createdAt: new Date(),
+    });
+
     res.status(200).json({
       userDetails: {
         _id: user._id,
@@ -58,6 +67,7 @@ const register = async (req, res) => {
         email: user.email,
         role: user.role,
       },
+      message: `${user.userName} account has been created!`,
     });
   } catch (err) {
     return res.status(500).send("Error occurred. Please try again");

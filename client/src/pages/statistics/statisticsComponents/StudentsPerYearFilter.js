@@ -59,6 +59,10 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
   const [dateOfIncident, setDateOfIncident] = useState("All");
   const [monthOfIncident, setMonthOfIncident] = useState("All");
   const [years, setYears] = useState([]);
+  const [bsitPercentage, setBsitPercentage] = useState("Percentage");
+  const [bsbammPercentage, setBsbammPercentage] = useState("Percentage");
+  const [becedPercentage, setBecedPercentage] = useState("Percentage");
+  const [bspPercentage, setBspPercentage] = useState("Percentage");
 
   useEffect(() => {
     const currentYear = new Date().getFullYear();
@@ -128,27 +132,105 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
 
   let combinedFilteredCases = [...filteredCases];
 
-  const majorCases = cases.filter((c) => c.typeOfViolation === "Major");
-  const minorCases = cases.filter((c) => c.typeOfViolation === "Minor");
+  const bsitCases = cases.filter(
+    (c) =>
+      c.student.department ===
+      "(BSIT) Bachelor of Science in Information Technology"
+  );
+  const bsbammCases = cases.filter(
+    (c) =>
+      c.student.department ===
+      "(BSBA MM) Bachelor of Science in Business Administration Major in Marketing Management"
+  );
 
-  const totalPercentageConverter = () => {
+  const becedCases = cases.filter(
+    (c) =>
+      c.student.department === "(BECED) Bachelor of Early Childhood Education"
+  );
+
+  const bspCases = cases.filter(
+    (c) => c.student.department === "(BSP) Bachelor of Science in Psychology"
+  );
+
+  const bsitPercentageConverter = () => {
+    const fraction = bsitCases?.length / cases?.length;
+    const percentage = fraction * 100;
+
+    return (
+      <>
+        <div className="pl-2 text-[48px] text-[#007bff] font-bold">
+          {percentage.toFixed(0)}
+          <span className="text-[20px]">%</span>
+        </div>
+      </>
+    );
+  };
+
+  const bsitNumberConverter = () => {
+    return (
+      <>
+        <div className=" text-[48px] text-[#007bff] font-bold">
+          {bsitCases.length}
+        </div>
+      </>
+    );
+  };
+
+  const bsbammPercentageConverter = () => {
+    const fraction = bsbammCases?.length / cases?.length;
+    const percentage = fraction * 100;
+
+    return (
+      <>
+        <div className="pl-2 text-[48px] text-[#007bff] font-bold">
+          {percentage.toFixed(0)}
+          <span className="text-[20px]">%</span>
+        </div>
+      </>
+    );
+  };
+
+  const bsbammNumberConverter = () => {
     return (
       <>
         <div className="text-[48px] text-[#007bff] font-bold">
-          {cases.length}
-          <span className="text-[20px]"></span>
+          {bsbammCases.length}
         </div>
       </>
     );
   };
 
-  const minorPercentageConverter = () => {
-    const fraction = minorCases?.length / cases?.length;
+  const becedPercentageConverter = () => {
+    const fraction = becedCases?.length / cases?.length;
     const percentage = fraction * 100;
 
+    return (
+      <>
+        <div className="pl-2 text-[48px] text-[#FFBF00] font-bold">
+          {percentage.toFixed(0)}
+          <span className="text-[20px]">%</span>
+        </div>
+      </>
+    );
+  };
+
+  const becedNumberConverter = () => {
     return (
       <>
         <div className="text-[48px] text-[#FFBF00] font-bold">
+          {becedCases.length}
+        </div>
+      </>
+    );
+  };
+
+  const bspPercentageConverter = () => {
+    const fraction = bspCases?.length / cases?.length;
+    const percentage = fraction * 100;
+
+    return (
+      <>
+        <div className="pl-2 text-[48px] text-[#FFBF00] font-bold">
           {percentage.toFixed(0)}
           <span className="text-[20px]">%</span>
         </div>
@@ -156,18 +238,42 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
     );
   };
 
-  const majorPercentageConverter = () => {
-    const fraction = majorCases?.length / cases?.length;
-    const percentage = fraction * 100;
-
+  const bspNumberConverter = () => {
     return (
       <>
-        <div className="text-[48px] text-[#ff3131] font-bold">
-          {percentage.toFixed(0)}
-          <span className="text-[20px]">%</span>
+        <div className="text-[48px] text-[#FFBF00] font-bold">
+          {bspCases.length}
         </div>
       </>
     );
+  };
+
+  const handleSetBsitPercentage = () => {
+    if (bsitPercentage === "Percentage") setBsitPercentage("Number");
+    else {
+      setBsitPercentage("Percentage");
+    }
+  };
+
+  const handleSetBsbammPercentage = () => {
+    if (bsbammPercentage === "Percentage") setBsbammPercentage("Number");
+    else {
+      setBsbammPercentage("Percentage");
+    }
+  };
+
+  const handleSetBecedPercentage = () => {
+    if (becedPercentage === "Percentage") setBecedPercentage("Number");
+    else {
+      setBecedPercentage("Percentage");
+    }
+  };
+
+  const handleSetBspPercentage = () => {
+    if (bspPercentage === "Percentage") setBspPercentage("Number");
+    else {
+      setBspPercentage("Percentage");
+    }
   };
 
   return (
@@ -342,31 +448,18 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
       </div>
 
       <div className="mt-4 flex justify-start items-center gap-4">
-        <div className="p-2 w-[209px] h-[180px] bg-white border-[1px] border-[#007bff] rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden">
-          <div className="pl-1 w-[100%] h-[100%] flex justify-center items-end">
-            {totalPercentageConverter()}
+        <div
+          onClick={() => handleSetBsitPercentage()}
+          className="p-2 w-[209px] h-[180px] bg-white border-[1px] border-[#007bff] rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden"
+        >
+          <div className="w-[100%] h-[100%] flex justify-center items-end">
+            {bsitPercentage === "Percentage" ? (
+              <>{bsitPercentageConverter()}</>
+            ) : (
+              <>{bsitNumberConverter()}</>
+            )}
           </div>
-          <div className="text-[16px] text-[#007bff]">Total Cases</div>
-          <svg
-            className="absolute top-0 left-0"
-            viewBox="0 0 500 500"
-            preserveAspectRatio="xMinYMin meet"
-          >
-            <path
-              d="M0,100 C150,200 350,0 500,100 L500,00 L0,0 Z"
-              style={{
-                stroke: "none",
-                fill: "rgba(219, 234, 254, 1)",
-                strokeWidth: "2px",
-              }}
-            ></path>
-          </svg>
-        </div>
-        <div className="p-2 w-[209px] h-[180px] bg-white border-[1px] border-[#007bff] rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden">
-          <div className="pl-1 w-[100%] h-[100%] flex justify-center items-end">
-            {totalPercentageConverter()}
-          </div>
-          <div className="text-[16px] text-[#007bff]">Total Cases</div>
+          <div className="text-[16px] text-[#007bff]">BSIT Cases</div>
           <svg
             className="absolute top-0 left-0"
             viewBox="0 0 500 500"
@@ -383,11 +476,46 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
           </svg>
         </div>
 
-        <div className="p-2 w-[209px] h-[180px] bg-white border-[1px] border-[#FFBF00] rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden">
-          <div className="pl-1 w-[100%] h-[100%] flex justify-center items-end">
-            {minorPercentageConverter()}
+        <div
+          onClick={() => handleSetBsbammPercentage()}
+          className="p-2 w-[209px] h-[180px] bg-white border-[1px] border-[#007bff] rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden"
+        >
+          <div className="w-[100%] h-[100%] flex justify-center items-end">
+            {bsbammPercentage === "Percentage" ? (
+              <>{bsbammPercentageConverter()}</>
+            ) : (
+              <>{bsbammNumberConverter()}</>
+            )}
           </div>
-          <div className="text-[16px] text-[#FFBF00]">Total Cases</div>
+          <div className="text-[16px] text-[#007bff]">BSBA MM Cases</div>
+          <svg
+            className="absolute top-0 left-0"
+            viewBox="0 0 500 500"
+            preserveAspectRatio="xMinYMin meet"
+          >
+            <path
+              d="M0,100 C150,200 350,0 500,100 L500,00 L0,0 Z"
+              style={{
+                stroke: "none",
+                fill: "rgba(219, 234, 254, 1)",
+                strokeWidth: "2px",
+              }}
+            ></path>
+          </svg>
+        </div>
+
+        <div
+          onClick={() => handleSetBecedPercentage()}
+          className="p-2 w-[209px] h-[180px] bg-white border-[1px] border-[#FFBF00] rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden"
+        >
+          <div className="w-[100%] h-[100%] flex justify-center items-end">
+            {becedPercentage === "Percentage" ? (
+              <>{becedPercentageConverter()}</>
+            ) : (
+              <>{becedNumberConverter()}</>
+            )}
+          </div>
+          <div className="text-[16px] text-[#FFBF00]">BECED Cases</div>
           <svg
             className="absolute top-0 left-0"
             viewBox="0 0 500 500"
@@ -403,11 +531,18 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
             ></path>
           </svg>
         </div>
-        <div className="p-2 w-[209px] h-[180px] bg-white border-[1px] border-[#FFBF00] rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden">
-          <div className="pl-1 w-[100%] h-[100%] flex justify-center items-end">
-            {minorPercentageConverter()}
+        <div
+          onClick={() => handleSetBspPercentage()}
+          className="p-2 w-[209px] h-[180px] bg-white border-[1px] border-[#FFBF00] rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden"
+        >
+          <div className="w-[100%] h-[100%] flex justify-center items-end">
+            {bspPercentage === "Percentage" ? (
+              <>{bspPercentageConverter()}</>
+            ) : (
+              <>{bspNumberConverter()}</>
+            )}
           </div>
-          <div className="text-[16px] text-[#FFBF00]">Total Cases</div>
+          <div className="text-[16px] text-[#FFBF00]">BSP Cases</div>
           <svg
             className="absolute top-0 left-0"
             viewBox="0 0 500 500"

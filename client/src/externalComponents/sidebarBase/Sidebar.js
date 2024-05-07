@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { createSelector } from "reselect";
 import { styled } from "@mui/system";
 import PropTypes from "prop-types";
@@ -14,16 +13,11 @@ import { useLocation } from "react-router-dom";
 import { AiOutlineLogout } from "react-icons/ai";
 import { CgMenuLeft } from "react-icons/cg";
 import {
-  BsBell,
-  BsBellFill,
-  BsClockHistory,
   BsGear,
-  BsGitlab,
   BsGrid1X2,
+  BsHourglassSplit,
   BsPeople,
   BsPeopleFill,
-  BsPerson,
-  BsPersonFill,
   BsPersonSquare,
   BsPieChart,
   BsPieChartFill,
@@ -32,6 +26,7 @@ import {
 } from "react-icons/bs";
 import { logoutUtil } from "../../pages/auth/login/loginUtils/logoutUtil";
 import plvLogo from "../../images/login/PLVlogo.png";
+import { FaRedhat } from "react-icons/fa6";
 
 const AppNavBar = styled(AppBar)({
   background: "transparent",
@@ -131,41 +126,6 @@ function Sidebar(props) {
           >
             <div className="w-full flex justify-center items-center font-semibold text-white mb-[20px] mt-[8px]">
               <img src={plvLogo} alt="" className="w-[100px] h-[100px]" />
-            </div>
-            <div className="w-full">
-              <Link to="/dashboard">
-                {activeItem === "/dashboard" ? (
-                  <SidebarOptions
-                    sx={{
-                      color: "#007bff",
-                      background: "white",
-                      borderRadius: "6px",
-                      "&:hover": {
-                        transform: "translateY(0px)",
-                        color: "#007bff",
-                        background: "white",
-                      },
-                      "&:active": { transform: "translateY(0px)" },
-                    }}
-                  >
-                    <RouteCon>
-                      <BsGrid1X2
-                        className={
-                          activeItem === "/dashboard" ? "icon-active" : ""
-                        }
-                      />
-                      <p className="text-[18px]">Dashboard</p>
-                    </RouteCon>
-                  </SidebarOptions>
-                ) : (
-                  <SidebarOptions>
-                    <RouteCon>
-                      <BsGrid1X2 />
-                      <p className="text-[18px]">Dashboard</p>
-                    </RouteCon>
-                  </SidebarOptions>
-                )}
-              </Link>
             </div>
 
             <div className="w-full">
@@ -414,17 +374,18 @@ function Sidebar(props) {
             </IconButton>
           </Toolbar>
           <div className="flex justify-center items-center gap-[24px]">
-            <div className="text-white flex w-[44px] h-[44px] rounded-[50%] border-[1px] border-[lightgray] justify-center items-center cursor-pointer hover:bg-white hover:text-[#007bff]">
-              <BsClockHistory className="text-[22px]" />
-            </div>
-
+            <Link to="/notification">
+              <div className="text-white flex w-[44px] h-[44px] rounded-[50%] border-[1px] border-[white] justify-center items-center cursor-pointer hover:bg-white hover:text-[#007bff]">
+                <BsHourglassSplit className="text-[22px]" />
+              </div>
+            </Link>
             <div className="w-[1px] h-[24px] bg-[lightgray]"></div>
             <div className="text-white flex justify-center items-center rounded-[6px] cursor-pointer gap-4">
               <div className="text-[18px]">
                 {`${auth?.userDetails?.userName}`}
               </div>
               <div className="flex justify-center items-center w-[44px] h-[44px] rounded-[50%] border-[1px] border-white bg-white text-[#007bff] text-[22px] hover:bg-transparent hover:text-white">
-                <BsGitlab className="mt-[4px]" />
+                <FaRedhat />
               </div>
             </div>
           </div>

@@ -1,6 +1,7 @@
 const User = require("../models/Users");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const Notification = require("../models/Notifications");
 
 const getUsers = async (req, res) => {
   try {
@@ -13,26 +14,39 @@ const getUsers = async (req, res) => {
 
 const deleteOneUser = async (req, res) => {
   try {
+    const userData = req.user;
+
     const deletedUser = await User.findByIdAndDelete(req.params.id);
     if (!deletedUser) {
       return res.status(404).json({ error: "User not found!" });
     }
+
+    await Notification.create({
+      userId: userData._id,
+      message: `User ${deletedUser.userName} has been deleted!`,
+      createdAt: new Date(),
+    });
+
     res.status(200).json({
-      message: "Successfully deleted a user!",
+      message: `User ${deletedUser.userName} has been deleted!`,
     });
   } catch (err) {
+    const deletedUser = await User.findByIdAndDelete(req.params.id);
     res.status(400).json({
-      message: "Deletion failed!",
+      message: `User ${deletedUser.userName} was not deleted!`,
     });
   }
 };
 
 const editUser = async (req, res) => {
-  const { userName, firstName, surName, password, role, contactNo, email } =
-    req.body;
-  const { id } = req.params;
-
   try {
+    const { userName, firstName, surName, password, role, contactNo, email } =
+      req.body;
+
+    const userData = req.user;
+
+    const { id } = req.params;
+
     const user = await User.findByIdAndUpdate(id);
 
     if (!user) {
@@ -60,8 +74,15 @@ const editUser = async (req, res) => {
       email: user.email,
       role: user.role,
     };
+
     const secretKey = process.env.ACCESS_TOKEN;
     const token = jwt.sign(tokenPayload, secretKey, { expiresIn: "24h" });
+
+    await Notification.create({
+      userId: userData._id,
+      message: `User ${user.userName} has been updated!`,
+      createdAt: new Date(),
+    });
 
     res.status(200).json({
       userDetails: {
@@ -71,7 +92,7 @@ const editUser = async (req, res) => {
         email: user.email,
         role: user.role,
       },
-      message: "User has been edited successfully!",
+      message: `User ${user.userName} has been updated!`,
     });
   } catch (error) {
     console.error(error);

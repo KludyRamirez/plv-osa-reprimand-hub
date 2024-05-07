@@ -3,7 +3,8 @@ const Notification = require("../models/Notifications");
 const getNotifications = async (req, res) => {
   try {
     const notifications = await Notification.find()
-      .populate("userId", "userName firstName surName")
+      .populate("userId", "uid userName firstName surName")
+      .sort({ createdAt: -1 })
       .exec();
     res.json(notifications);
   } catch (error) {

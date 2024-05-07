@@ -41,6 +41,8 @@ const CasesPerMonthFilter = ({ cases, students, getCases }) => {
   const [selectedStatus, setSelectedStatus] = useState("All");
   const [dateOfIncident, setDateOfIncident] = useState("All");
   const [years, setYears] = useState([]);
+  const [minorPercentage, setMinorPercentage] = useState("Percentage");
+  const [majorPercentage, setMajorPercentage] = useState("Percentage");
 
   useEffect(() => {
     const currentYear = new Date().getFullYear();
@@ -119,9 +121,20 @@ const CasesPerMonthFilter = ({ cases, students, getCases }) => {
 
     return (
       <>
-        <div className="text-[48px] text-[#FFBF00] font-bold">
+        <div className="pl-2 text-[48px] text-[#FFBF00] font-bold">
           {percentage.toFixed(0)}
           <span className="text-[20px]">%</span>
+        </div>
+      </>
+    );
+  };
+
+  const minorNumberConverter = () => {
+    return (
+      <>
+        <div className="text-[48px] text-[#FFBF00] font-bold">
+          {minorCases?.length}
+          <span className="text-[20px]"></span>
         </div>
       </>
     );
@@ -133,12 +146,37 @@ const CasesPerMonthFilter = ({ cases, students, getCases }) => {
 
     return (
       <>
-        <div className="text-[48px] text-[#ff3131] font-bold">
+        <div className="pl-2 text-[48px] text-[#ff3131] font-bold">
           {percentage.toFixed(0)}
           <span className="text-[20px]">%</span>
         </div>
       </>
     );
+  };
+
+  const majorNumberConverter = () => {
+    return (
+      <>
+        <div className="text-[48px] text-[#ff3131] font-bold">
+          {majorCases?.length}
+          <span className="text-[20px]"></span>
+        </div>
+      </>
+    );
+  };
+
+  const handleSetMinorPercentage = () => {
+    if (minorPercentage === "Percentage") setMinorPercentage("Number");
+    else {
+      setMinorPercentage("Percentage");
+    }
+  };
+
+  const handleSetMajorPercentage = () => {
+    if (majorPercentage === "Percentage") setMajorPercentage("Number");
+    else {
+      setMajorPercentage("Percentage");
+    }
   };
 
   return (
@@ -160,9 +198,16 @@ const CasesPerMonthFilter = ({ cases, students, getCases }) => {
             ></path>
           </svg>
         </div>
-        <div className="p-2 w-[206px] h-[180px] bg-yellow-100 rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden">
-          <div className="pl-2 w-[100%] h-[100%] flex justify-center items-end">
-            {minorPercentageConverter()}
+        <div
+          onClick={() => handleSetMinorPercentage()}
+          className="p-2 w-[206px] h-[180px] bg-yellow-100 rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden"
+        >
+          <div className=" w-[100%] h-[100%] flex justify-center items-end">
+            {minorPercentage === "Percentage" ? (
+              <>{minorPercentageConverter()}</>
+            ) : (
+              <>{minorNumberConverter()}</>
+            )}
           </div>
           <div className="text-[16px] text-[#FFBF00]">Minor Cases</div>
           <svg
@@ -177,9 +222,16 @@ const CasesPerMonthFilter = ({ cases, students, getCases }) => {
           </svg>
         </div>
 
-        <div className="p-2 w-[206px] h-[180px] bg-red-100 rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden">
-          <div className="pl-2 w-[100%] h-[100%] flex justify-center items-end">
-            {majorPercentageConverter()}
+        <div
+          onClick={() => handleSetMajorPercentage()}
+          className="p-2 w-[206px] h-[180px] bg-red-100 rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden"
+        >
+          <div className="w-[100%] h-[100%] flex justify-center items-end">
+            {majorPercentage === "Percentage" ? (
+              <>{majorPercentageConverter()}</>
+            ) : (
+              <>{majorNumberConverter()}</>
+            )}
           </div>
           <div className="text-[16px] text-[#ff3131]">Major Cases</div>
           <svg

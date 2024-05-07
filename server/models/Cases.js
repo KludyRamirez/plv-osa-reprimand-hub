@@ -4,6 +4,7 @@ const { ObjectId } = mongoose.Schema;
 const casesSchema = new mongoose.Schema(
   {
     caseNo: { type: Number },
+    studentNo: { type: String },
     student: {
       type: ObjectId,
       ref: "Students",
@@ -34,6 +35,13 @@ const casesSchema = new mongoose.Schema(
         "Implementation",
         "Case Solved",
       ],
+    },
+
+    offense: { type: String },
+
+    resetOffense: {
+      type: Number,
+      default: 0,
     },
   },
   { timestamps: true }

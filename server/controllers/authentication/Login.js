@@ -1,6 +1,7 @@
 const User = require("../../models/Users");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const Notification = require("../../models/Notifications");
 
 const login = async (req, res) => {
   try {
@@ -21,6 +22,12 @@ const login = async (req, res) => {
           expiresIn: "24h",
         }
       );
+
+      await Notification.create({
+        userId: user._id,
+        message: `${user.userName} has logged in!`,
+        createdAt: new Date(),
+      });
 
       return res.status(200).json({
         userDetails: {

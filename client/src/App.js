@@ -6,6 +6,7 @@ import Login from "./pages/auth/login/loginBase/Login";
 import Register from "./pages/auth/register/registerBase/Register";
 import Cases from "./pages/cases/casesBase/Cases";
 import Statistics from "./pages/statistics/statisticsBase/Statistics";
+import History from "./pages/history/historyBase/History";
 
 function App() {
   return (
@@ -28,7 +29,7 @@ function App() {
             path="/statistics"
             element={<Statistics toast={toast} />}
           ></Route>
-          <Route path="/faqs" element={<></>}></Route>
+          <Route path="/notification" element={<History />}></Route>
         </Routes>
       </Router>
     </>

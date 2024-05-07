@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import {
-  BsCaretDown,
   BsCheckCircle,
+  BsChevronBarDown,
   BsFilter,
   BsPersonGear,
 } from "react-icons/bs";
-import { VscFilter } from "react-icons/vsc";
+
 import UsersTable from "./UsersTable";
+import { LuHardHat } from "react-icons/lu";
 
 const UsersFilter = ({ users, getUsers }) => {
   const [searchTerm, setSearchTerm] = useState("All");
@@ -56,16 +57,16 @@ const UsersFilter = ({ users, getUsers }) => {
           </div>
         </div>
 
-        <div className="px-4 pt-4 flex justify-center">
+        <div className="px-4 pt-4 flex justify-center gap-3">
           <input
             onChange={(e) => setSearchTerm(e.target.value)}
             type="text"
             autoComplete="off"
-            placeholder="Search by user number, name, email, etc."
-            className="p-3 rounded-tl-[6px] rounded-bl-[6px] w-[97%] bg-[#f5f5f5] focus:outline-none focus:border-[1px] focus:border-[#cdcdcd]"
+            placeholder="Search by case number, student name, etc."
+            className="p-3 rounded-[6px] w-[97%] bg-gradient-to-br from-gray-100 to-gray-100 focus:outline-none focus:border-[1px] focus:border-[#cdcdcd]"
           />
-          <div className="flex justify-center items-center w-[3%] rounded-tr-[6px] rounded-br-[6px] bg-[#007bff] font-semibold text-[white] gap-3">
-            <VscFilter className="text-[24px]" />
+          <div className="flex justify-center items-center w-[50px] h-[48px] rounded-[8px] bg-gradient-to-br from-[#07bbff] to-[#007bff] text-white">
+            <BsFilter className="text-[24px]" />
           </div>
         </div>
 
@@ -76,15 +77,15 @@ const UsersFilter = ({ users, getUsers }) => {
         <div className=" w-100 flex justify-start bg-[#f5f5f5] flex p-4 rounded-bl-[10px] rounded-br-[10px]">
           <div className="flex justify-start items-center gap-4">
             <div className="flex flex-col items-start gap-2">
-              <div className="pl-2 w-[160px] flex justify-between items-center">
+              <div className="pl-2 w-[242px] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
-                  <div>Status</div> <BsCaretDown />
+                  <div>Status</div> <BsChevronBarDown />
                 </div>
                 <BsCheckCircle />
               </div>
               <select
                 onChange={(e) => setSelectedStatus(e.target.value)}
-                className="px-3 py-2 w-[160px] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
+                className="px-3 py-2 w-[242px] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
               >
                 <option value="All">All</option>
                 <option value="Enabled">Enabled</option>
@@ -93,15 +94,15 @@ const UsersFilter = ({ users, getUsers }) => {
             </div>
 
             <div className="flex flex-col items-start gap-2">
-              <div className="pl-2 w-[160px] flex justify-between items-center">
+              <div className="pl-2 w-[242px] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
-                  <div>Role</div> <BsCaretDown />
+                  <div>Role</div> <BsChevronBarDown />
                 </div>
-                <BsPersonGear />
+                <LuHardHat className="text-[20px]" />
               </div>
               <select
                 onChange={(e) => setRole(e.target.value)}
-                className="px-3 py-2 w-[160px] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
+                className="px-3 py-2 w-[242px] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
               >
                 <option value="All">All</option>
                 <option value="Student">Student</option>

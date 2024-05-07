@@ -15,6 +15,7 @@ const CreateCaseFormModal = ({
   students,
   majorViolation,
   minorViolation,
+  handleCaseOwnerChange,
 }) => {
   const { student, reportedViolation, typeOfViolations, typeOfViolation } =
     values;
@@ -95,14 +96,32 @@ const CreateCaseFormModal = ({
             <select
               name="student"
               value={student}
-              onChange={handleChange}
+              onChange={handleCaseOwnerChange}
               className="appearance-none p-3 rounded-[6px] bg-[#f5f5f5] focus:outline-none border-[1px] focus:border-[#bbbbbb]"
             >
-              {filteredStudents?.map((s) => (
-                <option key={s?._id} value={s?._id}>
-                  {s?.firstName} {s?.surName}
-                </option>
-              ))}
+              {filteredStudents
+                ?.sort((a, b) => {
+                  const nameA = `${a.firstName} ${a.surName}`.toLowerCase();
+                  const nameB = `${b.firstName} ${b.surName}`.toLowerCase();
+
+                  // Compare the names
+                  if (nameA < nameB) {
+                    return -1;
+                  }
+                  if (nameA > nameB) {
+                    return 1;
+                  }
+                  return 0;
+                })
+                .map((s) => (
+                  <option
+                    key={s?._id}
+                    value={s?._id}
+                    data-studentno={s?.studentNo}
+                  >
+                    {s?.firstName} {s?.surName}
+                  </option>
+                ))}
             </select>
           </div>
           <div className="text-[#606060] pt-6 flex gap-2">

@@ -183,7 +183,7 @@ const CreateUser = ({ register, getUsers }) => {
         <div>Users List</div>
         <div
           onClick={handleOpenModal}
-          className="py-3 px-3 bg-[#007bff] text-[white] text-[16px] flex gap-2 items-center rounded-[8px]"
+          className="cursor-pointer py-3 px-3 bg-gradient-to-br from-[#07bbff] to-[#007bff] text-[white] text-[16px] flex gap-2 items-center rounded-[8px]"
         >
           <FaPlus />
           <div>Add User</div>

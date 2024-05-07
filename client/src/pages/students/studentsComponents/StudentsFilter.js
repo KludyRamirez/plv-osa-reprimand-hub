@@ -3,13 +3,12 @@ import {
   BsBuilding,
   BsBuildings,
   BsCalendar4Week,
-  BsCaretDown,
+  BsChevronBarDown,
   BsCheckCircle,
   BsColumns,
   BsFilter,
   BsGenderMale,
 } from "react-icons/bs";
-import { VscFilter } from "react-icons/vsc";
 import StudentsTable from "./StudentsTable";
 
 const StudentsFilter = ({ students, cases, getStudents }) => {
@@ -49,7 +48,12 @@ const StudentsFilter = ({ students, cases, getStudents }) => {
       searchTerm === "All" ||
       student?.firstName?.toLowerCase().includes(searchTerm?.toLowerCase()) ||
       student?.middleName?.toLowerCase().includes(searchTerm?.toLowerCase()) ||
-      student?.surName?.toLowerCase().includes(searchTerm?.toLowerCase());
+      student?.surName?.toLowerCase().includes(searchTerm?.toLowerCase()) ||
+      student?.email?.toLowerCase().includes(searchTerm?.toLowerCase()) ||
+      student?.contactNo?.toLowerCase().includes(searchTerm?.toLowerCase()) ||
+      student?.guardianContactNo
+        ?.toLowerCase()
+        .includes(searchTerm?.toLowerCase());
 
     const yearMatch = year === "All" || student?.year?.includes(year);
 
@@ -97,16 +101,16 @@ const StudentsFilter = ({ students, cases, getStudents }) => {
           </div>
         </div>
 
-        <div className="px-4 pt-4 flex justify-center">
+        <div className="px-4 pt-4 flex justify-center gap-3">
           <input
             onChange={(e) => setSearchTerm(e.target.value)}
             type="text"
             autoComplete="off"
-            placeholder="Search by user number, name, email, etc."
-            className="p-3 rounded-tl-[6px] rounded-bl-[6px] w-[97%] bg-[#f5f5f5] focus:outline-none focus:border-[1px] focus:border-[#cdcdcd]"
+            placeholder="Search by student number, student name, etc."
+            className="p-3 rounded-[6px] w-[97%] bg-gradient-to-br from-gray-100 to-gray-100 focus:outline-none focus:border-[1px] focus:border-[#cdcdcd]"
           />
-          <div className="flex justify-center items-center w-[3%] rounded-tr-[6px] rounded-br-[6px] bg-[#007bff] font-semibold text-[white] gap-3">
-            <VscFilter className="text-[24px]" />
+          <div className="flex justify-center items-center w-[50px] h-[48px] rounded-[8px] bg-gradient-to-br from-[#07bbff] to-[#007bff] text-white">
+            <BsFilter className="text-[24px]" />
           </div>
         </div>
 
@@ -117,15 +121,15 @@ const StudentsFilter = ({ students, cases, getStudents }) => {
         <div className=" w-100 flex justify-start bg-[#f5f5f5] flex p-4 rounded-bl-[10px] rounded-br-[10px]">
           <div className="flex justify-start items-center gap-4">
             <div className="flex flex-col items-start gap-2">
-              <div className="pl-2 w-[160px] flex justify-between items-center">
+              <div className="pl-2 w-[210px] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
-                  <div>Status</div> <BsCaretDown />
+                  <div>Status</div> <BsChevronBarDown />
                 </div>
                 <BsCheckCircle />
               </div>
               <select
                 onChange={(e) => setSelectedStatus(e.target.value)}
-                className="px-3 py-2 w-[160px] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
+                className="px-3 py-2 w-[210px] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
               >
                 <option value="All">All</option>
                 <option value="Active">Active</option>
@@ -134,15 +138,15 @@ const StudentsFilter = ({ students, cases, getStudents }) => {
             </div>
 
             <div className="flex flex-col items-start gap-2">
-              <div className="pl-2 w-[160px] flex justify-between items-center">
+              <div className="pl-2 w-[210px] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
-                  <div>Sex</div> <BsCaretDown />
+                  <div>Sex</div> <BsChevronBarDown />
                 </div>
                 <BsGenderMale />
               </div>
               <select
                 onChange={(e) => setSex(e.target.value)}
-                className="px-3 py-2 w-[160px] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
+                className="px-3 py-2 w-[210px] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
               >
                 <option value="All">All</option>
                 <option value="Male">Male</option>
@@ -151,15 +155,15 @@ const StudentsFilter = ({ students, cases, getStudents }) => {
             </div>
 
             <div className="flex flex-col items-start gap-2">
-              <div className="pl-1 w-[160px] flex justify-between items-center">
+              <div className="pl-1 w-[210px] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
-                  <div>Year</div> <BsCaretDown />
+                  <div>Year</div> <BsChevronBarDown />
                 </div>
                 <BsCalendar4Week />
               </div>
               <select
                 onChange={(e) => setYear(e.target.value)}
-                className="px-3 py-2 w-[160px] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px]"
+                className="px-3 py-2 w-[210px] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px]"
               >
                 <option value="All">All</option>
                 {schoolYearArray.map((option) => (
@@ -170,15 +174,15 @@ const StudentsFilter = ({ students, cases, getStudents }) => {
               </select>
             </div>
             <div className="flex flex-col items-start gap-2">
-              <div className="pl-1 w-[160px] flex justify-between items-center">
+              <div className="pl-1 w-[210px] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
-                  <div>Section</div> <BsCaretDown />
+                  <div>Section</div> <BsChevronBarDown />
                 </div>
                 <BsColumns />
               </div>
               <select
                 onChange={(e) => setSection(e.target.value)}
-                className="px-3 py-2 w-[160px] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px]"
+                className="px-3 py-2 w-[210px] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px]"
               >
                 <option value="All">All</option>
                 {sectionArray.map((option) => (
@@ -189,15 +193,15 @@ const StudentsFilter = ({ students, cases, getStudents }) => {
               </select>
             </div>
             <div className="flex flex-col items-start gap-2">
-              <div className="pl-1 w-[320px] flex justify-between items-center">
+              <div className="pl-1 w-[210px] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
-                  <div>College</div> <BsCaretDown />
+                  <div>College</div> <BsChevronBarDown />
                 </div>
                 <BsBuildings />
               </div>
               <select
                 onChange={(e) => setCollege(e.target.value)}
-                className="px-3 py-2 w-[320px] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px]"
+                className="px-3 py-2 w-[210px] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px]"
               >
                 <option value="All">All</option>
                 <option value="(COED) College of Education">
@@ -216,15 +220,15 @@ const StudentsFilter = ({ students, cases, getStudents }) => {
               </select>
             </div>
             <div className="flex flex-col items-start gap-2">
-              <div className="pl-1 w-[320px] flex justify-between items-center">
+              <div className="pl-1 w-[210px] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
-                  <div>Department</div> <BsCaretDown />
+                  <div>Department</div> <BsChevronBarDown />
                 </div>
                 <BsBuilding />
               </div>
               <select
                 onChange={(e) => setDepartment(e.target.value)}
-                className="px-3 py-2 w-[320px] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px]"
+                className="px-3 py-2 w-[210px] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px]"
               >
                 <option value="All">All</option>
                 {college === "(COED) College of Education" ||

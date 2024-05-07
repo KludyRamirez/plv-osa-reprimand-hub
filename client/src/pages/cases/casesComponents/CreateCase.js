@@ -61,6 +61,7 @@ const minorViolation = [
 
 const initialState = {
   student: "",
+  studentNo: "",
   reportedViolation: "",
   typeOfViolations: ["Major", "Minor"],
   typeOfViolation: "",
@@ -187,6 +188,19 @@ const CreateCase = ({ toast, getCases }) => {
     }
   };
 
+  const handleCaseOwnerChange = (e) => {
+    const selectedStudentId = e.target.value;
+    const selectedStudentNo =
+      e.target.options[e.target.selectedIndex].getAttribute("data-studentno");
+
+    // Update state with selected student ID and student number
+    setValues({
+      ...values,
+      student: selectedStudentId,
+      studentNo: selectedStudentNo,
+    });
+  };
+
   // create student modal functions
 
   const handleOpenModal = () => {
@@ -238,6 +252,7 @@ const CreateCase = ({ toast, getCases }) => {
             handleCloseModal={handleCloseModal}
             majorViolation={majorViolation}
             minorViolation={minorViolation}
+            handleCaseOwnerChange={handleCaseOwnerChange}
           />
         </ModalBox>
       </Modal>

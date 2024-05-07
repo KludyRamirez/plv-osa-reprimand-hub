@@ -255,28 +255,28 @@ const UsersTable = ({ users, getUsers, selectedUsers, setSelectedUsers }) => {
               onChange={toggleSelectAll}
             />
           </div>
-          <div className="w-[100px] flex justify-start items-center border-[1px] py-1 px-2 rounded-[4px]">
+          <div className="w-[100px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
             UID
           </div>
-          <div className="w-[140px] flex justify-start items-center border-[1px] py-1 px-2 rounded-[4px]">
+          <div className="w-[140px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
             Username
           </div>
-          <div className="w-[140px] flex justify-start items-center border-[1px] py-1 px-2 rounded-[4px]">
+          <div className="w-[140px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
             Surname
           </div>
-          <div className="w-[140px] flex justify-start items-center border-[1px] py-1 px-2 rounded-[4px]">
+          <div className="w-[140px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
             First name
           </div>
-          <div className="w-[260px] flex justify-start items-center border-[1px] py-1 px-2 rounded-[4px]">
+          <div className="w-[260px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
             Email
           </div>
-          <div className=" w-[140px] flex justify-start items-center border-[1px] py-1 px-2 rounded-[4px]">
+          <div className=" w-[140px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
             Role
           </div>
-          <div className=" w-[140px] flex justify-start items-center border-[1px] py-1 px-2 rounded-[4px]">
+          <div className=" w-[140px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
             Contact No.
           </div>
-          <div className=" w-[140px] flex justify-start items-center border-[1px] py-1 px-2 rounded-[4px]">
+          <div className=" w-[140px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
             Status
           </div>
           {selectedUsers.length > 1 ? (
@@ -291,7 +291,7 @@ const UsersTable = ({ users, getUsers, selectedUsers, setSelectedUsers }) => {
               </div>
             </>
           ) : (
-            <div className="w-[140px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-2 rounded-[4px]">
+            <div className="w-[140px] whitespace-nowrap whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
               <span>Actions</span>
             </div>
           )}
@@ -312,31 +312,31 @@ const UsersTable = ({ users, getUsers, selectedUsers, setSelectedUsers }) => {
                 className="w-[18px] h-[18px]"
               />
             </div>
-            <div className="w-[100px] flex justify-start items-center py-1 px-2 rounded-[4px]">
+            <div className="w-[100px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px]">
               {user?.uid}
             </div>
-            <div className="w-[140px] flex justify-start items-center py-1 px-2 rounded-[4px]">
+            <div className="w-[140px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px]">
               {user?.userName}
             </div>
-            <div className="w-[140px] flex justify-start items-center py-1 px-2 rounded-[4px]">
+            <div className="w-[140px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px]">
               {user?.surName}
             </div>
-            <div className="w-[140px] flex justify-start items-center py-1 px-2 rounded-[4px]">
+            <div className="w-[140px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px]">
               {user?.firstName}
             </div>
-            <div className="w-[260px] flex justify-start items-center py-1 px-2 rounded-[4px]">
+            <div className="w-[260px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px]">
               {user?.email}
             </div>
-            <div className="w-[140px] flex justify-start items-center py-1 px-2 rounded-[4px]">
+            <div className="w-[140px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px]">
               {user?.role}
             </div>
-            <div className="w-[140px] flex justify-start items-center py-1 px-2 rounded-[4px]">
+            <div className="w-[140px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px]">
               {user?.contactNo}
             </div>
-            <div className="w-[140px] flex justify-start items-center py-1 px-2 rounded-[4px]">
+            <div className="w-[140px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px]">
               {user?.statusOfUser}
             </div>
-            <div className="w-[140px] flex justify-start items-center py-1 px-2 rounded-[4px] gap-2">
+            <div className="w-[140px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px] gap-2">
               {selectedUsers?.length < 2 ? (
                 <>
                   <div className="p-2 bg-[white] border-[1px] border-[#007bff] rounded-[18px] cursor-pointer">
