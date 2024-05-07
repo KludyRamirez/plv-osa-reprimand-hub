@@ -13,14 +13,11 @@ const CreateCaseFormModal = ({
   handleCloseModal,
   values,
   students,
+  majorViolation,
+  minorViolation,
 }) => {
-  const {
-    student,
-    reportedViolations,
-    reportedViolation,
-    typeOfViolations,
-    typeOfViolation,
-  } = values;
+  const { student, reportedViolation, typeOfViolations, typeOfViolation } =
+    values;
 
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredStudents, setFilteredStudents] = useState(students);
@@ -39,18 +36,8 @@ const CreateCaseFormModal = ({
     setFilteredStudents(filtered);
   };
 
-  //   const {
-  //     studentNo: studentNoError,
-  //     firstName: firstNameError,
-  //     middleName: middleNameError,
-  //     surName: surNameError,
-  //     email: emailError,
-  //     contactNo: contactNoError,
-  //     guardianContactNo: guardianContactNoError,
-  //   } = errors;
-
   const isSunday = (date) => {
-    return date.getDay() === 0; // 0 represents Sunday
+    return date.getDay() === 0;
   };
 
   const isDisabled = (date) => {
@@ -59,9 +46,10 @@ const CreateCaseFormModal = ({
 
   const isDisabledDateReported = (date) => {
     return (
-      moment(date).isAfter(moment(selectedDateOfIncident), "day") &&
-      (!isSunday(date) ||
-        moment(date).isSame(moment(selectedDateOfIncident), "day"))
+      moment(date).isAfter(
+        moment(selectedDateOfIncident).subtract(1, "day"),
+        "day"
+      ) && !isSunday(date)
     );
   };
 
@@ -140,23 +128,7 @@ const CreateCaseFormModal = ({
             </div>
           </div>
           <div className="text-[#606060] pt-6 flex gap-2">
-            <div className="flex flex-col gap-2 w-[100%]">
-              <div className="">Reported Violation</div>
-              <select
-                name="reportedViolation"
-                value={reportedViolation}
-                onChange={handleChange}
-                className="appearance-none p-3 rounded-[6px] bg-[#f5f5f5] focus:outline-none border-[1px] focus:border-[#bbbbbb]"
-              >
-                <option value="">Enter Violation</option>
-                {reportedViolations?.map((r) => (
-                  <option key={r} value={r}>
-                    {r}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="flex flex-col gap-2 w-[100%]">
+            <div className="flex flex-col gap-2 w-[20%]">
               <div className="">Type Of Violation</div>
               <select
                 name="typeOfViolation"
@@ -170,6 +142,34 @@ const CreateCaseFormModal = ({
                     {t}
                   </option>
                 ))}
+              </select>
+            </div>
+            <div className="flex flex-col gap-2 w-[80%]">
+              <div className="">Reported Violation</div>
+              <select
+                name="reportedViolation"
+                value={reportedViolation}
+                onChange={handleChange}
+                className="appearance-none p-3 rounded-[6px] bg-[#f5f5f5] focus:outline-none border-[1px] focus:border-[#bbbbbb]"
+              >
+                <option value="">Enter Violation</option>
+                {typeOfViolation === "Major" ? (
+                  <>
+                    {majorViolation?.map((r) => (
+                      <option key={r} value={r}>
+                        {r}
+                      </option>
+                    ))}
+                  </>
+                ) : (
+                  <>
+                    {minorViolation?.map((r) => (
+                      <option key={r} value={r}>
+                        {r}
+                      </option>
+                    ))}
+                  </>
+                )}
               </select>
             </div>
           </div>

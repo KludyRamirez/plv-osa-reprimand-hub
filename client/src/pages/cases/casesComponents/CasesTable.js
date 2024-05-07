@@ -4,11 +4,10 @@ import { createSelector } from "reselect";
 import axios from "axios";
 import {
   BsCapslock,
+  BsCaretUp,
   BsEye,
-  BsEyeFill,
-  BsLink45Deg,
+  BsFolder2Open,
   BsPen,
-  BsPenFill,
   BsTrash,
   BsTrash3,
   BsTrash3Fill,
@@ -301,7 +300,7 @@ const CasesTable = ({
         </ModalBox>
       </Modal>
       <div
-        className={`h-[362px] bg-white flex flex-col rounded-[10px] border-[1px] text-[#505050] phone:overflow-x-scroll ${
+        className={`h-[376px] bg-white flex flex-col rounded-[10px] border-[1px] text-[#505050] phone:overflow-x-scroll ${
           cases && cases.length > 5 ? "overflow-y-scroll" : ""
         }`}
       >
@@ -314,7 +313,7 @@ const CasesTable = ({
               onChange={toggleSelectAll}
             />
           </div>
-          <div className="w-[90px] whitespace-nowrap flex justify-start items-center bg-gradient-to-br from-[#07bbff] to-[#007bff] border-[1px] border-white text-[white] py-1 px-3 rounded-[24px]">
+          <div className="w-[90px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
             Case No.
           </div>
           <div className="w-[110px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
@@ -335,13 +334,13 @@ const CasesTable = ({
           <div className=" w-[120px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
             Violation
           </div>
-          <div className=" w-[118px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+          <div className=" w-[150px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
             Incident Date
           </div>
-          <div className=" w-[130px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+          <div className=" w-[160px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
             Date Reported
           </div>
-          <div className=" w-[180px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+          <div className=" w-[120px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
             Case Status
           </div>
           {selectedCases.length > 1 ? (
@@ -362,123 +361,127 @@ const CasesTable = ({
           )}
         </div>
 
-        {cases?.map((c, k) => (
-          <div
-            className={`phone:w-[fit-content]
+        {cases.length > 0 ? (
+          <>
+            {cases?.map((c, k) => (
+              <div
+                className={`phone:w-[fit-content]
               flex items-center gap-4 px-6 ${
                 k % 2 === 0
                   ? "bg-gradient-to-br from-gray-100 to-gray-100"
                   : "bg-white"
               }`}
-            key={k}
-          >
-            <div className="w-[30px] h-[60px] flex justify-start items-center">
-              <input
-                type="checkbox"
-                className="w-[18px] h-[18px]"
-                checked={selectedCases?.includes(c?._id)}
-                onChange={() => toggleCaseSelection(c?._id)}
-              />
-            </div>
-            <div className="w-[90px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
-              {c?.caseNo}
-            </div>
-            <div className="w-[110px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
-              {c?.student?.studentNo}
-            </div>
-            <div className="w-[160px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
-              {c?.student?.firstName} {c?.student?.surName}
-            </div>
-            <div className=" w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
-              {c?.student?.department?.slice(0, 6)}
-            </div>
-            <div className=" w-[60px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
-              {c?.student?.year}
-            </div>
-            <div className=" w-[80px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
-              {c?.student?.section}
-            </div>
-            <div className=" w-[120px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
-              {c?.reportedViolation}
-            </div>
-            <div className=" w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
-              {new Date(c?.dateOfIncident)?.toLocaleDateString("en-US", {
-                month: "long",
-                day: "numeric",
-                year: "numeric",
-              })}
-            </div>
-            <div className=" w-[130px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
-              {new Date(c?.dateReported)?.toLocaleDateString("en-US", {
-                month: "long",
-                day: "numeric",
-                year: "numeric",
-              })}
-            </div>
-            <div className="container flex justify-between items-center w-[180px] font-bold whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
-              {c?.statusOfCase}
-              <div
-                onClick={() => handlePatchStatusOfCase(c?._id, c?.statusOfCase)}
-                className="p-2 bg-[white] border-[1px] rounded-[6px] cursor-pointer hover:bg-[#007bff] text-[#707070] hover:text-white hover:border-[0px]"
+                key={k}
               >
-                <BsCapslock className="text-[18px] " />
-              </div>
-              <div className="absolute top-[-96px] right-[12px] w-[160px] h-[94px] bg-white border-[1px] rounded-[6px] additional-content">
-                <div className="py-2 px-4 text-[14px] font-normal flex flex-col items-start gap-1">
-                  <div className="mt-1 text-[#606060] font-semibold">
-                    Update Status?
-                  </div>
-                  <div className="flex flex-col items-start">
-                    <div className="text-[14px] text-[#ff3131]">
-                      This process cannot
-                    </div>
-                    <div className="text-[14px] text-[#ff3131]">
-                      not be reverted.
-                    </div>
-                  </div>
+                <div className="w-[30px] h-[60px] flex justify-start items-center">
+                  <input
+                    type="checkbox"
+                    className="w-[18px] h-[18px]"
+                    checked={selectedCases?.includes(c?._id)}
+                    onChange={() => toggleCaseSelection(c?._id)}
+                  />
+                </div>
+                <div className="w-[90px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
+                  {c?.caseNo}
+                </div>
+                <div className="w-[110px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
+                  {c?.student?.studentNo}
+                </div>
+                <div className="w-[160px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
+                  {c?.student?.firstName} {c?.student?.surName}
+                </div>
+                <div className=" w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
+                  {c?.student?.department?.slice(0, 6)}
+                </div>
+                <div className=" w-[60px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
+                  {c?.student?.year}
+                </div>
+                <div className=" w-[80px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
+                  {c?.student?.section}
+                </div>
+                <div className=" w-[120px] flex justify-start items-center py-1 px-3 rounded-[4px]">
+                  {c?.reportedViolation?.slice(0, 23)}...
+                </div>
+                <div className=" w-[150px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
+                  {new Date(c?.dateOfIncident)?.toLocaleDateString("en-US", {
+                    month: "long",
+                    day: "numeric",
+                    year: "numeric",
+                  })}
+                </div>
+                <div className=" w-[160px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
+                  {new Date(c?.dateReported)?.toLocaleDateString("en-US", {
+                    month: "long",
+                    day: "numeric",
+                    year: "numeric",
+                  })}
+                </div>
+                <div className="container flex justify-start items-center w-[120px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px] gap-3">
+                  <div className="w-[14px] h-[14px] rounded-[50%] bg-[#FFBF00]"></div>
+                  <div className="text-[#FFBF00]">{c?.statusOfCase}</div>
+                </div>
+                <div className="w-[130px] whitespace-nowrap flex justify-start items-center gap-2">
+                  {selectedCases.length < 2 ? (
+                    <>
+                      <div
+                        onClick={() =>
+                          handlePatchStatusOfCase(c?._id, c?.statusOfCase)
+                        }
+                        className="container w-[36px] h-[36px] flex justify-center items-center bg-[white] border-[1px] border-[#007bff] rounded-[18px] cursor-pointer"
+                      >
+                        <BsCaretUp className="text-[18px] text-[#007bff]" />
+                        <div className=" absolute p-4 top-[-110px] left-[-66px] w-[170px] h-[98px] bg-gradient-to-br from-[#07bbff] to-[#007bff] rounded-[8px] text-white additional-content">
+                          <div className="font-semibold text-[16px]">
+                            <span className="text-[yellow]">
+                              Update status?
+                            </span>
+                          </div>
+                          <div className="flex flex-col items-start">
+                            <div className="text-[14px]">
+                              This certain process
+                            </div>
+                            <div className="text-[14px]">
+                              cannot not be reverted.
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        onClick={() => handleCaseEditClick(c)}
+                        className="p-2 bg-[white] border-[1px] border-[#FFBF00] rounded-[18px] cursor-pointer"
+                      >
+                        <BsPen className="text-[18px] text-[#FFBF00]" />
+                      </div>
+                      <div
+                        onClick={() => handleClickDelete(c?._id)}
+                        className="p-2 bg-[white] border-[1px] border-[#FF3131] rounded-[18px] cursor-pointer"
+                      >
+                        <BsTrash3 className="text-[18px] text-[#FF3131]" />
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="p-2 bg-[#f0f0f0] rounded-[18px]">
+                        <BsCaretUp className="text-[18px] text-[white]" />
+                      </div>
+                      <div className="p-2 bg-[#f0f0f0] rounded-[18px]">
+                        <BsPen className="text-[18px] text-white" />
+                      </div>
+                      <div className="p-2 bg-[#f0f0f0] rounded-[18px]">
+                        <BsTrash className="text-[18px] text-white" />
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
-            </div>
-            <div className="w-[130px] whitespace-nowrap flex justify-start items-center gap-2">
-              {selectedCases.length < 2 ? (
-                <>
-                  <div
-                    onClick={() =>
-                      handlePatchStatusOfCase(c?._id, c?.statusOfCase)
-                    }
-                    className="p-2 bg-[white] border-[1px] border-[#007bff] rounded-[18px] cursor-pointer"
-                  >
-                    <BsEye className="text-[18px] text-[#007bff]" />
-                  </div>
-                  <div
-                    onClick={() => handleCaseEditClick(c)}
-                    className="p-2 bg-[white] border-[1px] border-[#FFBF00] rounded-[18px] cursor-pointer"
-                  >
-                    <BsPen className="text-[18px] text-[#FFBF00]" />
-                  </div>
-                  <div
-                    onClick={() => handleClickDelete(c?._id)}
-                    className="p-2 bg-[white] border-[1px] border-[#FF3131] rounded-[18px] cursor-pointer"
-                  >
-                    <BsTrash3 className="text-[18px] text-[#FF3131]" />
-                  </div>
-                </>
-              ) : (
-                <>
-                  <div className="p-2 bg-[#f0f0f0] rounded-[18px]">
-                    <BsEye className="text-[18px] text-[white]" />
-                  </div>
-                  <div className="p-2 bg-[#f0f0f0] rounded-[18px]">
-                    <BsPen className="text-[18px] text-white" />
-                  </div>
-                  <div className="p-2 bg-[#f0f0f0] rounded-[18px]">
-                    <BsTrash className="text-[18px] text-white" />
-                  </div>
-                </>
-              )}
-            </div>
+            ))}
+          </>
+        ) : (
+          <div className="w-100 h-[323px] flex flex-col justify-center items-center gap-2 text-[#909090] border-t-[1px] border-t-[#f0f0f0]">
+            <BsFolder2Open className="text-[42px]" />
+            <div className="text-[16px]">Empty</div>
           </div>
-        ))}
+        )}
       </div>
     </>
   );

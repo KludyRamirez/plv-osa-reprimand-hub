@@ -10,11 +10,10 @@ const casesSchema = new mongoose.Schema(
     },
     reportedViolation: {
       type: String,
-      enum: ["Stealing", "Bullying", "Subdued Hair Color", "Sexual Harassment"],
     },
     typeOfViolation: {
       type: String,
-      enum: ["Major", "Minor", "Complex"],
+      enum: ["Major", "Minor"],
     },
     dateOfIncident: {
       type: Date,

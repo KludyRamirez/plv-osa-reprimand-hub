@@ -6,11 +6,37 @@ import {
   BsCheckCircle,
   BsFilter,
 } from "react-icons/bs";
-import { VscFilter } from "react-icons/vsc";
 import CasesTable from "./CasesTable";
 import DatePicker from "react-datepicker";
 import moment from "moment";
 import "react-datepicker/dist/react-datepicker.css";
+
+const majorViolation = [
+  "Smoking or vaping",
+  "Possession of alcoholic beverages or coming to school under the influence of alcohol",
+  "Tampering of posters or other school information media",
+  "Refusal to submit to reasonable inspection conducted by authorized personnel",
+  "Bringing outsiders or providing any means for entry in the University premises without consent of the concerned authority",
+  "Ridiculing of fellow students / Rumor mongering",
+  "Failure to appear before school authorities when required to report within 48 hours without valid",
+  "Lewd Act / Boisterous remark/Use of profane or indecent language",
+  "Public Display of Affection",
+  "Unauthorized use of PLV logo or seal, or other university markers or symbols including accredited students' organization",
+  "Unauthorized representation to any activity / event / opportunity in behalf of the University student organization",
+];
+
+const minorViolation = [
+  "Incomplete uniform",
+  "Sporting very sophisticated hair style, clothing, and accessories",
+  "Unkempt / Long hair for boys",
+  "Hair dyeing",
+  "Sporting visible tattoos",
+  "Excessive body piercing",
+  "Littering",
+  "Loitering",
+  "Unauthorized use of classrooms and other school facilities and supplements",
+  "Unauthorized entry to restricted and designated areas",
+];
 
 const CasesFilter = ({ cases, students, getCases }) => {
   const [searchTerm, setSearchTerm] = useState("All");
@@ -106,15 +132,13 @@ const CasesFilter = ({ cases, students, getCases }) => {
   };
 
   const isDisabled = (date) => {
-    return (
-      (moment(date).isBefore(moment(), "day") && !isSunday(date)) ||
-      (moment(date).isAfter(moment(), "day") && !isSunday(date))
-    );
+    return !isSunday(date);
   };
 
   const isDisabledDateReported = (date) => {
     return (
-      moment(date).isAfter(moment(dateOfIncident), "day") && !isSunday(date)
+      moment(date).isAfter(moment(dateOfIncident).subtract(1, "day"), "day") &&
+      !isSunday(date)
     );
   };
 
@@ -152,16 +176,6 @@ const CasesFilter = ({ cases, students, getCases }) => {
           >
             Minor
           </div>
-          <div
-            onClick={() => handleMainFilterChange("Complex")}
-            className={`px-3 h-[58px] hover:border-b-2 hover:border-blue-600 flex justify-center items-center text-[18px] ${
-              activeMainFilter === "Complex"
-                ? "border-b-2 border-blue-600"
-                : "border-b-2 border-white"
-            }`}
-          >
-            Complex
-          </div>
         </div>
 
         <div className="px-4 pt-4 flex justify-center gap-3">
@@ -195,10 +209,24 @@ const CasesFilter = ({ cases, students, getCases }) => {
                 className="px-3 py-2 w-[242px] phone:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
               >
                 <option value="All">All</option>
-                <option value="Stealing">Stealing</option>
-                <option value="Bullying">Bullying</option>
-                <option value="Subdued Hair Color">Subdued Hair Color</option>
-                <option value="Sexual Harassment">Sexual Harassment</option>
+                {activeMainFilter === "Minor" || activeMainFilter === "All" ? (
+                  <>
+                    {minorViolation?.map((r) => (
+                      <option key={r} value={r}>
+                        {r}
+                      </option>
+                    ))}
+                  </>
+                ) : null}
+                {activeMainFilter === "Major" || activeMainFilter === "All" ? (
+                  <>
+                    {majorViolation?.map((r) => (
+                      <option key={r} value={r}>
+                        {r}
+                      </option>
+                    ))}
+                  </>
+                ) : null}
               </select>
             </div>
             <div className="phone:w-[47.8%] flex flex-col items-start gap-2">
@@ -259,83 +287,6 @@ const CasesFilter = ({ cases, students, getCases }) => {
                 className="px-3 py-2 w-[242px] phone:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
               />
             </div>
-
-            {/* <div className="flex justify-start items-center gap-4">
-            <div className="flex flex-col items-start gap-2">
-              <div className="pl-1 w-[160px] flex justify-between items-center">
-                <div>Date</div>
-                <div className="flex gap-2 items-center">
-                  <BsCalendar4Range /> <BsCaretDown />
-                </div>
-              </div>
-              <select
-                onChange={(e) => setDate(e.target.value)}
-                className="px-3 py-2 w-[160px] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px]"
-              >
-                <option value="All">All</option>
-                {Array.from({ length: 31 }, (_, index) => (
-                  <option key={index + 1} value={index + 1}>
-                    {index + 1}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="flex flex-col items-start gap-2">
-              <div className="pl-1 w-[160px] flex justify-between items-center">
-                <div>Month</div>
-                <div className="flex gap-2 items-center">
-                  <BsCalendar4Week /> <BsCaretDown />
-                </div>
-              </div>
-              <select
-                onChange={(e) => setMonth(e.target.value)}
-                className="px-3 py-2 w-[160px] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px]"
-              >
-                <option value="All">All</option>
-                {[
-                  "January",
-                  "February",
-                  "March",
-                  "April",
-                  "May",
-                  "June",
-                  "July",
-                  "August",
-                  "September",
-                  "October",
-                  "November",
-                  "December",
-                ].map((month) => (
-                  <option key={month} value={month}>
-                    {month}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div className="flex flex-col items-start gap-2">
-              <div className="pl-1 w-[160px] flex justify-between items-center">
-                <div>Year</div>
-                <div className="flex gap-2 items-center">
-                  <BsCalendar4Event /> <BsCaretDown />
-                </div>
-              </div>
-              <select
-                onChange={(e) => setYear(e.target.value)}
-                className="px-3 py-2 w-[160px] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px]"
-              >
-                <option value="All">All</option>
-                {Array.from({ length: 5 }, (_, index) => {
-                  const year = new Date().getFullYear() - index;
-                  return (
-                    <option key={year} value={year}>
-                      {year}
-                    </option>
-                  );
-                })}
-              </select>
-            </div>
-          </div> */}
           </div>
         </div>
       </div>

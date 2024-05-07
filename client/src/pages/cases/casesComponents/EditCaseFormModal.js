@@ -44,9 +44,10 @@ const EditCaseFormModal = ({
 
   const isDisabledDateReported = (date) => {
     return (
-      moment(date).isAfter(moment(selectedDateOfIncident), "day") &&
-      (!isSunday(date) ||
-        moment(date).isSame(moment(selectedDateOfIncident), "day"))
+      moment(date).isAfter(
+        moment(selectedDateOfIncident).subtract(1, "day"),
+        "day"
+      ) && !isSunday(date)
     );
   };
 
@@ -170,8 +171,8 @@ const EditCaseFormModal = ({
 
           <div className="w-100 pt-10 flex justify-end items-center">
             {updatedValues?.student !== "" &&
-            selectedDateOfIncident !== "" &&
-            selectedDateReported !== "" &&
+            updatedValues.dateOfIncident !== "" &&
+            updatedValues.dateReported !== "" &&
             updatedValues?.reportedViolation !== "" &&
             updatedValues?.typeOfViolation !== "" ? (
               <button

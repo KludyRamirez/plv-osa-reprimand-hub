@@ -4,7 +4,8 @@ const moment = require("moment");
 
 const createCase = async (req, res) => {
   try {
-    const { reportedViolation, dateOfIncident, dateReported } = req.body;
+    const { student, reportedViolation, dateOfIncident, dateReported } =
+      req.body;
 
     const userData = req.user;
 
@@ -16,21 +17,9 @@ const createCase = async (req, res) => {
       newCaseNo = parseInt(latestCase.caseNo) + 1;
     }
 
-    // const formattedDateOfIncident = moment.utc(
-    //   dateOfIncident,
-    //   "YYYY-MM-DDTHH:mm:ss.SSS[Z]"
-    // );
-
-    // const formattedDateReported = moment.utc(
-    //   dateReported,
-    //   "YYYY-MM-DDTHH:mm:ss.SSS[Z]"
-    // );
-
     const newCase = await Case.create({
       ...req.body,
       caseNo: newCaseNo,
-      // dateOfIncident: formattedDateOfIncident?.format("MM/DD/YYYY"),
-      // dateReported: formattedDateReported?.format("MM/DD/YYYY"),
     });
 
     await Notification.create({
@@ -56,7 +45,7 @@ const getCases = async (req, res) => {
     const cases = await Case.find()
       .populate(
         "student",
-        "caseNo studentNo firstName surName department year section"
+        "caseNo studentNo firstName surName department college year section"
       )
       .exec();
     res.json(cases);

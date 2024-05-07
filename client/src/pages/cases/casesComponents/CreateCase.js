@@ -32,26 +32,41 @@ const ModalBox = styled("div")({
   },
 });
 
+const majorViolation = [
+  "Smoking or vaping",
+  "Possession of alcoholic beverages or coming to school under the influence of alcohol",
+  "Tampering of posters or other school information media",
+  "Refusal to submit to reasonable inspection conducted by authorized personnel",
+  "Bringing outsiders or providing any means for entry in the University premises without consent of the concerned authority",
+  "Ridiculing of fellow students / Rumor mongering",
+  "Failure to appear before school authorities when required to report within 48 hours without valid",
+  "Lewd Act / Boisterous remark/Use of profane or indecent language",
+  "Public Display of Affection",
+  "Unauthorized use of PLV logo or seal, or other university markers or symbols including accredited students' organization",
+  "Unauthorized representation to any activity / event / opportunity in behalf of the University student organization",
+];
+
+const minorViolation = [
+  "Incomplete uniform",
+  "Sporting very sophisticated hair style, clothing, and accessories",
+  "Unkempt / Long hair for boys",
+  "Hair dyeing",
+  "Sporting visible tattoos",
+  "Excessive body piercing",
+  "Littering",
+  "Loitering",
+  "Unauthorized use of classrooms and other school facilities and supplements",
+  "Unauthorized entry to restricted and designated areas",
+];
+
 const initialState = {
   student: "",
-  reportedViolations: [
-    "Stealing",
-    "Bullying",
-    "Subdued Hair Color",
-    "Sexual Harassment",
-  ],
   reportedViolation: "",
-  typeOfViolations: ["Major", "Minor", "Complex"],
+  typeOfViolations: ["Major", "Minor"],
   typeOfViolation: "",
   dateOfIncident: Date,
   dateReported: Date,
 };
-
-// const errorsInitialState = {
-//   caseNo: "",
-//   dateOfIncident: "",
-//   dateReported: "",
-// };
 
 const selectAuth = (state) => state.auth;
 const authSelector = createSelector([selectAuth], (auth) => auth);
@@ -221,6 +236,8 @@ const CreateCase = ({ toast, getCases }) => {
             handleDateReportedChange={handleDateReportedChange}
             handleCreateCase={handleCreateCase}
             handleCloseModal={handleCloseModal}
+            majorViolation={majorViolation}
+            minorViolation={minorViolation}
           />
         </ModalBox>
       </Modal>
