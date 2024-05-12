@@ -69,6 +69,7 @@ const EditStudent = ({
   getStudents,
   selectedStudentEdit,
   handleCloseModalEdit,
+  handleCloseModalEditStudent,
 }) => {
   const [values, setValues] = useState(initialState);
   const [updatedValues, setUpdatedValues] = useState(selectedStudentEdit);
@@ -101,6 +102,7 @@ const EditStudent = ({
     } finally {
       setValues(initialState);
       handleCloseModalEdit();
+      handleCloseModalEditStudent();
       getStudents();
     }
   };
@@ -192,6 +194,7 @@ const EditStudent = ({
         updatedValues={updatedValues}
         handleChange={handleChange}
         handleCloseModalEdit={handleCloseModalEdit}
+        handleCloseModalEditStudent={handleCloseModalEditStudent}
         handleEditStudent={handleEditStudent}
         coedDepartments={coedDepartments}
         casDepartments={casDepartments}

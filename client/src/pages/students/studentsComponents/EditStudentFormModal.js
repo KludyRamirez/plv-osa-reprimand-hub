@@ -6,6 +6,7 @@ const EditStudentFormModal = ({
   handleChange,
   handleEditStudent,
   handleCloseModalEdit,
+  handleCloseModalEditStudent,
   values,
   updatedValues,
   errors,
@@ -32,7 +33,10 @@ const EditStudentFormModal = ({
         <div className="p-10">
           <div className="text-[28px] text-[#077bff] font-semibold flex justify-between">
             Edit Existing Student
-            <BsX onClick={handleCloseModalEdit} className="text-[36px]" />
+            <BsX
+              onClick={handleCloseModalEditStudent || handleCloseModalEdit}
+              className="text-[36px]"
+            />
           </div>
           <br />
           <div className="text-[#606060] flex flex-col gap-2">

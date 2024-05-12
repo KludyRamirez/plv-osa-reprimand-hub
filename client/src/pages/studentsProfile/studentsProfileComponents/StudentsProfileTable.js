@@ -11,10 +11,11 @@ import { useNavigate } from "react-router-dom";
 import EditCase from "../../cases/casesComponents/EditCase";
 import sea from "../../../images/login/sea.jpg";
 import boy from "../../../images/login/boynobg.svg";
+import girl from "../../../images/login/girl.png";
 import {
   BsArrowRightShort,
+  BsBoxArrowUpRight,
   BsChevronUp,
-  BsFolder2Open,
   BsFolderX,
   BsPen,
   BsSticky,
@@ -26,17 +27,15 @@ import {
   MdOutlineNetworkWifi2Bar,
 } from "react-icons/md";
 import { VscComment } from "react-icons/vsc";
+import EditStudent from "../../students/studentsComponents/EditStudent";
 
 const ModalBox = styled("div")({
   position: "absolute",
   top: "50%",
   left: "50%",
-  width: "22%",
-  height: "fit-content",
-  padding: "20px",
+  width: "48%",
   transform: "translate(-50%, -50%)",
   background: "white",
-  borderRadius: "12px",
   border: "none",
   outline: "none",
 
@@ -55,7 +54,13 @@ const ModalBox = styled("div")({
 const selectAuth = (state) => state.auth;
 const authSelector = createSelector([selectAuth], (auth) => auth);
 
-const StudentsProfileTable = ({ cases, students, getCases, student }) => {
+const StudentsProfileTable = ({
+  cases,
+  students,
+  getCases,
+  student,
+  getStudents,
+}) => {
   const [selectAll, setSelectAll] = useState(false);
   const [caseDeleteId, setCaseDeleteId] = useState("");
   const [showDeleteCaseModal, setShowDeleteCaseModal] = useState(false);
@@ -63,6 +68,8 @@ const StudentsProfileTable = ({ cases, students, getCases, student }) => {
   const [showEditCaseModal, setShowEditCaseModal] = useState(false);
   const [selectedCaseEdit, setSelectedCaseEdit] = useState("");
   const [selectedCases, setSelectedCases] = useState("");
+  const [showEditStudentModal, setShowEditStudentModal] = useState(false);
+  const [selectedStudentEdit, setSelectedStudentEdit] = useState("");
 
   const auth = useSelector(authSelector);
   const navigate = useNavigate();
@@ -246,6 +253,26 @@ const StudentsProfileTable = ({ cases, students, getCases, student }) => {
     }
   };
 
+  //edit student
+
+  const handleStudentEditClick = (student) => {
+    setSelectedStudentEdit(student);
+    setShowEditStudentModal(true);
+  };
+
+  const handleCloseModalEditStudent = () => {
+    setShowEditStudentModal(false);
+  };
+
+  // click navigate params
+
+  const handleClickProfile = (id) => {
+    navigate(`/profile/${id}`);
+    window.location.reload();
+  };
+
+  // filter cases
+
   const activeCases = cases?.filter((c) => c.statusOfCase !== "Case Solved");
   const caseSolvedCases = cases?.filter(
     (c) => c.statusOfCase === "Case Solved"
@@ -253,6 +280,22 @@ const StudentsProfileTable = ({ cases, students, getCases, student }) => {
 
   return (
     <>
+      <Modal
+        sx={{ border: "none", outline: "none" }}
+        open={showEditStudentModal}
+        onClose={handleCloseModalEditStudent}
+        aria-labelledby="parent-modal-title"
+        aria-describedby="parent-modal-description"
+      >
+        <ModalBox>
+          <EditStudent
+            handleCloseModalEditStudent={handleCloseModalEditStudent}
+            selectedStudentEdit={selectedStudentEdit}
+            toast={toast}
+            getStudents={getStudents}
+          />
+        </ModalBox>
+      </Modal>
       <Modal
         sx={{ border: "none", outline: "none" }}
         open={showEditCaseModal}
@@ -322,21 +365,34 @@ const StudentsProfileTable = ({ cases, students, getCases, student }) => {
             </div>
             <div className="w-[100%] border-[1px] h-[150px] rounded-bl-[8px] rounded-br-[8px] flex gap-4">
               <div className="w-[210px] h-[100%]  flex justify-end">
-                <img
-                  className="mt-[-60px] w-[175px] h-[175px] rounded-[50%] zIndex-2"
-                  src={boy}
-                ></img>
+                {student.sex === "Male" ? (
+                  <img
+                    className="mt-[-60px] w-[175px] h-[175px] rounded-[50%] zIndex-2"
+                    src={boy}
+                  />
+                ) : (
+                  <img
+                    className="mt-[-60px] w-[175px] h-[175px] rounded-[50%] zIndex-2"
+                    src={girl}
+                  />
+                )}
               </div>
               <div className="w-[400px] h-[100%] px-2 py-5 flex flex-col gap-2">
                 <span className="text-[27px] font-bold text-[#404040]">
                   {student.firstName} {student.surName}
                 </span>
                 <div className="w-[100%] text-[15px] text-[#606060] flex justify-between">
-                  <span>CEIT BSIT 4-2</span>
+                  <span>
+                    {student.college} {student?.department?.split(" ")[0]}{" "}
+                    {student.year}-{student.section}
+                  </span>
                 </div>
               </div>
               <div className="w-[200px] h-[100%] px-3 py-5 flex justify-end items-start">
-                <div className="px-4 py-2 bg-[#007bff] flex justify-center items-center rounded-[4px] text-white gap-3">
+                <div
+                  onClick={() => handleStudentEditClick(student)}
+                  className="cursor-pointer px-4 py-2 bg-[#007bff] flex justify-center items-center rounded-[4px] text-white gap-3"
+                >
                   <div>Edit</div>
                   <BsPen className="mt-[-2px]" />
                 </div>
@@ -349,7 +405,7 @@ const StudentsProfileTable = ({ cases, students, getCases, student }) => {
               <div className="text-[32px] font-bold text-blue-900">
                 {cases.length}
               </div>
-              <div className="text-[16px] py-2 px-3 bg-blue-900">
+              <div className="text-[16px] py-2 px-3 bg-blue-900 rounded-[4px]">
                 <div className="">Total Cases</div>
               </div>
             </div>
@@ -358,7 +414,7 @@ const StudentsProfileTable = ({ cases, students, getCases, student }) => {
               <div className="text-[32px] text-[red] font-bold">
                 {activeCases.length}
               </div>
-              <div className="text-[16px] py-2 px-3 bg-red-900">
+              <div className="text-[16px] py-2 px-3 bg-red-900 rounded-[4px]">
                 <div className="">Active Cases</div>
               </div>
             </div>
@@ -367,7 +423,7 @@ const StudentsProfileTable = ({ cases, students, getCases, student }) => {
               <div className="text-[32px] text-[green] font-bold">
                 {caseSolvedCases.length}
               </div>
-              <div className="text-[16px] py-2 px-3 bg-green-900">
+              <div className="text-[16px] py-2 px-3 bg-green-900 rounded-[4px]">
                 <div className="">Solved Cases</div>
               </div>
             </div>
@@ -376,7 +432,7 @@ const StudentsProfileTable = ({ cases, students, getCases, student }) => {
               <div className="text-[32px] text-blue-900 font-bold">
                 {caseSolvedCases.length}
               </div>
-              <div className="text-[16px] py-2 px-3 bg-blue-900">
+              <div className="text-[16px] py-2 px-3 bg-blue-900 rounded-[4px]">
                 <div className="">Counseling</div>
               </div>
             </div>
@@ -386,11 +442,11 @@ const StudentsProfileTable = ({ cases, students, getCases, student }) => {
               <div>Total</div>
               <BsSticky />
             </div>
-            <div className="cursor-pointer py-1 px-4 rounded-[24px] text-[16px]  flex gap-2 items-center text-[#606060]">
+            <div className="cursor-pointer py-1 px-4 rounded-[24px] text-[16px]  flex gap-2 items-center text-[#606060] bg-[#f0f0f0]">
               <div>Active</div>
               <BsSticky />
             </div>
-            <div className="cursor-pointer rounded-[24px] text-[16px]  flex gap-2 items-center text-[#606060]">
+            <div className="cursor-pointer py-1 px-4 rounded-[24px] text-[16px]  flex gap-2 items-center text-[#606060] bg-[#f0f0f0]">
               <div>Solved</div>
               <BsSticky />
             </div>
@@ -416,29 +472,41 @@ const StudentsProfileTable = ({ cases, students, getCases, student }) => {
                         <div className="w-[100%] flex justify-between items-center">
                           <div className="text-[20px] font-bold">
                             <span className="text-[red]">
-                              {c.typeOfViolation}{" "}
-                            </span>
-                            <span className="text-[16px] text-[#404040] font-normal">
-                              offense
+                              {c.typeOfViolation}
                             </span>
                           </div>
-                          <div className="text-[16px] text-[#404040] font-normal">
-                            {c.offense}
+                          <div className="text-[15px] text-[#606060] font-normal">
+                            {c.offense} offense
                           </div>
                         </div>
-                        <div className="w-[100%] h-[58px] text-[14px] text-[#606060] p-2 bg-white">
+                        <div className="w-[100%] h-[58px] text-[14px] text-[#606060] p-2 bg-[#f7f7f7] rounded-[4px]">
                           {c.reportedViolation}.
                         </div>
                       </div>
                       <div className="flex justify-between">
                         <div className="flex justify-start gap-3">
-                          <div className="cursor-pointer rounded-[50%] w-[36px] h-[35px] border-[1px] border-[#007bff] flex justify-center items-center hover:bg-[#007bff] hover:text-white text-[#007bff]">
+                          <div
+                            onClick={() => handleCaseEditClick(c)}
+                            className="cursor-pointer rounded-[50%] w-[36px] h-[35px] border-[1px] border-[#007bff] flex justify-center items-center hover:bg-[#007bff] hover:text-white text-[#007bff]"
+                          >
                             <BsPen className="text-[18px]" />
                           </div>
-                          <div className="cursor-pointer rounded-[50%] w-[36px] h-[35px] border-[1px] border-[#007bff] flex justify-center items-center hover:bg-[#007bff] hover:text-white text-[#007bff]">
+                          <div
+                            onClick={() => handleClickDelete(c?._id)}
+                            className="cursor-pointer rounded-[50%] w-[36px] h-[35px] border-[1px] border-[#007bff] flex justify-center items-center hover:bg-[#007bff] hover:text-white text-[#007bff]"
+                          >
                             <BsTrash3 className="text-[18px]" />
                           </div>
-                          <div className="cursor-pointer rounded-[50%] w-[36px] h-[35px] border-[1px] border-[#007bff] flex justify-center items-center hover:bg-[#007bff] hover:text-white text-[#007bff]">
+                          <div
+                            onClick={() =>
+                              handlePatchStatusOfCase(
+                                c?._id,
+                                c?.statusOfCase,
+                                c?.caseNo
+                              )
+                            }
+                            className="cursor-pointer rounded-[50%] w-[36px] h-[35px] border-[1px] border-[#007bff] flex justify-center items-center hover:bg-[#007bff] hover:text-white text-[#007bff]"
+                          >
                             <BsChevronUp className="text-[18px]" />
                           </div>
                           <div className="cursor-pointer rounded-[50%] w-[36px] h-[35px] border-[1px] border-[#007bff] flex justify-center items-center hover:bg-[#007bff] hover:text-white text-[#007bff]">
@@ -455,7 +523,7 @@ const StudentsProfileTable = ({ cases, students, getCases, student }) => {
                 ))}
               </>
             ) : (
-              <div className="w-[100%] h-[240px] text-[#606060] flex flex-col gap-2 justify-center items-center border-[1px] rounded-[8px]">
+              <div className="w-[100%] h-[240px] text-[#606060] flex flex-col gap-2 justify-center items-center rounded-[8px]">
                 <BsFolderX className="text-[32px]" />
                 <span className="text-[16px]">No cases available</span>
               </div>
@@ -463,37 +531,73 @@ const StudentsProfileTable = ({ cases, students, getCases, student }) => {
           </div>
         </div>
 
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-5">
           <div className="w-[350px] h-[232px] rounded-[8px] text-[#404040]">
-            <div className="w-[100%] px-6 pt-4 pb-4 text-[25px] font-bold">
+            <div className="w-[100%] px-6 py-4 text-[25px] font-bold">
               Connect
             </div>
             <div className="w-[100%] flex flex-col flex-grow px-6 pb-4 gap-4">
               <div className="w-[100%] flex justify-start gap-4 items-center">
-                <div className="p-1  rounded-[4px] border-[1px] border-[#007bff] text-[#007bff]">
+                <div className="p-2 rounded-[24px] border-[1px] border-[#007bff] text-[#007bff]">
                   <MdOutlineEmail className="text-[24px]" />
                 </div>
-                <div className="underline">{student.email}</div>
-                <BsArrowRightShort />
+                <div className="">{student.email}</div>
+                <BsArrowRightShort className="text-[24px]" />
               </div>
               <div className="w-[100%] flex gap-4 items-center">
-                <div className="p-1  rounded-[4px] border-[1px] border-[#007bff] text-[#007bff]">
+                <div className="p-2 rounded-[24px] border-[1px] border-[#007bff] text-[#007bff]">
                   <MdOutlineCall className="text-[24px]" />
                 </div>
-                <div className="underline">{student.contactNo}</div>
-                <BsArrowRightShort />
+                <div className="">{student.contactNo}</div>
+                <BsArrowRightShort className="text-[24px]" />
               </div>
 
               <div className="w-[100%] flex gap-4 items-center">
-                <div className="p-1 rounded-[4px] border-[1px] border-[#007bff] text-[#007bff]">
+                <div className="p-2 rounded-[24px] border-[1px] border-[#007bff] text-[#007bff]">
                   <MdOutlineNetworkWifi2Bar className="text-[24px]" />
                 </div>
-                <div className="underline">{student.guardianContactNo}</div>
-                <BsArrowRightShort />
+                <div className="">{student.guardianContactNo}</div>
+                <BsArrowRightShort className="text-[24px]" />
               </div>
             </div>
           </div>
-          <div className="w-[350px] h-[350px] border-[1px] rounded-[8px]"></div>
+          <div className="w-[350px] px-6 pt-4 pb-7 flex flex-col gap-5">
+            <div className="text-[25px] text-[#404040] font-bold">
+              Similar Profile
+            </div>
+            <div className="flex flex-col gap-4">
+              {students.map((s) => (
+                <div className="w-[100%] flex justify-between items-center pb-4 border-b-[1px]">
+                  <div className="flex items-center gap-4">
+                    {s.sex === "Male" ? (
+                      <img
+                        src={boy}
+                        alt=""
+                        className="w-[44px] h-[44px] rounded-[50%] border-[1px] border-[#007bff]"
+                      />
+                    ) : (
+                      <img
+                        src={girl}
+                        alt=""
+                        className="w-[44px] h-[44px] rounded-[50%] border-[1px] border-[#007bff]"
+                      />
+                    )}
+
+                    <div className="text-[16px] text-[#606060] ">
+                      {s.firstName} {s.surName}
+                    </div>
+                  </div>
+                  <div
+                    onClick={() => handleClickProfile(s._id)}
+                    className=" cursor-pointer flex justify-start items-center gap-2 hover:underline"
+                  >
+                    <span>Go</span>
+                    <BsBoxArrowUpRight />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </>

@@ -115,6 +115,7 @@ const EditCaseFormModal = ({
               onChange={handleCaseOwnerChange}
               className="appearance-none p-3 rounded-[6px] bg-[#f5f5f5] focus:outline-none border-[1px] focus:border-[#bbbbbb]"
             >
+              <option value="">Enter Student Name</option>
               {filteredStudents?.map((s) => (
                 <option
                   key={s?._id}

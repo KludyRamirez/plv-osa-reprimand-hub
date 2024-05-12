@@ -11,7 +11,7 @@ const authSelector = createSelector([selectAuth], (auth) => auth);
 
 const StudentProfile = () => {
   const [student, setStudent] = useState("");
-  const [students, setStudents] = useState("");
+  const [students, setStudents] = useState([]);
   const [cases, setCases] = useState([]);
 
   const auth = useSelector(authSelector);
@@ -95,6 +95,7 @@ const StudentProfile = () => {
             students={students}
             cases={cases}
             getCases={getCases}
+            getStudents={getStudents}
           />
         </div>
       </div>
