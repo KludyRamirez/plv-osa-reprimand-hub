@@ -2,10 +2,10 @@ import React from "react";
 import { Chart } from "react-google-charts";
 
 export function StudentsPerYearPieChart({ cases }) {
-  const firstYearCases = cases.filter((c) => c.student.year === "1");
-  const secondYearCases = cases.filter((c) => c.student.year === "2");
-  const thirdYearCases = cases.filter((c) => c.student.year === "3");
-  const fourthYearCases = cases.filter((c) => c.student.year === "4");
+  const firstYearCases = cases.filter((c) => c.student.year === 1);
+  const secondYearCases = cases.filter((c) => c.student.year === 2);
+  const thirdYearCases = cases.filter((c) => c.student.year === 3);
+  const fourthYearCases = cases.filter((c) => c.student.year === 4);
 
   const data = [
     ["Task", "Cases per year"],

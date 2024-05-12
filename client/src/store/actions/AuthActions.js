@@ -27,7 +27,6 @@ export const setUserDetails = (userDetails) => {
 const login = (userDetails, navigate) => {
   return async (dispatch) => {
     const response = await api.login(userDetails);
-    console.log(response);
     if (response.error) {
       dispatch(toast.error(response?.exception?.response?.data));
     } else {
@@ -43,7 +42,6 @@ const register = (userDetails) => {
   return async (dispatch) => {
     try {
       const response = await api.register(userDetails);
-      console.log(response);
       if (response.error) {
         dispatch(toast.error(response?.exception?.response?.data));
       } else {

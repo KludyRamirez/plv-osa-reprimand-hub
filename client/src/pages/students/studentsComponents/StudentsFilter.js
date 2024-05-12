@@ -11,14 +11,14 @@ import {
 } from "react-icons/bs";
 import StudentsTable from "./StudentsTable";
 
-const StudentsFilter = ({ students, cases, getStudents }) => {
+const StudentsFilter = ({ students, cases, getStudents, cads }) => {
   const [searchTerm, setSearchTerm] = useState("All");
   const [selectedStatus, setSelectedStatus] = useState("All");
-  const [college, setCollege] = useState("");
-  const [department, setDepartment] = useState("");
-  const [year, setYear] = useState("");
-  const [section, setSection] = useState("");
-  const [sex, setSex] = useState("");
+  const [college, setCollege] = useState("All");
+  const [department, setDepartment] = useState("All");
+  const [year, setYear] = useState("All");
+  const [section, setSection] = useState("All");
+  const [sex, setSex] = useState("All");
   const [selectedStudents, setSelectedStudents] = useState([]);
   const [activeMainFilter, setActiveMainFilter] = useState("All");
 
@@ -46,6 +46,7 @@ const StudentsFilter = ({ students, cases, getStudents }) => {
   const filteredBySearch = students?.filter((student) => {
     const searchMatch =
       searchTerm === "All" ||
+      student?.studentNo?.toLowerCase().includes(searchTerm?.toLowerCase()) ||
       student?.firstName?.toLowerCase().includes(searchTerm?.toLowerCase()) ||
       student?.middleName?.toLowerCase().includes(searchTerm?.toLowerCase()) ||
       student?.surName?.toLowerCase().includes(searchTerm?.toLowerCase()) ||
@@ -55,7 +56,7 @@ const StudentsFilter = ({ students, cases, getStudents }) => {
         ?.toLowerCase()
         .includes(searchTerm?.toLowerCase());
 
-    const yearMatch = year === "All" || student?.year?.includes(year);
+    const yearMatch = year === "All" || student?.year === parseInt(year);
 
     const collegeMatch =
       college === "All" ||
@@ -86,6 +87,8 @@ const StudentsFilter = ({ students, cases, getStudents }) => {
       : filteredBySearch?.filter((student) =>
           filteredByStatus?.includes(student)
         );
+
+  const uniqueColleges = [...new Set(cads.map((c) => c.college))];
 
   return (
     <>
@@ -204,19 +207,11 @@ const StudentsFilter = ({ students, cases, getStudents }) => {
                 className="px-3 py-2 w-[210px] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px]"
               >
                 <option value="All">All</option>
-                <option value="(COED) College of Education">
-                  (COED) College of Education
-                </option>
-                <option value="(CAS) College of Arts and Sciences">
-                  (CAS) College of Arts and Sciences
-                </option>
-                <option value="(CEIT) College of Engineering and Information Technology">
-                  (CEIT) College of Engineering and Information Technology
-                </option>
-                <option value="(CABA) College of Business Administration, Public Administration and Accountancy">
-                  (CABA) College of Business Administration, Public
-                  Administration and Accountancy
-                </option>
+                {uniqueColleges?.map((c) => (
+                  <option key={c} value={c}>
+                    {c}
+                  </option>
+                ))}
               </select>
             </div>
             <div className="flex flex-col items-start gap-2">
@@ -231,96 +226,25 @@ const StudentsFilter = ({ students, cases, getStudents }) => {
                 className="px-3 py-2 w-[210px] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px]"
               >
                 <option value="All">All</option>
-                {college === "(COED) College of Education" ||
-                college === "All" ? (
+                {college === "All" ? (
                   <>
-                    <option value="(BECED) Bachelor of Early Childhood Education">
-                      (BECED) Bachelor of Early Childhood Education
-                    </option>
-                    <option
-                      value="(BSED
-                      English) Bachelor of Secondary Education Major in English"
-                    >
-                      (BSED English) Bachelor of Secondary Education Major in
-                      English
-                    </option>
-                    <option
-                      value="(BSED
-                      Filipino) Bachelor of Secondary Education Major in Filipino"
-                    >
-                      (BSED Filipino) Bachelor of Secondary Education Major in
-                      Filipino
-                    </option>
-                    <option value="(BSED Mathematics) Bachelor of Secondary Education Major in Mathematics">
-                      (BSED Mathematics) Bachelor of Secondary Education Major
-                      in Mathematics
-                    </option>
-                    <option value="Bachelor of Secondary Education Major in Science">
-                      (BSED Science) Bachelor of Secondary Education Major in
-                      Science
-                    </option>
-                    <option value="(BSED Social Studies) Bachelor of Secondary Education Major in Social Studies">
-                      (BSED Social Studies) Bachelor of Secondary Education
-                      Major in Social Studies
-                    </option>
+                    {cads.map((c) => (
+                      <option key={c.department} value={c.department}>
+                        {c.department}
+                      </option>
+                    ))}
                   </>
-                ) : null}
-
-                {college === "(CAS) College of Arts and Sciences" ||
-                college === "All" ? (
+                ) : (
                   <>
-                    <option value="(BAC) Bachelor of Arts in Communication">
-                      (BAC) Bachelor of Arts in Communication
-                    </option>
-                    <option value="(BSP) Bachelor of Science in Psychology">
-                      (BSP) Bachelor of Science in Psychology
-                    </option>
-                    <option value="(BSSW) Bachelor of Science in Social Work">
-                      (BSSW) Bachelor of Science in Social Work
-                    </option>
+                    {cads
+                      .filter((c) => c.college === college)
+                      .map((c) => (
+                        <option key={c.department} value={c.department}>
+                          {c.department}
+                        </option>
+                      ))}
                   </>
-                ) : null}
-
-                {college ===
-                  "(CEIT) College of Engineering and Information Technology" ||
-                college === "All" ? (
-                  <>
-                    <option value="(BSCE) Bachelor of Science in Civil Engineering">
-                      (BSCE) Bachelor of Science in Civil Engineering
-                    </option>
-                    <option value="(BSEE) Bachelor of Science in Electrical Engineering">
-                      (BSEE) Bachelor of Science in Electrical Engineering
-                    </option>
-                    <option value="(BSIT) Bachelor of Science in Information Technology">
-                      (BSIT) Bachelor of Science in Information Technology
-                    </option>
-                  </>
-                ) : null}
-
-                {college ===
-                  "(CABA) College of Business Administration, Public Administration and Accountancy" ||
-                college === "All" ? (
-                  <>
-                    <option value="(BSA) Bachelor of Science in Accountancy">
-                      (BSA) Bachelor of Science in Accountancy
-                    </option>
-                    <option value="(BSBA FM) Bachelor of Science in Business Administration Major in Financial Management">
-                      (BSBA FM) Bachelor of Science in Business Administration
-                      Major in Financial Management
-                    </option>
-                    <option value="(BSBA HRDM) Bachelor of Science in Business Administration Major in Human Resource Development Management">
-                      (BSBA HRDM) Bachelor of Science in Business Administration
-                      Major in Human Resource Development Management
-                    </option>
-                    <option value="(BSBA MM) Bachelor of Science in Business Administration Major in Marketing Management">
-                      (BSBA MM) Bachelor of Science in Business Administration
-                      Major in Marketing Management
-                    </option>
-                    <option value="(BSPA) Bachelor of Science in Public Administration">
-                      (BSPA) Bachelor of Science in Public Administration
-                    </option>
-                  </>
-                ) : null}
+                )}
               </select>
             </div>
           </div>

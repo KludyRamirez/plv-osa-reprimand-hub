@@ -77,7 +77,7 @@ const CasesFilter = ({ cases, students, getCases }) => {
             c.student.department
               .toLowerCase()
               .includes(searchTerm.toLowerCase()) ||
-            c.student.year.includes(searchTerm) ||
+            c.student.year.toString().includes(searchTerm) ||
             c.student.section.includes(searchTerm)));
 
       const dateOfIncidentMatch =

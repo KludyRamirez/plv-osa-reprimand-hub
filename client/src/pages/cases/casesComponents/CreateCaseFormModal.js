@@ -1,5 +1,11 @@
-import React, { useState } from "react";
-import { BsCaretDown, BsX } from "react-icons/bs";
+import React, { useState, useEffect } from "react";
+import {
+  BsCaretDown,
+  BsChevronBarDown,
+  BsFilter,
+  BsSearch,
+  BsX,
+} from "react-icons/bs";
 import { FaPlus } from "react-icons/fa6";
 import DatePicker from "react-datepicker";
 import moment from "moment";
@@ -16,6 +22,7 @@ const CreateCaseFormModal = ({
   majorViolation,
   minorViolation,
   handleCaseOwnerChange,
+  setValues,
 }) => {
   const { student, reportedViolation, typeOfViolations, typeOfViolation } =
     values;
@@ -64,10 +71,16 @@ const CreateCaseFormModal = ({
     setSelectedDateReported(date);
   };
 
+  // useEffect(() => {
+  //   if (filteredStudents.length > 0) {
+  //     setValues({ ...values, student: filteredStudents[0]._id });
+  //   }
+  // }, [filteredStudents]);
+
   return (
     <>
       <form onSubmit={(e) => handleCreateCase(e)}>
-        <div className="p-8">
+        <div className="p-10">
           <div className="text-[28px] text-[#077bff] font-semibold flex justify-between">
             Create New Case
             <BsX
@@ -76,29 +89,33 @@ const CreateCaseFormModal = ({
             />
           </div>
 
-          <div className="text-[#606060] pt-8 flex flex-col gap-2">
-            <div>Search Student</div>
+          <div className="text-[#606060] pt-8 flex flex-col gap-2 ">
+            <div className="flex justify-start items-center gap-2">
+              <span>Search Case Owner</span>
+              <BsFilter className="text-[22px]" />
+            </div>
             <input
               value={searchTerm}
               onChange={handleSearchStudents}
               type="text"
               autoComplete="off"
-              placeholder="Search"
-              className={`border-[1px] p-3 rounded-[6px] w-[100%] bg-[#f5f5f5] focus:outline-none`}
+              placeholder="Search case owner's student no., firstname, etc."
+              className={`border-[1px] border-[#007bff] p-3 rounded-[6px] w-[100%] bg-white focus:outline-none`}
             />
           </div>
 
           <div className="text-[#606060] pt-6 flex flex-col gap-2 w-[100%]">
             <div className="flex gap-2 items-center">
               <span>Case Owner</span>
-              <BsCaretDown />
+              <BsChevronBarDown />
             </div>
             <select
               name="student"
               value={student}
               onChange={handleCaseOwnerChange}
-              className="appearance-none p-3 rounded-[6px] bg-[#f5f5f5] focus:outline-none border-[1px] focus:border-[#bbbbbb]"
+              className="appearance-none p-3 rounded-[6px] bg-[#f5f5f5] focus:outline-none border-[1px] focus:border-[#007bff]"
             >
+              <option value="">Student</option>
               {filteredStudents
                 ?.sort((a, b) => {
                   const nameA = `${a.firstName} ${a.surName}`.toLowerCase();
@@ -132,7 +149,7 @@ const CreateCaseFormModal = ({
                 placeholderText="Enter Date"
                 selected={selectedDateOfIncident}
                 onChange={(date) => handleDateOfIncidentChangeCombined(date)}
-                className={`border-[1px] p-3 rounded-[6px] w-[100%] bg-[#f5f5f5] focus:outline-none`}
+                className={`border-[1px] p-3 rounded-[6px] w-[100%] bg-[#f5f5f5] focus:outline-none focus:border-[#bbbbbb]`}
               />
             </div>
             <div className="flex flex-col gap-2 w-[100%]">
@@ -142,7 +159,7 @@ const CreateCaseFormModal = ({
                 placeholderText="Enter Date"
                 selected={selectedDateReported}
                 onChange={(date) => handleDateReportedChangeCombined(date)}
-                className={`border-[1px] p-3 rounded-[6px] w-[100%] bg-[#f5f5f5] focus:outline-none`}
+                className={`border-[1px] p-3 rounded-[6px] w-[100%] bg-[#f5f5f5] focus:outline-none focus:border-[#bbbbbb]`}
               />
             </div>
           </div>
@@ -155,7 +172,7 @@ const CreateCaseFormModal = ({
                 onChange={handleChange}
                 className="appearance-none p-3 rounded-[6px] bg-[#f5f5f5] focus:outline-none border-[1px] focus:border-[#bbbbbb]"
               >
-                <option value="">Enter Violation</option>
+                <option value="">Violation</option>
                 {typeOfViolations?.map((t) => (
                   <option key={t} value={t}>
                     {t}
@@ -194,8 +211,7 @@ const CreateCaseFormModal = ({
           </div>
 
           <div className="w-100 pt-10 flex justify-end items-center">
-            {student !== "" &&
-            selectedDateOfIncident !== "" &&
+            {selectedDateOfIncident !== "" &&
             selectedDateReported !== "" &&
             reportedViolation !== "" &&
             typeOfViolation !== "" ? (

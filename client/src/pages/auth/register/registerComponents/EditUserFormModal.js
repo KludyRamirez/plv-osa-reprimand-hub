@@ -24,9 +24,9 @@ const EditStudentFormModal = ({
   return (
     <>
       <form onSubmit={handleEditUser}>
-        <div className="p-8">
+        <div className="p-10">
           <div className="text-[28px] text-[#077bff] font-semibold flex justify-between">
-            Create New User
+            Edit Existing User
             <BsX onClick={handleCloseModalEdit} className="text-[36px]" />
           </div>
           <div className="text-[#606060] pt-8 flex gap-2">

@@ -6,6 +6,8 @@ import {
   BsCaretDown,
   BsCheckCircle,
   BsFilter,
+  BsFolder2Open,
+  BsFolderX,
 } from "react-icons/bs";
 import { StudentsPerYearPieChart } from "../statisticsUtils/StudentsPerYearPieChart";
 import { CasesPerCollegePieChart } from "../statisticsUtils/CasesPerCollegePieChart";
@@ -428,22 +430,40 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
           <div className="p-4 zIndex-2 text-[white] bg-[#007bff]">
             Cases Per Year Level
           </div>
-          <StudentsPerYearPieChart
-            cases={combinedFilteredCases}
-            students={students}
-            getCases={getCases}
-          />
+          {cases.length > 0 ? (
+            <>
+              <StudentsPerYearPieChart
+                cases={combinedFilteredCases}
+                students={students}
+                getCases={getCases}
+              />
+            </>
+          ) : (
+            <div className="mt-[-20px] h-[297px] flex flex-col justify-center items-center gap-2">
+              <BsFolderX className="text-[80px] text-[#007bff]" />
+              <div>No cases available</div>
+            </div>
+          )}
         </div>
 
         <div className="mt-4 w-[436px] relative flex flex-col bg-yellow-100 zIndex-2">
           <div className="p-4 zIndex-2 text-[white] bg-[#FFBF00]">
             Cases Per College
           </div>
-          <CasesPerCollegePieChart
-            cases={combinedFilteredCases}
-            students={students}
-            getCases={getCases}
-          />
+          {cases.length > 0 ? (
+            <>
+              <CasesPerCollegePieChart
+                cases={combinedFilteredCases}
+                students={students}
+                getCases={getCases}
+              />
+            </>
+          ) : (
+            <div className="mt-[-20px] h-[297px] flex flex-col justify-center items-center gap-2">
+              <BsFolderX className="text-[80px] text-[#FFBF00]" />
+              <div>No cases available</div>
+            </div>
+          )}
         </div>
       </div>
 

@@ -29,7 +29,7 @@ const EditStudentFormModal = ({
   return (
     <>
       <form onSubmit={handleEditStudent}>
-        <div className="p-8">
+        <div className="p-10">
           <div className="text-[28px] text-[#077bff] font-semibold flex justify-between">
             Edit Existing Student
             <BsX onClick={handleCloseModalEdit} className="text-[36px]" />

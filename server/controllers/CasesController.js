@@ -1,7 +1,6 @@
 const Case = require("../models/Cases");
 const Student = require("../models/Students");
 const Notification = require("../models/Notifications");
-const moment = require("moment");
 
 const createCase = async (req, res) => {
   try {
@@ -30,7 +29,6 @@ const createCase = async (req, res) => {
     // Find the user
     const studentNew = await Student.findById(student);
 
-    console.log("-------------->", studentNew);
     // Count existing cases with the same criteria
     const existingCasesCount = await Case.countDocuments({
       studentNo: studentNew.studentNo,
@@ -48,8 +46,7 @@ const createCase = async (req, res) => {
       },
       resetOffense: 0,
     });
-
-    console.log("23232323232323", existingCasesCount);
+    console.log(existingCasesCount);
 
     if (existingCasesCount === 0) {
       await Case.create({

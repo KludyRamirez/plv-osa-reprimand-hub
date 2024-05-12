@@ -8,17 +8,14 @@ const CreateStudentFormModal = ({
   handleCloseModal,
   values,
   errors,
-  coedDepartments,
-  casDepartments,
-  ceitDepartments,
-  cabaDepartments,
+  cads,
+  uniqueColleges,
 }) => {
   const {
     studentNo,
     firstName,
     surName,
     middleName,
-    colleges,
     college,
     department,
     year,
@@ -42,10 +39,13 @@ const CreateStudentFormModal = ({
   return (
     <>
       <form onSubmit={handleCreateStudent}>
-        <div className="p-8">
+        <div className="p-10">
           <div className="text-[28px] text-[#077bff] font-semibold flex justify-between">
             Create New Student
-            <BsX onClick={handleCloseModal} className="text-[36px]" />
+            <BsX
+              onClick={handleCloseModal}
+              className="text-[36px] cursor-pointer"
+            />
           </div>
           <br />
           <div className="text-[#606060] flex flex-col gap-2">
@@ -61,7 +61,7 @@ const CreateStudentFormModal = ({
               placeholder="e.g. 20-1130"
               className={`border-[1px] p-3 rounded-[6px] w-[100%] bg-[#f5f5f5] ${
                 studentNoError === "" ? "" : "border-[red]"
-              } focus:outline-none`}
+              } focus:outline-none border-[#007bff]`}
             />
           </div>
           {studentNoError && (
@@ -80,7 +80,7 @@ const CreateStudentFormModal = ({
                 placeholder="e.g. Kludy"
                 className={`border-[1px] p-3 rounded-[6px] w-[100%] bg-[#f5f5f5] ${
                   firstNameError === "" ? "" : "border-[red]"
-                } focus:outline-none`}
+                } focus:outline-none focus:border-[#007bff]`}
               />
               {firstNameError && (
                 <p className="text-red-500 pt-2">{firstNameError}</p>
@@ -99,7 +99,7 @@ const CreateStudentFormModal = ({
                 placeholder="e.g. Sabordo"
                 className={`border-[1px] p-3 rounded-[6px] w-[100%] bg-[#f5f5f5] ${
                   middleNameError === "" ? "" : "border-[red]"
-                } focus:outline-none`}
+                } focus:outline-none focus:border-[#007bff]`}
               />
               {middleNameError && (
                 <p className="text-red-500 pt-2">{middleNameError}</p>
@@ -117,7 +117,7 @@ const CreateStudentFormModal = ({
                 placeholder="e.g. Ramirez"
                 className={`border-[1px] p-3 rounded-[6px] w-[100%] bg-[#f5f5f5] ${
                   surNameError === "" ? "" : "border-[red]"
-                } focus:outline-none`}
+                } focus:outline-none focus:border-[#007bff]`}
               />
               {surNameError && (
                 <p className="text-red-500 pt-2">{surNameError}</p>
@@ -134,10 +134,10 @@ const CreateStudentFormModal = ({
                 name="college"
                 value={college}
                 onChange={handleChange}
-                className="appearance-none p-3 rounded-[6px] bg-[#f5f5f5] focus:outline-none border-[1px] focus:border-[#bbbbbb]"
+                className="appearance-none p-3 rounded-[6px] bg-[#f5f5f5] focus:outline-none border-[1px] focus:border-[#007bff]"
               >
-                <option value="">Enter College</option>
-                {colleges?.map((c) => (
+                <option value="">College</option>
+                {uniqueColleges?.map((c) => (
                   <option key={c} value={c}>
                     {c}
                   </option>
@@ -153,47 +153,16 @@ const CreateStudentFormModal = ({
                 name="department"
                 value={department}
                 onChange={handleChange}
-                className="appearance-none p-3 rounded-[6px] bg-[#f5f5f5] focus:outline-none border-[1px] focus:border-[#bbbbbb]"
+                className="appearance-none p-3 rounded-[6px] bg-[#f5f5f5] focus:outline-none border-[1px] focus:border-[#007bff]"
               >
-                <option value="">Enter Department</option>
-                {college === "(COED) College of Education" ? (
-                  <>
-                    {coedDepartments?.map((c) => (
-                      <option key={c} value={c}>
-                        {c}
-                      </option>
-                    ))}
-                  </>
-                ) : null}
-                {college === "(CAS) College of Arts and Sciences" ? (
-                  <>
-                    {casDepartments?.map((c) => (
-                      <option key={c} value={c}>
-                        {c}
-                      </option>
-                    ))}
-                  </>
-                ) : null}
-                {college ===
-                "(CEIT) College of Engineering and Information Technology" ? (
-                  <>
-                    {ceitDepartments?.map((c) => (
-                      <option key={c} value={c}>
-                        {c}
-                      </option>
-                    ))}
-                  </>
-                ) : null}
-                {college ===
-                "(CABA) College of Business Administration, Public Administration and Accountancy" ? (
-                  <>
-                    {cabaDepartments?.map((c) => (
-                      <option key={c} value={c}>
-                        {c}
-                      </option>
-                    ))}
-                  </>
-                ) : null}
+                <option value="">Department</option>
+                {cads
+                  ?.filter((c) => c.college === college)
+                  .map((c) => (
+                    <option key={c.department} value={c.department}>
+                      {c.department}
+                    </option>
+                  ))}
               </select>
             </div>
           </div>
@@ -207,13 +176,13 @@ const CreateStudentFormModal = ({
                 name="year"
                 value={year}
                 onChange={handleChange}
-                className="appearance-none p-3 rounded-[6px] bg-[#f5f5f5] focus:outline-none border-[1px] focus:border-[#bbbbbb]"
+                className="appearance-none p-3 rounded-[6px] bg-[#f5f5f5] focus:outline-none border-[1px] focus:border-[#007bff]"
               >
-                <option value="">Enter Year</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
+                <option value="">Year</option>
+                <option value={1}>1</option>
+                <option value={2}>2</option>
+                <option value={3}>3</option>
+                <option value={4}>4</option>
               </select>
             </div>
             <div className="flex flex-col gap-2 w-[16%]">
@@ -225,9 +194,9 @@ const CreateStudentFormModal = ({
                 name="section"
                 value={section}
                 onChange={handleChange}
-                className="appearance-none p-3 rounded-[6px] bg-[#f5f5f5] focus:outline-none border-[1px] focus:border-[#bbbbbb]"
+                className="appearance-none p-3 rounded-[6px] bg-[#f5f5f5] focus:outline-none border-[1px] focus:border-[#007bff]"
               >
-                <option value="">Enter Section</option>
+                <option value="">Section</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -246,9 +215,9 @@ const CreateStudentFormModal = ({
                 name="sex"
                 value={sex}
                 onChange={handleChange}
-                className="appearance-none p-3 rounded-[6px] bg-[#f5f5f5] focus:outline-none border-[1px] focus:border-[#bbbbbb]"
+                className="appearance-none p-3 rounded-[6px] bg-[#f5f5f5] focus:outline-none border-[1px] focus:border-[#007bff]"
               >
-                <option value="">Enter Sex</option>
+                <option value="">Sex</option>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
               </select>
@@ -266,7 +235,7 @@ const CreateStudentFormModal = ({
                 placeholder="e.g. example@gmail.com"
                 className={`border-[1px] p-3 rounded-[6px] w-[100%] bg-[#f5f5f5] ${
                   emailError === "" ? "" : "border-[red]"
-                } focus:outline-none`}
+                } focus:outline-none focus:border-[#007bff]`}
               />
               {emailError && <p className="text-red-500 pt-2">{emailError}</p>}
             </div>
@@ -285,7 +254,7 @@ const CreateStudentFormModal = ({
                 maxLength="13"
                 className={`border-[1px] p-3 rounded-[6px] w-[100%] bg-[#f5f5f5] ${
                   contactNoError === "" ? "" : "border-[red]"
-                } focus:outline-none`}
+                } focus:outline-none focus:border-[#007bff]`}
               />
               {contactNoError && (
                 <p className="text-red-500 pt-2">{contactNoError}</p>
@@ -304,7 +273,7 @@ const CreateStudentFormModal = ({
                 maxLength="13"
                 className={`border-[1px] p-3 rounded-[6px] w-[100%] bg-[#f5f5f5] ${
                   guardianContactNoError === "" ? "" : "border-[red]"
-                } focus:outline-none`}
+                } focus:outline-none focus:border-[#007bff]`}
               />
               {guardianContactNoError && (
                 <p className="text-red-500 pt-2">{guardianContactNoError}</p>

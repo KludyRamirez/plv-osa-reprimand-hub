@@ -54,8 +54,6 @@ const HistoryTable = ({
     year: "numeric",
   });
 
-  console.log(formattedDate);
-
   const todayHistory = history.filter(
     (h) =>
       new Date(h.createdAt).toLocaleDateString("en-PH", {
@@ -135,7 +133,7 @@ const HistoryTable = ({
                     {h?.userId?.userName}
                   </div>
                   <div className="w-[460px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
-                    {h?.message}
+                    {h?.message?.slice(0, 52)}...
                   </div>
                   <div className="w-[200px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
                     {new Date(h?.createdAt)?.toLocaleDateString("en-US", {

@@ -12,10 +12,8 @@ const ModalBox = styled("div")({
   top: "50%",
   left: "50%",
   width: "48%",
-  padding: "8px",
   transform: "translate(-50%, -50%)",
   background: "white",
-  borderRadius: "12px",
   border: "none",
   outline: "none",
 
@@ -31,46 +29,14 @@ const ModalBox = styled("div")({
   },
 });
 
-const coedDepartments = [
-  "(BECED) Bachelor of Early Childhood Education",
-  "(BSED English) Bachelor of Secondary Education Major in English",
-  "(BSED Filipino) Bachelor of Secondary Education Major in Filipino",
-  "(BSED Mathematics) Bachelor of Secondary Education Major in Mathematics",
-  "(BSED Science) Bachelor of Secondary Education Major in Science",
-  "(BSED Social Studies) Bachelor of Secondary Education Major in Social Studies",
-];
-const casDepartments = [
-  "(BAC) Bachelor of Arts in Communication",
-  "(BSP) Bachelor of Science in Psychology",
-  "(BSSW) Bachelor of Science in Social Work",
-];
-const ceitDepartments = [
-  "(BSCE) Bachelor of Science in Civil Engineering",
-  "(BSEE) Bachelor of Science in Electrical Engineering",
-  "(BSIT) Bachelor of Science in Information Technology",
-];
-const cabaDepartments = [
-  "(BSA) Bachelor of Science in Accountancy",
-  "(BSBA FM) Bachelor of Science in Business Administration Major in Financial Management",
-  "(BSBA HRDM) Bachelor of Science in Business Administration Major in Human Resource Development Management",
-  "(BSBA MM) Bachelor of Science in Business Administration Major in Marketing Management",
-  "(BSPA) Bachelor of Science in Public Administration",
-];
-
 const initialState = {
   studentNo: "",
   firstName: "",
   surName: "",
   middleName: "",
-  colleges: [
-    "(COED) College of Education",
-    "(CAS) College of Arts and Sciences",
-    "(CEIT) College of Engineering and Information Technology",
-    "(CABA) College of Business Administration, Public Administration and Accountancy",
-  ],
   college: "",
   department: "",
-  year: "",
+  year: Number,
   section: "",
   sex: "",
   contactNo: "",
@@ -91,7 +57,7 @@ const errorsInitialState = {
 const selectAuth = (state) => state.auth;
 const authSelector = createSelector([selectAuth], (auth) => auth);
 
-const CreateStudent = ({ toast, getStudents }) => {
+const CreateStudent = ({ toast, getStudents, cads }) => {
   const [values, setValues] = useState(initialState);
   const [showCreateStudentModal, setShowCreateStudentModal] = useState(false);
   const [errors, setErrors] = useState(errorsInitialState);
@@ -217,6 +183,8 @@ const CreateStudent = ({ toast, getStudents }) => {
     setErrors(errorsInitialState);
   };
 
+  const uniqueColleges = [...new Set(cads.map((c) => c.college))];
+
   return (
     <>
       <div className="w-100 text-[14px] text-[#404040] pb-6 ">
@@ -241,15 +209,13 @@ const CreateStudent = ({ toast, getStudents }) => {
       >
         <ModalBox>
           <CreateStudentFormModal
+            cads={cads}
+            uniqueColleges={uniqueColleges}
             errors={errors}
             values={values}
             handleChange={handleChange}
             handleCreateStudent={handleCreateStudent}
             handleCloseModal={handleCloseModal}
-            coedDepartments={coedDepartments}
-            casDepartments={casDepartments}
-            ceitDepartments={ceitDepartments}
-            cabaDepartments={cabaDepartments}
           />
         </ModalBox>
       </Modal>

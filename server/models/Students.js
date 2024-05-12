@@ -7,7 +7,7 @@ const studentsSchema = new mongoose.Schema(
     middleName: { type: String },
     college: { type: String },
     department: { type: String },
-    year: { type: String },
+    year: { type: Number },
     section: { type: String },
     sex: { type: String },
     contactNo: { type: String },

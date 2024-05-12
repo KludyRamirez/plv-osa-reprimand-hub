@@ -3,11 +3,7 @@ import { useSelector } from "react-redux";
 import { createSelector } from "reselect";
 import axios from "axios";
 import {
-  BsCapslock,
-  BsCaretUp,
-  BsChevronDoubleUp,
   BsChevronUp,
-  BsEye,
   BsFolder2Open,
   BsPen,
   BsTrash,
@@ -26,14 +22,12 @@ const ModalBox = styled("div")({
   position: "absolute",
   top: "50%",
   left: "50%",
-  width: "22%",
-  height: "fit-content",
-  padding: "20px",
+  width: "48%",
   transform: "translate(-50%, -50%)",
   background: "white",
-  borderRadius: "12px",
   border: "none",
   outline: "none",
+  borderRadius: "4px",
 
   "&:focus": {
     border: "none",
@@ -62,7 +56,7 @@ const CasesTable = ({
   const [showDeleteCaseModal, setShowDeleteCaseModal] = useState(false);
   const [showDeleteManyCaseModal, setShowDeleteManyCaseModal] = useState(false);
   const [showEditCaseModal, setShowEditCaseModal] = useState(false);
-  const [selectedCaseEdit, setSelectedCaseEdit] = useState("");
+  const [selectedCaseEdit, setSelectedCaseEdit] = useState(null);
 
   const auth = useSelector(authSelector);
   const navigate = useNavigate();
@@ -190,9 +184,15 @@ const CasesTable = ({
 
   // edit Case functions
 
-  const handleCaseEditClick = (c) => {
-    setSelectedCaseEdit(c);
-    setShowEditCaseModal(true);
+  const handleCaseEditClick = (cas) => {
+    try {
+      setSelectedCaseEdit(cas);
+      console.log(cas);
+    } catch (error) {
+      console.error("Error handling case edit click:", error);
+    } finally {
+      setShowEditCaseModal(true);
+    }
   };
 
   const handleCloseModalEdit = () => {
@@ -256,19 +256,10 @@ const CasesTable = ({
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-        <ModalBox
-          sx={{
-            top: "50%",
-            left: "50%",
-            width: "48%",
-            height: "fit-content",
-            padding: "8px",
-          }}
-        >
+        <ModalBox>
           <EditCase
             handleCloseModalEdit={handleCloseModalEdit}
             selectedCaseEdit={selectedCaseEdit}
-            setSelectedCaseEdit={setSelectedCaseEdit}
             toast={toast}
             getCases={getCases}
             students={students}
@@ -282,7 +273,7 @@ const CasesTable = ({
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-        <ModalBox>
+        <ModalBox sx={{ width: "22%" }}>
           <DeleteCaseModal
             handleConfirmDelete={handleConfirmDelete}
             handleCloseModal={handleCloseModal}
@@ -323,7 +314,7 @@ const CasesTable = ({
           <div className="w-[110px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
             Student No.
           </div>
-          <div className="w-[160px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+          <div className="w-[150px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
             Name
           </div>
           <div className=" w-[118px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
@@ -392,7 +383,7 @@ const CasesTable = ({
                 <div className="w-[110px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
                   {c?.student?.studentNo}
                 </div>
-                <div className="w-[160px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
+                <div className="w-[150px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
                   {c?.student?.firstName} {c?.student?.surName}
                 </div>
                 <div className=" w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
@@ -405,7 +396,7 @@ const CasesTable = ({
                   {c?.student?.section}
                 </div>
                 <div className=" w-[120px] flex justify-start items-center py-1 px-3 rounded-[4px]">
-                  {c?.reportedViolation?.slice(0, 23)}...
+                  {c?.reportedViolation?.slice(0, 18)}...
                 </div>
                 <div className=" w-[150px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
                   {new Date(c?.dateOfIncident)?.toLocaleDateString("en-US", {

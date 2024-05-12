@@ -5,6 +5,8 @@ import axios from "axios";
 import {
   BsEye,
   BsEyeFill,
+  BsFolder2,
+  BsFolder2Open,
   BsPen,
   BsPenFill,
   BsTrash3,
@@ -22,12 +24,9 @@ const ModalBox = styled("div")({
   position: "absolute",
   top: "50%",
   left: "50%",
-  width: "22%",
-  height: "fit-content",
-  padding: "20px",
+  width: "48%",
   transform: "translate(-50%, -50%)",
   background: "white",
-  borderRadius: "12px",
   border: "none",
   outline: "none",
 
@@ -161,6 +160,10 @@ const StudentsTable = ({
     setShowDeleteStudentModal(true);
   };
 
+  const handleClickProfile = (id) => {
+    navigate(`/profile/${id}`);
+  };
+
   const handleConfirmDelete = async () => {
     try {
       if (studentDeleteId) {
@@ -210,15 +213,7 @@ const StudentsTable = ({
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-        <ModalBox
-          sx={{
-            top: "50%",
-            left: "50%",
-            width: "48%",
-            height: "fit-content",
-            padding: "8px",
-          }}
-        >
+        <ModalBox>
           <EditStudent
             handleCloseModalEdit={handleCloseModalEdit}
             selectedStudentEdit={selectedStudentEdit}
@@ -284,14 +279,15 @@ const StudentsTable = ({
           <div className=" w-[118px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
             Section
           </div>
-          <div className=" w-[118px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
-            College
-          </div>
+
           <div className=" w-[118px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
             Department
           </div>
           <div className=" w-[118px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
             Sex
+          </div>
+          <div className=" w-[118px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+            Contact No.
           </div>
           <div className=" w-[118px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
             Status
@@ -318,92 +314,108 @@ const StudentsTable = ({
           )}
         </div>
 
-        {students?.map((student, k) => {
-          const casesCount = casesData.filter(
-            (c) => c?.student?.studentNo === student?.studentNo
-          ).length;
+        {students.length > 0 ? (
+          <>
+            {students
+              ?.filter((student) => student.year <= 4)
+              .map((student, k) => {
+                const casesCount = casesData.filter(
+                  (c) => c?.student?.studentNo === student?.studentNo
+                ).length;
 
-          return (
-            <div
-              className={`w-100 flex items-center gap-4 px-6 ${
-                k % 2 === 0 ? "bg-[#f5f5f5]" : "bg-white"
-              }`}
-              key={k}
-            >
-              <div className="w-[30px] h-[60px] flex justify-start items-center">
-                <input
-                  type="checkbox"
-                  checked={selectedStudents?.includes(student?._id)}
-                  onChange={() => toggleStudentSelection(student?._id)}
-                  className="w-[18px] h-[18px]"
-                />
-              </div>
-              <div className="w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
-                {student?.studentNo}
-              </div>
-              <div className="w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
-                {student?.surName}
-              </div>
-              <div className="w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
-                {student?.firstName}
-              </div>
-              <div className="w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
-                {student?.year}
-              </div>
-              <div className="w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
-                {student?.section}
-              </div>
-              <div className="w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
-                {student?.college?.slice(0, 6)}
-              </div>
-              <div className="w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
-                {student?.department?.slice(0, 6)}
-              </div>
-              <div className="w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
-                {student?.sex?.slice(0, 6)}
-              </div>
-              <div className="w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
-                {student?.statusOfStudent.slice(0, 6)}
-              </div>
-              <div className="w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
-                {casesCount}
-              </div>
-              <div className="w-[130px] whitespace-nowrap flex justify-start items-center gap-2">
-                {selectedStudents.length < 2 ? (
-                  <>
-                    <div className="p-2 bg-[white] border-[1px] border-[#007bff] rounded-[18px] cursor-pointer">
-                      <BsEye className="text-[18px] text-[#007bff]" />
+                return (
+                  <div
+                    className={`w-100 flex items-center gap-4 px-6 ${
+                      k % 2 === 0 ? "bg-[#f5f5f5]" : "bg-white"
+                    }`}
+                    key={k}
+                  >
+                    <div className="w-[30px] h-[60px] flex justify-start items-center">
+                      <input
+                        type="checkbox"
+                        checked={selectedStudents?.includes(student?._id)}
+                        onChange={() => toggleStudentSelection(student?._id)}
+                        className="w-[18px] h-[18px]"
+                      />
                     </div>
-                    <div
-                      onClick={() => handleStudentEditClick(student)}
-                      className="p-2 bg-[white] border-[1px] border-[#FFBF00] rounded-[18px] cursor-pointer"
-                    >
-                      <BsPen className="text-[18px] text-[#FFBF00]" />
+                    <div className="w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
+                      {student?.studentNo}
                     </div>
-                    <div
-                      onClick={() => handleClickDelete(student?._id)}
-                      className="p-2 bg-[white] border-[1px] border-[#FF3131] rounded-[18px] cursor-pointer"
-                    >
-                      <BsTrash3 className="text-[18px] text-[#FF3131]" />
+                    <div className="w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
+                      {student?.surName}
                     </div>
-                  </>
-                ) : (
-                  <>
-                    <div className="p-2 bg-[#efefef] rounded-[18px]">
-                      <BsEyeFill className="text-[18px] text-[white]" />
+                    <div className="w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
+                      {student?.firstName}
                     </div>
-                    <div className="p-2 bg-[#efefef] rounded-[18px]">
-                      <BsPenFill className="text-[18px] text-white" />
+                    <div className="w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
+                      {student?.year}
                     </div>
-                    <div className="p-2 bg-[#efefef] rounded-[18px]">
-                      <BsTrash3Fill className="text-[18px] text-white" />
+                    <div className="w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
+                      {student?.section}
                     </div>
-                  </>
-                )}
-              </div>
-            </div>
-          );
-        })}
+
+                    <div className="w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
+                      {student?.department?.slice(0, 9)}...
+                    </div>
+                    <div className="w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
+                      {student?.sex}
+                    </div>
+                    <div className="w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
+                      {student?.contactNo}
+                    </div>
+                    <div className="w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
+                      {student?.statusOfStudent}
+                    </div>
+
+                    <div className="w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
+                      {casesCount}
+                    </div>
+                    <div className="w-[130px] whitespace-nowrap flex justify-start items-center gap-2">
+                      {selectedStudents.length < 2 ? (
+                        <>
+                          <div
+                            onClick={() => handleClickProfile(student?._id)}
+                            className="p-2 bg-[white] border-[1px] border-[#007bff] rounded-[18px] cursor-pointer"
+                          >
+                            <BsEye className="text-[18px] text-[#007bff]" />
+                          </div>
+                          <div
+                            onClick={() => handleStudentEditClick(student)}
+                            className="p-2 bg-[white] border-[1px] border-[#FFBF00] rounded-[18px] cursor-pointer"
+                          >
+                            <BsPen className="text-[18px] text-[#FFBF00]" />
+                          </div>
+                          <div
+                            onClick={() => handleClickDelete(student?._id)}
+                            className="p-2 bg-[white] border-[1px] border-[#FF3131] rounded-[18px] cursor-pointer"
+                          >
+                            <BsTrash3 className="text-[18px] text-[#FF3131]" />
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          <div className="p-2 bg-[#efefef] rounded-[18px]">
+                            <BsEyeFill className="text-[18px] text-[white]" />
+                          </div>
+                          <div className="p-2 bg-[#efefef] rounded-[18px]">
+                            <BsPenFill className="text-[18px] text-white" />
+                          </div>
+                          <div className="p-2 bg-[#efefef] rounded-[18px]">
+                            <BsTrash3Fill className="text-[18px] text-white" />
+                          </div>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
+          </>
+        ) : (
+          <div className="w-100 h-[306px] flex flex-col justify-center items-center gap-2 text-[#707070] border-t-[1px] border-t-[#f0f0f0]">
+            <BsFolder2Open className="text-[42px]" />
+            <div className="text-[16px]">No students available</div>
+          </div>
+        )}
       </div>
     </>
   );

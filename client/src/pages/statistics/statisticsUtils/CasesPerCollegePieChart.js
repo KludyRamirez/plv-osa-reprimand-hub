@@ -2,30 +2,24 @@ import React from "react";
 import { Chart } from "react-google-charts";
 
 export function CasesPerCollegePieChart({ cases }) {
-  const coedCases = cases.filter(
-    (c) => c.student.college === "(COED) College of Education"
-  );
-  const casCases = cases.filter(
-    (c) => c.student.college === "(CAS) College of Arts and Sciences"
-  );
-  const ceitCases = cases.filter(
-    (c) =>
-      c.student.college ===
-      "(CEIT) College of Engineering and Information Technology"
-  );
-  const cabaCases = cases.filter(
-    (c) =>
-      c.student.college ===
-      "(CABA) College of Business Administration, Public Administration and Accountancy"
-  );
+  const casesData = [...cases];
 
-  const data = [
-    ["Cases", "Cases per college"],
-    ["COED", coedCases.length],
-    ["CAS", casCases.length],
-    ["CEIT", ceitCases.length],
-    ["CABA", cabaCases.length],
-  ];
+  const collegeCounts = {};
+
+  casesData.forEach((caseItem) => {
+    const college = caseItem?.student?.college;
+    if (collegeCounts[college]) {
+      collegeCounts[college]++;
+    } else {
+      collegeCounts[college] = 1;
+    }
+  });
+
+  const data = [["Cases", "Cases per college"]];
+
+  for (const college in collegeCounts) {
+    data.push([college, collegeCounts[college]]);
+  }
 
   const options = {
     is3D: true,

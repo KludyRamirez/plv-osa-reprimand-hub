@@ -34,7 +34,6 @@ const Statistics = ({ toast }) => {
       });
 
       setCases(res.data);
-      console.log(res.data.length);
     } catch (err) {
       console.error("Error fetching users!", err);
     }

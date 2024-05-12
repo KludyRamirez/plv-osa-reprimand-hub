@@ -3,9 +3,19 @@ const Notification = require("../models/Notifications");
 
 const createStudent = async (req, res) => {
   try {
-    const { firstName, surName } = req.body;
+    const { firstName, surName, studentNo } = req.body;
 
     const userData = req.user;
+
+    const studentNoExists = await Student.exists({
+      studentNo: studentNo,
+    });
+
+    if (studentNoExists) {
+      return res
+        .status(409)
+        .send("Student no. already exist. Please try again.");
+    }
 
     const newStudent = await Student.create(req.body);
 
@@ -30,9 +40,32 @@ const createStudent = async (req, res) => {
 const getStudents = async (req, res) => {
   try {
     const students = await Student.find();
+    const currentDate = new Date();
+
+    for (const student of students) {
+      if (currentDate.getMonth() === 11 && currentDate.getDate() === 31) {
+        student.year += 1;
+      }
+
+      await student.save();
+    }
+
     res.json(students);
   } catch (error) {
     return res.status(500).send("An error occurred, please try again!");
+  }
+};
+
+const getStudent = async (req, res) => {
+  try {
+    const schedule = await Student.findById(req.params.id);
+    if (!schedule) {
+      return res.status(404).json({ message: "Schedule not found" });
+    }
+    res.json(schedule);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
   }
 };
 
@@ -110,6 +143,7 @@ const deleteManyStudent = async (req, res) => {
 module.exports = {
   createStudent,
   getStudents,
+  getStudent,
   editStudent,
   deleteOneStudent,
   deleteManyStudent,

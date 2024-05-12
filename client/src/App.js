@@ -7,6 +7,8 @@ import Register from "./pages/auth/register/registerBase/Register";
 import Cases from "./pages/cases/casesBase/Cases";
 import Statistics from "./pages/statistics/statisticsBase/Statistics";
 import History from "./pages/history/historyBase/History";
+import StudentProfile from "./pages/studentsProfile/studentsProfileBase/StudentProfile";
+import Settings from "./pages/settings/settingsBase/Settings";
 
 function App() {
   return (
@@ -29,7 +31,15 @@ function App() {
             path="/statistics"
             element={<Statistics toast={toast} />}
           ></Route>
-          <Route path="/notification" element={<History />}></Route>
+          <Route
+            path="/notification"
+            element={<History toast={toast} />}
+          ></Route>
+          <Route
+            path="/profile/:id"
+            element={<StudentProfile toast={toast} />}
+          ></Route>
+          <Route path="/settings" element={<Settings toast={toast} />}></Route>
         </Routes>
       </Router>
     </>

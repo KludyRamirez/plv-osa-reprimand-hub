@@ -12,12 +12,14 @@ const authSelector = createSelector([selectAuth], (auth) => auth);
 const Cases = ({ toast }) => {
   const [cases, setCases] = useState([]);
   const [students, setStudents] = useState([]);
+  const [cads, setCads] = useState([]);
 
   const auth = useSelector(authSelector);
 
   useEffect(() => {
     getCases();
     getStudents();
+    getCads();
   }, []);
 
   const getCases = async () => {
@@ -54,7 +56,26 @@ const Cases = ({ toast }) => {
         },
       });
       setStudents(res.data);
-      console.log(students);
+    } catch (err) {
+      console.error("Error fetching users!", err);
+    }
+  };
+
+  const getCads = async () => {
+    try {
+      if (!auth.userDetails.token) {
+        console.error("Authentication token not found.");
+        return;
+      }
+      const url = `${process.env.REACT_APP_API_URI}/cad`;
+      const res = await axios.get(url, {
+        withCredentials: true,
+        headers: {
+          Authorization: `Bearer ${auth?.userDetails?.token}`,
+        },
+      });
+
+      setCads(res.data);
     } catch (err) {
       console.error("Error fetching users!", err);
     }
@@ -71,6 +92,7 @@ const Cases = ({ toast }) => {
               cases={cases}
               students={students}
               getCases={getCases}
+              cads={cads}
             />
           </div>
         </div>

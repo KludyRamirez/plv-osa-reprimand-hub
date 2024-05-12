@@ -3,6 +3,7 @@ import axios from "axios";
 import {
   BsEye,
   BsEyeFill,
+  BsFolder2Open,
   BsPen,
   BsPenFill,
   BsTrash3,
@@ -22,12 +23,9 @@ const ModalBox = styled("div")({
   position: "absolute",
   top: "50%",
   left: "50%",
-  width: "25%",
-  height: "392px",
-  padding: "20px",
+  width: "48%",
   transform: "translate(-50%, -50%)",
   background: "white",
-  borderRadius: "12px",
   border: "none",
   outline: "none",
 
@@ -196,15 +194,7 @@ const UsersTable = ({ users, getUsers, selectedUsers, setSelectedUsers }) => {
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-        <ModalBox
-          sx={{
-            top: "50%",
-            left: "50%",
-            width: "48%",
-            height: "fit-content",
-            padding: "8px",
-          }}
-        >
+        <ModalBox>
           <EditUser
             handleCloseModalEdit={handleCloseModalEdit}
             selectedUserEdit={selectedUserEdit}
@@ -297,80 +287,89 @@ const UsersTable = ({ users, getUsers, selectedUsers, setSelectedUsers }) => {
           )}
         </div>
 
-        {users?.map((user, k) => (
-          <div
-            className={`w-100 flex items-center gap-4 px-6 ${
-              k % 2 === 0 ? "bg-[#f5f5f5]" : "bg-white"
-            }`}
-            key={k}
-          >
-            <div className="w-[30px] h-[60px] flex justify-start items-center">
-              <input
-                type="checkbox"
-                checked={selectedUsers?.includes(user?._id)}
-                onChange={() => toggleUserSelection(user?._id)}
-                className="w-[18px] h-[18px]"
-              />
-            </div>
-            <div className="w-[100px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px]">
-              {user?.uid}
-            </div>
-            <div className="w-[140px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px]">
-              {user?.userName}
-            </div>
-            <div className="w-[140px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px]">
-              {user?.surName}
-            </div>
-            <div className="w-[140px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px]">
-              {user?.firstName}
-            </div>
-            <div className="w-[260px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px]">
-              {user?.email}
-            </div>
-            <div className="w-[140px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px]">
-              {user?.role}
-            </div>
-            <div className="w-[140px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px]">
-              {user?.contactNo}
-            </div>
-            <div className="w-[140px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px]">
-              {user?.statusOfUser}
-            </div>
-            <div className="w-[140px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px] gap-2">
-              {selectedUsers?.length < 2 ? (
-                <>
-                  <div className="p-2 bg-[white] border-[1px] border-[#007bff] rounded-[18px] cursor-pointer">
-                    <BsEye className="text-[18px] text-[#007bff]" />
-                  </div>
-                  <div
-                    onClick={() => handleUserEditClick(user)}
-                    className="p-2 bg-[white] border-[1px] border-[#FFBF00] rounded-[18px] cursor-pointer"
-                  >
-                    <BsPen className="text-[18px] text-[#FFBF00]" />
-                  </div>
-                  <div
-                    onClick={() => handleClickDelete(user?._id)}
-                    className="p-2 bg-[white] border-[1px] border-[#FF3131] rounded-[18px] cursor-pointer"
-                  >
-                    <BsTrash3 className="text-[18px] text-[#FF3131]" />
-                  </div>
-                </>
-              ) : (
-                <>
-                  <div className="p-2 bg-[#efefef] rounded-[18px]">
-                    <BsEyeFill className="text-[18px] text-[white]" />
-                  </div>
-                  <div className="p-2 bg-[#efefef] rounded-[18px]">
-                    <BsPenFill className="text-[18px] text-white" />
-                  </div>
-                  <div className="p-2 bg-[#efefef] rounded-[18px]">
-                    <BsTrash3Fill className="text-[18px] text-white" />
-                  </div>
-                </>
-              )}
-            </div>
+        {users.length ? (
+          <>
+            {users?.map((user, k) => (
+              <div
+                className={`w-100 flex items-center gap-4 px-6 ${
+                  k % 2 === 0 ? "bg-[#f5f5f5]" : "bg-white"
+                }`}
+                key={k}
+              >
+                <div className="w-[30px] h-[60px] flex justify-start items-center">
+                  <input
+                    type="checkbox"
+                    checked={selectedUsers?.includes(user?._id)}
+                    onChange={() => toggleUserSelection(user?._id)}
+                    className="w-[18px] h-[18px]"
+                  />
+                </div>
+                <div className="w-[100px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px]">
+                  {user?.uid}
+                </div>
+                <div className="w-[140px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px]">
+                  {user?.userName}
+                </div>
+                <div className="w-[140px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px]">
+                  {user?.surName}
+                </div>
+                <div className="w-[140px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px]">
+                  {user?.firstName}
+                </div>
+                <div className="w-[260px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px]">
+                  {user?.email}
+                </div>
+                <div className="w-[140px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px]">
+                  {user?.role}
+                </div>
+                <div className="w-[140px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px]">
+                  {user?.contactNo}
+                </div>
+                <div className="w-[140px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px]">
+                  {user?.statusOfUser}
+                </div>
+                <div className="w-[140px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px] gap-2">
+                  {selectedUsers?.length < 2 ? (
+                    <>
+                      <div className="p-2 bg-[white] border-[1px] border-[#007bff] rounded-[18px] cursor-pointer">
+                        <BsEye className="text-[18px] text-[#007bff]" />
+                      </div>
+                      <div
+                        onClick={() => handleUserEditClick(user)}
+                        className="p-2 bg-[white] border-[1px] border-[#FFBF00] rounded-[18px] cursor-pointer"
+                      >
+                        <BsPen className="text-[18px] text-[#FFBF00]" />
+                      </div>
+                      <div
+                        onClick={() => handleClickDelete(user?._id)}
+                        className="p-2 bg-[white] border-[1px] border-[#FF3131] rounded-[18px] cursor-pointer"
+                      >
+                        <BsTrash3 className="text-[18px] text-[#FF3131]" />
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="p-2 bg-[#efefef] rounded-[18px]">
+                        <BsEyeFill className="text-[18px] text-[white]" />
+                      </div>
+                      <div className="p-2 bg-[#efefef] rounded-[18px]">
+                        <BsPenFill className="text-[18px] text-white" />
+                      </div>
+                      <div className="p-2 bg-[#efefef] rounded-[18px]">
+                        <BsTrash3Fill className="text-[18px] text-white" />
+                      </div>
+                    </>
+                  )}
+                </div>
+              </div>
+            ))}
+          </>
+        ) : (
+          <div className="w-100 h-[306px] flex flex-col justify-center items-center gap-2 text-[#707070] border-t-[1px] border-t-[#f0f0f0]">
+            <BsFolder2Open className="text-[42px]" />
+            <div className="text-[16px]">No users available</div>
           </div>
-        ))}
+        )}
       </div>
     </>
   );

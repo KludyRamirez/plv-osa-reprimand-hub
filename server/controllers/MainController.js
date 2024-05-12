@@ -7,6 +7,7 @@ const { register } = require("../controllers/authentication/Register");
 
 const { createStudent } = require("../controllers/StudentsController");
 const { getStudents } = require("../controllers/StudentsController");
+const { getStudent } = require("../controllers/StudentsController");
 const { editStudent } = require("../controllers/StudentsController");
 const { deleteOneStudent } = require("../controllers/StudentsController");
 const { deleteManyStudent } = require("../controllers/StudentsController");
@@ -31,12 +32,20 @@ const { deleteManyCase } = require("../controllers/CasesController");
 
 const { getNotifications } = require("../controllers/NotificationsController");
 
+//colleges and departments
+
+const { createCad } = require("./CollegesAndDepartmentsController");
+const { getCads } = require("./CollegesAndDepartmentsController");
+const { deleteOneCad } = require("./CollegesAndDepartmentsController");
+const { deleteManyCad } = require("./CollegesAndDepartmentsController");
+
 exports.controllers = {
   login,
   register,
   //
   createStudent,
   getStudents,
+  getStudent,
   editStudent,
   deleteOneStudent,
   deleteManyStudent,
@@ -54,4 +63,9 @@ exports.controllers = {
   deleteManyCase,
   //
   getNotifications,
+  //
+  createCad,
+  getCads,
+  deleteOneCad,
+  deleteManyCad,
 };

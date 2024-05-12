@@ -14,7 +14,7 @@ const DeleteCaseModal = ({ handleConfirmDelete, handleCloseModal }) => {
 
   return (
     <>
-      <div className="p-4 flex flex-col gap-2 text-[#505050]">
+      <div className="p-8 flex flex-col gap-2 text-[#505050]">
         <div className="flex justify-center">
           <div className=" w-[100px] h-[100px] border-[2px] bg-[#ff3131] border-[#ff3131] rounded-[50%] flex justify-center items-center">
             <BsX className="text-[60px] text-[white] " />
@@ -24,7 +24,7 @@ const DeleteCaseModal = ({ handleConfirmDelete, handleCloseModal }) => {
 
         <div className="flex flex-col justify-center items-center text-[18px] text-[#606060] pt-2">
           <div>
-            Do you really want to <span className="text-[red]">DELETE </span>
+            Do you really want to <span className="text-[red]">delete </span>
             this case?
           </div>
           <div>

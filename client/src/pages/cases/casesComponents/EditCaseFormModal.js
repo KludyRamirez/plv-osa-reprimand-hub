@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BsCaretDown, BsX } from "react-icons/bs";
 import { FaPlus } from "react-icons/fa6";
 import DatePicker from "react-datepicker";
@@ -9,13 +9,17 @@ const EditCaseFormModal = ({
   handleChange,
   handleDateOfIncidentChange,
   handleDateReportedChange,
+  handleCaseOwnerChange,
   handleEditCase,
   handleCloseModalEdit,
+  majorViolation,
+  minorViolation,
   values,
   updatedValues,
+  setUpdatedValues,
   students,
 }) => {
-  const { reportedViolations, typeOfViolations } = values;
+  const { typeOfViolations } = values;
 
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredStudents, setFilteredStudents] = useState(students);
@@ -68,10 +72,18 @@ const EditCaseFormModal = ({
     return date.format("MM/DD/YYYY");
   };
 
+  // useEffect(() => {
+  //   if (filteredStudents.length > 0) {
+  //     setUpdatedValues({ ...updatedValues, student: filteredStudents[0]._id });
+  //   }
+  // }, [filteredStudents]);
+
+  console.log();
+
   return (
     <>
       <form onSubmit={(e) => handleEditCase(e)}>
-        <div className="p-8">
+        <div className="p-10">
           <div className="text-[28px] text-[#077bff] font-semibold flex justify-between">
             Edit Existing Case
             <BsX
@@ -100,11 +112,15 @@ const EditCaseFormModal = ({
             <select
               name="student"
               value={updatedValues?.student}
-              onChange={handleChange}
+              onChange={handleCaseOwnerChange}
               className="appearance-none p-3 rounded-[6px] bg-[#f5f5f5] focus:outline-none border-[1px] focus:border-[#bbbbbb]"
             >
               {filteredStudents?.map((s) => (
-                <option key={s?._id} value={s?._id}>
+                <option
+                  key={s?._id}
+                  value={s?._id}
+                  data-studentno={s?.studentNo}
+                >
                   {s?.firstName} {s?.surName}
                 </option>
               ))}
@@ -136,22 +152,6 @@ const EditCaseFormModal = ({
           </div>
           <div className="text-[#606060] pt-6 flex gap-2">
             <div className="flex flex-col gap-2 w-[100%]">
-              <div className="">Reported Violation</div>
-              <select
-                name="reportedViolation"
-                value={updatedValues?.reportedViolation}
-                onChange={handleChange}
-                className="appearance-none p-3 rounded-[6px] bg-[#f5f5f5] focus:outline-none border-[1px] focus:border-[#bbbbbb]"
-              >
-                <option value="">Enter Violation</option>
-                {reportedViolations?.map((r) => (
-                  <option key={r} value={r}>
-                    {r}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="flex flex-col gap-2 w-[100%]">
               <div className="">Type Of Violation</div>
               <select
                 name="typeOfViolation"
@@ -159,12 +159,38 @@ const EditCaseFormModal = ({
                 onChange={handleChange}
                 className="appearance-none p-3 rounded-[6px] bg-[#f5f5f5] focus:outline-none border-[1px] focus:border-[#bbbbbb]"
               >
-                <option value="">Enter Violation</option>
                 {typeOfViolations?.map((t) => (
                   <option key={t} value={t}>
                     {t}
                   </option>
                 ))}
+              </select>
+            </div>
+            <div className="flex flex-col gap-2 w-[80%]">
+              <div className="">Reported Violation</div>
+              <select
+                name="reportedViolation"
+                value={updatedValues?.reportedViolation}
+                onChange={handleChange}
+                className="appearance-none p-3 rounded-[6px] bg-[#f5f5f5] focus:outline-none border-[1px] focus:border-[#bbbbbb]"
+              >
+                {updatedValues?.typeOfViolation === "Major" ? (
+                  <>
+                    {majorViolation?.map((r) => (
+                      <option key={r} value={r}>
+                        {r}
+                      </option>
+                    ))}
+                  </>
+                ) : (
+                  <>
+                    {minorViolation?.map((r) => (
+                      <option key={r} value={r}>
+                        {r}
+                      </option>
+                    ))}
+                  </>
+                )}
               </select>
             </div>
           </div>

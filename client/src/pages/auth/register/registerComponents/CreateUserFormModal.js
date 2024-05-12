@@ -32,7 +32,7 @@ const CreateUserFormModal = ({
   return (
     <>
       <form onSubmit={handleCreateUser}>
-        <div className="p-8">
+        <div className="p-10">
           <div className="text-[28px] text-[#077bff] font-semibold flex justify-between">
             Create New User
             <BsX onClick={handleCloseModal} className="text-[36px]" />
@@ -49,9 +49,9 @@ const CreateUserFormModal = ({
                 maxLength="24"
                 autoComplete="off"
                 placeholder="e.g. kluds19"
-                className={`border-[1px] p-3 rounded-[6px] w-[100%] bg-[#f5f5f5] ${
+                className={`border-[1px] border-[#007bff] p-3 rounded-[6px] w-[100%] bg-[#f5f5f5] ${
                   userNameError === "" ? "" : "border-[red]"
-                } focus:outline-none`}
+                } focus:outline-none `}
               />
               {userNameError && <p className="text-red-500">{userNameError}</p>}
             </div>
@@ -70,7 +70,7 @@ const CreateUserFormModal = ({
                 placeholder="e.g. Kludy"
                 className={`border-[1px] p-3 rounded-[6px] w-[100%] bg-[#f5f5f5] ${
                   firstNameError === "" ? "" : "border-[red]"
-                } focus:outline-none`}
+                } focus:outline-none focus:border-[#007bff]`}
               />
               {firstNameError && (
                 <p className="text-red-500">{firstNameError}</p>
@@ -89,7 +89,7 @@ const CreateUserFormModal = ({
                 placeholder="e.g. Ramirez"
                 className={`border-[1px] p-3 rounded-[6px] w-[100%] bg-[#f5f5f5] ${
                   surNameError === "" ? "" : "border-[red]"
-                } focus:outline-none`}
+                } focus:outline-none focus:border-[#007bff]`}
               />
               {surNameError && <p className="text-red-500">{surNameError}</p>}
             </div>
@@ -109,7 +109,7 @@ const CreateUserFormModal = ({
                 placeholder="e.g. example@gmail.com"
                 className={`border-[1px] p-3 rounded-[6px] w-[100%] bg-[#f5f5f5] ${
                   emailError === "" ? "" : "border-[red]"
-                } focus:outline-none`}
+                } focus:outline-none focus:border-[#007bff]`}
               />
               {emailError && <p className="text-red-500 pt-2">{emailError}</p>}
             </div>
@@ -127,7 +127,7 @@ const CreateUserFormModal = ({
                 placeholder="Enter password"
                 className={`border-[1px] p-3 rounded-[6px] w-[100%] bg-[#f5f5f5] ${
                   passwordError === "" ? "" : "border-[red]"
-                } focus:outline-none`}
+                } focus:outline-none focus:border-[#007bff]`}
               />
               {passwordError && <p className="text-red-500">{passwordError}</p>}
             </div>
@@ -143,7 +143,7 @@ const CreateUserFormModal = ({
                 name="role"
                 value={role}
                 onChange={handleChange}
-                className="appearance-none p-3 rounded-[6px] bg-[#f5f5f5] focus:outline-none border-[1px] focus:border-[#bbbbbb]"
+                className="appearance-none p-3 rounded-[6px] bg-[#f5f5f5] focus:outline-none border-[1px] focus:border-[#007bff]"
               >
                 <option key="" value="">
                   Select Role
@@ -169,7 +169,7 @@ const CreateUserFormModal = ({
                 maxLength="13"
                 className={`border-[1px] p-3 rounded-[6px] w-[100%] bg-[#f5f5f5] ${
                   contactNoError === "" ? "" : "border-[red]"
-                } focus:outline-none`}
+                } focus:outline-none focus:border-[#007bff]`}
               />
               {contactNoError && (
                 <p className="text-red-500">{contactNoError}</p>

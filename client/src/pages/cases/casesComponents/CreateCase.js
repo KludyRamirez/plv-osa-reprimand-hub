@@ -13,16 +13,9 @@ const ModalBox = styled("div")({
   top: "50%",
   left: "50%",
   width: "48%",
-  padding: "8px",
   transform: "translate(-50%, -50%)",
   background: "white",
-  borderRadius: "12px",
-  border: "none",
   outline: "none",
-
-  "&:focus": {
-    border: "none",
-  },
 
   "@media (max-width: 767px)": {
     width: "100%",
@@ -193,7 +186,6 @@ const CreateCase = ({ toast, getCases }) => {
     const selectedStudentNo =
       e.target.options[e.target.selectedIndex].getAttribute("data-studentno");
 
-    // Update state with selected student ID and student number
     setValues({
       ...values,
       student: selectedStudentId,
@@ -245,6 +237,7 @@ const CreateCase = ({ toast, getCases }) => {
           <CreateCaseFormModal
             students={students}
             values={values}
+            setValues={setValues}
             handleChange={handleChange}
             handleDateOfIncidentChange={handleDateOfIncidentChange}
             handleDateReportedChange={handleDateReportedChange}
