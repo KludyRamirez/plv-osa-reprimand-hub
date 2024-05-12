@@ -24,6 +24,7 @@ const ModalBox = styled("div")({
   top: "50%",
   left: "50%",
   width: "48%",
+  borderRadius: "24px",
   transform: "translate(-50%, -50%)",
   background: "white",
   border: "none",
@@ -210,7 +211,7 @@ const UsersTable = ({ users, getUsers, selectedUsers, setSelectedUsers }) => {
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-        <ModalBox>
+        <ModalBox sx={{ width: "22%" }}>
           <DeleteUserModal
             handleConfirmDelete={handleConfirmDelete}
             handleCloseModal={handleCloseModal}
@@ -224,7 +225,7 @@ const UsersTable = ({ users, getUsers, selectedUsers, setSelectedUsers }) => {
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-        <ModalBox>
+        <ModalBox sx={{ width: "22%" }}>
           <DeleteManyUserModal
             deleteSelectedusers={deleteSelectedUsers}
             handleCloseModalDeleteMany={handleCloseModalDeleteMany}

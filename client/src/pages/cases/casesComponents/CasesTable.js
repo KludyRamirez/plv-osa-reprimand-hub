@@ -27,7 +27,7 @@ const ModalBox = styled("div")({
   background: "white",
   border: "none",
   outline: "none",
-  borderRadius: "4px",
+  borderRadius: "12px",
 
   "&:focus": {
     border: "none",
@@ -287,7 +287,7 @@ const CasesTable = ({
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-        <ModalBox>
+        <ModalBox sx={{ width: "22%" }}>
           <DeleteManyCaseModal
             deleteSelectedCases={deleteSelectedCases}
             handleCloseModalDeleteMany={handleCloseModalDeleteMany}

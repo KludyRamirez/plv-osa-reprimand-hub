@@ -257,6 +257,7 @@ const StudentsFilter = ({ students, cases, getStudents, cads }) => {
           selectedStudents={selectedStudents}
           setSelectedStudents={setSelectedStudents}
           cases={cases}
+          cads={cads}
         />
       </div>
     </>

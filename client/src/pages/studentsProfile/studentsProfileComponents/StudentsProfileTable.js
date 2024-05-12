@@ -34,6 +34,7 @@ const ModalBox = styled("div")({
   top: "50%",
   left: "50%",
   width: "48%",
+  borderRadius: "24px",
   transform: "translate(-50%, -50%)",
   background: "white",
   border: "none",
@@ -60,6 +61,7 @@ const StudentsProfileTable = ({
   getCases,
   student,
   getStudents,
+  cads,
 }) => {
   const [selectAll, setSelectAll] = useState(false);
   const [caseDeleteId, setCaseDeleteId] = useState("");
@@ -278,6 +280,8 @@ const StudentsProfileTable = ({
     (c) => c.statusOfCase === "Case Solved"
   );
 
+  // cads.college filter and set - para walang duplicate object sa array
+
   return (
     <>
       <Modal
@@ -293,6 +297,7 @@ const StudentsProfileTable = ({
             selectedStudentEdit={selectedStudentEdit}
             toast={toast}
             getStudents={getStudents}
+            cads={cads}
           />
         </ModalBox>
       </Modal>
@@ -319,6 +324,7 @@ const StudentsProfileTable = ({
             toast={toast}
             getCases={getCases}
             students={students}
+            cads={cads}
           />
         </ModalBox>
       </Modal>

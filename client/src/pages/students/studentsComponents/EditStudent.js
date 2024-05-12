@@ -4,46 +4,14 @@ import { createSelector } from "reselect";
 import axios from "axios";
 import EditStudentFormModal from "./EditStudentFormModal";
 
-const coedDepartments = [
-  "(BECED) Bachelor of Early Childhood Education",
-  "(BSED English) Bachelor of Secondary Education Major in English",
-  "(BSED Filipino) Bachelor of Secondary Education Major in Filipino",
-  "(BSED Mathematics) Bachelor of Secondary Education Major in Mathematics",
-  "(BSED Science) Bachelor of Secondary Education Major in Science",
-  "(BSED Social Studies) Bachelor of Secondary Education Major in Social Studies",
-];
-const casDepartments = [
-  "(BAC) Bachelor of Arts in Communication",
-  "(BSP) Bachelor of Science in Psychology",
-  "(BSSW) Bachelor of Science in Social Work",
-];
-const ceitDepartments = [
-  "(BSCE) Bachelor of Science in Civil Engineering",
-  "(BSEE) Bachelor of Science in Electrical Engineering",
-  "(BSIT) Bachelor of Science in Information Technology",
-];
-const cabaDepartments = [
-  "(BSA) Bachelor of Science in Accountancy",
-  "(BSBA FM) Bachelor of Science in Business Administration Major in Financial Management",
-  "(BSBA HRDM) Bachelor of Science in Business Administration Major in Human Resource Development Management",
-  "(BSBA MM) Bachelor of Science in Business Administration Major in Marketing Management",
-  "(BSPA) Bachelor of Science in Public Administration",
-];
-
 const initialState = {
   studentNo: "",
   firstName: "",
   surName: "",
   middleName: "",
-  colleges: [
-    "(COED) College of Education",
-    "(CAS) College of Arts and Sciences",
-    "(CEIT) College of Engineering and Information Technology",
-    "(CABA) College of Business Administration, Public Administration and Accountancy",
-  ],
   college: "",
   department: "",
-  year: "",
+  year: Number,
   section: "",
   sex: "",
   contactNo: "",
@@ -70,6 +38,7 @@ const EditStudent = ({
   selectedStudentEdit,
   handleCloseModalEdit,
   handleCloseModalEditStudent,
+  cads,
 }) => {
   const [values, setValues] = useState(initialState);
   const [updatedValues, setUpdatedValues] = useState(selectedStudentEdit);
@@ -101,8 +70,9 @@ const EditStudent = ({
       toast.error(err?.response?.data);
     } finally {
       setValues(initialState);
-      handleCloseModalEdit();
-      handleCloseModalEditStudent();
+      handleCloseModalEdit
+        ? handleCloseModalEdit()
+        : handleCloseModalEditStudent();
       getStudents();
     }
   };
@@ -186,6 +156,8 @@ const EditStudent = ({
     setErrors(newErrors);
   };
 
+  const uniqueColleges = [...new Set(cads.map((c) => c.college))];
+
   return (
     <>
       <EditStudentFormModal
@@ -196,10 +168,8 @@ const EditStudent = ({
         handleCloseModalEdit={handleCloseModalEdit}
         handleCloseModalEditStudent={handleCloseModalEditStudent}
         handleEditStudent={handleEditStudent}
-        coedDepartments={coedDepartments}
-        casDepartments={casDepartments}
-        ceitDepartments={ceitDepartments}
-        cabaDepartments={cabaDepartments}
+        cads={cads}
+        uniqueColleges={uniqueColleges}
       />
     </>
   );

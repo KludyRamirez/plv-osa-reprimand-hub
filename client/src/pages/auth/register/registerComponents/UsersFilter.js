@@ -3,6 +3,7 @@ import {
   BsCheckCircle,
   BsChevronBarDown,
   BsFilter,
+  BsGear,
   BsPersonGear,
 } from "react-icons/bs";
 
@@ -98,7 +99,7 @@ const UsersFilter = ({ users, getUsers }) => {
                 <div className="flex gap-2 items-center">
                   <div>Role</div> <BsChevronBarDown />
                 </div>
-                <LuHardHat className="text-[20px]" />
+                <BsGear className="text-[20px]" />
               </div>
               <select
                 onChange={(e) => setRole(e.target.value)}

@@ -15,6 +15,7 @@ const ModalBox = styled("div")({
   top: "50%",
   left: "50%",
   width: "48%",
+  borderRadius: "24px",
   transform: "translate(-50%, -50%)",
   background: "white",
   border: "none",

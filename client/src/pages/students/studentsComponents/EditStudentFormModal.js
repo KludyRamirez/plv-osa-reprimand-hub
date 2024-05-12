@@ -7,16 +7,11 @@ const EditStudentFormModal = ({
   handleEditStudent,
   handleCloseModalEdit,
   handleCloseModalEditStudent,
-  values,
   updatedValues,
   errors,
-  coedDepartments,
-  casDepartments,
-  ceitDepartments,
-  cabaDepartments,
+  cads,
+  uniqueColleges,
 }) => {
-  const { colleges } = values;
-
   const {
     studentNo: studentNoError,
     firstName: firstNameError,
@@ -34,7 +29,13 @@ const EditStudentFormModal = ({
           <div className="text-[28px] text-[#077bff] font-semibold flex justify-between">
             Edit Existing Student
             <BsX
-              onClick={handleCloseModalEditStudent || handleCloseModalEdit}
+              onClick={
+                handleCloseModalEdit
+                  ? handleCloseModalEdit
+                  : handleCloseModalEditStudent
+                  ? handleCloseModalEditStudent
+                  : handleCloseModalEdit
+              }
               className="text-[36px]"
             />
           </div>
@@ -127,7 +128,8 @@ const EditStudentFormModal = ({
                 onChange={handleChange}
                 className="appearance-none p-3 rounded-[6px] bg-[#f5f5f5] focus:outline-none border-[1px] focus:border-[#bbbbbb]"
               >
-                {colleges?.map((c) => (
+                <option value="">College</option>
+                {uniqueColleges?.map((c) => (
                   <option key={c} value={c}>
                     {c}
                   </option>
@@ -145,45 +147,14 @@ const EditStudentFormModal = ({
                 onChange={handleChange}
                 className="appearance-none p-3 rounded-[6px] bg-[#f5f5f5] focus:outline-none border-[1px] focus:border-[#bbbbbb]"
               >
-                {updatedValues?.college === "(COED) College of Education" ? (
-                  <>
-                    {coedDepartments?.map((c) => (
-                      <option key={c} value={c}>
-                        {c}
-                      </option>
-                    ))}
-                  </>
-                ) : null}
-                {updatedValues?.college ===
-                "(CAS) College of Arts and Sciences" ? (
-                  <>
-                    {casDepartments?.map((c) => (
-                      <option key={c} value={c}>
-                        {c}
-                      </option>
-                    ))}
-                  </>
-                ) : null}
-                {updatedValues?.college ===
-                "(CEIT) College of Engineering and Information Technology" ? (
-                  <>
-                    {ceitDepartments?.map((c) => (
-                      <option key={c} value={c}>
-                        {c}
-                      </option>
-                    ))}
-                  </>
-                ) : null}
-                {updatedValues?.college ===
-                "(CABA) College of Business Administration, Public Administration and Accountancy" ? (
-                  <>
-                    {cabaDepartments?.map((c) => (
-                      <option key={c} value={c}>
-                        {c}
-                      </option>
-                    ))}
-                  </>
-                ) : null}
+                <option value="">Department</option>
+                {cads
+                  ?.filter((c) => c.college === updatedValues?.college)
+                  .map((c) => (
+                    <option key={c.department} value={c.department}>
+                      {c.department}
+                    </option>
+                  ))}
               </select>
             </div>
           </div>
@@ -199,10 +170,11 @@ const EditStudentFormModal = ({
                 onChange={handleChange}
                 className="appearance-none p-3 rounded-[6px] bg-[#f5f5f5] focus:outline-none border-[1px] focus:border-[#bbbbbb]"
               >
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
+                <option value="">Year</option>
+                <option value={1}>1</option>
+                <option value={2}>2</option>
+                <option value={3}>3</option>
+                <option value={4}>4</option>
               </select>
             </div>
             <div className="flex flex-col gap-2 w-[16%]">

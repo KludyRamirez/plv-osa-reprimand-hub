@@ -25,6 +25,8 @@ const ModalBox = styled("div")({
   top: "50%",
   left: "50%",
   width: "48%",
+  borderRadius: "24px",
+  borderRadius: "24px",
   transform: "translate(-50%, -50%)",
   background: "white",
   border: "none",
@@ -51,6 +53,7 @@ const StudentsTable = ({
   selectedStudents,
   setSelectedStudents,
   cases,
+  cads,
 }) => {
   const [selectAll, setSelectAll] = useState(false);
   const [studentDeleteId, setStudentDeleteId] = useState("");
@@ -219,6 +222,7 @@ const StudentsTable = ({
             selectedStudentEdit={selectedStudentEdit}
             toast={toast}
             getStudents={getStudents}
+            cads={cads}
           />
         </ModalBox>
       </Modal>
@@ -229,7 +233,7 @@ const StudentsTable = ({
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-        <ModalBox>
+        <ModalBox sx={{ width: "22%" }}>
           <DeleteStudentModal
             handleConfirmDelete={handleConfirmDelete}
             handleCloseModal={handleCloseModal}
@@ -243,7 +247,7 @@ const StudentsTable = ({
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-        <ModalBox>
+        <ModalBox sx={{ width: "22%" }}>
           <DeleteManyStudentModal
             deleteSelectedStudents={deleteSelectedStudents}
             handleCloseModalDeleteMany={handleCloseModalDeleteMany}

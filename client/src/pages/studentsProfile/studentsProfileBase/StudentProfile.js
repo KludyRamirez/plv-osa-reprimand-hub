@@ -13,6 +13,7 @@ const StudentProfile = () => {
   const [student, setStudent] = useState("");
   const [students, setStudents] = useState([]);
   const [cases, setCases] = useState([]);
+  const [cads, setCads] = useState([]);
 
   const auth = useSelector(authSelector);
 
@@ -22,6 +23,7 @@ const StudentProfile = () => {
     getOneStudent();
     getStudents();
     getCases();
+    getCads();
   }, []);
 
   const getOneStudent = async () => {
@@ -85,6 +87,26 @@ const StudentProfile = () => {
     }
   };
 
+  const getCads = async () => {
+    try {
+      if (!auth.userDetails.token) {
+        console.error("Authentication token not found.");
+        return;
+      }
+      const url = `${process.env.REACT_APP_API_URI}/cad`;
+      const res = await axios.get(url, {
+        withCredentials: true,
+        headers: {
+          Authorization: `Bearer ${auth?.userDetails?.token}`,
+        },
+      });
+
+      setCads(res.data);
+    } catch (err) {
+      console.error("Error fetching users!", err);
+    }
+  };
+
   return (
     <div className="flex justify-start">
       <Sidebar />
@@ -96,6 +118,7 @@ const StudentProfile = () => {
             cases={cases}
             getCases={getCases}
             getStudents={getStudents}
+            cads={cads}
           />
         </div>
       </div>

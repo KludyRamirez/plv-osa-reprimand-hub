@@ -134,25 +134,12 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
 
   let combinedFilteredCases = [...filteredCases];
 
-  const bsitCases = cases.filter(
-    (c) =>
-      c.student.department ===
-      "(BSIT) Bachelor of Science in Information Technology"
-  );
-  const bsbammCases = cases.filter(
-    (c) =>
-      c.student.department ===
-      "(BSBA MM) Bachelor of Science in Business Administration Major in Marketing Management"
-  );
+  const bsitCases = cases.filter((c) => c.offense === "1st");
+  const bsbammCases = cases.filter((c) => c.offense === "2nd");
 
-  const becedCases = cases.filter(
-    (c) =>
-      c.student.department === "(BECED) Bachelor of Early Childhood Education"
-  );
+  const becedCases = cases.filter((c) => c.offense === "3rd");
 
-  const bspCases = cases.filter(
-    (c) => c.student.department === "(BSP) Bachelor of Science in Psychology"
-  );
+  const bspCases = cases.filter((c) => c.offense === "4th");
 
   const bsitPercentageConverter = () => {
     const fraction = bsitCases?.length / cases?.length;
@@ -479,7 +466,7 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
               <>{bsitNumberConverter()}</>
             )}
           </div>
-          <div className="text-[16px] text-[#007bff]">BSIT Cases</div>
+          <div className="text-[16px] text-[#007bff]">1st Offense Cases</div>
           <svg
             className="absolute top-0 left-0"
             viewBox="0 0 500 500"
@@ -507,7 +494,7 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
               <>{bsbammNumberConverter()}</>
             )}
           </div>
-          <div className="text-[16px] text-[#007bff]">BSBA MM Cases</div>
+          <div className="text-[16px] text-[#007bff]">2nd Offense Cases</div>
           <svg
             className="absolute top-0 left-0"
             viewBox="0 0 500 500"
@@ -535,7 +522,7 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
               <>{becedNumberConverter()}</>
             )}
           </div>
-          <div className="text-[16px] text-[#FFBF00]">BECED Cases</div>
+          <div className="text-[16px] text-[#FFBF00]">3rd Offense Cases</div>
           <svg
             className="absolute top-0 left-0"
             viewBox="0 0 500 500"
@@ -562,7 +549,7 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
               <>{bspNumberConverter()}</>
             )}
           </div>
-          <div className="text-[16px] text-[#FFBF00]">BSP Cases</div>
+          <div className="text-[16px] text-[#FFBF00]">4th Offense Cases</div>
           <svg
             className="absolute top-0 left-0"
             viewBox="0 0 500 500"
