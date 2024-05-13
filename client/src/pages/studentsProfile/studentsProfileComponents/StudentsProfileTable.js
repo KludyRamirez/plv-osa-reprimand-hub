@@ -15,8 +15,13 @@ import girl from "../../../images/login/girl.png";
 import {
   BsArrowRightShort,
   BsBoxArrowUpRight,
+  BsBullseye,
+  BsCheck2Circle,
+  BsCheckCircle,
   BsChevronUp,
+  BsCollection,
   BsFolderX,
+  BsGoogle,
   BsPen,
   BsSticky,
   BsTrash3,
@@ -34,7 +39,7 @@ const ModalBox = styled("div")({
   top: "50%",
   left: "50%",
   width: "48%",
-  borderRadius: "24px",
+  borderRadius: "12px",
   transform: "translate(-50%, -50%)",
   background: "white",
   border: "none",
@@ -308,15 +313,7 @@ const StudentsProfileTable = ({
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-        <ModalBox
-          sx={{
-            top: "50%",
-            left: "50%",
-            width: "48%",
-            height: "fit-content",
-            padding: "8px",
-          }}
-        >
+        <ModalBox>
           <EditCase
             handleCloseModalEdit={handleCloseModalEdit}
             selectedCaseEdit={selectedCaseEdit}
@@ -335,7 +332,7 @@ const StudentsProfileTable = ({
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-        <ModalBox>
+        <ModalBox sx={{ width: "22%" }}>
           <DeleteCaseModal
             handleConfirmDelete={handleConfirmDelete}
             handleCloseModal={handleCloseModal}
@@ -349,7 +346,7 @@ const StudentsProfileTable = ({
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-        <ModalBox>
+        <ModalBox sx={{ width: "22%" }}>
           <DeleteManyCaseModal
             deleteSelectedCases={deleteSelectedCases}
             handleCloseModalDeleteMany={handleCloseModalDeleteMany}
@@ -406,66 +403,72 @@ const StudentsProfileTable = ({
             </div>
             <div className=""></div>
           </div>
-          <div className="w-[850px] flex justify-center gap-8  items-center">
-            <div className="w-[148px] text-white h-[150px] flex flex-col justify-center items-center gap-2 rounded-[8px]">
-              <div className="text-[32px] font-bold text-blue-900">
+          <div className="w-[850px] flex justify-center gap-8 items-center border-[1px] rounded-[8px]">
+            <div className="w-[148px] text-white h-[150px] flex flex-col justify-center items-center gap-2 rounded-[8px] ">
+              <div className="text-[32px] font-bold text-[#5D3FD3]">
                 {cases.length}
               </div>
-              <div className="text-[16px] py-2 px-3 bg-blue-900 rounded-[4px]">
+              <div className=" cursor-pointer text-[16px] py-2 px-3 bg-[#5D3FD3] rounded-[4px] hover:text-[#5D3FD3] hover:bg-white hover:border-[1px] hover:border-[#5D3FD3]">
                 <div className="">Total Cases</div>
               </div>
             </div>
             <div className="w-[1px] h-[30px] bg-gray-200"></div>
             <div className="w-[148px] h-[150px] flex flex-col justify-center items-center gap-2 text-white">
-              <div className="text-[32px] text-[red] font-bold">
+              <div className="text-[32px] text-[#ff3131] font-bold">
                 {activeCases.length}
               </div>
-              <div className="text-[16px] py-2 px-3 bg-red-900 rounded-[4px]">
+              <div className="text-[16px] py-2 px-3 bg-[#ff3131] rounded-[4px] hover:text-[#ff3131] hover:bg-white hover:border-[1px] hover:border-[#ff3131] cursor-pointer">
                 <div className="">Active Cases</div>
               </div>
             </div>
             <div className="w-[1px] h-[30px] bg-gray-200"></div>
             <div className="w-[148px] h-[150px] flex flex-col justify-center items-center gap-2 text-[white]">
-              <div className="text-[32px] text-[green] font-bold">
+              <div className="text-[32px] text-[#32CD32] font-bold">
                 {caseSolvedCases.length}
               </div>
-              <div className="text-[16px] py-2 px-3 bg-green-900 rounded-[4px]">
+              <div className="text-[16px] py-2 px-3 bg-[#32CD32] rounded-[4px] hover:text-[#32CD32] hover:bg-white hover:border-[1px] hover:border-[#32CD32] cursor-pointer">
                 <div className="">Solved Cases</div>
               </div>
             </div>
             <div className="w-[1px] h-[30px] bg-gray-200"></div>
             <div className="w-[148px] h-[150px] flex flex-col justify-center items-center gap-2 text-[white]">
-              <div className="text-[32px] text-blue-900 font-bold">
+              <div className="text-[32px] text-[#007bff] font-bold">
                 {caseSolvedCases.length}
               </div>
-              <div className="text-[16px] py-2 px-3 bg-blue-900 rounded-[4px]">
+              <div className="text-[16px] py-2 px-3 bg-[#007bff] rounded-[4px] hover:text-[#007bff] hover:bg-white hover:border-[1px] hover:border-[#007bff] cursor-pointer">
                 <div className="">Counseling</div>
               </div>
             </div>
           </div>
-          <div className="w-[100%] h-[48px] flex justify-start items-center pt-2 gap-2">
-            <div className="cursor-pointer py-1 px-4 rounded-[24px] text-[16px] border-[1px] border-[#606060] flex gap-2 items-center text-[#606060]">
-              <div>Total</div>
-              <BsSticky />
+          <div className="w-[100%] h-[48px] flex justify-between items-center pt-8">
+            <div className="flex justify-start gap-3 items-center">
+              <div className="text-[24px] text-[#007bff] font-bold">Cases</div>
+              <BsSticky className="text-[22px] text-[#007bff]" />
             </div>
-            <div className="cursor-pointer py-1 px-4 rounded-[24px] text-[16px]  flex gap-2 items-center text-[#606060] bg-[#f0f0f0]">
-              <div>Active</div>
-              <BsSticky />
-            </div>
-            <div className="cursor-pointer py-1 px-4 rounded-[24px] text-[16px]  flex gap-2 items-center text-[#606060] bg-[#f0f0f0]">
-              <div>Solved</div>
-              <BsSticky />
+            <div className="flex justify-center items-center gap-2 font-bold">
+              <div className="cursor-pointer py-2 px-4 rounded-[24px] text-[16px]  flex gap-2 items-center text-[#007bff] bg-[#f7f7f7] hover:border-[1px] hover:border-[#007bff]">
+                <div>Total</div>
+                <BsSticky />
+              </div>
+              <div className="cursor-pointer py-2 px-4 rounded-[24px] text-[16px]  flex gap-2 items-center text-[#007bff] bg-[#f7f7f7] hover:border-[1px] hover:border-[#007bff]">
+                <div>Active</div>
+                <BsCollection />
+              </div>
+              <div className="cursor-pointer py-2 px-4 rounded-[24px] text-[16px]  flex gap-2 items-center text-[#007bff] bg-[#f7f7f7] hover:border-[1px] hover:border-[#007bff]">
+                <div>Solved</div>
+                <BsCheckCircle />
+              </div>
             </div>
           </div>
-          <div className="w-[848px] rounded-[8px] flex justify-start flex-wrap gap-8 pt-2">
+          <div className="w-[848px] rounded-[8px] flex justify-start flex-wrap gap-8 pt-6">
             {cases.length > 0 ? (
               <>
                 {cases.map((c) => (
                   <div
                     key={c}
-                    className="cursor-pointer w-[408px] bg-blue-100 rounded-[8px] flex flex-col"
+                    className="cursor-pointer w-[408px] bg-[#f3f3f3] rounded-[8px] flex flex-col"
                   >
-                    <div className="flex h-[33px] justify-between items-center bg-blue-200 rounded-tr-[8px] rounded-tl-[8px] px-4">
+                    <div className="flex h-[33px] justify-between items-center bg-[#efefef] rounded-tr-[8px] rounded-tl-[8px] px-4">
                       <div className="flex justify-center items-center text-[14px] text-[#606060]">
                         ID {c.caseNo}
                       </div>
@@ -477,7 +480,7 @@ const StudentsProfileTable = ({
                       <div className="flex flex-col items-start gap-4">
                         <div className="w-[100%] flex justify-between items-center">
                           <div className="text-[20px] font-bold">
-                            <span className="text-[red]">
+                            <span className="text-[#007bff]">
                               {c.typeOfViolation}
                             </span>
                           </div>
@@ -485,7 +488,7 @@ const StudentsProfileTable = ({
                             {c.offense} offense
                           </div>
                         </div>
-                        <div className="w-[100%] h-[58px] text-[14px] text-[#606060] p-2 bg-[#f7f7f7] rounded-[4px]">
+                        <div className="w-[100%] h-[58px] text-[14px] text-[#606060] pt-2 rounded-[4px]">
                           {c.reportedViolation}.
                         </div>
                       </div>
@@ -544,30 +547,26 @@ const StudentsProfileTable = ({
             </div>
             <div className="w-[100%] flex flex-col flex-grow px-6 pb-4 gap-4">
               <div className="w-[100%] flex justify-start gap-4 items-center">
-                <div className="p-2 rounded-[24px] border-[1px] border-[#007bff] text-[#007bff]">
+                <div className="p-2 rounded-[24px] border-[1px] border-[#007bff] text-[#007bff] hover:bg-[#007bff] hover:text-white cursor-pointer">
                   <MdOutlineEmail className="text-[24px]" />
                 </div>
                 <div className="">{student.email}</div>
-                <BsArrowRightShort className="text-[24px]" />
+                <BsGoogle className="text-[24px] text-[#606060]" />
               </div>
               <div className="w-[100%] flex gap-4 items-center">
-                <div className="p-2 rounded-[24px] border-[1px] border-[#007bff] text-[#007bff]">
+                <div className="p-2 rounded-[24px] border-[1px] border-[#007bff] text-[#007bff] hover:bg-[#007bff] hover:text-white cursor-pointer">
                   <MdOutlineCall className="text-[24px]" />
                 </div>
                 <div className="">{student.contactNo}</div>
-                <BsArrowRightShort className="text-[24px]" />
               </div>
 
-              <div className="w-[100%] flex gap-4 items-center">
-                <div className="p-2 rounded-[24px] border-[1px] border-[#007bff] text-[#007bff]">
-                  <MdOutlineNetworkWifi2Bar className="text-[24px]" />
-                </div>
-                <div className="">{student.guardianContactNo}</div>
+              <div className="w-[100%] flex gap-2 items-center pt-4 hover:underline cursor-pointer">
+                Show more info
                 <BsArrowRightShort className="text-[24px]" />
               </div>
             </div>
           </div>
-          <div className="w-[350px] px-6 pt-4 pb-7 flex flex-col gap-5">
+          <div className="w-[350px] px-6 pt-3 pb-6 flex flex-col gap-6">
             <div className="text-[25px] text-[#404040] font-bold">
               Similar Profile
             </div>

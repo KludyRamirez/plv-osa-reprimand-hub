@@ -2,6 +2,8 @@
 
 const { login } = require("../controllers/authentication/Login");
 const { register } = require("../controllers/authentication/Register");
+const { changeEmail } = require("../controllers/authentication/CurrentUser");
+const { changePassword } = require("../controllers/authentication/CurrentUser");
 
 //students
 
@@ -42,6 +44,8 @@ const { deleteManyCad } = require("./CollegesAndDepartmentsController");
 exports.controllers = {
   login,
   register,
+  changeEmail,
+  changePassword,
   //
   createStudent,
   getStudents,

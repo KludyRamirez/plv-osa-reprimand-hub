@@ -25,8 +25,7 @@ const ModalBox = styled("div")({
   top: "50%",
   left: "50%",
   width: "48%",
-  borderRadius: "24px",
-  borderRadius: "24px",
+  borderRadius: "12px",
   transform: "translate(-50%, -50%)",
   background: "white",
   border: "none",
@@ -277,20 +276,20 @@ const StudentsTable = ({
           <div className="w-[118px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
             First name
           </div>
-          <div className=" w-[118px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+          <div className=" w-[60px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
             Year
           </div>
-          <div className=" w-[118px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+          <div className=" w-[80px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
             Section
           </div>
 
-          <div className=" w-[118px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+          <div className=" w-[160px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
             Department
           </div>
           <div className=" w-[118px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
             Sex
           </div>
-          <div className=" w-[118px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+          <div className=" w-[160px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
             Contact No.
           </div>
           <div className=" w-[118px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
@@ -351,20 +350,20 @@ const StudentsTable = ({
                     <div className="w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
                       {student?.firstName}
                     </div>
-                    <div className="w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
+                    <div className="w-[60px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
                       {student?.year}
                     </div>
-                    <div className="w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
+                    <div className="w-[80px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
                       {student?.section}
                     </div>
 
-                    <div className="w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
-                      {student?.department?.slice(0, 9)}...
+                    <div className="w-[160px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
+                      {student?.department?.slice(0, 15)}...
                     </div>
                     <div className="w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
                       {student?.sex}
                     </div>
-                    <div className="w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
+                    <div className="w-[160px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
                       {student?.contactNo}
                     </div>
                     <div className="w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">

@@ -13,11 +13,13 @@ import { useLocation } from "react-router-dom";
 import { AiOutlineLogout } from "react-icons/ai";
 import { CgMenuLeft } from "react-icons/cg";
 import {
+  BsBoxArrowUp,
+  BsBoxArrowUpRight,
   BsGear,
-  BsGrid1X2,
   BsHourglassSplit,
   BsPeople,
   BsPeopleFill,
+  BsPerson,
   BsPersonSquare,
   BsPieChart,
   BsPieChartFill,
@@ -26,7 +28,7 @@ import {
 } from "react-icons/bs";
 import { logoutUtil } from "../../pages/auth/login/loginUtils/logoutUtil";
 import plvLogo from "../../images/login/PLVlogo.png";
-import { FaRedhat } from "react-icons/fa6";
+import admin from "../../images/login/admin.svg";
 
 const AppNavBar = styled(AppBar)({
   background: "transparent",
@@ -373,7 +375,7 @@ function Sidebar(props) {
               <CgMenuLeft />
             </IconButton>
           </Toolbar>
-          <div className="flex justify-center items-center gap-[24px]">
+          <div className="flex justify-center items-center gap-[24px] mr-3">
             <Link to="/notification">
               <div className="text-white flex w-[44px] h-[44px] rounded-[50%] border-[1px] border-[white] justify-center items-center cursor-pointer hover:bg-white hover:text-[#007bff]">
                 <BsHourglassSplit className="text-[22px]" />
@@ -384,9 +386,11 @@ function Sidebar(props) {
               <div className="text-[18px]">
                 {`${auth?.userDetails?.userName}`}
               </div>
-              <div className="flex justify-center items-center w-[44px] h-[44px] rounded-[50%] border-[1px] border-white bg-white text-[#007bff] text-[22px] hover:bg-transparent hover:text-white">
-                <FaRedhat />
-              </div>
+              <Link to="/account">
+                <div className="flex justify-center items-center w-[44px] h-[44px] rounded-[50%] border-[1px] border-white hover:bg-white hover:text-[#007bff] text-[22px] bg-transparent text-white">
+                  <BsBoxArrowUpRight />
+                </div>
+              </Link>
             </div>
           </div>
         </div>

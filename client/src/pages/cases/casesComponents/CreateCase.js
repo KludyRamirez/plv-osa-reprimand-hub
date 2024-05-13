@@ -6,14 +6,13 @@ import { FaPlus } from "react-icons/fa6";
 import { styled } from "@mui/system";
 import axios from "axios";
 import CreateCaseFormModal from "./CreateCaseFormModal";
-import moment from "moment";
 
 const ModalBox = styled("div")({
   position: "absolute",
   top: "50%",
   left: "50%",
   width: "48%",
-  borderRadius: "24px",
+  borderRadius: "12px",
   transform: "translate(-50%, -50%)",
   background: "white",
   outline: "none",

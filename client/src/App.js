@@ -9,6 +9,7 @@ import Statistics from "./pages/statistics/statisticsBase/Statistics";
 import History from "./pages/history/historyBase/History";
 import StudentProfile from "./pages/studentsProfile/studentsProfileBase/StudentProfile";
 import Settings from "./pages/settings/settingsBase/Settings";
+import AccountSettings from "./pages/accountSettings/accountSettingsBase/AccountSettings";
 
 function App() {
   return (
@@ -40,6 +41,10 @@ function App() {
             element={<StudentProfile toast={toast} />}
           ></Route>
           <Route path="/settings" element={<Settings toast={toast} />}></Route>
+          <Route
+            path="/account"
+            element={<AccountSettings toast={toast} />}
+          ></Route>
         </Routes>
       </Router>
     </>

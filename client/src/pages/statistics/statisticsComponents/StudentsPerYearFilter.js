@@ -417,7 +417,7 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
           <div className="p-4 zIndex-2 text-[white] bg-[#007bff]">
             Cases Per Year Level
           </div>
-          {cases.length > 0 ? (
+          {cases.length > 0 || combinedFilteredCases.length > 0 ? (
             <>
               <StudentsPerYearPieChart
                 cases={combinedFilteredCases}
@@ -428,7 +428,7 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
           ) : (
             <div className="mt-[-20px] h-[297px] flex flex-col justify-center items-center gap-2">
               <BsFolderX className="text-[80px] text-[#007bff]" />
-              <div>No cases available</div>
+              <div className="text-[#007bff] font-bold">No cases available</div>
             </div>
           )}
         </div>
@@ -437,7 +437,7 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
           <div className="p-4 zIndex-2 text-[white] bg-[#FFBF00]">
             Cases Per College
           </div>
-          {cases.length > 0 ? (
+          {cases.length > 0 || combinedFilteredCases.length > 0 ? (
             <>
               <CasesPerCollegePieChart
                 cases={combinedFilteredCases}
@@ -448,7 +448,7 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
           ) : (
             <div className="mt-[-20px] h-[297px] flex flex-col justify-center items-center gap-2">
               <BsFolderX className="text-[80px] text-[#FFBF00]" />
-              <div>No cases available</div>
+              <div className="text-[#FFBF00] font-bold">No cases available</div>
             </div>
           )}
         </div>
