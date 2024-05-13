@@ -370,7 +370,7 @@ const StudentsTable = ({
                       {student?.statusOfStudent}
                     </div>
 
-                    <div className="w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
+                    <div className="w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px] text-[22px] font-bold text-[#007bff]">
                       {casesCount}
                     </div>
                     <div className="w-[130px] whitespace-nowrap flex justify-start items-center gap-2">

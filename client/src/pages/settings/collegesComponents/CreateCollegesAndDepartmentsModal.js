@@ -34,7 +34,7 @@ const CreateCollegesAndDepartmentFormModal = ({
               onChange={handleChange}
               type="text"
               autoComplete="off"
-              placeholder="e.g. 20-1130"
+              placeholder="e.g. CEIT"
               className={`border-[1px] p-3 rounded-[6px] w-[100%] bg-[#f5f5f5] ${
                 collegeError === "" ? "" : "border-[red]"
               } focus:outline-none border-[#007bff]`}
@@ -51,7 +51,7 @@ const CreateCollegesAndDepartmentFormModal = ({
                 onChange={handleChange}
                 type="text"
                 autoComplete="off"
-                placeholder="e.g. Kludy"
+                placeholder="e.g. BSIT Bachelor of Science in Information Technology"
                 className={`border-[1px] p-3 rounded-[6px] w-[100%] bg-[#f5f5f5] ${
                   departmentError === "" ? "" : "border-[red]"
                 } focus:outline-none focus:border-[#007bff]`}

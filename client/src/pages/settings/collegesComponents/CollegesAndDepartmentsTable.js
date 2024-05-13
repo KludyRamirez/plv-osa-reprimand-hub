@@ -180,7 +180,7 @@ const CollegesAndDepartmentsTable = ({
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-        <ModalBox>
+        <ModalBox sx={{ width: "22%" }}>
           <DeleteCadModal
             handleConfirmDelete={handleConfirmDelete}
             handleCloseModal={handleCloseModal}
@@ -194,7 +194,7 @@ const CollegesAndDepartmentsTable = ({
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-        <ModalBox>
+        <ModalBox sx={{ width: "22%" }}>
           <DeleteManyCadModal
             deleteSelectedCads={deleteSelectedCads}
             handleCloseModalDeleteMany={handleCloseModalDeleteMany}

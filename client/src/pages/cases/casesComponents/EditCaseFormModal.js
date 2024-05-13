@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { BsCaretDown, BsX } from "react-icons/bs";
+import React, { useState } from "react";
+import { BsChevronBarDown, BsFilter, BsX } from "react-icons/bs";
 import { FaPlus } from "react-icons/fa6";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -16,7 +16,6 @@ const EditCaseFormModal = ({
   minorViolation,
   values,
   updatedValues,
-  setUpdatedValues,
   students,
 }) => {
   const { typeOfViolations } = values;
@@ -93,27 +92,30 @@ const EditCaseFormModal = ({
           </div>
 
           <div className="text-[#606060] pt-8 flex flex-col gap-2">
-            <div>Search Student</div>
+            <div className="flex justify-start items-center gap-2">
+              <span>Search Case Owner</span>
+              <BsFilter className="text-[22px]" />
+            </div>
             <input
               value={searchTerm}
               onChange={handleSearchStudents}
               type="text"
               autoComplete="off"
-              placeholder="Search"
-              className={`border-[1px] p-3 rounded-[6px] w-[100%] bg-[#f5f5f5] focus:outline-none`}
+              placeholder="Search case owner's student no., firstname, etc."
+              className={`border-[1px] border-[#007bff] p-3 rounded-[6px] w-[100%] bg-white focus:outline-none`}
             />
           </div>
 
           <div className="text-[#606060] pt-6 flex flex-col gap-2 w-[100%]">
             <div className="flex gap-2 items-center">
               <span>Case Owner</span>
-              <BsCaretDown />
+              <BsChevronBarDown />
             </div>
             <select
               name="student"
               value={updatedValues?.student}
               onChange={handleCaseOwnerChange}
-              className="appearance-none p-3 rounded-[6px] bg-[#f5f5f5] focus:outline-none border-[1px] focus:border-[#bbbbbb]"
+              className="appearance-none p-3 rounded-[6px] bg-[#f5f5f5] focus:outline-none border-[1px] focus:border-[#007bff]"
             >
               <option value="">Enter Student Name</option>
               {filteredStudents?.map((s) => (
@@ -136,7 +138,7 @@ const EditCaseFormModal = ({
                 placeholderText="Enter Date"
                 selected={selectedDateOfIncident}
                 onChange={(date) => handleDateOfIncidentChangeCombined(date)}
-                className={`border-[1px] p-3 rounded-[6px] w-[100%] bg-[#f5f5f5] focus:outline-none`}
+                className={`border-[1px] p-3 rounded-[6px] w-[100%] bg-[#f5f5f5] focus:outline-none focus:border-[#007bff]`}
               />
             </div>
             <div className="flex flex-col gap-2 w-[100%]">
@@ -147,7 +149,7 @@ const EditCaseFormModal = ({
                 placeholderText="Enter Date"
                 selected={selectedDateReported}
                 onChange={(date) => handleDateReportedChangeCombined(date)}
-                className={`border-[1px] p-3 rounded-[6px] w-[100%] bg-[#f5f5f5] focus:outline-none`}
+                className={`border-[1px] p-3 rounded-[6px] w-[100%] bg-[#f5f5f5] focus:outline-none focus:border-[#007bff]`}
               />
             </div>
           </div>
@@ -158,7 +160,7 @@ const EditCaseFormModal = ({
                 name="typeOfViolation"
                 value={updatedValues?.typeOfViolation}
                 onChange={handleChange}
-                className="appearance-none p-3 rounded-[6px] bg-[#f5f5f5] focus:outline-none border-[1px] focus:border-[#bbbbbb]"
+                className="appearance-none p-3 rounded-[6px] bg-[#f5f5f5] focus:outline-none border-[1px] focus:border-[#007bff]"
               >
                 {typeOfViolations?.map((t) => (
                   <option key={t} value={t}>
@@ -173,7 +175,7 @@ const EditCaseFormModal = ({
                 name="reportedViolation"
                 value={updatedValues?.reportedViolation}
                 onChange={handleChange}
-                className="appearance-none p-3 rounded-[6px] bg-[#f5f5f5] focus:outline-none border-[1px] focus:border-[#bbbbbb]"
+                className="appearance-none p-3 rounded-[6px] bg-[#f5f5f5] focus:outline-none border-[1px] focus:border-[#007bff]"
               >
                 {updatedValues?.typeOfViolation === "Major" ? (
                   <>

@@ -466,7 +466,7 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
               <>{bsitNumberConverter()}</>
             )}
           </div>
-          <div className="text-[16px] text-[#007bff]">1st Offense Cases</div>
+          <div className="text-[16px] text-[#007bff]">1st Offense</div>
           <svg
             className="absolute top-0 left-0"
             viewBox="0 0 500 500"
@@ -494,7 +494,7 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
               <>{bsbammNumberConverter()}</>
             )}
           </div>
-          <div className="text-[16px] text-[#007bff]">2nd Offense Cases</div>
+          <div className="text-[16px] text-[#007bff]">2nd Offense</div>
           <svg
             className="absolute top-0 left-0"
             viewBox="0 0 500 500"
@@ -522,7 +522,7 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
               <>{becedNumberConverter()}</>
             )}
           </div>
-          <div className="text-[16px] text-[#FFBF00]">3rd Offense Cases</div>
+          <div className="text-[16px] text-[#FFBF00]">3rd Offense</div>
           <svg
             className="absolute top-0 left-0"
             viewBox="0 0 500 500"
@@ -549,7 +549,7 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
               <>{bspNumberConverter()}</>
             )}
           </div>
-          <div className="text-[16px] text-[#FFBF00]">4th Offense Cases</div>
+          <div className="text-[16px] text-[#FFBF00]">4th Offense</div>
           <svg
             className="absolute top-0 left-0"
             viewBox="0 0 500 500"

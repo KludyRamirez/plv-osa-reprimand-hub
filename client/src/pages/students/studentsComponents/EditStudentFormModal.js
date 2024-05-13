@@ -36,7 +36,7 @@ const EditStudentFormModal = ({
                   ? handleCloseModalEditStudent
                   : handleCloseModalEdit
               }
-              className="text-[36px]"
+              className="text-[36px] cursor-pointer"
             />
           </div>
           <br />
@@ -53,7 +53,7 @@ const EditStudentFormModal = ({
               placeholder="e.g. 20-1130"
               className={`border-[1px] p-3 rounded-[6px] w-[100%] bg-[#f5f5f5] ${
                 studentNoError === "" ? "" : "border-[red]"
-              } focus:outline-none`}
+              } focus:outline-none border-[#007bff]`}
             />
           </div>
           {studentNoError && (
@@ -72,7 +72,7 @@ const EditStudentFormModal = ({
                 placeholder="e.g. Kludy"
                 className={`border-[1px] p-3 rounded-[6px] w-[100%] bg-[#f5f5f5] ${
                   firstNameError === "" ? "" : "border-[red]"
-                } focus:outline-none`}
+                } focus:outline-none focus:border-[#007bff]`}
               />
               {firstNameError && (
                 <p className="text-red-500 pt-2">{firstNameError}</p>
@@ -91,7 +91,7 @@ const EditStudentFormModal = ({
                 placeholder="e.g. Sabordo"
                 className={`border-[1px] p-3 rounded-[6px] w-[100%] bg-[#f5f5f5] ${
                   middleNameError === "" ? "" : "border-[red]"
-                } focus:outline-none`}
+                } focus:outline-none focus:border-[#007bff]`}
               />
               {middleNameError && (
                 <p className="text-red-500 pt-2">{middleNameError}</p>
@@ -109,7 +109,7 @@ const EditStudentFormModal = ({
                 placeholder="e.g. Ramirez"
                 className={`border-[1px] p-3 rounded-[6px] w-[100%] bg-[#f5f5f5] ${
                   surNameError === "" ? "" : "border-[red]"
-                } focus:outline-none`}
+                } focus:outline-none focus:border-[#007bff]`}
               />
               {surNameError && (
                 <p className="text-red-500 pt-2">{surNameError}</p>
@@ -126,7 +126,7 @@ const EditStudentFormModal = ({
                 name="college"
                 value={updatedValues?.college}
                 onChange={handleChange}
-                className="appearance-none p-3 rounded-[6px] bg-[#f5f5f5] focus:outline-none border-[1px] focus:border-[#bbbbbb]"
+                className="appearance-none p-3 rounded-[6px] bg-[#f5f5f5] focus:outline-none border-[1px] focus:border-[#007bff]"
               >
                 <option value="">College</option>
                 {uniqueColleges?.map((c) => (
@@ -145,7 +145,7 @@ const EditStudentFormModal = ({
                 name="department"
                 value={updatedValues?.department}
                 onChange={handleChange}
-                className="appearance-none p-3 rounded-[6px] bg-[#f5f5f5] focus:outline-none border-[1px] focus:border-[#bbbbbb]"
+                className="appearance-none p-3 rounded-[6px] bg-[#f5f5f5] focus:outline-none border-[1px] focus:border-[#007bff]"
               >
                 <option value="">Department</option>
                 {cads
@@ -168,7 +168,7 @@ const EditStudentFormModal = ({
                 name="year"
                 value={updatedValues?.year}
                 onChange={handleChange}
-                className="appearance-none p-3 rounded-[6px] bg-[#f5f5f5] focus:outline-none border-[1px] focus:border-[#bbbbbb]"
+                className="appearance-none p-3 rounded-[6px] bg-[#f5f5f5] focus:outline-none border-[1px] focus:border-[#007bff]"
               >
                 <option value="">Year</option>
                 <option value={1}>1</option>
@@ -186,7 +186,7 @@ const EditStudentFormModal = ({
                 name="section"
                 value={updatedValues?.section}
                 onChange={handleChange}
-                className="appearance-none p-3 rounded-[6px] bg-[#f5f5f5] focus:outline-none border-[1px] focus:border-[#bbbbbb]"
+                className="appearance-none p-3 rounded-[6px] bg-[#f5f5f5] focus:outline-none border-[1px] focus:border-[#007bff]"
               >
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -206,7 +206,7 @@ const EditStudentFormModal = ({
                 name="sex"
                 value={updatedValues?.sex}
                 onChange={handleChange}
-                className="appearance-none p-3 rounded-[6px] bg-[#f5f5f5] focus:outline-none border-[1px] focus:border-[#bbbbbb]"
+                className="appearance-none p-3 rounded-[6px] bg-[#f5f5f5] focus:outline-none border-[1px] focus:border-[#007bff]"
               >
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
@@ -225,7 +225,7 @@ const EditStudentFormModal = ({
                 placeholder="e.g. example@gmail.com"
                 className={`border-[1px] p-3 rounded-[6px] w-[100%] bg-[#f5f5f5] ${
                   emailError === "" ? "" : "border-[red]"
-                } focus:outline-none`}
+                } focus:outline-none focus:border-[#007bff]`}
               />
               {emailError && <p className="text-red-500 pt-2">{emailError}</p>}
             </div>
@@ -244,7 +244,7 @@ const EditStudentFormModal = ({
                 maxLength="13"
                 className={`border-[1px] p-3 rounded-[6px] w-[100%] bg-[#f5f5f5] ${
                   contactNoError === "" ? "" : "border-[red]"
-                } focus:outline-none`}
+                } focus:outline-none focus:border-[#007bff]`}
               />
               {contactNoError && (
                 <p className="text-red-500 pt-2">{contactNoError}</p>
@@ -266,7 +266,7 @@ const EditStudentFormModal = ({
                 maxLength="13"
                 className={`border-[1px] p-3 rounded-[6px] w-[100%] bg-[#f5f5f5] ${
                   guardianContactNoError === "" ? "" : "border-[red]"
-                } focus:outline-none`}
+                } focus:outline-none focus:border-[#007bff]`}
               />
               {guardianContactNoError && (
                 <p className="text-red-500 pt-2">{guardianContactNoError}</p>

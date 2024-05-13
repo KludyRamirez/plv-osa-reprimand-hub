@@ -387,7 +387,7 @@ const CasesTable = ({
                   {c?.student?.firstName} {c?.student?.surName}
                 </div>
                 <div className=" w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
-                  {c?.student?.department?.slice(0, 6)}
+                  {c?.student?.department?.slice(0, 9)}...
                 </div>
                 <div className=" w-[60px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
                   {c?.student?.year}

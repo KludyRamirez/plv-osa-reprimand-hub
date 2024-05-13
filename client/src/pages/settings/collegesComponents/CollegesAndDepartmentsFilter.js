@@ -8,6 +8,7 @@ import {
 } from "react-icons/bs";
 import "react-datepicker/dist/react-datepicker.css";
 import CollegesAndDepartmentsTable from "./CollegesAndDepartmentsTable";
+import { FaPlus } from "react-icons/fa6";
 
 const CollegesAndDepartmentsFilter = ({ cads, getCads }) => {
   const [searchTerm, setSearchTerm] = useState("All");
@@ -19,8 +20,8 @@ const CollegesAndDepartmentsFilter = ({ cads, getCads }) => {
     return cads.filter((c) => {
       const searchMatch =
         searchTerm === "All" ||
-        c.college.toString().includes(searchTerm) ||
-        c.department.toString().includes(searchTerm);
+        c.college.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        c.department.toLowerCase().includes(searchTerm.toLowerCase());
 
       const collegeMatch = college === "All" || c.college.includes(college);
 
@@ -31,7 +32,6 @@ const CollegesAndDepartmentsFilter = ({ cads, getCads }) => {
     });
   };
 
-  // Filter cases based on search criteria, main filter, and status filter
   const filteredCads = filterCads(cads, searchTerm, college, department);
 
   let combinedFilteredCads = [...filteredCads];
@@ -127,6 +127,10 @@ const CollegesAndDepartmentsFilter = ({ cads, getCads }) => {
             selectedCads={selectedCads}
             setSelectedCads={setSelectedCads}
           />
+        </div>
+        <div className="w-[100%] h-[380px] flex flex-col border-[1px] border-dashed  rounded-[8px] justify-center items-center gap-4 text-[#007bff]">
+          <FaPlus className="text-[32px] " />
+          <span>Add CMS</span>
         </div>
       </div>
     </>

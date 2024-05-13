@@ -16,6 +16,7 @@ import {
   BsBoxArrowUp,
   BsBoxArrowUpRight,
   BsGear,
+  BsHourglass,
   BsHourglassSplit,
   BsPeople,
   BsPeopleFill,
@@ -266,6 +267,41 @@ function Sidebar(props) {
                 )}
               </Link>
             </div>
+            <div className="w-full">
+              <Link to="/notification">
+                {activeItem === "/notification" ? (
+                  <SidebarOptions
+                    sx={{
+                      color: "#007bff",
+                      background: "white",
+                      borderRadius: "6px",
+                      "&:hover": {
+                        transform: "translateY(0px)",
+                        color: "#007bff",
+                        background: "white",
+                      },
+                      "&:active": { transform: "translateY(0px)" },
+                    }}
+                  >
+                    <RouteCon>
+                      <BsHourglassSplit
+                        className={
+                          activeItem === "/notification" ? "icon-active" : ""
+                        }
+                      />
+                      <p className="text-[18px]">History</p>
+                    </RouteCon>
+                  </SidebarOptions>
+                ) : (
+                  <SidebarOptions>
+                    <RouteCon>
+                      <BsHourglass />
+                      <p className="text-[18px]">History</p>
+                    </RouteCon>
+                  </SidebarOptions>
+                )}
+              </Link>
+            </div>
           </div>
           <div className="flex flex-col justify-start items-start gap-[12px] w-full p-[20px]">
             <div
@@ -376,19 +412,14 @@ function Sidebar(props) {
             </IconButton>
           </Toolbar>
           <div className="flex justify-center items-center gap-[24px] mr-3">
-            <Link to="/notification">
-              <div className="text-white flex w-[44px] h-[44px] rounded-[50%] border-[1px] border-[white] justify-center items-center cursor-pointer hover:bg-white hover:text-[#007bff]">
-                <BsHourglassSplit className="text-[22px]" />
-              </div>
-            </Link>
             <div className="w-[1px] h-[24px] bg-[lightgray]"></div>
-            <div className="text-white flex justify-center items-center rounded-[6px] cursor-pointer gap-4">
+            <div className="text-white flex justify-center items-center rounded-[6px] cursor-pointer gap-4 hover:underline">
               <div className="text-[18px]">
                 {`${auth?.userDetails?.userName}`}
               </div>
               <Link to="/account">
-                <div className="flex justify-center items-center w-[44px] h-[44px] rounded-[50%] border-[1px] border-white hover:bg-white hover:text-[#007bff] text-[22px] bg-transparent text-white">
-                  <BsBoxArrowUpRight />
+                <div className="flex justify-center items-center">
+                  <BsBoxArrowUpRight className="text-[24px]" />
                 </div>
               </Link>
             </div>

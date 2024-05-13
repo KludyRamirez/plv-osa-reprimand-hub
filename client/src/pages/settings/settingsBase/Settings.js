@@ -43,7 +43,7 @@ const Settings = ({ toast }) => {
       <div className="flex justify-start">
         <Sidebar />
         <div className="w-full flex justify-start bg-[#007bff]">
-          <div className="w-full bg-[#fefefe] mt-[80px] rounded-tl-[24px] phone:rounded-tl-[0px] px-8 phone:px-4 pt-8">
+          <div className="w-full bg-[#fefefe] rounded-tl-[24px] phone:rounded-tl-[0px] mt-[80px] px-8 phone:px-4 pt-8">
             <CreateCollegesAndDepartments
               toast={toast}
               cads={cads}

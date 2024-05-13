@@ -23,6 +23,7 @@ import {
   BsFolderX,
   BsGoogle,
   BsPen,
+  BsStarFill,
   BsSticky,
   BsTrash3,
 } from "react-icons/bs";
@@ -366,7 +367,7 @@ const StudentsProfileTable = ({
                 {student.studentNo}
               </div>
             </div>
-            <div className="w-[100%] border-[1px] h-[150px] rounded-bl-[8px] rounded-br-[8px] flex gap-4">
+            <div className="w-[100%] border-[1px] h-[150px] rounded-bl-[8px] rounded-br-[8px] flex gap-4 ">
               <div className="w-[210px] h-[100%]  flex justify-end">
                 {student.sex === "Male" ? (
                   <img
@@ -380,15 +381,21 @@ const StudentsProfileTable = ({
                   />
                 )}
               </div>
-              <div className="w-[400px] h-[100%] px-2 py-5 flex flex-col gap-2">
+              <div className="w-[400px] h-[100%] px-2 py-5 flex flex-col gap-2 ">
                 <span className="text-[27px] font-bold text-[#404040]">
                   {student.firstName} {student.surName}
                 </span>
                 <div className="w-[100%] text-[15px] text-[#606060] flex justify-between">
                   <span>
-                    {student.college} {student?.department?.split(" ")[0]}{" "}
-                    {student.year}-{student.section}
+                    {student?.department?.split(" ")[0]} {student.year}-
+                    {student.section}
                   </span>
+                </div>
+                <div className="w-[100%] text-[15px] flex justify-start gap-2 pt-2 text-[#007bff]">
+                  <BsStarFill />
+                  <BsStarFill />
+                  <BsStarFill />
+                  <BsStarFill />
                 </div>
               </div>
               <div className="w-[200px] h-[100%] px-3 py-5 flex justify-end items-start">
@@ -403,7 +410,7 @@ const StudentsProfileTable = ({
             </div>
             <div className=""></div>
           </div>
-          <div className="w-[850px] flex justify-center gap-8 items-center border-[1px] rounded-[8px]">
+          {/* <div className="w-[850px] flex justify-center gap-8 items-center border-[1px] rounded-[8px]">
             <div className="w-[148px] text-white h-[150px] flex flex-col justify-center items-center gap-2 rounded-[8px] ">
               <div className="text-[32px] font-bold text-[#5D3FD3]">
                 {cases.length}
@@ -439,34 +446,34 @@ const StudentsProfileTable = ({
                 <div className="">Counseling</div>
               </div>
             </div>
-          </div>
+          </div> */}
           <div className="w-[100%] h-[48px] flex justify-between items-center pt-8">
             <div className="flex justify-start gap-3 items-center">
               <div className="text-[24px] text-[#007bff] font-bold">Cases</div>
               <BsSticky className="text-[22px] text-[#007bff]" />
             </div>
             <div className="flex justify-center items-center gap-2 font-bold">
-              <div className="cursor-pointer py-2 px-4 rounded-[24px] text-[16px]  flex gap-2 items-center text-[#007bff] bg-[#f7f7f7] hover:border-[1px] hover:border-[#007bff]">
+              <div className="cursor-pointer py-2 px-4 rounded-[24px] text-[16px] border-[1px] border-blue-400 flex gap-2 items-center text-[#007bff] bg-[#f7f7f7] hover:border-[1px] hover:border-blue-400">
                 <div>Total</div>
                 <BsSticky />
               </div>
-              <div className="cursor-pointer py-2 px-4 rounded-[24px] text-[16px]  flex gap-2 items-center text-[#007bff] bg-[#f7f7f7] hover:border-[1px] hover:border-[#007bff]">
+              <div className="cursor-pointer py-2 px-4 rounded-[24px] text-[16px]  flex gap-2 items-center text-[#007bff] bg-[#f7f7f7] hover:border-[1px] hover:border-blue-400">
                 <div>Active</div>
                 <BsCollection />
               </div>
-              <div className="cursor-pointer py-2 px-4 rounded-[24px] text-[16px]  flex gap-2 items-center text-[#007bff] bg-[#f7f7f7] hover:border-[1px] hover:border-[#007bff]">
+              <div className="cursor-pointer py-2 px-4 rounded-[24px] text-[16px]  flex gap-2 items-center text-[#007bff] bg-[#f7f7f7] hover:border-[1px] hover:border-blue-400">
                 <div>Solved</div>
                 <BsCheckCircle />
               </div>
             </div>
           </div>
-          <div className="w-[848px] rounded-[8px] flex justify-start flex-wrap gap-8 pt-6">
+          <div className="w-[848px] rounded-[8px] flex justify-start flex-wrap gap-8 mt-6">
             {cases.length > 0 ? (
               <>
                 {cases.map((c) => (
                   <div
                     key={c}
-                    className="cursor-pointer w-[408px] bg-[#f3f3f3] rounded-[8px] flex flex-col"
+                    className="cursor-pointer w-[408px] bg-[#f3f3f3] rounded-[8px] flex flex-col border-[1px]"
                   >
                     <div className="flex h-[33px] justify-between items-center bg-[#efefef] rounded-tr-[8px] rounded-tl-[8px] px-4">
                       <div className="flex justify-center items-center text-[14px] text-[#606060]">

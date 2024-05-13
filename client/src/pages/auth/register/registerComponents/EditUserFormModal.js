@@ -27,7 +27,10 @@ const EditStudentFormModal = ({
         <div className="p-10">
           <div className="text-[28px] text-[#077bff] font-semibold flex justify-between">
             Edit Existing User
-            <BsX onClick={handleCloseModalEdit} className="text-[36px]" />
+            <BsX
+              onClick={handleCloseModalEdit}
+              className="text-[36px] cursor-pointer"
+            />
           </div>
           <div className="text-[#606060] pt-8 flex gap-2">
             <div className="flex flex-col gap-2 w-[100%]">
@@ -41,9 +44,9 @@ const EditStudentFormModal = ({
                 maxLength="24"
                 autoComplete="off"
                 placeholder="e.g. kluds19"
-                className={`border-[1px] p-3 rounded-[6px] w-[100%] bg-[#f5f5f5] ${
+                className={`border-[1px] border-blue-400 p-3 rounded-[6px] w-[100%] bg-[#f5f5f5] ${
                   userNameError === "" ? "" : "border-[red]"
-                } focus:outline-none`}
+                } focus:outline-none `}
               />
               {userNameError && <p className="text-red-500">{userNameError}</p>}
             </div>
@@ -62,7 +65,7 @@ const EditStudentFormModal = ({
                 placeholder="e.g. Kludy"
                 className={`border-[1px] p-3 rounded-[6px] w-[100%] bg-[#f5f5f5] ${
                   firstNameError === "" ? "" : "border-[red]"
-                } focus:outline-none`}
+                } focus:outline-none focus:border-blue-400`}
               />
               {firstNameError && (
                 <p className="text-red-500">{firstNameError}</p>
@@ -81,7 +84,7 @@ const EditStudentFormModal = ({
                 placeholder="e.g. Ramirez"
                 className={`border-[1px] p-3 rounded-[6px] w-[100%] bg-[#f5f5f5] ${
                   surNameError === "" ? "" : "border-[red]"
-                } focus:outline-none`}
+                } focus:outline-none focus:border-blue-400`}
               />
               {surNameError && <p className="text-red-500">{surNameError}</p>}
             </div>
@@ -101,7 +104,7 @@ const EditStudentFormModal = ({
                 placeholder="e.g. example@gmail.com"
                 className={`border-[1px] p-3 rounded-[6px] w-[100%] bg-[#f5f5f5] ${
                   emailError === "" ? "" : "border-[red]"
-                } focus:outline-none`}
+                } focus:outline-none focus:border-blue-400`}
               />
               {emailError && <p className="text-red-500 pt-2">{emailError}</p>}
             </div>
@@ -119,7 +122,7 @@ const EditStudentFormModal = ({
                 placeholder="Enter password"
                 className={`border-[1px] p-3 rounded-[6px] w-[100%] bg-[#f5f5f5] ${
                   passwordError === "" ? "" : "border-[red]"
-                } focus:outline-none`}
+                } focus:outline-none focus:border-blue-400`}
               />
               {passwordError && <p className="text-red-500">{passwordError}</p>}
             </div>
@@ -135,7 +138,7 @@ const EditStudentFormModal = ({
                 name="role"
                 value={updatedValues?.role}
                 onChange={handleChange}
-                className="appearance-none p-3 rounded-[6px] bg-[#f5f5f5] focus:outline-none border-[1px] focus:border-[#bbbbbb]"
+                className="appearance-none p-3 rounded-[6px] bg-[#f5f5f5] focus:outline-none border-[1px] focus:border-blue-400"
               >
                 <option key="" value="">
                   Select Role
@@ -161,7 +164,7 @@ const EditStudentFormModal = ({
                 maxLength="13"
                 className={`border-[1px] p-3 rounded-[6px] w-[100%] bg-[#f5f5f5] ${
                   contactNoError === "" ? "" : "border-[red]"
-                } focus:outline-none`}
+                } focus:outline-none focus:border-blue-400`}
               />
               {contactNoError && (
                 <p className="text-red-500">{contactNoError}</p>

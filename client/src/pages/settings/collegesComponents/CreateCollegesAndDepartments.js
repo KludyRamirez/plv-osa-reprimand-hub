@@ -11,12 +11,11 @@ const ModalBox = styled("div")({
   position: "absolute",
   top: "50%",
   left: "50%",
-  width: "48%",
+  width: "32%",
   borderRadius: "12px",
   transform: "translate(-50%, -50%)",
   background: "white",
   border: "none",
-  borderRadius: "4px",
   outline: "none",
 
   "&:focus": {

@@ -115,7 +115,7 @@ const CreateCaseFormModal = ({
               onChange={handleCaseOwnerChange}
               className="appearance-none p-3 rounded-[6px] bg-[#f5f5f5] focus:outline-none border-[1px] focus:border-[#007bff]"
             >
-              <option value="">Student</option>
+              <option value="">Select student below</option>
               {filteredStudents
                 ?.sort((a, b) => {
                   const nameA = `${a.firstName} ${a.surName}`.toLowerCase();
