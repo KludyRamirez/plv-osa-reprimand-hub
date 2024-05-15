@@ -147,7 +147,7 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
 
     return (
       <>
-        <div className="pl-2 text-[48px] text-[purple] font-bold">
+        <div className="pl-2 text-[48px] text-[green] font-bold">
           {percentage.toFixed(0)}
           <span className="text-[20px]">%</span>
         </div>
@@ -158,7 +158,7 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
   const bsitNumberConverter = () => {
     return (
       <>
-        <div className=" text-[48px] text-[purple] font-bold">
+        <div className=" text-[48px] text-[green] font-bold">
           {bsitCases.length}
         </div>
       </>
@@ -457,7 +457,7 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
       <div className="mt-4 flex justify-start items-center gap-4">
         <div
           onClick={() => handleSetBsitPercentage()}
-          className="p-2 w-[209px] h-[180px] bg-white border-[4px] border-[purple] rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden"
+          className="p-2 w-[209px] h-[180px] bg-white border-[1px] border-[green] rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden"
         >
           <div className="w-[100%] h-[100%] flex justify-center items-end">
             {bsitPercentage === "Percentage" ? (
@@ -466,7 +466,7 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
               <>{bsitNumberConverter()}</>
             )}
           </div>
-          <div className="text-[16px] text-[purple]">1st Offense</div>
+          <div className="text-[16px] text-[green]">1st Offense</div>
           <svg
             className="absolute top-0 left-0"
             viewBox="0 0 500 500"
@@ -476,7 +476,7 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
               d="M0,100 C150,200 350,0 500,100 L500,00 L0,0 Z"
               style={{
                 stroke: "none",
-                fill: "rgba(219, 234, 254, 1)",
+                fill: "rgba(220, 252, 231, 1)",
                 strokeWidth: "2px",
               }}
             ></path>

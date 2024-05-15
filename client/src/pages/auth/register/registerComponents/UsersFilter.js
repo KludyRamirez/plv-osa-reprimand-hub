@@ -73,7 +73,7 @@ const UsersFilter = ({ users, getUsers, allowedRoles }) => {
           Filter by <BsFilter className="text-[24px]" />
         </div>
 
-        <div className=" w-100 flex justify-start bg-[#f5f5f5] flex p-4 rounded-bl-[10px] rounded-br-[10px]">
+        <div className=" w-100 flex justify-start bg-gray-100 flex p-4 rounded-bl-[10px] rounded-br-[10px]">
           <div className="flex justify-start items-center gap-4">
             <div className="flex flex-col items-start gap-2">
               <div className="pl-2 w-[242px] flex justify-between items-center">

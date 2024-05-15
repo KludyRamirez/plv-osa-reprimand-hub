@@ -25,7 +25,7 @@ const ModalBox = styled("div")({
   position: "absolute",
   top: "50%",
   left: "50%",
-  width: "48%",
+  width: "44%",
   borderRadius: "12px",
   transform: "translate(-50%, -50%)",
   background: "white",
@@ -254,7 +254,7 @@ const UsersTable = ({
               onChange={toggleSelectAll}
             />
           </div>
-          <div className="w-[100px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+          <div className="w-[60px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
             UID
           </div>
           <div className="w-[140px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
@@ -275,7 +275,7 @@ const UsersTable = ({
           <div className=" w-[140px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
             Contact No.
           </div>
-          <div className=" w-[140px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+          <div className=" w-[100px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
             Status
           </div>
           {selectedUsers.length > 1 ? (
@@ -293,12 +293,12 @@ const UsersTable = ({
                 </div>
               </>
             ) : (
-              <div className="w-[118px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+              <div className="w-[140px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
                 <span>Actions</span>
               </div>
             )
           ) : (
-            <div className="w-[118px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+            <div className="w-[140px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
               <span>Actions</span>
             </div>
           )}
@@ -309,7 +309,7 @@ const UsersTable = ({
             {users?.map((user, k) => (
               <div
                 className={`w-100 flex items-center gap-4 px-6 ${
-                  k % 2 === 0 ? "bg-[#f5f5f5]" : "bg-white"
+                  k % 2 === 0 ? "bg-gray-100" : "bg-white"
                 }`}
                 key={k}
               >
@@ -321,7 +321,7 @@ const UsersTable = ({
                     className="w-[18px] h-[18px]"
                   />
                 </div>
-                <div className="w-[100px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px]">
+                <div className="w-[60px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px]">
                   {user?.uid}
                 </div>
                 <div className="w-[140px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px]">
@@ -342,10 +342,10 @@ const UsersTable = ({
                 <div className="w-[140px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px]">
                   {user?.contactNo}
                 </div>
-                <div className="w-[140px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px]">
+                <div className="w-[100px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px]">
                   {user?.statusOfUser}
                 </div>
-                <div className="w-[140px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px] gap-2">
+                <div className="w-[140px] whitespace-nowrap flex justify-start items-center py-1 px-1 rounded-[4px] gap-2">
                   {selectedUsers?.length < 2 ? (
                     allowedRoles?.find((ar) =>
                       auth?.userDetails?.role?.includes(ar)
@@ -369,26 +369,26 @@ const UsersTable = ({
                       </>
                     ) : (
                       <>
-                        <div className="p-2 bg-[#efefef] rounded-[18px]">
+                        <div className="p-2 bg-gray-200 rounded-[18px]">
                           <BsPenFill className="text-[18px] text-white" />
                         </div>
-                        <div className="p-2 bg-[#efefef] rounded-[18px]">
+                        <div className="p-2 bg-gray-200 rounded-[18px]">
                           <AiOutlineStop className="text-[18px] text-white" />
                         </div>
-                        <div className="p-2 bg-[#efefef] rounded-[18px]">
+                        <div className="p-2 bg-gray-200 rounded-[18px]">
                           <BsTrash3Fill className="text-[18px] text-white" />
                         </div>
                       </>
                     )
                   ) : (
                     <>
-                      <div className="p-2 bg-[#efefef] rounded-[18px]">
+                      <div className="p-2 bg-gray-200 rounded-[18px]">
                         <BsPenFill className="text-[18px] text-white" />
                       </div>
-                      <div className="p-2 bg-[#efefef] rounded-[18px]">
+                      <div className="p-2 bg-gray-200 rounded-[18px]">
                         <AiOutlineStop className="text-[18px] text-white" />
                       </div>
-                      <div className="p-2 bg-[#efefef] rounded-[18px]">
+                      <div className="p-2 bg-gray-200 rounded-[18px]">
                         <BsTrash3Fill className="text-[18px] text-white" />
                       </div>
                     </>

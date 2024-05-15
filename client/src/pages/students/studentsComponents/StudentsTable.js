@@ -338,7 +338,7 @@ const StudentsTable = ({
                 return (
                   <div
                     className={`w-100 flex items-center gap-4 px-6 ${
-                      k % 2 === 0 ? "bg-[#f5f5f5]" : "bg-white"
+                      k % 2 === 0 ? "bg-gray-100" : "bg-white"
                     }`}
                     key={k}
                   >

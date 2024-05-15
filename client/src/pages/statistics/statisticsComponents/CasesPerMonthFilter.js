@@ -182,7 +182,7 @@ const CasesPerMonthFilter = ({ cases, students, getCases }) => {
   return (
     <>
       <div className="flex justify-start items-center gap-4">
-        <div className="p-2 w-[206px] h-[180px] bg-blue-100 border-[4px] border-[#007bff] rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden">
+        <div className="p-2 w-[206px] h-[180px] bg-blue-100  rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden">
           <div className="pl-1 w-[100%] h-[100%] flex justify-center items-end">
             {totalPercentageConverter()}
           </div>
@@ -200,7 +200,7 @@ const CasesPerMonthFilter = ({ cases, students, getCases }) => {
         </div>
         <div
           onClick={() => handleSetMinorPercentage()}
-          className="p-2 w-[206px] h-[180px] bg-yellow-100 border-[4px] border-[#FFBF00] rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden"
+          className="p-2 w-[206px] h-[180px] bg-yellow-100  rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden"
         >
           <div className=" w-[100%] h-[100%] flex justify-center items-end">
             {minorPercentage === "Percentage" ? (
@@ -224,7 +224,7 @@ const CasesPerMonthFilter = ({ cases, students, getCases }) => {
 
         <div
           onClick={() => handleSetMajorPercentage()}
-          className="p-2 w-[206px] h-[180px] bg-red-100 border-[4px] border-[#FF3131] rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden"
+          className="p-2 w-[206px] h-[180px] bg-red-100 rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden"
         >
           <div className="w-[100%] h-[100%] flex justify-center items-end">
             {majorPercentage === "Percentage" ? (
