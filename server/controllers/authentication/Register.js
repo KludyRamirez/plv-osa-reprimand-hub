@@ -70,6 +70,7 @@ const register = async (req, res) => {
       message: `${user.userName} account has been created!`,
     });
   } catch (err) {
+    console.log(err);
     return res.status(500).send("Error occurred. Please try again");
   }
 };

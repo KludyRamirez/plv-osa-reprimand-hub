@@ -15,8 +15,8 @@ const studentsSchema = new mongoose.Schema(
     email: { type: String },
     statusOfStudent: {
       type: String,
-      default: "Active",
-      enum: ["Active", "Disabled"],
+      default: "Enrolled",
+      enum: ["Enrolled", "Dismissed"],
     },
   },
   { timestamps: true }

@@ -17,6 +17,8 @@ import toast from "react-hot-toast";
 import DeleteManyCaseModal from "./DeleteManyCaseModal";
 import { useNavigate } from "react-router-dom";
 import EditCase from "./EditCase";
+import PatchCaseStatus from "./PatchCaseStatus";
+import RemarksCase from "./RemarksCase";
 
 const ModalBox = styled("div")({
   position: "absolute",
@@ -50,6 +52,7 @@ const CasesTable = ({
   getCases,
   selectedCases,
   setSelectedCases,
+  allowedRoles,
 }) => {
   const [selectAll, setSelectAll] = useState(false);
   const [caseDeleteId, setCaseDeleteId] = useState("");
@@ -57,6 +60,10 @@ const CasesTable = ({
   const [showDeleteManyCaseModal, setShowDeleteManyCaseModal] = useState(false);
   const [showEditCaseModal, setShowEditCaseModal] = useState(false);
   const [selectedCaseEdit, setSelectedCaseEdit] = useState(null);
+  const [showPatchCaseModal, setShowPatchCaseModal] = useState(false);
+  const [selectedCasePatch, setSelectedCasePatch] = useState(null);
+  const [showRemarksCaseModal, setShowRemarksCaseModal] = useState(false);
+  const [selectedCaseRemarks, setSelectedCaseRemarks] = useState(null);
 
   const auth = useSelector(authSelector);
   const navigate = useNavigate();
@@ -105,7 +112,7 @@ const CasesTable = ({
           data: { cases: selectedCases },
           withCredentials: true,
           headers: {
-            Authorization: `Bearer ${auth.userDetails.token}`,
+            Authorization: `Bearer ${auth?.userDetails?.token}`,
           },
         }
       );
@@ -201,50 +208,36 @@ const CasesTable = ({
 
   // patch statusOfCase
 
-  const handlePatchStatusOfCase = async (id, statusCase, caseNo) => {
+  const handleCasePatchClick = (cas) => {
     try {
-      if (!auth.userDetails.token) {
-        console.error("Authentication token not found.");
-        return;
-      }
-
-      const caseMapping = {
-        Pending: "Investigation",
-        Investigation: "Evaluation",
-        Evaluation: "Referral",
-        Referral: "Hearing",
-        Hearing: "Decision",
-        Decision: "Implementation",
-        Implementation: "Case Solved",
-      };
-
-      const caseStatus = caseMapping[statusCase];
-
-      if (!caseStatus) {
-        console.error("Invalid case status:", statusCase);
-        return;
-      }
-
-      // Make the API request with the determined case status
-      const res = await axios.patch(
-        `${process.env.REACT_APP_API_URI}/case/${id}/patchCase`,
-        {
-          caseNo,
-          statusOfCase: caseStatus,
-        },
-        {
-          headers: {
-            withCredentials: true,
-            Authorization: `Bearer ${auth?.userDetails?.token}`,
-          },
-        }
-      );
-
-      toast.success(res.data.message);
-      getCases();
+      setSelectedCasePatch(cas);
+      console.log(cas);
     } catch (error) {
-      console.error("Error fetching cases!", error);
+      console.error("Error handling case Patch click:", error);
+    } finally {
+      setShowPatchCaseModal(true);
     }
+  };
+
+  const handleCloseModalPatch = () => {
+    setShowPatchCaseModal(false);
+  };
+
+  // case remarks
+
+  const handleCaseRemarksClick = (cas) => {
+    try {
+      setSelectedCaseRemarks(cas);
+      console.log(cas);
+    } catch (error) {
+      console.error("Error handling case Remarks click:", error);
+    } finally {
+      setShowRemarksCaseModal(true);
+    }
+  };
+
+  const handleCloseModalRemarks = () => {
+    setShowRemarksCaseModal(false);
   };
 
   return (
@@ -260,6 +253,40 @@ const CasesTable = ({
           <EditCase
             handleCloseModalEdit={handleCloseModalEdit}
             selectedCaseEdit={selectedCaseEdit}
+            toast={toast}
+            getCases={getCases}
+            students={students}
+          />
+        </ModalBox>
+      </Modal>
+      <Modal
+        sx={{ border: "none", outline: "none" }}
+        open={showPatchCaseModal}
+        onClose={handleCloseModalPatch}
+        aria-labelledby="parent-modal-title"
+        aria-describedby="parent-modal-description"
+      >
+        <ModalBox sx={{ width: "38%" }}>
+          <PatchCaseStatus
+            handleCloseModalPatch={handleCloseModalPatch}
+            selectedCasePatch={selectedCasePatch}
+            toast={toast}
+            getCases={getCases}
+            students={students}
+          />
+        </ModalBox>
+      </Modal>
+      <Modal
+        sx={{ border: "none", outline: "none" }}
+        open={showRemarksCaseModal}
+        onClose={handleCloseModalRemarks}
+        aria-labelledby="parent-modal-title"
+        aria-describedby="parent-modal-description"
+      >
+        <ModalBox sx={{ width: "38%" }}>
+          <RemarksCase
+            handleCloseModalRemarks={handleCloseModalRemarks}
+            selectedCaseRemarks={selectedCaseRemarks}
             toast={toast}
             getCases={getCases}
             students={students}
@@ -339,16 +366,24 @@ const CasesTable = ({
             Case Status
           </div>
           {selectedCases.length > 1 ? (
-            <>
-              <div className="w-[1px] h-[20px] border-[1px]"></div>
-              <div
-                className="flex gap-2 justify-start items-center py-1 px-2 bg-[#ff3131] border-[1px] border-[#ff3131] text-white text-[14px] rounded-[4px] cursor-pointer"
-                onClick={handleOpenModalDeleteMany}
-              >
-                <span>Delete</span>
-                <BsTrash3Fill className="text-[14px]" />
+            allowedRoles?.find((ar) =>
+              auth?.userDetails?.role?.includes(ar)
+            ) ? (
+              <>
+                <div className="w-[1px] h-[20px] border-[1px]"></div>
+                <div
+                  className="flex gap-2 justify-start items-center py-1 px-2 bg-[#ff3131] border-[1px] border-[#ff3131] text-white text-[14px] rounded-[4px] cursor-pointer"
+                  onClick={handleOpenModalDeleteMany}
+                >
+                  <span>Delete</span>
+                  <BsTrash3Fill className="text-[14px]" />
+                </div>
+              </>
+            ) : (
+              <div className="w-[118px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+                <span>Actions</span>
               </div>
-            </>
+            )
           ) : (
             <div className="w-[118px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
               <span>Actions</span>
@@ -425,57 +460,67 @@ const CasesTable = ({
                 </div>
                 <div className="w-[130px] whitespace-nowrap flex justify-start items-center gap-2">
                   {selectedCases.length < 2 ? (
-                    <>
-                      <div
-                        onClick={() =>
-                          handlePatchStatusOfCase(
-                            c?._id,
-                            c?.statusOfCase,
-                            c?.caseNo
-                          )
-                        }
-                        className="container w-[36px] h-[36px] flex justify-center items-center bg-[white] border-[1px] border-[#007bff] rounded-[18px] cursor-pointer"
-                      >
-                        <BsChevronUp className="text-[18px] text-[#007bff]" />
-                        <div className="absolute bg-white p-4 top-[-120px] left-[-66px] w-[170px] h-[108px] border-[1px] rounded-[4px] text-[#606060] additional-content">
-                          <div className="font-semibold text-[16px]">
-                            <span className="text-[#007bff]">
-                              Update status?
-                            </span>
-                          </div>
-                          <div className="pt-2 flex flex-col items-start">
-                            <div className="text-[14px]">
-                              This certain process
+                    allowedRoles?.find((ar) =>
+                      auth?.userDetails?.role?.includes(ar)
+                    ) ? (
+                      <>
+                        <div
+                          onClick={() => handleCasePatchClick(c)}
+                          className="relative container w-[36px] h-[36px] flex justify-center items-center bg-white border-[1px] border-[#007bff] rounded-[18px] cursor-pointer"
+                        >
+                          <BsChevronUp className="text-[18px] text-[#007bff]" />
+                          <div className="absolute bg-white p-4 top-[-120px] left-[-66px] w-[170px] h-[108px] border-[1px] rounded-[4px] text-[#606060] additional-content">
+                            <div className="font-semibold text-[16px]">
+                              <span className="text-[#007bff]">
+                                Update status?
+                              </span>
                             </div>
-                            <div className="text-[14px]">
-                              cannot not be reverted.
+                            <div className="pt-2 flex flex-col items-start">
+                              <div className="text-[14px]">
+                                This certain process
+                              </div>
+                              <div className="text-[14px]">
+                                cannot be reverted.
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                      <div
-                        onClick={() => handleCaseEditClick(c)}
-                        className="p-2 bg-[white] border-[1px] border-[#FFBF00] rounded-[18px] cursor-pointer"
-                      >
-                        <BsPen className="text-[18px] text-[#FFBF00]" />
-                      </div>
-                      <div
-                        onClick={() => handleClickDelete(c?._id)}
-                        className="p-2 bg-[white] border-[1px] border-[#FF3131] rounded-[18px] cursor-pointer"
-                      >
-                        <BsTrash3 className="text-[18px] text-[#FF3131]" />
-                      </div>
-                    </>
+                        <div
+                          onClick={() => handleCaseEditClick(c)}
+                          className="p-2 bg-white border-[1px] border-[#FFBF00] rounded-[18px] cursor-pointer"
+                        >
+                          <BsPen className="text-[18px] text-[#FFBF00]" />
+                        </div>
+                        <div
+                          onClick={() => handleClickDelete(c?._id)}
+                          className="p-2 bg-white border-[1px] border-[#FF3131] rounded-[18px] cursor-pointer"
+                        >
+                          <BsTrash3 className="text-[18px] text-[#FF3131]" />
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <div className="p-2 bg-gray-200 rounded-[18px]">
+                          <BsChevronUp className="text-[18px] text-white" />
+                        </div>
+                        <div className="p-2 bg-gray-200 rounded-[18px]">
+                          <BsPen className="text-[18px] text-white" />
+                        </div>
+                        <div className="p-2 bg-gray-200 rounded-[18px]">
+                          <BsTrash3 className="text-[18px] text-white" />
+                        </div>
+                      </>
+                    )
                   ) : (
                     <>
-                      <div className="p-2 bg-[#f0f0f0] rounded-[18px]">
-                        <BsChevronUp className="text-[18px] text-[white]" />
+                      <div className="p-2 bg-gray-200 rounded-[18px]">
+                        <BsChevronUp className="text-[18px] text-white" />
                       </div>
-                      <div className="p-2 bg-[#f0f0f0] rounded-[18px]">
+                      <div className="p-2 bg-gray-200 rounded-[18px]">
                         <BsPen className="text-[18px] text-white" />
                       </div>
-                      <div className="p-2 bg-[#f0f0f0] rounded-[18px]">
-                        <BsTrash className="text-[18px] text-white" />
+                      <div className="p-2 bg-gray-200 rounded-[18px]">
+                        <BsTrash3 className="text-[18px] text-white" />
                       </div>
                     </>
                   )}

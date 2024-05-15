@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-// import { useSelector } from "react-redux";
-// import { createSelector } from "reselect";
+import { useSelector } from "react-redux";
+import { createSelector } from "reselect";
 import Modal from "@mui/material/Modal";
 import { FaPlus } from "react-icons/fa6";
 import { styled } from "@mui/system";
@@ -32,8 +32,8 @@ const ModalBox = styled("div")({
   },
 });
 
-// const selectAuth = (state) => state.auth;
-// const authSelector = createSelector([selectAuth], (auth) => auth);
+const selectAuth = (state) => state.auth;
+const authSelector = createSelector([selectAuth], (auth) => auth);
 
 const initialState = {
   userName: "",
@@ -55,12 +55,12 @@ const errorsInitialState = {
   contactNo: "",
 };
 
-const CreateUser = ({ register, getUsers }) => {
+const CreateUser = ({ register, getUsers, allowedRoles }) => {
   const [values, setValues] = useState(initialState);
   const [showCreateUserModal, setShowCreateUserModal] = useState(false);
   const [errors, setErrors] = useState(errorsInitialState);
 
-  // const auth = useSelector(authSelector);
+  const auth = useSelector(authSelector);
 
   const navigate = useNavigate();
 
@@ -180,13 +180,20 @@ const CreateUser = ({ register, getUsers }) => {
       </div>
       <div className="w-100 text-[26px] text-[#077bff] font-bold pb-6 flex justify-between items-center">
         <div>Users List</div>
-        <div
-          onClick={handleOpenModal}
-          className="cursor-pointer py-3 px-3 bg-gradient-to-br from-[#07bbff] to-[#007bff] text-[white] text-[16px] flex gap-2 items-center rounded-[8px]"
-        >
-          <FaPlus />
-          <div>Add User</div>
-        </div>
+        {allowedRoles?.find((ar) => auth?.userDetails?.role?.includes(ar)) ? (
+          <div
+            onClick={handleOpenModal}
+            className="cursor-pointer py-3 px-3 bg-gradient-to-br from-[#07bbff] to-[#007bff] text-[white] text-[16px] flex gap-2 items-center rounded-[8px]"
+          >
+            <FaPlus />
+            <div>Add User</div>
+          </div>
+        ) : (
+          <div className="cursor-pointer py-3 px-3 bg-gray-100 text-[white] text-[16px] flex gap-2 items-center rounded-[8px]">
+            <FaPlus />
+            <div>Add User</div>
+          </div>
+        )}
       </div>
       <Modal
         sx={{ border: "none", outline: "none" }}

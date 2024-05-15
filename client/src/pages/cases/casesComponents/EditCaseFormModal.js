@@ -77,8 +77,6 @@ const EditCaseFormModal = ({
   //   }
   // }, [filteredStudents]);
 
-  console.log();
-
   return (
     <>
       <form onSubmit={(e) => handleEditCase(e)}>

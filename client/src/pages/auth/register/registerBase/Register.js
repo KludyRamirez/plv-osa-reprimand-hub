@@ -9,7 +9,7 @@ import { createSelector } from "reselect";
 const selectAuth = (state) => state.auth;
 const authSelector = createSelector([selectAuth], (auth) => auth);
 
-const Register = ({ toast }) => {
+const Register = ({ toast, allowedRoles }) => {
   const [users, setUsers] = useState([]);
 
   const auth = useSelector(authSelector);
@@ -43,8 +43,16 @@ const Register = ({ toast }) => {
         <Sidebar />
         <div className="w-full h-screen flex justify-start bg-[#007bff]">
           <div className="w-full bg-[#fefefe] mt-[80px] rounded-tl-[24px] p-8">
-            <CreateUser toast={toast} getUsers={getUsers} />
-            <UsersFilter users={users} getUsers={getUsers} />
+            <CreateUser
+              toast={toast}
+              getUsers={getUsers}
+              allowedRoles={allowedRoles}
+            />
+            <UsersFilter
+              users={users}
+              getUsers={getUsers}
+              allowedRoles={allowedRoles}
+            />
           </div>
         </div>
       </div>

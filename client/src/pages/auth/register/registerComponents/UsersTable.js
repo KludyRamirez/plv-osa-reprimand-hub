@@ -6,6 +6,7 @@ import {
   BsFolder2Open,
   BsPen,
   BsPenFill,
+  BsStop,
   BsTrash3,
   BsTrash3Fill,
 } from "react-icons/bs";
@@ -18,6 +19,7 @@ import { useSelector } from "react-redux";
 import { createSelector } from "reselect";
 import { useNavigate } from "react-router-dom";
 import EditUser from "./EditUser";
+import { AiOutlineStop } from "react-icons/ai";
 
 const ModalBox = styled("div")({
   position: "absolute",
@@ -45,7 +47,13 @@ const ModalBox = styled("div")({
 const selectAuth = (state) => state.auth;
 const authSelector = createSelector([selectAuth], (auth) => auth);
 
-const UsersTable = ({ users, getUsers, selectedUsers, setSelectedUsers }) => {
+const UsersTable = ({
+  users,
+  getUsers,
+  selectedUsers,
+  setSelectedUsers,
+  allowedRoles,
+}) => {
   const [selectAll, setSelectAll] = useState(false);
   const [userDeleteId, setUserDeleteId] = useState("");
   const [showDeleteUserModal, setShowDeleteUserModal] = useState(false);
@@ -271,18 +279,26 @@ const UsersTable = ({ users, getUsers, selectedUsers, setSelectedUsers }) => {
             Status
           </div>
           {selectedUsers.length > 1 ? (
-            <>
-              <div className="w-[1px] h-[20px] border-[1px]"></div>
-              <div
-                className="flex gap-2 justify-start items-center py-1 px-2 bg-[#ff3131] border-[1px] border-[#ff3131] text-white text-[14px] rounded-[4px] cursor-pointer"
-                onClick={handleOpenModalDeleteMany}
-              >
-                <span>Delete</span>
-                <BsTrash3Fill className="text-[14px]" />
+            allowedRoles?.find((ar) =>
+              auth?.userDetails?.role?.includes(ar)
+            ) ? (
+              <>
+                <div className="w-[1px] h-[20px] border-[1px]"></div>
+                <div
+                  className="flex gap-2 justify-start items-center py-1 px-2 bg-[#ff3131] border-[1px] border-[#ff3131] text-white text-[14px] rounded-[4px] cursor-pointer"
+                  onClick={handleOpenModalDeleteMany}
+                >
+                  <span>Delete</span>
+                  <BsTrash3Fill className="text-[14px]" />
+                </div>
+              </>
+            ) : (
+              <div className="w-[118px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+                <span>Actions</span>
               </div>
-            </>
+            )
           ) : (
-            <div className="w-[140px] whitespace-nowrap whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+            <div className="w-[118px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
               <span>Actions</span>
             </div>
           )}
@@ -331,30 +347,46 @@ const UsersTable = ({ users, getUsers, selectedUsers, setSelectedUsers }) => {
                 </div>
                 <div className="w-[140px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px] gap-2">
                   {selectedUsers?.length < 2 ? (
-                    <>
-                      <div className="p-2 bg-[white] border-[1px] border-[#007bff] rounded-[18px] cursor-pointer">
-                        <BsEye className="text-[18px] text-[#007bff]" />
-                      </div>
-                      <div
-                        onClick={() => handleUserEditClick(user)}
-                        className="p-2 bg-[white] border-[1px] border-[#FFBF00] rounded-[18px] cursor-pointer"
-                      >
-                        <BsPen className="text-[18px] text-[#FFBF00]" />
-                      </div>
-                      <div
-                        onClick={() => handleClickDelete(user?._id)}
-                        className="p-2 bg-[white] border-[1px] border-[#FF3131] rounded-[18px] cursor-pointer"
-                      >
-                        <BsTrash3 className="text-[18px] text-[#FF3131]" />
-                      </div>
-                    </>
+                    allowedRoles?.find((ar) =>
+                      auth?.userDetails?.role?.includes(ar)
+                    ) ? (
+                      <>
+                        <div
+                          onClick={() => handleUserEditClick(user)}
+                          className="p-2 bg-[white] border-[1px] border-[#FFBF00] rounded-[18px] cursor-pointer"
+                        >
+                          <BsPen className="text-[18px] text-[#FFBF00]" />
+                        </div>
+                        <div className="p-2 bg-[white] border-[1px] border-[orange] rounded-[18px] cursor-pointer">
+                          <AiOutlineStop className="text-[18px] text-[orange]" />
+                        </div>
+                        <div
+                          onClick={() => handleClickDelete(user?._id)}
+                          className="p-2 bg-[white] border-[1px] border-[#FF3131] rounded-[18px] cursor-pointer"
+                        >
+                          <BsTrash3 className="text-[18px] text-[#FF3131]" />
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <div className="p-2 bg-[#efefef] rounded-[18px]">
+                          <BsPenFill className="text-[18px] text-white" />
+                        </div>
+                        <div className="p-2 bg-[#efefef] rounded-[18px]">
+                          <AiOutlineStop className="text-[18px] text-white" />
+                        </div>
+                        <div className="p-2 bg-[#efefef] rounded-[18px]">
+                          <BsTrash3Fill className="text-[18px] text-white" />
+                        </div>
+                      </>
+                    )
                   ) : (
                     <>
                       <div className="p-2 bg-[#efefef] rounded-[18px]">
-                        <BsEyeFill className="text-[18px] text-[white]" />
+                        <BsPenFill className="text-[18px] text-white" />
                       </div>
                       <div className="p-2 bg-[#efefef] rounded-[18px]">
-                        <BsPenFill className="text-[18px] text-white" />
+                        <AiOutlineStop className="text-[18px] text-white" />
                       </div>
                       <div className="p-2 bg-[#efefef] rounded-[18px]">
                         <BsTrash3Fill className="text-[18px] text-white" />

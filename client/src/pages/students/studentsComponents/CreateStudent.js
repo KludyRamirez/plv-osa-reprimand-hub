@@ -58,7 +58,7 @@ const errorsInitialState = {
 const selectAuth = (state) => state.auth;
 const authSelector = createSelector([selectAuth], (auth) => auth);
 
-const CreateStudent = ({ toast, getStudents, cads }) => {
+const CreateStudent = ({ toast, getStudents, cads, allowedRoles }) => {
   const [values, setValues] = useState(initialState);
   const [showCreateStudentModal, setShowCreateStudentModal] = useState(false);
   const [errors, setErrors] = useState(errorsInitialState);
@@ -193,13 +193,20 @@ const CreateStudent = ({ toast, getStudents, cads }) => {
       </div>
       <div className="w-100 text-[26px] text-[#077bff] font-bold pb-6 flex justify-between items-center">
         <div>Students List</div>
-        <div
-          onClick={handleOpenModal}
-          className="cursor-pointer py-3 px-3 bg-gradient-to-br from-[#07bbff] to-[#007bff] text-[white] text-[16px] flex gap-2 items-center rounded-[8px]"
-        >
-          <FaPlus />
-          <div>Add Student</div>
-        </div>
+        {allowedRoles?.find((ar) => auth?.userDetails?.role?.includes(ar)) ? (
+          <div
+            onClick={handleOpenModal}
+            className="cursor-pointer py-3 px-3 bg-gradient-to-br from-[#07bbff] to-[#007bff] text-[white] text-[16px] flex gap-2 items-center rounded-[8px]"
+          >
+            <FaPlus />
+            <div>Add Student</div>
+          </div>
+        ) : (
+          <div className="cursor-pointer py-3 px-3 bg-gray-100 text-[white] text-[16px] flex gap-2 items-center rounded-[8px]">
+            <FaPlus />
+            <div>Add Student</div>
+          </div>
+        )}
       </div>
       <Modal
         sx={{ border: "none", outline: "none" }}

@@ -263,7 +263,7 @@ const CollegesAndDepartmentsTable = ({
                     />
                   </div>
                   <div className="w-[60px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
-                    1
+                    {cad?.uid}
                   </div>
                   <div className="w-[86px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
                     {cad?.college}

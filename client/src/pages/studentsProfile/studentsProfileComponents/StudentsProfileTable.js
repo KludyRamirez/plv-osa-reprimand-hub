@@ -15,8 +15,6 @@ import girl from "../../../images/login/girl.png";
 import {
   BsArrowRightShort,
   BsBoxArrowUpRight,
-  BsBullseye,
-  BsCheck2Circle,
   BsCheckCircle,
   BsChevronUp,
   BsCollection,
@@ -27,13 +25,11 @@ import {
   BsSticky,
   BsTrash3,
 } from "react-icons/bs";
-import {
-  MdOutlineCall,
-  MdOutlineEmail,
-  MdOutlineNetworkWifi2Bar,
-} from "react-icons/md";
+import { MdOutlineCall, MdOutlineEmail } from "react-icons/md";
 import { VscComment } from "react-icons/vsc";
 import EditStudent from "../../students/studentsComponents/EditStudent";
+import PatchCaseStatus from "../../cases/casesComponents/PatchCaseStatus";
+import RemarksCase from "../../cases/casesComponents/RemarksCase";
 
 const ModalBox = styled("div")({
   position: "absolute",
@@ -77,7 +73,11 @@ const StudentsProfileTable = ({
   const [selectedCaseEdit, setSelectedCaseEdit] = useState("");
   const [selectedCases, setSelectedCases] = useState("");
   const [showEditStudentModal, setShowEditStudentModal] = useState(false);
-  const [selectedStudentEdit, setSelectedStudentEdit] = useState("");
+  const [selectedStudentEdit, setSelectedStudentEdit] = useState(null);
+  const [showPatchCaseModal, setShowPatchCaseModal] = useState(false);
+  const [selectedCasePatch, setSelectedCasePatch] = useState(null);
+  const [showRemarksCaseModal, setShowRemarksCaseModal] = useState(false);
+  const [selectedCaseRemarks, setSelectedCaseRemarks] = useState(null);
 
   const auth = useSelector(authSelector);
   const navigate = useNavigate();
@@ -216,50 +216,50 @@ const StudentsProfileTable = ({
 
   // patch statusOfCase
 
-  const handlePatchStatusOfCase = async (id, statusCase, caseNo) => {
-    try {
-      if (!auth.userDetails.token) {
-        console.error("Authentication token not found.");
-        return;
-      }
+  // const handlePatchStatusOfCase = async (id, statusCase, caseNo) => {
+  //   try {
+  //     if (!auth.userDetails.token) {
+  //       console.error("Authentication token not found.");
+  //       return;
+  //     }
 
-      const caseMapping = {
-        Pending: "Investigation",
-        Investigation: "Evaluation",
-        Evaluation: "Referral",
-        Referral: "Hearing",
-        Hearing: "Decision",
-        Decision: "Implementation",
-        Implementation: "Case Solved",
-      };
+  //     const caseMapping = {
+  //       Pending: "Investigation",
+  //       Investigation: "Evaluation",
+  //       Evaluation: "Referral",
+  //       Referral: "Hearing",
+  //       Hearing: "Decision",
+  //       Decision: "Implementation",
+  //       Implementation: "Case Solved",
+  //     };
 
-      const caseStatus = caseMapping[statusCase];
+  //     const caseStatus = caseMapping[statusCase];
 
-      if (!caseStatus) {
-        console.error("Invalid case status:", statusCase);
-        return;
-      }
+  //     if (!caseStatus) {
+  //       console.error("Invalid case status:", statusCase);
+  //       return;
+  //     }
 
-      const res = await axios.patch(
-        `${process.env.REACT_APP_API_URI}/case/${id}/patchCase`,
-        {
-          caseNo,
-          statusOfCase: caseStatus,
-        },
-        {
-          headers: {
-            withCredentials: true,
-            Authorization: `Bearer ${auth?.userDetails?.token}`,
-          },
-        }
-      );
+  //     const res = await axios.patch(
+  //       `${process.env.REACT_APP_API_URI}/case/${id}/patchCase`,
+  //       {
+  //         caseNo,
+  //         statusOfCase: caseStatus,
+  //       },
+  //       {
+  //         headers: {
+  //           withCredentials: true,
+  //           Authorization: `Bearer ${auth?.userDetails?.token}`,
+  //         },
+  //       }
+  //     );
 
-      toast.success(res.data.message);
-      getCases();
-    } catch (error) {
-      console.error("Error fetching cases!", error);
-    }
-  };
+  //     toast.success(res.data.message);
+  //     getCases();
+  //   } catch (error) {
+  //     console.error("Error fetching cases!", error);
+  //   }
+  // };
 
   //edit student
 
@@ -286,7 +286,39 @@ const StudentsProfileTable = ({
     (c) => c.statusOfCase === "Case Solved"
   );
 
-  // cads.college filter and set - para walang duplicate object sa array
+  // patch case status
+
+  const handleCasePatchClick = (cas) => {
+    try {
+      setSelectedCasePatch(cas);
+      console.log(cas);
+    } catch (error) {
+      console.error("Error handling case Patch click:", error);
+    } finally {
+      setShowPatchCaseModal(true);
+    }
+  };
+
+  const handleCloseModalPatch = () => {
+    setShowPatchCaseModal(false);
+  };
+
+  // remarks case
+
+  const handleCaseRemarksClick = (cas) => {
+    try {
+      setSelectedCaseRemarks(cas);
+      console.log(cas);
+    } catch (error) {
+      console.error("Error handling case Remarks click:", error);
+    } finally {
+      setShowRemarksCaseModal(true);
+    }
+  };
+
+  const handleCloseModalRemarks = () => {
+    setShowRemarksCaseModal(false);
+  };
 
   return (
     <>
@@ -323,6 +355,40 @@ const StudentsProfileTable = ({
             getCases={getCases}
             students={students}
             cads={cads}
+          />
+        </ModalBox>
+      </Modal>
+      <Modal
+        sx={{ border: "none", outline: "none" }}
+        open={showPatchCaseModal}
+        onClose={handleCloseModalPatch}
+        aria-labelledby="parent-modal-title"
+        aria-describedby="parent-modal-description"
+      >
+        <ModalBox sx={{ width: "38%" }}>
+          <PatchCaseStatus
+            handleCloseModalPatch={handleCloseModalPatch}
+            selectedCasePatch={selectedCasePatch}
+            toast={toast}
+            getCases={getCases}
+            students={students}
+          />
+        </ModalBox>
+      </Modal>
+      <Modal
+        sx={{ border: "none", outline: "none" }}
+        open={showRemarksCaseModal}
+        onClose={handleCloseModalRemarks}
+        aria-labelledby="parent-modal-title"
+        aria-describedby="parent-modal-description"
+      >
+        <ModalBox sx={{ width: "38%" }}>
+          <RemarksCase
+            handleCloseModalRemarks={handleCloseModalRemarks}
+            selectedCaseRemarks={selectedCaseRemarks}
+            toast={toast}
+            getCases={getCases}
+            students={students}
           />
         </ModalBox>
       </Modal>
@@ -408,45 +474,8 @@ const StudentsProfileTable = ({
                 </div>
               </div>
             </div>
-            <div className=""></div>
           </div>
-          {/* <div className="w-[850px] flex justify-center gap-8 items-center border-[1px] rounded-[8px]">
-            <div className="w-[148px] text-white h-[150px] flex flex-col justify-center items-center gap-2 rounded-[8px] ">
-              <div className="text-[32px] font-bold text-[#5D3FD3]">
-                {cases.length}
-              </div>
-              <div className=" cursor-pointer text-[16px] py-2 px-3 bg-[#5D3FD3] rounded-[4px] hover:text-[#5D3FD3] hover:bg-white hover:border-[1px] hover:border-[#5D3FD3]">
-                <div className="">Total Cases</div>
-              </div>
-            </div>
-            <div className="w-[1px] h-[30px] bg-gray-200"></div>
-            <div className="w-[148px] h-[150px] flex flex-col justify-center items-center gap-2 text-white">
-              <div className="text-[32px] text-[#ff3131] font-bold">
-                {activeCases.length}
-              </div>
-              <div className="text-[16px] py-2 px-3 bg-[#ff3131] rounded-[4px] hover:text-[#ff3131] hover:bg-white hover:border-[1px] hover:border-[#ff3131] cursor-pointer">
-                <div className="">Active Cases</div>
-              </div>
-            </div>
-            <div className="w-[1px] h-[30px] bg-gray-200"></div>
-            <div className="w-[148px] h-[150px] flex flex-col justify-center items-center gap-2 text-[white]">
-              <div className="text-[32px] text-[#32CD32] font-bold">
-                {caseSolvedCases.length}
-              </div>
-              <div className="text-[16px] py-2 px-3 bg-[#32CD32] rounded-[4px] hover:text-[#32CD32] hover:bg-white hover:border-[1px] hover:border-[#32CD32] cursor-pointer">
-                <div className="">Solved Cases</div>
-              </div>
-            </div>
-            <div className="w-[1px] h-[30px] bg-gray-200"></div>
-            <div className="w-[148px] h-[150px] flex flex-col justify-center items-center gap-2 text-[white]">
-              <div className="text-[32px] text-[#007bff] font-bold">
-                {caseSolvedCases.length}
-              </div>
-              <div className="text-[16px] py-2 px-3 bg-[#007bff] rounded-[4px] hover:text-[#007bff] hover:bg-white hover:border-[1px] hover:border-[#007bff] cursor-pointer">
-                <div className="">Counseling</div>
-              </div>
-            </div>
-          </div> */}
+
           <div className="w-[100%] h-[48px] flex justify-between items-center pt-8">
             <div className="flex justify-start gap-3 items-center">
               <div className="text-[24px] text-[#007bff] font-bold">Cases</div>
@@ -514,18 +543,15 @@ const StudentsProfileTable = ({
                             <BsTrash3 className="text-[18px]" />
                           </div>
                           <div
-                            onClick={() =>
-                              handlePatchStatusOfCase(
-                                c?._id,
-                                c?.statusOfCase,
-                                c?.caseNo
-                              )
-                            }
+                            onClick={() => handleCasePatchClick(c)}
                             className="cursor-pointer rounded-[50%] w-[36px] h-[35px] border-[1px] border-[#007bff] flex justify-center items-center hover:bg-[#007bff] hover:text-white text-[#007bff]"
                           >
                             <BsChevronUp className="text-[18px]" />
                           </div>
-                          <div className="cursor-pointer rounded-[50%] w-[36px] h-[35px] border-[1px] border-[#007bff] flex justify-center items-center hover:bg-[#007bff] hover:text-white text-[#007bff]">
+                          <div
+                            onClick={() => handleCaseRemarksClick(c)}
+                            className="cursor-pointer rounded-[50%] w-[36px] h-[35px] border-[1px] border-[#007bff] flex justify-center items-center hover:bg-[#007bff] hover:text-white text-[#007bff]"
+                          >
                             <VscComment className="text-[20px]" />
                           </div>
                         </div>

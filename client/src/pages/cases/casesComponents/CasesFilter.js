@@ -38,7 +38,7 @@ const minorViolation = [
   "Unauthorized entry to restricted and designated areas",
 ];
 
-const CasesFilter = ({ cases, students, getCases }) => {
+const CasesFilter = ({ cases, students, getCases, allowedRoles }) => {
   const [searchTerm, setSearchTerm] = useState("All");
   const [selectedStatus, setSelectedStatus] = useState("All");
   const [dateOfIncident, setDateOfIncident] = useState(null);
@@ -307,6 +307,7 @@ const CasesFilter = ({ cases, students, getCases }) => {
       </div>
       <div className="py-8">
         <CasesTable
+          allowedRoles={allowedRoles}
           cases={combinedFilteredCases}
           students={students}
           getCases={getCases}

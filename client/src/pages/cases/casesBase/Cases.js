@@ -9,7 +9,7 @@ import CasesFilter from "../casesComponents/CasesFilter";
 const selectAuth = (state) => state.auth;
 const authSelector = createSelector([selectAuth], (auth) => auth);
 
-const Cases = ({ toast }) => {
+const Cases = ({ toast, allowedRoles }) => {
   const [cases, setCases] = useState([]);
   const [students, setStudents] = useState([]);
   const [cads, setCads] = useState([]);
@@ -87,12 +87,17 @@ const Cases = ({ toast }) => {
         <Sidebar />
         <div className="w-full flex justify-start bg-[#007bff]">
           <div className="w-full bg-[#fefefe] mt-[80px] rounded-tl-[24px] phone:rounded-tl-[0px] px-8 phone:px-4 pt-8">
-            <CreateCase toast={toast} getCases={getCases} />
+            <CreateCase
+              toast={toast}
+              getCases={getCases}
+              allowedRoles={allowedRoles}
+            />
             <CasesFilter
               cases={cases}
               students={students}
               getCases={getCases}
               cads={cads}
+              allowedRoles={allowedRoles}
             />
           </div>
         </div>

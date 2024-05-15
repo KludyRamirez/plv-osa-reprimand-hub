@@ -8,7 +8,7 @@ const auth = VerifyJWT;
 
 router.post("/login", mainController.controllers.login);
 
-router.post("/register", mainController.controllers.register);
+router.post("/register", auth, mainController.controllers.register);
 
 router.post("/change-email", auth, mainController.controllers.changeEmail);
 

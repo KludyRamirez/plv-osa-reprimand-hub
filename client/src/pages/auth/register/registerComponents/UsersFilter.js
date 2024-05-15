@@ -4,13 +4,11 @@ import {
   BsChevronBarDown,
   BsFilter,
   BsGear,
-  BsPersonGear,
 } from "react-icons/bs";
 
 import UsersTable from "./UsersTable";
-import { LuHardHat } from "react-icons/lu";
 
-const UsersFilter = ({ users, getUsers }) => {
+const UsersFilter = ({ users, getUsers, allowedRoles }) => {
   const [searchTerm, setSearchTerm] = useState("All");
   const [selectedStatus, setSelectedStatus] = useState("All");
   const [role, setRole] = useState("");
@@ -120,6 +118,7 @@ const UsersFilter = ({ users, getUsers }) => {
           getUsers={getUsers}
           selectedUsers={selectedUsers}
           setSelectedUsers={setSelectedUsers}
+          allowedRoles={allowedRoles}
         />
       </div>
     </>

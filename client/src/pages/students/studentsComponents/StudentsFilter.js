@@ -11,7 +11,13 @@ import {
 } from "react-icons/bs";
 import StudentsTable from "./StudentsTable";
 
-const StudentsFilter = ({ students, cases, getStudents, cads }) => {
+const StudentsFilter = ({
+  students,
+  cases,
+  getStudents,
+  cads,
+  allowedRoles,
+}) => {
   const [searchTerm, setSearchTerm] = useState("All");
   const [selectedStatus, setSelectedStatus] = useState("All");
   const [college, setCollege] = useState("All");
@@ -258,6 +264,7 @@ const StudentsFilter = ({ students, cases, getStudents, cads }) => {
           setSelectedStudents={setSelectedStudents}
           cases={cases}
           cads={cads}
+          allowedRoles={allowedRoles}
         />
       </div>
     </>

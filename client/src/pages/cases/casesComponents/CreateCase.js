@@ -60,12 +60,15 @@ const initialState = {
   typeOfViolation: "",
   dateOfIncident: Date,
   dateReported: Date,
+  dismissalDate: Date,
+  appeal: false,
+  remarks: "",
 };
 
 const selectAuth = (state) => state.auth;
 const authSelector = createSelector([selectAuth], (auth) => auth);
 
-const CreateCase = ({ toast, getCases }) => {
+const CreateCase = ({ toast, getCases, allowedRoles }) => {
   const [values, setValues] = useState(initialState);
   const [showCreateCaseModal, setShowCreateCaseModal] = useState(false);
   const [students, setStudents] = useState([]);
@@ -212,6 +215,8 @@ const CreateCase = ({ toast, getCases }) => {
     }
   };
 
+  console.log(auth.userDetails.role);
+
   return (
     <>
       <div className="w-100 text-[14px] text-[#404040] pb-6 ">
@@ -219,13 +224,21 @@ const CreateCase = ({ toast, getCases }) => {
       </div>
       <div className="w-100 text-[26px] text-[#077bff] font-bold pb-6 flex justify-between items-center">
         <div>Cases List</div>
-        <div
-          onClick={handleOpenModal}
-          className="cursor-pointer py-3 px-3 bg-gradient-to-br from-[#07bbff] to-[#007bff] text-[white] text-[16px] flex gap-2 items-center rounded-[8px]"
-        >
-          <FaPlus />
-          <div>Add Case</div>
-        </div>
+
+        {allowedRoles?.find((ar) => auth?.userDetails?.role?.includes(ar)) ? (
+          <div
+            onClick={handleOpenModal}
+            className="cursor-pointer py-3 px-3 bg-gradient-to-br from-[#07bbff] to-[#007bff] text-[white] text-[16px] flex gap-2 items-center rounded-[8px]"
+          >
+            <FaPlus />
+            <div>Add Case</div>
+          </div>
+        ) : (
+          <div className="cursor-pointer py-3 px-3 bg-gray-100 text-[white] text-[16px] flex gap-2 items-center rounded-[8px]">
+            <FaPlus />
+            <div>Add Case</div>
+          </div>
+        )}
       </div>
       <Modal
         sx={{ border: "none", outline: "none" }}

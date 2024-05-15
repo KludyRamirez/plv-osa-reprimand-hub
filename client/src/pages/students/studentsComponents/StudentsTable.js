@@ -53,6 +53,7 @@ const StudentsTable = ({
   setSelectedStudents,
   cases,
   cads,
+  allowedRoles,
 }) => {
   const [selectAll, setSelectAll] = useState(false);
   const [studentDeleteId, setStudentDeleteId] = useState("");
@@ -300,16 +301,24 @@ const StudentsTable = ({
           </div>
 
           {selectedStudents.length > 1 ? (
-            <>
-              <div className="w-[1px] h-[20px] border-[1px]"></div>
-              <div
-                className="flex gap-2 justify-start items-center py-1 px-2 bg-[#ff3131] border-[1px] border-[#ff3131] text-white text-[14px] rounded-[4px] cursor-pointer"
-                onClick={handleOpenModalDeleteMany}
-              >
-                <span>Delete</span>
-                <BsTrash3Fill className="text-[14px]" />
+            allowedRoles?.find((ar) =>
+              auth?.userDetails?.role?.includes(ar)
+            ) ? (
+              <>
+                <div className="w-[1px] h-[20px] border-[1px]"></div>
+                <div
+                  className="flex gap-2 justify-start items-center py-1 px-2 bg-[#ff3131] border-[1px] border-[#ff3131] text-white text-[14px] rounded-[4px] cursor-pointer"
+                  onClick={handleOpenModalDeleteMany}
+                >
+                  <span>Delete</span>
+                  <BsTrash3Fill className="text-[14px]" />
+                </div>
+              </>
+            ) : (
+              <div className="w-[118px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+                <span>Actions</span>
               </div>
-            </>
+            )
           ) : (
             <div className="w-[118px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
               <span>Actions</span>
@@ -366,44 +375,66 @@ const StudentsTable = ({
                     <div className="w-[160px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
                       {student?.contactNo}
                     </div>
-                    <div className="w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
+                    <div
+                      className={`w-[118px] flex justify-start items-center py-1 px-3 rounded-[4px] ${
+                        student?.statusOfStudent === "Dismissed"
+                          ? "text-[red] font-bold"
+                          : "text-[green]"
+                      }`}
+                    >
                       {student?.statusOfStudent}
                     </div>
 
-                    <div className="w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px] text-[22px] font-bold text-[#007bff]">
+                    <div className="w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px] text-[20px] font-bold text-[#404040]">
                       {casesCount}
                     </div>
                     <div className="w-[130px] whitespace-nowrap flex justify-start items-center gap-2">
                       {selectedStudents.length < 2 ? (
-                        <>
-                          <div
-                            onClick={() => handleClickProfile(student?._id)}
-                            className="p-2 bg-[white] border-[1px] border-[#007bff] rounded-[18px] cursor-pointer"
-                          >
-                            <BsEye className="text-[18px] text-[#007bff]" />
-                          </div>
-                          <div
-                            onClick={() => handleStudentEditClick(student)}
-                            className="p-2 bg-[white] border-[1px] border-[#FFBF00] rounded-[18px] cursor-pointer"
-                          >
-                            <BsPen className="text-[18px] text-[#FFBF00]" />
-                          </div>
-                          <div
-                            onClick={() => handleClickDelete(student?._id)}
-                            className="p-2 bg-[white] border-[1px] border-[#FF3131] rounded-[18px] cursor-pointer"
-                          >
-                            <BsTrash3 className="text-[18px] text-[#FF3131]" />
-                          </div>
-                        </>
+                        allowedRoles?.find((ar) =>
+                          auth?.userDetails?.role?.includes(ar)
+                        ) ? (
+                          <>
+                            <div
+                              onClick={() => handleClickProfile(student?._id)}
+                              className="p-2 bg-[white] border-[1px] border-[#007bff] rounded-[18px] cursor-pointer"
+                            >
+                              <BsEye className="text-[18px] text-[#007bff]" />
+                            </div>
+                            <div
+                              onClick={() => handleStudentEditClick(student)}
+                              className="p-2 bg-[white] border-[1px] border-[#FFBF00] rounded-[18px] cursor-pointer"
+                            >
+                              <BsPen className="text-[18px] text-[#FFBF00]" />
+                            </div>
+                            <div
+                              onClick={() => handleClickDelete(student?._id)}
+                              className="p-2 bg-[white] border-[1px] border-[#FF3131] rounded-[18px] cursor-pointer"
+                            >
+                              <BsTrash3 className="text-[18px] text-[#FF3131]" />
+                            </div>
+                          </>
+                        ) : (
+                          <>
+                            <div className="p-2 bg-gray-200 rounded-[18px]">
+                              <BsEyeFill className="text-[18px] text-[white]" />
+                            </div>
+                            <div className="p-2 bg-gray-200 rounded-[18px]">
+                              <BsPenFill className="text-[18px] text-white" />
+                            </div>
+                            <div className="p-2 bg-gray-200 rounded-[18px]">
+                              <BsTrash3Fill className="text-[18px] text-white" />
+                            </div>
+                          </>
+                        )
                       ) : (
                         <>
-                          <div className="p-2 bg-[#efefef] rounded-[18px]">
+                          <div className="p-2 bg-gray-200 rounded-[18px]">
                             <BsEyeFill className="text-[18px] text-[white]" />
                           </div>
-                          <div className="p-2 bg-[#efefef] rounded-[18px]">
+                          <div className="p-2 bg-gray-200 rounded-[18px]">
                             <BsPenFill className="text-[18px] text-white" />
                           </div>
-                          <div className="p-2 bg-[#efefef] rounded-[18px]">
+                          <div className="p-2 bg-gray-200 rounded-[18px]">
                             <BsTrash3Fill className="text-[18px] text-white" />
                           </div>
                         </>

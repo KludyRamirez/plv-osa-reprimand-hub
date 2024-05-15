@@ -48,6 +48,24 @@ const createCase = async (req, res) => {
     });
     console.log(existingCasesCount);
 
+    const existingMajorCasesCount = await Case.countDocuments({
+      studentNo: studentNew.studentNo,
+      statusOfCase: {
+        $in: [
+          "Pending",
+          "Investigation",
+          "Evaluation",
+          "Referral",
+          "Hearing",
+          "Decision",
+          "Implementation",
+        ],
+      },
+      resetOffense: 0,
+      typeOfViolation: "Major",
+    });
+    console.log(existingMajorCasesCount);
+
     if (existingCasesCount === 0) {
       await Case.create({
         ...req.body,
@@ -97,6 +115,14 @@ const createCase = async (req, res) => {
         caseNo: newCaseNo,
         offense: "1st",
       });
+    }
+
+    if (existingMajorCasesCount === 3) {
+      await Student.findByIdAndUpdate(
+        student,
+        { statusOfStudent: "Dismissed" },
+        { new: true }
+      );
     }
 
     await Notification.create({

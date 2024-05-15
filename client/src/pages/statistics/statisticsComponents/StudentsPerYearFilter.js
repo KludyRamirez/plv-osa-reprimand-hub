@@ -147,7 +147,7 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
 
     return (
       <>
-        <div className="pl-2 text-[48px] text-[#007bff] font-bold">
+        <div className="pl-2 text-[48px] text-[purple] font-bold">
           {percentage.toFixed(0)}
           <span className="text-[20px]">%</span>
         </div>
@@ -158,7 +158,7 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
   const bsitNumberConverter = () => {
     return (
       <>
-        <div className=" text-[48px] text-[#007bff] font-bold">
+        <div className=" text-[48px] text-[purple] font-bold">
           {bsitCases.length}
         </div>
       </>
@@ -417,7 +417,7 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
           <div className="p-4 zIndex-2 text-[white] bg-[#007bff]">
             Cases Per Year Level
           </div>
-          {cases.length > 0 || combinedFilteredCases.length > 0 ? (
+          {combinedFilteredCases.length > 0 ? (
             <>
               <StudentsPerYearPieChart
                 cases={combinedFilteredCases}
@@ -437,7 +437,7 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
           <div className="p-4 zIndex-2 text-[white] bg-[#FFBF00]">
             Cases Per College
           </div>
-          {cases.length > 0 || combinedFilteredCases.length > 0 ? (
+          {combinedFilteredCases.length > 0 ? (
             <>
               <CasesPerCollegePieChart
                 cases={combinedFilteredCases}
@@ -457,7 +457,7 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
       <div className="mt-4 flex justify-start items-center gap-4">
         <div
           onClick={() => handleSetBsitPercentage()}
-          className="p-2 w-[209px] h-[180px] bg-white border-[1px] border-[#007bff] rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden"
+          className="p-2 w-[209px] h-[180px] bg-white border-[4px] border-[purple] rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden"
         >
           <div className="w-[100%] h-[100%] flex justify-center items-end">
             {bsitPercentage === "Percentage" ? (
@@ -466,7 +466,7 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
               <>{bsitNumberConverter()}</>
             )}
           </div>
-          <div className="text-[16px] text-[#007bff]">1st Offense</div>
+          <div className="text-[16px] text-[purple]">1st Offense</div>
           <svg
             className="absolute top-0 left-0"
             viewBox="0 0 500 500"

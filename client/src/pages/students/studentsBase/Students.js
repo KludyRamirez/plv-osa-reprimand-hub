@@ -9,7 +9,7 @@ import { createSelector } from "reselect";
 const selectAuth = (state) => state.auth;
 const authSelector = createSelector([selectAuth], (auth) => auth);
 
-const Students = ({ toast }) => {
+const Students = ({ toast, allowedRoles }) => {
   const [students, setStudents] = useState([]);
   const [cases, setCases] = useState([]);
   const [cads, setCads] = useState([]);
@@ -90,12 +90,14 @@ const Students = ({ toast }) => {
               toast={toast}
               getStudents={getStudents}
               cads={cads}
+              allowedRoles={allowedRoles}
             />
             <StudentsFilter
               students={students}
               cases={cases}
               getStudents={getStudents}
               cads={cads}
+              allowedRoles={allowedRoles}
             />
           </div>
         </div>
