@@ -11,17 +11,23 @@ import StudentProfile from "./pages/studentsProfile/studentsProfileBase/StudentP
 import Settings from "./pages/settings/settingsBase/Settings";
 import AccountSettings from "./pages/accountSettings/accountSettingsBase/AccountSettings";
 import SecureRoles from "./externalUtils/SecureRoles";
-import Error404 from "./externalComponents/sidebarBase/Errors/Error404";
 import { useSelector } from "react-redux";
 import { createSelector } from "reselect";
-import Error302 from "./externalComponents/sidebarBase/Errors/Error302";
-import Error403 from "./externalComponents/sidebarBase/Errors/Error403";
+import Error403 from "./externalComponents/Errors/Error403";
+import Error302 from "./externalComponents/Errors/Error302";
+import Error404 from "./externalComponents/Errors/Error404";
+import Forgot from "./pages/auth/forgot/forgotBase/Forgot";
+import Reset from "./pages/auth/reset/resetBase/Reset";
+
+import { useParams } from "react-router-dom";
 
 const selectAuth = (state) => state.auth;
 const authSelector = createSelector([selectAuth], (auth) => auth);
 
 function App() {
   const auth = useSelector(authSelector);
+
+  const { id, token } = useParams();
 
   return (
     <>
@@ -41,6 +47,17 @@ function App() {
             path="/login"
             element={auth?.userDetails?.token ? <Error302 /> : <Login />}
           ></Route>
+          <Route
+            path="/forgot"
+            element={
+              auth?.userDetails?.token ? (
+                <Error302 />
+              ) : (
+                <Forgot auth={auth} toast={toast} />
+              )
+            }
+          ></Route>
+          <Route path="/reset-password/:id/:token" element={<Reset />}></Route>
           <Route
             element={
               <SecureRoles allowedRoles={["Administrator", "Instructor"]} />
@@ -73,10 +90,7 @@ function App() {
             <Route
               path="/statistics"
               element={
-                <Statistics
-                  toast={toast}
-                  allowedRoles={["Administrator", "Instructor"]}
-                />
+                <Statistics toast={toast} allowedRoles={["Administrator"]} />
               }
             ></Route>
             <Route

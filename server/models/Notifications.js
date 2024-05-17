@@ -8,12 +8,16 @@ const notificationsSchema = new mongoose.Schema(
       ref: "Users",
     },
 
-    message: {
+    typeOfNotif: {
       type: String,
     },
 
-    createdAt: {
-      type: Date,
+    actionOfNotif: {
+      type: String,
+    },
+
+    message: {
+      type: String,
     },
   },
   { timestamps: true }

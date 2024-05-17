@@ -110,21 +110,36 @@ const EditCaseFormModal = ({
               <BsChevronBarDown />
             </div>
             <select
-              name="student"
-              value={updatedValues?.student}
+              name="studentName"
+              value={updatedValues?.studentName}
               onChange={handleCaseOwnerChange}
               className="appearance-none p-3 rounded-[6px] bg-[#f5f5f5] focus:outline-none border-[1px] focus:border-[#007bff]"
             >
-              <option value="">Enter Student Name</option>
-              {filteredStudents?.map((s) => (
-                <option
-                  key={s?._id}
-                  value={s?._id}
-                  data-studentno={s?.studentNo}
-                >
-                  {s?.firstName} {s?.surName}
-                </option>
-              ))}
+              {filteredStudents
+                ?.sort((a, b) => {
+                  const nameA = `${a.firstName} ${a.surName}`.toLowerCase();
+                  const nameB = `${b.firstName} ${b.surName}`.toLowerCase();
+
+                  // Compare the names
+                  if (nameA < nameB) {
+                    return -1;
+                  }
+                  if (nameA > nameB) {
+                    return 1;
+                  }
+                  return 0;
+                })
+                .map((s) => (
+                  <option
+                    key={s?._id}
+                    value={`${s?.firstName} ${s?.surName}`}
+                    data-student={s?._id}
+                    data-studentno={s?.studentNo}
+                    data-year={s?.year}
+                  >
+                    {s?.firstName} {s?.surName}
+                  </option>
+                ))}
             </select>
           </div>
           <div className="text-[#606060] pt-6 flex gap-2">

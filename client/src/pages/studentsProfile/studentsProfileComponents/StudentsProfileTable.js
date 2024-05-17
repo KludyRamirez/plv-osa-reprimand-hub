@@ -9,15 +9,13 @@ import toast from "react-hot-toast";
 import DeleteManyCaseModal from "../../cases/casesComponents/DeleteCaseModal";
 import { useNavigate } from "react-router-dom";
 import EditCase from "../../cases/casesComponents/EditCase";
-import sea from "../../../images/login/sea.jpg";
-import boy from "../../../images/login/boynobg.svg";
-import girl from "../../../images/login/girl.png";
+import sea from "../../../images/sea.jpg";
+import boy from "../../../images/boynobg.svg";
+import girl from "../../../images/girl.png";
 import {
   BsArrowRightShort,
   BsBoxArrowUpRight,
-  BsCheckCircle,
   BsChevronUp,
-  BsCollection,
   BsFolderX,
   BsGoogle,
   BsPen,
@@ -30,6 +28,7 @@ import { VscComment } from "react-icons/vsc";
 import EditStudent from "../../students/studentsComponents/EditStudent";
 import PatchCaseStatus from "../../cases/casesComponents/PatchCaseStatus";
 import RemarksCase from "../../cases/casesComponents/RemarksCase";
+import { Radio, RadioGroup, FormControlLabel } from "@mui/material";
 
 const ModalBox = styled("div")({
   position: "absolute",
@@ -79,6 +78,8 @@ const StudentsProfileTable = ({
   const [showRemarksCaseModal, setShowRemarksCaseModal] = useState(false);
   const [selectedCaseRemarks, setSelectedCaseRemarks] = useState(null);
 
+  const [casesFilter, setCasesFilter] = useState("All");
+
   const auth = useSelector(authSelector);
   const navigate = useNavigate();
 
@@ -90,27 +91,27 @@ const StudentsProfileTable = ({
     }
   }, [selectedCases, cases]);
 
-  const toggleCaseSelection = (caseId) => {
-    let updatedSelectedCases = [...selectedCases];
+  // const toggleCaseSelection = (caseId) => {
+  //   let updatedSelectedCases = [...selectedCases];
 
-    if (updatedSelectedCases.includes(caseId)) {
-      updatedSelectedCases = updatedSelectedCases.filter((id) => id !== caseId);
-    } else {
-      updatedSelectedCases = [...updatedSelectedCases, caseId];
-    }
+  //   if (updatedSelectedCases.includes(caseId)) {
+  //     updatedSelectedCases = updatedSelectedCases.filter((id) => id !== caseId);
+  //   } else {
+  //     updatedSelectedCases = [...updatedSelectedCases, caseId];
+  //   }
 
-    setSelectedCases(updatedSelectedCases);
-  };
+  //   setSelectedCases(updatedSelectedCases);
+  // };
 
-  const toggleSelectAll = () => {
-    setSelectAll(!selectAll);
+  // const toggleSelectAll = () => {
+  //   setSelectAll(!selectAll);
 
-    if (!selectAll) {
-      setSelectedCases(cases.map((c) => c._id));
-    } else {
-      setSelectedCases([]);
-    }
-  };
+  //   if (!selectAll) {
+  //     setSelectedCases(cases.map((c) => c._id));
+  //   } else {
+  //     setSelectedCases([]);
+  //   }
+  // };
 
   const deleteSelectedCases = async () => {
     try {
@@ -195,9 +196,9 @@ const StudentsProfileTable = ({
 
   // delete many modal
 
-  const handleOpenModalDeleteMany = () => {
-    setShowDeleteManyCaseModal(true);
-  };
+  // const handleOpenModalDeleteMany = () => {
+  //   setShowDeleteManyCaseModal(true);
+  // };
 
   const handleCloseModalDeleteMany = () => {
     setShowDeleteManyCaseModal(false);
@@ -319,6 +320,18 @@ const StudentsProfileTable = ({
   const handleCloseModalRemarks = () => {
     setShowRemarksCaseModal(false);
   };
+
+  // cases filter latest
+
+  const filteredCases = cases?.filter((c) => {
+    if (casesFilter === "All") {
+      return true;
+    } else if (casesFilter === "Case Solved") {
+      return c.statusOfCase === "Case Solved";
+    } else if (casesFilter !== "Case Solved" && casesFilter !== "All") {
+      return c.statusOfCase !== "Case Solved";
+    }
+  });
 
   return (
     <>
@@ -476,33 +489,76 @@ const StudentsProfileTable = ({
             </div>
           </div>
 
-          <div className="w-[100%] h-[48px] flex justify-between items-center pt-8">
+          <div className="w-[100%] h-[48px] flex justify-between items-center pt-8 relative">
             <div className="flex justify-start gap-3 items-center">
               <div className="text-[24px] text-[#007bff] font-bold">Cases</div>
               <BsSticky className="text-[22px] text-[#007bff]" />
             </div>
-            <div className="flex justify-center items-center gap-2 font-bold">
-              <div className="cursor-pointer py-2 px-4 rounded-[24px] text-[16px] border-[1px] border-blue-400 flex gap-2 items-center text-[#007bff] bg-[#f7f7f7] hover:border-[1px] hover:border-blue-400">
-                <div>Total</div>
-                <BsSticky />
+
+            <RadioGroup
+              aria-labelledby="demo-controlled-radio-buttons-group"
+              name="controlled-radio-buttons-group"
+              value={casesFilter}
+              onChange={(e) => setCasesFilter(e.target.value)}
+              className="absolute top-[18px] right-[-16px]"
+            >
+              <div className="flex items-center gap-2">
+                <FormControlLabel
+                  value="All"
+                  control={<Radio id="All" sx={{ display: "none" }} />}
+                  label={
+                    <div
+                      className={`cursor-pointer py-2 px-4 rounded-[24px] text-[16px] border-[1px] border-blue-400 flex gap-2 items-center text-[#007bff] ${
+                        casesFilter === "All" ? "bg-[#007bff] text-white" : ""
+                      } `}
+                    >
+                      <div>Total</div>
+                      <BsSticky />
+                    </div>
+                  }
+                />
+                <FormControlLabel
+                  value="Case Solved"
+                  control={<Radio id="Case Solved" sx={{ display: "none" }} />}
+                  label={
+                    <div
+                      className={`cursor-pointer py-2 px-4 rounded-[24px] text-[16px] border-[1px] border-blue-400 flex gap-2 items-center text-[#007bff] ${
+                        casesFilter === "Case Solved"
+                          ? "bg-[#007bff] text-white"
+                          : "text-[#007bff] bg-[#f7f7f7]"
+                      }`}
+                    >
+                      <div>Solved</div>
+                      <BsSticky />
+                    </div>
+                  }
+                />
+                <FormControlLabel
+                  value="Active"
+                  control={<Radio id="Active" sx={{ display: "none" }} />}
+                  label={
+                    <div
+                      className={`cursor-pointer py-2 px-4 rounded-[24px] text-[16px] border-[1px] border-blue-400 flex gap-2 items-center ${
+                        casesFilter !== "All" && casesFilter !== "Case Solved"
+                          ? "bg-[#007bff] text-white"
+                          : "text-[#007bff] bg-[#f7f7f7]"
+                      }`}
+                    >
+                      <div>Active</div>
+                      <BsSticky />
+                    </div>
+                  }
+                />
               </div>
-              <div className="cursor-pointer py-2 px-4 rounded-[24px] text-[16px]  flex gap-2 items-center text-[#007bff] bg-[#f7f7f7] hover:border-[1px] hover:border-blue-400">
-                <div>Active</div>
-                <BsCollection />
-              </div>
-              <div className="cursor-pointer py-2 px-4 rounded-[24px] text-[16px]  flex gap-2 items-center text-[#007bff] bg-[#f7f7f7] hover:border-[1px] hover:border-blue-400">
-                <div>Solved</div>
-                <BsCheckCircle />
-              </div>
-            </div>
+            </RadioGroup>
           </div>
           <div className="w-[848px] rounded-[8px] flex justify-start flex-wrap gap-8 mt-6">
-            {cases.length > 0 ? (
+            {filteredCases.length > 0 ? (
               <>
-                {cases.map((c) => (
+                {filteredCases.map((c) => (
                   <div
                     key={c}
-                    className="cursor-pointer w-[408px] bg-[#f3f3f3] rounded-[8px] flex flex-col border-[1px]"
+                    className="cursor-pointer w-[408px] bg-[#f3f3f3] rounded-[0px] flex flex-col border-[1px] border-[#efefef] hover:border-blue-400"
                   >
                     <div className="flex h-[33px] justify-between items-center bg-[#efefef] rounded-tr-[8px] rounded-tl-[8px] px-4">
                       <div className="flex justify-center items-center text-[14px] text-[#606060]">
@@ -556,7 +612,7 @@ const StudentsProfileTable = ({
                           </div>
                         </div>
 
-                        <div className="rounded-[24px] px-3 py-1 border-[1px] border-[#007bff] text-[#007bff] flex justify-center items-center hover:bg-[#007bff] hover:text-white text-[#007bff]">
+                        <div className="rounded-[24px] px-4 py-2 border-[1px] border-[#007bff] text-[#007bff] flex justify-center items-center hover:bg-[#007bff] hover:text-white text-[#007bff]">
                           {c.statusOfCase}
                         </div>
                       </div>
@@ -584,7 +640,7 @@ const StudentsProfileTable = ({
                   <MdOutlineEmail className="text-[24px]" />
                 </div>
                 <div className="">{student.email}</div>
-                <BsGoogle className="text-[24px] text-[#606060]" />
+                <BsGoogle className="text-[24px] text-[#007bff]" />
               </div>
               <div className="w-[100%] flex gap-4 items-center">
                 <div className="p-2 rounded-[24px] border-[1px] border-[#007bff] text-[#007bff] hover:bg-[#007bff] hover:text-white cursor-pointer">
@@ -604,36 +660,38 @@ const StudentsProfileTable = ({
               Similar Profile
             </div>
             <div className="flex flex-col gap-4">
-              {students.map((s) => (
-                <div className="w-[100%] flex justify-between items-center pb-4 border-b-[1px]">
-                  <div className="flex items-center gap-4">
-                    {s.sex === "Male" ? (
-                      <img
-                        src={boy}
-                        alt=""
-                        className="w-[44px] h-[44px] rounded-[50%] border-[1px] border-[#007bff]"
-                      />
-                    ) : (
-                      <img
-                        src={girl}
-                        alt=""
-                        className="w-[44px] h-[44px] rounded-[50%] border-[1px] border-[#007bff]"
-                      />
-                    )}
+              {students
+                .filter((s) => s._id !== student._id)
+                .map((s) => (
+                  <div className="w-[100%] flex justify-between items-center pb-4 border-b-[1px]">
+                    <div className="flex items-center gap-4">
+                      {s.sex === "Male" ? (
+                        <img
+                          src={boy}
+                          alt=""
+                          className="w-[44px] h-[44px] rounded-[50%] border-[1px] border-blue-500"
+                        />
+                      ) : (
+                        <img
+                          src={girl}
+                          alt=""
+                          className="w-[44px] h-[44px] rounded-[50%] border-[1px] border-blue-500"
+                        />
+                      )}
 
-                    <div className="text-[16px] text-[#606060] ">
-                      {s.firstName} {s.surName}
+                      <div className="text-[16px] text-[#606060] ">
+                        {s.firstName} {s.surName}
+                      </div>
+                    </div>
+                    <div
+                      onClick={() => handleClickProfile(s._id)}
+                      className=" cursor-pointer flex justify-start items-center gap-2 hover:underline"
+                    >
+                      <span>Go</span>
+                      <BsBoxArrowUpRight />
                     </div>
                   </div>
-                  <div
-                    onClick={() => handleClickProfile(s._id)}
-                    className=" cursor-pointer flex justify-start items-center gap-2 hover:underline"
-                  >
-                    <span>Go</span>
-                    <BsBoxArrowUpRight />
-                  </div>
-                </div>
-              ))}
+                ))}
             </div>
           </div>
         </div>

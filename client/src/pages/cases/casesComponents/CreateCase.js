@@ -55,6 +55,8 @@ const minorViolation = [
 const initialState = {
   student: "",
   studentNo: "",
+  studentName: "",
+  year: "",
   reportedViolation: "",
   typeOfViolations: ["Major", "Minor"],
   typeOfViolation: "",
@@ -185,14 +187,20 @@ const CreateCase = ({ toast, getCases, allowedRoles }) => {
   };
 
   const handleCaseOwnerChange = (e) => {
-    const selectedStudentId = e.target.value;
+    const selectedName = e.target.value;
+    const selectedStudentId =
+      e.target.options[e.target.selectedIndex].getAttribute("data-student");
     const selectedStudentNo =
       e.target.options[e.target.selectedIndex].getAttribute("data-studentno");
+    const selectedYear =
+      e.target.options[e.target.selectedIndex].getAttribute("data-year");
 
     setValues({
       ...values,
+      studentName: selectedName,
       student: selectedStudentId,
       studentNo: selectedStudentNo,
+      year: selectedYear,
     });
   };
 

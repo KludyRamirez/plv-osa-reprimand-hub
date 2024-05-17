@@ -8,7 +8,7 @@ import HistoryFilter from "../historyComponents/HistoryFilter";
 const selectAuth = (state) => state.auth;
 const authSelector = createSelector([selectAuth], (auth) => auth);
 
-const History = ({ toast }) => {
+const History = ({ toast, allowedRoles }) => {
   const [history, setHistory] = useState([]);
 
   const auth = useSelector(authSelector);
@@ -42,7 +42,12 @@ const History = ({ toast }) => {
         <Sidebar />
         <div className="w-full h-screen flex justify-start bg-[#007bff]">
           <div className="w-full bg-[#fefefe] mt-[80px] rounded-tl-[24px] p-8">
-            <HistoryFilter history={history} getHistory={getHistory} />
+            <HistoryFilter
+              history={history}
+              getHistory={getHistory}
+              toast={toast}
+              allowedRoles={allowedRoles}
+            />
           </div>
         </div>
       </div>

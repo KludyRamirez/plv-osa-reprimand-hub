@@ -3,10 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
 import { getActions } from "../../../../store/actions/AuthActions";
 import { styled } from "@mui/material/styles";
-import osaLogo from "../../../../images/login/osalogo.jpg";
-import plvLogo from "../../../../images/login/PLVlogo.png";
-import folder from "../../../../images/login/folder.png";
-import flash from "../../../../images/login/flash.png";
+import osaLogo from "../../../../images/osalogo.jpg";
+import plvLogo from "../../../../images/PLVlogo.png";
+import flash from "../../../../images/flash.png";
 import LoginInputs from "../loginComponents/LoginInputs";
 
 import {
@@ -17,14 +16,9 @@ import {
   BsGithub,
   BsGlobe2,
   BsInstagram,
-  BsLightningCharge,
-  BsLink,
   BsLinkedin,
-  BsMailbox,
-  BsMailbox2,
-  BsMailbox2Flag,
+  BsMegaphone,
   BsMegaphoneFill,
-  BsThunderbolt,
   BsTwitter,
 } from "react-icons/bs";
 
@@ -90,17 +84,17 @@ const Login = ({ login }) => {
             </div>
             <div className="flex justify-center items-center gap-3">
               <div
-                className="text-base cursor-pointer bg-[#077bff] text-white px-3 py-2 rounded-[6px] hover:bg-white hover:border-[1px] hover:border-[#007bff] hover:text-[#007bff]"
+                className="flex items-center gap-2 text-base text-[#077bff] cursor-pointer bg-white border-[1px] border-[#077bff] px-3 py-2 rounded-[6px] hover:bg-[#007bff] hover:text-white hover:border-[1px]"
                 onClick={() => handleActiveChange("Login")}
               >
                 Sign in
               </div>
               <div
-                className="flex items-center gap-2 text-base text-[#077bff] cursor-pointer bg-white border-[1px] border-[#077bff] px-3 py-2 rounded-[6px] hover:bg-[#007bff] hover:border-[0px] hover:text-white"
+                className="flex items-center gap-2 text-base text-[#077bff] cursor-pointer bg-white border-[1px] border-[#077bff] px-3 py-2 rounded-[6px] hover:bg-[#007bff] hover:text-white hover:border-[1px]"
                 onClick={() => handleActiveChange("Login")}
               >
                 <span>Announcements</span>
-                <BsMegaphoneFill />
+                <BsMegaphone />
               </div>
             </div>
           </div>

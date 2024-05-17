@@ -26,7 +26,7 @@ const RemarksCase = ({
       }
 
       const res = await axios.put(
-        `${process.env.REACT_APP_API_URI}/case/${selectedCaseRemarks._id}`,
+        `${process.env.REACT_APP_API_URI}/caseRemarks/${selectedCaseRemarks._id}`,
         updatedValues,
         {
           withCredentials: true,

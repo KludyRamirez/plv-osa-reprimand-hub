@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { createSelector } from "reselect";
-import { BsFolder2Open, BsShare } from "react-icons/bs";
+import { BsFolder2Open, BsFolderX, BsShare } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
+import { AiOutlineExport } from "react-icons/ai";
+import TimeExtractor from "../../../externalUtils/TimeExtractor";
 
 const selectAuth = (state) => state.auth;
 const authSelector = createSelector([selectAuth], (auth) => auth);
@@ -12,8 +14,11 @@ const HistoryTable = ({
   getHistory,
   selectedHistory,
   setSelectedHistory,
+  allowedRoles,
 }) => {
   const [selectAll, setSelectAll] = useState(false);
+
+  const auth = useSelector(authSelector);
 
   useEffect(() => {
     if (history.length > 0 && selectedHistory.length === history.length) {
@@ -67,7 +72,7 @@ const HistoryTable = ({
     <>
       <div className="flex justify-start gap-8">
         <div
-          className={`w-[1300px] h-[570px] bg-white flex flex-col rounded-[10px] border-[1px] text-[#505050] phone:overflow-x-scroll ${
+          className={`w-[100%] h-[422px] bg-white flex flex-col rounded-[10px] border-[1px] text-[#505050] phone:overflow-x-scroll ${
             history && history.length > 5 ? "overflow-y-scroll" : ""
           }`}
         >
@@ -80,21 +85,28 @@ const HistoryTable = ({
                 onChange={toggleSelectAll}
               />
             </div>
-            <div className="w-[100px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
-              User ID
+            <div className="w-[60px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+              UID
             </div>
             <div className="w-[150px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
               Username
             </div>
-            <div className="w-[460px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+            <div className="w-[150px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+              Type
+            </div>
+            <div className="w-[400px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+              Message
+            </div>
+            <div className="w-[150px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
               Activity
             </div>
-            <div className="w-[200px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+            <div className="w-[150px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
               <span>Date</span>
             </div>
-            <div className="w-[100px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
-              <span>Actions</span>
+            <div className="w-[150px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+              <span>Time</span>
             </div>
+
             {selectedHistory?.length > 1 ? (
               <>
                 <div className="w-[1px] h-[20px] border-[1px]"></div>
@@ -103,7 +115,11 @@ const HistoryTable = ({
                   <BsShare className="text-[14px]" />
                 </div>
               </>
-            ) : null}
+            ) : (
+              <div className="w-[120px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+                <span>Actions</span>
+              </div>
+            )}
           </div>
 
           {history.length > 0 ? (
@@ -126,48 +142,65 @@ const HistoryTable = ({
                       onChange={() => toggleHistorySelection(h?._id)}
                     />
                   </div>
-                  <div className="w-[100px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
+                  <div className="w-[60px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
                     {h?.userId?.uid}
                   </div>
                   <div className="w-[150px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
                     {h?.userId?.userName}
                   </div>
-                  <div className="w-[460px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
-                    {h?.message?.slice(0, 52)}...
+                  <div className="w-[150px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
+                    {h?.typeOfNotif}
                   </div>
-                  <div className="w-[200px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
+                  <div className="w-[400px] flex justify-start items-center py-1 px-3 rounded-[4px]">
+                    {h?.message}
+                  </div>
+                  <div className="w-[150px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
+                    {h?.actionOfNotif}
+                  </div>
+                  <div className="w-[150px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
                     {new Date(h?.createdAt)?.toLocaleDateString("en-US", {
                       month: "long",
                       day: "numeric",
                       year: "numeric",
                     })}
                   </div>
-                  {selectedHistory?.length < 2 ? (
-                    <div className="w-[100px] mt-[-4px] whitespace-nowrap flex justify-center items-center rounded-[4px]">
-                      <div className="flex gap-2 justify-start items-center py-1 px-2 bg-[green] border-[1px] border-[green] text-white text-[14px] rounded-[4px] cursor-pointer">
-                        <span>Export</span>
-                        <BsShare className="text-[14px]" />
-                      </div>
-                    </div>
+                  <div className="w-[150px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
+                    <TimeExtractor date={h?.createdAt} />
+                  </div>
+                  {selectedHistory.length < 2 ? (
+                    allowedRoles?.find((ar) =>
+                      auth?.userDetails?.role?.includes(ar)
+                    ) ? (
+                      <>
+                        <div className="p-2 ml-1 bg-white border-[1px] border-[green] rounded-[18px] cursor-pointer">
+                          <AiOutlineExport className="text-[18px] text-[green]" />
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <div className="p-2 ml-1 bg-gray-200 rounded-[18px]">
+                          <AiOutlineExport className="text-[18px] text-white" />
+                        </div>
+                      </>
+                    )
                   ) : (
-                    <div className="w-[100px] mt-[-4px] whitespace-nowrap flex justify-center items-center rounded-[4px]">
-                      <div className="flex gap-2 justify-start items-center py-1 px-2 bg-[#efefef] border-[1px] border-[#efefef] text-white text-[14px] rounded-[4px] cursor-pointer">
-                        <span>Export</span>
-                        <BsShare className="text-[14px]" />
+                    <>
+                      <div className="p-2  ml-1 bg-gray-200 rounded-[18px]">
+                        <AiOutlineExport className="text-[18px] text-white" />
                       </div>
-                    </div>
+                    </>
                   )}
                 </div>
               ))}
             </>
           ) : (
             <div className="w-100 h-[323px] flex flex-col justify-center items-center gap-2 text-[#909090] border-t-[1px] border-t-[#f0f0f0]">
-              <BsFolder2Open className="text-[42px]" />
-              <div className="text-[16px]">Empty</div>
+              <BsFolderX className="text-[42px]" />
+              <div className="text-[16px]">No history available</div>
             </div>
           )}
         </div>
-        <div className="flex flex-col gap-4">
+        {/* <div className="flex flex-col gap-4">
           <div className="p-2 w-[236px] h-[179px] bg-white border-[1px] border-[#007bff] rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden">
             <div className="mt-[-46px] w-[100%] h-[100%] flex justify-center items-end">
               <div className=" text-[48px] text-[#007bff] font-bold">
@@ -186,9 +219,9 @@ const HistoryTable = ({
               ></path>
             </svg>
           </div>
-          <div className="p-2 w-[236px] h-[179px] bg-white border-[1px] border-[#FFBF00] rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden">
+          <div className="p-2 w-[236px] h-[179px] bg-white border-[1px] border-[green] rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden">
             <div className="pl-1 w-[100%] h-[100%] flex justify-center items-end"></div>
-            <div className="text-[16px] text-[#FFBF00]"></div>
+            <div className="text-[16px] text-[green]"></div>
             <svg
               className="absolute top-0 left-0"
               viewBox="0 0 500 500"
@@ -214,7 +247,7 @@ const HistoryTable = ({
               ></path>
             </svg>
           </div>
-        </div>
+        </div> */}
       </div>
     </>
   );

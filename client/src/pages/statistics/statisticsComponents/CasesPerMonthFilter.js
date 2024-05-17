@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import {
   BsCalendar4,
   BsCalendar4Week,
-  BsCaretDown,
+  BsChevronBarDown,
   BsCheckCircle,
   BsFilter,
 } from "react-icons/bs";
@@ -292,7 +292,7 @@ const CasesPerMonthFilter = ({ cases, students, getCases }) => {
             <div className="phone:w-[50%] flex flex-col items-start gap-2">
               <div className="pl-2 w-[158px] phone:w-[100%] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
-                  <div>Violation</div> <BsCaretDown />
+                  <div>Violation</div> <BsChevronBarDown />
                 </div>
                 <BsCalendar4 />
               </div>
@@ -324,7 +324,7 @@ const CasesPerMonthFilter = ({ cases, students, getCases }) => {
             <div className="phone:w-[47.8%] flex flex-col items-start gap-2">
               <div className=" w-[158px] phone:w-[100%] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
-                  <div>Case Status</div> <BsCaretDown />
+                  <div>Case Status</div> <BsChevronBarDown />
                 </div>
                 <BsCheckCircle />
               </div>
@@ -347,7 +347,7 @@ const CasesPerMonthFilter = ({ cases, students, getCases }) => {
             <div className="phone:w-[50%] flex flex-col items-start gap-2">
               <div className=" w-[158px] phone:w-[100%] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
-                  <div>Year</div> <BsCaretDown />
+                  <div>Year</div> <BsChevronBarDown />
                 </div>
                 <BsCalendar4Week />
               </div>

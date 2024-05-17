@@ -47,11 +47,13 @@ const Register = ({ toast, allowedRoles }) => {
               toast={toast}
               getUsers={getUsers}
               allowedRoles={allowedRoles}
+              auth={auth}
             />
             <UsersFilter
               users={users}
               getUsers={getUsers}
               allowedRoles={allowedRoles}
+              auth={auth}
             />
           </div>
         </div>

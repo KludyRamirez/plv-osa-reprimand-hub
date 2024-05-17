@@ -5,6 +5,7 @@ const casesSchema = new mongoose.Schema(
   {
     caseNo: { type: Number },
     studentNo: { type: String },
+    studentName: { type: String },
     student: {
       type: ObjectId,
       ref: "Students",
@@ -50,7 +51,8 @@ const casesSchema = new mongoose.Schema(
     dismissalDate: { type: Date },
     appeal: { type: Boolean },
     caseSolvedDate: { type: Date },
-    remarks: "",
+    remarks: { type: String },
+    year: { type: String },
   },
   { timestamps: true }
 );

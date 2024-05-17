@@ -8,7 +8,8 @@ export const AuthActions = {
 export const getActions = (dispatch) => {
   return {
     login: (userDetails, navigate) => dispatch(login(userDetails, navigate)),
-    register: (userDetails) => dispatch(register(userDetails)),
+    register: (userDetails, authToken) =>
+      dispatch(register(userDetails, authToken)),
     setUserDetails: (userDetails) => dispatch(setUserDetails(userDetails)),
   };
 };
@@ -28,27 +29,27 @@ const login = (userDetails, navigate) => {
   return async (dispatch) => {
     const response = await api.login(userDetails);
     if (response.error) {
-      dispatch(toast.error(response?.exception?.response?.data));
+      dispatch(toast.error(response?.exception?.response?.data.message));
     } else {
       const { userDetails } = response?.data;
       localStorage.setItem("user", JSON.stringify(userDetails));
       dispatch(setUserDetails(userDetails));
-      navigate("/students");
+      navigate("/statistics");
     }
   };
 };
 
-const register = (userDetails) => {
+const register = (userDetails, authToken) => {
   return async (dispatch) => {
     try {
-      const response = await api.register(userDetails);
+      const response = await api.register(userDetails, authToken);
       if (response.error) {
-        dispatch(toast.error(response?.exception?.response?.data));
+        dispatch(toast.error(response?.exception?.response?.data.message));
       } else {
-        dispatch(toast.success("A user has been successfully added!"));
+        dispatch(toast.success(response.data.message));
       }
-    } catch (error) {
-      console.error("Error occurred while registering:", error);
+    } catch (err) {
+      console.error("Error on creating new user. Please try again", err);
     }
   };
 };

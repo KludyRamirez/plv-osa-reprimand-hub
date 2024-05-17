@@ -41,7 +41,7 @@ const PatchCaseStatus = ({
       }
 
       const res = await axios.put(
-        `${process.env.REACT_APP_API_URI}/case/${selectedCasePatch._id}`,
+        `${process.env.REACT_APP_API_URI}/caseStatus/${selectedCasePatch._id}`,
         updatedValues,
         {
           withCredentials: true,

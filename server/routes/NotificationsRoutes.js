@@ -8,13 +8,6 @@ const { VerifyRoles } = require("../middlewares/VerifyRoles");
 const auth = VerifyJWT;
 const role = VerifyRoles;
 
-// router.post(
-//   "/notification",
-//   auth,
-//   role(["Administrator"]),
-//   mainController.controllers.createNotification
-// );
-
 router.get(
   "/notification",
   auth,

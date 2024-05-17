@@ -4,14 +4,18 @@ import {
   BsFilter,
   BsChevronBarDown,
   BsCheckCircle,
+  BsFeather,
+  BsFastForward,
 } from "react-icons/bs";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import HistoryTable from "./HistoryTable";
+import { VscGithubAction } from "react-icons/vsc";
 
-const HistoryFilter = ({ history, getHistory }) => {
+const HistoryFilter = ({ history, getHistory, toast, allowedRoles }) => {
   const [selectedStatus, setSelectedStatus] = useState("All");
   const [date, setDate] = useState(null);
+  const [actionNotif, setActionNotif] = useState("All");
   const [activeMainFilter, setActiveMainFilter] = useState("All");
   const [selectedHistory, setSelectedHistory] = useState([]);
 
@@ -22,7 +26,7 @@ const HistoryFilter = ({ history, getHistory }) => {
   const filteredByStatus =
     selectedStatus === "All"
       ? history
-      : history?.filter((h) => h?.message === selectedStatus);
+      : history?.filter((h) => h?.typeOfNotif === selectedStatus);
 
   const filteredByDate = history?.filter((h) => {
     const dateMatch =
@@ -38,7 +42,10 @@ const HistoryFilter = ({ history, getHistory }) => {
           year: "numeric",
         });
 
-    return dateMatch;
+    const actionNotifMatch =
+      actionNotif === "All" || h?.actionOfNotif?.includes(actionNotif);
+
+    return dateMatch && actionNotifMatch;
   });
 
   const combinedFilteredHistory =
@@ -71,32 +78,48 @@ const HistoryFilter = ({ history, getHistory }) => {
 
         <div className="w-100 flex justify-start bg-gradient-to-br from-gray-100 to-gray-100 p-4 rounded-bl-[10px] rounded-br-[10px]">
           <div className="w-100 flex flex-wrap justify-start items-center gap-4 phone:gap-2">
-            {/* <div className="phone:w-[47.8%] flex flex-col items-start gap-2">
+            <div className="phone:w-[47.8%] flex flex-col items-start gap-2">
               <div className="pl-2 w-[242px] phone:w-[100%] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
-                  <div>Status of Case</div> <BsChevronBarDown />
+                  <div>Type</div> <BsChevronBarDown />
                 </div>
-                <BsCheckCircle />
+                <BsFeather />
               </div>
               <select
                 onChange={(e) => setSelectedStatus(e.target.value)}
                 className="px-3 py-2 w-[242px] phone:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
               >
                 <option value="All">All</option>
-                <option value="Pending">Pending</option>
-                <option value="Investigation">Investigation</option>
-                <option value="Evaluation">Evaluation</option>
-                <option value="Referral">Referral</option>
-                <option value="Hearing">Hearing</option>
-                <option value="Decision">Decision</option>
-                <option value="Implementation">Implementation</option>
-                <option value="Case Solved">Case Solved</option>
+                <option value="Authentication">Authentication</option>
+                <option value="Cases">Cases</option>
+                <option value="Students">Students</option>
+                <option value="Users">Users</option>
+                <option value="Account">Account</option>
+                <option value="Utilities">Utilities</option>
               </select>
-            </div> */}
+            </div>
+            <div className="phone:w-[47.8%] flex flex-col items-start gap-2">
+              <div className="pl-2 w-[242px] phone:w-[100%] flex justify-between items-center">
+                <div className="flex gap-2 items-center">
+                  <div>Action</div> <BsChevronBarDown />
+                </div>
+                <BsFastForward />
+              </div>
+              <select
+                onChange={(e) => setActionNotif(e.target.value)}
+                className="px-3 py-2 w-[242px] phone:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
+              >
+                <option value="All">All</option>
+                <option value="Add">Add</option>
+                <option value="Update One">Update One</option>
+                <option value="Update">Update</option>
+                <option value="Delete">Delete</option>
+              </select>
+            </div>
             <div className="phone:w-[50%] flex flex-col items-start gap-2">
               <div className="pl-2 w-[242px] phone:w-[100%] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
-                  <div>Date of History</div> <BsChevronBarDown />
+                  <div>Date</div> <BsChevronBarDown />
                 </div>
                 <BsCalendar4Week />
               </div>
@@ -118,6 +141,8 @@ const HistoryFilter = ({ history, getHistory }) => {
           getHistory={getHistory}
           selectedHistory={selectedHistory}
           setSelectedHistory={setSelectedHistory}
+          toast={toast}
+          allowedRoles={allowedRoles}
         />
       </div>
     </>

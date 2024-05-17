@@ -6,7 +6,6 @@ import { FaPlus } from "react-icons/fa6";
 import { styled } from "@mui/system";
 import { connect } from "react-redux";
 import { getActions } from "../../../../store/actions/AuthActions";
-import { useNavigate } from "react-router-dom";
 import CreateUserFormModal from "./CreateUserFormModal";
 
 const ModalBox = styled("div")({
@@ -62,10 +61,10 @@ const CreateUser = ({ register, getUsers, allowedRoles }) => {
 
   const auth = useSelector(authSelector);
 
-  const navigate = useNavigate();
-
   const { userName, firstName, surName, email, password, role, contactNo } =
     values;
+
+  const authToken = auth?.userDetails?.token;
 
   const handleCreateUser = async (e) => {
     e.preventDefault();
@@ -81,7 +80,7 @@ const CreateUser = ({ register, getUsers, allowedRoles }) => {
     };
 
     try {
-      await register(userDetails, navigate);
+      await register(userDetails, authToken);
       setValues(initialState);
     } catch (error) {
       console.error("Error while registering user:", error);

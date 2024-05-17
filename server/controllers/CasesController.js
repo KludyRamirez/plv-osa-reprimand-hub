@@ -127,12 +127,14 @@ const createCase = async (req, res) => {
 
     await Notification.create({
       userId: userData._id,
-      message: `[Case no. ${newCaseNo} was successfully added]`,
+      typeOfNotif: "Cases",
+      actionOfNotif: "Add",
+      message: `Case no. ${newCaseNo} was created successfully.`,
       createdAt: new Date(),
     });
 
     res.status(200).json({
-      message: `[Case no. ${newCaseNo} was successfully added]`,
+      message: `Case no. ${newCaseNo} was created successfully.`,
     });
   } catch (error) {
     console.error("Error adding case:", error);
@@ -176,17 +178,19 @@ const editCase = async (req, res) => {
 
     await Notification.create({
       userId: userData._id,
-      message: `Case No. ${caseNo} has been successfully updated.`,
+      typeOfNotif: "Cases",
+      actionOfNotif: "Update",
+      message: `Case No. ${caseNo} has been updated successfully.`,
       createdAt: new Date(),
     });
 
     res.status(200).json({
       data: theCase,
-      message: `Case No. ${caseNo} has been successfully updated.`,
+      message: `Case No. ${caseNo} has been updated successfully.`,
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Failed to edit case values !" });
+    res.status(500).json({ message: "Failed to edit case values!" });
   }
 };
 
@@ -194,23 +198,95 @@ const patchCase = async (req, res) => {
   try {
     const userData = req.user;
 
-    const { statusOfCase, caseNo } = req.body;
+    const { caseNo } = req.body;
 
-    await Case.findByIdAndUpdate(req.params.id, { statusOfCase });
+    const { id } = req.params;
+
+    const theCase = await Case.findByIdAndUpdate(
+      id,
+      {
+        ...req.body,
+      },
+      {
+        new: true,
+      }
+    );
 
     await Notification.create({
       userId: userData._id,
-      message: `Case No. ${caseNo} status has been changed to ${statusOfCase}`,
+      typeOfNotif: "Cases",
+      actionOfNotif: "Update One",
+      message: `Case No. ${caseNo} status has been updated successfully.`,
       createdAt: new Date(),
     });
 
     res.status(200).json({
-      message: `Case No. ${caseNo} status has been changed to ${statusOfCase}`,
+      data: theCase,
+      message: `Case No. ${caseNo} status has been updated successfully.`,
     });
   } catch (error) {
-    res.status(500).json({ error: "Failed to change case status." });
+    console.error(error);
+    res.status(500).json({ message: "Failed to edit case status!" });
   }
 };
+
+const remarksCase = async (req, res) => {
+  try {
+    const userData = req.user;
+
+    const { caseNo } = req.body;
+
+    const { id } = req.params;
+
+    const theCase = await Case.findByIdAndUpdate(
+      id,
+      {
+        ...req.body,
+      },
+      {
+        new: true,
+      }
+    );
+
+    await Notification.create({
+      userId: userData._id,
+      typeOfNotif: "Cases",
+      actionOfNotif: "Update One",
+      message: `Case No. ${caseNo} remarks has been updated succesfully.`,
+      createdAt: new Date(),
+    });
+
+    res.status(200).json({
+      data: theCase,
+      message: `Case No. ${caseNo} remarks has been updated succesfully.`,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Failed to update case remarks!" });
+  }
+};
+
+// const patchCase = async (req, res) => {
+//   try {
+//     const userData = req.user;
+
+//     const { statusOfCase, caseNo } = req.body;
+
+//     await Case.findByIdAndUpdate(req.params.id, { statusOfCase });
+
+//     await Notification.create({
+//       userId: userData._id,
+//       message: `Case No. ${caseNo} status has been changed to ${statusOfCase}`,
+//       createdAt: new Date(),
+//     });
+
+//     res.status(200).json({
+//       message: `Case No. ${caseNo} status has been changed to ${statusOfCase}`,
+//     });
+//   } catch (error) {
+//     res.status(500).json({ error: "Failed to change case status." });
+//   }
+// };
 
 const deleteOneCase = async (req, res) => {
   try {
@@ -223,12 +299,14 @@ const deleteOneCase = async (req, res) => {
 
     await Notification.create({
       userId: userData._id,
-      message: `User ${deletedCase.caseNo} has been deleted!`,
+      typeOfNotif: "Cases",
+      actionOfNotif: "Delete",
+      message: `Case No. ${deletedCase.caseNo} has been deleted successfully.`,
       createdAt: new Date(),
     });
 
     res.status(200).json({
-      message: `Case No. ${deletedCase.caseNo} has been deleted!`,
+      message: `Case No. ${deletedCase.caseNo} has been deleted successfully.`,
     });
   } catch (err) {
     res.status(400).json({
@@ -239,11 +317,22 @@ const deleteOneCase = async (req, res) => {
 
 const deleteManyCase = async (req, res) => {
   try {
+    const userData = req.user;
+
     const { cases } = req.body;
     await Case.deleteMany({ _id: { $in: cases } });
+
+    await Notification.create({
+      userId: userData._id,
+      typeOfNotif: "Cases",
+      actionOfNotif: "Delete",
+      message: `Selected cases has been deleted successfully.`,
+      createdAt: new Date(),
+    });
+
     res
       .status(200)
-      .json({ message: "Selected cases has been deleted permanently!" });
+      .json({ message: "Selected cases has been deleted successfully." });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -254,6 +343,7 @@ module.exports = {
   getCases,
   editCase,
   patchCase,
+  remarksCase,
   deleteOneCase,
   deleteManyCase,
 };

@@ -1,5 +1,5 @@
 import React from "react";
-import { BsCaretDown, BsX } from "react-icons/bs";
+import { BsChevronBarDown, BsX } from "react-icons/bs";
 import { FaPlus } from "react-icons/fa6";
 
 const EditStudentFormModal = ({
@@ -120,7 +120,7 @@ const EditStudentFormModal = ({
             <div className="flex flex-col gap-2 w-[49%]">
               <div className="flex gap-2 items-center">
                 <span>College</span>
-                <BsCaretDown />
+                <BsChevronBarDown />
               </div>
               <select
                 name="college"
@@ -139,7 +139,7 @@ const EditStudentFormModal = ({
             <div className="flex flex-col gap-2 w-[50%]">
               <div className="flex gap-2 items-center">
                 <span>Department</span>
-                <BsCaretDown />
+                <BsChevronBarDown />
               </div>
               <select
                 name="department"
@@ -162,7 +162,7 @@ const EditStudentFormModal = ({
             <div className="flex flex-col gap-2 w-[15%]">
               <div className="flex gap-2 items-center">
                 <span>Year</span>
-                <BsCaretDown />
+                <BsChevronBarDown />
               </div>
               <select
                 name="year"
@@ -180,7 +180,7 @@ const EditStudentFormModal = ({
             <div className="flex flex-col gap-2 w-[16%]">
               <div className="flex gap-2 items-center">
                 <span>Section</span>
-                <BsCaretDown />
+                <BsChevronBarDown />
               </div>
               <select
                 name="section"
@@ -200,7 +200,7 @@ const EditStudentFormModal = ({
             <div className="flex flex-col gap-2 w-[16%]">
               <div className="flex gap-2 items-center">
                 <span>Sex</span>
-                <BsCaretDown />
+                <BsChevronBarDown />
               </div>
               <select
                 name="sex"

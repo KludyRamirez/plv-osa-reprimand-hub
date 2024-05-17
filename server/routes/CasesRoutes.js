@@ -29,11 +29,18 @@ router.put(
   mainController.controllers.editCase
 );
 
-router.patch(
-  "/case/:id/patchCase",
+router.put(
+  "/caseStatus/:id",
   auth,
   role(["Administrator"]),
   mainController.controllers.patchCase
+);
+
+router.put(
+  "/caseRemarks/:id",
+  auth,
+  role(["Administrator", "Instructor"]),
+  mainController.controllers.remarksCase
 );
 
 router.delete(

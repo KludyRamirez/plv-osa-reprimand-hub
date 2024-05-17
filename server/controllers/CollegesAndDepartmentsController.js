@@ -33,18 +33,19 @@ const createCad = async (req, res) => {
 
     await Notification.create({
       userId: userData._id,
-      message: `Successfully added [${college} - ${department}] 
-      as a college and department`,
+      typeOfNotif: "Utilities",
+      actionOfNotif: "Add",
+      message: `Added ${college} - ${department}
+      as a college and department successfully.`,
       createdAt: new Date(),
     });
 
     res.status(200).json({
-      message: `Successfully added [${college} - ${department}] 
-      as a college and department`,
+      message: `Added ${college} - ${department}
+      as a college and department successfully.`,
       data: newCad,
     });
   } catch (error) {
-    console.error("Error adding college:", error);
     res
       .status(400)
       .send(
@@ -88,16 +89,18 @@ const deleteOneCad = async (req, res) => {
 
     await Notification.create({
       userId: userData._id,
-      message: `${deletedCad.college} ${deletedCad.department} has been deleted.`,
+      typeOfNotif: "Utilities",
+      actionOfNotif: "Delete",
+      message: `${deletedCad.college} ${deletedCad.department} has been deleted successfully.`,
       createdAt: new Date(),
     });
 
     res.status(200).json({
-      message: `${deletedCad.college} ${deletedCad.department} has been deleted.`,
+      message: `${deletedCad.college} ${deletedCad.department} has been deleted successfully.`,
     });
   } catch (err) {
     res.status(400).json({
-      message: `college and department was not deleted.`,
+      message: `Selected college and department was not deleted.`,
     });
   }
 };
@@ -106,8 +109,16 @@ const deleteManyCad = async (req, res) => {
   try {
     const { cads } = req.body;
     await Cad.deleteMany({ _id: { $in: cads } });
+    await Notification.create({
+      userId: userData._id,
+      typeOfNotif: "Utilities",
+      actionOfNotif: "Delete",
+      message: `Selected colleges and departments has been deleted successfully.`,
+      createdAt: new Date(),
+    });
     res.status(200).json({
-      message: "Selected colleges and departments deleted successfully.",
+      message:
+        "Selected colleges and departments has been deleted successfully.",
     });
   } catch (error) {
     res.status(500).json({ error: error.message });

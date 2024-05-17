@@ -21,16 +21,18 @@ const createStudent = async (req, res) => {
 
     await Notification.create({
       userId: userData._id,
-      message: `Successfully added ${firstName} ${surName} as a student`,
+      typeOfNotif: "Students",
+      actionOfNotif: "Add",
+      message: `Added ${firstName} ${surName} as a student successfully.`,
       createdAt: new Date(),
     });
 
     res.status(200).json({
-      message: `Successfully added ${firstName} ${surName} as a student`,
+      message: `Added ${firstName} ${surName} as a student successfully.`,
       data: newStudent,
     });
   } catch (error) {
-    console.error("Error adding student:", error);
+    console.error("Failed to add student.", error);
     res
       .status(400)
       .send("An error occurred while adding the student, please try again!");
@@ -89,6 +91,8 @@ const editStudent = async (req, res) => {
 
     await Notification.create({
       userId: userData._id,
+      typeOfNotif: "Students",
+      actionOfNotif: "Update",
       message: `Student No. ${studentNo} has been successfully updated.`,
       createdAt: new Date(),
     });
@@ -109,21 +113,23 @@ const deleteOneStudent = async (req, res) => {
 
     const deletedStudent = await Student.findByIdAndDelete(req.params.id);
     if (!deletedStudent) {
-      return res.status(404).json({ error: "Student not found!" });
+      return res.status(404).json({ error: "Cannot find selected student." });
     }
 
     await Notification.create({
       userId: userData._id,
-      message: `Student No. ${deletedStudent.studentNo} has been deleted!`,
+      typeOfNotif: "Students",
+      actionOfNotif: "Delete",
+      message: `Student No. ${deletedStudent.studentNo} has been deleted successfully.`,
       createdAt: new Date(),
     });
 
     res.status(200).json({
-      message: `Student No. ${deletedStudent.studentNo} has been deleted!`,
+      message: `Student No. ${deletedStudent.studentNo} has been deleted successfully.`,
     });
   } catch (err) {
     res.status(400).json({
-      message: `Student was not deleted!`,
+      message: `Selected student was not deleted.`,
     });
   }
 };
@@ -132,9 +138,18 @@ const deleteManyStudent = async (req, res) => {
   try {
     const { students } = req.body;
     await Student.deleteMany({ _id: { $in: students } });
+
+    await Notification.create({
+      userId: userData._id,
+      typeOfNotif: "Students",
+      actionOfNotif: "Delete",
+      message: `Selected students has been deleted successfully.`,
+      createdAt: new Date(),
+    });
+
     res
       .status(200)
-      .json({ message: "Selected students deleted successfully." });
+      .json({ message: "Selected students has been deleted successfully." });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

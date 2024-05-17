@@ -4,9 +4,9 @@ const jwt = require("jsonwebtoken");
 const Notification = require("../../models/Notifications");
 
 const register = async (req, res) => {
-  try {
-    const userData = req.user;
+  const userData = req.user;
 
+  try {
     const { userName, firstName, surName, password, email, contactNo, role } =
       req.body;
 
@@ -55,7 +55,9 @@ const register = async (req, res) => {
 
     await Notification.create({
       userId: userData._id,
-      message: `${user.userName} account has been created!`,
+      typeOfNotif: "Authentication",
+      actionOfNotif: "Add",
+      message: `${user.userName} account has been created successfully.`,
       createdAt: new Date(),
     });
 
@@ -67,11 +69,13 @@ const register = async (req, res) => {
         email: user.email,
         role: user.role,
       },
-      message: `${user.userName} account has been created!`,
+      message: `${user.userName} account has been created successfully.`,
     });
   } catch (err) {
     console.log(err);
-    return res.status(500).send("Error occurred. Please try again");
+    return res
+      .status(500)
+      .json({ error: "Something went wrong. Please try again" });
   }
 };
 

@@ -1,6 +1,8 @@
 //auth
 
 const { login } = require("../controllers/authentication/Login");
+const { forgot } = require("../controllers/authentication/Forgot");
+const { reset } = require("../controllers/authentication/Reset");
 const { register } = require("../controllers/authentication/Register");
 const { changeEmail } = require("../controllers/authentication/CurrentUser");
 const { changePassword } = require("../controllers/authentication/CurrentUser");
@@ -27,6 +29,7 @@ const { createCase } = require("../controllers/CasesController");
 const { getCases } = require("../controllers/CasesController");
 const { editCase } = require("../controllers/CasesController");
 const { patchCase } = require("../controllers/CasesController");
+const { remarksCase } = require("../controllers/CasesController");
 const { deleteOneCase } = require("../controllers/CasesController");
 const { deleteManyCase } = require("../controllers/CasesController");
 
@@ -43,6 +46,8 @@ const { deleteManyCad } = require("./CollegesAndDepartmentsController");
 
 exports.controllers = {
   login,
+  forgot,
+  reset,
   register,
   changeEmail,
   changePassword,
@@ -63,6 +68,7 @@ exports.controllers = {
   getCases,
   editCase,
   patchCase,
+  remarksCase,
   deleteOneCase,
   deleteManyCase,
   //

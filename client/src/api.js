@@ -19,9 +19,14 @@ export const login = async (data) => {
   }
 };
 
-export const register = async (data) => {
+export const register = async (data, authToken) => {
   try {
-    return await apiClient.post("/register", data);
+    return await axios.post(`${process.env.REACT_APP_API_URI}/register`, data, {
+      headers: {
+        Authorization: `Bearer ${authToken}`,
+      },
+      withCredentials: true,
+    });
   } catch (exception) {
     return {
       error: true,

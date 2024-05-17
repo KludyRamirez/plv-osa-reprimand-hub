@@ -12,32 +12,6 @@ const getUsers = async (req, res) => {
   }
 };
 
-const deleteOneUser = async (req, res) => {
-  try {
-    const userData = req.user;
-
-    const deletedUser = await User.findByIdAndDelete(req.params.id);
-    if (!deletedUser) {
-      return res.status(404).json({ error: "User not found!" });
-    }
-
-    await Notification.create({
-      userId: userData._id,
-      message: `User ${deletedUser.userName} has been deleted!`,
-      createdAt: new Date(),
-    });
-
-    res.status(200).json({
-      message: `User ${deletedUser.userName} has been deleted!`,
-    });
-  } catch (err) {
-    const deletedUser = await User.findByIdAndDelete(req.params.id);
-    res.status(400).json({
-      message: `User ${deletedUser.userName} was not deleted!`,
-    });
-  }
-};
-
 const editUser = async (req, res) => {
   try {
     const { userName, firstName, surName, password, role, contactNo, email } =
@@ -50,7 +24,7 @@ const editUser = async (req, res) => {
     const user = await User.findByIdAndUpdate(id);
 
     if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      return res.status(404).json({ message: "Cannot find selected user." });
     }
 
     if (role) user.role = role;
@@ -80,7 +54,9 @@ const editUser = async (req, res) => {
 
     await Notification.create({
       userId: userData._id,
-      message: `User ${user.userName} has been updated!`,
+      typeOfNotif: "Users",
+      actionOfNotif: "Update",
+      message: `User ${user.userName} has been updated successfully.`,
       createdAt: new Date(),
     });
 
@@ -92,7 +68,7 @@ const editUser = async (req, res) => {
         email: user.email,
         role: user.role,
       },
-      message: `User ${user.userName} has been updated!`,
+      message: `User ${user.userName} has been updated successfully.`,
     });
   } catch (error) {
     console.error(error);
@@ -100,11 +76,54 @@ const editUser = async (req, res) => {
   }
 };
 
+const deleteOneUser = async (req, res) => {
+  try {
+    const userData = req.user;
+
+    const deletedUser = await User.findByIdAndDelete(req.params.id);
+    if (!deletedUser) {
+      return res.status(404).json({ error: "Cannot find selected user." });
+    }
+
+    await Notification.create({
+      userId: userData._id,
+      typeOfNotif: "Users",
+      actionOfNotif: "Delete",
+      message: `User ${deletedUser.userName} has been deleted successfully.`,
+      createdAt: new Date(),
+    });
+
+    res.status(200).json({
+      message: `User ${deletedUser.userName} has been deleted successfully.`,
+    });
+  } catch (err) {
+    const deletedUser = await User.findByIdAndDelete(req.params.id);
+    res.status(400).json({
+      message: `User ${deletedUser.userName} was not deleted.`,
+    });
+  }
+};
+
 const deleteManyUser = async (req, res) => {
   try {
     const { users } = req.body;
+
+    if (!users) {
+      return res.status(404).json({ error: "Cannot find selected users." });
+    }
+
     await User.deleteMany({ _id: { $in: users } });
-    res.status(200).json({ message: "Selected users deleted successfully." });
+
+    await Notification.create({
+      userId: userData._id,
+      typeOfNotif: "Users",
+      actionOfNotif: "Delete",
+      message: `Selected users has been deleted successfully.`,
+      createdAt: new Date(),
+    });
+    res
+      .status(200)
+      .json({ message: "Selected users has been deleted successfully." });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

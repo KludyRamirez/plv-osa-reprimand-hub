@@ -1,5 +1,5 @@
 import React from "react";
-import { BsCaretDown, BsX } from "react-icons/bs";
+import { BsChevronBarDown, BsX } from "react-icons/bs";
 import { FaPlus } from "react-icons/fa6";
 
 const CreateUserFormModal = ({
@@ -146,7 +146,7 @@ const CreateUserFormModal = ({
             <div className="flex flex-col gap-2 w-[50%]">
               <div className="flex gap-2 items-center">
                 <span className="ml-2">Role</span>
-                <BsCaretDown />
+                <BsChevronBarDown />
               </div>
               <select
                 name="role"

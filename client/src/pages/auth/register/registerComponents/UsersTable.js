@@ -266,7 +266,7 @@ const UsersTable = ({
           <div className="w-[140px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
             First name
           </div>
-          <div className="w-[260px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+          <div className="w-[300px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
             Email
           </div>
           <div className=" w-[140px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
@@ -333,7 +333,7 @@ const UsersTable = ({
                 <div className="w-[140px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px]">
                   {user?.firstName}
                 </div>
-                <div className="w-[260px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px]">
+                <div className="w-[300px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px]">
                   {user?.email}
                 </div>
                 <div className="w-[140px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px]">

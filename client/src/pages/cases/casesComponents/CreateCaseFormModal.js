@@ -1,11 +1,5 @@
-import React, { useState, useEffect } from "react";
-import {
-  BsCaretDown,
-  BsChevronBarDown,
-  BsFilter,
-  BsSearch,
-  BsX,
-} from "react-icons/bs";
+import React, { useState } from "react";
+import { BsChevronBarDown, BsFilter, BsX } from "react-icons/bs";
 import { FaPlus } from "react-icons/fa6";
 import DatePicker from "react-datepicker";
 import moment from "moment";
@@ -22,9 +16,8 @@ const CreateCaseFormModal = ({
   majorViolation,
   minorViolation,
   handleCaseOwnerChange,
-  setValues,
 }) => {
-  const { student, reportedViolation, typeOfViolations, typeOfViolation } =
+  const { reportedViolation, typeOfViolations, typeOfViolation, studentName } =
     values;
 
   const [searchTerm, setSearchTerm] = useState("");
@@ -110,12 +103,12 @@ const CreateCaseFormModal = ({
               <BsChevronBarDown />
             </div>
             <select
-              name="student"
-              value={student}
+              name="studentName"
+              value={studentName}
               onChange={handleCaseOwnerChange}
               className="appearance-none p-3 rounded-[6px] bg-[#f5f5f5] focus:outline-none border-[1px] focus:border-[#007bff]"
             >
-              <option value="">Select student below</option>
+              <option value="">Select Student Below</option>
               {filteredStudents
                 ?.sort((a, b) => {
                   const nameA = `${a.firstName} ${a.surName}`.toLowerCase();
@@ -133,8 +126,10 @@ const CreateCaseFormModal = ({
                 .map((s) => (
                   <option
                     key={s?._id}
-                    value={s?._id}
+                    value={`${s?.firstName} ${s?.surName}`}
+                    data-student={s?._id}
                     data-studentno={s?.studentNo}
+                    data-year={s?.year}
                   >
                     {s?.firstName} {s?.surName}
                   </option>

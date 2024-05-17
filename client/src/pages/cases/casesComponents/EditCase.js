@@ -34,11 +34,16 @@ const minorViolation = [
 const initialState = {
   student: "",
   studentNo: "",
+  studentName: "",
+  year: "",
   reportedViolation: "",
   typeOfViolations: ["Major", "Minor"],
-  typeOfViolaton: "",
-  dateOfIncident: "",
-  dateReported: "",
+  typeOfViolation: "",
+  dateOfIncident: Date,
+  dateReported: Date,
+  dismissalDate: Date,
+  appeal: false,
+  remarks: "",
 };
 
 const selectAuth = (state) => state.auth;
@@ -53,6 +58,8 @@ const EditCase = ({
 }) => {
   const [values, setValues] = useState(initialState);
   const [updatedValues, setUpdatedValues] = useState(selectedCaseEdit);
+
+  console.log(updatedValues);
 
   const auth = useSelector(authSelector);
 
@@ -151,14 +158,20 @@ const EditCase = ({
   };
 
   const handleCaseOwnerChange = (e) => {
-    const selectedStudentId = e.target.value;
+    const selectedName = e.target.value;
+    const selectedStudentId =
+      e.target.options[e.target.selectedIndex].getAttribute("data-student");
     const selectedStudentNo =
       e.target.options[e.target.selectedIndex].getAttribute("data-studentno");
+    const selectedYear =
+      e.target.options[e.target.selectedIndex].getAttribute("data-year");
 
     setUpdatedValues({
       ...updatedValues,
+      studentName: selectedName,
       student: selectedStudentId,
       studentNo: selectedStudentNo,
+      year: selectedYear,
     });
   };
 

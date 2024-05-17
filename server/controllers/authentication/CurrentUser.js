@@ -22,7 +22,9 @@ const changeEmail = async (req, res) => {
 
     await Notification.create({
       userId: userData._id,
-      message: `${userData.userName} has successfully changed his/her email`,
+      typeOfNotif: "Account",
+      actionOfNotif: "Update One",
+      message: `${userData.userName} has updated his/her email successfully.`,
       createdAt: new Date(),
     });
 
@@ -30,7 +32,6 @@ const changeEmail = async (req, res) => {
       .status(200)
       .json({ message: "Your email has been updated successfully." });
   } catch (error) {
-    console.error("Error updating email:", error);
     return res.status(500).json({ message: "Error updating email", error });
   }
 };
@@ -58,7 +59,9 @@ const changePassword = async (req, res) => {
 
     await Notification.create({
       userId: userData._id,
-      message: `${userData.userName} has successfully changed his/her password`,
+      typeOfNotif: "Account",
+      actionOfNotif: "Update One",
+      message: `${userData.userName} has changed his/her password successfully.`,
       createdAt: new Date(),
     });
 
@@ -66,7 +69,6 @@ const changePassword = async (req, res) => {
       .status(200)
       .json({ message: "Your password has been updated successfully." });
   } catch (error) {
-    console.error("Error updating password:", error);
     return res.status(500).json({ message: "Error updating password", error });
   }
 };

@@ -28,8 +28,7 @@ import {
   BsStickyFill,
 } from "react-icons/bs";
 import { logoutUtil } from "../../pages/auth/login/loginUtils/logoutUtil";
-import plvLogo from "../../images/login/PLVlogo.png";
-import admin from "../../images/login/admin.svg";
+import plvLogo from "../../images/PLVlogo.png";
 
 const AppNavBar = styled(AppBar)({
   background: "transparent",

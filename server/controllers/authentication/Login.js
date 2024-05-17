@@ -24,7 +24,9 @@ const login = async (req, res) => {
 
       await Notification.create({
         userId: user._id,
-        message: `${user.userName} has logged in!`,
+        typeOfNotif: "Authentication",
+        actionOfNotif: "Add",
+        message: `${user.userName} has logged in successfully.`,
         createdAt: new Date(),
       });
 
@@ -37,9 +39,13 @@ const login = async (req, res) => {
         },
       });
     }
-    return res.status(400).send("Invalid credentials. Please try again.");
+    return res
+      .status(400)
+      .json({ message: "Invalid credentials. Please try again." });
   } catch (err) {
-    return res.status(500).send("Something went wrong. Please try again.");
+    return res
+      .status(500)
+      .json({ message: "Something went wrong. Please try again." });
   }
 };
 
