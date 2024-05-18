@@ -225,16 +225,16 @@ const CasesTable = ({
 
   // case remarks
 
-  const handleCaseRemarksClick = (cas) => {
-    try {
-      setSelectedCaseRemarks(cas);
-      console.log(cas);
-    } catch (error) {
-      console.error("Error handling case Remarks click:", error);
-    } finally {
-      setShowRemarksCaseModal(true);
-    }
-  };
+  // const handleCaseRemarksClick = (cas) => {
+  //   try {
+  //     setSelectedCaseRemarks(cas);
+  //     console.log(cas);
+  //   } catch (error) {
+  //     console.error("Error handling case Remarks click:", error);
+  //   } finally {
+  //     setShowRemarksCaseModal(true);
+  //   }
+  // };
 
   const handleCloseModalRemarks = () => {
     setShowRemarksCaseModal(false);

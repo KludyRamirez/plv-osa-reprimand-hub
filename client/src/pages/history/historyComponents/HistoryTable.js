@@ -52,27 +52,11 @@ const HistoryTable = ({
     }
   };
 
-  const currentDate = new Date();
-  const formattedDate = currentDate.toLocaleDateString("en-PH", {
-    month: "long",
-    day: "numeric",
-    year: "numeric",
-  });
-
-  const todayHistory = history.filter(
-    (h) =>
-      new Date(h.createdAt).toLocaleDateString("en-PH", {
-        month: "long",
-        day: "numeric",
-        year: "numeric",
-      }) === formattedDate
-  );
-
   return (
     <>
       <div className="flex justify-start gap-8">
         <div
-          className={`w-[100%] h-[422px] bg-white flex flex-col rounded-[10px] border-[1px] text-[#505050] phone:overflow-x-scroll ${
+          className={`w-[100%] h-[362px] bg-white flex flex-col rounded-[10px] border-[1px] text-[#505050] phone:overflow-x-scroll ${
             history && history.length > 5 ? "overflow-y-scroll" : ""
           }`}
         >
@@ -85,19 +69,19 @@ const HistoryTable = ({
                 onChange={toggleSelectAll}
               />
             </div>
-            <div className="w-[60px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+            <div className="w-[70px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
               UID
             </div>
             <div className="w-[150px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
               Username
             </div>
-            <div className="w-[150px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+            <div className="w-[180px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
               Type
             </div>
-            <div className="w-[400px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+            <div className="w-[340px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
               Message
             </div>
-            <div className="w-[150px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+            <div className="w-[120px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
               Activity
             </div>
             <div className="w-[150px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
@@ -116,7 +100,7 @@ const HistoryTable = ({
                 </div>
               </>
             ) : (
-              <div className="w-[120px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+              <div className="w-[160px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
                 <span>Actions</span>
               </div>
             )}
@@ -142,20 +126,20 @@ const HistoryTable = ({
                       onChange={() => toggleHistorySelection(h?._id)}
                     />
                   </div>
-                  <div className="w-[60px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
+                  <div className="w-[70px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px] text-[#606060]">
                     {h?.userId?.uid}
                   </div>
-                  <div className="w-[150px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
+                  <div className="w-[150px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px] text-[#007bff]">
                     {h?.userId?.userName}
                   </div>
-                  <div className="w-[150px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
+                  <div className="w-[180px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
                     {h?.typeOfNotif}
                   </div>
-                  <div className="w-[400px] flex justify-start items-center py-1 px-3 rounded-[4px]">
-                    {h?.message}
+                  <div className="w-[340px] flex justify-start items-center py-1 px-3 rounded-[4px]">
+                    {h?.message}..
                   </div>
-                  <div className="w-[150px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
-                    {h?.actionOfNotif}
+                  <div className="w-[120px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px] text-[green]">
+                    <span>{h?.actionOfNotif}</span>
                   </div>
                   <div className="w-[150px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
                     {new Date(h?.createdAt)?.toLocaleDateString("en-US", {
@@ -164,7 +148,7 @@ const HistoryTable = ({
                       year: "numeric",
                     })}
                   </div>
-                  <div className="w-[150px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
+                  <div className="w-[150px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px] text-[#007bff]">
                     <TimeExtractor date={h?.createdAt} />
                   </div>
                   {selectedHistory.length < 2 ? (
@@ -173,20 +157,20 @@ const HistoryTable = ({
                     ) ? (
                       <>
                         <div className="p-2 ml-1 bg-white border-[1px] border-[green] rounded-[18px] cursor-pointer">
-                          <AiOutlineExport className="text-[18px] text-[green]" />
+                          <BsShare className="text-[18px] text-[green]" />
                         </div>
                       </>
                     ) : (
                       <>
                         <div className="p-2 ml-1 bg-gray-200 rounded-[18px]">
-                          <AiOutlineExport className="text-[18px] text-white" />
+                          <BsShare className="text-[18px] text-white" />
                         </div>
                       </>
                     )
                   ) : (
                     <>
                       <div className="p-2  ml-1 bg-gray-200 rounded-[18px]">
-                        <AiOutlineExport className="text-[18px] text-white" />
+                        <BsShare className="text-[18px] text-white" />
                       </div>
                     </>
                   )}

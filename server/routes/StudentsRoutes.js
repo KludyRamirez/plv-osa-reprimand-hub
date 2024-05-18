@@ -18,14 +18,14 @@ router.post(
 router.get(
   "/student",
   auth,
-  role(["Administrator"]),
+  role(["Administrator", "Instructor"]),
   mainController.controllers.getStudents
 );
 
 router.get(
   "/student/:id",
   auth,
-  role(["Administrator"]),
+  role(["Administrator", "Instructor"]),
   mainController.controllers.getStudent
 );
 

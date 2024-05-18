@@ -45,10 +45,8 @@ const LoginInputs = ({
 
   return (
     <div className="flex flex-col gap-8 w-full zIndex-2">
-      <div className="flex flex-col gap-4">
-        <div className="w-100 text-base font-large text-[#303030]">
-          Username
-        </div>
+      <div className="flex flex-col gap-2">
+        <div className="w-100 text-base text-blue-900">Username</div>
         <input
           autoFocus
           value={userName}
@@ -60,12 +58,10 @@ const LoginInputs = ({
             userNameError === "" ? "" : "border-[red]"
           } focus:outline-none focus:border-[#007bff]`}
         />
-        {userNameError && <p className="text-red-500">{userNameError}</p>}
+        {userNameError && <p className="text-red-500 mt-1">{userNameError}</p>}
       </div>
-      <div className="flex flex-col gap-4">
-        <div className="w-100 text-base font-large text-[#303030]">
-          Password
-        </div>
+      <div className="flex flex-col gap-2">
+        <div className="w-100 text-base text-blue-900">Password</div>
         <input
           value={password}
           onChange={handlePasswordChange}
@@ -76,7 +72,7 @@ const LoginInputs = ({
             passwordError === "" ? "" : "border-[red]"
           } focus:outline-none focus:border-[#007bff]`}
         />
-        {passwordError && <p className="text-red-500">{passwordError}</p>}
+        {passwordError && <p className="text-red-500 mt-1">{passwordError}</p>}
       </div>
       <div className="w-100 mt-6 flex justify-between items-center">
         <div className="hover:underline">
@@ -92,14 +88,14 @@ const LoginInputs = ({
             <button
               type="button"
               onClick={handleLogin}
-              className="py-2 px-4 bg-[#007bff] text-[white] text-[16px] flex gap-2 items-center rounded-[6px]"
+              className="py-2 px-6 border-[1px] border-[#007bff] bg-[#007bff] text-[white] text-[16px] flex gap-2 items-center rounded-[6px]"
             >
               Sign In
             </button>
           ) : (
             <button
               disabled
-              className="py-2 px-4 bg-blue-400 text-[white] text-[16px] flex gap-2 items-center rounded-[6px]"
+              className="py-2 px-6 border-[1px] border-[#007bff] text-[#007bff] text-[16px] flex gap-2 items-center rounded-[6px]"
             >
               Sign In
             </button>

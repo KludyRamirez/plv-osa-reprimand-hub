@@ -233,87 +233,10 @@ function Sidebar(props) {
                 )}
               </Link>
             </div>
-            <div className="w-full">
-              <Link to="/users">
-                {activeItem === "/users" ? (
-                  <SidebarOptions
-                    sx={{
-                      color: "#007bff",
-                      background: "white",
-                      borderRadius: "6px",
-                      "&:hover": {
-                        transform: "translateY(0px)",
-                        color: "#007bff",
-                        background: "white",
-                      },
-                      "&:active": { transform: "translateY(0px)" },
-                    }}
-                  >
-                    <RouteCon>
-                      <BsPersonSquare
-                        className={activeItem === "/users" ? "icon-active" : ""}
-                      />
-                      <p className="text-[18px]">Users</p>
-                    </RouteCon>
-                  </SidebarOptions>
-                ) : (
-                  <SidebarOptions>
-                    <RouteCon>
-                      <BsPersonSquare />
-                      <p className="text-[18px]">Users</p>
-                    </RouteCon>
-                  </SidebarOptions>
-                )}
-              </Link>
-            </div>
-            <div className="w-full">
-              <Link to="/notification">
-                {activeItem === "/notification" ? (
-                  <SidebarOptions
-                    sx={{
-                      color: "#007bff",
-                      background: "white",
-                      borderRadius: "6px",
-                      "&:hover": {
-                        transform: "translateY(0px)",
-                        color: "#007bff",
-                        background: "white",
-                      },
-                      "&:active": { transform: "translateY(0px)" },
-                    }}
-                  >
-                    <RouteCon>
-                      <BsHourglassSplit
-                        className={
-                          activeItem === "/notification" ? "icon-active" : ""
-                        }
-                      />
-                      <p className="text-[18px]">History</p>
-                    </RouteCon>
-                  </SidebarOptions>
-                ) : (
-                  <SidebarOptions>
-                    <RouteCon>
-                      <BsHourglass />
-                      <p className="text-[18px]">History</p>
-                    </RouteCon>
-                  </SidebarOptions>
-                )}
-              </Link>
-            </div>
-          </div>
-          <div className="flex flex-col justify-start items-start gap-[12px] w-full p-[20px]">
-            <div
-              style={{
-                width: "100%",
-                display: "flex",
-                justifyContent: "flex-start",
-                alignItems: "center",
-              }}
-            >
+            {auth?.userDetails?.role === "Administrator" ? (
               <div className="w-full">
-                <Link to="/settings">
-                  {activeItem === "/settings" ? (
+                <Link to="/users">
+                  {activeItem === "/users" ? (
                     <SidebarOptions
                       sx={{
                         color: "#007bff",
@@ -328,24 +251,110 @@ function Sidebar(props) {
                       }}
                     >
                       <RouteCon>
-                        <BsGear
+                        <BsPersonSquare
                           className={
-                            activeItem === "/settings" ? "icon-active" : ""
+                            activeItem === "/users" ? "icon-active" : ""
                           }
                         />
-                        <p className="text-[18px]">Settings</p>
+                        <p className="text-[18px]">Users</p>
                       </RouteCon>
                     </SidebarOptions>
                   ) : (
                     <SidebarOptions>
                       <RouteCon>
-                        <BsGear />
-                        <p className="text-[18px]">Settings</p>
+                        <BsPersonSquare />
+                        <p className="text-[18px]">Users</p>
                       </RouteCon>
                     </SidebarOptions>
                   )}
                 </Link>
               </div>
+            ) : null}
+
+            {auth?.userDetails?.role === "Administrator" ? (
+              <div className="w-full">
+                <Link to="/notification">
+                  {activeItem === "/notification" ? (
+                    <SidebarOptions
+                      sx={{
+                        color: "#007bff",
+                        background: "white",
+                        borderRadius: "6px",
+                        "&:hover": {
+                          transform: "translateY(0px)",
+                          color: "#007bff",
+                          background: "white",
+                        },
+                        "&:active": { transform: "translateY(0px)" },
+                      }}
+                    >
+                      <RouteCon>
+                        <BsHourglassSplit
+                          className={
+                            activeItem === "/notification" ? "icon-active" : ""
+                          }
+                        />
+                        <p className="text-[18px]">History</p>
+                      </RouteCon>
+                    </SidebarOptions>
+                  ) : (
+                    <SidebarOptions>
+                      <RouteCon>
+                        <BsHourglass />
+                        <p className="text-[18px]">History</p>
+                      </RouteCon>
+                    </SidebarOptions>
+                  )}
+                </Link>
+              </div>
+            ) : null}
+          </div>
+          <div className="flex flex-col justify-start items-start gap-[12px] w-full p-[20px]">
+            <div
+              style={{
+                width: "100%",
+                display: "flex",
+                justifyContent: "flex-start",
+                alignItems: "center",
+              }}
+            >
+              {auth?.userDetails?.role === "Administrator" ? (
+                <div className="w-full">
+                  <Link to="/settings">
+                    {activeItem === "/settings" ? (
+                      <SidebarOptions
+                        sx={{
+                          color: "#007bff",
+                          background: "white",
+                          borderRadius: "6px",
+                          "&:hover": {
+                            transform: "translateY(0px)",
+                            color: "#007bff",
+                            background: "white",
+                          },
+                          "&:active": { transform: "translateY(0px)" },
+                        }}
+                      >
+                        <RouteCon>
+                          <BsGear
+                            className={
+                              activeItem === "/settings" ? "icon-active" : ""
+                            }
+                          />
+                          <p className="text-[18px]">Settings</p>
+                        </RouteCon>
+                      </SidebarOptions>
+                    ) : (
+                      <SidebarOptions>
+                        <RouteCon>
+                          <BsGear />
+                          <p className="text-[18px]">Settings</p>
+                        </RouteCon>
+                      </SidebarOptions>
+                    )}
+                  </Link>
+                </div>
+              ) : null}
             </div>
             <div
               style={{

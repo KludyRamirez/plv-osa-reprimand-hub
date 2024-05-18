@@ -18,7 +18,7 @@ router.post(
 router.get(
   "/cad",
   auth,
-  role(["Administrator"]),
+  role(["Administrator", "Instructor"]),
   mainController.controllers.getCads
 );
 

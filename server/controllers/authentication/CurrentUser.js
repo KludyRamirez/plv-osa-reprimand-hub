@@ -44,14 +44,13 @@ const changePassword = async (req, res) => {
 
     const newPassword = password;
 
-    console.log(newPassword);
     const user = await User.findOne({ userName: userData.userName });
 
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
 
-    const hashedPassword = bcrypt.hash(newPassword, 10);
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
 
     user.password = hashedPassword;
 
@@ -69,6 +68,7 @@ const changePassword = async (req, res) => {
       .status(200)
       .json({ message: "Your password has been updated successfully." });
   } catch (error) {
+    console.error(error);
     return res.status(500).json({ message: "Error updating password", error });
   }
 };

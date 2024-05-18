@@ -9,7 +9,7 @@ import StudentsProfileTable from "../studentsProfileComponents/StudentsProfileTa
 const selectAuth = (state) => state.auth;
 const authSelector = createSelector([selectAuth], (auth) => auth);
 
-const StudentProfile = () => {
+const StudentProfile = ({ allowedRoles }) => {
   const [student, setStudent] = useState("");
   const [students, setStudents] = useState([]);
   const [cases, setCases] = useState([]);
@@ -119,6 +119,7 @@ const StudentProfile = () => {
             getCases={getCases}
             getStudents={getStudents}
             cads={cads}
+            allowedRoles={allowedRoles}
           />
         </div>
       </div>

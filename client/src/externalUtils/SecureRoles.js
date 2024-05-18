@@ -13,7 +13,7 @@ const SecureRoles = ({ allowedRoles }) => {
   return allowedRoles?.find((ar) => auth?.userDetails?.role?.includes(ar)) ? (
     <Outlet />
   ) : auth?.userDetails?.token ? (
-    <Navigate to="/error" state={{ from: location }} replace />
+    <Navigate to="/error403" state={{ from: location }} replace />
   ) : (
     <Navigate to="/login" state={{ from: location }} replace />
   );

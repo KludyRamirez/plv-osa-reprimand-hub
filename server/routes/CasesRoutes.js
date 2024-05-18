@@ -18,7 +18,7 @@ router.post(
 router.get(
   "/case",
   auth,
-  role(["Administrator"]),
+  role(["Administrator", "Instructor"]),
   mainController.controllers.getCases
 );
 

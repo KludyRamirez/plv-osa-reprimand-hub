@@ -119,8 +119,8 @@ const ChangeUserEmail = ({ toast }) => {
     setValues({ ...values, [name]: formattedValue });
 
     if (name === "password") {
-      if (formattedValue.length < 3) {
-        newErrors[name] = "Password must be at least 3 characters long.";
+      if (formattedValue.length < 6) {
+        newErrors[name] = "Password must be at least 6 characters long.";
       } else if (formattedValue.length > 48) {
         newErrors[name] = "Password must be at most 48 characters long.";
       } else {

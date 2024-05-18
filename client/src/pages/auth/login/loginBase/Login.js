@@ -8,21 +8,9 @@ import plvLogo from "../../../../images/PLVlogo.png";
 import flash from "../../../../images/flash.png";
 import LoginInputs from "../loginComponents/LoginInputs";
 
-import {
-  BsAlexa,
-  BsArrowLeft,
-  BsArrowRight,
-  BsFacebook,
-  BsGithub,
-  BsGlobe2,
-  BsInstagram,
-  BsLinkedin,
-  BsMegaphone,
-  BsMegaphoneFill,
-  BsTwitter,
-} from "react-icons/bs";
+import { BsArrowLeft, BsArrowRight, BsMegaphone } from "react-icons/bs";
 
-import { FaRegCopyright } from "react-icons/fa6";
+import LoginFooter from "../loginComponents/LoginFooter";
 
 const Login = ({ login }) => {
   const FormTitle = styled("div")({
@@ -64,7 +52,7 @@ const Login = ({ login }) => {
   };
 
   return (
-    <div className="w-full h-screen flex justify-center bg-white">
+    <div className="w-full h-screen bg-white">
       <div className="w-full flex flex-col gap-[80px]">
         <div className="px-6 shadow-sm bg-white zIndex-2">
           <div className="h-[90px] flex justify-between items-center gap-10">
@@ -99,7 +87,7 @@ const Login = ({ login }) => {
             </div>
           </div>
         </div>
-        <div className="w-100 flex justify-center items-center gap-24">
+        <div className="w-100 flex justify-center items-start gap-24">
           <div className="relative">
             <div className="p-8 gap-8 w-[500px] flex flex-col self-center rounded-[8px]">
               {activeSelect === "Login" && (
@@ -124,20 +112,49 @@ const Login = ({ login }) => {
                 </>
               )}
             </div>
-            <div className="absolute flex justify-center items-center w-[800px] h-[800px] rounded-[50%] border-[1px] top-[-200px] left-[-400px] zIndex-1">
-              <div className="w-[100px] h-[100px] bg-blue-100 rounded-[50%] relative">
-                <div className="absolute w-[50px] h-[50px] rounded-[50%] bg-[white] zIndex-3"></div>
-                <div className="absolute w-[20px] h-[20px] rounded-[50%] bg-[#ff3131] top-[-254px] left-[310px]"></div>
-                <div className="absolute w-[20px] h-[20px] rounded-[50%] bg-[#007bff] top-[352px] left-[-210px]"></div>
-                <div className="absolute w-[240px] h-[240px] rounded-[50%] top-[170px] right-[0px] bg-[white] border-[1px] border-[yellow] zIndex-1"></div>
-                <div className="absolute w-[50px] h-[50px] rounded-[50%] top-[170px] right-[0px] bg-[white] border-[1px] border-[yellow] zIndex-1"></div>
-                <div className="absolute w-[100px] h-[100px] rounded-[50%] top-[270px] right-[300px] bg-[white] border-[1px] border-[yellow] zIndex-1"></div>
+            <div className="absolute flex justify-center items-center w-[800px] h-[800px] rounded-[50%] border-[10px] border-[#f9f9f9] top-[-220px] left-[-440px] zIndex-1">
+              <div className="flex justify-center items-center w-[760px] h-[760px] rounded-[50%] border-[10px] border-[#f9f9f9] top-[-200px] left-[-400px] zIndex-1">
+                <div className="flex justify-center items-center w-[720px] h-[720px] rounded-[50%] border-[10px] border-[#f9f9f9] top-[-200px] left-[-400px] zIndex-1">
+                  <div className="flex justify-center items-center w-[680px] h-[680px] rounded-[50%] border-[10px] border-[#f9f9f9] top-[-200px] left-[-400px] zIndex-1">
+                    <div className="flex justify-center items-center w-[640px] h-[640px] rounded-[50%] border-[10px] border-[#f9f9f9] top-[-200px] left-[-400px] zIndex-1">
+                      <div className="flex justify-center items-center w-[600px] h-[600px] rounded-[50%] border-[10px] border-[#f9f9f9] top-[-200px] left-[-400px] zIndex-1">
+                        <div className="flex justify-center items-center w-[560px] h-[560px] rounded-[50%] border-[10px] border-[#f9f9f9] top-[-200px] left-[-400px] zIndex-1">
+                          <div className="flex justify-center items-center w-[520px] h-[520px] rounded-[50%] border-[10px] border-[#f9f9f9] top-[-200px] left-[-400px] zIndex-1">
+                            <div className="flex justify-center items-center w-[480px] h-[480px] rounded-[50%] border-[10px] border-[#f9f9f9] top-[-200px] left-[-400px] zIndex-1">
+                              <div className="flex justify-center items-center w-[440px] h-[440px] rounded-[50%] border-[10px] border-[#f9f9f9] top-[-200px] left-[-400px] zIndex-1">
+                                <div className="flex justify-center items-center w-[400px] h-[400px] rounded-[50%] border-[10px] border-[#f9f9f9] top-[-200px] left-[-400px] zIndex-1">
+                                  <div className="flex justify-center items-center w-[360px] h-[360px] rounded-[50%] border-[10px] border-[#f9f9f9] top-[-200px] left-[-400px] zIndex-1">
+                                    <div className="flex justify-center items-center w-[320px] h-[320px] rounded-[50%] border-[10px] border-[#f9f9f9] top-[-200px] left-[-400px] zIndex-1">
+                                      <div className="flex justify-center items-center w-[280px] h-[280px] rounded-[50%] border-[10px] border-[#f9f9f9] top-[-200px] left-[-400px] zIndex-1">
+                                        <div className="flex justify-center items-center w-[240px] h-[240px] rounded-[50%] border-[10px] border-[#f9f9f9] top-[-200px] left-[-400px] zIndex-1">
+                                          <div className="flex justify-center items-center w-[200px] h-[200px] rounded-[50%] border-[10px] border-[#f9f9f9] top-[-200px] left-[-400px] zIndex-1">
+                                            <div className="flex justify-center items-center w-[160px] h-[160px] rounded-[50%] border-[10px] border-[#f9f9f9] top-[-200px] left-[-400px] zIndex-1">
+                                              <div className="flex justify-center items-center w-[120px] h-[120px] rounded-[50%] border-[10px] border-[#f9f9f9] top-[-200px] left-[-400px] zIndex-1">
+                                                <div className="flex justify-center items-center w-[80px] h-[80px] rounded-[50%] border-[10px] border-[#f9f9f9] top-[-200px] left-[-400px] zIndex-1">
+                                                  <div className="flex justify-center items-center w-[40px] h-[40px] rounded-[50%] border-[10px] border-[#f9f9f9] top-[-200px] left-[-400px] zIndex-1"></div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
 
           <div className="relative">
-            <div className="h-[100%] flex flex-col p-4 rounded-[8px] z-2">
+            <div className="h-[100%] flex flex-col p-4 z-2 mt-6">
               <FormTitle
                 sx={{
                   backgroundImage:
@@ -175,7 +192,6 @@ const Login = ({ login }) => {
               </div>
             </div>
 
-            <div className="absolute top-[160px] right-[100px] w-[100px] h-[100px] bg-[white] border-[1px] border-[#07bbff] rounded-[50%] "></div>
             <div className="absolute top-[240px] right-[198px] w-[20px] h-[20px] bg-blue-100 rounded-[50%]"></div>
             <div className="absolute bottom-[-100px] right-[-110px] w-[320px] h-[320px] border-[1px] border-[#07bbff] rounded-[50%]"></div>
             <div className="absolute bottom-[-60px] right-[-70px] w-[150px] h-[150px] bg-white rounded-[50%]"></div>
@@ -187,35 +203,7 @@ const Login = ({ login }) => {
             />
           </div>
         </div>
-        <div className="flex flex-col items-center zIndex-2">
-          <div className="py-6 px-8 w-[96%] mt-20 left-0 bottom-0 flex justify-between items-center bg-[#007bff] relative rounded-tl-[32px] rounded-tr-[32px]">
-            <div className="flex flex-col gap-3">
-              <div className="flex justify-start items-center gap-2">
-                <div className="text-[16px] font-bold text-white">PLV</div>
-                <BsAlexa className="text-[18px] text-white" />
-              </div>
-
-              <div className="flex justify-start items-center text-[16px] text-white gap-2">
-                <FaRegCopyright />
-                <span>Copyright 2024 Office of Student Affairs</span>
-              </div>
-            </div>
-            <div className="flex flex-col gap-3">
-              <div className="flex justify-end items-center gap-2">
-                <div className="text-[16px] text-white">Follow our socials</div>
-                <BsGlobe2 className="text-[18px] text-white" />
-              </div>
-              <div className="flex justify-start items-center gap-4">
-                <BsFacebook className="text-[24px] text-white" />
-                <BsTwitter className="text-[24px] text-white" />
-                <BsInstagram className="text-[24px] text-white" />
-                <BsGithub className="text-[24px] text-white" />
-                <BsLinkedin className="text-[24px] text-white" />
-              </div>
-            </div>
-          </div>
-          <div className="h-[74px] w-[96%] border-l-[1px] border-r-[1px]"></div>
-        </div>
+        <LoginFooter />
       </div>
     </div>
   );

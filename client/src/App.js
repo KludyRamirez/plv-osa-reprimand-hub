@@ -19,15 +19,11 @@ import Error404 from "./externalComponents/Errors/Error404";
 import Forgot from "./pages/auth/forgot/forgotBase/Forgot";
 import Reset from "./pages/auth/reset/resetBase/Reset";
 
-import { useParams } from "react-router-dom";
-
 const selectAuth = (state) => state.auth;
 const authSelector = createSelector([selectAuth], (auth) => auth);
 
 function App() {
   const auth = useSelector(authSelector);
-
-  const { id, token } = useParams();
 
   return (
     <>
@@ -48,6 +44,15 @@ function App() {
             element={auth?.userDetails?.token ? <Error302 /> : <Login />}
           ></Route>
           <Route
+            path="/account"
+            element={
+              <AccountSettings
+                toast={toast}
+                allowedRoles={["Administrator", "Instructor", "Student"]}
+              />
+            }
+          ></Route>
+          <Route
             path="/forgot"
             element={
               auth?.userDetails?.token ? (
@@ -57,7 +62,10 @@ function App() {
               )
             }
           ></Route>
-          <Route path="/reset-password/:id/:token" element={<Reset />}></Route>
+          <Route
+            path="/reset-password/:id/:token"
+            element={<Reset toast={toast} />}
+          ></Route>
           <Route
             element={
               <SecureRoles allowedRoles={["Administrator", "Instructor"]} />
@@ -65,22 +73,38 @@ function App() {
           >
             <Route
               path="/cases"
-              element={
-                <Cases
-                  toast={toast}
-                  allowedRoles={["Administrator", "Instructor"]}
-                />
-              }
+              element={<Cases toast={toast} allowedRoles={["Administrator"]} />}
             ></Route>
             <Route
               path="/students"
               element={
-                <Students
+                <Students toast={toast} allowedRoles={["Administrator"]} />
+              }
+            ></Route>
+
+            <Route
+              path="/statistics"
+              element={
+                <Statistics
                   toast={toast}
                   allowedRoles={["Administrator", "Instructor"]}
                 />
               }
             ></Route>
+
+            <Route
+              path="/profile/:id"
+              element={
+                <StudentProfile
+                  toast={toast}
+                  allowedRoles={["Administrator"]}
+                />
+              }
+            ></Route>
+          </Route>
+
+          {/* // */}
+          <Route element={<SecureRoles allowedRoles={["Administrator"]} />}>
             <Route
               path="/users"
               element={
@@ -88,45 +112,15 @@ function App() {
               }
             ></Route>
             <Route
-              path="/statistics"
+              path="/settings"
               element={
-                <Statistics toast={toast} allowedRoles={["Administrator"]} />
+                <Settings toast={toast} allowedRoles={["Administrator"]} />
               }
             ></Route>
             <Route
               path="/notification"
               element={
-                <History
-                  toast={toast}
-                  allowedRoles={["Administrator", "Instructor"]}
-                />
-              }
-            ></Route>
-            <Route
-              path="/profile/:id"
-              element={
-                <StudentProfile
-                  toast={toast}
-                  allowedRoles={["Administrator", "Instructor"]}
-                />
-              }
-            ></Route>
-            <Route
-              path="/settings"
-              element={
-                <Settings
-                  toast={toast}
-                  allowedRoles={["Administrator", "Instructor"]}
-                />
-              }
-            ></Route>
-            <Route
-              path="/account"
-              element={
-                <AccountSettings
-                  toast={toast}
-                  allowedRoles={["Administrator", "Instructor"]}
-                />
+                <History toast={toast} allowedRoles={["Administrator"]} />
               }
             ></Route>
           </Route>

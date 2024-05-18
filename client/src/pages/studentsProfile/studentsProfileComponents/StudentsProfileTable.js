@@ -63,6 +63,7 @@ const StudentsProfileTable = ({
   student,
   getStudents,
   cads,
+  allowedRoles,
 }) => {
   const [selectAll, setSelectAll] = useState(false);
   const [caseDeleteId, setCaseDeleteId] = useState("");
@@ -282,10 +283,10 @@ const StudentsProfileTable = ({
 
   // filter cases
 
-  const activeCases = cases?.filter((c) => c.statusOfCase !== "Case Solved");
-  const caseSolvedCases = cases?.filter(
-    (c) => c.statusOfCase === "Case Solved"
-  );
+  // const activeCases = cases?.filter((c) => c.statusOfCase !== "Case Solved");
+  // const caseSolvedCases = cases?.filter(
+  //   (c) => c.statusOfCase === "Case Solved"
+  // );
 
   // patch case status
 
@@ -470,12 +471,7 @@ const StudentsProfileTable = ({
                     {student.section}
                   </span>
                 </div>
-                <div className="w-[100%] text-[15px] flex justify-start gap-2 pt-2 text-[#007bff]">
-                  <BsStarFill />
-                  <BsStarFill />
-                  <BsStarFill />
-                  <BsStarFill />
-                </div>
+                <div className="w-[100%] text-[15px] flex justify-start gap-2 pt-2 text-[#007bff]"></div>
               </div>
               <div className="w-[200px] h-[100%] px-3 py-5 flex justify-end items-start">
                 <div
@@ -586,24 +582,31 @@ const StudentsProfileTable = ({
                       </div>
                       <div className="flex justify-between">
                         <div className="flex justify-start gap-3">
-                          <div
-                            onClick={() => handleCaseEditClick(c)}
-                            className="cursor-pointer rounded-[50%] w-[36px] h-[35px] border-[1px] border-[#007bff] flex justify-center items-center hover:bg-[#007bff] hover:text-white text-[#007bff]"
-                          >
-                            <BsPen className="text-[18px]" />
-                          </div>
-                          <div
-                            onClick={() => handleClickDelete(c?._id)}
-                            className="cursor-pointer rounded-[50%] w-[36px] h-[35px] border-[1px] border-[#007bff] flex justify-center items-center hover:bg-[#007bff] hover:text-white text-[#007bff]"
-                          >
-                            <BsTrash3 className="text-[18px]" />
-                          </div>
-                          <div
-                            onClick={() => handleCasePatchClick(c)}
-                            className="cursor-pointer rounded-[50%] w-[36px] h-[35px] border-[1px] border-[#007bff] flex justify-center items-center hover:bg-[#007bff] hover:text-white text-[#007bff]"
-                          >
-                            <BsChevronUp className="text-[18px]" />
-                          </div>
+                          {allowedRoles?.find((ar) =>
+                            auth?.userDetails?.role?.includes(ar)
+                          ) ? (
+                            <>
+                              <div
+                                onClick={() => handleCaseEditClick(c)}
+                                className="cursor-pointer rounded-[50%] w-[36px] h-[35px] border-[1px] border-[#007bff] flex justify-center items-center hover:bg-[#007bff] hover:text-white text-[#007bff]"
+                              >
+                                <BsPen className="text-[18px]" />
+                              </div>
+                              <div
+                                onClick={() => handleClickDelete(c?._id)}
+                                className="cursor-pointer rounded-[50%] w-[36px] h-[35px] border-[1px] border-[#007bff] flex justify-center items-center hover:bg-[#007bff] hover:text-white text-[#007bff]"
+                              >
+                                <BsTrash3 className="text-[18px]" />
+                              </div>
+                              <div
+                                onClick={() => handleCasePatchClick(c)}
+                                className="cursor-pointer rounded-[50%] w-[36px] h-[35px] border-[1px] border-[#007bff] flex justify-center items-center hover:bg-[#007bff] hover:text-white text-[#007bff]"
+                              >
+                                <BsChevronUp className="text-[18px]" />
+                              </div>
+                            </>
+                          ) : null}
+
                           <div
                             onClick={() => handleCaseRemarksClick(c)}
                             className="cursor-pointer rounded-[50%] w-[36px] h-[35px] border-[1px] border-[#007bff] flex justify-center items-center hover:bg-[#007bff] hover:text-white text-[#007bff]"

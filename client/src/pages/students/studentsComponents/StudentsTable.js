@@ -385,21 +385,37 @@ const StudentsTable = ({
                       {student?.statusOfStudent}
                     </div>
 
-                    <div className="w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px] text-[20px] font-bold text-[#404040]">
-                      {casesCount}
+                    <div
+                      className={`w-[118px] flex justify-start items-center gap-8 py-1 px-3 rounded-[4px] ${
+                        casesCount < 2 ? "text-[#ffbf00]" : "text-[#ff3131]"
+                      }`}
+                    >
+                      <div>{casesCount}</div>
+                      {casesCount < 2 ? (
+                        <div className="w-[14px] h-[14px] rounded-[50%] bg-[#FFBF00]"></div>
+                      ) : (
+                        <div className="w-[14px] h-[14px] rounded-[50%] bg-[#ff3131]"></div>
+                      )}
                     </div>
                     <div className="w-[130px] whitespace-nowrap flex justify-start items-center gap-2">
+                      {selectedStudents.length < 2 ? (
+                        <div
+                          onClick={() => handleClickProfile(student?._id)}
+                          className="p-2 bg-[white] border-[1px] border-[#007bff] rounded-[18px] cursor-pointer"
+                        >
+                          <BsEye className="text-[18px] text-[#007bff]" />
+                        </div>
+                      ) : (
+                        <div className="p-2 bg-gray-200 rounded-[18px]">
+                          <BsEyeFill className="text-[18px] text-[white]" />
+                        </div>
+                      )}
+
                       {selectedStudents.length < 2 ? (
                         allowedRoles?.find((ar) =>
                           auth?.userDetails?.role?.includes(ar)
                         ) ? (
                           <>
-                            <div
-                              onClick={() => handleClickProfile(student?._id)}
-                              className="p-2 bg-[white] border-[1px] border-[#007bff] rounded-[18px] cursor-pointer"
-                            >
-                              <BsEye className="text-[18px] text-[#007bff]" />
-                            </div>
                             <div
                               onClick={() => handleStudentEditClick(student)}
                               className="p-2 bg-[white] border-[1px] border-[#FFBF00] rounded-[18px] cursor-pointer"
@@ -416,9 +432,6 @@ const StudentsTable = ({
                         ) : (
                           <>
                             <div className="p-2 bg-gray-200 rounded-[18px]">
-                              <BsEyeFill className="text-[18px] text-[white]" />
-                            </div>
-                            <div className="p-2 bg-gray-200 rounded-[18px]">
                               <BsPenFill className="text-[18px] text-white" />
                             </div>
                             <div className="p-2 bg-gray-200 rounded-[18px]">
@@ -428,9 +441,6 @@ const StudentsTable = ({
                         )
                       ) : (
                         <>
-                          <div className="p-2 bg-gray-200 rounded-[18px]">
-                            <BsEyeFill className="text-[18px] text-[white]" />
-                          </div>
                           <div className="p-2 bg-gray-200 rounded-[18px]">
                             <BsPenFill className="text-[18px] text-white" />
                           </div>

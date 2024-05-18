@@ -336,13 +336,13 @@ const UsersTable = ({
                 <div className="w-[300px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px]">
                   {user?.email}
                 </div>
-                <div className="w-[140px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px]">
+                <div className="w-[140px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px] text-[#007bff]">
                   {user?.role}
                 </div>
                 <div className="w-[140px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px]">
                   {user?.contactNo}
                 </div>
-                <div className="w-[100px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px]">
+                <div className="w-[100px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px] text-[green]">
                   {user?.statusOfUser}
                 </div>
                 <div className="w-[140px] whitespace-nowrap flex justify-start items-center py-1 px-1 rounded-[4px] gap-2">
@@ -357,9 +357,7 @@ const UsersTable = ({
                         >
                           <BsPen className="text-[18px] text-[#FFBF00]" />
                         </div>
-                        <div className="p-2 bg-[white] border-[1px] border-[orange] rounded-[18px] cursor-pointer">
-                          <AiOutlineStop className="text-[18px] text-[orange]" />
-                        </div>
+
                         <div
                           onClick={() => handleClickDelete(user?._id)}
                           className="p-2 bg-[white] border-[1px] border-[#FF3131] rounded-[18px] cursor-pointer"
@@ -372,9 +370,7 @@ const UsersTable = ({
                         <div className="p-2 bg-gray-200 rounded-[18px]">
                           <BsPenFill className="text-[18px] text-white" />
                         </div>
-                        <div className="p-2 bg-gray-200 rounded-[18px]">
-                          <AiOutlineStop className="text-[18px] text-white" />
-                        </div>
+
                         <div className="p-2 bg-gray-200 rounded-[18px]">
                           <BsTrash3Fill className="text-[18px] text-white" />
                         </div>
@@ -385,9 +381,7 @@ const UsersTable = ({
                       <div className="p-2 bg-gray-200 rounded-[18px]">
                         <BsPenFill className="text-[18px] text-white" />
                       </div>
-                      <div className="p-2 bg-gray-200 rounded-[18px]">
-                        <AiOutlineStop className="text-[18px] text-white" />
-                      </div>
+
                       <div className="p-2 bg-gray-200 rounded-[18px]">
                         <BsTrash3Fill className="text-[18px] text-white" />
                       </div>

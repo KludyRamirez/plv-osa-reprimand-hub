@@ -6,11 +6,11 @@ import {
   BsCheckCircle,
   BsFeather,
   BsFastForward,
+  BsKeyboard,
 } from "react-icons/bs";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import HistoryTable from "./HistoryTable";
-import { VscGithubAction } from "react-icons/vsc";
 
 const HistoryFilter = ({ history, getHistory, toast, allowedRoles }) => {
   const [selectedStatus, setSelectedStatus] = useState("All");
@@ -53,10 +53,66 @@ const HistoryFilter = ({ history, getHistory, toast, allowedRoles }) => {
       ? filteredByDate
       : filteredByDate?.filter((h) => filteredByStatus?.includes(h));
 
+  const currentDate = new Date();
+  const formattedDate = currentDate.toLocaleDateString("en-PH", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  });
+
+  const todayHistory = history.filter(
+    (h) =>
+      new Date(h.createdAt).toLocaleDateString("en-PH", {
+        month: "long",
+        day: "numeric",
+        year: "numeric",
+      }) === formattedDate
+  );
+
   return (
     <>
       <div className="text-[14px] text-[#404040] pb-6 ">
         Office of Student Affairs / History
+      </div>
+      <div className="flex justify-start items-center gap-4 pb-8">
+        <div className="p-2 w-[200px] h-[174px] bg-blue-100  rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden">
+          <div className=" w-[100%] h-[100%] flex justify-center items-end">
+            <div className="text-[48px] text-[#007bff] font-bold">
+              {history?.length}
+              <span className="text-[20px]"></span>
+            </div>
+          </div>
+          <div className="text-[16px] text-[#007bff]">Total History</div>
+          <svg
+            className="absolute top-0 left-0"
+            viewBox="0 0 500 500"
+            preserveAspectRatio="xMinYMin meet"
+          >
+            <path
+              d="M0,100 C150,200 350,0 500,100 L500,00 L0,0 Z"
+              style={{ stroke: "none", fill: "#007bff" }}
+            ></path>
+          </svg>
+        </div>
+        <div className="p-2 w-[200px] h-[174px] bg-[#007bff]  rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden">
+          <div className=" w-[100%] h-[100%] flex justify-center items-end">
+            <div className="text-[48px] text-white font-bold">
+              {todayHistory?.length}
+              <span className="text-[20px]"></span>
+            </div>
+          </div>
+          <div className="text-[16px] text-white">History Today</div>
+          <svg
+            className="absolute top-0 left-0"
+            viewBox="0 0 500 500"
+            preserveAspectRatio="xMinYMin meet"
+          >
+            <path
+              d="M0,100 C150,200 350,0 500,100 L500,00 L0,0 Z"
+              style={{ stroke: "none", fill: "rgba(219, 234, 254, 1)" }}
+            ></path>
+          </svg>
+        </div>
       </div>
       <div className="bg-[white] text-[#404040] rounded-[10px] flex flex-col border-[1px]">
         <div className="px-3 h-[58px] flex justify-between gap-2">
@@ -83,7 +139,7 @@ const HistoryFilter = ({ history, getHistory, toast, allowedRoles }) => {
                 <div className="flex gap-2 items-center">
                   <div>Type</div> <BsChevronBarDown />
                 </div>
-                <BsFeather />
+                <BsKeyboard />
               </div>
               <select
                 onChange={(e) => setSelectedStatus(e.target.value)}
@@ -135,6 +191,7 @@ const HistoryFilter = ({ history, getHistory, toast, allowedRoles }) => {
           </div>
         </div>
       </div>
+
       <div className="py-8">
         <HistoryTable
           history={combinedFilteredHistory}
