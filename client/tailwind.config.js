@@ -4,9 +4,9 @@ module.exports = {
   theme: {
     extend: {
       screens: {
-        phone: { max: "479px" }, // Max-width for phone screens
-        tablet: { max: "639px" }, // Max-width for tablet screens
-        desktop: { max: "1023px" }, // Max-width for desktop screens
+        phone: { max: "479px" },
+        tablet: { max: "639px" }, 
+        desktop: { max: "1023px" },
       },
     },
   },

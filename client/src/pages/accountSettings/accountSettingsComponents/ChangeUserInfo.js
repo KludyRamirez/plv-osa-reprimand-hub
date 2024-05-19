@@ -18,7 +18,7 @@ const errorsInitialState = {
 const selectAuth = (state) => state.auth;
 const authSelector = createSelector([selectAuth], (auth) => auth);
 
-const ChangeUserEmail = ({ toast }) => {
+const ChangeUserInfo = ({ toast }) => {
   const [values, setValues] = useState(initialState);
   const [errors, setErrors] = useState(errorsInitialState);
 
@@ -132,15 +132,15 @@ const ChangeUserEmail = ({ toast }) => {
 
   return (
     <>
-      <div className="w-[400px] flex flex-col gap-8">
-        <div className="p-2 bg-blue-900 flex justify-center items-center transform -rotate-[2deg] rounded-[0px]">
-          <span className="text-[34px] font-bold text-white transform rotate-[2deg]">
-            Change Information
-          </span>
-        </div>
-        <div className="text-[#606060] flex flex-col border-[1px] gap-4 px-5 py-6 rounded-[8px] bg-[#f7f7f7]">
-          <div className="flex flex-col gap-2 w-[100%]">
-            <div className="text-[16px] font-semibold text-[#007bff] w-100 flex justify-between items-center">
+      <div className="w-[460px] flex flex-col gap-8 zIndex-2">
+        <div className="text-[#606060] flex flex-col gap-4 px-5 py-6 rounded-[8px]">
+          <div className="flex items-center justify-start relative">
+            <div className="text-[36px] text-[#007bff] font-bold">
+              Change Info
+            </div>
+          </div>
+          <div className="flex flex-col gap-3 w-[100%]">
+            <div className="text-[16px] text-[#007bff] w-100 flex justify-between items-center">
               <span>Email</span>
               <BsEnvelope className="text-[22px]" />
             </div>
@@ -157,27 +157,29 @@ const ChangeUserEmail = ({ toast }) => {
               } focus:outline-none `}
             />
             {errors.email && <p className="text-red-500">{errors.email}</p>}
+
+            <div className="w-100 flex justify-start items-center">
+              {errors.email === "" && values.email !== "" ? (
+                <button
+                  type="button"
+                  className="w-[100%] py-2 bg-[#007bff] text-[white] text-[16px] flex justify-center items-center rounded-[4px] gap-2"
+                  onClick={handleUpdateEmail}
+                >
+                  <div>Change</div>
+                </button>
+              ) : (
+                <button
+                  disabled
+                  className="w-[100%] py-2 bg-blue-300 text-[white] text-[16px] flex justify-center items-center rounded-[4px] gap-2"
+                >
+                  <div>Change</div>
+                </button>
+              )}
+            </div>
           </div>
-          <div className="w-100 flex justify-start items-center">
-            {errors.email === "" && values.email !== "" ? (
-              <button
-                type="button"
-                className="w-[100%] py-2 bg-[#007bff] text-[white] text-[16px] flex justify-center items-center rounded-[4px] gap-2"
-                onClick={handleUpdateEmail}
-              >
-                <div>Change</div>
-              </button>
-            ) : (
-              <button
-                disabled
-                className="w-[100%] py-2 bg-blue-300 text-[white] text-[16px] flex justify-center items-center rounded-[4px] gap-2"
-              >
-                <div>Change</div>
-              </button>
-            )}
-          </div>
-          <div className="flex flex-col gap-2 w-[100%]">
-            <div className="text-[16px] font-semibold text-[#007bff] w-100 flex justify-between items-center">
+
+          <div className="flex flex-col gap-3 w-[100%] pt-4">
+            <div className="text-[16px] text-[#007bff] w-100 flex justify-between items-center">
               <span>Password</span>
               <BsCardText className="text-[22px]" />
             </div>
@@ -196,24 +198,25 @@ const ChangeUserEmail = ({ toast }) => {
             {errors.password && (
               <p className="text-red-500">{errors.password}</p>
             )}
-          </div>
-          <div className="w-100 flex justify-start items-center">
-            {errors.password === "" && values.password !== "" ? (
-              <button
-                type="button"
-                className="w-[100%] py-2 bg-[#007bff] text-[white] text-[16px] flex justify-center items-center rounded-[4px] gap-2"
-                onClick={handleUpdatePassword}
-              >
-                <div>Change</div>
-              </button>
-            ) : (
-              <button
-                disabled
-                className="w-[100%] py-2 bg-blue-300 text-[white] text-[16px] flex justify-center items-center rounded-[4px] gap-2"
-              >
-                <div>Change</div>
-              </button>
-            )}
+
+            <div className="w-100 flex justify-start items-center">
+              {errors.password === "" && values.password !== "" ? (
+                <button
+                  type="button"
+                  className="w-[100%] py-2 bg-[#007bff] text-[white] text-[16px] flex justify-center items-center rounded-[4px] gap-2"
+                  onClick={handleUpdatePassword}
+                >
+                  <div>Change</div>
+                </button>
+              ) : (
+                <button
+                  disabled
+                  className="w-[100%] py-2 bg-blue-300 text-[white] text-[16px] flex justify-center items-center rounded-[4px] gap-2"
+                >
+                  <div>Change</div>
+                </button>
+              )}
+            </div>
           </div>
         </div>
       </div>
@@ -221,4 +224,4 @@ const ChangeUserEmail = ({ toast }) => {
   );
 };
 
-export default ChangeUserEmail;
+export default ChangeUserInfo;

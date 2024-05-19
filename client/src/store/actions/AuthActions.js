@@ -44,7 +44,7 @@ const register = (userDetails, authToken) => {
     try {
       const response = await api.register(userDetails, authToken);
       if (response.error) {
-        dispatch(toast.error(response?.exception?.response?.data.message));
+        dispatch(toast.error(response?.exception?.response?.data));
       } else {
         dispatch(toast.success(response.data.message));
       }

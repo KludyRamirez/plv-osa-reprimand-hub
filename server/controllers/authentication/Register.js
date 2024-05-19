@@ -15,7 +15,19 @@ const register = async (req, res) => {
     });
 
     if (userNameExists) {
-      return res.status(409).send("Username already exists");
+      return res
+        .status(409)
+        .send("Username already exists. Please input another username.");
+    }
+
+    const emailExists = await User.exists({
+      email: email,
+    });
+
+    if (emailExists) {
+      return res
+        .status(409)
+        .send("Email already exists. Please input another email.");
     }
 
     const latestUser = await User.findOne({}).sort({ uid: -1 }).limit(1);

@@ -54,13 +54,7 @@ function App() {
           ></Route>
           <Route
             path="/forgot"
-            element={
-              auth?.userDetails?.token ? (
-                <Error302 />
-              ) : (
-                <Forgot auth={auth} toast={toast} />
-              )
-            }
+            element={<Forgot auth={auth} toast={toast} />}
           ></Route>
           <Route
             path="/reset-password/:id/:token"

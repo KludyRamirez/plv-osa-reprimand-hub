@@ -147,7 +147,7 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
 
     return (
       <>
-        <div className="pl-2 text-[48px] text-[green] font-bold">
+        <div className="pl-2 text-[48px] text-[#007bff] font-bold">
           {percentage.toFixed(0)}
           <span className="text-[20px]">%</span>
         </div>
@@ -158,7 +158,7 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
   const bsitNumberConverter = () => {
     return (
       <>
-        <div className=" text-[48px] text-[green] font-bold">
+        <div className=" text-[48px] text-[#007bff] font-bold">
           {bsitCases.length}
         </div>
       </>
@@ -344,7 +344,7 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
             <div className="phone:w-[47.8%] flex flex-col items-start gap-2">
               <div className=" w-[158px] phone:w-[100%] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
-                  <div>Case Status</div> <BsChevronBarDown />
+                  <div>Status</div> <BsChevronBarDown />
                 </div>
                 <BsCheckCircle />
               </div>
@@ -457,7 +457,7 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
       <div className="mt-4 flex justify-start items-center gap-4">
         <div
           onClick={() => handleSetBsitPercentage()}
-          className="p-2 w-[209px] h-[180px] bg-white border-[1px] border-[green] rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden"
+          className="p-2 w-[209px] h-[180px] bg-white border-[2px] border-blue-300 rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden"
         >
           <div className="w-[100%] h-[100%] flex justify-center items-end">
             {bsitPercentage === "Percentage" ? (
@@ -466,7 +466,7 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
               <>{bsitNumberConverter()}</>
             )}
           </div>
-          <div className="text-[16px] text-[green]">1st Offense</div>
+          <div className="text-[16px] text-[#007bff]">1st Offense</div>
           <svg
             className="absolute top-0 left-0"
             viewBox="0 0 500 500"
@@ -476,7 +476,7 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
               d="M0,100 C150,200 350,0 500,100 L500,00 L0,0 Z"
               style={{
                 stroke: "none",
-                fill: "rgba(220, 252, 231, 1)",
+                fill: "rgba(219, 234, 254, 1)",
                 strokeWidth: "2px",
               }}
             ></path>
@@ -485,7 +485,7 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
 
         <div
           onClick={() => handleSetBsbammPercentage()}
-          className="p-2 w-[209px] h-[180px] bg-white border-[1px] border-[#007bff] rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden"
+          className="p-2 w-[209px] h-[180px] bg-white border-[2px] border-blue-300 rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden"
         >
           <div className="w-[100%] h-[100%] flex justify-center items-end">
             {bsbammPercentage === "Percentage" ? (
@@ -513,7 +513,7 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
 
         <div
           onClick={() => handleSetBecedPercentage()}
-          className="p-2 w-[209px] h-[180px] bg-white border-[1px] border-[#FFBF00] rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden"
+          className="p-2 w-[209px] h-[180px] bg-white border-[2px] border-yellow-300 rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden"
         >
           <div className="w-[100%] h-[100%] flex justify-center items-end">
             {becedPercentage === "Percentage" ? (
@@ -540,7 +540,7 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
         </div>
         <div
           onClick={() => handleSetBspPercentage()}
-          className="p-2 w-[209px] h-[180px] bg-white border-[1px] border-[#FFBF00] rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden"
+          className="p-2 w-[209px] h-[180px] bg-white border-[2px] border-yellow-300 rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden"
         >
           <div className="w-[100%] h-[100%] flex justify-center items-end">
             {bspPercentage === "Percentage" ? (

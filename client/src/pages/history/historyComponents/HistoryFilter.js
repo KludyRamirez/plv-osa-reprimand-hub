@@ -75,7 +75,7 @@ const HistoryFilter = ({ history, getHistory, toast, allowedRoles }) => {
         Office of Student Affairs / History
       </div>
       <div className="flex justify-start items-center gap-4 pb-8">
-        <div className="p-2 w-[200px] h-[174px] bg-blue-100  rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden">
+        <div className="p-2 w-[200px] h-[174px] bg-white border-[1px] border-blue-200 rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden">
           <div className=" w-[100%] h-[100%] flex justify-center items-end">
             <div className="text-[48px] text-[#007bff] font-bold">
               {history?.length}
@@ -90,18 +90,18 @@ const HistoryFilter = ({ history, getHistory, toast, allowedRoles }) => {
           >
             <path
               d="M0,100 C150,200 350,0 500,100 L500,00 L0,0 Z"
-              style={{ stroke: "none", fill: "#007bff" }}
+              style={{ stroke: "none", fill: "#f5fbff" }}
             ></path>
           </svg>
         </div>
-        <div className="p-2 w-[200px] h-[174px] bg-[#007bff]  rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden">
+        <div className="p-2 w-[200px] h-[174px] bg-white border-[1px] border-blue-200 rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden">
           <div className=" w-[100%] h-[100%] flex justify-center items-end">
-            <div className="text-[48px] text-white font-bold">
+            <div className="text-[48px] text-[#007bff] font-bold">
               {todayHistory?.length}
               <span className="text-[20px]"></span>
             </div>
           </div>
-          <div className="text-[16px] text-white">History Today</div>
+          <div className="text-[16px] text-[#007bff]">Today's History</div>
           <svg
             className="absolute top-0 left-0"
             viewBox="0 0 500 500"
@@ -109,12 +109,12 @@ const HistoryFilter = ({ history, getHistory, toast, allowedRoles }) => {
           >
             <path
               d="M0,100 C150,200 350,0 500,100 L500,00 L0,0 Z"
-              style={{ stroke: "none", fill: "rgba(219, 234, 254, 1)" }}
+              style={{ stroke: "none", fill: "#f5fbff" }}
             ></path>
           </svg>
         </div>
       </div>
-      <div className="bg-[white] text-[#404040] rounded-[10px] flex flex-col border-[1px]">
+      <div className="bg-[white] text-[#404040] rounded-[10px] flex flex-col border-[1px] border-blue-100">
         <div className="px-3 h-[58px] flex justify-between gap-2">
           <div
             onClick={() => handleMainFilterChange("All")}
@@ -132,7 +132,7 @@ const HistoryFilter = ({ history, getHistory, toast, allowedRoles }) => {
           </div>
         </div>
 
-        <div className="w-100 flex justify-start bg-gradient-to-br from-gray-100 to-gray-100 p-4 rounded-bl-[10px] rounded-br-[10px]">
+        <div className="w-100 flex justify-start bg-gradient-to-br from-white to-[#f5fbff] p-4 rounded-bl-[10px] rounded-br-[10px]">
           <div className="w-100 flex flex-wrap justify-start items-center gap-4 phone:gap-2">
             <div className="phone:w-[47.8%] flex flex-col items-start gap-2">
               <div className="pl-2 w-[242px] phone:w-[100%] flex justify-between items-center">
@@ -143,7 +143,7 @@ const HistoryFilter = ({ history, getHistory, toast, allowedRoles }) => {
               </div>
               <select
                 onChange={(e) => setSelectedStatus(e.target.value)}
-                className="px-3 py-2 w-[242px] phone:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
+                className="px-3 py-2 w-[242px] phone:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none border-[1px] border-blue-100 cursor-pointer focus:outline-none focus:border-blue-300"
               >
                 <option value="All">All</option>
                 <option value="Authentication">Authentication</option>
@@ -163,7 +163,7 @@ const HistoryFilter = ({ history, getHistory, toast, allowedRoles }) => {
               </div>
               <select
                 onChange={(e) => setActionNotif(e.target.value)}
-                className="px-3 py-2 w-[242px] phone:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
+                className="px-3 py-2 w-[242px] phone:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none border-[1px] border-blue-100 cursor-pointer focus:outline-none focus:border-blue-300"
               >
                 <option value="All">All</option>
                 <option value="Add">Add</option>
@@ -185,14 +185,14 @@ const HistoryFilter = ({ history, getHistory, toast, allowedRoles }) => {
                 onChange={(date) => {
                   setDate(date);
                 }}
-                className="phone:w-[100%] px-3 py-2 w-[242px] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
+                className="px-3 py-2 w-[242px] phone:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none border-[1px] border-blue-100 cursor-pointer focus:outline-none focus:border-blue-300"
               />
             </div>
           </div>
         </div>
       </div>
 
-      <div className="py-8">
+      <div className="py-6">
         <HistoryTable
           history={combinedFilteredHistory}
           getHistory={getHistory}

@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { createSelector } from "reselect";
-import { BsFolder2Open, BsFolderX, BsShare } from "react-icons/bs";
-import { useNavigate } from "react-router-dom";
-import { AiOutlineExport } from "react-icons/ai";
+import { BsFolderX, BsEscape } from "react-icons/bs";
 import TimeExtractor from "../../../externalUtils/TimeExtractor";
 
 const selectAuth = (state) => state.auth;
@@ -11,7 +9,6 @@ const authSelector = createSelector([selectAuth], (auth) => auth);
 
 const HistoryTable = ({
   history,
-  getHistory,
   selectedHistory,
   setSelectedHistory,
   allowedRoles,
@@ -56,7 +53,7 @@ const HistoryTable = ({
     <>
       <div className="flex justify-start gap-8">
         <div
-          className={`w-[100%] h-[362px] bg-white flex flex-col rounded-[10px] border-[1px] text-[#505050] phone:overflow-x-scroll ${
+          className={`w-[100%] h-[366px] bg-white flex flex-col text-[#505050] phone:overflow-x-scroll ${
             history && history.length > 5 ? "overflow-y-scroll" : ""
           }`}
         >
@@ -69,38 +66,38 @@ const HistoryTable = ({
                 onChange={toggleSelectAll}
               />
             </div>
-            <div className="w-[70px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+            <div className="w-[70px] whitespace-nowrap flex justify-start items-center border-[1px] border-blue-200 py-1 px-3 rounded-[24px]">
               UID
             </div>
-            <div className="w-[150px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+            <div className="w-[150px] whitespace-nowrap flex justify-start items-center border-[1px] border-blue-200 py-1 px-3 rounded-[24px]">
               Username
             </div>
-            <div className="w-[180px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+            <div className="w-[180px] whitespace-nowrap flex justify-start items-center border-[1px] border-blue-200 py-1 px-3 rounded-[24px]">
               Type
             </div>
-            <div className="w-[340px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+            <div className="w-[340px] whitespace-nowrap flex justify-start items-center border-[1px] border-blue-200 py-1 px-3 rounded-[24px]">
               Message
             </div>
-            <div className="w-[120px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+            <div className="w-[120px] whitespace-nowrap flex justify-start items-center border-[1px] border-blue-200 py-1 px-3 rounded-[24px]">
               Activity
             </div>
-            <div className="w-[150px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+            <div className="w-[150px] whitespace-nowrap flex justify-start items-center border-[1px] border-blue-200 py-1 px-3 rounded-[24px]">
               <span>Date</span>
             </div>
-            <div className="w-[150px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+            <div className="w-[150px] whitespace-nowrap flex justify-start items-center border-[1px] border-blue-200 py-1 px-3 rounded-[24px]">
               <span>Time</span>
             </div>
 
             {selectedHistory?.length > 1 ? (
               <>
                 <div className="w-[1px] h-[20px] border-[1px]"></div>
-                <div className="flex gap-2 justify-start items-center py-1 px-2 bg-[green] border-[1px] border-[green] text-white text-[14px] rounded-[4px] cursor-pointer">
+                <div className="flex gap-2 justify-start items-center py-1 px-2 bg-[#007bff] border-[1px] border-[#007bff] text-white text-[14px] rounded-[4px] cursor-pointer">
                   <span>Export</span>
-                  <BsShare className="text-[14px]" />
+                  <BsEscape className="text-[14px]" />
                 </div>
               </>
             ) : (
-              <div className="w-[160px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+              <div className="w-[100px] whitespace-nowrap flex justify-start items-center border-[1px] border-blue-200 py-1 px-3 rounded-[24px]">
                 <span>Actions</span>
               </div>
             )}
@@ -113,8 +110,8 @@ const HistoryTable = ({
                   className={`phone:w-[fit-content]
               flex items-center gap-4 px-6 ${
                 k % 2 === 0
-                  ? "bg-gradient-to-br from-gray-100 to-gray-100"
-                  : "bg-white"
+                  ? "bg-gradient-to-br from-white to-[#f5fbff] border-[1px] border-blue-100 rounded-[8px]"
+                  : "bg-[#fefefe]"
               }`}
                   key={k}
                 >
@@ -156,21 +153,21 @@ const HistoryTable = ({
                       auth?.userDetails?.role?.includes(ar)
                     ) ? (
                       <>
-                        <div className="p-2 ml-1 bg-white border-[1px] border-[green] rounded-[18px] cursor-pointer">
-                          <BsShare className="text-[18px] text-[green]" />
+                        <div className="p-2 ml-1 bg-white border-[1px] border-[#007bff] rounded-[18px] cursor-pointer">
+                          <BsEscape className="text-[18px] text-[#007bff]" />
                         </div>
                       </>
                     ) : (
                       <>
-                        <div className="p-2 ml-1 bg-gray-200 rounded-[18px]">
-                          <BsShare className="text-[18px] text-white" />
+                        <div className="p-2 ml-1 bg-gray-100 rounded-[18px]">
+                          <BsEscape className="text-[18px] text-white" />
                         </div>
                       </>
                     )
                   ) : (
                     <>
-                      <div className="p-2  ml-1 bg-gray-200 rounded-[18px]">
-                        <BsShare className="text-[18px] text-white" />
+                      <div className="p-2  ml-1 bg-gray-100 rounded-[18px]">
+                        <BsEscape className="text-[18px] text-white" />
                       </div>
                     </>
                   )}

@@ -82,11 +82,10 @@ const CreateUser = ({ register, getUsers, allowedRoles }) => {
     try {
       await register(userDetails, authToken);
       setValues(initialState);
-    } catch (error) {
-      console.error("Error while registering user:", error);
-    } finally {
       handleCloseModal();
       getUsers();
+    } catch (error) {
+      console.error("Error while registering user:", error);
     }
   };
 
