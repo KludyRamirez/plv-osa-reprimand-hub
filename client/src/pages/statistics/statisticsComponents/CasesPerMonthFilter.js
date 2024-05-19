@@ -358,6 +358,7 @@ const CasesPerMonthFilter = ({ cases, students, getCases }) => {
                 }}
                 className="phone:w-[100%] px-3 py-2 w-[158px] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
               >
+                <option value="All">All</option>
                 {years.map((year) => (
                   <option key={year} value={year}>
                     {year}
