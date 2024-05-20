@@ -12,7 +12,7 @@ import { BsArrowLeft, BsArrowRight, BsMegaphone } from "react-icons/bs";
 
 import LoginFooter from "../loginComponents/LoginFooter";
 
-const Login = ({ login }) => {
+const Login = ({ login, setLoading, toast }) => {
   const FormTitle = styled("div")({
     backgroundImage:
       "radial-gradient(100% 100% at 100% 0, #122c8e 0, #07bbff 100%)",
@@ -41,9 +41,18 @@ const Login = ({ login }) => {
     };
 
     try {
+      setLoading(true);
       await login(userDetails, navigate);
+      setUserName("");
+      setPassword("");
+      setLoading(false);
     } catch (error) {
-      console.error("Error while registering user:", error);
+      setUserName("");
+      setPassword("");
+      setLoading(false);
+      console.error(
+        "Either invalid credentials or something went wrong. Please try again."
+      );
     }
   };
 
