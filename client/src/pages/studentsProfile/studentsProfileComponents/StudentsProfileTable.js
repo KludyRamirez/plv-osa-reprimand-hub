@@ -496,7 +496,7 @@ const StudentsProfileTable = ({
               name="controlled-radio-buttons-group"
               value={casesFilter}
               onChange={(e) => setCasesFilter(e.target.value)}
-              className="absolute top-[18px] right-[-16px]"
+              className="absolute top-[20px] right-[-16px]"
             >
               <div className="flex items-center gap-2">
                 <FormControlLabel
@@ -504,8 +504,10 @@ const StudentsProfileTable = ({
                   control={<Radio id="All" sx={{ display: "none" }} />}
                   label={
                     <div
-                      className={`cursor-pointer py-2 px-4 rounded-[24px] text-[16px] border-[1px] border-blue-400 flex gap-2 items-center text-[#007bff] ${
-                        casesFilter === "All" ? "bg-[#007bff] text-white" : ""
+                      className={`cursor-pointer py-2 px-4 rounded-[24px] text-[16px] flex gap-2 items-center text-[#007bff] ${
+                        casesFilter === "All"
+                          ? "bg-[#007bff] text-white"
+                          : "text-[#007bff] bg-[#f7f7f7]"
                       } `}
                     >
                       <div>Total</div>
@@ -518,7 +520,7 @@ const StudentsProfileTable = ({
                   control={<Radio id="Case Solved" sx={{ display: "none" }} />}
                   label={
                     <div
-                      className={`cursor-pointer py-2 px-4 rounded-[24px] text-[16px] border-[1px] border-blue-400 flex gap-2 items-center text-[#007bff] ${
+                      className={`cursor-pointer py-2 px-4 rounded-[24px] text-[16px] flex gap-2 items-center text-[#007bff] ${
                         casesFilter === "Case Solved"
                           ? "bg-[#007bff] text-white"
                           : "text-[#007bff] bg-[#f7f7f7]"
@@ -534,7 +536,7 @@ const StudentsProfileTable = ({
                   control={<Radio id="Active" sx={{ display: "none" }} />}
                   label={
                     <div
-                      className={`cursor-pointer py-2 px-4 rounded-[24px] text-[16px] border-[1px] border-blue-400 flex gap-2 items-center ${
+                      className={`cursor-pointer py-2 px-4 rounded-[24px] text-[16px] flex gap-2 items-center ${
                         casesFilter !== "All" && casesFilter !== "Case Solved"
                           ? "bg-[#007bff] text-white"
                           : "text-[#007bff] bg-[#f7f7f7]"
