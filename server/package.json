@@ -4,8 +4,7 @@
   "private": true,
   "main": "index.js",
   "engines": {
-    "node": "v20.11.1",
-    "npm": "10.2.4"
+    "node": "20.x"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
