@@ -13,13 +13,14 @@ import sea from "../../../images/sea.jpg";
 import boy from "../../../images/boynobg.svg";
 import girl from "../../../images/girl.png";
 import {
+  BsArrowDownShort,
   BsArrowRightShort,
+  BsArrowUpShort,
   BsBoxArrowUpRight,
   BsChevronUp,
   BsFolderX,
   BsGoogle,
   BsPen,
-  BsStarFill,
   BsSticky,
   BsTrash3,
 } from "react-icons/bs";
@@ -81,6 +82,8 @@ const StudentsProfileTable = ({
 
   const [casesFilter, setCasesFilter] = useState("All");
 
+  const [showMoreInfo, setShowMoreInfo] = useState(false);
+
   const auth = useSelector(authSelector);
   const navigate = useNavigate();
 
@@ -113,6 +116,10 @@ const StudentsProfileTable = ({
   //     setSelectedCases([]);
   //   }
   // };
+
+  const toggleShowMoreInfo = () => {
+    setShowMoreInfo(!showMoreInfo);
+  };
 
   const deleteSelectedCases = async () => {
     try {
@@ -635,7 +642,7 @@ const StudentsProfileTable = ({
         </div>
 
         <div className="flex flex-col gap-5">
-          <div className="w-[350px] h-[232px] rounded-[8px] text-[#404040]">
+          <div className="w-[350px] rounded-[8px] text-[#404040]">
             <div className="w-[100%] px-6 py-4 text-[25px] font-bold">
               Connect
             </div>
@@ -654,13 +661,44 @@ const StudentsProfileTable = ({
                 <div className="">{student.contactNo}</div>
               </div>
 
-              <div className="w-[100%] flex gap-2 items-center pt-4 hover:underline cursor-pointer">
-                Show more info
-                <BsArrowRightShort className="text-[24px]" />
-              </div>
+              {showMoreInfo ? (
+                <div
+                  onClick={toggleShowMoreInfo}
+                  className="w-[100%] flex gap-2 items-center pt-4 hover:underline cursor-pointer"
+                >
+                  Collapse info
+                  <BsArrowUpShort className="text-[24px]" />
+                </div>
+              ) : (
+                <div
+                  onClick={toggleShowMoreInfo}
+                  className="w-[100%] flex gap-2 items-center pt-4 hover:underline cursor-pointer"
+                >
+                  Show more info
+                  <BsArrowDownShort className="text-[24px]" />
+                </div>
+              )}
+
+              {showMoreInfo ? (
+                <>
+                  <div className="w-[100%] flex justify-start gap-4 items-center pt-2">
+                    <div className="p-2 rounded-[24px] border-[1px] border-[#007bff] text-[#007bff] hover:bg-[#007bff] hover:text-white cursor-pointer">
+                      <MdOutlineEmail className="text-[24px]" />
+                    </div>
+                    <div className="">{student.email}</div>
+                    <BsGoogle className="text-[24px] text-[#007bff]" />
+                  </div>
+                  <div className="w-[100%] flex gap-4 items-center">
+                    <div className="p-2 rounded-[24px] border-[1px] border-[#007bff] text-[#007bff] hover:bg-[#007bff] hover:text-white cursor-pointer">
+                      <MdOutlineCall className="text-[24px]" />
+                    </div>
+                    <div className="">{student.contactNo}</div>
+                  </div>
+                </>
+              ) : null}
             </div>
           </div>
-          <div className="w-[350px] px-6 pt-3 pb-6 flex flex-col gap-6">
+          <div className="w-[350px] px-6 flex flex-col gap-6">
             <div className="text-[25px] text-[#404040] font-bold">
               Similar Profile
             </div>

@@ -1,21 +1,16 @@
 const express = require("express");
 const http = require("http");
 const mongoose = require("mongoose");
-// const morgan = require("morgan");
-// const bodyParser = require("body-parser");
 const cors = require("cors");
 const fs = require("fs");
 require("dotenv").config();
 
-// Define the port
 const PORT = process.env.PORT || process.env.API_PORT;
 
-// Create an Express app
 const app = express();
 
 const server = http.createServer(app);
 
-// Connect to the database
 mongoose
   .connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
@@ -27,10 +22,9 @@ mongoose
     });
   })
   .catch((err) => {
-    console.error("Database is not connected!", err);
+    console.error("Database is not connected.", err);
   });
 
-// Middleware
 app.use(
   cors({
     origin: (origin, callback) => {
@@ -40,7 +34,6 @@ app.use(
         callback(null, true);
       }
     },
-
     credentials: true,
   })
 );
