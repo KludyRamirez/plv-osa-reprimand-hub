@@ -199,9 +199,9 @@ const CasesFilter = ({ cases, students, getCases, allowedRoles }) => {
             type="text"
             autoComplete="off"
             placeholder="Search by case number, student name, etc."
-            className="p-3 rounded-[6px] w-[97%] bg-gradient-to-br from-gray-100 to-gray-100 focus:outline-none focus:border-[1px] focus:border-[#cdcdcd]"
+            className="p-3 rounded-[6px] w-[97%] phone:w-[100%] bg-gradient-to-br from-gray-100 to-gray-100 focus:outline-none focus:border-[1px] focus:border-[#cdcdcd]"
           />
-          <div className="flex justify-center items-center w-[50px] h-[48px] rounded-[8px] bg-gradient-to-br from-[#07bbff] to-[#007bff] text-white">
+          <div className="flex justify-center items-center w-[50px] h-[48px] rounded-[8px] bg-gradient-to-br from-[#07bbff] to-[#007bff] text-white phone:hidden">
             <BsFilter className="text-[24px]" />
           </div>
         </div>
@@ -244,6 +244,7 @@ const CasesFilter = ({ cases, students, getCases, allowedRoles }) => {
                 ) : null}
               </select>
             </div>
+
             <div className="phone:w-[47.8%] flex flex-col items-start gap-2">
               <div className="pl-2 w-[242px] phone:w-[100%] flex justify-between items-center">
                 <div className="flex gap-2 items-center">

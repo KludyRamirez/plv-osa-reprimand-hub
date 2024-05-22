@@ -267,7 +267,7 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
 
   return (
     <>
-      <div className=" w-100 bg-[white] text-[#404040] rounded-[10px] flex flex-col border-[1px]">
+      <div className="w-100 bg-[white] text-[#404040] rounded-[10px] flex flex-col border-[1px]">
         <div className="px-3 w-100 h-[58px] flex justify-between gap-2 border-b-2 border-white">
           <div className="flex justify-start items-center gap-2">
             <div
@@ -387,7 +387,7 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
               </select>
             </div>
 
-            <div className="phone:w-[50%] flex flex-col items-start gap-2">
+            <div className="phone:w-[47.8%] flex flex-col items-start gap-2">
               <div className=" w-[158px] phone:w-[100%] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
                   <div>Month</div> <BsChevronBarDown />
@@ -412,7 +412,7 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
           </div>
         </div>
       </div>
-      <div className="flex justify-start gap-4">
+      <div className="flex phone:flex-wrap justify-start gap-4 phone:gap-0">
         <div className="mt-4 w-[434px] relative flex flex-col bg-blue-100 zIndex-2">
           <div className="p-4 zIndex-2 text-[white] bg-[#007bff]">
             Cases Per Year Level
@@ -428,7 +428,7 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
           ) : (
             <div className="mt-[-20px] h-[297px] flex flex-col justify-center items-center gap-2">
               <BsFolderX className="text-[80px] text-[#007bff]" />
-              <div className="text-[#007bff] font-bold">No cases available</div>
+              <div className="text-[#007bff]">No cases available</div>
             </div>
           )}
         </div>
@@ -448,122 +448,125 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
           ) : (
             <div className="mt-[-20px] h-[297px] flex flex-col justify-center items-center gap-2">
               <BsFolderX className="text-[80px] text-[#FFBF00]" />
-              <div className="text-[#FFBF00] font-bold">No cases available</div>
+              <div className="text-[#FFBF00]">No cases available</div>
             </div>
           )}
         </div>
       </div>
 
-      <div className="mt-4 flex justify-start items-center gap-4">
-        <div
-          onClick={() => handleSetBsitPercentage()}
-          className="p-2 w-[209px] h-[180px] bg-white border-[2px] border-blue-300 rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden"
-        >
-          <div className="w-[100%] h-[100%] flex justify-center items-end">
-            {bsitPercentage === "Percentage" ? (
-              <>{bsitPercentageConverter()}</>
-            ) : (
-              <>{bsitNumberConverter()}</>
-            )}
-          </div>
-          <div className="text-[16px] text-[#007bff]">1st Offense</div>
-          <svg
-            className="absolute top-0 left-0"
-            viewBox="0 0 500 500"
-            preserveAspectRatio="xMinYMin meet"
+      <div className="mt-4 phone:overflow-x-scroll pb-4">
+        <div className="w-[fit-content] flex justify-start items-center gap-4 whitespace-nowrap ">
+          <div
+            onClick={() => handleSetBsitPercentage()}
+            className="p-2 w-[209px] h-[180px] bg-white border-[1px] border-blue-400 rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden"
           >
-            <path
-              d="M0,100 C150,200 350,0 500,100 L500,00 L0,0 Z"
-              style={{
-                stroke: "none",
-                fill: "rgba(219, 234, 254, 1)",
-                strokeWidth: "2px",
-              }}
-            ></path>
-          </svg>
-        </div>
+            <div className="w-[100%] h-[100%] flex justify-center items-end">
+              {bsitPercentage === "Percentage" ? (
+                <>{bsitPercentageConverter()}</>
+              ) : (
+                <>{bsitNumberConverter()}</>
+              )}
+            </div>
+            <div className="text-[16px] text-[#007bff]">1st Offense</div>
+            <svg
+              className="absolute top-0 left-0"
+              viewBox="0 0 500 500"
+              preserveAspectRatio="xMinYMin meet"
+            >
+              <path
+                d="M0,100 C150,200 350,0 500,100 L500,00 L0,0 Z"
+                style={{
+                  stroke: "none",
+                  fill: "rgba(219, 234, 254, 1)",
+                  strokeWidth: "2px",
+                }}
+              ></path>
+            </svg>
+          </div>
 
-        <div
-          onClick={() => handleSetBsbammPercentage()}
-          className="p-2 w-[209px] h-[180px] bg-white border-[2px] border-blue-300 rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden"
-        >
-          <div className="w-[100%] h-[100%] flex justify-center items-end">
-            {bsbammPercentage === "Percentage" ? (
-              <>{bsbammPercentageConverter()}</>
-            ) : (
-              <>{bsbammNumberConverter()}</>
-            )}
-          </div>
-          <div className="text-[16px] text-[#007bff]">2nd Offense</div>
-          <svg
-            className="absolute top-0 left-0"
-            viewBox="0 0 500 500"
-            preserveAspectRatio="xMinYMin meet"
+          <div
+            onClick={() => handleSetBsbammPercentage()}
+            className="p-2 w-[209px] h-[180px] bg-white border-[1px] border-blue-400 rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden"
           >
-            <path
-              d="M0,100 C150,200 350,0 500,100 L500,00 L0,0 Z"
-              style={{
-                stroke: "none",
-                fill: "rgba(219, 234, 254, 1)",
-                strokeWidth: "2px",
-              }}
-            ></path>
-          </svg>
-        </div>
+            <div className="w-[100%] h-[100%] flex justify-center items-end">
+              {bsbammPercentage === "Percentage" ? (
+                <>{bsbammPercentageConverter()}</>
+              ) : (
+                <>{bsbammNumberConverter()}</>
+              )}
+            </div>
+            <div className="text-[16px] text-[#007bff]">2nd Offense</div>
+            <svg
+              className="absolute top-0 left-0"
+              viewBox="0 0 500 500"
+              preserveAspectRatio="xMinYMin meet"
+            >
+              <path
+                d="M0,100 C150,200 350,0 500,100 L500,00 L0,0 Z"
+                style={{
+                  stroke: "none",
+                  fill: "rgba(219, 234, 254, 1)",
+                  strokeWidth: "2px",
+                }}
+              ></path>
+            </svg>
+          </div>
 
-        <div
-          onClick={() => handleSetBecedPercentage()}
-          className="p-2 w-[209px] h-[180px] bg-white border-[2px] border-yellow-300 rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden"
-        >
-          <div className="w-[100%] h-[100%] flex justify-center items-end">
-            {becedPercentage === "Percentage" ? (
-              <>{becedPercentageConverter()}</>
-            ) : (
-              <>{becedNumberConverter()}</>
-            )}
-          </div>
-          <div className="text-[16px] text-[#FFBF00]">3rd Offense</div>
-          <svg
-            className="absolute top-0 left-0"
-            viewBox="0 0 500 500"
-            preserveAspectRatio="xMinYMin meet"
+          <div
+            onClick={() => handleSetBecedPercentage()}
+            className="p-2 w-[209px] h-[180px] bg-white border-[1px] border-yellow-400 rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden"
           >
-            <path
-              d="M0,100 C150,200 350,0 500,100 L500,00 L0,0 Z"
-              style={{
-                stroke: "none",
-                fill: "rgba(254, 249, 195, 1)",
-                strokeWidth: "2px",
-              }}
-            ></path>
-          </svg>
-        </div>
-        <div
-          onClick={() => handleSetBspPercentage()}
-          className="p-2 w-[209px] h-[180px] bg-white border-[2px] border-yellow-300 rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden"
-        >
-          <div className="w-[100%] h-[100%] flex justify-center items-end">
-            {bspPercentage === "Percentage" ? (
-              <>{bspPercentageConverter()}</>
-            ) : (
-              <>{bspNumberConverter()}</>
-            )}
+            <div className="w-[100%] h-[100%] flex justify-center items-end">
+              {becedPercentage === "Percentage" ? (
+                <>{becedPercentageConverter()}</>
+              ) : (
+                <>{becedNumberConverter()}</>
+              )}
+            </div>
+            <div className="text-[16px] text-[#FFBF00]">3rd Offense</div>
+            <svg
+              className="absolute top-0 left-0"
+              viewBox="0 0 500 500"
+              preserveAspectRatio="xMinYMin meet"
+            >
+              <path
+                d="M0,100 C150,200 350,0 500,100 L500,00 L0,0 Z"
+                style={{
+                  stroke: "none",
+                  fill: "rgba(254, 249, 195, 1)",
+                  strokeWidth: "2px",
+                }}
+              ></path>
+            </svg>
           </div>
-          <div className="text-[16px] text-[#FFBF00]">4th Offense</div>
-          <svg
-            className="absolute top-0 left-0"
-            viewBox="0 0 500 500"
-            preserveAspectRatio="xMinYMin meet"
+
+          <div
+            onClick={() => handleSetBspPercentage()}
+            className="p-2 w-[209px] h-[180px] bg-white border-[1px] border-yellow-400 rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden"
           >
-            <path
-              d="M0,100 C150,200 350,0 500,100 L500,00 L0,0 Z"
-              style={{
-                stroke: "none",
-                fill: "rgba(254, 249, 195, 1)",
-                strokeWidth: "2px",
-              }}
-            ></path>
-          </svg>
+            <div className="w-[100%] h-[100%] flex justify-center items-end">
+              {bspPercentage === "Percentage" ? (
+                <>{bspPercentageConverter()}</>
+              ) : (
+                <>{bspNumberConverter()}</>
+              )}
+            </div>
+            <div className="text-[16px] text-[#FFBF00]">4th Offense</div>
+            <svg
+              className="absolute top-0 left-0"
+              viewBox="0 0 500 500"
+              preserveAspectRatio="xMinYMin meet"
+            >
+              <path
+                d="M0,100 C150,200 350,0 500,100 L500,00 L0,0 Z"
+                style={{
+                  stroke: "none",
+                  fill: "rgba(254, 249, 195, 1)",
+                  strokeWidth: "2px",
+                }}
+              ></path>
+            </svg>
+          </div>
         </div>
       </div>
     </>

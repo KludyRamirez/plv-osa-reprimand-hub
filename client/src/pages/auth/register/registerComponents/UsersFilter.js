@@ -62,9 +62,9 @@ const UsersFilter = ({ users, getUsers, allowedRoles }) => {
             type="text"
             autoComplete="off"
             placeholder="Search by case number, student name, etc."
-            className="p-3 rounded-[6px] w-[97%] bg-gradient-to-br from-gray-100 to-gray-100 focus:outline-none focus:border-[1px] focus:border-[#cdcdcd]"
+            className="p-3 rounded-[6px] w-[97%] phone:w-[100%] bg-gradient-to-br from-gray-100 to-gray-100 focus:outline-none focus:border-[1px] focus:border-[#cdcdcd]"
           />
-          <div className="flex justify-center items-center w-[50px] h-[48px] rounded-[8px] bg-gradient-to-br from-[#07bbff] to-[#007bff] text-white">
+          <div className="flex justify-center items-center w-[50px] h-[48px] rounded-[8px] bg-gradient-to-br from-[#07bbff] to-[#007bff] text-white phone:hidden">
             <BsFilter className="text-[24px]" />
           </div>
         </div>
@@ -73,10 +73,10 @@ const UsersFilter = ({ users, getUsers, allowedRoles }) => {
           Filter by <BsFilter className="text-[24px]" />
         </div>
 
-        <div className=" w-100 flex justify-start bg-gray-100 flex p-4 rounded-bl-[10px] rounded-br-[10px]">
-          <div className="flex justify-start items-center gap-4">
-            <div className="flex flex-col items-start gap-2">
-              <div className="pl-2 w-[242px] flex justify-between items-center">
+        <div className="w-[100%] flex justify-start bg-gray-100 flex p-4 rounded-bl-[10px] rounded-br-[10px]">
+          <div className="w-[100%] flex flex-wrap justify-start items-center gap-4 phone:gap-2">
+            <div className="phone:w-[49%] flex flex-col items-start gap-2">
+              <div className="pl-2 w-[242px] phone:w-[100%] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
                   <div>Status</div> <BsChevronBarDown />
                 </div>
@@ -84,7 +84,7 @@ const UsersFilter = ({ users, getUsers, allowedRoles }) => {
               </div>
               <select
                 onChange={(e) => setSelectedStatus(e.target.value)}
-                className="px-3 py-2 w-[242px] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
+                className="px-3 py-2 w-[242px] phone:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
               >
                 <option value="All">All</option>
                 <option value="Enabled">Enabled</option>
@@ -92,8 +92,8 @@ const UsersFilter = ({ users, getUsers, allowedRoles }) => {
               </select>
             </div>
 
-            <div className="flex flex-col items-start gap-2">
-              <div className="pl-2 w-[242px] flex justify-between items-center">
+            <div className="phone:w-[48.8%] flex flex-col items-start gap-2">
+              <div className="pl-2 w-[242px] phone:w-[100%] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
                   <div>Role</div> <BsChevronBarDown />
                 </div>
@@ -101,7 +101,7 @@ const UsersFilter = ({ users, getUsers, allowedRoles }) => {
               </div>
               <select
                 onChange={(e) => setRole(e.target.value)}
-                className="px-3 py-2 w-[242px] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
+                className="px-3 py-2 w-[242px] phone:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
               >
                 <option value="All">All</option>
                 <option value="Student">Student</option>

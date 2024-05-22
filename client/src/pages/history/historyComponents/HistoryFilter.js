@@ -74,44 +74,49 @@ const HistoryFilter = ({ history, getHistory, toast, allowedRoles }) => {
       <div className="text-[14px] text-[#404040] pb-6 ">
         Office of Student Affairs / History
       </div>
-      <div className="flex justify-start items-center gap-4 pb-8">
-        <div className="p-2 w-[200px] h-[174px] bg-white border-[1px] border-blue-200 rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden">
-          <div className=" w-[100%] h-[100%] flex justify-center items-end">
-            <div className="text-[48px] text-[#007bff] font-bold">
-              {history?.length}
-              <span className="text-[20px]"></span>
+
+      <div className="w-[100%]">
+        <div className="phone:overflow-x-scroll">
+          <div className="w-[fit-content] flex justify-start items-center gap-4 pb-8">
+            <div className="p-2 w-[200px] h-[174px] bg-white border-[1px] border-blue-200 rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden">
+              <div className=" w-[100%] h-[100%] flex justify-center items-end">
+                <div className="text-[48px] text-[#007bff] font-bold">
+                  {history?.length}
+                  <span className="text-[20px]"></span>
+                </div>
+              </div>
+              <div className="text-[16px] text-[#007bff]">Total History</div>
+              <svg
+                className="absolute top-0 left-0"
+                viewBox="0 0 500 500"
+                preserveAspectRatio="xMinYMin meet"
+              >
+                <path
+                  d="M0,100 C150,200 350,0 500,100 L500,00 L0,0 Z"
+                  style={{ stroke: "none", fill: "#f5fbff" }}
+                ></path>
+              </svg>
+            </div>
+            <div className="p-2 w-[200px] h-[174px] bg-white border-[1px] border-blue-200 rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden">
+              <div className=" w-[100%] h-[100%] flex justify-center items-end">
+                <div className="text-[48px] text-[#007bff] font-bold">
+                  {todayHistory?.length}
+                  <span className="text-[20px]"></span>
+                </div>
+              </div>
+              <div className="text-[16px] text-[#007bff]">Today's History</div>
+              <svg
+                className="absolute top-0 left-0"
+                viewBox="0 0 500 500"
+                preserveAspectRatio="xMinYMin meet"
+              >
+                <path
+                  d="M0,100 C150,200 350,0 500,100 L500,00 L0,0 Z"
+                  style={{ stroke: "none", fill: "#f5fbff" }}
+                ></path>
+              </svg>
             </div>
           </div>
-          <div className="text-[16px] text-[#007bff]">Total History</div>
-          <svg
-            className="absolute top-0 left-0"
-            viewBox="0 0 500 500"
-            preserveAspectRatio="xMinYMin meet"
-          >
-            <path
-              d="M0,100 C150,200 350,0 500,100 L500,00 L0,0 Z"
-              style={{ stroke: "none", fill: "#f5fbff" }}
-            ></path>
-          </svg>
-        </div>
-        <div className="p-2 w-[200px] h-[174px] bg-white border-[1px] border-blue-200 rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden">
-          <div className=" w-[100%] h-[100%] flex justify-center items-end">
-            <div className="text-[48px] text-[#007bff] font-bold">
-              {todayHistory?.length}
-              <span className="text-[20px]"></span>
-            </div>
-          </div>
-          <div className="text-[16px] text-[#007bff]">Today's History</div>
-          <svg
-            className="absolute top-0 left-0"
-            viewBox="0 0 500 500"
-            preserveAspectRatio="xMinYMin meet"
-          >
-            <path
-              d="M0,100 C150,200 350,0 500,100 L500,00 L0,0 Z"
-              style={{ stroke: "none", fill: "#f5fbff" }}
-            ></path>
-          </svg>
         </div>
       </div>
       <div className="bg-[white] text-[#404040] rounded-[10px] flex flex-col border-[1px] border-blue-100">

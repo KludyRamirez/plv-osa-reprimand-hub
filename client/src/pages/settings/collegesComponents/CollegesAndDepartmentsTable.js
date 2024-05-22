@@ -206,7 +206,7 @@ const CollegesAndDepartmentsTable = ({
           cads && cads.length > 5 ? "overflow-y-scroll" : ""
         }`}
       >
-        <div className=" flex items-center gap-4 px-6">
+        <div className="phone:w-[fit-content] flex items-center gap-4 px-6">
           <div className="w-[30px] h-[60px] flex justify-start items-center">
             <input
               type="checkbox"
@@ -247,7 +247,7 @@ const CollegesAndDepartmentsTable = ({
             {cads?.map((cad, k) => {
               return (
                 <div
-                  className={`w-100 flex items-center gap-4 px-6 ${
+                  className={`w-[100%] flex items-center gap-4 px-6 ${
                     k % 2 === 0
                       ? "bg-gradient-to-br from-gray-100 to-gray-100"
                       : "bg-white"

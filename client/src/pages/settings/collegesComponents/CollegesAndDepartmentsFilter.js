@@ -40,7 +40,7 @@ const CollegesAndDepartmentsFilter = ({ cads, getCads }) => {
 
   return (
     <>
-      <div className="flex flex-wrap gap-8 w-full">
+      <div className="flex flex-wrap gap-8 w-[100%]">
         <div className="bg-[white] text-[#404040] rounded-[10px] flex flex-col border-[1px]">
           <div className="px-3 w-100 h-[58px] flex justify-between items-center border-b-2 border-white">
             <div className="px-3 h-[58px] hover:border-b-2 hover:border-blue-600 flex justify-center items-center text-[18px] border-b-2 border-blue-600">
@@ -120,7 +120,7 @@ const CollegesAndDepartmentsFilter = ({ cads, getCads }) => {
             </div>
           </div>
         </div>
-        <div className="flex flex-grow">
+        <div className="flex flex-grow phone:overflow-x-scroll">
           <CollegesAndDepartmentsTable
             cads={combinedFilteredCads}
             getCads={getCads}
@@ -128,7 +128,7 @@ const CollegesAndDepartmentsFilter = ({ cads, getCads }) => {
             setSelectedCads={setSelectedCads}
           />
         </div>
-        <div className="w-[100%] h-[380px] flex flex-col border-[1px] border-dashed  rounded-[8px] justify-center items-center gap-4 text-[#007bff]">
+        <div className="w-[100%] h-[380px] flex flex-col border-[1px] border-dashed rounded-[8px] justify-center items-center gap-4 text-[#007bff] mb-4">
           <FaPlus className="text-[32px] " />
           <span>Add CMS</span>
         </div>

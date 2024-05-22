@@ -116,21 +116,21 @@ const StudentsFilter = ({
             type="text"
             autoComplete="off"
             placeholder="Search by student number, student name, etc."
-            className="p-3 rounded-[6px] w-[97%] bg-gradient-to-br from-gray-100 to-gray-100 focus:outline-none focus:border-[1px] focus:border-[#cdcdcd]"
+            className="p-3 rounded-[6px] w-[97%] phone:w-[100%] bg-gradient-to-br from-gray-100 to-gray-100 focus:outline-none focus:border-[1px] focus:border-[#cdcdcd]"
           />
-          <div className="flex justify-center items-center w-[50px] h-[48px] rounded-[8px] bg-gradient-to-br from-[#07bbff] to-[#007bff] text-white">
+          <div className="flex justify-center items-center w-[50px] h-[48px] rounded-[8px] bg-gradient-to-br from-[#07bbff] to-[#007bff] text-white phone:hidden">
             <BsFilter className="text-[24px]" />
           </div>
         </div>
 
-        <div className="py-4 px-6 text-[18px] flex items-center gap-2">
+        <div className="py-4 px-6 text-[18px] flex items-center gap-2 ">
           Filter by <BsFilter className="text-[24px]" />
         </div>
 
         <div className=" w-100 flex justify-start bg-gray-100 flex p-4 rounded-bl-[10px] rounded-br-[10px]">
-          <div className="flex justify-start items-center gap-4">
-            <div className="flex flex-col items-start gap-2">
-              <div className="pl-2 w-[210px] flex justify-between items-center">
+          <div className="w-100 flex flex-wrap justify-start items-center gap-4 phone:gap-2">
+            <div className="phone:w-[49%] flex flex-col items-start gap-2">
+              <div className="pl-2 w-[210px] phone:w-[100%] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
                   <div>Status</div> <BsChevronBarDown />
                 </div>
@@ -138,7 +138,7 @@ const StudentsFilter = ({
               </div>
               <select
                 onChange={(e) => setSelectedStatus(e.target.value)}
-                className="px-3 py-2 w-[210px] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
+                className="px-3 py-2 w-[210px] phone:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
               >
                 <option value="All">All</option>
                 <option value="Active">Active</option>
@@ -146,8 +146,8 @@ const StudentsFilter = ({
               </select>
             </div>
 
-            <div className="flex flex-col items-start gap-2">
-              <div className="pl-2 w-[210px] flex justify-between items-center">
+            <div className="phone:w-[48.8%] flex flex-col items-start gap-2">
+              <div className="pl-2 w-[210px] phone:w-[100%] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
                   <div>Sex</div> <BsChevronBarDown />
                 </div>
@@ -155,7 +155,7 @@ const StudentsFilter = ({
               </div>
               <select
                 onChange={(e) => setSex(e.target.value)}
-                className="px-3 py-2 w-[210px] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
+                className="px-3 py-2 w-[210px] phone:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
               >
                 <option value="All">All</option>
                 <option value="Male">Male</option>
@@ -163,8 +163,8 @@ const StudentsFilter = ({
               </select>
             </div>
 
-            <div className="flex flex-col items-start gap-2">
-              <div className="pl-1 w-[210px] flex justify-between items-center">
+            <div className="phone:w-[49%] flex flex-col items-start gap-2">
+              <div className="pl-1 w-[210px] phone:w-[100%] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
                   <div>Year</div> <BsChevronBarDown />
                 </div>
@@ -172,7 +172,7 @@ const StudentsFilter = ({
               </div>
               <select
                 onChange={(e) => setYear(e.target.value)}
-                className="px-3 py-2 w-[210px] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px]"
+                className="px-3 py-2 w-[210px] phone:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px]"
               >
                 <option value="All">All</option>
                 {schoolYearArray.map((option) => (
@@ -182,8 +182,9 @@ const StudentsFilter = ({
                 ))}
               </select>
             </div>
-            <div className="flex flex-col items-start gap-2">
-              <div className="pl-1 w-[210px] flex justify-between items-center">
+
+            <div className="phone:w-[48.8%] flex flex-col items-start gap-2">
+              <div className="pl-1 w-[210px] phone:w-[100%] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
                   <div>Section</div> <BsChevronBarDown />
                 </div>
@@ -191,7 +192,7 @@ const StudentsFilter = ({
               </div>
               <select
                 onChange={(e) => setSection(e.target.value)}
-                className="px-3 py-2 w-[210px] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px]"
+                className="px-3 py-2 w-[210px] phone:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px]"
               >
                 <option value="All">All</option>
                 {sectionArray.map((option) => (
@@ -201,8 +202,8 @@ const StudentsFilter = ({
                 ))}
               </select>
             </div>
-            <div className="flex flex-col items-start gap-2">
-              <div className="pl-1 w-[210px] flex justify-between items-center">
+            <div className="phone:w-[49%] flex flex-col items-start gap-2">
+              <div className="pl-1 w-[210px] phone:w-[100%] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
                   <div>College</div> <BsChevronBarDown />
                 </div>
@@ -210,7 +211,7 @@ const StudentsFilter = ({
               </div>
               <select
                 onChange={(e) => setCollege(e.target.value)}
-                className="px-3 py-2 w-[210px] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px]"
+                className="px-3 py-2 w-[210px] phone:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px]"
               >
                 <option value="All">All</option>
                 {uniqueColleges?.map((c) => (
@@ -220,8 +221,8 @@ const StudentsFilter = ({
                 ))}
               </select>
             </div>
-            <div className="flex flex-col items-start gap-2">
-              <div className="pl-1 w-[210px] flex justify-between items-center">
+            <div className="phone:w-[48.8%] flex flex-col items-start gap-2">
+              <div className="pl-1 w-[210px] phone:w-[100%] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
                   <div>Department</div> <BsChevronBarDown />
                 </div>
@@ -229,7 +230,7 @@ const StudentsFilter = ({
               </div>
               <select
                 onChange={(e) => setDepartment(e.target.value)}
-                className="px-3 py-2 w-[210px] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px]"
+                className="px-3 py-2 w-[210px] phone:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px]"
               >
                 <option value="All">All</option>
                 {college === "All" ? (

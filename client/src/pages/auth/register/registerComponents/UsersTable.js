@@ -241,11 +241,11 @@ const UsersTable = ({
         </ModalBox>
       </Modal>
       <div
-        className={`w-100 h-[380px] bg-white flex flex-col rounded-[10px] border-[1px] text-[#505050] ${
+        className={`w-100 h-[380px] bg-white flex flex-col rounded-[10px] border-[1px] text-[#505050] phone:overflow-x-scroll ${
           users && users?.length > 5 ? "overflow-y-scroll" : ""
         }`}
       >
-        <div className="w-100 flex items-center gap-4 px-6">
+        <div className="phone:w-[fit-content] flex items-center gap-4 px-6">
           <div className="w-[30px] h-[60px] flex justify-start items-center">
             <input
               type="checkbox"
@@ -308,7 +308,7 @@ const UsersTable = ({
           <>
             {users?.map((user, k) => (
               <div
-                className={`w-100 flex items-center gap-4 px-6 ${
+                className={`phone:w-[fit-content] flex items-center gap-4 px-6 ${
                   k % 2 === 0 ? "bg-gray-100" : "bg-white"
                 }`}
                 key={k}

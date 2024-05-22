@@ -181,69 +181,70 @@ const CasesPerMonthFilter = ({ cases, students, getCases }) => {
 
   return (
     <>
-      <div className="flex justify-start items-center gap-4">
-        <div className="p-2 w-[206px] h-[180px] bg-blue-100  rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden">
-          <div className="pl-1 w-[100%] h-[100%] flex justify-center items-end">
-            {totalPercentageConverter()}
+      <div className="phone:overflow-x-scroll">
+        <div className="w-[fit-content] flex justify-start items-center gap-4 whitespace-nowrap">
+          <div className="p-2 w-[206px] h-[180px] bg-blue-100 rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden">
+            <div className="pl-1 w-[100%] h-[100%] flex justify-center items-end">
+              {totalPercentageConverter()}
+            </div>
+            <div className="text-[16px] text-[#007bff]">Total Cases</div>
+            <svg
+              className="absolute top-0 left-0"
+              viewBox="0 0 500 500"
+              preserveAspectRatio="xMinYMin meet"
+            >
+              <path
+                d="M0,100 C150,200 350,0 500,100 L500,00 L0,0 Z"
+                style={{ stroke: "none", fill: "#007bff" }}
+              ></path>
+            </svg>
           </div>
-          <div className="text-[16px] text-[#007bff]">Total Cases</div>
-          <svg
-            className="absolute top-0 left-0"
-            viewBox="0 0 500 500"
-            preserveAspectRatio="xMinYMin meet"
+          <div
+            onClick={() => handleSetMinorPercentage()}
+            className="p-2 w-[206px] h-[180px] bg-yellow-100 rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden"
           >
-            <path
-              d="M0,100 C150,200 350,0 500,100 L500,00 L0,0 Z"
-              style={{ stroke: "none", fill: "#007bff" }}
-            ></path>
-          </svg>
-        </div>
-        <div
-          onClick={() => handleSetMinorPercentage()}
-          className="p-2 w-[206px] h-[180px] bg-yellow-100  rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden"
-        >
-          <div className=" w-[100%] h-[100%] flex justify-center items-end">
-            {minorPercentage === "Percentage" ? (
-              <>{minorPercentageConverter()}</>
-            ) : (
-              <>{minorNumberConverter()}</>
-            )}
+            <div className="w-[100%] h-[100%] flex justify-center items-end">
+              {minorPercentage === "Percentage" ? (
+                <>{minorPercentageConverter()}</>
+              ) : (
+                <>{minorNumberConverter()}</>
+              )}
+            </div>
+            <div className="text-[16px] text-[#FFBF00]">Minor Cases</div>
+            <svg
+              className="absolute top-0 left-0"
+              viewBox="0 0 500 500"
+              preserveAspectRatio="xMinYMin meet"
+            >
+              <path
+                d="M0,100 C150,200 350,0 500,100 L500,00 L0,0 Z"
+                style={{ stroke: "none", fill: "#FFBF00" }}
+              ></path>
+            </svg>
           </div>
-          <div className="text-[16px] text-[#FFBF00]">Minor Cases</div>
-          <svg
-            className="absolute top-0 left-0"
-            viewBox="0 0 500 500"
-            preserveAspectRatio="xMinYMin meet"
+          <div
+            onClick={() => handleSetMajorPercentage()}
+            className="p-2 w-[206px] h-[180px] bg-red-100 rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden"
           >
-            <path
-              d="M0,100 C150,200 350,0 500,100 L500,00 L0,0 Z"
-              style={{ stroke: "none", fill: "#FFBF00" }}
-            ></path>
-          </svg>
-        </div>
-
-        <div
-          onClick={() => handleSetMajorPercentage()}
-          className="p-2 w-[206px] h-[180px] bg-red-100 rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden"
-        >
-          <div className="w-[100%] h-[100%] flex justify-center items-end">
-            {majorPercentage === "Percentage" ? (
-              <>{majorPercentageConverter()}</>
-            ) : (
-              <>{majorNumberConverter()}</>
-            )}
+            <div className="w-[100%] h-[100%] flex justify-center items-end">
+              {majorPercentage === "Percentage" ? (
+                <>{majorPercentageConverter()}</>
+              ) : (
+                <>{majorNumberConverter()}</>
+              )}
+            </div>
+            <div className="text-[16px] text-[#ff3131]">Major Cases</div>
+            <svg
+              className="absolute top-0 left-0"
+              viewBox="0 0 500 500"
+              preserveAspectRatio="xMinYMin meet"
+            >
+              <path
+                d="M0,100 C150,200 350,0 500,100 L500,00 L0,0 Z"
+                style={{ stroke: "none", fill: "#ff3131" }}
+              ></path>
+            </svg>
           </div>
-          <div className="text-[16px] text-[#ff3131]">Major Cases</div>
-          <svg
-            className="absolute top-0 left-0"
-            viewBox="0 0 500 500"
-            preserveAspectRatio="xMinYMin meet"
-          >
-            <path
-              d="M0,100 C150,200 350,0 500,100 L500,00 L0,0 Z"
-              style={{ stroke: "none", fill: "#ff3131" }}
-            ></path>
-          </svg>
         </div>
       </div>
 
