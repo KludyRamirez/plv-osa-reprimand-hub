@@ -412,7 +412,7 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
           </div>
         </div>
       </div>
-      <div className="flex justify-between">
+      <div className="flex justify-start gap-4">
         <div className="mt-4 w-[434px] relative flex flex-col bg-blue-100 zIndex-2">
           <div className="p-4 zIndex-2 text-[white] bg-[#007bff]">
             Cases Per Year Level
