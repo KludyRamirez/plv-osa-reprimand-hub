@@ -27,14 +27,14 @@ const saveState = (state) => {
   }
 };
 
-const Store = createStore(
+const ReduxStore = createStore(
   rootReducer,
   loadState(),
   composeWithDevTools(applyMiddleware(thunk))
 );
 
-Store.subscribe(() => {
-  saveState(Store.getState());
+ReduxStore.subscribe(() => {
+  saveState(ReduxStore.getState());
 });
 
-export default Store;
+export default ReduxStore;
