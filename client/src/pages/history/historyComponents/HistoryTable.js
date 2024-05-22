@@ -66,7 +66,7 @@ const HistoryTable = ({
                 onChange={toggleSelectAll}
               />
             </div>
-            <div className="w-[70px] whitespace-nowrap flex justify-start items-center border-[1px] border-blue-200 py-1 px-3 rounded-[24px]">
+            <div className="w-[60px] whitespace-nowrap flex justify-center items-center border-[1px] border-blue-200 py-1 px-3 rounded-[24px]">
               UID
             </div>
             <div className="w-[150px] whitespace-nowrap flex justify-start items-center border-[1px] border-blue-200 py-1 px-3 rounded-[24px]">
@@ -123,10 +123,10 @@ const HistoryTable = ({
                       onChange={() => toggleHistorySelection(h?._id)}
                     />
                   </div>
-                  <div className="w-[70px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px] text-[#606060]">
+                  <div className="w-[60px] whitespace-nowrap flex justify-center items-center py-1 px-3 rounded-[4px] text-[#606060]">
                     {h?.userId?.uid}
                   </div>
-                  <div className="w-[150px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px] text-[#007bff]">
+                  <div className="w-[150px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
                     {h?.userId?.userName}
                   </div>
                   <div className="w-[180px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">

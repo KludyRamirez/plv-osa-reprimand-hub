@@ -111,7 +111,7 @@ const StudentProfile = ({ allowedRoles }) => {
     <div className="flex justify-start">
       <Sidebar />
       <div className="w-full h-[100%] flex justify-start bg-[#007bff]">
-        <div className="w-full h-[100%] bg-[#fefefe] mt-[80px] rounded-tl-[24px] p-8">
+        <div className="w-full h-[100%] bg-[#fefefe] mt-[80px] rounded-tl-[24px] phone:rounded-tl-[0px] mt-[80px] px-8 phone:px-4 pt-8">
           <StudentsProfileTable
             student={student}
             students={students}
