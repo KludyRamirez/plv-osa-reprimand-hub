@@ -46,7 +46,7 @@ const LoginInputs = ({
   return (
     <div className="flex flex-col gap-8 w-full zIndex-2">
       <div className="flex flex-col gap-2">
-        <div className="w-100 text-base text-blue-900">Username</div>
+        <div className="w-100 text-base text-[#606060]">Username</div>
         <input
           autoFocus
           value={userName}
@@ -54,53 +54,51 @@ const LoginInputs = ({
           label="Username"
           type="text"
           placeholder="Enter username"
-          className={`p-3  border-[1px] rounded-[6px] w-[100%] bg-white ${
+          className={`py-3 px-6  border-[1px] rounded-[24px] w-[100%] bg-white ${
             userNameError === "" ? "" : "border-[red]"
-          } focus:outline-none focus:border-[#007bff]`}
+          } focus:outline-none  focus:border-[#007bff]`}
         />
         {userNameError && <p className="text-red-500 mt-1">{userNameError}</p>}
       </div>
       <div className="flex flex-col gap-2">
-        <div className="w-100 text-base text-blue-900">Password</div>
+        <div className="w-100 text-base text-[#606060]">Password</div>
         <input
           value={password}
           onChange={handlePasswordChange}
           label="Password"
           type="password"
           placeholder="Enter password"
-          className={`p-3 border-[1px] rounded-[6px] w-[100%] bg-white ${
+          className={`py-3 px-6 border-[1px] rounded-[24px] w-[100%] bg-white ${
             passwordError === "" ? "" : "border-[red]"
-          } focus:outline-none focus:border-[#007bff]`}
+          } focus:outline-none  focus:border-[#007bff]`}
         />
         {passwordError && <p className="text-red-500 mt-1">{passwordError}</p>}
       </div>
-      <div className="w-100 mt-6 flex justify-between items-center">
-        <div className="hover:underline">
-          <Link to="/forgot" className="text-[#ff3131]">
-            Oops! Forgot password?
-          </Link>
-        </div>
-        <div>
-          {userNameError === "" &&
-          passwordError === "" &&
-          userName !== "" &&
-          password !== "" ? (
-            <button
-              type="button"
-              onClick={handleLogin}
-              className="py-2 px-6 border-[1px] border-[#007bff] bg-[#007bff] text-[white] text-[16px] flex gap-2 items-center rounded-[6px]"
-            >
-              Sign In
-            </button>
-          ) : (
-            <button
-              disabled
-              className="py-2 px-6 border-[1px] border-[#007bff] text-[#007bff] text-[16px] flex gap-2 items-center rounded-[6px]"
-            >
-              Sign In
-            </button>
-          )}
-        </div>
+      <div className="mt-[-10px] w-100 flex justify-end items-center ">
+        <Link to="/forgot" className="text-[#ff3131] hover:underline">
+          Forgot password?
+        </Link>
+      </div>
+      <div className="mt-[-10px]">
+        {userNameError === "" &&
+        passwordError === "" &&
+        userName !== "" &&
+        password !== "" ? (
+          <button
+            type="button"
+            onClick={handleLogin}
+            className="p-3 border-[1px] border-[#007bff] rounded-[48px] w-[100%] bg-[#007bff] text-white"
+          >
+            Sign In
+          </button>
+        ) : (
+          <button
+            disabled
+            className="p-3 border-[1px] border-blue-300 rounded-[48px] w-[100%] bg-white text-blue-300"
+          >
+            Sign In
+          </button>
+        )}
       </div>
     </div>
   );

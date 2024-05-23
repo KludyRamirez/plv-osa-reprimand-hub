@@ -15,7 +15,7 @@ const LoginFooter = () => {
   return (
     <div>
       <div className="w-[100%] flex flex-col fixed bottom-0 items-center zIndex-2">
-        <div className="py-6 px-8 w-[96%] flex justify-between items-center bg-[#007bff] rounded-tl-[18px] rounded-tr-[18px]">
+        <div className="py-6 px-8 w-[96%] flex justify-between items-center bg-blue-400 rounded-tl-[18px] rounded-tr-[18px]">
           <div className="flex flex-col gap-3">
             <div className="flex justify-start items-center text-[16px] text-white gap-2">
               <span>Pamantasan ng Lungsod ng Valenzuela</span>
@@ -30,7 +30,7 @@ const LoginFooter = () => {
             </div>
           </div>
         </div>
-        <div className="w-[96%] py-6 px-8 border-[1px] flex justify-between items-center bg-white">
+        <div className="w-[96%] py-6 px-8 border-l-[1px] border-r-[1px] border-b-[1px] flex justify-between items-center bg-white">
           <div className="flex flex-col gap-3">
             <div className="flex justify-start items-center text-[16px] text-[#007bff] gap-2">
               <FaRegCopyright />
