@@ -290,7 +290,7 @@ const StudentsTable = ({
           <div className=" w-[118px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
             Sex
           </div>
-          <div className=" w-[160px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+          <div className=" w-[140px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
             Contact No.
           </div>
           <div className=" w-[118px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
@@ -372,7 +372,7 @@ const StudentsTable = ({
                     <div className="w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
                       {student?.sex}
                     </div>
-                    <div className="w-[160px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
+                    <div className="w-[140px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
                       {student?.contactNo}
                     </div>
                     <div
@@ -387,12 +387,13 @@ const StudentsTable = ({
 
                     <div
                       className={`w-[118px] flex justify-start items-center gap-8 py-1 px-3 rounded-[4px] ${
-                        casesCount < 2 ? "text-[#ffbf00]" : "text-[#ff3131]"
+                        casesCount < 2 ? "text-[green]" : "text-[#ff3131]"
                       }`}
                     >
                       <div>{casesCount}</div>
+
                       {casesCount < 2 ? (
-                        <div className="w-[14px] h-[14px] rounded-[50%] bg-[#FFBF00]"></div>
+                        <div className="w-[14px] h-[14px] rounded-[50%] bg-[lightgreen]"></div>
                       ) : (
                         <div className="w-[14px] h-[14px] rounded-[50%] bg-[#ff3131]"></div>
                       )}

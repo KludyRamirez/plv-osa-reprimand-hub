@@ -560,13 +560,13 @@ const StudentsProfileTable = ({
               </div>
             </RadioGroup>
           </div>
-          <div className="rounded-[8px] flex flex-wrap justify-start flex-wrap gap-8 phone:gap-4 mt-6">
+          <div className="w-[850px] rounded-[8px] flex flex-wrap justify-center gap-8 phone:gap-4 mt-6 mb-12">
             {filteredCases.length > 0 ? (
               <>
                 {filteredCases.map((c) => (
                   <div
                     key={c}
-                    className="cursor-pointer w-[408px] bg-[#ffffff] rounded-[0px] flex flex-col border-[1px] border-[#efefef] hover:border-blue-400"
+                    className="cursor-pointer w-[409px] bg-[#ffffff] rounded-[0px] flex flex-col border-[1px] border-[#efefef] hover:border-blue-400"
                   >
                     <div className="flex h-[33px] justify-between items-center border-b-[1px] rounded-tr-[8px] rounded-tl-[8px] px-4">
                       <div className="flex justify-center items-center text-[14px] text-[#606060]">

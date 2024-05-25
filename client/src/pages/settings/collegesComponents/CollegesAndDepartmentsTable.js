@@ -202,8 +202,8 @@ const CollegesAndDepartmentsTable = ({
         </ModalBox>
       </Modal>
       <div
-        className={`flex-grow bg-white flex flex-col rounded-[10px] border-[1px] text-[#505050] ${
-          cads && cads.length > 5 ? "overflow-y-scroll" : ""
+        className={`flex-grow bg-white flex flex-col rounded-[10px] border-[1px] text-[#505050] h-[289px] ${
+          cads && cads.length > 4 ? "overflow-y-scroll" : ""
         }`}
       >
         <div className="phone:w-[fit-content] flex items-center gap-4 px-6">
@@ -221,7 +221,7 @@ const CollegesAndDepartmentsTable = ({
           <div className="w-[86px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
             College
           </div>
-          <div className="w-[594px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+          <div className="w-[574px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
             Department
           </div>
 
@@ -268,7 +268,7 @@ const CollegesAndDepartmentsTable = ({
                   <div className="w-[86px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
                     {cad?.college}
                   </div>
-                  <div className="w-[594px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
+                  <div className="w-[574px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
                     {cad?.department}
                   </div>
 

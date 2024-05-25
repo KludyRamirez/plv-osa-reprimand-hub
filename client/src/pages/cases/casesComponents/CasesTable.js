@@ -2,13 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { createSelector } from "reselect";
 import axios from "axios";
-import {
-  BsChevronUp,
-  BsFolder2Open,
-  BsPen,
-  BsTrash3,
-  BsTrash3Fill,
-} from "react-icons/bs";
+import { BsChevronUp, BsFolder2Open, BsPen, BsTrash3 } from "react-icons/bs";
 import Modal from "@mui/material/Modal";
 import { styled } from "@mui/system";
 import DeleteCaseModal from "./DeleteCaseModal";
@@ -18,10 +12,7 @@ import { useNavigate } from "react-router-dom";
 import EditCase from "./EditCase";
 import PatchCaseStatus from "./PatchCaseStatus";
 import RemarksCase from "./RemarksCase";
-
-import jsPDF from "jspdf";
-import html2canvas from "html2canvas";
-import { createRoot } from "react-dom/client";
+import pdfExporter from "../../../externalUtils/pdfExporter";
 
 const ModalBox = styled("div")({
   position: "absolute",
@@ -251,46 +242,9 @@ const CasesTable = ({
     setExportTrigger(true);
   };
 
-  useEffect(() => {
-    if (exportTrigger) {
-      const exportCases = cases.filter((c) => selectedCases.includes(c._id));
-
-      const pdfElement = document.createElement("div");
-      pdfElement.style.position = "absolute";
-      pdfElement.style.left = "0px";
-      pdfElement.style.top = "0";
-      pdfElement.style.width = "210mm";
-      pdfElement.style.minHeight = "297mm";
-      pdfElement.style.color = "black";
-      document.body.appendChild(pdfElement);
-
-      const root = createRoot(pdfElement);
-      root.render(
-        <div id="pdf-content">
-          {exportCases.map((c) => (
-            <div key={c._id}>{c.typeOfViolation}</div>
-          ))}
-        </div>
-      );
-
-      setTimeout(() => {
-        html2canvas(pdfElement)
-          .then((canvas) => {
-            const imgData = canvas.toDataURL("image/png");
-            const pdf = new jsPDF();
-            pdf.addImage(imgData, "PNG", 10, 10);
-            pdf.save("download.pdf");
-            document.body.removeChild(pdfElement);
-            setExportTrigger(false);
-          })
-          .catch((error) => {
-            console.error("Error creating PDF:", error);
-            document.body.removeChild(pdfElement);
-            setExportTrigger(false);
-          });
-      }, 1000);
-    }
-  }, [exportTrigger, cases, selectedCases]);
+  if (exportTrigger) {
+    pdfExporter(selectedCases, cases, setExportTrigger);
+  }
 
   return (
     <>
@@ -423,17 +377,19 @@ const CasesTable = ({
             ) ? (
               <>
                 <div className="w-[1px] h-[20px] border-[1px]"></div>
-                <div
-                  className="flex gap-1 justify-start items-center py-1 px-2 bg-[#ff3131] border-[1px] border-[#ff3131] text-white text-[14px] rounded-[4px] cursor-pointer"
-                  onClick={handleOpenModalDeleteMany}
-                >
-                  <span>Delete</span>
-                </div>
-                <div
-                  className="flex gap-1 justify-start items-center py-1 px-2 bg-[#007bff] border-[1px] border-[#007bff] text-white text-[14px] rounded-[4px] cursor-pointer"
-                  onClick={exportPDF}
-                >
-                  <span>Export</span>
+                <div className="flex justify-start items-center gap-2">
+                  <div
+                    className="flex gap-1 justify-start items-center py-1 px-2 bg-[#ff3131] border-[1px] border-[#ff3131] text-white text-[14px] rounded-[4px] cursor-pointer"
+                    onClick={handleOpenModalDeleteMany}
+                  >
+                    <span>Delete</span>
+                  </div>
+                  <div
+                    className="flex gap-1 justify-start items-center py-1 px-2 bg-[green] border-[1px] border-[green] text-white text-[14px] rounded-[4px] cursor-pointer"
+                    onClick={exportPDF}
+                  >
+                    <span>Export</span>
+                  </div>
                 </div>
               </>
             ) : (
