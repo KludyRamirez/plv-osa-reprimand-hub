@@ -257,16 +257,16 @@ const UsersTable = ({
           <div className="w-[60px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
             UID
           </div>
-          <div className="w-[140px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+          <div className="w-[160px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
             Username
           </div>
-          <div className="w-[140px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+          <div className="w-[160px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
             Surname
           </div>
-          <div className="w-[140px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+          <div className="w-[160px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
             First name
           </div>
-          <div className="w-[300px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+          <div className="w-[240px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
             Email
           </div>
           <div className=" w-[140px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
@@ -324,16 +324,16 @@ const UsersTable = ({
                 <div className="w-[60px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px]">
                   {user?.uid}
                 </div>
-                <div className="w-[140px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px]">
+                <div className="w-[160px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px]">
                   {user?.userName}
                 </div>
-                <div className="w-[140px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px]">
+                <div className="w-[160px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px]">
                   {user?.surName}
                 </div>
-                <div className="w-[140px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px]">
+                <div className="w-[160px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px]">
                   {user?.firstName}
                 </div>
-                <div className="w-[300px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px]">
+                <div className="w-[240px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px]">
                   {user?.email}
                 </div>
                 <div className="w-[140px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px] text-[#007bff]">

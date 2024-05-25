@@ -4,9 +4,8 @@ import { connect } from "react-redux";
 import { getActions } from "../../../../store/actions/AuthActions";
 import { styled } from "@mui/material/styles";
 import osaLogo from "../../../../images/osalogo.jpg";
-import plvLogo from "../../../../images/PLVlogo.png";
+
 import crown from "../../../../images/crown.png";
-import folder from "../../../../images/folder.png";
 import LoginInputs from "../loginComponents/LoginInputs";
 
 import { BsMegaphone } from "react-icons/bs";
@@ -64,11 +63,15 @@ const Login = ({ login, setLoading, toast }) => {
   return (
     <div className="w-full h-screen bg-white">
       <div className="w-full flex flex-col gap-[80px]">
-        <div className="px-6 shadow-sm bg-white zIndex-2">
+        <div className="px-16 shadow-sm bg-white zIndex-2">
           <div className="h-[90px] flex justify-between items-center gap-10">
             <div className="flex justify-center items-center gap-10">
               <div className="flex items-center gap-6">
-                <img src={plvLogo} alt="" className="w-[60px] h-[60px]" />
+                <img
+                  src={osaLogo}
+                  alt=""
+                  className="w-[54px] h-[54px] rounded-[50%]"
+                />
                 <FormTitle
                   sx={{
                     fontSize: "22px",
@@ -126,9 +129,7 @@ const Login = ({ login, setLoading, toast }) => {
                         <div className="flex justify-center items-center w-[560px] h-[560px] rounded-[50%] border-[2px] border-[#f9f9f9] top-[-200px] left-[-400px] zIndex-1">
                           <div className="flex justify-center items-center w-[520px] h-[520px] rounded-[50%] border-[2px] border-[#f9f9f9] top-[-200px] left-[-400px] zIndex-1">
                             <div className="flex justify-center items-center w-[480px] h-[480px] rounded-[50%] border-[2px] border-[#f9f9f9] top-[-200px] left-[-400px] zIndex-1">
-                              <div className="flex justify-center items-center w-[440px] h-[440px] rounded-[50%] border-[2px] border-[#f9f9f9] top-[-200px] left-[-400px] zIndex-1">
-                                <div className="flex justify-center items-center w-[400px] h-[400px] rounded-[50%] border-[2px] border-[#f9f9f9] top-[-200px] left-[-400px] zIndex-1"></div>
-                              </div>
+                              <div className="flex justify-center items-center w-[440px] h-[440px] rounded-[50%] border-[2px] border-[#f9f9f9] top-[-200px] left-[-400px] zIndex-1"></div>
                             </div>
                           </div>
                         </div>
@@ -138,7 +139,6 @@ const Login = ({ login, setLoading, toast }) => {
                 </div>
               </div>
             </div>
-            <div className="absolute top-[0px] left-[-220px] w-[600px] h-[460px] zIndex-2"></div>
           </div>
 
           <div className="relative">
