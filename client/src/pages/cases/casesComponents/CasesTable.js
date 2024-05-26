@@ -98,7 +98,7 @@ const CasesTable = ({
     try {
       if (!auth.userDetails || !auth.userDetails.token) {
         console.error("Authentication token not found.");
-        navigate("/login");
+        navigate("/");
         return;
       }
 

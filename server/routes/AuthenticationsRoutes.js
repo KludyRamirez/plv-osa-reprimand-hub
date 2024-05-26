@@ -8,6 +8,10 @@ const auth = VerifyJWT;
 
 router.post("/login", mainController.controllers.login);
 
+router.get("/refresh", mainController.controllers.handleRefreshToken);
+
+router.get("/logout", mainController.controllers.handleLogout);
+
 router.post("/register", auth, mainController.controllers.register);
 
 router.post("/forgot", mainController.controllers.forgot);

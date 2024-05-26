@@ -153,21 +153,24 @@ const HistoryTable = ({
                       auth?.userDetails?.role?.includes(ar)
                     ) ? (
                       <>
-                        <div className="p-2 ml-1 bg-white border-[1px] border-[#007bff] rounded-[18px] cursor-pointer">
-                          <BsEscape className="text-[18px] text-[#007bff]" />
+                        <div className="flex gap-2 justify-start items-center py-1 px-2 bg-[#007bff] border-[1px] border-[#007bff] text-white text-[14px] rounded-[4px] cursor-pointer">
+                          <span>Export</span>
+                          <BsEscape className="text-[14px]" />
                         </div>
                       </>
                     ) : (
                       <>
-                        <div className="p-2 ml-1 bg-gray-100 rounded-[18px]">
-                          <BsEscape className="text-[18px] text-white" />
+                        <div className="flex gap-2 justify-start items-center py-1 px-2 bg-gray-100 border-[1px] border-gray-100 text-white text-[14px] rounded-[4px] cursor-pointer">
+                          <span>Export</span>
+                          <BsEscape className="text-[14px]" />
                         </div>
                       </>
                     )
                   ) : (
                     <>
-                      <div className="p-2  ml-1 bg-gray-100 rounded-[18px]">
-                        <BsEscape className="text-[18px] text-white" />
+                      <div className="flex gap-2 justify-start items-center py-1 px-2 bg-gray-100 border-[1px] border-gray-100 text-white text-[14px] rounded-[4px] cursor-pointer">
+                        <span>Export</span>
+                        <BsEscape className="text-[14px]" />
                       </div>
                     </>
                   )}

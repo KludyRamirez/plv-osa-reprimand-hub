@@ -65,7 +65,7 @@ const Reset = ({ auth, toast }) => {
         }, 1000);
 
         timer = setTimeout(() => {
-          navigate("/login");
+          navigate("/");
         }, 10000);
       }
     } catch (error) {

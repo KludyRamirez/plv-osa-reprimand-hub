@@ -103,7 +103,7 @@ const StudentsTable = ({
       if (!auth.userDetails || !auth.userDetails.token) {
         console.error("Authentication token not found.");
         // Redirect to login page or handle unauthorized access as per your application's logic
-        navigate("/login");
+        navigate("/");
         return;
       }
 

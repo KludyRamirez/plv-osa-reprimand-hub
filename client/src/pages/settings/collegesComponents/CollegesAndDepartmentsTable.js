@@ -84,7 +84,7 @@ const CollegesAndDepartmentsTable = ({
     try {
       if (!auth.userDetails || !auth.userDetails.token) {
         toast.error("Authentication token not found.");
-        navigate("/login");
+        navigate("/");
         return;
       }
 

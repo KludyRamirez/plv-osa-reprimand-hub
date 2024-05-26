@@ -1,6 +1,8 @@
 //auth
 
 const { login } = require("../controllers/authentication/Login");
+const { handleRefreshToken } = require("../controllers/authentication/Login");
+const { handleLogout } = require("../controllers/authentication/Login");
 const { forgot } = require("../controllers/authentication/Forgot");
 const { reset } = require("../controllers/authentication/Reset");
 const { register } = require("../controllers/authentication/Register");
@@ -46,6 +48,8 @@ const { deleteManyCad } = require("./CollegesAndDepartmentsController");
 
 exports.controllers = {
   login,
+  handleRefreshToken,
+  handleLogout,
   forgot,
   reset,
   register,

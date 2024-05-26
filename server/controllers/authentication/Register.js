@@ -51,20 +51,6 @@ const register = async (req, res) => {
       role,
     });
 
-    // create JWT token
-    const token = jwt.sign(
-      {
-        _id: user._id,
-        userName: user.userName,
-        email: user.email,
-        role: user.role,
-      },
-      process.env.ACCESS_TOKEN,
-      {
-        expiresIn: "24h",
-      }
-    );
-
     await Notification.create({
       userId: userData._id,
       typeOfNotif: "Authentication",
@@ -76,7 +62,6 @@ const register = async (req, res) => {
     res.status(200).json({
       userDetails: {
         _id: user._id,
-        token: token,
         userName: user.userName,
         email: user.email,
         role: user.role,

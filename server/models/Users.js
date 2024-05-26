@@ -17,6 +17,9 @@ const usersSchema = new mongoose.Schema(
       default: "Enabled",
       enum: ["Enabled", "Disabled"],
     },
+    refreshToken: {
+      type: String,
+    },
   },
   { timestamps: true }
 );

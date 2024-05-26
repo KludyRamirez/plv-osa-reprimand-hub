@@ -84,8 +84,26 @@ const StudentsProfileTable = ({
 
   const [showMoreInfo, setShowMoreInfo] = useState(false);
 
+  const [randomStudents, setRandomStudents] = useState([]);
+
   const auth = useSelector(authSelector);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const shuffleArray = (array) => {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    };
+
+    const shuffledStudents = shuffleArray(
+      students.filter((s) => s._id !== student._id)
+    );
+
+    setRandomStudents(shuffledStudents.slice(0, 4));
+  }, [students, student._id]);
 
   useEffect(() => {
     if (cases.length > 0 && selectedCases.length === cases.length) {
@@ -125,7 +143,7 @@ const StudentsProfileTable = ({
     try {
       if (!auth.userDetails || !auth.userDetails.token) {
         console.error("Authentication token not found.");
-        navigate("/login");
+        navigate("/");
         return;
       }
 
@@ -705,38 +723,36 @@ const StudentsProfileTable = ({
               Similar Profile
             </div>
             <div className="flex flex-col gap-4">
-              {students
-                .filter((s) => s._id !== student._id)
-                .map((s) => (
-                  <div className="w-[100%] flex justify-between items-center pb-4 border-b-[1px]">
-                    <div className="flex items-center gap-4">
-                      {s.sex === "Male" ? (
-                        <img
-                          src={boy}
-                          alt=""
-                          className="w-[44px] h-[44px] rounded-[50%] border-[1px] border-blue-500"
-                        />
-                      ) : (
-                        <img
-                          src={girl}
-                          alt=""
-                          className="w-[44px] h-[44px] rounded-[50%] border-[1px] border-blue-500"
-                        />
-                      )}
+              {randomStudents.map((s) => (
+                <div className="w-[100%] flex justify-between items-center pb-4 border-b-[1px]">
+                  <div className="flex items-center gap-4">
+                    {s.sex === "Male" ? (
+                      <img
+                        src={boy}
+                        alt=""
+                        className="w-[44px] h-[44px] rounded-[50%] border-[1px] border-blue-500"
+                      />
+                    ) : (
+                      <img
+                        src={girl}
+                        alt=""
+                        className="w-[44px] h-[44px] rounded-[50%] border-[1px] border-blue-500"
+                      />
+                    )}
 
-                      <div className="text-[16px] text-[#606060] ">
-                        {s.firstName} {s.surName}
-                      </div>
-                    </div>
-                    <div
-                      onClick={() => handleClickProfile(s._id)}
-                      className=" cursor-pointer flex justify-start items-center gap-2 hover:underline"
-                    >
-                      <span>Go</span>
-                      <BsBoxArrowUpRight />
+                    <div className="text-[16px] text-[#606060] ">
+                      {s.firstName} {s.surName}
                     </div>
                   </div>
-                ))}
+                  <div
+                    onClick={() => handleClickProfile(s._id)}
+                    className=" cursor-pointer flex justify-start items-center gap-2 hover:underline"
+                  >
+                    <span>Go</span>
+                    <BsBoxArrowUpRight />
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>

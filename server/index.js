@@ -3,6 +3,8 @@ const http = require("http");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const fs = require("fs");
+const morgan = require("morgan");
+const cookieParser = require("cookie-parser");
 require("dotenv").config();
 
 const PORT = process.env.PORT || process.env.API_PORT;
@@ -25,6 +27,8 @@ mongoose
     console.error("Database is not connected.", err);
   });
 
+app.use(cookieParser());
+
 app.use(
   cors({
     origin: (origin, callback) => {
@@ -38,7 +42,9 @@ app.use(
   })
 );
 
-app.use(express.json({ limit: "2mb" }));
+app.use(morgan("dev"));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 const routeFiles = fs.readdirSync("./routes");
 routeFiles.forEach((file) => {

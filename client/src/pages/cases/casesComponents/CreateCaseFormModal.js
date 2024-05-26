@@ -110,6 +110,7 @@ const CreateCaseFormModal = ({
             >
               <option value="">Select Student Below</option>
               {filteredStudents
+                ?.filter((s) => s.statusOfStudent === "Enrolled")
                 ?.sort((a, b) => {
                   const nameA = `${a.firstName} ${a.surName}`.toLowerCase();
                   const nameB = `${b.firstName} ${b.surName}`.toLowerCase();

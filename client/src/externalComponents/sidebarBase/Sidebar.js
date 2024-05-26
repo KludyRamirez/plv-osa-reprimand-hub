@@ -13,14 +13,12 @@ import { useLocation } from "react-router-dom";
 import { AiOutlineLogout } from "react-icons/ai";
 import { CgMenuLeft } from "react-icons/cg";
 import {
-  BsBoxArrowUp,
   BsBoxArrowUpRight,
   BsGear,
   BsHourglass,
   BsHourglassSplit,
   BsPeople,
   BsPeopleFill,
-  BsPerson,
   BsPersonSquare,
   BsPieChart,
   BsPieChartFill,

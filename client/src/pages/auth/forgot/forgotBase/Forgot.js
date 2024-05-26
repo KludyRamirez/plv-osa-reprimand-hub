@@ -61,7 +61,7 @@ const Forgot = ({ auth, toast }) => {
         }, 1000);
 
         timer = setTimeout(() => {
-          navigate("/login");
+          navigate("/");
         }, 10000);
       }
     } catch (error) {
@@ -113,12 +113,12 @@ const Forgot = ({ auth, toast }) => {
               </div>
             </div>
             <div className="flex justify-center items-center gap-3">
-              <Link to="/login">
+              <Link to="/">
                 <div className="flex items-center gap-2 hover:border-[1px] text-base text-[#077bff] cursor-pointer bg-white border-[1px] border-[#077bff] px-3 py-2 rounded-[6px] hover:bg-[#007bff] hover:text-white">
                   Sign in
                 </div>
               </Link>
-              <Link to="/login">
+              <Link to="/">
                 <div className="flex items-center gap-2 hover:border-[1px] text-base text-[#077bff] cursor-pointer bg-white border-[1px] border-[#077bff] px-3 py-2 rounded-[6px] hover:bg-[#007bff] hover:text-white">
                   <span>Announcements</span>
                   <BsMegaphone />

@@ -13,12 +13,12 @@ import AccountSettings from "./pages/accountSettings/accountSettingsBase/Account
 import SecureRoles from "./externalUtils/SecureRoles";
 import { useSelector } from "react-redux";
 import { createSelector } from "reselect";
-import Error403 from "./externalComponents/Errors/Error403";
-import Error302 from "./externalComponents/Errors/Error302";
 import Error404 from "./externalComponents/Errors/Error404";
+import Error403 from "./externalComponents/Errors/Error403";
 import Forgot from "./pages/auth/forgot/forgotBase/Forgot";
 import Reset from "./pages/auth/reset/resetBase/Reset";
 import Loading from "./externalUtils/Loading";
+import PersistLogin from "./externalUtils/PersistLogin";
 
 const selectAuth = (state) => state.auth;
 const authSelector = createSelector([selectAuth], (auth) => auth);
@@ -48,97 +48,111 @@ function App() {
         ) : (
           <Routes>
             <Route path="*" element={<Error404 />}></Route>
+
+            <Route path="/error" element={<Error403 />}></Route>
+
+            <Route
+              path="/forgot"
+              element={<Forgot auth={auth} toast={toast} />}
+            ></Route>
+
+            <Route
+              path="/reset-password/:id/:token"
+              element={<Reset toast={toast} />}
+            ></Route>
+
+            {/* START OF PERSIST LOGIN */}
             <Route
               path="/"
-              element={<Login setLoading={setLoading} toast={toast} />}
-            ></Route>
-            <Route path="/error403" element={<Error403 />}></Route>
-            <Route
-              path="/login"
               element={
                 auth?.userDetails?.token ? (
-                  <Error302 />
+                  <Statistics />
                 ) : (
                   <Login setLoading={setLoading} toast={toast} />
                 )
               }
             ></Route>
-            <Route
-              path="/account"
-              element={
-                <AccountSettings
-                  toast={toast}
-                  allowedRoles={["Administrator", "Instructor", "Student"]}
-                />
-              }
-            ></Route>
-            <Route
-              path="/forgot"
-              element={<Forgot auth={auth} toast={toast} />}
-            ></Route>
-            <Route
-              path="/reset-password/:id/:token"
-              element={<Reset toast={toast} />}
-            ></Route>
-            <Route
-              element={
-                <SecureRoles allowedRoles={["Administrator", "Instructor"]} />
-              }
-            >
-              <Route
-                path="/cases"
-                element={
-                  <Cases toast={toast} allowedRoles={["Administrator"]} />
-                }
-              ></Route>
-              <Route
-                path="/students"
-                element={
-                  <Students toast={toast} allowedRoles={["Administrator"]} />
-                }
-              ></Route>
+
+            <Route element={<PersistLogin />}>
+              {/* allowedRoles PROPS: ADMIN, INSTRUCTOR, STUDENT */}
 
               <Route
-                path="/statistics"
+                path="/account"
                 element={
-                  <Statistics
+                  <AccountSettings
                     toast={toast}
-                    allowedRoles={["Administrator", "Instructor"]}
+                    allowedRoles={["Administrator", "Instructor", "Student"]}
                   />
                 }
               ></Route>
 
-              <Route
-                path="/profile/:id"
-                element={
-                  <StudentProfile
-                    toast={toast}
-                    allowedRoles={["Administrator"]}
-                  />
-                }
-              ></Route>
-            </Route>
+              {/* allowedRoles: ADMIN AND INSTRUCTOR */}
 
-            {/* // */}
-            <Route element={<SecureRoles allowedRoles={["Administrator"]} />}>
               <Route
-                path="/users"
                 element={
-                  <Register toast={toast} allowedRoles={["Administrator"]} />
+                  <SecureRoles allowedRoles={["Administrator", "Instructor"]} />
                 }
-              ></Route>
-              <Route
-                path="/settings"
-                element={
-                  <Settings toast={toast} allowedRoles={["Administrator"]} />
-                }
-              ></Route>
-              <Route
-                path="/notification"
-                element={
-                  <History toast={toast} allowedRoles={["Administrator"]} />
-                }
-              ></Route>
+              >
+                <Route
+                  path="/cases"
+                  element={
+                    <Cases toast={toast} allowedRoles={["Administrator"]} />
+                  }
+                ></Route>
+                <Route
+                  path="/students"
+                  element={
+                    <Students toast={toast} allowedRoles={["Administrator"]} />
+                  }
+                ></Route>
+
+                <Route
+                  path="/profile/:id"
+                  element={
+                    <StudentProfile
+                      toast={toast}
+                      allowedRoles={["Administrator"]}
+                    />
+                  }
+                ></Route>
+
+                {/* allowedRoles PROPS: ADMIN AND INSTRUCTOR */}
+
+                <Route
+                  path="/statistics"
+                  element={
+                    <Statistics
+                      toast={toast}
+                      allowedRoles={["Administrator", "Instructor"]}
+                    />
+                  }
+                ></Route>
+              </Route>
+
+              {/* allowedRoles: ADMIN ONLY */}
+
+              {/* allowedRoles PROPS: ADMIN ONLY */}
+
+              <Route element={<SecureRoles allowedRoles={["Administrator"]} />}>
+                <Route
+                  path="/users"
+                  element={
+                    <Register toast={toast} allowedRoles={["Administrator"]} />
+                  }
+                ></Route>
+                <Route
+                  path="/settings"
+                  element={
+                    <Settings toast={toast} allowedRoles={["Administrator"]} />
+                  }
+                ></Route>
+                <Route
+                  path="/notification"
+                  element={
+                    <History toast={toast} allowedRoles={["Administrator"]} />
+                  }
+                ></Route>
+              </Route>
             </Route>
           </Routes>
         )}

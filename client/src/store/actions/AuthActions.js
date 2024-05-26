@@ -3,6 +3,7 @@ import toast from "react-hot-toast";
 
 export const AuthActions = {
   SET_USER_DETAILS: "AUTH.SET_USER_DETAILS",
+  LOGOUT: "LOGOUT",
 };
 
 export const getActions = (dispatch) => {
