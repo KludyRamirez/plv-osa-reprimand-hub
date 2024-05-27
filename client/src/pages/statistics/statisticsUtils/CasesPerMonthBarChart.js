@@ -23,7 +23,7 @@ const CasesPerMonthBarChart = ({ cases }) => {
   const casesByMonth = {};
 
   months.forEach((month, index) => {
-    const monthCases = cases.filter((c) => {
+    const monthCases = cases?.filter((c) => {
       const dateParts = new Date(c?.dateOfIncident)
         .toLocaleDateString("en-PH", {
           month: "long",
@@ -34,7 +34,7 @@ const CasesPerMonthBarChart = ({ cases }) => {
       return dateParts[0] === month;
     });
 
-    casesByMonth[month] = monthCases.length;
+    casesByMonth[month] = monthCases?.length;
   });
 
   const data = {
@@ -55,7 +55,7 @@ const CasesPerMonthBarChart = ({ cases }) => {
     datasets: [
       {
         label: "Cases",
-        data: months.map((month) => casesByMonth[month]),
+        data: months?.map((month) => casesByMonth[month]),
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",
           "rgba(255, 159, 64, 0.2)",
