@@ -141,8 +141,8 @@ const StudentsFilter = ({
                 className="px-3 py-2 w-[210px] phone:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
               >
                 <option value="All">All</option>
-                <option value="Active">Active</option>
-                <option value="Inactive">Inactive</option>
+                <option value="Enrolled">Enrolled</option>
+                <option value="Dismissed">Dismissed</option>
               </select>
             </div>
 

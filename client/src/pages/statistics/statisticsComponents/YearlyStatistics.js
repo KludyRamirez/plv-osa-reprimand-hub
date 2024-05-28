@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import { BsCalendar4Week, BsChevronBarDown } from "react-icons/bs";
 
 const currentYear = new Date().getFullYear();
+const previousYear = currentYear - 1;
 
 const YearlyStatistics = ({ cases }) => {
   const [year, setYear] = useState(currentYear?.toString());
-  const [otherYear, setOtherYear] = useState(null);
+  const [otherYear, setOtherYear] = useState(previousYear?.toString());
   const [years, setYears] = useState([]);
 
   useEffect(() => {
@@ -40,7 +41,6 @@ const YearlyStatistics = ({ cases }) => {
 
   const totalCases = cases?.filter(
     (c) =>
-      year === "All" ||
       new Date(c?.dateOfIncident).getFullYear() === new Date(year).getFullYear()
   );
 
@@ -83,9 +83,8 @@ const YearlyStatistics = ({ cases }) => {
 
   const totalOtherCases = cases?.filter(
     (c) =>
-      year === "All" ||
       new Date(c?.dateOfIncident).getFullYear() ===
-        new Date(otherYear).getFullYear()
+      new Date(otherYear).getFullYear()
   );
 
   const majorOtherCases = combinedFilteredOtherCases?.filter(
@@ -236,17 +235,11 @@ const YearlyStatistics = ({ cases }) => {
               }}
               className="phone:w-[100%] px-3 py-2 w-[158px] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
             >
-              {years
-                .filter(
-                  (y) =>
-                    y !== new Date(year).getFullYear() &&
-                    y < new Date(year).getFullYear()
-                )
-                .map((y) => (
-                  <option key={y} value={y}>
-                    {y}
-                  </option>
-                ))}
+              {years.map((y) => (
+                <option key={y} value={y}>
+                  {y}
+                </option>
+              ))}
             </select>
           </div>
           <div className="flex justify-center flex-wrap gap-2 w-[100%]">

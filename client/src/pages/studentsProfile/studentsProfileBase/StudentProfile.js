@@ -79,13 +79,7 @@ const StudentProfile = ({ allowedRoles }) => {
         },
       });
 
-      // Sort cases alphabetically by some property, for example, 'name'
-      const sortedCases = res.data.sort((a, b) => {
-        // Assuming 'name' is the property by which you want to sort
-        return a.name.localeCompare(b.name);
-      });
-
-      setCases(sortedCases);
+      setCases(res.data);
     } catch (err) {
       console.error("Error fetching cases!", err);
     }

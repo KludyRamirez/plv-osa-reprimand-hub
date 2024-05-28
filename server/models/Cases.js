@@ -30,6 +30,7 @@ const casesSchema = new mongoose.Schema(
         "Pending",
         "Investigation",
         "Evaluation",
+        "Undertaking",
         "Dismissed",
         "Categorization",
         "Show Cause",

@@ -185,6 +185,8 @@ const CasesFilter = ({ cases, students, getCases, allowedRoles }) => {
     );
   };
 
+  const combinedCases = [...minorViolation, ...majorViolation];
+
   return (
     <>
       <div className="w-100 bg-[white] text-[#404040] rounded-[10px] flex flex-col border-[1px]">
@@ -252,22 +254,73 @@ const CasesFilter = ({ cases, students, getCases, allowedRoles }) => {
                 className="px-3 py-2 w-[242px] phone:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
               >
                 <option value="All">All</option>
-                {activeMainFilter === "Minor" || activeMainFilter === "All" ? (
+                {activeMainFilter === "All" ? (
                   <>
-                    {minorViolation?.map((r) => (
-                      <option key={r} value={r}>
-                        {r}
-                      </option>
-                    ))}
+                    {combinedCases
+                      ?.sort((a, b) => {
+                        const nameA = a.toLowerCase();
+                        const nameB = b.toLowerCase();
+
+                        // Compare the names
+                        if (nameA < nameB) {
+                          return -1;
+                        }
+                        if (nameA > nameB) {
+                          return 1;
+                        }
+                        return 0;
+                      })
+                      ?.map((r) => (
+                        <option key={r} value={r}>
+                          {r}
+                        </option>
+                      ))}
                   </>
                 ) : null}
-                {activeMainFilter === "Major" || activeMainFilter === "All" ? (
+                {activeMainFilter === "Minor" ? (
                   <>
-                    {majorViolation?.map((r) => (
-                      <option key={r} value={r}>
-                        {r}
-                      </option>
-                    ))}
+                    {minorViolation
+                      ?.sort((a, b) => {
+                        const nameA = a.toLowerCase();
+                        const nameB = b.toLowerCase();
+
+                        // Compare the names
+                        if (nameA < nameB) {
+                          return -1;
+                        }
+                        if (nameA > nameB) {
+                          return 1;
+                        }
+                        return 0;
+                      })
+                      ?.map((r) => (
+                        <option key={r} value={r}>
+                          {r}
+                        </option>
+                      ))}
+                  </>
+                ) : null}
+                {activeMainFilter === "Major" ? (
+                  <>
+                    {majorViolation
+                      ?.sort((a, b) => {
+                        const nameA = a.toLowerCase();
+                        const nameB = b.toLowerCase();
+
+                        // Compare the names
+                        if (nameA < nameB) {
+                          return -1;
+                        }
+                        if (nameA > nameB) {
+                          return 1;
+                        }
+                        return 0;
+                      })
+                      ?.map((r) => (
+                        <option key={r} value={r}>
+                          {r}
+                        </option>
+                      ))}
                   </>
                 ) : null}
               </select>

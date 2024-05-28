@@ -418,9 +418,14 @@ const CasesPerMonthFilter = ({ cases, students, getCases }) => {
                 <option value="Pending">Pending</option>
                 <option value="Investigation">Investigation</option>
                 <option value="Evaluation">Evaluation</option>
+                <option value="Undertaking">Undertaking</option>
+                <option value="Dismissed">Dismissed</option>
+                <option value="Categorization">Categorization</option>
+                <option value="Show Cause">Show Cause</option>
                 <option value="Referral">Referral</option>
                 <option value="Hearing">Hearing</option>
                 <option value="Decision">Decision</option>
+                <option value="Appeal">Appeal</option>
                 <option value="Implementation">Implementation</option>
                 <option value="Case Solved">Case Solved</option>
               </select>
