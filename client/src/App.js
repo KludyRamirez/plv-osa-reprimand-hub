@@ -47,7 +47,16 @@ function App() {
           <Loading />
         ) : (
           <Routes>
-            <Route path="*" element={<Error404 />}></Route>
+            <Route
+              path="*"
+              element={
+                auth?.userDetails?.token ? (
+                  <Statistics />
+                ) : (
+                  <Login setLoading={setLoading} toast={toast} />
+                )
+              }
+            ></Route>
 
             <Route path="/error" element={<Error403 />}></Route>
 
