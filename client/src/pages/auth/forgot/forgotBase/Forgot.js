@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import ForgotForm from "../forgotComponents/ForgotForm";
-import plvLogo from "../../../../images/PLVlogo.png";
+import osaLogo from "../../../../images/osalogo.jpg";
 import { BsEnvelopeAt, BsMegaphone } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { styled } from "@mui/material/styles";
@@ -94,13 +94,17 @@ const Forgot = ({ auth, toast }) => {
   };
 
   return (
-    <div className="w-full h-screen flex justify-center bg-white">
-      <div className="w-full flex flex-col items-center gap-[100px] relative overflow-x-hidden">
-        <div className="w-[100%] px-6 shadow-sm bg-white zIndex-2">
-          <div className="h-[90px] flex justify-between items-center gap-10">
+    <div className="w-[100%] h-screen bg-white">
+      <div className="w-[100%] flex flex-col items-center gap-[80px]">
+        <div className="w-[100%] px-16 shadow-sm bg-white zIndex-2">
+          <div className="w-[100%] h-[90px] flex justify-between items-center gap-10">
             <div className="flex justify-center items-center gap-10">
-              <div className="flex items-center gap-6">
-                <img src={plvLogo} alt="" className="w-[60px] h-[60px]" />
+              <div className="flex justify-center items-center gap-6">
+                <img
+                  src={osaLogo}
+                  alt=""
+                  className="w-[54px] h-[54px] rounded-[50%]"
+                />
                 <FormTitle
                   sx={{
                     fontSize: "22px",
