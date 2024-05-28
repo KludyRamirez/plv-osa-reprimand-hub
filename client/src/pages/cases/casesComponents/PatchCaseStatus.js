@@ -21,6 +21,7 @@ const PatchCaseStatus = ({
     "Pending",
     "Investigation",
     "Evaluation",
+    "Undertaking",
     "Dismissed",
     "Categorization",
     "Show Cause",

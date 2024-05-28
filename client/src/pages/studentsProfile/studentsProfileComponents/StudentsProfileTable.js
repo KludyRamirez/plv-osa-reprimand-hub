@@ -62,6 +62,7 @@ const StudentsProfileTable = ({
   students,
   getCases,
   student,
+  getOneStudent,
   getStudents,
   cads,
   allowedRoles,
@@ -372,7 +373,9 @@ const StudentsProfileTable = ({
           <EditStudent
             handleCloseModalEditStudent={handleCloseModalEditStudent}
             selectedStudentEdit={selectedStudentEdit}
+            setSelectedStudentEdit={setSelectedStudentEdit}
             toast={toast}
+            getOneStudent={getOneStudent}
             getStudents={getStudents}
             cads={cads}
           />

@@ -70,6 +70,8 @@ const CreateCaseFormModal = ({
   //   }
   // }, [filteredStudents]);
 
+  const combinedCases = [...minorViolation, ...majorViolation];
+
   return (
     <>
       <form onSubmit={(e) => handleCreateCase(e)}>
@@ -124,7 +126,7 @@ const CreateCaseFormModal = ({
                   }
                   return 0;
                 })
-                .map((s) => (
+                ?.map((s) => (
                   <option
                     key={s?._id}
                     value={`${s?.firstName} ${s?.surName}`}
@@ -184,24 +186,54 @@ const CreateCaseFormModal = ({
                 onChange={handleChange}
                 className="appearance-none p-3 rounded-[6px] bg-[#f5f5f5] focus:outline-none border-[1px] focus:border-[#bbbbbb]"
               >
-                <option value="">Enter Violation</option>
+                <option value="All">All</option>
+
+                {typeOfViolation === "Minor" ? (
+                  <>
+                    {minorViolation
+                      ?.sort((a, b) => {
+                        const nameA = a.toLowerCase();
+                        const nameB = b.toLowerCase();
+
+                        // Compare the names
+                        if (nameA < nameB) {
+                          return -1;
+                        }
+                        if (nameA > nameB) {
+                          return 1;
+                        }
+                        return 0;
+                      })
+                      ?.map((r) => (
+                        <option key={r} value={r}>
+                          {r}
+                        </option>
+                      ))}
+                  </>
+                ) : null}
                 {typeOfViolation === "Major" ? (
                   <>
-                    {majorViolation?.map((r) => (
-                      <option key={r} value={r}>
-                        {r}
-                      </option>
-                    ))}
+                    {majorViolation
+                      ?.sort((a, b) => {
+                        const nameA = a.toLowerCase();
+                        const nameB = b.toLowerCase();
+
+                        // Compare the names
+                        if (nameA < nameB) {
+                          return -1;
+                        }
+                        if (nameA > nameB) {
+                          return 1;
+                        }
+                        return 0;
+                      })
+                      ?.map((r) => (
+                        <option key={r} value={r}>
+                          {r}
+                        </option>
+                      ))}
                   </>
-                ) : (
-                  <>
-                    {minorViolation?.map((r) => (
-                      <option key={r} value={r}>
-                        {r}
-                      </option>
-                    ))}
-                  </>
-                )}
+                ) : null}
               </select>
             </div>
           </div>

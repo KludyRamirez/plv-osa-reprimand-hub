@@ -79,11 +79,15 @@ const StudentProfile = ({ allowedRoles }) => {
         },
       });
 
-      const filteredCases = res.data.filter((c) => c?.student?._id === id);
+      // Sort cases alphabetically by some property, for example, 'name'
+      const sortedCases = res.data.sort((a, b) => {
+        // Assuming 'name' is the property by which you want to sort
+        return a.name.localeCompare(b.name);
+      });
 
-      setCases(filteredCases);
+      setCases(sortedCases);
     } catch (err) {
-      console.error("Error fetching users!", err);
+      console.error("Error fetching cases!", err);
     }
   };
 
@@ -117,6 +121,7 @@ const StudentProfile = ({ allowedRoles }) => {
             students={students}
             cases={cases}
             getCases={getCases}
+            getOneStudent={getOneStudent}
             getStudents={getStudents}
             cads={cads}
             allowedRoles={allowedRoles}

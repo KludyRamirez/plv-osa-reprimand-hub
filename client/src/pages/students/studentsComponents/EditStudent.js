@@ -34,6 +34,7 @@ const authSelector = createSelector([selectAuth], (auth) => auth);
 
 const EditStudent = ({
   toast,
+  getOneStudent,
   getStudents,
   selectedStudentEdit,
   handleCloseModalEdit,
@@ -50,18 +51,18 @@ const EditStudent = ({
     e.preventDefault();
 
     try {
-      if (!auth.userDetails.token) {
+      if (!auth?.userDetails?.token) {
         console.error("Authentication token not found.");
         return;
       }
 
       const res = await axios.put(
-        `${process.env.REACT_APP_API_URI}/student/${selectedStudentEdit._id}`,
+        `${process.env.REACT_APP_API_URI}/student/${selectedStudentEdit?._id}`,
         updatedValues,
         {
           withCredentials: true,
           headers: {
-            Authorization: `Bearer ${auth.userDetails.token}`,
+            Authorization: `Bearer ${auth?.userDetails?.token}`,
           },
         }
       );
@@ -73,7 +74,8 @@ const EditStudent = ({
       handleCloseModalEdit
         ? handleCloseModalEdit()
         : handleCloseModalEditStudent();
-      getStudents();
+      await getOneStudent();
+      await getStudents();
     }
   };
 
@@ -156,7 +158,7 @@ const EditStudent = ({
     setErrors(newErrors);
   };
 
-  const uniqueColleges = [...new Set(cads.map((c) => c.college))];
+  const uniqueColleges = [...new Set(cads?.map((c) => c?.college))];
 
   return (
     <>

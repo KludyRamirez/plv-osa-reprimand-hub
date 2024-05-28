@@ -62,19 +62,20 @@ function App() {
             ></Route>
 
             {/* START OF PERSIST LOGIN */}
-            <Route
-              path="/"
-              element={
-                auth?.userDetails?.token ? (
-                  <Statistics />
-                ) : (
-                  <Login setLoading={setLoading} toast={toast} />
-                )
-              }
-            ></Route>
 
             <Route element={<PersistLogin />}>
               {/* allowedRoles PROPS: ADMIN, INSTRUCTOR, STUDENT */}
+
+              <Route
+                path="/"
+                element={
+                  auth?.userDetails?.token ? (
+                    <Statistics />
+                  ) : (
+                    <Login setLoading={setLoading} toast={toast} />
+                  )
+                }
+              ></Route>
 
               <Route
                 path="/account"

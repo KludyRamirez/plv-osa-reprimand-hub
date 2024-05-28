@@ -19,11 +19,39 @@ const majorViolation = [
   "Refusal to submit to reasonable inspection conducted by authorized personnel",
   "Bringing outsiders or providing any means for entry in the University premises without consent of the concerned authority",
   "Ridiculing of fellow students / Rumor mongering",
-  "Failure to appear before school authorities when required to report within 48 hours without valid",
-  "Lewd Act / Boisterous remark/Use of profane or indecent language",
-  "Public Display of Affection",
-  "Unauthorized use of PLV logo or seal, or other university markers or symbols including accredited students' organization",
-  "Unauthorized representation to any activity / event / opportunity in behalf of the University student organization",
+  "Failure to appear before school authorities when required to report within 48 hours without valid reason",
+  "Lewd Act / Boisterous remark / Use of profane or indecent language (e.g., catcalling, etc.)",
+  "Public Display of Affection such as, but not limited to embracing, petting, kissing, suggestive, vulgar, or indecent poses",
+  "Unauthorized use of PLV logo or seal, or other university markers or symbols including accredited students' organizations",
+  "Unauthorized representation to any activity / event / opportunity in behalf of the University, student organization, student, council officer, school authorities, or officials",
+  "Willful affiliation with any unrecognized organization within PLV",
+  "Physical, verbal, or written assault on student, organization, or school authorities",
+  "Lending or borrowing one's ID, COR, or Library Card for the use of another person / Other forms of misrepresentation",
+  "Use of class / organizational funds for personal benefit",
+  "Unauthorized solicitation or collection of money from students and other school authorities",
+  "Vandalism / Defacing walls / Tearing pages from library materials or school documents / Unauthorized removal of official notices and posters",
+  "Destruction of school properties / equipment",
+  "Any form of coercion or threat against any student, faculty member, University guest, or any school authority",
+  "Disrespect towards school personnel, faculty members, or school authorities",
+  "Possession of pornographic material/s in any form",
+  "Unauthorized possession and/or use of playing cards or devices inside the school premises / Indulging in any form of betting or gathering",
+  "Any form of cheating during examinations or in any academic work",
+  "Plagiarism or submission of another person's work and claiming it as his/her own",
+  "Any form of bullying, harassment, threat, or intimidation against students, school personnel, faculty members, and school authorities",
+  "Membership in gangs, fraternities, sororities, or recruitment of students to the same",
+  "Any form hazing or infliction of physical or mental harm or ordeal to student as a requirement for entry to student organizations in the university",
+  "Illegal possession, use, sale, or disposal of prohibited drugs",
+  "Arson",
+  "Grave sexual misconduct constituting a criminal offense (such as, but not limited to, acts of lasciviousness)",
+  "Rebellious actions such as, but not limited to, pressuring others to boycott classes, or leading or participating in unauthorized activities",
+  "Organizing (what type of group) groups and/or inviting membership to unrecognized/accredited organizations or groups by PLV",
+  "Any form of falsification, tampering, or submission of fraudulent school records or credentials, such as, but not limited to, I.D., Receipt, and other documents / materials",
+  "Carrying deadly weapons of any kind (firearms, knives, and the likes) or possession of explosives",
+  "Inflicting physical injury / assault on students, school personnel, faculty members, or school authorities without provocation on the part of the latter",
+  "Any form of stealing, swindling, or extortion rebellious",
+  "Disclosing or misusing confidential or classified school information",
+  "Posting of statements through any system of communication, channel, or publications, which damage the reputation of the university or its community",
+  "Bring dishonor to the University",
 ];
 
 const minorViolation = [
@@ -265,6 +293,8 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
     }
   };
 
+  const combinedCases = [...minorViolation, ...majorViolation];
+
   return (
     <>
       <div className="w-100 bg-[white] text-[#404040] rounded-[10px] flex flex-col border-[1px]">
@@ -321,22 +351,73 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
                 className="px-3 py-2 w-[158px] phone:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
               >
                 <option value="All">All</option>
-                {activeMainFilter === "Minor" || activeMainFilter === "All" ? (
+                {activeMainFilter === "All" ? (
                   <>
-                    {minorViolation?.map((r) => (
-                      <option key={r} value={r}>
-                        {r}
-                      </option>
-                    ))}
+                    {combinedCases
+                      ?.sort((a, b) => {
+                        const nameA = a.toLowerCase();
+                        const nameB = b.toLowerCase();
+
+                        // Compare the names
+                        if (nameA < nameB) {
+                          return -1;
+                        }
+                        if (nameA > nameB) {
+                          return 1;
+                        }
+                        return 0;
+                      })
+                      ?.map((r) => (
+                        <option key={r} value={r}>
+                          {r}
+                        </option>
+                      ))}
                   </>
                 ) : null}
-                {activeMainFilter === "Major" || activeMainFilter === "All" ? (
+                {activeMainFilter === "Minor" ? (
                   <>
-                    {majorViolation?.map((r) => (
-                      <option key={r} value={r}>
-                        {r}
-                      </option>
-                    ))}
+                    {minorViolation
+                      ?.sort((a, b) => {
+                        const nameA = a.toLowerCase();
+                        const nameB = b.toLowerCase();
+
+                        // Compare the names
+                        if (nameA < nameB) {
+                          return -1;
+                        }
+                        if (nameA > nameB) {
+                          return 1;
+                        }
+                        return 0;
+                      })
+                      ?.map((r) => (
+                        <option key={r} value={r}>
+                          {r}
+                        </option>
+                      ))}
+                  </>
+                ) : null}
+                {activeMainFilter === "Major" ? (
+                  <>
+                    {majorViolation
+                      ?.sort((a, b) => {
+                        const nameA = a.toLowerCase();
+                        const nameB = b.toLowerCase();
+
+                        // Compare the names
+                        if (nameA < nameB) {
+                          return -1;
+                        }
+                        if (nameA > nameB) {
+                          return 1;
+                        }
+                        return 0;
+                      })
+                      ?.map((r) => (
+                        <option key={r} value={r}>
+                          {r}
+                        </option>
+                      ))}
                   </>
                 ) : null}
               </select>

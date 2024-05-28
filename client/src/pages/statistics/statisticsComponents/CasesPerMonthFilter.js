@@ -36,6 +36,18 @@ const majorViolation = [
   "Any form of bullying, harassment, threat, or intimidation against students, school personnel, faculty members, and school authorities",
   "Membership in gangs, fraternities, sororities, or recruitment of students to the same",
   "Any form hazing or infliction of physical or mental harm or ordeal to student as a requirement for entry to student organizations in the university",
+  "Illegal possession, use, sale, or disposal of prohibited drugs",
+  "Arson",
+  "Grave sexual misconduct constituting a criminal offense (such as, but not limited to, acts of lasciviousness)",
+  "Rebellious actions such as, but not limited to, pressuring others to boycott classes, or leading or participating in unauthorized activities",
+  "Organizing (what type of group) groups and/or inviting membership to unrecognized/accredited organizations or groups by PLV",
+  "Any form of falsification, tampering, or submission of fraudulent school records or credentials, such as, but not limited to, I.D., Receipt, and other documents / materials",
+  "Carrying deadly weapons of any kind (firearms, knives, and the likes) or possession of explosives",
+  "Inflicting physical injury / assault on students, school personnel, faculty members, or school authorities without provocation on the part of the latter",
+  "Any form of stealing, swindling, or extortion rebellious",
+  "Disclosing or misusing confidential or classified school information",
+  "Posting of statements through any system of communication, channel, or publications, which damage the reputation of the university or its community",
+  "Bring dishonor to the University",
 ];
 
 const minorViolation = [
@@ -195,6 +207,8 @@ const CasesPerMonthFilter = ({ cases, students, getCases }) => {
     }
   };
 
+  const combinedCases = [...minorViolation, ...majorViolation];
+
   return (
     <>
       <div className="phone:overflow-x-scroll">
@@ -318,22 +332,73 @@ const CasesPerMonthFilter = ({ cases, students, getCases }) => {
                 className="px-3 py-2 w-[158px] phone:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
               >
                 <option value="All">All</option>
-                {activeMainFilter === "Minor" || activeMainFilter === "All" ? (
+                {activeMainFilter === "All" ? (
                   <>
-                    {minorViolation?.map((r) => (
-                      <option key={r} value={r}>
-                        {r}
-                      </option>
-                    ))}
+                    {combinedCases
+                      ?.sort((a, b) => {
+                        const nameA = a.toLowerCase();
+                        const nameB = b.toLowerCase();
+
+                        // Compare the names
+                        if (nameA < nameB) {
+                          return -1;
+                        }
+                        if (nameA > nameB) {
+                          return 1;
+                        }
+                        return 0;
+                      })
+                      ?.map((r) => (
+                        <option key={r} value={r}>
+                          {r}
+                        </option>
+                      ))}
                   </>
                 ) : null}
-                {activeMainFilter === "Major" || activeMainFilter === "All" ? (
+                {activeMainFilter === "Minor" ? (
                   <>
-                    {majorViolation?.map((r) => (
-                      <option key={r} value={r}>
-                        {r}
-                      </option>
-                    ))}
+                    {minorViolation
+                      ?.sort((a, b) => {
+                        const nameA = a.toLowerCase();
+                        const nameB = b.toLowerCase();
+
+                        // Compare the names
+                        if (nameA < nameB) {
+                          return -1;
+                        }
+                        if (nameA > nameB) {
+                          return 1;
+                        }
+                        return 0;
+                      })
+                      ?.map((r) => (
+                        <option key={r} value={r}>
+                          {r}
+                        </option>
+                      ))}
+                  </>
+                ) : null}
+                {activeMainFilter === "Major" ? (
+                  <>
+                    {majorViolation
+                      ?.sort((a, b) => {
+                        const nameA = a.toLowerCase();
+                        const nameB = b.toLowerCase();
+
+                        // Compare the names
+                        if (nameA < nameB) {
+                          return -1;
+                        }
+                        if (nameA > nameB) {
+                          return 1;
+                        }
+                        return 0;
+                      })
+                      ?.map((r) => (
+                        <option key={r} value={r}>
+                          {r}
+                        </option>
+                      ))}
                   </>
                 ) : null}
               </select>
@@ -341,7 +406,7 @@ const CasesPerMonthFilter = ({ cases, students, getCases }) => {
             <div className="phone:w-[47.8%] flex flex-col items-start gap-2">
               <div className=" w-[158px] phone:w-[100%] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
-                  <div>Case Status</div> <BsChevronBarDown />
+                  <div>Status</div> <BsChevronBarDown />
                 </div>
                 <BsCheckCircle />
               </div>
