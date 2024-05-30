@@ -352,11 +352,17 @@ const StudentsProfileTable = ({
 
   const filteredCases = cases?.filter((c) => {
     if (casesFilter === "All") {
-      return true;
+      return c.studentName === `${student.firstName} ${student.surName}`;
     } else if (casesFilter === "Case Solved") {
-      return c.statusOfCase === "Case Solved";
+      return (
+        c.studentName === `${student.firstName} ${student.surName}` &&
+        c.statusOfCase === "Case Solved"
+      );
     } else if (casesFilter !== "Case Solved" && casesFilter !== "All") {
-      return c.statusOfCase !== "Case Solved";
+      return (
+        c.studentName === `${student.firstName} ${student.surName}` &&
+        c.statusOfCase !== "Case Solved"
+      );
     }
   });
 

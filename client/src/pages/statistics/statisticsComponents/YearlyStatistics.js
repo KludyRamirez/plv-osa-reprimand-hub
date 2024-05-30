@@ -118,11 +118,13 @@ const YearlyStatistics = ({ cases }) => {
       new Date(otherYear).getFullYear()
   );
 
-  const subtractCasesTotalPerYear = yearTotal.length - otherYearTotal.length;
+  const subtractCasesTotalPerYear = yearTotal?.length - otherYearTotal?.length;
 
   const yearNowPercentage = Math.abs(subtractCasesTotalPerYear);
 
-  const fraction = yearNowPercentage / yearTotal?.length;
+  const fraction =
+    yearTotal?.length !== 0 ? yearNowPercentage / yearTotal?.length : 0;
+
   const percentage = (fraction * 100).toFixed(1);
 
   return (
