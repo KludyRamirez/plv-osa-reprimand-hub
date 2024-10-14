@@ -16,13 +16,12 @@ const months = [
   "December",
 ];
 
-// Define the React component
 const CasesPerMonthBarChart = ({ cases }) => {
   const chartContainer = useRef(null);
 
   const casesByMonth = {};
 
-  months.forEach((month, index) => {
+  months.forEach((month) => {
     const monthCases = cases?.filter((c) => {
       const dateParts = new Date(c?.dateOfIncident)
         .toLocaleDateString("en-PH", {

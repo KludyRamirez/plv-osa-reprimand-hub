@@ -43,7 +43,7 @@ const StatisticsTable = ({ cases, students, getCases, toast }) => {
         </div>
 
         {activeStats === "Dynamic" ? (
-          <div className="flex phone:flex-wrap justify-start gap-8">
+          <div className="flex flex-wrap justify-start gap-8">
             <div className="w-[100%] h-[fit-content] pt-2">
               <CasesPerMonthFilter
                 toast={toast}
@@ -62,7 +62,7 @@ const StatisticsTable = ({ cases, students, getCases, toast }) => {
             </div>
           </div>
         ) : (
-          <div className="flex phone:flex-wrap justify-start gap-8">
+          <div className="flex flex-wrap justify-start gap-8">
             <div className="w-[100%] h-[fit-content] mt-2">
               <YearlyStatistics cases={cases} />
             </div>

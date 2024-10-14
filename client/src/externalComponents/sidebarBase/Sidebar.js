@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { createSelector } from "reselect";
-import { styled } from "@mui/system";
-import PropTypes from "prop-types";
-import Box from "@mui/material/Box";
-import Drawer from "@mui/material/Drawer";
-import AppBar from "@mui/material/AppBar";
-import IconButton from "@mui/material/IconButton";
-import Toolbar from "@mui/material/Toolbar";
-import { useLocation } from "react-router-dom";
-import { AiOutlineLogout } from "react-icons/ai";
-import { CgMenuLeft } from "react-icons/cg";
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { createSelector } from 'reselect';
+import { styled } from '@mui/system';
+import PropTypes from 'prop-types';
+import Box from '@mui/material/Box';
+import Drawer from '@mui/material/Drawer';
+import AppBar from '@mui/material/AppBar';
+import IconButton from '@mui/material/IconButton';
+import Toolbar from '@mui/material/Toolbar';
+import { useLocation } from 'react-router-dom';
+import { AiOutlineLogout } from 'react-icons/ai';
+import { CgMenuLeft } from 'react-icons/cg';
 import {
   BsBoxArrowUpRight,
   BsGear,
@@ -19,58 +19,58 @@ import {
   BsHourglassSplit,
   BsPeople,
   BsPeopleFill,
-  BsPersonSquare,
+  BsPersonLock,
   BsPieChart,
   BsPieChartFill,
   BsSticky,
   BsStickyFill,
-} from "react-icons/bs";
-import { logoutUtil } from "../../pages/auth/login/loginUtils/logoutUtil";
-import plvLogo from "../../images/PLVlogo.png";
+} from 'react-icons/bs';
+import { logoutUtil } from '../../pages/auth/login/loginUtils/logoutUtil';
+import plvLogo from '../../images/PLVlogo.png';
 
 const AppNavBar = styled(AppBar)({
-  background: "transparent",
-  boxShadow: "none",
-  width: { sm: "calc(100% - 40px)" },
-  ml: { sm: "40px" },
-  height: "80px",
+  background: 'transparent',
+  boxShadow: 'none',
+  width: { sm: 'calc(100% - 40px)' },
+  ml: { sm: '40px' },
+  height: '80px',
 });
 
-const SidebarOptions = styled("div")({
-  display: "flex",
-  justifyContent: "flex-start",
-  listStyle: "none",
-  overflow: "hidden",
-  textDecoration: "none",
-  transition: "box-shadow .15s, transform .15s",
-  userSelect: "none",
-  WebkitUserSelect: "none",
-  touchAction: "manipulation",
-  willChange: "transform",
-  color: "white",
-  padding: "10px 13px",
-  fontSize: "24px",
-  width: "100%",
-  cursor: "pointer",
+const SidebarOptions = styled('div')({
+  display: 'flex',
+  justifyContent: 'flex-start',
+  listStyle: 'none',
+  overflow: 'hidden',
+  textDecoration: 'none',
+  transition: 'box-shadow .15s, transform .15s',
+  userSelect: 'none',
+  WebkitUserSelect: 'none',
+  touchAction: 'manipulation',
+  willChange: 'transform',
+  color: 'white',
+  padding: '10px 13px',
+  fontSize: '24px',
+  width: '100%',
+  cursor: 'pointer',
 
-  "&:hover": {
-    transform: "translateY(-1px)",
-    background: "rgba(255, 255, 255, 0.2)",
-    borderRadius: "6px",
-    color: "white",
+  '&:hover': {
+    transform: 'translateY(-1px)',
+    background: 'rgba(255, 255, 255, 0.2)',
+    borderRadius: '6px',
+    color: 'white',
   },
-  "&:active": {
-    transform: "translateY(1px)",
+  '&:active': {
+    transform: 'translateY(1px)',
   },
 });
 
-const RouteCon = styled("div")({
-  display: "flex",
-  justifyContent: "flex-start",
-  alignItems: "center",
-  gap: "16px",
-  cursor: "pointer",
-  width: "100%",
+const RouteCon = styled('div')({
+  display: 'flex',
+  justifyContent: 'flex-start',
+  alignItems: 'center',
+  gap: '16px',
+  cursor: 'pointer',
+  width: '100%',
 });
 
 const selectAuth = (state) => state.auth;
@@ -79,7 +79,7 @@ const authSelector = createSelector([selectAuth], (auth) => auth);
 function Sidebar(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [activeItem, setActiveItem] = useState("");
+  const [activeItem, setActiveItem] = useState('');
 
   const auth = useSelector(authSelector);
 
@@ -97,31 +97,31 @@ function Sidebar(props) {
     <>
       <div
         style={{
-          height: "100vh",
-          display: "flex",
-          justifyContent: "center",
+          height: '100vh',
+          display: 'flex',
+          justifyContent: 'center',
         }}
       >
         <div
           style={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-between",
-            alignItems: "center",
-            width: "100%",
-            height: "100vh",
-            backgroundColor: "#007bff",
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            width: '100%',
+            height: '100vh',
+            backgroundColor: '#007bff',
           }}
         >
           <div
             style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "flex-start",
-              alignItems: "flex-start",
-              gap: "8px",
-              width: "100%",
-              padding: "20px",
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'flex-start',
+              alignItems: 'flex-start',
+              gap: '8px',
+              width: '100%',
+              padding: '20px',
             }}
           >
             <div className="w-full flex justify-center items-center font-semibold text-white mb-[20px] mt-[8px]">
@@ -130,24 +130,24 @@ function Sidebar(props) {
 
             <div className="w-full">
               <Link to="/statistics">
-                {activeItem === "/statistics" ? (
+                {activeItem === '/statistics' ? (
                   <SidebarOptions
                     sx={{
-                      color: "#007bff",
-                      background: "white",
-                      borderRadius: "6px",
-                      "&:hover": {
-                        transform: "translateY(0px)",
-                        color: "#007bff",
-                        background: "white",
+                      color: '#007bff',
+                      background: 'white',
+                      borderRadius: '6px',
+                      '&:hover': {
+                        transform: 'translateY(0px)',
+                        color: '#007bff',
+                        background: 'white',
                       },
-                      "&:active": { transform: "translateY(0px)" },
+                      '&:active': { transform: 'translateY(0px)' },
                     }}
                   >
                     <RouteCon>
                       <BsPieChartFill
                         className={
-                          activeItem === "/statistics" ? "icon-active" : ""
+                          activeItem === '/statistics' ? 'icon-active' : ''
                         }
                       />
                       <p className="text-[18px]">Statistics</p>
@@ -165,23 +165,23 @@ function Sidebar(props) {
             </div>
             <div className="w-full">
               <Link to="/cases">
-                {activeItem === "/cases" ? (
+                {activeItem === '/cases' ? (
                   <SidebarOptions
                     sx={{
-                      color: "#007bff",
-                      background: "white",
-                      borderRadius: "6px",
-                      "&:hover": {
-                        transform: "translateY(0px)",
-                        color: "#007bff",
-                        background: "white",
+                      color: '#007bff',
+                      background: 'white',
+                      borderRadius: '6px',
+                      '&:hover': {
+                        transform: 'translateY(0px)',
+                        color: '#007bff',
+                        background: 'white',
                       },
-                      "&:active": { transform: "translateY(0px)" },
+                      '&:active': { transform: 'translateY(0px)' },
                     }}
                   >
                     <RouteCon>
                       <BsStickyFill
-                        className={activeItem === "/cases" ? "icon-active" : ""}
+                        className={activeItem === '/cases' ? 'icon-active' : ''}
                       />
                       <p className="text-[18px]">Cases</p>
                     </RouteCon>
@@ -198,24 +198,24 @@ function Sidebar(props) {
             </div>
             <div className="w-full">
               <Link to="/students">
-                {activeItem === "/students" ? (
+                {activeItem === '/students' ? (
                   <SidebarOptions
                     sx={{
-                      color: "#007bff",
-                      background: "white",
-                      borderRadius: "6px",
-                      "&:hover": {
-                        transform: "translateY(0px)",
-                        color: "#007bff",
-                        background: "white",
+                      color: '#007bff',
+                      background: 'white',
+                      borderRadius: '6px',
+                      '&:hover': {
+                        transform: 'translateY(0px)',
+                        color: '#007bff',
+                        background: 'white',
                       },
-                      "&:active": { transform: "translateY(0px)" },
+                      '&:active': { transform: 'translateY(0px)' },
                     }}
                   >
                     <RouteCon>
                       <BsPeopleFill
                         className={
-                          activeItem === "/student" ? "icon-active" : ""
+                          activeItem === '/student' ? 'icon-active' : ''
                         }
                       />
                       <p className="text-[18px]">Students</p>
@@ -231,27 +231,27 @@ function Sidebar(props) {
                 )}
               </Link>
             </div>
-            {auth?.userDetails?.role === "Administrator" ? (
+            {auth?.userDetails?.role === 'Administrator' ? (
               <div className="w-full">
                 <Link to="/users">
-                  {activeItem === "/users" ? (
+                  {activeItem === '/users' ? (
                     <SidebarOptions
                       sx={{
-                        color: "#007bff",
-                        background: "white",
-                        borderRadius: "6px",
-                        "&:hover": {
-                          transform: "translateY(0px)",
-                          color: "#007bff",
-                          background: "white",
+                        color: '#007bff',
+                        background: 'white',
+                        borderRadius: '6px',
+                        '&:hover': {
+                          transform: 'translateY(0px)',
+                          color: '#007bff',
+                          background: 'white',
                         },
-                        "&:active": { transform: "translateY(0px)" },
+                        '&:active': { transform: 'translateY(0px)' },
                       }}
                     >
                       <RouteCon>
-                        <BsPersonSquare
+                        <BsPersonLock
                           className={
-                            activeItem === "/users" ? "icon-active" : ""
+                            activeItem === '/users' ? 'icon-active' : ''
                           }
                         />
                         <p className="text-[18px]">Users</p>
@@ -260,7 +260,7 @@ function Sidebar(props) {
                   ) : (
                     <SidebarOptions>
                       <RouteCon>
-                        <BsPersonSquare />
+                        <BsPersonLock />
                         <p className="text-[18px]">Users</p>
                       </RouteCon>
                     </SidebarOptions>
@@ -269,27 +269,27 @@ function Sidebar(props) {
               </div>
             ) : null}
 
-            {auth?.userDetails?.role === "Administrator" ? (
+            {auth?.userDetails?.role === 'Administrator' ? (
               <div className="w-full">
                 <Link to="/notification">
-                  {activeItem === "/notification" ? (
+                  {activeItem === '/notification' ? (
                     <SidebarOptions
                       sx={{
-                        color: "#007bff",
-                        background: "white",
-                        borderRadius: "6px",
-                        "&:hover": {
-                          transform: "translateY(0px)",
-                          color: "#007bff",
-                          background: "white",
+                        color: '#007bff',
+                        background: 'white',
+                        borderRadius: '6px',
+                        '&:hover': {
+                          transform: 'translateY(0px)',
+                          color: '#007bff',
+                          background: 'white',
                         },
-                        "&:active": { transform: "translateY(0px)" },
+                        '&:active': { transform: 'translateY(0px)' },
                       }}
                     >
                       <RouteCon>
                         <BsHourglassSplit
                           className={
-                            activeItem === "/notification" ? "icon-active" : ""
+                            activeItem === '/notification' ? 'icon-active' : ''
                           }
                         />
                         <p className="text-[18px]">History</p>
@@ -310,33 +310,33 @@ function Sidebar(props) {
           <div className="flex flex-col justify-start items-start gap-[12px] w-full p-[20px]">
             <div
               style={{
-                width: "100%",
-                display: "flex",
-                justifyContent: "flex-start",
-                alignItems: "center",
+                width: '100%',
+                display: 'flex',
+                justifyContent: 'flex-start',
+                alignItems: 'center',
               }}
             >
-              {auth?.userDetails?.role === "Administrator" ? (
+              {auth?.userDetails?.role === 'Administrator' ? (
                 <div className="w-full">
                   <Link to="/settings">
-                    {activeItem === "/settings" ? (
+                    {activeItem === '/settings' ? (
                       <SidebarOptions
                         sx={{
-                          color: "#007bff",
-                          background: "white",
-                          borderRadius: "6px",
-                          "&:hover": {
-                            transform: "translateY(0px)",
-                            color: "#007bff",
-                            background: "white",
+                          color: '#007bff',
+                          background: 'white',
+                          borderRadius: '6px',
+                          '&:hover': {
+                            transform: 'translateY(0px)',
+                            color: '#007bff',
+                            background: 'white',
                           },
-                          "&:active": { transform: "translateY(0px)" },
+                          '&:active': { transform: 'translateY(0px)' },
                         }}
                       >
                         <RouteCon>
                           <BsGear
                             className={
-                              activeItem === "/settings" ? "icon-active" : ""
+                              activeItem === '/settings' ? 'icon-active' : ''
                             }
                           />
                           <p className="text-[18px]">Settings</p>
@@ -356,25 +356,25 @@ function Sidebar(props) {
             </div>
             <div
               style={{
-                width: "100%",
-                display: "flex",
-                justifyContent: "flex-start",
-                alignItems: "center",
+                width: '100%',
+                display: 'flex',
+                justifyContent: 'flex-start',
+                alignItems: 'center',
               }}
             >
               <div className="w-full">
                 <SidebarOptions
                   onClick={logoutUtil}
                   sx={{
-                    background: "rgba(0, 0, 0, 0.1)",
-                    borderRadius: "6px",
-                    boxShadow: "none",
-                    "&:hover": {
-                      transform: "translateY(-1px)",
-                      background: "#FF4433",
-                      color: "white",
+                    background: 'rgba(0, 0, 0, 0.1)',
+                    borderRadius: '6px',
+                    boxShadow: 'none',
+                    '&:hover': {
+                      transform: 'translateY(-1px)',
+                      background: '#FF4433',
+                      color: 'white',
                     },
-                    "&:active": { transform: "translateY(1px)" },
+                    '&:active': { transform: 'translateY(1px)' },
                   }}
                 >
                   <RouteCon>
@@ -394,14 +394,14 @@ function Sidebar(props) {
     window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: 'flex' }}>
       <AppNavBar>
         <div className="flex h-[100%] justify-between items-center px-[20px]">
           <Toolbar
             sx={{
-              display: "flex",
-              justifyContent: "flex-start",
-              padding: "0",
+              display: 'flex',
+              justifyContent: 'flex-start',
+              padding: '0',
             }}
           >
             <IconButton
@@ -410,8 +410,8 @@ function Sidebar(props) {
               onClick={handleDrawerToggle}
               sx={{
                 mr: 2,
-                display: { sm: "none" },
-                color: "white",
+                display: { sm: 'none' },
+                color: 'white',
               }}
             >
               <CgMenuLeft />
@@ -435,7 +435,7 @@ function Sidebar(props) {
       <Box
         component="nav"
         sx={{
-          width: { sm: "240px" },
+          width: { sm: '240px' },
           flexShrink: { sm: 0 },
         }}
         aria-label="mailbox folders"
@@ -449,12 +449,12 @@ function Sidebar(props) {
             keepMounted: true,
           }}
           sx={{
-            display: { xs: "block", sm: "none" },
-            "& .MuiDrawer-paper": {
-              boxSizing: "border-box",
-              width: "240px",
-              border: "none",
-              overflow: "hidden",
+            display: { xs: 'block', sm: 'none' },
+            '& .MuiDrawer-paper': {
+              boxSizing: 'border-box',
+              width: '240px',
+              border: 'none',
+              overflow: 'hidden',
             },
           }}
         >
@@ -463,11 +463,11 @@ function Sidebar(props) {
         <Drawer
           variant="permanent"
           sx={{
-            display: { xs: "none", sm: "block" },
-            "& .MuiDrawer-paper": {
-              boxSizing: "border-box",
-              width: "240px",
-              border: "none",
+            display: { xs: 'none', sm: 'block' },
+            '& .MuiDrawer-paper': {
+              boxSizing: 'border-box',
+              width: '240px',
+              border: 'none',
             },
           }}
           open

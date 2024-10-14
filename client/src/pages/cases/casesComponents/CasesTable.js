@@ -23,7 +23,6 @@ const ModalBox = styled("div")({
   background: "white",
   border: "none",
   outline: "none",
-  borderRadius: "12px",
 
   "&:focus": {
     border: "none",
@@ -190,7 +189,6 @@ const CasesTable = ({
   const handleCaseEditClick = (cas) => {
     try {
       setSelectedCaseEdit(cas);
-      console.log(cas);
     } catch (error) {
       console.error("Error handling case edit click:", error);
     } finally {
@@ -207,7 +205,6 @@ const CasesTable = ({
   const handleCasePatchClick = (cas) => {
     try {
       setSelectedCasePatch(cas);
-      console.log(cas);
     } catch (error) {
       console.error("Error handling case Patch click:", error);
     } finally {
@@ -306,7 +303,13 @@ const CasesTable = ({
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-        <ModalBox sx={{ width: "22%" }}>
+        <ModalBox
+          sx={{
+            width: "30%",
+            background: "linear-gradient(to bottom, #ff3131, #efefef, #efefef)",
+            borderRadius: "12px",
+          }}
+        >
           <DeleteCaseModal
             handleConfirmDelete={handleConfirmDelete}
             handleCloseModal={handleCloseModal}
@@ -320,197 +323,223 @@ const CasesTable = ({
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-        <ModalBox sx={{ width: "22%" }}>
+        <ModalBox
+          sx={{
+            width: "30%",
+            background: "linear-gradient(to bottom, #ff3131, #efefef, #efefef)",
+            borderRadius: "12px",
+          }}
+        >
           <DeleteManyCaseModal
             deleteSelectedCases={deleteSelectedCases}
             handleCloseModalDeleteMany={handleCloseModalDeleteMany}
           />
         </ModalBox>
       </Modal>
-      <div
-        className={`h-[376px] bg-white flex flex-col rounded-[10px] border-[1px] text-[#505050] phone:overflow-x-scroll ${
-          cases && cases.length > 5 ? "overflow-y-scroll" : ""
-        }`}
-      >
-        <div className="phone:w-[fit-content] flex items-center gap-4 px-6">
-          <div className="w-[30px] h-[60px] flex justify-start items-center">
-            <input
-              type="checkbox"
-              className="w-[18px] h-[18px]"
-              checked={selectAll}
-              onChange={toggleSelectAll}
-            />
-          </div>
-          <div className="w-[90px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
-            No. | Off
-          </div>
-          <div className="w-[110px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
-            Student No.
-          </div>
-          <div className="w-[150px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
-            Name
-          </div>
-          <div className=" w-[118px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
-            Department
-          </div>
-          <div className=" w-[60px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
-            Year
-          </div>
-          <div className=" w-[80px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
-            Section
-          </div>
-          <div className=" w-[120px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
-            Violation
-          </div>
-          <div className=" w-[150px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
-            Incident Date
-          </div>
-          <div className=" w-[160px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
-            Date Reported
-          </div>
-          <div className=" w-[120px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
-            Case Status
-          </div>
-          {selectedCases.length > 1 ? (
-            allowedRoles?.find((ar) =>
-              auth?.userDetails?.role?.includes(ar)
-            ) ? (
-              <>
-                <div className="w-[1px] h-[20px] border-[1px]"></div>
-                <div className="flex justify-start items-center gap-2">
-                  <div
-                    className="flex gap-1 justify-start items-center py-1 px-2 bg-[#ff3131] border-[1px] border-[#ff3131] text-white text-[14px] rounded-[4px] cursor-pointer"
-                    onClick={handleOpenModalDeleteMany}
-                  >
-                    <span>Delete</span>
+
+      <div className="w-full overflow-x-auto">
+        <div
+          className={`w-full h-[376px] flex flex-col rounded-[10px] border-[1px] text-[#505050] ${
+            cases && cases.length > 5 ? "overflow-y-scroll" : ""
+          }`}
+        >
+          <div className="w-[fit-content] flex items-center gap-4 pl-6 pr-2">
+            <div className="w-[30px] h-[60px] flex justify-start items-center">
+              <input
+                type="checkbox"
+                className="w-[18px] h-[18px]"
+                checked={selectAll}
+                onChange={toggleSelectAll}
+              />
+            </div>
+            <div className="w-[89px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+              No. | Off
+            </div>
+            <div className="w-[110px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+              Student No.
+            </div>
+            <div className="w-[170px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+              Name
+            </div>
+            <div className="w-[118px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+              Department
+            </div>
+            <div className="w-[60px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+              Year
+            </div>
+            <div className="w-[80px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+              Section
+            </div>
+            <div className="w-[120px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+              Violation
+            </div>
+            <div className="w-[160px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+              Incident Date
+            </div>
+            <div className="w-[160px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+              Date Reported
+            </div>
+            <div className="w-[144px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+              Case Status
+            </div>
+            {selectedCases.length > 1 ? (
+              allowedRoles?.find((ar) =>
+                auth?.userDetails?.role?.includes(ar)
+              ) ? (
+                <>
+                  <div className="flex justify-start items-center gap-2">
+                    <div
+                      className="flex gap-1 justify-start items-center py-1 px-2 bg-[#ff3131] border-[1px] border-[#ff3131] text-white text-[14px] rounded-[4px] cursor-pointer"
+                      onClick={handleOpenModalDeleteMany}
+                    >
+                      <span>Delete</span>
+                    </div>
+                    <div
+                      className="flex gap-1 justify-start items-center py-1 px-2 bg-[green] border-[1px] border-[green] text-white text-[14px] rounded-[4px] cursor-pointer"
+                      onClick={exportPDF}
+                    >
+                      <span>Export</span>
+                    </div>
                   </div>
-                  <div
-                    className="flex gap-1 justify-start items-center py-1 px-2 bg-[green] border-[1px] border-[green] text-white text-[14px] rounded-[4px] cursor-pointer"
-                    onClick={exportPDF}
-                  >
-                    <span>Export</span>
-                  </div>
+                </>
+              ) : (
+                <div className="w-[119px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+                  <span>Actions</span>
                 </div>
-              </>
+              )
             ) : (
-              <div className="w-[118px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+              <div className="w-[119px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
                 <span>Actions</span>
               </div>
-            )
-          ) : (
-            <div className="w-[118px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
-              <span>Actions</span>
-            </div>
-          )}
-        </div>
+            )}
+          </div>
 
-        {cases.length > 0 ? (
-          <>
-            {cases?.map((c, k) => (
-              <div
-                className={`phone:w-[fit-content]
-              flex items-center gap-4 px-6 ${
+          {cases.length > 0 ? (
+            <>
+              {cases?.map((c, k) => (
+                <div
+                  className={`w-[fit-content]
+              flex items-center gap-4 pl-6 pr-2 ${
                 k % 2 === 0
                   ? "bg-gradient-to-br from-gray-100 to-gray-100"
                   : "bg-white"
               }`}
-                key={k}
-              >
-                <div className="w-[30px] h-[60px] flex justify-start items-center">
-                  <input
-                    type="checkbox"
-                    className="w-[18px] h-[18px]"
-                    checked={selectedCases?.includes(c?._id)}
-                    onChange={() => toggleCaseSelection(c?._id)}
-                  />
-                </div>
-                <div className="w-[90px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px] ">
-                  {c?.caseNo}
-                  <div>{c?.offense}</div>
-                </div>
-                <div className="w-[110px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
-                  {c?.student?.studentNo}
-                </div>
-                <div className="w-[150px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
-                  {c?.student?.firstName} {c?.student?.surName}
-                </div>
-                <div className=" w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
-                  {c?.student?.department?.slice(0, 9)}...
-                </div>
-                <div className=" w-[60px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
-                  {c?.year}
-                </div>
-                <div className=" w-[80px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
-                  {c?.student?.section}
-                </div>
-                <div className=" w-[120px] flex justify-start items-center py-1 px-3 rounded-[4px]">
-                  {c?.reportedViolation?.slice(0, 18)}...
-                </div>
-                <div className=" w-[150px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
-                  {new Date(c?.dateOfIncident)?.toLocaleDateString("en-US", {
-                    month: "long",
-                    day: "numeric",
-                    year: "numeric",
-                  })}
-                </div>
-                <div className=" w-[160px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
-                  {new Date(c?.dateReported)?.toLocaleDateString("en-US", {
-                    month: "long",
-                    day: "numeric",
-                    year: "numeric",
-                  })}
-                </div>
-                <div className="container flex justify-start items-center w-[120px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px] gap-3">
-                  <div
-                    className={`${
-                      c?.statusOfCase === "Case Solved"
-                        ? "text-[#32CD32]"
-                        : "text-[#007bff]"
-                    }`}
-                  >
-                    {c?.statusOfCase}
+                  key={k}
+                >
+                  <div className="w-[30px] h-[60px] flex justify-start items-center">
+                    <input
+                      type="checkbox"
+                      className="w-[18px] h-[18px]"
+                      checked={selectedCases?.includes(c?._id)}
+                      onChange={() => toggleCaseSelection(c?._id)}
+                    />
                   </div>
-                </div>
-                <div className="w-[130px] whitespace-nowrap flex justify-start items-center gap-2">
-                  {selectedCases.length < 2 ? (
-                    allowedRoles?.find((ar) =>
-                      auth?.userDetails?.role?.includes(ar)
-                    ) ? (
-                      <>
-                        <div
-                          onClick={() => handleCasePatchClick(c)}
-                          className="relative container w-[36px] h-[36px] flex justify-center items-center bg-white border-[1px] border-[#007bff] rounded-[18px] cursor-pointer"
-                        >
-                          <BsChevronUp className="text-[18px] text-[#007bff]" />
-                          <div className="absolute bg-white p-4 top-[-120px] left-[-66px] w-[170px] h-[108px] border-[1px] rounded-[4px] text-[#606060] additional-content">
-                            <div className="font-semibold text-[16px]">
-                              <span className="text-[#007bff]">
-                                Update status?
+                  <div className="w-[89px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px]">
+                    <span>{c?.caseNo}</span>
+                    <span>{c?.offense}</span>
+                  </div>
+                  <div className="w-[110px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
+                    {c?.student?.studentNo}
+                  </div>
+                  <div className="w-[170px] flex justify-start items-center py-1 px-3 rounded-[4px]">
+                    {`${c?.student?.firstName} ${c?.student?.surName}`.slice(
+                      0,
+                      32
+                    )}
+                  </div>
+                  <div className=" w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
+                    {c?.student?.department?.slice(0, 9)}...
+                  </div>
+                  <div className=" w-[60px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
+                    {c?.year}
+                  </div>
+                  <div className=" w-[80px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
+                    {c?.student?.section}
+                  </div>
+                  <div className=" w-[120px] flex justify-start items-center py-1 px-3 rounded-[4px]">
+                    {c?.reportedViolation?.slice(0, 18)}...
+                  </div>
+                  <div className=" w-[160px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
+                    {new Date(c?.dateOfIncident)?.toLocaleDateString("en-US", {
+                      month: "long",
+                      day: "numeric",
+                      year: "numeric",
+                    })}
+                  </div>
+                  <div className=" w-[160px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
+                    {new Date(c?.dateReported)?.toLocaleDateString("en-US", {
+                      month: "long",
+                      day: "numeric",
+                      year: "numeric",
+                    })}
+                  </div>
+                  <div className="container flex justify-start items-center w-[144px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px] gap-3">
+                    <div
+                      className={`${
+                        c?.statusOfCase === "Case Solved"
+                          ? "text-[#32CD32]"
+                          : "text-[#007bff]"
+                      }`}
+                    >
+                      {c?.statusOfCase}
+                    </div>
+                  </div>
+                  <div className="w-[131px] whitespace-nowrap flex justify-start items-center gap-2">
+                    {selectedCases.length < 2 ? (
+                      allowedRoles?.find((ar) =>
+                        auth?.userDetails?.role?.includes(ar)
+                      ) ? (
+                        <>
+                          <div
+                            onClick={() => handleCasePatchClick(c)}
+                            className="relative container w-[36px] h-[36px] flex justify-center items-center bg-white border-[1px] border-[#007bff] rounded-[18px] cursor-pointer"
+                          >
+                            <BsChevronUp className="text-[18px] text-[#007bff]" />
+                            <div className="absolute bg-gradient-to-br from-[#007bff] via-[#079bff] to-[#007bff] py-2 px-4 top-[-62px] left-[-14px] rounded-[32px] text-[#606060] additional-content z-40">
+                              <span className="text-[16px] text-white">
+                                Update status
                               </span>
                             </div>
-                            <div className="pt-2 flex flex-col items-start">
-                              <div className="text-[14px]">
-                                This certain process
-                              </div>
-                              <div className="text-[14px]">
-                                cannot be reverted.
-                              </div>
-                            </div>
+                            <div className="absolute top-[-38px] left-[7px] w-[20px] h-[20px] bg-gradient-to-br from-[#007bff] via-[#079bff] to-[#079bff] transform rotate-[45deg] additional-content z-10"></div>
                           </div>
-                        </div>
-                        <div
-                          onClick={() => handleCaseEditClick(c)}
-                          className="p-2 bg-white border-[1px] border-[#FFBF00] rounded-[18px] cursor-pointer"
-                        >
-                          <BsPen className="text-[18px] text-[#FFBF00]" />
-                        </div>
-                        <div
-                          onClick={() => handleClickDelete(c?._id)}
-                          className="p-2 bg-white border-[1px] border-[#FF3131] rounded-[18px] cursor-pointer"
-                        >
-                          <BsTrash3 className="text-[18px] text-[#FF3131]" />
-                        </div>
-                      </>
+                          <div
+                            onClick={() => handleCaseEditClick(c)}
+                            className="relative container w-[36px] h-[36px] flex justify-center items-center bg-white border-[1px] border-[#ffbf00] rounded-[18px] cursor-pointer"
+                          >
+                            <BsPen className="text-[18px] text-[#ffbf00]" />
+                            <div className="absolute bg-gradient-to-br from-[#F4BB44] via-[#FFBF00] to-[#F4BB44] py-2 px-4 top-[-62px] left-[-14px] rounded-[32px] text-[#606060] additional-content z-40">
+                              <span className="text-[16px] text-white">
+                                Edit case
+                              </span>
+                            </div>
+                            <div className="absolute top-[-38px] left-[7px] w-[20px] h-[20px] bg-gradient-to-br from-[#F4BB44] via-[#FFBF00] to-[#FFBF00] transform rotate-[45deg] additional-content z-10"></div>
+                          </div>
+                          <div
+                            onClick={() => handleClickDelete(c?._id)}
+                            className="relative container w-[36px] h-[36px] flex justify-center items-center bg-white border-[1px] border-[#ff3131] rounded-[18px] cursor-pointer"
+                          >
+                            <BsTrash3 className="text-[18px] text-[#ff3131]" />
+                            <div className="absolute bg-gradient-to-br from-[#C41E3A] via-[#ff3131] to-[#ff3131] py-2 px-4 top-[-62px] right-[-12px] rounded-[32px] text-[#606060] additional-content z-40">
+                              <span className="text-[16px] text-white">
+                                Delete case
+                              </span>
+                            </div>
+                            <div className="absolute top-[-38px] left-[7px] w-[20px] h-[20px] bg-gradient-to-br from-[#ff3131] via-[#ff3131] to-[#ff3131] transform rotate-[45deg] additional-content z-10"></div>
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          <div className="p-2 bg-gray-200 rounded-[18px]">
+                            <BsChevronUp className="text-[18px] text-white" />
+                          </div>
+                          <div className="p-2 bg-gray-200 rounded-[18px]">
+                            <BsPen className="text-[18px] text-white" />
+                          </div>
+                          <div className="p-2 bg-gray-200 rounded-[18px]">
+                            <BsTrash3 className="text-[18px] text-white" />
+                          </div>
+                        </>
+                      )
                     ) : (
                       <>
                         <div className="p-2 bg-gray-200 rounded-[18px]">
@@ -523,30 +552,18 @@ const CasesTable = ({
                           <BsTrash3 className="text-[18px] text-white" />
                         </div>
                       </>
-                    )
-                  ) : (
-                    <>
-                      <div className="p-2 bg-gray-200 rounded-[18px]">
-                        <BsChevronUp className="text-[18px] text-white" />
-                      </div>
-                      <div className="p-2 bg-gray-200 rounded-[18px]">
-                        <BsPen className="text-[18px] text-white" />
-                      </div>
-                      <div className="p-2 bg-gray-200 rounded-[18px]">
-                        <BsTrash3 className="text-[18px] text-white" />
-                      </div>
-                    </>
-                  )}
+                    )}
+                  </div>
                 </div>
-              </div>
-            ))}
-          </>
-        ) : (
-          <div className="w-100 h-[306px] flex flex-col justify-center items-center gap-2 text-[#707070] border-t-[1px] border-t-[#f0f0f0]">
-            <BsFolder2Open className="text-[42px]" />
-            <div className="text-[16px]">No cases available</div>
-          </div>
-        )}
+              ))}
+            </>
+          ) : (
+            <div className="w-100 h-[306px] flex flex-col justify-center items-center gap-2 text-[#707070] border-t-[1px] border-t-[#f0f0f0]">
+              <BsFolder2Open className="text-[42px]" />
+              <div className="text-[16px]">No cases available</div>
+            </div>
+          )}
+        </div>
       </div>
     </>
   );

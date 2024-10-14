@@ -69,8 +69,16 @@ const CasesPerMonthFilter = ({ cases, students, getCases }) => {
   const [selectedStatus, setSelectedStatus] = useState("All");
   const [dateOfIncident, setDateOfIncident] = useState("All");
   const [years, setYears] = useState([]);
-  const [minorPercentage, setMinorPercentage] = useState("Percentage");
-  const [majorPercentage, setMajorPercentage] = useState("Percentage");
+  const [minorPercentageVar, setMinorPercentageVar] = useState("Percentage");
+  const [majorPercentageVar, setMajorPercentageVar] = useState("Percentage");
+  const [firstOffensePercentageVar, setFirstOffensePercentageVar] =
+    useState("Percentage");
+  const [secondOffensePercentageVar, setSecondOffensePercentageVar] =
+    useState("Percentage");
+  const [thirdOffensePercentageVar, setThirdOffensePercentageVar] =
+    useState("Percentage");
+  const [fourthOffensePercentageVar, setFourthOffensePercentageVar] =
+    useState("Percentage");
 
   useEffect(() => {
     const currentYear = new Date().getFullYear();
@@ -129,10 +137,19 @@ const CasesPerMonthFilter = ({ cases, students, getCases }) => {
 
   let combinedFilteredCases = [...filteredCases];
 
-  const majorCases = cases.filter((c) => c.typeOfViolation === "Major");
-  const minorCases = cases.filter((c) => c.typeOfViolation === "Minor");
+  const { majorCases, minorCases } = cases.reduce(
+    (acc, c) => {
+      if (c.typeOfViolation === "Major") {
+        acc.majorCases.push(c);
+      } else if (c.typeOfViolation === "Minor") {
+        acc.minorCases.push(c);
+      }
+      return acc;
+    },
+    { majorCases: [], minorCases: [] }
+  );
 
-  const totalPercentageConverter = () => {
+  const totalPercentage = () => {
     return (
       <>
         <div className="text-[48px] text-[#007bff] font-bold">
@@ -143,8 +160,8 @@ const CasesPerMonthFilter = ({ cases, students, getCases }) => {
     );
   };
 
-  const minorPercentageConverter = () => {
-    const fraction = minorCases?.length / cases?.length;
+  const minorPercentage = () => {
+    const fraction = (minorCases?.length || 0) / (cases?.length || 1);
     const percentage = fraction * 100;
 
     return (
@@ -157,7 +174,7 @@ const CasesPerMonthFilter = ({ cases, students, getCases }) => {
     );
   };
 
-  const minorNumberConverter = () => {
+  const minorNumber = () => {
     return (
       <>
         <div className="text-[48px] text-[#FFBF00] font-bold">
@@ -168,8 +185,8 @@ const CasesPerMonthFilter = ({ cases, students, getCases }) => {
     );
   };
 
-  const majorPercentageConverter = () => {
-    const fraction = majorCases?.length / cases?.length;
+  const majorPercentage = () => {
+    const fraction = (majorCases?.length || 0) / (cases?.length || 1);
     const percentage = fraction * 100;
 
     return (
@@ -182,7 +199,7 @@ const CasesPerMonthFilter = ({ cases, students, getCases }) => {
     );
   };
 
-  const majorNumberConverter = () => {
+  const majorNumber = () => {
     return (
       <>
         <div className="text-[48px] text-[#ff3131] font-bold">
@@ -193,29 +210,146 @@ const CasesPerMonthFilter = ({ cases, students, getCases }) => {
     );
   };
 
-  const handleSetMinorPercentage = () => {
-    if (minorPercentage === "Percentage") setMinorPercentage("Number");
+  const handleSetMinorPercentageVar = () => {
+    if (minorPercentageVar === "Percentage") setMinorPercentageVar("Number");
     else {
-      setMinorPercentage("Percentage");
+      setMinorPercentageVar("Percentage");
     }
   };
 
-  const handleSetMajorPercentage = () => {
-    if (majorPercentage === "Percentage") setMajorPercentage("Number");
+  const handleSetMajorPercentageVar = () => {
+    if (majorPercentageVar === "Percentage") setMajorPercentageVar("Number");
     else {
-      setMajorPercentage("Percentage");
+      setMajorPercentageVar("Percentage");
     }
   };
 
-  const combinedCases = [...minorViolation, ...majorViolation];
+  const filterCasesByOffense = (offense) =>
+    cases.filter((c) => c.offense === offense);
+
+  const firstOffenseCases = filterCasesByOffense("1st");
+  const secondOffenseCases = filterCasesByOffense("2nd");
+  const thirdOffenseCases = filterCasesByOffense("3rd");
+  const fourthOffenseCases = filterCasesByOffense("4th");
+
+  const firstOffensePercentage = () => {
+    const fraction = (firstOffenseCases?.length || 0) / (cases?.length || 1);
+    const percentage = fraction * 100;
+
+    return (
+      <>
+        <div className="pl-2 text-[48px] text-[#007bff] font-bold">
+          {percentage.toFixed(0)}
+          <span className="text-[20px]">%</span>
+        </div>
+      </>
+    );
+  };
+
+  const firstOffenseNumber = () => {
+    return (
+      <>
+        <div className="text-[48px] text-[#007bff] font-bold">
+          {firstOffenseCases.length}
+        </div>
+      </>
+    );
+  };
+
+  const secondOffensePercentage = () => {
+    const fraction = (secondOffenseCases?.length || 0) / (cases?.length || 1);
+    const percentage = fraction * 100;
+
+    return (
+      <>
+        <div className="pl-2 text-[48px] text-[#FFBF00] font-bold">
+          {percentage.toFixed(0)}
+          <span className="text-[20px]">%</span>
+        </div>
+      </>
+    );
+  };
+
+  const secondOffenseNumber = () => {
+    return (
+      <>
+        <div className="text-[48px] text-[#FFBF00] font-bold">
+          {secondOffenseCases.length}
+        </div>
+      </>
+    );
+  };
+
+  const thirdOffensePercentage = () => {
+    const fraction = (thirdOffenseCases?.length || 0) / (cases?.length || 1);
+    const percentage = fraction * 100;
+
+    return (
+      <>
+        <div className="pl-2 text-[48px] text-[#FF5F1F] font-bold">
+          {percentage.toFixed(0)}
+          <span className="text-[20px]">%</span>
+        </div>
+      </>
+    );
+  };
+
+  const thirdOffenseNumber = () => {
+    return (
+      <>
+        <div className="text-[48px] text-[#FF5F1F] font-bold">
+          {thirdOffenseCases.length}
+        </div>
+      </>
+    );
+  };
+
+  const fourthOffensePercentage = () => {
+    const fraction = (fourthOffenseCases?.length || 0) / (cases?.length || 1);
+    const percentage = fraction * 100;
+
+    return (
+      <>
+        <div className="pl-2 text-[48px] text-[#ff3131] font-bold">
+          {percentage.toFixed(0)}
+          <span className="text-[20px]">%</span>
+        </div>
+      </>
+    );
+  };
+
+  const fourthOffenseNumber = () => {
+    return (
+      <>
+        <div className="text-[48px] text-[#ff3131] font-bold">
+          {fourthOffenseCases.length}
+        </div>
+      </>
+    );
+  };
+
+  const togglePercentage = (currentValue, setter) => {
+    setter(currentValue === "Percentage" ? "Number" : "Percentage");
+  };
+
+  const handleSetFirstOffensePercentageVar = () =>
+    togglePercentage(firstOffensePercentageVar, setFirstOffensePercentageVar);
+  const handleSetSecondOffensePercentageVar = () =>
+    togglePercentage(secondOffensePercentageVar, setSecondOffensePercentageVar);
+  const handleSetThirdOffensePercentageVar = () =>
+    togglePercentage(thirdOffensePercentageVar, setThirdOffensePercentageVar);
+  const handleSetFourthOffensePercentageVar = () =>
+    togglePercentage(fourthOffensePercentageVar, setFourthOffensePercentageVar);
+
+  let combinedViolations = [...majorViolation, ...minorViolation];
 
   return (
     <>
       <div className="phone:overflow-x-scroll">
-        <div className="w-[fit-content] flex justify-start items-center gap-4 whitespace-nowrap">
-          <div className="p-2 w-[206px] h-[180px] bg-blue-100 rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden">
+        <div className="w-[fit-content] flex justify-start items-center flex-wrap gap-4 whitespace-nowrap">
+          <div className="p-2 w-[209px] h-[182px] bg-blue-100 rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden">
             <div className="pl-1 w-[100%] h-[100%] flex justify-center items-end">
-              {totalPercentageConverter()}
+              {totalPercentage()}
             </div>
             <div className="text-[16px] text-[#007bff]">Total Cases</div>
             <svg
@@ -230,14 +364,14 @@ const CasesPerMonthFilter = ({ cases, students, getCases }) => {
             </svg>
           </div>
           <div
-            onClick={() => handleSetMinorPercentage()}
-            className="p-2 w-[206px] h-[180px] bg-yellow-100 rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden"
+            onClick={() => handleSetMinorPercentageVar()}
+            className="p-2 w-[209px] h-[182px] bg-yellow-100 rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden"
           >
             <div className="w-[100%] h-[100%] flex justify-center items-end">
-              {minorPercentage === "Percentage" ? (
-                <>{minorPercentageConverter()}</>
+              {minorPercentageVar === "Percentage" ? (
+                <>{minorPercentage()}</>
               ) : (
-                <>{minorNumberConverter()}</>
+                <>{minorNumber()}</>
               )}
             </div>
             <div className="text-[16px] text-[#FFBF00]">Minor Cases</div>
@@ -253,14 +387,14 @@ const CasesPerMonthFilter = ({ cases, students, getCases }) => {
             </svg>
           </div>
           <div
-            onClick={() => handleSetMajorPercentage()}
-            className="p-2 w-[206px] h-[180px] bg-red-100 rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden"
+            onClick={() => handleSetMajorPercentageVar()}
+            className="p-2 w-[209px] h-[182px] bg-red-100 rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden"
           >
             <div className="w-[100%] h-[100%] flex justify-center items-end">
-              {majorPercentage === "Percentage" ? (
-                <>{majorPercentageConverter()}</>
+              {majorPercentageVar === "Percentage" ? (
+                <>{majorPercentage()}</>
               ) : (
-                <>{majorNumberConverter()}</>
+                <>{majorNumber()}</>
               )}
             </div>
             <div className="text-[16px] text-[#ff3131]">Major Cases</div>
@@ -272,6 +406,122 @@ const CasesPerMonthFilter = ({ cases, students, getCases }) => {
               <path
                 d="M0,100 C150,200 350,0 500,100 L500,00 L0,0 Z"
                 style={{ stroke: "none", fill: "#ff3131" }}
+              ></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-4 phone:overflow-x-scroll pb-4">
+        <div className="w-[fit-content] flex justify-start items-center flex-wrap gap-4 whitespace-nowrap">
+          <div
+            onClick={() => handleSetFirstOffensePercentageVar()}
+            className="p-2 w-[209px] h-[180px] bg-white border-[1px] border-blue-400 rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden"
+          >
+            <div className="w-[100%] h-[100%] flex justify-center items-end">
+              {firstOffensePercentageVar === "Percentage" ? (
+                <>{firstOffensePercentage()}</>
+              ) : (
+                <>{firstOffenseNumber()}</>
+              )}
+            </div>
+            <div className="text-[16px] text-[#007bff]">1st Offense</div>
+            <svg
+              className="absolute top-0 left-0"
+              viewBox="0 0 500 500"
+              preserveAspectRatio="xMinYMin meet"
+            >
+              <path
+                d="M0,100 C150,200 350,0 500,100 L500,00 L0,0 Z"
+                style={{
+                  stroke: "none",
+                  fill: "rgba(219, 234, 254, 1)",
+                  strokeWidth: "2px",
+                }}
+              ></path>
+            </svg>
+          </div>
+
+          <div
+            onClick={() => handleSetSecondOffensePercentageVar()}
+            className="p-2 w-[209px] h-[180px] bg-white border-[1px] border-yellow-400 rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden"
+          >
+            <div className="w-[100%] h-[100%] flex justify-center items-end">
+              {secondOffensePercentageVar === "Percentage" ? (
+                <>{secondOffensePercentage()}</>
+              ) : (
+                <>{secondOffenseNumber()}</>
+              )}
+            </div>
+            <div className="text-[16px] text-[#FFBF00]">2nd Offense</div>
+            <svg
+              className="absolute top-0 left-0"
+              viewBox="0 0 500 500"
+              preserveAspectRatio="xMinYMin meet"
+            >
+              <path
+                d="M0,100 C150,200 350,0 500,100 L500,00 L0,0 Z"
+                style={{
+                  stroke: "none",
+                  fill: "rgba(254, 249, 195, 1)",
+                  strokeWidth: "2px",
+                }}
+              ></path>
+            </svg>
+          </div>
+
+          <div
+            onClick={() => handleSetThirdOffensePercentageVar()}
+            className="p-2 w-[209px] h-[180px] bg-white border-[1px] border-orange-400 rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden"
+          >
+            <div className="w-[100%] h-[100%] flex justify-center items-end">
+              {thirdOffensePercentageVar === "Percentage" ? (
+                <>{thirdOffensePercentage()}</>
+              ) : (
+                <>{thirdOffenseNumber()}</>
+              )}
+            </div>
+            <div className="text-[16px] text-[#FF5F1F]">3rd Offense</div>
+            <svg
+              className="absolute top-0 left-0"
+              viewBox="0 0 500 500"
+              preserveAspectRatio="xMinYMin meet"
+            >
+              <path
+                d="M0,100 C150,200 350,0 500,100 L500,00 L0,0 Z"
+                style={{
+                  stroke: "none",
+                  fill: "rgba(255, 237, 213, 1)",
+                  strokeWidth: "2px",
+                }}
+              ></path>
+            </svg>
+          </div>
+
+          <div
+            onClick={() => handleSetFourthOffensePercentageVar()}
+            className="p-2 w-[209px] h-[180px] bg-white border-[1px] border-red-400 rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden"
+          >
+            <div className="w-[100%] h-[100%] flex justify-center items-end">
+              {fourthOffensePercentageVar === "Percentage" ? (
+                <>{fourthOffensePercentage()}</>
+              ) : (
+                <>{fourthOffenseNumber()}</>
+              )}
+            </div>
+            <div className="text-[16px] text-[#ff3131]">4th Offense</div>
+            <svg
+              className="absolute top-0 left-0"
+              viewBox="0 0 500 500"
+              preserveAspectRatio="xMinYMin meet"
+            >
+              <path
+                d="M0,100 C150,200 350,0 500,100 L500,00 L0,0 Z"
+                style={{
+                  stroke: "none",
+                  fill: "rgba(254, 226, 226, 1)",
+                  strokeWidth: "2px",
+                }}
               ></path>
             </svg>
           </div>
@@ -321,25 +571,24 @@ const CasesPerMonthFilter = ({ cases, students, getCases }) => {
         <div className="w-100 flex justify-start bg-gradient-to-br from-gray-100 to-gray-100 p-4 rounded-bl-[10px] rounded-br-[10px]">
           <div className="w-100 flex flex-wrap justify-start items-center gap-4 phone:gap-2">
             <div className="phone:w-[50%] flex flex-col items-start gap-2">
-              <div className="pl-2 w-[158px] phone:w-[100%] flex justify-between items-center">
+              <div className="pl-2 w-[240px] phone:w-[100%] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
-                  <div>Violation</div> <BsChevronBarDown />
+                  <div>Violation</div>
                 </div>
-                <BsCalendar4 />
+                <BsChevronBarDown />
               </div>
               <select
                 onChange={(e) => setReportedViolation(e.target.value)}
-                className="px-3 py-2 w-[158px] phone:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
+                className="cursor-pointer px-3 py-2 w-[240px] phone:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
               >
                 <option value="All">All</option>
                 {activeMainFilter === "All" ? (
                   <>
-                    {combinedCases
+                    {combinedViolations
                       ?.sort((a, b) => {
                         const nameA = a.toLowerCase();
                         const nameB = b.toLowerCase();
 
-                        // Compare the names
                         if (nameA < nameB) {
                           return -1;
                         }
@@ -362,7 +611,6 @@ const CasesPerMonthFilter = ({ cases, students, getCases }) => {
                         const nameA = a.toLowerCase();
                         const nameB = b.toLowerCase();
 
-                        // Compare the names
                         if (nameA < nameB) {
                           return -1;
                         }
@@ -385,7 +633,6 @@ const CasesPerMonthFilter = ({ cases, students, getCases }) => {
                         const nameA = a.toLowerCase();
                         const nameB = b.toLowerCase();
 
-                        // Compare the names
                         if (nameA < nameB) {
                           return -1;
                         }
@@ -404,15 +651,15 @@ const CasesPerMonthFilter = ({ cases, students, getCases }) => {
               </select>
             </div>
             <div className="phone:w-[47.8%] flex flex-col items-start gap-2">
-              <div className=" w-[158px] phone:w-[100%] flex justify-between items-center">
+              <div className=" w-[240px] phone:w-[100%] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
-                  <div>Status</div> <BsChevronBarDown />
+                  <div>Status</div>
                 </div>
-                <BsCheckCircle />
+                <BsChevronBarDown />
               </div>
               <select
                 onChange={(e) => setSelectedStatus(e.target.value)}
-                className="px-3 py-2 w-[158px] phone:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
+                className="cursor-pointer px-3 py-2 w-[240px] phone:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
               >
                 <option value="All">All</option>
                 <option value="Pending">Pending</option>
@@ -432,18 +679,18 @@ const CasesPerMonthFilter = ({ cases, students, getCases }) => {
             </div>
 
             <div className="phone:w-[50%] flex flex-col items-start gap-2">
-              <div className=" w-[158px] phone:w-[100%] flex justify-between items-center">
+              <div className=" w-[240px] phone:w-[100%] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
-                  <div>Year</div> <BsChevronBarDown />
+                  <div>Year</div>
                 </div>
-                <BsCalendar4Week />
+                <BsChevronBarDown />
               </div>
               <select
                 value={dateOfIncident}
                 onChange={(e) => {
                   setDateOfIncident(e.target.value);
                 }}
-                className="phone:w-[100%] px-3 py-2 w-[158px] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
+                className="cursor-pointer phone:w-[100%] px-3 py-2 w-[240px] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
               >
                 <option value="All">All</option>
                 {years.map((year) => (

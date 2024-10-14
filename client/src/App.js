@@ -1,5 +1,10 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import Students from "./pages/students/studentsBase/Students";
 import toast, { Toaster } from "react-hot-toast";
 import Login from "./pages/auth/login/loginBase/Login";
@@ -13,7 +18,6 @@ import AccountSettings from "./pages/accountSettings/accountSettingsBase/Account
 import SecureRoles from "./externalUtils/SecureRoles";
 import { useSelector } from "react-redux";
 import { createSelector } from "reselect";
-import Error404 from "./externalComponents/Errors/Error404";
 import Error403 from "./externalComponents/Errors/Error403";
 import Forgot from "./pages/auth/forgot/forgotBase/Forgot";
 import Reset from "./pages/auth/reset/resetBase/Reset";
@@ -47,18 +51,22 @@ function App() {
           <Loading />
         ) : (
           <Routes>
+            <Route path="*" element={<Error403 />}></Route>
+
             <Route
-              path="*"
+              path="/"
               element={
                 auth?.userDetails?.token ? (
-                  <Statistics />
+                  <Navigate to="/statistics" replace />
                 ) : (
-                  <Login setLoading={setLoading} toast={toast} />
+                  <Navigate to="/login" replace />
                 )
               }
+            />
+            <Route
+              path="/login"
+              element={<Login setLoading={setLoading} />}
             ></Route>
-
-            <Route path="/error" element={<Error403 />}></Route>
 
             <Route
               path="/forgot"
@@ -74,17 +82,6 @@ function App() {
 
             <Route element={<PersistLogin />}>
               {/* allowedRoles PROPS: ADMIN, INSTRUCTOR, STUDENT */}
-
-              <Route
-                path="/"
-                element={
-                  auth?.userDetails?.token ? (
-                    <Statistics />
-                  ) : (
-                    <Login setLoading={setLoading} toast={toast} />
-                  )
-                }
-              ></Route>
 
               <Route
                 path="/account"

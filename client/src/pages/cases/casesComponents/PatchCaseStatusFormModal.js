@@ -16,7 +16,7 @@ const PatchCaseStatusFormModal = ({
       <form onSubmit={(e) => handlePatchCase(e)}>
         <div className="p-10">
           <div className="text-[28px] text-[#077bff] font-semibold flex justify-between">
-            Edit Status?
+            Update status?
             <BsX
               onClick={handleCloseModalPatch}
               className="text-[36px] cursor-pointer"
@@ -95,19 +95,18 @@ const PatchCaseStatusFormModal = ({
             {updatedValues?.statusOfCase !== "" ? (
               <button
                 type="submit"
-                className="py-3 px-3 bg-[#007bff] text-[white] text-[16px] flex gap-2 items-center rounded-[8px]"
+                className="py-3 px-4 bg-[#007bff] text-[white] text-[16px] flex gap-2 items-center rounded-[32px]"
               >
                 <FaPlus />
-                <div>Edit Status</div>
+                <div>Update status</div>
               </button>
             ) : (
               <button
                 disabled
-                type="submit"
-                className="py-3 px-3 bg-blue-300 text-[white] text-[16px] flex gap-2 items-center rounded-[8px]"
+                className="py-3 px-4 bg-blue-300 text-[white] text-[16px] flex gap-2 items-center rounded-[32px]"
               >
                 <FaPlus />
-                <div>Edit Status</div>
+                <div>Update status</div>
               </button>
             )}
           </div>

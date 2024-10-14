@@ -34,7 +34,7 @@ export function CasesPerCollegePieChart({ cases }) {
           data={data}
           options={options}
           width={"100%"}
-          height={"280px"}
+          height={"400px"}
         />
       </div>
     </>

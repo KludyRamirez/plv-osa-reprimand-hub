@@ -12,7 +12,7 @@ import { BsMegaphone } from "react-icons/bs";
 
 import LoginFooter from "../loginComponents/LoginFooter";
 
-const Login = ({ login, setLoading, toast }) => {
+const Login = ({ login, setLoading }) => {
   const FormTitle = styled("div")({
     backgroundImage:
       "radial-gradient(100% 100% at 100% 0, #122c8e 0, #07bbff 100%)",
@@ -50,9 +50,6 @@ const Login = ({ login, setLoading, toast }) => {
       setUserName("");
       setPassword("");
       setLoading(false);
-      console.error(
-        "Either invalid credentials or something went wrong. Please try again."
-      );
     }
   };
 

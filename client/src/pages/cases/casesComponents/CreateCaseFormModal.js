@@ -12,6 +12,7 @@ const CreateCaseFormModal = ({
   handleCreateCase,
   handleCloseModal,
   values,
+  setValues,
   students,
   majorViolation,
   minorViolation,
@@ -35,6 +36,24 @@ const CreateCaseFormModal = ({
         student?.studentNo?.toLowerCase().includes(searchText)
     );
     setFilteredStudents(filtered);
+
+    console.log(values);
+
+    if (filtered.length > 0) {
+      setValues((prevValues) => ({
+        ...prevValues,
+        studentName: filtered[0]?.firstName + " " + filtered[0]?.surName,
+        student: filtered[0]?._id,
+        year: filtered[0]?.year,
+      }));
+    } else {
+      setValues((prevValues) => ({
+        ...prevValues,
+        studentName: "",
+        student: "",
+        year: "",
+      }));
+    }
   };
 
   const isSunday = (date) => {
@@ -64,51 +83,43 @@ const CreateCaseFormModal = ({
     setSelectedDateReported(date);
   };
 
-  // useEffect(() => {
-  //   if (filteredStudents.length > 0) {
-  //     setValues({ ...values, student: filteredStudents[0]._id });
-  //   }
-  // }, [filteredStudents]);
-
-  const combinedCases = [...minorViolation, ...majorViolation];
-
   return (
     <>
       <form onSubmit={(e) => handleCreateCase(e)}>
-        <div className="p-10">
-          <div className="text-[28px] text-[#077bff] font-semibold flex justify-between">
-            Create New Case
-            <BsX
-              onClick={handleCloseModal}
-              className="text-[36px] cursor-pointer"
-            />
-          </div>
+        <div className="text-[26px] text-[#077bff] font-semibold flex justify-between mt-10 px-10">
+          Add Case
+          <BsX
+            onClick={handleCloseModal}
+            className="text-[36px] cursor-pointer"
+          />
+        </div>
 
-          <div className="text-[#606060] pt-8 flex flex-col gap-2 ">
-            <div className="flex justify-start items-center gap-2">
-              <span>Search Case Owner</span>
-              <BsFilter className="text-[22px]" />
-            </div>
-            <input
-              value={searchTerm}
-              onChange={handleSearchStudents}
-              type="text"
-              autoComplete="off"
-              placeholder="Search case owner's student no., firstname, etc."
-              className={`border-[1px] border-[#007bff] p-3 rounded-[6px] w-[100%] bg-white focus:outline-none`}
-            />
+        <div className="text-[#606060] mt-8 flex flex-col gap-2 px-10">
+          <div className="flex justify-start items-center gap-2">
+            <span>Search</span>
+            <BsFilter className="text-[22px]" />
           </div>
+          <input
+            value={searchTerm}
+            onChange={handleSearchStudents}
+            type="text"
+            autoComplete="off"
+            placeholder="Search case owner's student no., firstname, etc."
+            className={`border-[1px] py-3 px-5 rounded-[32px] w-[100%] bg-white focus:outline-none`}
+          />
+        </div>
 
-          <div className="text-[#606060] pt-6 flex flex-col gap-2 w-[100%]">
+        <div className="flex flex-col gap-8 mt-10 p-10 bg-gray-100">
+          <div className="text-[#606060] flex flex-col gap-2 w-[100%]">
             <div className="flex gap-2 items-center">
-              <span>Case Owner</span>
+              <span>Accused</span>
               <BsChevronBarDown />
             </div>
             <select
               name="studentName"
               value={studentName}
               onChange={handleCaseOwnerChange}
-              className="appearance-none p-3 rounded-[6px] bg-[#f5f5f5] focus:outline-none border-[1px] focus:border-[#007bff]"
+              className="appearance-none py-3 px-5 rounded-[32px] focus:outline-none focus:border-[1px] focus:border-[#007bff]"
             >
               <option value="">Select Student Below</option>
               {filteredStudents
@@ -117,7 +128,6 @@ const CreateCaseFormModal = ({
                   const nameA = `${a.firstName} ${a.surName}`.toLowerCase();
                   const nameB = `${b.firstName} ${b.surName}`.toLowerCase();
 
-                  // Compare the names
                   if (nameA < nameB) {
                     return -1;
                   }
@@ -131,7 +141,6 @@ const CreateCaseFormModal = ({
                     key={s?._id}
                     value={`${s?.firstName} ${s?.surName}`}
                     data-student={s?._id}
-                    data-studentno={s?.studentNo}
                     data-year={s?.year}
                   >
                     {s?.firstName} {s?.surName}
@@ -139,7 +148,7 @@ const CreateCaseFormModal = ({
                 ))}
             </select>
           </div>
-          <div className="text-[#606060] pt-6 flex gap-2">
+          <div className="text-[#606060] flex gap-2">
             <div className="flex flex-col gap-2 w-[100%]">
               <div className="">Date of Incident</div>
               <DatePicker
@@ -147,7 +156,7 @@ const CreateCaseFormModal = ({
                 placeholderText="Enter Date"
                 selected={selectedDateOfIncident}
                 onChange={(date) => handleDateOfIncidentChangeCombined(date)}
-                className={`border-[1px] p-3 rounded-[6px] w-[100%] bg-[#f5f5f5] focus:outline-none focus:border-[#bbbbbb]`}
+                className={`border-[1px] py-3 px-5 rounded-[32px] w-[100%] focus:outline-none focus:border-[#007bff]`}
               />
             </div>
             <div className="flex flex-col gap-2 w-[100%]">
@@ -157,18 +166,18 @@ const CreateCaseFormModal = ({
                 placeholderText="Enter Date"
                 selected={selectedDateReported}
                 onChange={(date) => handleDateReportedChangeCombined(date)}
-                className={`border-[1px] p-3 rounded-[6px] w-[100%] bg-[#f5f5f5] focus:outline-none focus:border-[#bbbbbb]`}
+                className={`border-[1px] py-3 px-5 rounded-[32px] w-[100%] focus:outline-none focus:border-[#007bff]`}
               />
             </div>
           </div>
-          <div className="text-[#606060] pt-6 flex gap-2">
-            <div className="flex flex-col gap-2 w-[20%]">
+          <div className="text-[#606060] flex gap-2">
+            <div className="flex flex-col gap-2 w-[50%]">
               <div className="">Type Of Violation</div>
               <select
                 name="typeOfViolation"
                 value={typeOfViolation}
                 onChange={handleChange}
-                className="appearance-none p-3 rounded-[6px] bg-[#f5f5f5] focus:outline-none border-[1px] focus:border-[#bbbbbb]"
+                className="appearance-none py-3 px-5 rounded-[32px] focus:outline-none border-[1px] focus:border-[#007bff]"
               >
                 <option value="">Violation</option>
                 {typeOfViolations?.map((t) => (
@@ -178,13 +187,13 @@ const CreateCaseFormModal = ({
                 ))}
               </select>
             </div>
-            <div className="flex flex-col gap-2 w-[80%]">
+            <div className="flex flex-col gap-2 w-[50%]">
               <div className="">Reported Violation</div>
               <select
                 name="reportedViolation"
                 value={reportedViolation}
                 onChange={handleChange}
-                className="appearance-none p-3 rounded-[6px] bg-[#f5f5f5] focus:outline-none border-[1px] focus:border-[#bbbbbb]"
+                className="appearance-none py-3 px-5 rounded-[32px] focus:outline-none border-[1px] focus:border-[#007bff]"
               >
                 <option value="All">All</option>
 
@@ -237,30 +246,29 @@ const CreateCaseFormModal = ({
               </select>
             </div>
           </div>
+        </div>
 
-          <div className="w-100 pt-10 flex justify-end items-center">
-            {selectedDateOfIncident !== "" &&
-            selectedDateReported !== "" &&
-            reportedViolation !== "" &&
-            typeOfViolation !== "" ? (
-              <button
-                type="submit"
-                className="cursor-pointer py-3 px-3 bg-[#007bff] text-[white] text-[16px] flex gap-2 items-center rounded-[8px]"
-              >
-                <FaPlus />
-                <div>Add Case</div>
-              </button>
-            ) : (
-              <button
-                disabled
-                type="submit"
-                className="py-3 px-3 bg-blue-300 text-[white] text-[16px] flex gap-2 items-center rounded-[8px]"
-              >
-                <FaPlus />
-                <div>Add Case</div>
-              </button>
-            )}
-          </div>
+        <div className="w-[100%] p-10 flex justify-end items-center">
+          {selectedDateOfIncident !== "" &&
+          selectedDateReported !== "" &&
+          reportedViolation !== "" &&
+          typeOfViolation !== "" ? (
+            <button
+              type="submit"
+              className="cursor-pointer w-[100%] py-3 px-4 bg-[#007bff] text-[white] text-[16px] flex gap-2 items-center rounded-[32px]"
+            >
+              <FaPlus />
+              <div>Add Case</div>
+            </button>
+          ) : (
+            <button
+              disabled
+              className="py-3 px-4 w-[100%] bg-blue-300 text-[white] text-[16px] flex gap-2 items-center rounded-[32px]"
+            >
+              <FaPlus />
+              <div>Add Case</div>
+            </button>
+          )}
         </div>
       </form>
     </>

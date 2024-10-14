@@ -15,7 +15,7 @@ const SecureRoles = ({ allowedRoles }) => {
   ) : auth?.userDetails?.token ? (
     <Navigate to="/statistics" state={{ from: location }} replace />
   ) : (
-    <Navigate to="/" state={{ from: location }} replace />
+    <Navigate to="/login" state={{ from: location }} replace />
   );
 };
 

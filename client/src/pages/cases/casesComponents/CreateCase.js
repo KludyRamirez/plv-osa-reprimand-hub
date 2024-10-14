@@ -12,7 +12,6 @@ const ModalBox = styled("div")({
   top: "50%",
   left: "50%",
   width: "48%",
-  borderRadius: "12px",
   transform: "translate(-50%, -50%)",
   background: "white",
   outline: "none",
@@ -102,7 +101,6 @@ const CreateCase = ({ toast, getCases, allowedRoles }) => {
   const [values, setValues] = useState(initialState);
   const [showCreateCaseModal, setShowCreateCaseModal] = useState(false);
   const [students, setStudents] = useState([]);
-  //   const [errors, setErrors] = useState(errorsInitialState);
 
   const auth = useSelector(authSelector);
 
@@ -218,8 +216,6 @@ const CreateCase = ({ toast, getCases, allowedRoles }) => {
     const selectedName = e.target.value;
     const selectedStudentId =
       e.target.options[e.target.selectedIndex].getAttribute("data-student");
-    const selectedStudentNo =
-      e.target.options[e.target.selectedIndex].getAttribute("data-studentno");
     const selectedYear =
       e.target.options[e.target.selectedIndex].getAttribute("data-year");
 
@@ -227,7 +223,6 @@ const CreateCase = ({ toast, getCases, allowedRoles }) => {
       ...values,
       studentName: selectedName,
       student: selectedStudentId,
-      studentNo: selectedStudentNo,
       year: selectedYear,
     });
   };
@@ -242,10 +237,8 @@ const CreateCase = ({ toast, getCases, allowedRoles }) => {
     try {
       setShowCreateCaseModal(false);
       setValues(initialState);
-      // setErrors(errorsInitialState);
     } catch (error) {
       console.error("An error occurred while handling modal closure:", error);
-      // Handle the error gracefully, if needed
     } finally {
       getStudents();
     }
@@ -258,13 +251,13 @@ const CreateCase = ({ toast, getCases, allowedRoles }) => {
       <div className="w-100 text-[14px] text-[#404040] pb-6 ">
         Office of Student Affairs / Cases
       </div>
-      <div className="w-100 text-[26px] text-[#077bff] font-bold pb-6 flex justify-between items-center">
+      <div className="w-100 text-[26px] text-[#077bff] font-semibold pb-6 flex justify-between items-center">
         <div>Cases List</div>
 
         {allowedRoles?.find((ar) => auth?.userDetails?.role?.includes(ar)) ? (
           <div
             onClick={handleOpenModal}
-            className="cursor-pointer py-3 px-3 bg-gradient-to-br from-[#07bbff] to-[#007bff] text-[white] text-[16px] flex gap-2 items-center rounded-[8px]"
+            className="cursor-pointer py-3 px-4 bg-gradient-to-br from-[#007bff] via-[#079bff] to-[#007bff] text-[white] text-[16px] flex gap-2 items-center rounded-[32px]"
           >
             <FaPlus />
             <div>Add Case</div>

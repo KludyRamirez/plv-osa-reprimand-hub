@@ -6,7 +6,6 @@ import {
   BsChevronBarDown,
   BsCheckCircle,
   BsFilter,
-  BsFolder2Open,
   BsFolderX,
 } from "react-icons/bs";
 import { StudentsPerYearPieChart } from "../statisticsUtils/StudentsPerYearPieChart";
@@ -89,10 +88,6 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
   const [dateOfIncident, setDateOfIncident] = useState("All");
   const [monthOfIncident, setMonthOfIncident] = useState("All");
   const [years, setYears] = useState([]);
-  const [bsitPercentage, setBsitPercentage] = useState("Percentage");
-  const [bsbammPercentage, setBsbammPercentage] = useState("Percentage");
-  const [becedPercentage, setBecedPercentage] = useState("Percentage");
-  const [bspPercentage, setBspPercentage] = useState("Percentage");
 
   useEffect(() => {
     const currentYear = new Date().getFullYear();
@@ -161,139 +156,7 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
   );
 
   let combinedFilteredCases = [...filteredCases];
-
-  const bsitCases = cases.filter((c) => c.offense === "1st");
-  const bsbammCases = cases.filter((c) => c.offense === "2nd");
-
-  const becedCases = cases.filter((c) => c.offense === "3rd");
-
-  const bspCases = cases.filter((c) => c.offense === "4th");
-
-  const bsitPercentageConverter = () => {
-    const fraction = bsitCases?.length / cases?.length;
-    const percentage = fraction * 100;
-
-    return (
-      <>
-        <div className="pl-2 text-[48px] text-[#007bff] font-bold">
-          {percentage.toFixed(0)}
-          <span className="text-[20px]">%</span>
-        </div>
-      </>
-    );
-  };
-
-  const bsitNumberConverter = () => {
-    return (
-      <>
-        <div className=" text-[48px] text-[#007bff] font-bold">
-          {bsitCases.length}
-        </div>
-      </>
-    );
-  };
-
-  const bsbammPercentageConverter = () => {
-    const fraction = bsbammCases?.length / cases?.length;
-    const percentage = fraction * 100;
-
-    return (
-      <>
-        <div className="pl-2 text-[48px] text-[#007bff] font-bold">
-          {percentage.toFixed(0)}
-          <span className="text-[20px]">%</span>
-        </div>
-      </>
-    );
-  };
-
-  const bsbammNumberConverter = () => {
-    return (
-      <>
-        <div className="text-[48px] text-[#007bff] font-bold">
-          {bsbammCases.length}
-        </div>
-      </>
-    );
-  };
-
-  const becedPercentageConverter = () => {
-    const fraction = becedCases?.length / cases?.length;
-    const percentage = fraction * 100;
-
-    return (
-      <>
-        <div className="pl-2 text-[48px] text-[#FFBF00] font-bold">
-          {percentage.toFixed(0)}
-          <span className="text-[20px]">%</span>
-        </div>
-      </>
-    );
-  };
-
-  const becedNumberConverter = () => {
-    return (
-      <>
-        <div className="text-[48px] text-[#FFBF00] font-bold">
-          {becedCases.length}
-        </div>
-      </>
-    );
-  };
-
-  const bspPercentageConverter = () => {
-    const fraction = bspCases?.length / cases?.length;
-    const percentage = fraction * 100;
-
-    return (
-      <>
-        <div className="pl-2 text-[48px] text-[#FFBF00] font-bold">
-          {percentage.toFixed(0)}
-          <span className="text-[20px]">%</span>
-        </div>
-      </>
-    );
-  };
-
-  const bspNumberConverter = () => {
-    return (
-      <>
-        <div className="text-[48px] text-[#FFBF00] font-bold">
-          {bspCases.length}
-        </div>
-      </>
-    );
-  };
-
-  const handleSetBsitPercentage = () => {
-    if (bsitPercentage === "Percentage") setBsitPercentage("Number");
-    else {
-      setBsitPercentage("Percentage");
-    }
-  };
-
-  const handleSetBsbammPercentage = () => {
-    if (bsbammPercentage === "Percentage") setBsbammPercentage("Number");
-    else {
-      setBsbammPercentage("Percentage");
-    }
-  };
-
-  const handleSetBecedPercentage = () => {
-    if (becedPercentage === "Percentage") setBecedPercentage("Number");
-    else {
-      setBecedPercentage("Percentage");
-    }
-  };
-
-  const handleSetBspPercentage = () => {
-    if (bspPercentage === "Percentage") setBspPercentage("Number");
-    else {
-      setBspPercentage("Percentage");
-    }
-  };
-
-  const combinedCases = [...minorViolation, ...majorViolation];
+  let combinedViolations = [...minorViolation, ...majorViolation];
 
   return (
     <>
@@ -340,25 +203,24 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
         <div className="w-100 flex justify-start bg-gradient-to-br from-gray-100 to-gray-100 p-4 rounded-bl-[10px] rounded-br-[10px]">
           <div className="w-100 flex flex-wrap justify-start items-center gap-4 phone:gap-2">
             <div className="phone:w-[50%] flex flex-col items-start gap-2">
-              <div className="pl-2 w-[158px] phone:w-[100%] flex justify-between items-center">
+              <div className="pl-2 w-[200px] phone:w-[100%] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
-                  <div>Violation</div> <BsChevronBarDown />
+                  <div>Violation</div>
                 </div>
-                <BsCalendar4 />
+                <BsChevronBarDown />
               </div>
               <select
                 onChange={(e) => setReportedViolation(e.target.value)}
-                className="px-3 py-2 w-[158px] phone:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
+                className="cursor-pointer px-3 py-2 w-[200px] phone:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
               >
                 <option value="All">All</option>
                 {activeMainFilter === "All" ? (
                   <>
-                    {combinedCases
+                    {combinedViolations
                       ?.sort((a, b) => {
                         const nameA = a.toLowerCase();
                         const nameB = b.toLowerCase();
 
-                        // Compare the names
                         if (nameA < nameB) {
                           return -1;
                         }
@@ -381,7 +243,6 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
                         const nameA = a.toLowerCase();
                         const nameB = b.toLowerCase();
 
-                        // Compare the names
                         if (nameA < nameB) {
                           return -1;
                         }
@@ -404,7 +265,6 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
                         const nameA = a.toLowerCase();
                         const nameB = b.toLowerCase();
 
-                        // Compare the names
                         if (nameA < nameB) {
                           return -1;
                         }
@@ -423,15 +283,15 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
               </select>
             </div>
             <div className="phone:w-[47.8%] flex flex-col items-start gap-2">
-              <div className=" w-[158px] phone:w-[100%] flex justify-between items-center">
+              <div className="w-[200px] phone:w-[100%] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
-                  <div>Status</div> <BsChevronBarDown />
+                  <div>Status</div>
                 </div>
-                <BsCheckCircle />
+                <BsChevronBarDown />
               </div>
               <select
                 onChange={(e) => setSelectedStatus(e.target.value)}
-                className="px-3 py-2 w-[158px] phone:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
+                className="cursor-pointer px-3 py-2 w-[200px] phone:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
               >
                 <option value="All">All</option>
                 <option value="Pending">Pending</option>
@@ -451,18 +311,18 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
             </div>
 
             <div className="phone:w-[50%] flex flex-col items-start gap-2">
-              <div className=" w-[158px] phone:w-[100%] flex justify-between items-center">
+              <div className="w-[200px] phone:w-[100%] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
-                  <div>Year</div> <BsChevronBarDown />
+                  <div>Year</div>
                 </div>
-                <BsCalendar4Week />
+                <BsChevronBarDown />
               </div>
               <select
                 value={dateOfIncident}
                 onChange={(e) => {
                   setDateOfIncident(e.target.value);
                 }}
-                className="phone:w-[100%] px-3 py-2 w-[158px] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
+                className="cursor-pointer phone:w-[100%] px-3 py-2 w-[200px] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
               >
                 <option value="All">All</option>
                 {years.map((year) => (
@@ -474,18 +334,18 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
             </div>
 
             <div className="phone:w-[47.8%] flex flex-col items-start gap-2">
-              <div className=" w-[158px] phone:w-[100%] flex justify-between items-center">
+              <div className="w-[200px] phone:w-[100%] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
-                  <div>Month</div> <BsChevronBarDown />
+                  <div>Month</div>
                 </div>
-                <BsCalendar4Event />
+                <BsChevronBarDown />
               </div>
               <select
                 value={monthOfIncident}
                 onChange={(e) => {
                   setMonthOfIncident(e.target.value);
                 }}
-                className="phone:w-[100%] px-3 py-2 w-[158px] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
+                className="cursor-pointer phone:w-[100%] px-3 py-2 w-[200px] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
               >
                 <option value="All">All</option>
                 {months.map((month) => (
@@ -499,7 +359,7 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
         </div>
       </div>
       <div className="flex phone:flex-wrap justify-start gap-4 phone:gap-0">
-        <div className="mt-4 w-[434px] relative flex flex-col bg-blue-100 zIndex-2">
+        <div className="mt-4 w-[50%] relative flex flex-col bg-blue-100 zIndex-2">
           <div className="p-4 zIndex-2 text-[white] bg-[#007bff]">
             Cases Per Year Level
           </div>
@@ -519,7 +379,7 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
           )}
         </div>
 
-        <div className="mt-4 w-[436px] relative flex flex-col bg-yellow-100 zIndex-2">
+        <div className="mt-4 w-[50%] relative flex flex-col bg-yellow-100 zIndex-2">
           <div className="p-4 zIndex-2 text-[white] bg-[#FFBF00]">
             Cases Per College
           </div>
@@ -537,122 +397,6 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
               <div className="text-[#FFBF00]">No cases available</div>
             </div>
           )}
-        </div>
-      </div>
-
-      <div className="mt-4 phone:overflow-x-scroll pb-4">
-        <div className="w-[fit-content] flex justify-start items-center gap-4 whitespace-nowrap ">
-          <div
-            onClick={() => handleSetBsitPercentage()}
-            className="p-2 w-[209px] h-[180px] bg-white border-[1px] border-blue-400 rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden"
-          >
-            <div className="w-[100%] h-[100%] flex justify-center items-end">
-              {bsitPercentage === "Percentage" ? (
-                <>{bsitPercentageConverter()}</>
-              ) : (
-                <>{bsitNumberConverter()}</>
-              )}
-            </div>
-            <div className="text-[16px] text-[#007bff]">1st Offense</div>
-            <svg
-              className="absolute top-0 left-0"
-              viewBox="0 0 500 500"
-              preserveAspectRatio="xMinYMin meet"
-            >
-              <path
-                d="M0,100 C150,200 350,0 500,100 L500,00 L0,0 Z"
-                style={{
-                  stroke: "none",
-                  fill: "rgba(219, 234, 254, 1)",
-                  strokeWidth: "2px",
-                }}
-              ></path>
-            </svg>
-          </div>
-
-          <div
-            onClick={() => handleSetBsbammPercentage()}
-            className="p-2 w-[209px] h-[180px] bg-white border-[1px] border-blue-400 rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden"
-          >
-            <div className="w-[100%] h-[100%] flex justify-center items-end">
-              {bsbammPercentage === "Percentage" ? (
-                <>{bsbammPercentageConverter()}</>
-              ) : (
-                <>{bsbammNumberConverter()}</>
-              )}
-            </div>
-            <div className="text-[16px] text-[#007bff]">2nd Offense</div>
-            <svg
-              className="absolute top-0 left-0"
-              viewBox="0 0 500 500"
-              preserveAspectRatio="xMinYMin meet"
-            >
-              <path
-                d="M0,100 C150,200 350,0 500,100 L500,00 L0,0 Z"
-                style={{
-                  stroke: "none",
-                  fill: "rgba(219, 234, 254, 1)",
-                  strokeWidth: "2px",
-                }}
-              ></path>
-            </svg>
-          </div>
-
-          <div
-            onClick={() => handleSetBecedPercentage()}
-            className="p-2 w-[209px] h-[180px] bg-white border-[1px] border-yellow-400 rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden"
-          >
-            <div className="w-[100%] h-[100%] flex justify-center items-end">
-              {becedPercentage === "Percentage" ? (
-                <>{becedPercentageConverter()}</>
-              ) : (
-                <>{becedNumberConverter()}</>
-              )}
-            </div>
-            <div className="text-[16px] text-[#FFBF00]">3rd Offense</div>
-            <svg
-              className="absolute top-0 left-0"
-              viewBox="0 0 500 500"
-              preserveAspectRatio="xMinYMin meet"
-            >
-              <path
-                d="M0,100 C150,200 350,0 500,100 L500,00 L0,0 Z"
-                style={{
-                  stroke: "none",
-                  fill: "rgba(254, 249, 195, 1)",
-                  strokeWidth: "2px",
-                }}
-              ></path>
-            </svg>
-          </div>
-
-          <div
-            onClick={() => handleSetBspPercentage()}
-            className="p-2 w-[209px] h-[180px] bg-white border-[1px] border-yellow-400 rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden"
-          >
-            <div className="w-[100%] h-[100%] flex justify-center items-end">
-              {bspPercentage === "Percentage" ? (
-                <>{bspPercentageConverter()}</>
-              ) : (
-                <>{bspNumberConverter()}</>
-              )}
-            </div>
-            <div className="text-[16px] text-[#FFBF00]">4th Offense</div>
-            <svg
-              className="absolute top-0 left-0"
-              viewBox="0 0 500 500"
-              preserveAspectRatio="xMinYMin meet"
-            >
-              <path
-                d="M0,100 C150,200 350,0 500,100 L500,00 L0,0 Z"
-                style={{
-                  stroke: "none",
-                  fill: "rgba(254, 249, 195, 1)",
-                  strokeWidth: "2px",
-                }}
-              ></path>
-            </svg>
-          </div>
         </div>
       </div>
     </>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   BsBuilding,
   BsBuildings,
@@ -8,8 +8,8 @@ import {
   BsColumns,
   BsFilter,
   BsGenderMale,
-} from "react-icons/bs";
-import StudentsTable from "./StudentsTable";
+} from 'react-icons/bs';
+import StudentsTable from './StudentsTable';
 
 const StudentsFilter = ({
   students,
@@ -18,15 +18,15 @@ const StudentsFilter = ({
   cads,
   allowedRoles,
 }) => {
-  const [searchTerm, setSearchTerm] = useState("All");
-  const [selectedStatus, setSelectedStatus] = useState("All");
-  const [college, setCollege] = useState("All");
-  const [department, setDepartment] = useState("All");
-  const [year, setYear] = useState("All");
-  const [section, setSection] = useState("All");
-  const [sex, setSex] = useState("All");
+  const [searchTerm, setSearchTerm] = useState('All');
+  const [selectedStatus, setSelectedStatus] = useState('All');
+  const [college, setCollege] = useState('All');
+  const [department, setDepartment] = useState('All');
+  const [year, setYear] = useState('All');
+  const [section, setSection] = useState('All');
+  const [sex, setSex] = useState('All');
   const [selectedStudents, setSelectedStudents] = useState([]);
-  const [activeMainFilter, setActiveMainFilter] = useState("All");
+  const [activeMainFilter, setActiveMainFilter] = useState('All');
 
   const handleMainFilterChange = (filter) => {
     setActiveMainFilter(filter);
@@ -43,7 +43,7 @@ const StudentsFilter = ({
   }
 
   const filteredByStatus =
-    selectedStatus === "All"
+    selectedStatus === 'All'
       ? students
       : students?.filter(
           (student) => student.statusOfStudent === selectedStatus
@@ -51,7 +51,7 @@ const StudentsFilter = ({
 
   const filteredBySearch = students?.filter((student) => {
     const searchMatch =
-      searchTerm === "All" ||
+      searchTerm === 'All' ||
       student?.studentNo?.toLowerCase().includes(searchTerm?.toLowerCase()) ||
       student?.firstName?.toLowerCase().includes(searchTerm?.toLowerCase()) ||
       student?.middleName?.toLowerCase().includes(searchTerm?.toLowerCase()) ||
@@ -62,20 +62,20 @@ const StudentsFilter = ({
         ?.toLowerCase()
         .includes(searchTerm?.toLowerCase());
 
-    const yearMatch = year === "All" || student?.year === parseInt(year);
+    const yearMatch = year === 'All' || student?.year === parseInt(year);
 
     const collegeMatch =
-      college === "All" ||
+      college === 'All' ||
       student?.college?.toLowerCase().includes(college?.toLowerCase());
 
     const departmentMatch =
-      department === "All" ||
+      department === 'All' ||
       student?.department?.toLowerCase().includes(department?.toLowerCase());
 
     const sectionMatch =
-      section === "All" || student?.section?.includes(section);
+      section === 'All' || student?.section?.includes(section);
 
-    const sexMatch = sex === "All" || student?.sex.includes(sex);
+    const sexMatch = sex === 'All' || student?.sex.includes(sex);
 
     return (
       searchMatch &&
@@ -88,7 +88,7 @@ const StudentsFilter = ({
   });
 
   const combinedFilteredStudents =
-    selectedStatus === "All"
+    selectedStatus === 'All'
       ? filteredBySearch
       : filteredBySearch?.filter((student) =>
           filteredByStatus?.includes(student)
@@ -101,9 +101,9 @@ const StudentsFilter = ({
       <div className="w-100 bg-[white] text-[#404040] rounded-[10px] flex flex-col border-[1px]">
         <div className="px-3 w-100 h-[58px] flex justify-start gap-1 border-b-2 border-white">
           <div
-            onClick={() => handleMainFilterChange("All")}
+            onClick={() => handleMainFilterChange('All')}
             className={`px-3 h-[58px] hover:border-b-2 border-blue-600 flex justify-center items-center text-[18px] ${
-              activeMainFilter === "All" ? "border-b-2 border-blue-600" : ""
+              activeMainFilter === 'All' ? 'border-b-2 border-blue-600' : ''
             }`}
           >
             All Students
@@ -116,11 +116,8 @@ const StudentsFilter = ({
             type="text"
             autoComplete="off"
             placeholder="Search by student number, student name, etc."
-            className="p-3 rounded-[6px] w-[97%] phone:w-[100%] bg-gradient-to-br from-gray-100 to-gray-100 focus:outline-none focus:border-[1px] focus:border-[#cdcdcd]"
+            className="p-3 rounded-[6px] w-[100%] bg-gradient-to-br from-gray-100 to-gray-100 focus:outline-none focus:border-[1px] focus:border-[#cdcdcd]"
           />
-          <div className="flex justify-center items-center w-[50px] h-[48px] rounded-[8px] bg-gradient-to-br from-[#07bbff] to-[#007bff] text-white phone:hidden">
-            <BsFilter className="text-[24px]" />
-          </div>
         </div>
 
         <div className="py-4 px-6 text-[18px] flex items-center gap-2 ">
@@ -233,7 +230,7 @@ const StudentsFilter = ({
                 className="px-3 py-2 w-[210px] phone:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px]"
               >
                 <option value="All">All</option>
-                {college === "All" ? (
+                {college === 'All' ? (
                   <>
                     {cads.map((c) => (
                       <option key={c.department} value={c.department}>
