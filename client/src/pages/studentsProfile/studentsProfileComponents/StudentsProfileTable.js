@@ -1,17 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { createSelector } from "reselect";
-import axios from "axios";
-import Modal from "@mui/material/Modal";
-import { styled } from "@mui/system";
-import DeleteCaseModal from "../../cases/casesComponents/DeleteCaseModal";
-import toast from "react-hot-toast";
-import DeleteManyCaseModal from "../../cases/casesComponents/DeleteCaseModal";
-import { useNavigate } from "react-router-dom";
-import EditCase from "../../cases/casesComponents/EditCase";
-import sea from "../../../images/sea.jpg";
-import boy from "../../../images/boynobg.svg";
-import girl from "../../../images/girl.png";
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { createSelector } from 'reselect';
+import axios from 'axios';
+import Modal from '@mui/material/Modal';
+import { styled } from '@mui/system';
+import DeleteCaseModal from '../../cases/casesComponents/DeleteCaseModal';
+import toast from 'react-hot-toast';
+import DeleteManyCaseModal from '../../cases/casesComponents/DeleteCaseModal';
+import { useNavigate } from 'react-router-dom';
+import EditCase from '../../cases/casesComponents/EditCase';
+import sea from '../../../images/sea.jpg';
 import {
   BsArrowDownShort,
   BsArrowUpShort,
@@ -23,34 +21,34 @@ import {
   BsPhoneFlip,
   BsSticky,
   BsTrash3,
-} from "react-icons/bs";
-import { MdOutlineCall, MdOutlineEmail } from "react-icons/md";
-import { VscComment } from "react-icons/vsc";
-import EditStudent from "../../students/studentsComponents/EditStudent";
-import PatchCaseStatus from "../../cases/casesComponents/PatchCaseStatus";
-import RemarksCase from "../../cases/casesComponents/RemarksCase";
-import { Radio, RadioGroup, FormControlLabel } from "@mui/material";
+} from 'react-icons/bs';
+import { MdOutlineCall, MdOutlineEmail } from 'react-icons/md';
+import { VscComment } from 'react-icons/vsc';
+import EditStudent from '../../students/studentsComponents/EditStudent';
+import PatchCaseStatus from '../../cases/casesComponents/PatchCaseStatus';
+import RemarksCase from '../../cases/casesComponents/RemarksCase';
+import { Radio, RadioGroup, FormControlLabel } from '@mui/material';
 
-const ModalBox = styled("div")({
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  width: "48%",
-  borderRadius: "12px",
-  transform: "translate(-50%, -50%)",
-  background: "white",
-  border: "none",
-  outline: "none",
+const ModalBox = styled('div')({
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  width: '48%',
+  borderRadius: '12px',
+  transform: 'translate(-50%, -50%)',
+  background: 'white',
+  border: 'none',
+  outline: 'none',
 
-  "&:focus": {
-    border: "none",
+  '&:focus': {
+    border: 'none',
   },
 
-  "@media (max-width: 767px)": {
-    width: "100%",
-    height: "100%",
-    borderRadius: "0px",
-    border: "none",
+  '@media (max-width: 767px)': {
+    width: '100%',
+    height: '100%',
+    borderRadius: '0px',
+    border: 'none',
   },
 });
 
@@ -68,12 +66,12 @@ const StudentsProfileTable = ({
   allowedRoles,
 }) => {
   const [selectAll, setSelectAll] = useState(false);
-  const [caseDeleteId, setCaseDeleteId] = useState("");
+  const [caseDeleteId, setCaseDeleteId] = useState('');
   const [showDeleteCaseModal, setShowDeleteCaseModal] = useState(false);
   const [showDeleteManyCaseModal, setShowDeleteManyCaseModal] = useState(false);
   const [showEditCaseModal, setShowEditCaseModal] = useState(false);
-  const [selectedCaseEdit, setSelectedCaseEdit] = useState("");
-  const [selectedCases, setSelectedCases] = useState("");
+  const [selectedCaseEdit, setSelectedCaseEdit] = useState('');
+  const [selectedCases, setSelectedCases] = useState('');
   const [showEditStudentModal, setShowEditStudentModal] = useState(false);
   const [selectedStudentEdit, setSelectedStudentEdit] = useState(null);
   const [showPatchCaseModal, setShowPatchCaseModal] = useState(false);
@@ -81,7 +79,7 @@ const StudentsProfileTable = ({
   const [showRemarksCaseModal, setShowRemarksCaseModal] = useState(false);
   const [selectedCaseRemarks, setSelectedCaseRemarks] = useState(null);
 
-  const [casesFilter, setCasesFilter] = useState("All");
+  const [casesFilter, setCasesFilter] = useState('All');
 
   const [showMoreInfo, setShowMoreInfo] = useState(false);
 
@@ -143,8 +141,8 @@ const StudentsProfileTable = ({
   const deleteSelectedCases = async () => {
     try {
       if (!auth.userDetails || !auth.userDetails.token) {
-        console.error("Authentication token not found.");
-        navigate("/");
+        console.error('Authentication token not found.');
+        navigate('/');
         return;
       }
 
@@ -163,16 +161,16 @@ const StudentsProfileTable = ({
       getCases();
       toast.success(res.data.message);
     } catch (error) {
-      console.error("Error deleting selected Cases:", error);
+      console.error('Error deleting selected Cases:', error);
       if (error.response) {
         if (error.response.status === 403) {
-          console.error("Unauthorized access. Please check your permissions.");
-          navigate("/forbidden");
+          console.error('Unauthorized access. Please check your permissions.');
+          navigate('/forbidden');
         } else {
           toast.error(error.response.data.message);
         }
       } else {
-        toast.error("An error occurred while deleting the selected cases.");
+        toast.error('An error occurred while deleting the selected cases.');
       }
     }
   };
@@ -180,7 +178,7 @@ const StudentsProfileTable = ({
   const deleteOneCase = async (id) => {
     try {
       if (!auth.userDetails.token) {
-        console.error("Authentication token not found.");
+        console.error('Authentication token not found.');
         return;
       }
       const res = await axios.delete(
@@ -195,7 +193,7 @@ const StudentsProfileTable = ({
       getCases();
       toast.success(res.data.message);
     } catch (error) {
-      console.error("Error deleting Case:", error);
+      console.error('Error deleting Case:', error);
     }
   };
 
@@ -210,7 +208,7 @@ const StudentsProfileTable = ({
         await deleteOneCase(caseDeleteId);
       }
     } catch (error) {
-      console.error("Error deleting schedule:", error);
+      console.error('Error deleting schedule:', error);
     } finally {
       setShowDeleteCaseModal(false);
       getCases();
@@ -321,7 +319,7 @@ const StudentsProfileTable = ({
       setSelectedCasePatch(cas);
       console.log(cas);
     } catch (error) {
-      console.error("Error handling case Patch click:", error);
+      console.error('Error handling case Patch click:', error);
     } finally {
       setShowPatchCaseModal(true);
     }
@@ -338,7 +336,7 @@ const StudentsProfileTable = ({
       setSelectedCaseRemarks(cas);
       console.log(cas);
     } catch (error) {
-      console.error("Error handling case Remarks click:", error);
+      console.error('Error handling case Remarks click:', error);
     } finally {
       setShowRemarksCaseModal(true);
     }
@@ -351,17 +349,17 @@ const StudentsProfileTable = ({
   // cases filter latest
 
   const filteredCases = cases?.filter((c) => {
-    if (casesFilter === "All") {
+    if (casesFilter === 'All') {
       return c.studentName === `${student.firstName} ${student.surName}`;
-    } else if (casesFilter === "Case Solved") {
+    } else if (casesFilter === 'Case Solved') {
       return (
         c.studentName === `${student.firstName} ${student.surName}` &&
-        c.statusOfCase === "Case Solved"
+        c.statusOfCase === 'Case Solved'
       );
-    } else if (casesFilter !== "Case Solved" && casesFilter !== "All") {
+    } else if (casesFilter !== 'Case Solved' && casesFilter !== 'All') {
       return (
         c.studentName === `${student.firstName} ${student.surName}` &&
-        c.statusOfCase !== "Case Solved"
+        c.statusOfCase !== 'Case Solved'
       );
     }
   });
@@ -369,7 +367,7 @@ const StudentsProfileTable = ({
   return (
     <>
       <Modal
-        sx={{ border: "none", outline: "none" }}
+        sx={{ border: 'none', outline: 'none' }}
         open={showEditStudentModal}
         onClose={handleCloseModalEditStudent}
         aria-labelledby="parent-modal-title"
@@ -388,7 +386,7 @@ const StudentsProfileTable = ({
         </ModalBox>
       </Modal>
       <Modal
-        sx={{ border: "none", outline: "none" }}
+        sx={{ border: 'none', outline: 'none' }}
         open={showEditCaseModal}
         onClose={handleCloseModalEdit}
         aria-labelledby="parent-modal-title"
@@ -407,13 +405,13 @@ const StudentsProfileTable = ({
         </ModalBox>
       </Modal>
       <Modal
-        sx={{ border: "none", outline: "none" }}
+        sx={{ border: 'none', outline: 'none' }}
         open={showPatchCaseModal}
         onClose={handleCloseModalPatch}
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-        <ModalBox sx={{ width: "38%" }}>
+        <ModalBox sx={{ width: '38%' }}>
           <PatchCaseStatus
             handleCloseModalPatch={handleCloseModalPatch}
             selectedCasePatch={selectedCasePatch}
@@ -424,13 +422,13 @@ const StudentsProfileTable = ({
         </ModalBox>
       </Modal>
       <Modal
-        sx={{ border: "none", outline: "none" }}
+        sx={{ border: 'none', outline: 'none' }}
         open={showRemarksCaseModal}
         onClose={handleCloseModalRemarks}
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-        <ModalBox sx={{ width: "38%" }}>
+        <ModalBox sx={{ width: '38%' }}>
           <RemarksCase
             handleCloseModalRemarks={handleCloseModalRemarks}
             selectedCaseRemarks={selectedCaseRemarks}
@@ -441,13 +439,13 @@ const StudentsProfileTable = ({
         </ModalBox>
       </Modal>
       <Modal
-        sx={{ border: "none", outline: "none" }}
+        sx={{ border: 'none', outline: 'none' }}
         open={showDeleteCaseModal}
         onClose={handleCloseModal}
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-        <ModalBox sx={{ width: "22%" }}>
+        <ModalBox sx={{ width: '22%' }}>
           <DeleteCaseModal
             handleConfirmDelete={handleConfirmDelete}
             handleCloseModal={handleCloseModal}
@@ -455,13 +453,13 @@ const StudentsProfileTable = ({
         </ModalBox>
       </Modal>
       <Modal
-        sx={{ border: "none", outline: "none" }}
+        sx={{ border: 'none', outline: 'none' }}
         open={showDeleteManyCaseModal}
         onClose={handleCloseModalDeleteMany}
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-        <ModalBox sx={{ width: "22%" }}>
+        <ModalBox sx={{ width: '22%' }}>
           <DeleteManyCaseModal
             deleteSelectedCases={deleteSelectedCases}
             handleCloseModalDeleteMany={handleCloseModalDeleteMany}
@@ -484,16 +482,10 @@ const StudentsProfileTable = ({
               </div>
               <div className="w-[100%] border-[1px] h-[150px] rounded-bl-[8px] rounded-br-[8px] flex gap-4 ">
                 <div className="w-[210px] h-[100%]  flex justify-end">
-                  {student.sex === "Male" ? (
-                    <img
-                      className="mt-[-60px] w-[175px] h-[175px] rounded-[50%] zIndex-2"
-                      src={boy}
-                    />
+                  {student.sex === 'Male' ? (
+                    <img className="mt-[-60px] w-[175px] h-[175px] rounded-[50%] zIndex-2" />
                   ) : (
-                    <img
-                      className="mt-[-60px] w-[175px] h-[175px] rounded-[50%] zIndex-2"
-                      src={girl}
-                    />
+                    <img className="mt-[-60px] w-[175px] h-[175px] rounded-[50%] zIndex-2" />
                   )}
                 </div>
                 <div className="w-[400px] h-[100%] px-2 py-5 flex flex-col gap-2 ">
@@ -502,7 +494,7 @@ const StudentsProfileTable = ({
                   </span>
                   <div className="w-[100%] text-[15px] text-[#606060] flex justify-between">
                     <span>
-                      {student?.department?.split(" ")[0]} {student.year}-
+                      {student?.department?.split(' ')[0]} {student.year}-
                       {student.section}
                     </span>
                   </div>
@@ -538,13 +530,13 @@ const StudentsProfileTable = ({
               <div className="flex items-center gap-2">
                 <FormControlLabel
                   value="All"
-                  control={<Radio id="All" sx={{ display: "none" }} />}
+                  control={<Radio id="All" sx={{ display: 'none' }} />}
                   label={
                     <div
                       className={`cursor-pointer py-2 px-4 rounded-[24px] text-[16px] flex gap-2 items-center text-[#007bff] ${
-                        casesFilter === "All"
-                          ? "bg-[#007bff] text-white"
-                          : "text-[#404040] bg-[#f7f7f7]"
+                        casesFilter === 'All'
+                          ? 'bg-[#007bff] text-white'
+                          : 'text-[#404040] bg-[#f7f7f7]'
                       } `}
                     >
                       <div>Total</div>
@@ -554,13 +546,13 @@ const StudentsProfileTable = ({
                 />
                 <FormControlLabel
                   value="Case Solved"
-                  control={<Radio id="Case Solved" sx={{ display: "none" }} />}
+                  control={<Radio id="Case Solved" sx={{ display: 'none' }} />}
                   label={
                     <div
                       className={`cursor-pointer py-2 px-4 rounded-[24px] text-[16px] flex gap-2 items-center text-[#007bff] ${
-                        casesFilter === "Case Solved"
-                          ? "bg-[#007bff] text-white"
-                          : "text-[#404040] bg-[#f7f7f7]"
+                        casesFilter === 'Case Solved'
+                          ? 'bg-[#007bff] text-white'
+                          : 'text-[#404040] bg-[#f7f7f7]'
                       }`}
                     >
                       <div>Solved</div>
@@ -570,13 +562,13 @@ const StudentsProfileTable = ({
                 />
                 <FormControlLabel
                   value="Active"
-                  control={<Radio id="Active" sx={{ display: "none" }} />}
+                  control={<Radio id="Active" sx={{ display: 'none' }} />}
                   label={
                     <div
                       className={`cursor-pointer py-2 px-4 rounded-[24px] text-[16px] flex gap-2 items-center ${
-                        casesFilter !== "All" && casesFilter !== "Case Solved"
-                          ? "bg-[#007bff] text-white"
-                          : "text-[#404040] bg-[#f7f7f7]"
+                        casesFilter !== 'All' && casesFilter !== 'Case Solved'
+                          ? 'bg-[#007bff] text-white'
+                          : 'text-[#404040] bg-[#f7f7f7]'
                       }`}
                     >
                       <div>Active</div>
@@ -601,10 +593,10 @@ const StudentsProfileTable = ({
                       </div>
                       <div className="flex justify-center items-center text-[14px] text-[#606060]">
                         {new Date(c.dateOfIncident)
-                          .toLocaleDateString("en-PH", {
-                            month: "long",
-                            day: "numeric",
-                            year: "numeric",
+                          .toLocaleDateString('en-PH', {
+                            month: 'long',
+                            day: 'numeric',
+                            year: 'numeric',
                           })
                           .slice(0, -6)}
                       </div>
@@ -735,15 +727,13 @@ const StudentsProfileTable = ({
               {randomStudents.map((s) => (
                 <div className="w-[100%] flex justify-between items-center pb-4 border-b-[1px]">
                   <div className="flex items-center gap-4">
-                    {s.sex === "Male" ? (
+                    {s.sex === 'Male' ? (
                       <img
-                        src={boy}
                         alt=""
                         className="w-[44px] h-[44px] rounded-[50%] border-[1px] border-blue-500"
                       />
                     ) : (
                       <img
-                        src={girl}
                         alt=""
                         className="w-[44px] h-[44px] rounded-[50%] border-[1px] border-blue-500"
                       />

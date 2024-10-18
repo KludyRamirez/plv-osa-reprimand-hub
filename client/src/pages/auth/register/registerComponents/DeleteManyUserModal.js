@@ -1,5 +1,5 @@
-import React from "react";
-import { BsTrash3, BsX } from "react-icons/bs";
+import React from 'react';
+import { BsTrash3, BsX } from 'react-icons/bs';
 
 const DeleteManyUserModal = ({
   deleteSelectedUsers,
@@ -9,7 +9,7 @@ const DeleteManyUserModal = ({
     try {
       deleteSelectedUsers();
     } catch (error) {
-      console.error("Error handling delete and close:", error);
+      console.error('Error handling delete and close:', error);
     } finally {
       handleCloseModalDeleteMany();
     }

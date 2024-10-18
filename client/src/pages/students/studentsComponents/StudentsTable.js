@@ -5,7 +5,6 @@ import axios from 'axios';
 import {
   BsEye,
   BsEyeFill,
-  BsFolder2,
   BsFolder2Open,
   BsPen,
   BsPenFill,
@@ -102,7 +101,6 @@ const StudentsTable = ({
     try {
       if (!auth.userDetails || !auth.userDetails.token) {
         console.error('Authentication token not found.');
-        // Redirect to login page or handle unauthorized access as per your application's logic
         navigate('/');
         return;
       }
@@ -388,24 +386,36 @@ const StudentsTable = ({
 
                       <div
                         className={`w-[118px] flex justify-start items-center gap-8 py-1 px-3 rounded-[4px] ${
-                          casesCount < 2 ? 'text-[green]' : 'text-[#ff3131]'
+                          casesCount >= 2 && 'text-[#ff3131]'
+                        } ${casesCount === 1 && 'text-[#ffbf00]'} ${
+                          casesCount <= 0 && 'text-[#007bff]'
                         }`}
                       >
                         <div>{casesCount}</div>
 
-                        {casesCount < 2 ? (
-                          <div className="w-[14px] h-[14px] rounded-[50%] bg-[lightgreen]"></div>
-                        ) : (
+                        {casesCount >= 2 && (
                           <div className="w-[14px] h-[14px] rounded-[50%] bg-[#ff3131]"></div>
+                        )}
+                        {casesCount === 1 && (
+                          <div className="w-[14px] h-[14px] rounded-[50%] bg-[#ffbf00]"></div>
+                        )}
+                        {casesCount <= 0 && (
+                          <div className="w-[14px] h-[14px] rounded-[50%] bg-[#007bff]"></div>
                         )}
                       </div>
                       <div className="w-[130px] whitespace-nowrap flex justify-start items-center gap-2">
                         {selectedStudents.length < 2 ? (
                           <div
                             onClick={() => handleClickProfile(student?._id)}
-                            className="p-2 bg-[white] border-[1px] border-[#007bff] rounded-[18px] cursor-pointer"
+                            className="relative container w-[36px] h-[36px] flex justify-center items-center bg-white border-[1px] border-[#007bff] rounded-[18px] cursor-pointer"
                           >
                             <BsEye className="text-[18px] text-[#007bff]" />
+                            <div className="absolute bg-gradient-to-br from-[#007bff] via-[#079bff] to-[#007bff] py-2 px-4 top-[-62px] left-[-16px] rounded-[32px] text-[#606060] additional-content z-40">
+                              <span className="text-[16px] text-white">
+                                View student
+                              </span>
+                            </div>
+                            <div className="absolute top-[-38px] left-[7px] w-[20px] h-[20px] bg-gradient-to-br from-[#007bff] via-[#079bff] to-[#079bff] transform rotate-[45deg] additional-content z-10"></div>
                           </div>
                         ) : (
                           <div className="p-2 bg-gray-200 rounded-[18px]">
@@ -420,15 +430,27 @@ const StudentsTable = ({
                             <>
                               <div
                                 onClick={() => handleStudentEditClick(student)}
-                                className="p-2 bg-[white] border-[1px] border-[#FFBF00] rounded-[18px] cursor-pointer"
+                                className="relative container w-[36px] h-[36px] flex justify-center items-center bg-white border-[1px] border-[#ffbf00] rounded-[18px] cursor-pointer"
                               >
                                 <BsPen className="text-[18px] text-[#FFBF00]" />
+                                <div className="absolute bg-gradient-to-br from-[#F4BB44] via-[#FFBF00] to-[#F4BB44] py-2 px-4 top-[-62px] left-[-14px] rounded-[32px] text-[#606060] additional-content z-40">
+                                  <span className="text-[16px] text-white">
+                                    Edit student
+                                  </span>
+                                </div>
+                                <div className="absolute top-[-38px] left-[7px] w-[20px] h-[20px] bg-gradient-to-br from-[#F4BB44] via-[#FFBF00] to-[#FFBF00] transform rotate-[45deg] additional-content z-10"></div>
                               </div>
                               <div
                                 onClick={() => handleClickDelete(student?._id)}
-                                className="p-2 bg-[white] border-[1px] border-[#FF3131] rounded-[18px] cursor-pointer"
+                                className="relative container w-[36px] h-[36px] flex justify-center items-center bg-white border-[1px] border-[#ff3131] rounded-[18px] cursor-pointer"
                               >
                                 <BsTrash3 className="text-[18px] text-[#FF3131]" />
+                                <div className="absolute bg-gradient-to-br from-[#C41E3A] via-[#ff3131] to-[#ff3131] py-2 px-4 top-[-62px] right-[-14px] rounded-[32px] text-[#606060] additional-content z-40">
+                                  <span className="text-[16px] text-white">
+                                    Delete student
+                                  </span>
+                                </div>
+                                <div className="absolute top-[-38px] left-[7px] w-[20px] h-[20px] bg-gradient-to-br from-[#ff3131] via-[#ff3131] to-[#ff3131] transform rotate-[45deg] additional-content z-10"></div>
                               </div>
                             </>
                           ) : (

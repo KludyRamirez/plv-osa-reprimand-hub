@@ -1,46 +1,42 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import {
-  BsEye,
-  BsEyeFill,
   BsFolder2Open,
   BsPen,
   BsPenFill,
-  BsStop,
   BsTrash3,
   BsTrash3Fill,
-} from "react-icons/bs";
-import Modal from "@mui/material/Modal";
-import { styled } from "@mui/system";
-import DeleteUserModal from "./DeleteUserModal";
-import toast from "react-hot-toast";
-import DeleteManyUserModal from "./DeleteManyUserModal";
-import { useSelector } from "react-redux";
-import { createSelector } from "reselect";
-import { useNavigate } from "react-router-dom";
-import EditUser from "./EditUser";
-import { AiOutlineStop } from "react-icons/ai";
+} from 'react-icons/bs';
+import Modal from '@mui/material/Modal';
+import { styled } from '@mui/system';
+import DeleteUserModal from './DeleteUserModal';
+import toast from 'react-hot-toast';
+import DeleteManyUserModal from './DeleteManyUserModal';
+import { useSelector } from 'react-redux';
+import { createSelector } from 'reselect';
+import { useNavigate } from 'react-router-dom';
+import EditUser from './EditUser';
 
-const ModalBox = styled("div")({
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  width: "44%",
-  borderRadius: "12px",
-  transform: "translate(-50%, -50%)",
-  background: "white",
-  border: "none",
-  outline: "none",
+const ModalBox = styled('div')({
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  width: '44%',
+  borderRadius: '12px',
+  transform: 'translate(-50%, -50%)',
+  background: 'white',
+  border: 'none',
+  outline: 'none',
 
-  "&:focus": {
-    border: "none",
+  '&:focus': {
+    border: 'none',
   },
 
-  "@media (max-width: 767px)": {
-    width: "100%",
-    height: "100%",
-    borderRadius: "0px",
-    border: "none",
+  '@media (max-width: 767px)': {
+    width: '100%',
+    height: '100%',
+    borderRadius: '0px',
+    border: 'none',
   },
 });
 
@@ -55,11 +51,11 @@ const UsersTable = ({
   allowedRoles,
 }) => {
   const [selectAll, setSelectAll] = useState(false);
-  const [userDeleteId, setUserDeleteId] = useState("");
+  const [userDeleteId, setUserDeleteId] = useState('');
   const [showDeleteUserModal, setShowDeleteUserModal] = useState(false);
   const [showDeleteManyUserModal, setShowDeleteManyUserModal] = useState(false);
   const [showEditUserModal, setShowEditUserModal] = useState(false);
-  const [selectedUserEdit, setSelectedUserEdit] = useState("");
+  const [selectedUserEdit, setSelectedUserEdit] = useState('');
 
   const auth = useSelector(authSelector);
   const navigate = useNavigate();
@@ -97,7 +93,7 @@ const UsersTable = ({
   const deleteSelectedUsers = async () => {
     try {
       if (!auth.userDetails.token) {
-        console.error("Authentication token not found.");
+        console.error('Authentication token not found.');
         return;
       }
       const res = await axios.delete(
@@ -115,16 +111,16 @@ const UsersTable = ({
       getUsers();
       toast.success(res.data.message);
     } catch (error) {
-      console.error("Error deleting selected users:", error);
+      console.error('Error deleting selected users:', error);
       if (error.response) {
         if (error.response.status === 403) {
-          console.error("Unauthorized access. Please check your permissions.");
-          navigate("/forbidden");
+          console.error('Unauthorized access. Please check your permissions.');
+          navigate('/forbidden');
         } else {
           toast.error(error.response.data.message);
         }
       } else {
-        toast.error("An error occurred while deleting the selected students.");
+        toast.error('An error occurred while deleting the selected students.');
       }
     }
   };
@@ -132,7 +128,7 @@ const UsersTable = ({
   const deleteOneUser = async (id) => {
     try {
       if (!auth.userDetails.token) {
-        console.error("Authentication token not found.");
+        console.error('Authentication token not found.');
         return;
       }
       const res = await axios.delete(
@@ -147,7 +143,7 @@ const UsersTable = ({
       getUsers();
       toast.success(res.data.message);
     } catch (error) {
-      console.error("Error deleting user:", error);
+      console.error('Error deleting user:', error);
     }
   };
 
@@ -162,7 +158,7 @@ const UsersTable = ({
         await deleteOneUser(userDeleteId);
       }
     } catch (error) {
-      console.error("Error deleting schedule:", error);
+      console.error('Error deleting schedule:', error);
     } finally {
       setShowDeleteUserModal(false);
       getUsers();
@@ -197,7 +193,7 @@ const UsersTable = ({
   return (
     <>
       <Modal
-        sx={{ border: "none", outline: "none" }}
+        sx={{ border: 'none', outline: 'none' }}
         open={showEditUserModal}
         onClose={handleCloseModalEdit}
         aria-labelledby="parent-modal-title"
@@ -213,13 +209,13 @@ const UsersTable = ({
         </ModalBox>
       </Modal>
       <Modal
-        sx={{ border: "none", outline: "none" }}
+        sx={{ border: 'none', outline: 'none' }}
         open={showDeleteUserModal}
         onClose={handleCloseModal}
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-        <ModalBox sx={{ width: "22%" }}>
+        <ModalBox sx={{ width: '22%' }}>
           <DeleteUserModal
             handleConfirmDelete={handleConfirmDelete}
             handleCloseModal={handleCloseModal}
@@ -227,22 +223,22 @@ const UsersTable = ({
         </ModalBox>
       </Modal>
       <Modal
-        sx={{ border: "none", outline: "none" }}
+        sx={{ border: 'none', outline: 'none' }}
         open={showDeleteManyUserModal}
         onClose={handleCloseModalDeleteMany}
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-        <ModalBox sx={{ width: "22%" }}>
+        <ModalBox sx={{ width: '22%' }}>
           <DeleteManyUserModal
-            deleteSelectedusers={deleteSelectedUsers}
+            deleteSelectedUsers={deleteSelectedUsers}
             handleCloseModalDeleteMany={handleCloseModalDeleteMany}
           />
         </ModalBox>
       </Modal>
       <div
         className={`w-100 h-[380px] bg-white flex flex-col rounded-[10px] border-[1px] text-[#505050] phone:overflow-x-scroll ${
-          users && users?.length > 5 ? "overflow-y-scroll" : ""
+          users && users?.length > 5 ? 'overflow-y-scroll' : ''
         }`}
       >
         <div className="phone:w-[fit-content] flex items-center gap-4 px-6">
@@ -309,7 +305,7 @@ const UsersTable = ({
             {users?.map((user, k) => (
               <div
                 className={`phone:w-[fit-content] flex items-center gap-4 px-6 ${
-                  k % 2 === 0 ? "bg-gray-100" : "bg-white"
+                  k % 2 === 0 ? 'bg-gray-100' : 'bg-white'
                 }`}
                 key={k}
               >

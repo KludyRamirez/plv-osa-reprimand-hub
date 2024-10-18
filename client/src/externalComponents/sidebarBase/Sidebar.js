@@ -8,12 +8,9 @@ import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import AppBar from '@mui/material/AppBar';
 import IconButton from '@mui/material/IconButton';
-import Toolbar from '@mui/material/Toolbar';
 import { useLocation } from 'react-router-dom';
-import { AiOutlineLogout } from 'react-icons/ai';
 import { CgMenuLeft } from 'react-icons/cg';
 import {
-  BsBoxArrowUpRight,
   BsGear,
   BsHourglass,
   BsHourglassSplit,
@@ -27,6 +24,7 @@ import {
 } from 'react-icons/bs';
 import { logoutUtil } from '../../pages/auth/login/loginUtils/logoutUtil';
 import plvLogo from '../../images/PLVlogo.png';
+import drac from '../../images/drac.png';
 
 const AppNavBar = styled(AppBar)({
   background: 'transparent',
@@ -121,7 +119,7 @@ function Sidebar(props) {
               alignItems: 'flex-start',
               gap: '8px',
               width: '100%',
-              padding: '20px',
+              padding: '16px',
             }}
           >
             <div className="w-full flex justify-center items-center font-semibold text-white mb-[20px] mt-[8px]">
@@ -270,56 +268,10 @@ function Sidebar(props) {
             ) : null}
 
             {auth?.userDetails?.role === 'Administrator' ? (
-              <div className="w-full">
-                <Link to="/notification">
-                  {activeItem === '/notification' ? (
-                    <SidebarOptions
-                      sx={{
-                        color: '#007bff',
-                        background: 'white',
-                        borderRadius: '6px',
-                        '&:hover': {
-                          transform: 'translateY(0px)',
-                          color: '#007bff',
-                          background: 'white',
-                        },
-                        '&:active': { transform: 'translateY(0px)' },
-                      }}
-                    >
-                      <RouteCon>
-                        <BsHourglassSplit
-                          className={
-                            activeItem === '/notification' ? 'icon-active' : ''
-                          }
-                        />
-                        <p className="text-[18px]">History</p>
-                      </RouteCon>
-                    </SidebarOptions>
-                  ) : (
-                    <SidebarOptions>
-                      <RouteCon>
-                        <BsHourglass />
-                        <p className="text-[18px]">History</p>
-                      </RouteCon>
-                    </SidebarOptions>
-                  )}
-                </Link>
-              </div>
-            ) : null}
-          </div>
-          <div className="flex flex-col justify-start items-start gap-[12px] w-full p-[20px]">
-            <div
-              style={{
-                width: '100%',
-                display: 'flex',
-                justifyContent: 'flex-start',
-                alignItems: 'center',
-              }}
-            >
-              {auth?.userDetails?.role === 'Administrator' ? (
+              <>
                 <div className="w-full">
-                  <Link to="/settings">
-                    {activeItem === '/settings' ? (
+                  <Link to="/notification">
+                    {activeItem === '/notification' ? (
                       <SidebarOptions
                         sx={{
                           color: '#007bff',
@@ -334,55 +286,101 @@ function Sidebar(props) {
                         }}
                       >
                         <RouteCon>
-                          <BsGear
+                          <BsHourglassSplit
                             className={
-                              activeItem === '/settings' ? 'icon-active' : ''
+                              activeItem === '/notification'
+                                ? 'icon-active'
+                                : ''
                             }
                           />
-                          <p className="text-[18px]">Settings</p>
+                          <p className="text-[18px]">History</p>
                         </RouteCon>
                       </SidebarOptions>
                     ) : (
                       <SidebarOptions>
                         <RouteCon>
-                          <BsGear />
-                          <p className="text-[18px]">Settings</p>
+                          <BsHourglass />
+                          <p className="text-[18px]">History</p>
                         </RouteCon>
                       </SidebarOptions>
                     )}
                   </Link>
                 </div>
-              ) : null}
-            </div>
-            <div
-              style={{
-                width: '100%',
-                display: 'flex',
-                justifyContent: 'flex-start',
-                alignItems: 'center',
-              }}
-            >
-              <div className="w-full">
-                <SidebarOptions
-                  onClick={logoutUtil}
-                  sx={{
-                    background: 'rgba(0, 0, 0, 0.1)',
-                    borderRadius: '6px',
-                    boxShadow: 'none',
-                    '&:hover': {
-                      transform: 'translateY(-1px)',
-                      background: '#FF4433',
-                      color: 'white',
-                    },
-                    '&:active': { transform: 'translateY(1px)' },
+                <div
+                  style={{
+                    width: '100%',
+                    display: 'flex',
+                    justifyContent: 'flex-start',
+                    alignItems: 'center',
                   }}
                 >
-                  <RouteCon>
-                    <AiOutlineLogout />
-                    <p className="text-[18px]">Sign Out</p>
-                  </RouteCon>
-                </SidebarOptions>
+                  {auth?.userDetails?.role === 'Administrator' ? (
+                    <div className="w-full">
+                      <Link to="/settings">
+                        {activeItem === '/settings' ? (
+                          <SidebarOptions
+                            sx={{
+                              color: '#007bff',
+                              background: 'white',
+                              borderRadius: '6px',
+                              '&:hover': {
+                                transform: 'translateY(0px)',
+                                color: '#007bff',
+                                background: 'white',
+                              },
+                              '&:active': { transform: 'translateY(0px)' },
+                            }}
+                          >
+                            <RouteCon>
+                              <BsGear
+                                className={
+                                  activeItem === '/settings'
+                                    ? 'icon-active'
+                                    : ''
+                                }
+                              />
+                              <p className="text-[18px]">Colleges</p>
+                            </RouteCon>
+                          </SidebarOptions>
+                        ) : (
+                          <SidebarOptions>
+                            <RouteCon>
+                              <BsGear />
+                              <p className="text-[18px]">Colleges</p>
+                            </RouteCon>
+                          </SidebarOptions>
+                        )}
+                      </Link>
+                    </div>
+                  ) : null}
+                </div>
+              </>
+            ) : null}
+          </div>
+
+          <div className="flex flex-col justify-center items-center w-[100%] p-4 shadow-sm">
+            <div className="group flex justify-start items-center gap-4 w-[100%] bg-[#fefefe] p-4 rounded-tl-[12px] rounded-tr-[12px]">
+              <img
+                src={drac}
+                alt=""
+                className="w-[50px] h-[50px] transition-transform duration-300 transform group-hover:rotate-[360deg]"
+              />
+              <div className="flex flex-col">
+                <div className="text-[#007bff] text-[18px] font-semibold hover:underline cursor-pointer">
+                  {auth.userDetails.userName.slice(0, 13)}
+                </div>
+                <div className="text-[#606060] text-[14px]">
+                  {auth.userDetails.role?.slice(0, 5)}
+                </div>
               </div>
+            </div>
+            <div
+              onClick={logoutUtil}
+              className="group cursor-pointer bg-[#fefefe] flex justify-start gap-2 items-center w-[100%] border-t-[1px] border-gray-200 rounded-bl-[8px] rounded-br-[8px] px-4 py-2  hover:bg-[#ff3131]"
+            >
+              <span className="text-[14px] text-[#007bff] font-semibold group-hover:text-white">
+                Sign out
+              </span>
             </div>
           </div>
         </div>
@@ -395,42 +393,29 @@ function Sidebar(props) {
 
   return (
     <Box sx={{ display: 'flex' }}>
-      <AppNavBar>
-        <div className="flex h-[100%] justify-between items-center px-[20px]">
-          <Toolbar
-            sx={{
-              display: 'flex',
-              justifyContent: 'flex-start',
-              padding: '0',
-            }}
-          >
-            <IconButton
-              aria-label="open drawer"
-              edge="start"
-              onClick={handleDrawerToggle}
-              sx={{
-                mr: 2,
-                display: { sm: 'none' },
-                color: 'white',
-              }}
-            >
-              <CgMenuLeft />
-            </IconButton>
-          </Toolbar>
-          <div className="flex justify-center items-center gap-[24px] mr-3">
-            <div className="w-[1px] h-[24px] bg-[lightgray]"></div>
-            <div className="text-white flex justify-center items-center rounded-[6px] cursor-pointer gap-4 hover:underline">
-              <div className="text-[18px]">
-                {`${auth?.userDetails?.userName}`}
-              </div>
-              <Link to="/account">
-                <div className="flex justify-center items-center">
-                  <BsBoxArrowUpRight className="text-[24px]" />
-                </div>
-              </Link>
-            </div>
-          </div>
-        </div>
+      <AppNavBar
+        sx={{
+          padding: '0',
+          margin: '-4px 0 0 10px',
+          width: 'fit-content',
+          right: 'auto',
+        }}
+      >
+        <IconButton
+          aria-label="open drawer"
+          edge="start"
+          onClick={handleDrawerToggle}
+          sx={{
+            display: { sm: 'none' },
+            color: 'white',
+            width: 'fit-content',
+            height: '100%',
+            padding: '0',
+            margin: '0',
+          }}
+        >
+          <CgMenuLeft />
+        </IconButton>
       </AppNavBar>
       <Box
         component="nav"
@@ -455,6 +440,7 @@ function Sidebar(props) {
               width: '240px',
               border: 'none',
               overflow: 'hidden',
+              backgroundColor: 'transparent',
             },
           }}
         >
@@ -468,6 +454,7 @@ function Sidebar(props) {
               boxSizing: 'border-box',
               width: '240px',
               border: 'none',
+              backgroundColor: 'transparent',
             },
           }}
           open

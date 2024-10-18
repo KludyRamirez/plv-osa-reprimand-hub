@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import { BsChevronBarDown, BsFilter, BsX } from "react-icons/bs";
-import { FaPlus } from "react-icons/fa6";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import moment from "moment";
+import React, { useState } from 'react';
+import { BsChevronBarDown, BsFilter, BsX } from 'react-icons/bs';
+import { FaPlus } from 'react-icons/fa6';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import moment from 'moment';
 
 const EditCaseFormModal = ({
   handleChange,
@@ -25,8 +25,8 @@ const EditCaseFormModal = ({
     `${updatedValues?.student?.firstName} ${updatedValues?.student?.surName}`
   );
   const [filteredStudents, setFilteredStudents] = useState(students);
-  const [selectedDateOfIncident, setSelectedDateOfIncident] = useState("");
-  const [selectedDateReported, setSelectedDateReported] = useState("");
+  const [selectedDateOfIncident, setSelectedDateOfIncident] = useState('');
+  const [selectedDateReported, setSelectedDateReported] = useState('');
 
   const handleSearchStudents = (e) => {
     const searchText = e.target.value.toLowerCase();
@@ -43,16 +43,16 @@ const EditCaseFormModal = ({
     if (filtered.length > 0) {
       setUpdatedValues((prevValues) => ({
         ...prevValues,
-        studentName: filtered[0]?.firstName + " " + filtered[0]?.surName,
+        studentName: filtered[0]?.firstName + ' ' + filtered[0]?.surName,
         student: filtered[0]?._id,
         year: filtered[0]?.year,
       }));
     } else {
       setUpdatedValues((prevValues) => ({
         ...prevValues,
-        studentName: "",
-        student: "",
-        year: "",
+        studentName: '',
+        student: '',
+        year: '',
       }));
     }
   };
@@ -68,8 +68,8 @@ const EditCaseFormModal = ({
   const isDisabledDateReported = (date) => {
     return (
       moment(date).isAfter(
-        moment(selectedDateOfIncident).subtract(1, "day"),
-        "day"
+        moment(selectedDateOfIncident).subtract(1, 'day'),
+        'day'
       ) && !isSunday(date)
     );
   };
@@ -86,39 +86,39 @@ const EditCaseFormModal = ({
 
   const formatDate = (dateString) => {
     const date = moment
-      .utc(dateString, "YYYY-MM-DDTHH:mm:ss.SSS[Z]")
-      .add(1, "day");
-    return date.format("MM/DD/YYYY");
+      .utc(dateString, 'YYYY-MM-DDTHH:mm:ss.SSS[Z]')
+      .add(1, 'day');
+    return date.format('MM/DD/YYYY');
   };
 
   return (
     <>
       <form onSubmit={(e) => handleEditCase(e)}>
-        <div className="p-10">
-          <div className="text-[26px] text-[#077bff] font-semibold flex justify-between">
-            Update Case
-            <BsX
-              onClick={handleCloseModalEdit}
-              className="text-[36px] cursor-pointer"
-            />
-          </div>
+        <div className="text-[26px] text-[#077bff] font-semibold flex justify-between mt-10 px-10">
+          Update Case
+          <BsX
+            onClick={handleCloseModalEdit}
+            className="text-[36px] cursor-pointer"
+          />
+        </div>
 
-          <div className="text-[#606060] pt-8 flex flex-col gap-2">
-            <div className="flex items-center gap-2">
-              <span>Search</span>
-              <BsFilter className="text-[22px]" />
-            </div>
-            <input
-              value={searchTerm}
-              onChange={handleSearchStudents}
-              type="text"
-              autoComplete="off"
-              placeholder="Search accused's student no., firstname, etc."
-              className={`border-[1px] py-3 px-5 rounded-[32px] w-[100%] bg-white focus:outline-none`}
-            />
+        <div className="text-[#606060] mt-8 flex flex-col gap-2 px-10">
+          <div className="flex items-center gap-2">
+            <span>Search</span>
+            <BsFilter className="text-[22px]" />
           </div>
+          <input
+            value={searchTerm}
+            onChange={handleSearchStudents}
+            type="text"
+            autoComplete="off"
+            placeholder="Search accused's student no., firstname, etc."
+            className={`border-[1px] py-3 px-5 rounded-[32px] w-[100%] bg-white focus:outline-none`}
+          />
+        </div>
 
-          <div className="text-[#606060] pt-8 flex flex-col gap-2 w-[100%]">
+        <div className="flex flex-col gap-8 mt-10 pt-9 pl-10 pr-10 pb-10 bg-gray-100">
+          <div className="text-[#606060] flex flex-col gap-2 w-[100%]">
             <div className="flex gap-2 items-center">
               <span>Accused</span>
               <BsChevronBarDown />
@@ -127,7 +127,7 @@ const EditCaseFormModal = ({
               name="studentName"
               value={updatedValues?.studentName}
               onChange={handleCaseOwnerChange}
-              className="appearance-none py-3 px-5 rounded-[32px] focus:outline-none border-[1px] focus:border-[#007bff]"
+              className="border-[1px] appearance-none py-3 px-5 rounded-[32px] focus:outline-none focus:border-[#007bff]"
             >
               {filteredStudents
                 ?.sort((a, b) => {
@@ -154,7 +154,8 @@ const EditCaseFormModal = ({
                 ))}
             </select>
           </div>
-          <div className="text-[#606060] pt-8 flex gap-2">
+
+          <div className="text-[#606060] flex gap-2">
             <div className="flex flex-col gap-2 w-[100%]">
               <div className="">Date of Incident</div>
               <DatePicker
@@ -178,7 +179,7 @@ const EditCaseFormModal = ({
               />
             </div>
           </div>
-          <div className="text-[#606060] pt-8 flex gap-2">
+          <div className="text-[#606060] flex gap-2">
             <div className="flex flex-col gap-2 w-[50%]">
               <div className="">Type Of Violation</div>
               <select
@@ -202,7 +203,7 @@ const EditCaseFormModal = ({
                 onChange={handleChange}
                 className="appearance-none py-3 px-5 rounded-[32px] focus:outline-none border-[1px] focus:border-[#007bff]"
               >
-                {updatedValues?.typeOfViolation === "Major" ? (
+                {updatedValues?.typeOfViolation === 'Major' ? (
                   <>
                     {majorViolation?.map((r) => (
                       <option key={r} value={r}>
@@ -222,30 +223,30 @@ const EditCaseFormModal = ({
               </select>
             </div>
           </div>
+        </div>
 
-          <div className="w-[100%] pt-12 pb-2 flex justify-end items-center">
-            {updatedValues?.student !== "" &&
-            updatedValues.dateOfIncident !== "" &&
-            updatedValues.dateReported !== "" &&
-            updatedValues?.reportedViolation !== "" &&
-            updatedValues?.typeOfViolation !== "" ? (
-              <button
-                type="submit"
-                className="w-[100%] cursor-pointer py-3 px-4 bg-[#007bff] text-[white] text-[16px] flex gap-2 items-center rounded-[32px]"
-              >
-                <FaPlus />
-                <div>Update Case</div>
-              </button>
-            ) : (
-              <button
-                disabled
-                className="w-[100%] py-3 px-4 bg-blue-300 text-[white] text-[16px] flex gap-2 items-center rounded-[32px]"
-              >
-                <FaPlus />
-                <div>Update Case</div>
-              </button>
-            )}
-          </div>
+        <div className="w-[100%] p-10 flex justify-end items-center">
+          {updatedValues?.student !== '' &&
+          updatedValues.dateOfIncident !== '' &&
+          updatedValues.dateReported !== '' &&
+          updatedValues?.reportedViolation !== '' &&
+          updatedValues?.typeOfViolation !== '' ? (
+            <button
+              type="submit"
+              className="cursor-pointer w-[100%] py-3 px-4 bg-[#007bff] text-[white] text-[16px] flex gap-2 items-center rounded-[4px]"
+            >
+              <FaPlus />
+              <div>Update Case</div>
+            </button>
+          ) : (
+            <button
+              disabled
+              className="py-3 px-4 w-[100%] bg-blue-300 text-[white] text-[16px] flex gap-2 items-center rounded-[4px]"
+            >
+              <FaPlus />
+              <div>Update Case</div>
+            </button>
+          )}
         </div>
       </form>
     </>

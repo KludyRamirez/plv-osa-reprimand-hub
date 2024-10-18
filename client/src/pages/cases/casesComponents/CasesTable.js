@@ -1,38 +1,44 @@
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { createSelector } from "reselect";
-import axios from "axios";
-import { BsChevronUp, BsFolder2Open, BsPen, BsTrash3 } from "react-icons/bs";
-import Modal from "@mui/material/Modal";
-import { styled } from "@mui/system";
-import DeleteCaseModal from "./DeleteCaseModal";
-import toast from "react-hot-toast";
-import DeleteManyCaseModal from "./DeleteManyCaseModal";
-import { useNavigate } from "react-router-dom";
-import EditCase from "./EditCase";
-import PatchCaseStatus from "./PatchCaseStatus";
-import RemarksCase from "./RemarksCase";
-import pdfExporter from "../../../externalUtils/pdfExporter";
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { createSelector } from 'reselect';
+import axios from 'axios';
+import {
+  BsChevronUp,
+  BsFolder2Open,
+  BsFolderMinus,
+  BsPen,
+  BsTrash3,
+} from 'react-icons/bs';
+import Modal from '@mui/material/Modal';
+import { styled } from '@mui/system';
+import DeleteCaseModal from './DeleteCaseModal';
+import toast from 'react-hot-toast';
+import DeleteManyCaseModal from './DeleteManyCaseModal';
+import { useNavigate } from 'react-router-dom';
+import EditCase from './EditCase';
+import PatchCaseStatus from './PatchCaseStatus';
+import RemarksCase from './RemarksCase';
+import pdfExporter from '../../../externalUtils/pdfExporter';
 
-const ModalBox = styled("div")({
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  width: "48%",
-  transform: "translate(-50%, -50%)",
-  background: "white",
-  border: "none",
-  outline: "none",
+const ModalBox = styled('div')({
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  width: '48%',
+  transform: 'translate(-50%, -50%)',
+  background: 'white',
+  border: 'none',
+  outline: 'none',
 
-  "&:focus": {
-    border: "none",
+  '&:focus': {
+    border: 'none',
   },
 
-  "@media (max-width: 767px)": {
-    width: "100%",
-    height: "100%",
-    borderRadius: "0px",
-    border: "none",
+  '@media (max-width: 767px)': {
+    width: '100%',
+    height: '100%',
+    borderRadius: '0px',
+    border: 'none',
   },
 });
 
@@ -48,7 +54,7 @@ const CasesTable = ({
   allowedRoles,
 }) => {
   const [selectAll, setSelectAll] = useState(false);
-  const [caseDeleteId, setCaseDeleteId] = useState("");
+  const [caseDeleteId, setCaseDeleteId] = useState('');
   const [showDeleteCaseModal, setShowDeleteCaseModal] = useState(false);
   const [showDeleteManyCaseModal, setShowDeleteManyCaseModal] = useState(false);
   const [showEditCaseModal, setShowEditCaseModal] = useState(false);
@@ -96,8 +102,8 @@ const CasesTable = ({
   const deleteSelectedCases = async () => {
     try {
       if (!auth.userDetails || !auth.userDetails.token) {
-        console.error("Authentication token not found.");
-        navigate("/");
+        console.error('Authentication token not found.');
+        navigate('/');
         return;
       }
 
@@ -116,16 +122,16 @@ const CasesTable = ({
       getCases();
       toast.success(res.data.message);
     } catch (error) {
-      console.error("Error deleting selected Cases:", error);
+      console.error('Error deleting selected Cases:', error);
       if (error.response) {
         if (error.response.status === 403) {
-          console.error("Unauthorized access. Please check your permissions.");
-          navigate("/forbidden");
+          console.error('Unauthorized access. Please check your permissions.');
+          navigate('/forbidden');
         } else {
           toast.error(error.response.data.message);
         }
       } else {
-        toast.error("An error occurred while deleting the selected cases.");
+        toast.error('An error occurred while deleting the selected cases.');
       }
     }
   };
@@ -133,7 +139,7 @@ const CasesTable = ({
   const deleteOneCase = async (id) => {
     try {
       if (!auth.userDetails.token) {
-        console.error("Authentication token not found.");
+        console.error('Authentication token not found.');
         return;
       }
       const res = await axios.delete(
@@ -148,7 +154,7 @@ const CasesTable = ({
       getCases();
       toast.success(res.data.message);
     } catch (error) {
-      console.error("Error deleting Case:", error);
+      console.error('Error deleting Case:', error);
     }
   };
 
@@ -163,7 +169,7 @@ const CasesTable = ({
         await deleteOneCase(caseDeleteId);
       }
     } catch (error) {
-      console.error("Error deleting schedule:", error);
+      console.error('Error deleting schedule:', error);
     } finally {
       setShowDeleteCaseModal(false);
       getCases();
@@ -190,7 +196,7 @@ const CasesTable = ({
     try {
       setSelectedCaseEdit(cas);
     } catch (error) {
-      console.error("Error handling case edit click:", error);
+      console.error('Error handling case edit click:', error);
     } finally {
       setShowEditCaseModal(true);
     }
@@ -206,7 +212,7 @@ const CasesTable = ({
     try {
       setSelectedCasePatch(cas);
     } catch (error) {
-      console.error("Error handling case Patch click:", error);
+      console.error('Error handling case Patch click:', error);
     } finally {
       setShowPatchCaseModal(true);
     }
@@ -246,7 +252,7 @@ const CasesTable = ({
   return (
     <>
       <Modal
-        sx={{ border: "none", outline: "none" }}
+        sx={{ border: 'none', outline: 'none' }}
         open={showEditCaseModal}
         onClose={handleCloseModalEdit}
         aria-labelledby="parent-modal-title"
@@ -263,13 +269,13 @@ const CasesTable = ({
         </ModalBox>
       </Modal>
       <Modal
-        sx={{ border: "none", outline: "none" }}
+        sx={{ border: 'none', outline: 'none' }}
         open={showPatchCaseModal}
         onClose={handleCloseModalPatch}
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-        <ModalBox sx={{ width: "38%" }}>
+        <ModalBox sx={{ width: '40%' }}>
           <PatchCaseStatus
             handleCloseModalPatch={handleCloseModalPatch}
             selectedCasePatch={selectedCasePatch}
@@ -280,13 +286,13 @@ const CasesTable = ({
         </ModalBox>
       </Modal>
       <Modal
-        sx={{ border: "none", outline: "none" }}
+        sx={{ border: 'none', outline: 'none' }}
         open={showRemarksCaseModal}
         onClose={handleCloseModalRemarks}
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-        <ModalBox sx={{ width: "38%" }}>
+        <ModalBox sx={{ width: '38%' }}>
           <RemarksCase
             handleCloseModalRemarks={handleCloseModalRemarks}
             selectedCaseRemarks={selectedCaseRemarks}
@@ -297,7 +303,7 @@ const CasesTable = ({
         </ModalBox>
       </Modal>
       <Modal
-        sx={{ border: "none", outline: "none" }}
+        sx={{ border: 'none', outline: 'none' }}
         open={showDeleteCaseModal}
         onClose={handleCloseModal}
         aria-labelledby="parent-modal-title"
@@ -305,9 +311,9 @@ const CasesTable = ({
       >
         <ModalBox
           sx={{
-            width: "30%",
-            background: "linear-gradient(to bottom, #ff3131, #efefef, #efefef)",
-            borderRadius: "12px",
+            width: '29%',
+            background: '#efefef',
+            borderRadius: '12px',
           }}
         >
           <DeleteCaseModal
@@ -317,7 +323,7 @@ const CasesTable = ({
         </ModalBox>
       </Modal>
       <Modal
-        sx={{ border: "none", outline: "none" }}
+        sx={{ border: 'none', outline: 'none' }}
         open={showDeleteManyCaseModal}
         onClose={handleCloseModalDeleteMany}
         aria-labelledby="parent-modal-title"
@@ -325,9 +331,9 @@ const CasesTable = ({
       >
         <ModalBox
           sx={{
-            width: "30%",
-            background: "linear-gradient(to bottom, #ff3131, #efefef, #efefef)",
-            borderRadius: "12px",
+            width: '29%',
+            background: '#efefef',
+            borderRadius: '12px',
           }}
         >
           <DeleteManyCaseModal
@@ -339,11 +345,9 @@ const CasesTable = ({
 
       <div className="w-full overflow-x-auto">
         <div
-          className={`w-full h-[376px] flex flex-col rounded-[10px] border-[1px] text-[#505050] ${
-            cases && cases.length > 5 ? "overflow-y-scroll" : ""
-          }`}
+          className={`w-full h-[374px] flex flex-col rounded-[10px] border-[1px] text-[#505050] overflow-y-scroll`}
         >
-          <div className="w-[fit-content] flex items-center gap-4 pl-6 pr-2">
+          <div className="w-[fit-content] flex items-center gap-4 px-6">
             <div className="w-[30px] h-[60px] flex justify-start items-center">
               <input
                 type="checkbox"
@@ -352,7 +356,7 @@ const CasesTable = ({
                 onChange={toggleSelectAll}
               />
             </div>
-            <div className="w-[89px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+            <div className="w-[90px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
               No. | Off
             </div>
             <div className="w-[110px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
@@ -419,10 +423,10 @@ const CasesTable = ({
               {cases?.map((c, k) => (
                 <div
                   className={`w-[fit-content]
-              flex items-center gap-4 pl-6 pr-2 ${
+              flex items-center gap-4 px-6 ${
                 k % 2 === 0
-                  ? "bg-gradient-to-br from-gray-100 to-gray-100"
-                  : "bg-white"
+                  ? 'bg-gradient-to-br from-gray-100 to-gray-100'
+                  : 'bg-white'
               }`}
                   key={k}
                 >
@@ -434,7 +438,7 @@ const CasesTable = ({
                       onChange={() => toggleCaseSelection(c?._id)}
                     />
                   </div>
-                  <div className="w-[89px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px]">
+                  <div className="w-[90px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px]">
                     <span>{c?.caseNo}</span>
                     <span>{c?.offense}</span>
                   </div>
@@ -460,25 +464,25 @@ const CasesTable = ({
                     {c?.reportedViolation?.slice(0, 18)}...
                   </div>
                   <div className=" w-[160px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
-                    {new Date(c?.dateOfIncident)?.toLocaleDateString("en-US", {
-                      month: "long",
-                      day: "numeric",
-                      year: "numeric",
+                    {new Date(c?.dateOfIncident)?.toLocaleDateString('en-US', {
+                      month: 'long',
+                      day: 'numeric',
+                      year: 'numeric',
                     })}
                   </div>
                   <div className=" w-[160px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
-                    {new Date(c?.dateReported)?.toLocaleDateString("en-US", {
-                      month: "long",
-                      day: "numeric",
-                      year: "numeric",
+                    {new Date(c?.dateReported)?.toLocaleDateString('en-US', {
+                      month: 'long',
+                      day: 'numeric',
+                      year: 'numeric',
                     })}
                   </div>
                   <div className="container flex justify-start items-center w-[144px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px] gap-3">
                     <div
                       className={`${
-                        c?.statusOfCase === "Case Solved"
-                          ? "text-[#32CD32]"
-                          : "text-[#007bff]"
+                        c?.statusOfCase === 'Case Solved'
+                          ? 'text-[#32CD32]'
+                          : 'text-[#007bff]'
                       }`}
                     >
                       {c?.statusOfCase}
@@ -495,7 +499,7 @@ const CasesTable = ({
                             className="relative container w-[36px] h-[36px] flex justify-center items-center bg-white border-[1px] border-[#007bff] rounded-[18px] cursor-pointer"
                           >
                             <BsChevronUp className="text-[18px] text-[#007bff]" />
-                            <div className="absolute bg-gradient-to-br from-[#007bff] via-[#079bff] to-[#007bff] py-2 px-4 top-[-62px] left-[-14px] rounded-[32px] text-[#606060] additional-content z-40">
+                            <div className="absolute bg-gradient-to-br from-[#007bff] via-[#079bff] to-[#007bff] py-2 px-4 top-[-62px] left-[-16px] rounded-[32px] text-[#606060] additional-content z-40">
                               <span className="text-[16px] text-white">
                                 Update status
                               </span>
@@ -519,7 +523,7 @@ const CasesTable = ({
                             className="relative container w-[36px] h-[36px] flex justify-center items-center bg-white border-[1px] border-[#ff3131] rounded-[18px] cursor-pointer"
                           >
                             <BsTrash3 className="text-[18px] text-[#ff3131]" />
-                            <div className="absolute bg-gradient-to-br from-[#C41E3A] via-[#ff3131] to-[#ff3131] py-2 px-4 top-[-62px] right-[-12px] rounded-[32px] text-[#606060] additional-content z-40">
+                            <div className="absolute bg-gradient-to-br from-[#C41E3A] via-[#ff3131] to-[#ff3131] py-2 px-4 top-[-62px] right-[-14px] rounded-[32px] text-[#606060] additional-content z-40">
                               <span className="text-[16px] text-white">
                                 Delete case
                               </span>
@@ -558,8 +562,8 @@ const CasesTable = ({
               ))}
             </>
           ) : (
-            <div className="w-100 h-[306px] flex flex-col justify-center items-center gap-2 text-[#707070] border-t-[1px] border-t-[#f0f0f0]">
-              <BsFolder2Open className="text-[42px]" />
+            <div className="w-100 h-[376px] flex flex-col justify-center items-center gap-2 text-[#707070] border-t-[1px] border-t-[#f0f0f0]">
+              <BsFolderMinus className="text-[42px]" />
               <div className="text-[16px]">No cases available</div>
             </div>
           )}

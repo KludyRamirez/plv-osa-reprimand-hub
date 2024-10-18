@@ -1,14 +1,5 @@
 import React, { useState } from 'react';
-import {
-  BsBuilding,
-  BsBuildings,
-  BsCalendar4Week,
-  BsChevronBarDown,
-  BsCheckCircle,
-  BsColumns,
-  BsFilter,
-  BsGenderMale,
-} from 'react-icons/bs';
+import { BsChevronBarDown, BsFilter } from 'react-icons/bs';
 import StudentsTable from './StudentsTable';
 
 const StudentsFilter = ({
@@ -129,9 +120,9 @@ const StudentsFilter = ({
             <div className="phone:w-[49%] flex flex-col items-start gap-2">
               <div className="pl-2 w-[210px] phone:w-[100%] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
-                  <div>Status</div> <BsChevronBarDown />
+                  <div>Status</div>
                 </div>
-                <BsCheckCircle />
+                <BsChevronBarDown />
               </div>
               <select
                 onChange={(e) => setSelectedStatus(e.target.value)}
@@ -146,9 +137,9 @@ const StudentsFilter = ({
             <div className="phone:w-[48.8%] flex flex-col items-start gap-2">
               <div className="pl-2 w-[210px] phone:w-[100%] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
-                  <div>Sex</div> <BsChevronBarDown />
+                  <div>Sex</div>
                 </div>
-                <BsGenderMale />
+                <BsChevronBarDown />
               </div>
               <select
                 onChange={(e) => setSex(e.target.value)}
@@ -163,9 +154,9 @@ const StudentsFilter = ({
             <div className="phone:w-[49%] flex flex-col items-start gap-2">
               <div className="pl-1 w-[210px] phone:w-[100%] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
-                  <div>Year</div> <BsChevronBarDown />
+                  <div>Year</div>
                 </div>
-                <BsCalendar4Week />
+                <BsChevronBarDown />
               </div>
               <select
                 onChange={(e) => setYear(e.target.value)}
@@ -183,9 +174,9 @@ const StudentsFilter = ({
             <div className="phone:w-[48.8%] flex flex-col items-start gap-2">
               <div className="pl-1 w-[210px] phone:w-[100%] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
-                  <div>Section</div> <BsChevronBarDown />
+                  <div>Section</div>
                 </div>
-                <BsColumns />
+                <BsChevronBarDown />
               </div>
               <select
                 onChange={(e) => setSection(e.target.value)}
@@ -202,9 +193,9 @@ const StudentsFilter = ({
             <div className="phone:w-[49%] flex flex-col items-start gap-2">
               <div className="pl-1 w-[210px] phone:w-[100%] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
-                  <div>College</div> <BsChevronBarDown />
+                  <div>College</div>
                 </div>
-                <BsBuildings />
+                <BsChevronBarDown />
               </div>
               <select
                 onChange={(e) => setCollege(e.target.value)}
@@ -221,9 +212,9 @@ const StudentsFilter = ({
             <div className="phone:w-[48.8%] flex flex-col items-start gap-2">
               <div className="pl-1 w-[210px] phone:w-[100%] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
-                  <div>Department</div> <BsChevronBarDown />
+                  <div>Department</div>
                 </div>
-                <BsBuilding />
+                <BsChevronBarDown />
               </div>
               <select
                 onChange={(e) => setDepartment(e.target.value)}
