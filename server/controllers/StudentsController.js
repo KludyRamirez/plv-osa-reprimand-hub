@@ -41,16 +41,13 @@ const createStudent = async (req, res) => {
 
 const getStudents = async (req, res) => {
   try {
-    const students = await Student.find();
     const currentDate = new Date();
 
-    for (const student of students) {
-      if (currentDate.getMonth() === 11 && currentDate.getDate() === 31) {
-        student.year += 1;
-      }
-
-      await student.save();
+    if (currentDate.getMonth() === 11 && currentDate.getDate() === 31) {
+      await Student.updateMany({}, { $inc: { year: 1 } });
     }
+
+    const students = await Student.find();
 
     res.json(students);
   } catch (error) {

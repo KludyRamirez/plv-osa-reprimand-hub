@@ -77,9 +77,9 @@ const editUser = async (req, res) => {
 };
 
 const deleteOneUser = async (req, res) => {
-  try {
-    const userData = req.user;
+  const userData = req.user;
 
+  try {
     const deletedUser = await User.findByIdAndDelete(req.params.id);
     if (!deletedUser) {
       return res.status(404).json({ error: "Cannot find selected user." });
@@ -105,6 +105,8 @@ const deleteOneUser = async (req, res) => {
 };
 
 const deleteManyUser = async (req, res) => {
+  const userData = req.user;
+
   try {
     const { users } = req.body;
 
