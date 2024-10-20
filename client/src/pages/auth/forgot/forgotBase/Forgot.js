@@ -96,7 +96,7 @@ const Forgot = ({ auth, toast }) => {
   return (
     <div className="w-[100%] h-screen bg-white">
       <div className="w-[100%] flex flex-col items-center gap-[80px]">
-        <div className="w-[100%] px-16 shadow-sm bg-white zIndex-2">
+        <div className="w-[100%] px-14 shadow-sm bg-white zIndex-2">
           <div className="w-[100%] h-[90px] flex justify-between items-center gap-10">
             <div className="flex justify-center items-center gap-10">
               <div className="flex justify-center items-center gap-6">
@@ -116,7 +116,7 @@ const Forgot = ({ auth, toast }) => {
                 </FormTitle>
               </div>
             </div>
-            <div className="flex justify-center items-center gap-3">
+            {/* <div className="flex justify-center items-center gap-3">
               <Link to="/">
                 <div className="flex items-center gap-2 hover:border-[1px] text-base text-[#077bff] cursor-pointer bg-white border-[1px] border-[#077bff] px-3 py-2 rounded-[6px] hover:bg-[#007bff] hover:text-white">
                   Sign in
@@ -128,7 +128,7 @@ const Forgot = ({ auth, toast }) => {
                   <BsMegaphone />
                 </div>
               </Link>
-            </div>
+            </div> */}
           </div>
         </div>
         <ForgotForm

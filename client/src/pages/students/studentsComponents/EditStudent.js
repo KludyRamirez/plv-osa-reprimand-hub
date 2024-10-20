@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { createSelector } from "reselect";
 import axios from "axios";
@@ -46,6 +47,7 @@ const EditStudent = ({
   const [errors, setErrors] = useState(errorsInitialState);
 
   const auth = useSelector(authSelector);
+  const location = useLocation();
 
   const handleEditStudent = async (e) => {
     e.preventDefault();
@@ -74,8 +76,12 @@ const EditStudent = ({
       handleCloseModalEdit
         ? handleCloseModalEdit()
         : handleCloseModalEditStudent();
-      await getOneStudent();
-      await getStudents();
+
+      if (location.pathname === "/profile/:id") {
+        await getOneStudent();
+      } else if (location.pathname === "/students") {
+        await getStudents();
+      }
     }
   };
 

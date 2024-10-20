@@ -130,7 +130,7 @@ const Reset = ({ auth, toast }) => {
                 </FormTitle>
               </div>
             </div>
-            <div className="flex justify-center items-center gap-3">
+            {/* <div className="flex justify-center items-center gap-3">
               <div className="flex items-center border-[1px] border-gray-100 gap-2 text-base text-[#077bff] cursor-pointer bg-[#f7f7f7] px-3 py-2 rounded-[6px]">
                 Sign in
               </div>
@@ -139,7 +139,7 @@ const Reset = ({ auth, toast }) => {
                 <span>Announcements</span>
                 <BsMegaphone />
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
         <ResetForm

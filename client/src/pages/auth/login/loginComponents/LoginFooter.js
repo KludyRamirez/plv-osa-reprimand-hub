@@ -1,5 +1,5 @@
 import React from "react";
-import { BsFacebook, BsMessenger, BsTwitter } from "react-icons/bs";
+import { BsFacebook, BsGithub, BsLinkedin } from "react-icons/bs";
 
 import { FaRegCopyright } from "react-icons/fa6";
 import osaLogo from "../../../../images/osalogo.jpg";
@@ -24,9 +24,30 @@ const LoginFooter = () => {
               </div>
             </div>
           </div>
-          <div className="flex flex-col gap-3"></div>
+          <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-3">
+              <div className="flex justify-end items-center gap-2">
+                <div className="text-[16px] text-[white]">
+                  <div className="flex justify-end items-center gap-4 ">
+                    <a href="https://facebook.com" target="_blank">
+                      <BsFacebook className="text-[24px] text-white cursor-pointer" />
+                    </a>
+                    <a
+                      href="https://www.linkedin.com/in/kludyramirez/"
+                      target="_blank"
+                    >
+                      <BsLinkedin className="text-[24px] text-white cursor-pointer" />
+                    </a>
+                    <a href="https://github.com/KludyRamirez" target="_blank">
+                      <BsGithub className="text-[24px] text-white cursor-pointer" />
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="w-[96%] py-4 px-8 border-l-[1px] border-r-[1px] border-b-[1px] flex justify-between items-center bg-white relative">
+        {/* <div className="w-[96%] py-4 px-8 border-l-[1px] border-r-[1px] border-b-[1px] flex justify-between items-center bg-white relative">
           <div className="flex flex-col gap-3">
             <div className="flex justify-start items-center text-[16px] text-[#007bff] gap-2">
               <FaRegCopyright />
@@ -36,23 +57,11 @@ const LoginFooter = () => {
               </span>
             </div>
           </div>
-          <div className="flex flex-col gap-3">
-            <div className="flex justify-end items-center gap-2">
-              <div className="text-[16px] text-[#007bff]">
-                <div className="flex justify-end items-center gap-4 ">
-                  <a href="https://facebook.com" target="_blank">
-                    <BsFacebook className="text-[24px] text-[#007bff] cursor-pointer" />
-                  </a>
-                  <BsTwitter className="text-[24px] text-[#007bff]" />
-                  <BsMessenger className="text-[24px] text-[#007bff]" />
-                </div>
-              </div>
-            </div>
-          </div>
+         
           <div className="absolute top-[-4px] left-[950px] w-[60px] h-[60px] transform rotate-[45deg] bg-white zIndex-3"></div>
           <div className="absolute top-[-12px] left-[980px] w-[60px] h-[60px] transform rotate-[45deg] bg-white zIndex-3"></div>
           <div className="absolute top-[-18px] left-[1030px] w-[60px] h-[60px] transform rotate-[45deg] bg-white zIndex-3"></div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

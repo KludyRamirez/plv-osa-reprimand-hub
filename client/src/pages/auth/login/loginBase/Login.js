@@ -60,7 +60,7 @@ const Login = ({ login, setLoading }) => {
   return (
     <div className="w-full h-screen bg-white">
       <div className="w-full flex flex-col gap-[80px]">
-        <div className="px-16 shadow-sm bg-white zIndex-2">
+        <div className="px-12 shadow-sm bg-white zIndex-2">
           <div className="h-[90px] flex justify-between items-center gap-10">
             <div className="flex justify-center items-center gap-10">
               <div className="flex items-center gap-6">
@@ -80,7 +80,7 @@ const Login = ({ login, setLoading }) => {
                 </FormTitle>
               </div>
             </div>
-            <div className="flex justify-center items-center gap-3">
+            {/* <div className="flex justify-center items-center gap-3">
               <div
                 className="flex items-center gap-2 text-base text-[#077bff] cursor-pointer bg-white border-[1px] border-[#077bff] px-3 py-2 rounded-[6px] hover:bg-[#007bff] hover:text-white hover:border-[1px]"
                 onClick={() => handleActiveChange("Login")}
@@ -94,7 +94,7 @@ const Login = ({ login, setLoading }) => {
                 <span>Announcements</span>
                 <BsMegaphone />
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="w-[100%] flex justify-center items-start gap-24">
@@ -137,7 +137,7 @@ const Login = ({ login, setLoading }) => {
               </div>
             </div>
           </div>
-
+          {/* 
           <div className="relative">
             <div className="h-[100%] flex flex-col p-4 z-2 mt-6 zIndex-2">
               <FormTitle
@@ -240,7 +240,7 @@ const Login = ({ login, setLoading }) => {
             <div className="absolute top-[130px] right-[-100px] w-[170px] h-[170px]">
               <img src={crown} alt="" className="w-[100%] h-[100%]" />
             </div>
-          </div>
+          </div> */}
         </div>
         <LoginFooter />
       </div>
