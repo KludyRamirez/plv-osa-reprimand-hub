@@ -107,8 +107,11 @@ const deleteOneCad = async (req, res) => {
 
 const deleteManyCad = async (req, res) => {
   try {
+    const userData = req.user;
+
     const { cads } = req.body;
     await Cad.deleteMany({ _id: { $in: cads } });
+
     await Notification.create({
       userId: userData._id,
       typeOfNotif: "Utilities",

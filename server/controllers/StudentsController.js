@@ -133,6 +133,8 @@ const deleteOneStudent = async (req, res) => {
 
 const deleteManyStudent = async (req, res) => {
   try {
+    const userData = req.user;
+
     const { students } = req.body;
     await Student.deleteMany({ _id: { $in: students } });
 
