@@ -1,28 +1,28 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   Navigate,
-} from "react-router-dom";
-import Students from "./pages/students/studentsBase/Students";
-import toast, { Toaster } from "react-hot-toast";
-import Login from "./pages/auth/login/loginBase/Login";
-import Register from "./pages/auth/register/registerBase/Register";
-import Cases from "./pages/cases/casesBase/Cases";
-import Statistics from "./pages/statistics/statisticsBase/Statistics";
-import History from "./pages/history/historyBase/History";
-import StudentProfile from "./pages/studentsProfile/studentsProfileBase/StudentProfile";
-import Settings from "./pages/settings/settingsBase/Settings";
-import AccountSettings from "./pages/accountSettings/accountSettingsBase/AccountSettings";
-import SecureRoles from "./externalUtils/SecureRoles";
-import { useSelector } from "react-redux";
-import { createSelector } from "reselect";
-import Error403 from "./externalComponents/Errors/Error403";
-import Forgot from "./pages/auth/forgot/forgotBase/Forgot";
-import Reset from "./pages/auth/reset/resetBase/Reset";
-import Loading from "./externalUtils/Loading";
-import PersistLogin from "./externalUtils/PersistLogin";
+} from 'react-router-dom';
+import Students from './pages/students/studentsBase/Students';
+import toast, { Toaster } from 'react-hot-toast';
+import Login from './pages/auth/login/loginBase/Login';
+import Register from './pages/auth/register/registerBase/Register';
+import Cases from './pages/cases/casesBase/Cases';
+import Statistics from './pages/statistics/statisticsBase/Statistics';
+import History from './pages/history/historyBase/History';
+import StudentProfile from './pages/studentsProfile/studentsProfileBase/StudentProfile';
+import Settings from './pages/settings/settingsBase/Settings';
+import AccountSettings from './pages/accountSettings/accountSettingsBase/AccountSettings';
+import SecureRoles from './externalUtils/SecureRoles';
+import { useSelector } from 'react-redux';
+import { createSelector } from 'reselect';
+import Error from './externalComponents/Errors/Error';
+import Forgot from './pages/auth/forgot/forgotBase/Forgot';
+import Reset from './pages/auth/reset/resetBase/Reset';
+import Loading from './externalUtils/Loading';
+import PersistLogin from './externalUtils/PersistLogin';
 
 const selectAuth = (state) => state.auth;
 const authSelector = createSelector([selectAuth], (auth) => auth);
@@ -39,10 +39,10 @@ function App() {
         reverseOrder={false}
         toastOptions={{
           style: {
-            fontWeight: "600",
-            textAlign: "center",
-            border: "1px solid #606060",
-            backgroundColor: "white",
+            fontWeight: '600',
+            textAlign: 'center',
+            border: '1px solid #606060',
+            backgroundColor: 'white',
           },
         }}
       />
@@ -51,7 +51,7 @@ function App() {
           <Loading />
         ) : (
           <Routes>
-            <Route path="*" element={<Error403 />}></Route>
+            <Route path="*" element={<Error />}></Route>
 
             <Route
               path="/"
@@ -88,7 +88,7 @@ function App() {
                 element={
                   <AccountSettings
                     toast={toast}
-                    allowedRoles={["Administrator", "Instructor", "Student"]}
+                    allowedRoles={['Administrator', 'Instructor', 'Student']}
                   />
                 }
               ></Route>
@@ -97,19 +97,19 @@ function App() {
 
               <Route
                 element={
-                  <SecureRoles allowedRoles={["Administrator", "Instructor"]} />
+                  <SecureRoles allowedRoles={['Administrator', 'Instructor']} />
                 }
               >
                 <Route
                   path="/cases"
                   element={
-                    <Cases toast={toast} allowedRoles={["Administrator"]} />
+                    <Cases toast={toast} allowedRoles={['Administrator']} />
                   }
                 ></Route>
                 <Route
                   path="/students"
                   element={
-                    <Students toast={toast} allowedRoles={["Administrator"]} />
+                    <Students toast={toast} allowedRoles={['Administrator']} />
                   }
                 ></Route>
 
@@ -118,7 +118,7 @@ function App() {
                   element={
                     <StudentProfile
                       toast={toast}
-                      allowedRoles={["Administrator"]}
+                      allowedRoles={['Administrator']}
                     />
                   }
                 ></Route>
@@ -130,7 +130,7 @@ function App() {
                   element={
                     <Statistics
                       toast={toast}
-                      allowedRoles={["Administrator", "Instructor"]}
+                      allowedRoles={['Administrator', 'Instructor']}
                     />
                   }
                 ></Route>
@@ -140,23 +140,23 @@ function App() {
 
               {/* allowedRoles PROPS: ADMIN ONLY */}
 
-              <Route element={<SecureRoles allowedRoles={["Administrator"]} />}>
+              <Route element={<SecureRoles allowedRoles={['Administrator']} />}>
                 <Route
                   path="/users"
                   element={
-                    <Register toast={toast} allowedRoles={["Administrator"]} />
+                    <Register toast={toast} allowedRoles={['Administrator']} />
                   }
                 ></Route>
                 <Route
                   path="/settings"
                   element={
-                    <Settings toast={toast} allowedRoles={["Administrator"]} />
+                    <Settings toast={toast} allowedRoles={['Administrator']} />
                   }
                 ></Route>
                 <Route
                   path="/notification"
                   element={
-                    <History toast={toast} allowedRoles={["Administrator"]} />
+                    <History toast={toast} allowedRoles={['Administrator']} />
                   }
                 ></Route>
               </Route>

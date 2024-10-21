@@ -1,6 +1,6 @@
-import React from "react";
-import { BsChevronBarDown, BsX } from "react-icons/bs";
-import { FaPlus } from "react-icons/fa6";
+import React from 'react';
+import { BsChevronBarDown, BsX } from 'react-icons/bs';
+import { FaPlus } from 'react-icons/fa6';
 
 const CreateStudentFormModal = ({
   handleChange,
@@ -55,14 +55,14 @@ const CreateStudentFormModal = ({
           <input
             required
             name="studentNo"
-            value={studentNo?.replace(/[^0-9-]/g, "")}
+            value={studentNo?.replace(/[^0-9-]/g, '')}
             onChange={handleChange}
             type="text"
             maxLength="7"
             autoComplete="off"
             placeholder="e.g. 20-1130"
             className={`border-[1px] py-3 px-5 rounded-[32px] w-[100%] ${
-              studentNoError === "" ? "border-gray-300" : "border-[red]"
+              studentNoError === '' ? 'border-gray-300' : 'border-[red]'
             } focus:outline-none focus:border-blue-500`}
           />
           {studentNoError && (
@@ -70,8 +70,8 @@ const CreateStudentFormModal = ({
           )}
         </div>
 
-        <div className="flex flex-col gap-8 mt-10 pt-9 pl-10 pr-10 pb-10 bg-gray-200">
-          <div className="text-[#606060] flex gap-2">
+        <div className="flex flex-col gap-8 mt-10 pt-8 pl-10 pr-10 pb-11 bg-gray-100">
+          <div className="text-[#606060] flex gap-3">
             <div className="flex flex-col gap-2 w-[100%]">
               <div className="">First Name</div>
               <input
@@ -82,8 +82,8 @@ const CreateStudentFormModal = ({
                 type="text"
                 autoComplete="off"
                 placeholder="e.g. Kludy"
-                className={`border-[1px] py-3 px-5 rounded-[32px] w-[100%] bg-transparent ${
-                  firstNameError === "" ? "border-white" : "border-[red]"
+                className={`border-[1px] py-3 px-5 rounded-[32px] w-[100%] bg-white ${
+                  firstNameError === '' ? 'border-gray-200' : 'border-[red]'
                 } focus:outline-none focus:border-[#007bff]`}
               />
               {firstNameError && (
@@ -101,8 +101,8 @@ const CreateStudentFormModal = ({
                 type="text"
                 autoComplete="off"
                 placeholder="e.g. Ramirez"
-                className={`border-[1px] py-3 px-5 rounded-[32px] w-[100%] bg-transparent ${
-                  surNameError === "" ? "border-white" : "border-[red]"
+                className={`border-[1px] py-3 px-5 rounded-[32px] w-[100%] bg-white ${
+                  surNameError === '' ? 'border-gray-200' : 'border-[red]'
                 } focus:outline-none focus:border-[#007bff]`}
               />
               {surNameError && (
@@ -111,9 +111,9 @@ const CreateStudentFormModal = ({
             </div>
           </div>
 
-          <div className="flex justify-center items-center w-[100%] gap-2">
-            <div className="flex gap-2 w-[50%]">
-              <div className="text-[#606060] flex flex-col gap-2 w-[100%]">
+          <div className="flex justify-center items-center w-[100%] gap-3">
+            <div className="flex gap-3 w-[50%]">
+              <div className="text-[#606060] flex flex-col gap-2 w-[50%]">
                 <div className="flex gap-2 items-center">
                   <span>College</span>
                   <BsChevronBarDown />
@@ -122,7 +122,7 @@ const CreateStudentFormModal = ({
                   name="college"
                   value={college}
                   onChange={handleChange}
-                  className="appearance-none py-3 px-5 rounded-[32px] bg-transparent border-[1px] border-white focus:outline-none focus:border-[#007bff]"
+                  className="appearance-none py-3 px-5 rounded-[32px] bg-white border-[1px] border-gray-200 focus:outline-none focus:border-[#007bff]"
                 >
                   <option value="">College</option>
                   {uniqueColleges?.map((c) => (
@@ -133,7 +133,7 @@ const CreateStudentFormModal = ({
                 </select>
               </div>
 
-              <div className="text-[#606060] flex flex-col gap-2 w-[100%]">
+              <div className="text-[#606060] flex flex-col gap-2 w-[50%]">
                 <div className="flex gap-2 items-center">
                   <span>Department</span>
                   <BsChevronBarDown />
@@ -142,7 +142,7 @@ const CreateStudentFormModal = ({
                   name="department"
                   value={department}
                   onChange={handleChange}
-                  className="appearance-none py-3 px-5 rounded-[32px] bg-transparent border-[1px] border-white focus:outline-none focus:border-[#007bff]"
+                  className="appearance-none py-3 px-5 rounded-[32px] bg-white border-[1px] border-gray-200 focus:outline-none focus:border-[#007bff] "
                 >
                   <option value="">Department</option>
                   {cads
@@ -155,8 +155,8 @@ const CreateStudentFormModal = ({
                 </select>
               </div>
             </div>
-            <div className="flex gap-2 w-[50%]">
-              <div className="text-[#606060] flex flex-col gap-2 w-[100%]">
+            <div className="flex gap-3 w-[50%]">
+              <div className="text-[#606060] flex flex-col gap-2 w-[50%]">
                 <div className="flex gap-2 items-center">
                   <span>Year</span>
                   <BsChevronBarDown />
@@ -165,7 +165,7 @@ const CreateStudentFormModal = ({
                   name="year"
                   value={year}
                   onChange={handleChange}
-                  className="appearance-none py-3 px-5 rounded-[32px] bg-transparent border-[1px] border-white focus:outline-none focus:border-[#007bff]"
+                  className="appearance-none py-3 px-5 rounded-[32px] bg-white border-[1px] border-gray-200 focus:outline-none focus:border-[#007bff]"
                 >
                   <option value="">Year</option>
                   <option value={1}>1</option>
@@ -174,7 +174,7 @@ const CreateStudentFormModal = ({
                   <option value={4}>4</option>
                 </select>
               </div>
-              <div className="text-[#606060] flex flex-col gap-2 w-[100%]">
+              <div className="text-[#606060] flex flex-col gap-2 w-[50%]">
                 <div className="flex gap-2 items-center">
                   <span>Section</span>
                   <BsChevronBarDown />
@@ -183,7 +183,7 @@ const CreateStudentFormModal = ({
                   name="section"
                   value={section}
                   onChange={handleChange}
-                  className="appearance-none py-3 px-5 rounded-[32px] bg-transparent border-[1px] border-white focus:outline-none focus:border-[#007bff]"
+                  className="appearance-none py-3 px-5 rounded-[32px] bg-white border-[1px] border-gray-200 focus:outline-none focus:border-[#007bff]"
                 >
                   <option value="">Section</option>
                   <option value="1">1</option>
@@ -203,9 +203,9 @@ const CreateStudentFormModal = ({
             </div>
           </div>
 
-          <div className="flex justify-center items-center w-[100%] gap-2">
-            <div className="flex gap-2 w-[50%]">
-              <div className="text-[#606060] flex flex-col gap-2 w-[100%]">
+          <div className="flex justify-center items-center w-[100%] gap-3">
+            <div className="flex gap-3 w-[50%]">
+              <div className="text-[#606060] flex flex-col gap-2 w-[50%]">
                 <div className="flex gap-2 items-center">
                   <span>Sex</span>
                   <BsChevronBarDown />
@@ -214,14 +214,14 @@ const CreateStudentFormModal = ({
                   name="sex"
                   value={sex}
                   onChange={handleChange}
-                  className="appearance-none py-3 px-5 rounded-[32px] bg-transparent border-[1px] border-white focus:outline-none focus:border-[#007bff]"
+                  className="appearance-none py-3 px-5 rounded-[32px] bg-white border-[1px] border-gray-200 focus:outline-none focus:border-[#007bff]"
                 >
                   <option value="">Sex</option>
                   <option value="Male">Male</option>
                   <option value="Female">Female</option>
                 </select>
               </div>
-              <div className="text-[#606060] flex flex-col gap-2 w-[100%]">
+              <div className="text-[#606060] flex flex-col gap-2 w-[50%]">
                 <div className="">Email</div>
                 <input
                   required
@@ -232,8 +232,8 @@ const CreateStudentFormModal = ({
                   maxLength="32"
                   autoComplete="off"
                   placeholder="e.g. example@gmail.com"
-                  className={`py-3 px-5 rounded-[32px] w-[100%] bg-transparent border-[1px]  ${
-                    emailError === "" ? "border-white" : "border-[red]"
+                  className={`py-3 px-5 rounded-[32px] w-[100%] bg-white border-[1px]  ${
+                    emailError === '' ? 'border-gray-200' : 'border-[red]'
                   } focus:outline-none focus:border-[#007bff]`}
                 />
                 {emailError && (
@@ -241,41 +241,41 @@ const CreateStudentFormModal = ({
                 )}
               </div>
             </div>
-            <div className="flex gap-2 w-[50%]">
-              <div className="text-[#606060] flex flex-col gap-2 w-[100%]">
+            <div className="flex gap-3 w-[50%]">
+              <div className="text-[#606060] flex flex-col gap-2 w-[50%]">
                 <div className="">Contact No.</div>
                 <input
                   required
                   name="contactNo"
-                  value={contactNo?.replace(/[^0-9+]/g, "")}
+                  value={contactNo?.replace(/[^0-9+]/g, '')}
                   onChange={handleChange}
                   type="text"
                   autoComplete="off"
                   placeholder="e.g. 09123456789"
                   maxLength="13"
-                  className={`py-3 px-5 rounded-[32px] w-[100%] bg-transparent border-[1px]  ${
-                    contactNoError === "" ? "border-white" : "border-[red]"
+                  className={`py-3 px-5 rounded-[32px] w-[100%] bg-white border-[1px]  ${
+                    contactNoError === '' ? 'border-gray-200' : 'border-[red]'
                   } focus:outline-none focus:border-[#007bff]`}
                 />
                 {contactNoError && (
                   <p className="text-red-500 pt-2">{contactNoError}</p>
                 )}
               </div>
-              <div className="text-[#606060] flex flex-col gap-2 w-[100%]">
-                <div className="">Guardian Contact No.</div>
+              <div className="text-[#606060] flex flex-col gap-2 w-[50%]">
+                <div className="">Guardian No.</div>
                 <input
                   required
                   name="guardianContactNo"
-                  value={guardianContactNo?.replace(/[^0-9+]/g, "")}
+                  value={guardianContactNo?.replace(/[^0-9+]/g, '')}
                   onChange={handleChange}
                   type="text"
                   autoComplete="off"
                   placeholder="e.g. 09123456789"
                   maxLength="13"
-                  className={`py-3 px-5 rounded-[32px] w-[100%] bg-transparent border-[1px] ${
-                    guardianContactNoError === ""
-                      ? "border-white"
-                      : "border-[red]"
+                  className={`py-3 px-5 rounded-[32px] w-[100%] bg-white border-[1px] ${
+                    guardianContactNoError === ''
+                      ? 'border-gray-200'
+                      : 'border-[red]'
                   } focus:outline-none focus:border-[#007bff]`}
                 />
                 {guardianContactNoError && (
@@ -286,21 +286,21 @@ const CreateStudentFormModal = ({
           </div>
         </div>
         <div className="w-[100%] p-10 flex justify-end items-center">
-          {studentNoError === "" &&
-          firstNameError === "" &&
-          middleNameError === "" &&
-          surNameError === "" &&
-          college !== "" &&
-          department !== "" &&
-          year !== "" &&
-          section !== "" &&
-          sex !== "" &&
-          emailError === "" &&
-          contactNoError === "" &&
-          guardianContactNoError === "" ? (
+          {studentNoError === '' &&
+          firstNameError === '' &&
+          middleNameError === '' &&
+          surNameError === '' &&
+          college !== '' &&
+          department !== '' &&
+          year !== '' &&
+          section !== '' &&
+          sex !== '' &&
+          emailError === '' &&
+          contactNoError === '' &&
+          guardianContactNoError === '' ? (
             <button
               type="submit"
-              className="cursor-pointer w-[100%] py-3 px-4 bg-[#007bff] text-[white] text-[16px] flex gap-2 items-center rounded-[4px]"
+              className="cursor-pointer w-[100%] py-4 px-4 bg-[#007bff] text-[white] text-[16px] flex gap-2 justify-center items-center rounded-[32px]"
             >
               <FaPlus />
               <div>Add Student</div>
@@ -309,7 +309,7 @@ const CreateStudentFormModal = ({
             <button
               disabled
               type="submit"
-              className="py-3 px-4 w-[100%] bg-blue-300 text-[white] text-[16px] flex gap-2 items-center rounded-[4px]"
+              className="py-4 px-4 w-[100%] bg-blue-300 text-[white] text-[16px] flex gap-2 justify-center items-center rounded-[32px]"
             >
               <FaPlus />
               <div>Add Student</div>

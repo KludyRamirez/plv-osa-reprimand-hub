@@ -253,11 +253,7 @@ const StudentsTable = ({
         </ModalBox>
       </Modal>
       <div className="w-full overflow-x-auto">
-        <div
-          className={`w-full h-[376px] flex flex-col rounded-[10px] border-[1px] text-[#505050] ${
-            students && students.length > 5 ? 'overflow-y-scroll' : ''
-          }`}
-        >
+        <div className="w-full h-[376px] flex flex-col rounded-[10px] border-[1px] text-[#505050] overflow-y-scroll">
           <div className="w-[fit-content] flex items-center gap-4 pl-6 pr-2">
             <div className="w-[30px] h-[60px] flex justify-start items-center">
               <input
@@ -270,32 +266,32 @@ const StudentsTable = ({
             <div className="w-[118px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
               Student No.
             </div>
-            <div className="w-[122px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+            <div className="w-[130px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
               Surname
             </div>
-            <div className="w-[122px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+            <div className="w-[130px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
               First name
             </div>
-            <div className=" w-[60px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+            <div className="w-[60px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
               Year
             </div>
-            <div className=" w-[80px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+            <div className="w-[80px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
               Section
             </div>
 
-            <div className=" w-[200px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+            <div className="w-[200px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
               Department
             </div>
-            <div className=" w-[118px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+            <div className="w-[118px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
               Sex
             </div>
-            <div className=" w-[140px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+            <div className="w-[140px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
               Contact No.
             </div>
-            <div className=" w-[118px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+            <div className="w-[118px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
               Status
             </div>
-            <div className=" w-[118px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+            <div className="w-[118px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
               No. of Cases
             </div>
 
@@ -303,16 +299,20 @@ const StudentsTable = ({
               allowedRoles?.find((ar) =>
                 auth?.userDetails?.role?.includes(ar)
               ) ? (
-                <>
-                  <div className="w-[1px] h-[20px] border-[1px]"></div>
+                <div className="flex justify-start items-center gap-2">
                   <div
-                    className="flex gap-2 justify-start items-center py-1 px-2 bg-[#ff3131] border-[1px] border-[#ff3131] text-white text-[14px] rounded-[4px] cursor-pointer"
+                    className="flex gap-1 justify-start items-center py-1 px-2 bg-[#ff3131] border-[1px] border-[#ff3131] text-white text-[14px] rounded-[4px] cursor-pointer"
                     onClick={handleOpenModalDeleteMany}
                   >
                     <span>Delete</span>
-                    <BsTrash3Fill className="text-[14px]" />
                   </div>
-                </>
+                  {/* <div
+                    className="flex gap-1 justify-start items-center py-1 px-2 bg-[green] border-[1px] border-[green] text-white text-[14px] rounded-[4px] cursor-pointer"
+                    onClick={exportPDF}
+                  >
+                    <span>Export</span>
+                  </div> */}
+                </div>
               ) : (
                 <div className="w-[118px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
                   <span>Actions</span>
@@ -352,10 +352,10 @@ const StudentsTable = ({
                       <div className="w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
                         {student?.studentNo}
                       </div>
-                      <div className="w-[122px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
+                      <div className="w-[130px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
                         {student?.surName}
                       </div>
-                      <div className="w-[122px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
+                      <div className="w-[130px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
                         {student?.firstName}
                       </div>
                       <div className="w-[60px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">

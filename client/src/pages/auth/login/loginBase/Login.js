@@ -1,36 +1,31 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { connect } from "react-redux";
-import { getActions } from "../../../../store/actions/AuthActions";
-import { styled } from "@mui/material/styles";
-import osaLogo from "../../../../images/osalogo.jpg";
-
-import crown from "../../../../images/crown.png";
-import LoginInputs from "../loginComponents/LoginInputs";
-
-import { BsMegaphone } from "react-icons/bs";
-
-import LoginFooter from "../loginComponents/LoginFooter";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { getActions } from '../../../../store/actions/AuthActions';
+import { styled } from '@mui/material/styles';
+import osaLogo from '../../../../images/osalogo.jpg';
+import LoginInputs from '../loginComponents/LoginInputs';
+import LoginFooter from '../loginComponents/LoginFooter';
 
 const Login = ({ login, setLoading }) => {
-  const FormTitle = styled("div")({
+  const FormTitle = styled('div')({
     backgroundImage:
-      "radial-gradient(100% 100% at 100% 0, #122c8e 0, #07bbff 100%)",
-    backgroundSize: "100%",
-    backgroundRepeat: "repeat",
-    WebkitBackgroundClip: "text",
-    WebkitTextFillColor: "transparent",
-    MozBackgroundClip: "text",
-    MozTextFillColor: "transparent",
-    fontSize: "120px",
-    fontWeight: "600",
-    lineHeight: "134px",
-    zIndex: "2",
+      'radial-gradient(100% 100% at 100% 0, #122c8e 0, #07bbff 100%)',
+    backgroundSize: '100%',
+    backgroundRepeat: 'repeat',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+    MozBackgroundClip: 'text',
+    MozTextFillColor: 'transparent',
+    fontSize: '120px',
+    fontWeight: '600',
+    lineHeight: '134px',
+    zIndex: '2',
   });
 
-  const [userName, setUserName] = useState("");
-  const [password, setPassword] = useState("");
-  const [activeSelect, setActiveSelect] = useState("Login");
+  const [userName, setUserName] = useState('');
+  const [password, setPassword] = useState('');
+  const [activeSelect, setActiveSelect] = useState('Login');
 
   const navigate = useNavigate();
 
@@ -43,19 +38,19 @@ const Login = ({ login, setLoading }) => {
     try {
       setLoading(true);
       await login(userDetails, navigate);
-      setUserName("");
-      setPassword("");
+      setUserName('');
+      setPassword('');
       setLoading(false);
     } catch (error) {
-      setUserName("");
-      setPassword("");
+      setUserName('');
+      setPassword('');
       setLoading(false);
     }
   };
 
-  const handleActiveChange = (option) => {
-    setActiveSelect(option);
-  };
+  // const handleActiveChange = (option) => {
+  //   setActiveSelect(option);
+  // };
 
   return (
     <div className="w-full h-screen bg-white">
@@ -71,9 +66,9 @@ const Login = ({ login, setLoading }) => {
                 />
                 <FormTitle
                   sx={{
-                    fontSize: "22px",
+                    fontSize: '22px',
                     backgroundImage:
-                      "radial-gradient(100% 100% at 100% 0, #077bff 0, #122c8e 100%)",
+                      'radial-gradient(100% 100% at 100% 0, #077bff 0, #122c8e 100%)',
                   }}
                 >
                   Office of Student Affairs
@@ -100,7 +95,7 @@ const Login = ({ login, setLoading }) => {
         <div className="w-[100%] flex justify-center items-start gap-24">
           <div className="relative flex justify-center items-start">
             <div className="p-8 gap-8 w-[500px] flex flex-col self-center rounded-[8px]">
-              {activeSelect === "Login" && (
+              {activeSelect === 'Login' && (
                 <>
                   <div className="w-100 flex justify-start items-center text-3xl font-semibold text-[#007bff] zIndex-3">
                     <span>Sign in</span>

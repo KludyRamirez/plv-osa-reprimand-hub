@@ -312,7 +312,7 @@ const CasesTable = ({
         <ModalBox
           sx={{
             width: '29%',
-            background: '#efefef',
+            background: '#fafafa',
             borderRadius: '12px',
           }}
         >
@@ -332,7 +332,7 @@ const CasesTable = ({
         <ModalBox
           sx={{
             width: '29%',
-            background: '#efefef',
+            background: '#fafafa',
             borderRadius: '12px',
           }}
         >

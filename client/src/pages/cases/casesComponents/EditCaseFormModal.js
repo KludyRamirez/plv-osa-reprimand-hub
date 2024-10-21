@@ -117,7 +117,7 @@ const EditCaseFormModal = ({
           />
         </div>
 
-        <div className="flex flex-col gap-8 mt-10 pt-9 pl-10 pr-10 pb-10 bg-gray-100">
+        <div className="flex flex-col gap-8 mt-10 pt-8 pl-10 pr-10 pb-12 bg-gray-100">
           <div className="text-[#606060] flex flex-col gap-2 w-[100%]">
             <div className="flex gap-2 items-center">
               <span>Accused</span>
@@ -233,7 +233,7 @@ const EditCaseFormModal = ({
           updatedValues?.typeOfViolation !== '' ? (
             <button
               type="submit"
-              className="cursor-pointer w-[100%] py-3 px-4 bg-[#007bff] text-[white] text-[16px] flex gap-2 items-center rounded-[4px]"
+              className="cursor-pointer w-[100%] py-4 px-4 bg-[#007bff] text-[white] text-[16px] flex gap-2 justify-center items-center rounded-[32px]"
             >
               <FaPlus />
               <div>Update Case</div>
@@ -241,7 +241,7 @@ const EditCaseFormModal = ({
           ) : (
             <button
               disabled
-              className="py-3 px-4 w-[100%] bg-blue-300 text-[white] text-[16px] flex gap-2 items-center rounded-[4px]"
+              className="py-4 px-4 w-[100%] bg-blue-300 text-[white] text-[16px] flex gap-2 justify-center items-center rounded-[32px]"
             >
               <FaPlus />
               <div>Update Case</div>
