@@ -51,8 +51,6 @@ function App() {
           <Loading />
         ) : (
           <Routes>
-            <Route path="*" element={<Error />}></Route>
-
             <Route
               path="/"
               element={
@@ -63,10 +61,8 @@ function App() {
                 )
               }
             />
-            <Route
-              path="/login"
-              element={<Login setLoading={setLoading} />}
-            ></Route>
+
+            <Route path="/error" element={<Error />}></Route>
 
             <Route
               path="/forgot"
@@ -82,6 +78,17 @@ function App() {
 
             <Route element={<PersistLogin />}>
               {/* allowedRoles PROPS: ADMIN, INSTRUCTOR, STUDENT */}
+
+              <Route
+                path="/login"
+                element={
+                  auth?.userDetails?.token ? (
+                    <Navigate to="/statistics" replace />
+                  ) : (
+                    <Login setLoading={setLoading} />
+                  )
+                }
+              ></Route>
 
               <Route
                 path="/account"
