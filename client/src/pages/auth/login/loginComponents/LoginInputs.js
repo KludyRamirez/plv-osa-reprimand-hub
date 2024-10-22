@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const LoginInputs = ({
   userName,
@@ -8,26 +8,26 @@ const LoginInputs = ({
   setPassword,
   handleLogin,
 }) => {
-  const [userNameError, setUserNameError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
+  const [userNameError, setUserNameError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
 
   const validateUsername = (value) => {
     if (value.length < 3) {
-      setUserNameError("Username must be at least 3 characters long.");
+      setUserNameError('Username must be at least 3 characters long.');
     } else if (value.length > 24) {
-      setUserNameError("Username must be at most 24 characters long.");
+      setUserNameError('Username must be at most 24 characters long.');
     } else {
-      setUserNameError("");
+      setUserNameError('');
     }
   };
 
   const validatePassword = (value) => {
     if (value.length < 3) {
-      setPasswordError("Password must be at least 3 characters long.");
+      setPasswordError('Password must be at least 3 characters long.');
     } else if (value.length > 24) {
-      setPasswordError("Password must be at most 24 characters long.");
+      setPasswordError('Password must be at most 24 characters long.');
     } else {
-      setPasswordError("");
+      setPasswordError('');
     }
   };
 
@@ -44,7 +44,7 @@ const LoginInputs = ({
   };
 
   return (
-    <div className="flex flex-col gap-8 w-full zIndex-2">
+    <div className="flex flex-col gap-8 w-full z-20">
       <div className="flex flex-col gap-2">
         <div className="w-100 text-base text-[#606060]">Username</div>
         <input
@@ -55,7 +55,7 @@ const LoginInputs = ({
           type="text"
           placeholder="Enter username"
           className={`py-3 px-6  border-[1px] rounded-[24px] w-[100%] bg-white ${
-            userNameError === "" ? "" : "border-[red]"
+            userNameError === '' ? '' : 'border-[red]'
           } focus:outline-none  focus:border-[#007bff]`}
         />
         {userNameError && <p className="text-red-500 mt-1">{userNameError}</p>}
@@ -69,7 +69,7 @@ const LoginInputs = ({
           type="password"
           placeholder="Enter password"
           className={`py-3 px-6 border-[1px] rounded-[24px] w-[100%] bg-white ${
-            passwordError === "" ? "" : "border-[red]"
+            passwordError === '' ? '' : 'border-[red]'
           } focus:outline-none  focus:border-[#007bff]`}
         />
         {passwordError && <p className="text-red-500 mt-1">{passwordError}</p>}
@@ -80,10 +80,10 @@ const LoginInputs = ({
         </Link>
       </div>
       <div className="mt-[-10px]">
-        {userNameError === "" &&
-        passwordError === "" &&
-        userName !== "" &&
-        password !== "" ? (
+        {userNameError === '' &&
+        passwordError === '' &&
+        userName !== '' &&
+        password !== '' ? (
           <button
             type="button"
             onClick={handleLogin}

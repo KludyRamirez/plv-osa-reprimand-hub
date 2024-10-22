@@ -1,18 +1,18 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { createSelector } from "reselect";
-import { BsCardText, BsEnvelope, BsPass } from "react-icons/bs";
-import axios from "axios";
-import { MdOutlinePassword } from "react-icons/md";
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { createSelector } from 'reselect';
+import { BsCardText, BsEnvelope, BsPass } from 'react-icons/bs';
+import axios from 'axios';
+import { MdOutlinePassword } from 'react-icons/md';
 
 const initialState = {
-  email: "",
-  password: "",
+  email: '',
+  password: '',
 };
 
 const errorsInitialState = {
-  email: "",
-  password: "",
+  email: '',
+  password: '',
 };
 
 const selectAuth = (state) => state.auth;
@@ -31,7 +31,7 @@ const ChangeUserInfo = ({ toast }) => {
 
     try {
       if (!auth.userDetails.token) {
-        console.error("Authentication token not found.");
+        console.error('Authentication token not found.');
         return;
       }
 
@@ -57,7 +57,7 @@ const ChangeUserInfo = ({ toast }) => {
 
     try {
       if (!auth.userDetails.token) {
-        console.error("Authentication token not found.");
+        console.error('Authentication token not found.');
         return;
       }
 
@@ -88,21 +88,21 @@ const ChangeUserInfo = ({ toast }) => {
 
     setValues({ ...values, [name]: formattedValue });
 
-    if (name === "email") {
+    if (name === 'email') {
       if (formattedValue.length < 3) {
-        newErrors[name] = "Email must be at least 3 characters long.";
+        newErrors[name] = 'Email must be at least 3 characters long.';
       } else if (formattedValue.length > 48) {
-        newErrors[name] = "Email name must be at most 48 characters long.";
+        newErrors[name] = 'Email name must be at most 48 characters long.';
       } else {
-        newErrors[name] = "";
+        newErrors[name] = '';
       }
-    } else if (name === "password") {
+    } else if (name === 'password') {
       if (formattedValue.length < 3) {
-        newErrors[name] = "Password must be at least 3 characters long.";
+        newErrors[name] = 'Password must be at least 3 characters long.';
       } else if (formattedValue.length > 48) {
-        newErrors[name] = "Password must be at most 48 characters long.";
+        newErrors[name] = 'Password must be at most 48 characters long.';
       } else {
-        newErrors[name] = "";
+        newErrors[name] = '';
       }
     }
     setErrors(newErrors);
@@ -118,13 +118,13 @@ const ChangeUserInfo = ({ toast }) => {
 
     setValues({ ...values, [name]: formattedValue });
 
-    if (name === "password") {
+    if (name === 'password') {
       if (formattedValue.length < 6) {
-        newErrors[name] = "Password must be at least 6 characters long.";
+        newErrors[name] = 'Password must be at least 6 characters long.';
       } else if (formattedValue.length > 48) {
-        newErrors[name] = "Password must be at most 48 characters long.";
+        newErrors[name] = 'Password must be at most 48 characters long.';
       } else {
-        newErrors[name] = "";
+        newErrors[name] = '';
       }
     }
     setErrors(newErrors);
@@ -132,7 +132,7 @@ const ChangeUserInfo = ({ toast }) => {
 
   return (
     <>
-      <div className="w-[460px] flex flex-col gap-8 zIndex-2">
+      <div className="w-[460px] flex flex-col gap-8 z-20">
         <div className="text-[#606060] flex flex-col gap-4 px-5 py-6 rounded-[8px]">
           <div className="flex items-center justify-start relative">
             <div className="text-[36px] text-[#007bff] font-bold">
@@ -153,13 +153,13 @@ const ChangeUserInfo = ({ toast }) => {
               autoComplete="off"
               placeholder="e.g. example@domain.com"
               className={`border-[1px] hover:border-blue-300 focus:border-blue-300 p-3 rounded-[6px] w-[100%] bg-[white] ${
-                errors.email === "" ? "" : "border-[red]"
+                errors.email === '' ? '' : 'border-[red]'
               } focus:outline-none `}
             />
             {errors.email && <p className="text-red-500">{errors.email}</p>}
 
             <div className="w-100 flex justify-start items-center">
-              {errors.email === "" && values.email !== "" ? (
+              {errors.email === '' && values.email !== '' ? (
                 <button
                   type="button"
                   className="w-[100%] py-2 bg-[#007bff] text-[white] text-[16px] flex justify-center items-center rounded-[4px] gap-2"
@@ -192,7 +192,7 @@ const ChangeUserInfo = ({ toast }) => {
               autoComplete="off"
               placeholder="e.g. ******"
               className={`border-[1px] hover:border-blue-300 focus:border-blue-300 p-3 rounded-[6px] w-[100%] bg-white ${
-                errors.password === "" ? "" : "border-[red]"
+                errors.password === '' ? '' : 'border-[red]'
               } focus:outline-none `}
             />
             {errors.password && (
@@ -200,7 +200,7 @@ const ChangeUserInfo = ({ toast }) => {
             )}
 
             <div className="w-100 flex justify-start items-center">
-              {errors.password === "" && values.password !== "" ? (
+              {errors.password === '' && values.password !== '' ? (
                 <button
                   type="button"
                   className="w-[100%] py-2 bg-[#007bff] text-[white] text-[16px] flex justify-center items-center rounded-[4px] gap-2"

@@ -55,7 +55,7 @@ const Login = ({ login, setLoading }) => {
   return (
     <div className="w-full h-screen bg-white">
       <div className="w-full flex flex-col gap-[80px]">
-        <div className="px-12 shadow-sm bg-white zIndex-2">
+        <div className="px-12 shadow-sm bg-white z-20">
           <div className="h-[90px] flex justify-between items-center gap-10">
             <div className="flex justify-center items-center gap-10">
               <div className="flex items-center gap-6">
@@ -97,10 +97,10 @@ const Login = ({ login, setLoading }) => {
             <div className="p-8 gap-8 w-[500px] flex flex-col self-center rounded-[8px]">
               {activeSelect === 'Login' && (
                 <>
-                  <div className="w-100 flex justify-start items-center text-3xl font-semibold text-[#007bff] zIndex-3">
+                  <div className="w-100 flex justify-start items-center text-3xl font-semibold text-[#007bff] z-30">
                     <span>Sign in</span>
                   </div>
-                  <div className="zIndex-3">
+                  <div className="z-30">
                     <LoginInputs
                       userName={userName}
                       setUserName={setUserName}
@@ -112,16 +112,16 @@ const Login = ({ login, setLoading }) => {
                 </>
               )}
             </div>
-            <div className="absolute flex justify-center items-center w-[800px] h-[800px] rounded-[50%] border-[2px] border-[#f9f9f9] top-[-220px] right-[140px] zIndex-1 transform rotate-[-15deg]">
-              <div className="flex justify-center items-center w-[760px] h-[760px] rounded-[50%] border-[2px] border-[#f9f9f9] top-[-200px] left-[-400px] zIndex-1">
-                <div className="flex justify-center items-center w-[720px] h-[720px] rounded-[50%] border-[2px] border-[#f9f9f9] top-[-200px] left-[-400px] zIndex-1">
-                  <div className="flex justify-center items-center w-[680px] h-[680px] rounded-[50%] border-[2px] border-[#f9f9f9] top-[-200px] left-[-400px] zIndex-1">
-                    <div className="flex justify-center items-center w-[640px] h-[640px] rounded-[50%] border-[2px] border-[#f9f9f9] top-[-200px] left-[-400px] zIndex-1">
-                      <div className="flex justify-center items-center w-[600px] h-[600px] rounded-[50%] border-[2px] border-[#f9f9f9] top-[-200px] left-[-400px] zIndex-1">
-                        <div className="flex justify-center items-center w-[560px] h-[560px] rounded-[50%] border-[2px] border-[#f9f9f9] top-[-200px] left-[-400px] zIndex-1">
-                          <div className="flex justify-center items-center w-[520px] h-[520px] rounded-[50%] border-[2px] border-[#f9f9f9] top-[-200px] left-[-400px] zIndex-1">
-                            <div className="flex justify-center items-center w-[480px] h-[480px] rounded-[50%] border-[2px] border-[#f9f9f9] top-[-200px] left-[-400px] zIndex-1">
-                              <div className="flex justify-center items-center w-[440px] h-[440px] rounded-[50%] border-[2px] border-[#f9f9f9] top-[-200px] left-[-400px] zIndex-1"></div>
+            <div className="absolute flex justify-center items-center w-[800px] h-[800px] rounded-[50%] border-[2px] border-[#f9f9f9] top-[-220px] right-[140px] z-10 transform rotate-[-15deg]">
+              <div className="flex justify-center items-center w-[760px] h-[760px] rounded-[50%] border-[2px] border-[#f9f9f9] top-[-200px] left-[-400px] z-10">
+                <div className="flex justify-center items-center w-[720px] h-[720px] rounded-[50%] border-[2px] border-[#f9f9f9] top-[-200px] left-[-400px] z-10">
+                  <div className="flex justify-center items-center w-[680px] h-[680px] rounded-[50%] border-[2px] border-[#f9f9f9] top-[-200px] left-[-400px] z-10">
+                    <div className="flex justify-center items-center w-[640px] h-[640px] rounded-[50%] border-[2px] border-[#f9f9f9] top-[-200px] left-[-400px] z-10">
+                      <div className="flex justify-center items-center w-[600px] h-[600px] rounded-[50%] border-[2px] border-[#f9f9f9] top-[-200px] left-[-400px] z-10">
+                        <div className="flex justify-center items-center w-[560px] h-[560px] rounded-[50%] border-[2px] border-[#f9f9f9] top-[-200px] left-[-400px] z-10">
+                          <div className="flex justify-center items-center w-[520px] h-[520px] rounded-[50%] border-[2px] border-[#f9f9f9] top-[-200px] left-[-400px] z-10">
+                            <div className="flex justify-center items-center w-[480px] h-[480px] rounded-[50%] border-[2px] border-[#f9f9f9] top-[-200px] left-[-400px] z-10">
+                              <div className="flex justify-center items-center w-[440px] h-[440px] rounded-[50%] border-[2px] border-[#f9f9f9] top-[-200px] left-[-400px] z-10"></div>
                             </div>
                           </div>
                         </div>
@@ -134,7 +134,7 @@ const Login = ({ login, setLoading }) => {
           </div>
           {/* 
           <div className="relative">
-            <div className="h-[100%] flex flex-col p-4 z-2 mt-6 zIndex-2">
+            <div className="h-[100%] flex flex-col p-4 z-2 mt-6 z-20">
               <FormTitle
                 sx={{
                   backgroundImage:

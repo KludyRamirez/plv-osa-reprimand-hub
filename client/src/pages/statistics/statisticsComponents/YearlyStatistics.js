@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { BsCalendar4Week, BsChevronBarDown } from "react-icons/bs";
+import React, { useState, useEffect } from 'react';
+import { BsCalendar4Week, BsChevronBarDown } from 'react-icons/bs';
 
 const currentYear = new Date().getFullYear();
 const previousYear = currentYear - 1;
@@ -20,7 +20,7 @@ const YearlyStatistics = ({ cases }) => {
   const filterCases = (cases, year) => {
     return cases.filter((c) => {
       const yearMatch =
-        year === "All" ||
+        year === 'All' ||
         new Date(c?.dateOfIncident).getFullYear() ===
           new Date(year).getFullYear();
 
@@ -38,29 +38,29 @@ const YearlyStatistics = ({ cases }) => {
   );
 
   const majorCases = combinedFilteredCases?.filter(
-    (c) => c?.typeOfViolation === "Major"
+    (c) => c?.typeOfViolation === 'Major'
   );
   const minorCases = combinedFilteredCases?.filter(
-    (c) => c?.typeOfViolation === "Minor"
+    (c) => c?.typeOfViolation === 'Minor'
   );
 
   const firstOffCases = combinedFilteredCases?.filter(
-    (c) => c?.offense === "1st"
+    (c) => c?.offense === '1st'
   );
   const secondOffCases = combinedFilteredCases?.filter(
-    (c) => c?.offense === "2nd"
+    (c) => c?.offense === '2nd'
   );
   const thirdOffCases = combinedFilteredCases?.filter(
-    (c) => c?.offense === "3rd"
+    (c) => c?.offense === '3rd'
   );
   const fourthOffCases = combinedFilteredCases?.filter(
-    (c) => c?.offense === "4th"
+    (c) => c?.offense === '4th'
   );
 
   const filterOtherYearCases = (cases, otherYear) => {
     return cases.filter((c) => {
       const otherYearMatch =
-        otherYear === "All" ||
+        otherYear === 'All' ||
         new Date(c?.dateOfIncident).getFullYear() ===
           new Date(otherYear).getFullYear();
 
@@ -79,23 +79,23 @@ const YearlyStatistics = ({ cases }) => {
   );
 
   const majorOtherYearCases = filteredOtherYearCasesArray?.filter(
-    (c) => c?.typeOfViolation === "Major"
+    (c) => c?.typeOfViolation === 'Major'
   );
   const minorOtherYearCases = filteredOtherYearCasesArray?.filter(
-    (c) => c?.typeOfViolation === "Minor"
+    (c) => c?.typeOfViolation === 'Minor'
   );
 
   const firstOffenseOtherYearCases = filteredOtherYearCasesArray?.filter(
-    (c) => c?.offense === "1st"
+    (c) => c?.offense === '1st'
   );
   const secondOffenseOtherYearCases = filteredOtherYearCasesArray?.filter(
-    (c) => c?.offense === "2nd"
+    (c) => c?.offense === '2nd'
   );
   const thirdOffenseOtherYearCases = filteredOtherYearCasesArray?.filter(
-    (c) => c?.offense === "3rd"
+    (c) => c?.offense === '3rd'
   );
   const fourthOffenseOtherYearCases = filteredOtherYearCasesArray?.filter(
-    (c) => c?.offense === "4th"
+    (c) => c?.offense === '4th'
   );
 
   const yearTotalCases = cases?.filter(
@@ -149,7 +149,7 @@ const YearlyStatistics = ({ cases }) => {
           <div className="flex justify-start flex-wrap gap-2 w-[100%]">
             <div className="p-4 w-[206px] h-[180px] rounded-[12px] relative overflow-hidden bg-[#007bff] flex justify-start items-start text-[white]">
               <div className="text-[20px]">Total</div>
-              <div className="absolute bottom-[-10px] right-[16px] text-[64px] font-bold zIndex-3">
+              <div className="absolute bottom-[-10px] right-[16px] text-[64px] font-bold z-30">
                 {totalCases?.length}
               </div>
               <div className="absolute bottom-[-90px] left-[-90px] w-[200px] h-[200px] rounded-[50%] bg-blue-400 flex justify-center items-center">
@@ -158,7 +158,7 @@ const YearlyStatistics = ({ cases }) => {
             </div>
             <div className="p-4 w-[206px] h-[180px] border-[1px] border-blue-300 rounded-[12px] relative overflow-hidden bg-white text-[#007bff]">
               <div className="text-[20px]">Minor</div>
-              <div className="absolute bottom-[-10px] right-[16px] text-[64px] font-bold zIndex-3">
+              <div className="absolute bottom-[-10px] right-[16px] text-[64px] font-bold z-30">
                 {minorCases?.length}
               </div>
               <div className="absolute top-[-90px] right-[-90px] w-[200px] h-[200px] rounded-[50%] bg-blue-200 flex justify-center items-center">
@@ -167,7 +167,7 @@ const YearlyStatistics = ({ cases }) => {
             </div>
             <div className="p-4 w-[206px] h-[180px] rounded-[12px] relative overflow-hidden bg-red-800 text-[white]">
               <div className="text-[20px]">Major</div>
-              <div className="absolute bottom-[-10px] right-[16px] text-[64px] font-bold zIndex-3">
+              <div className="absolute bottom-[-10px] right-[16px] text-[64px] font-bold z-30">
                 {majorCases?.length}
               </div>
               <div className="absolute bottom-[-90px] left-[-90px] w-[200px] h-[200px] rounded-[50%] bg-red-200 flex justify-center items-center">
@@ -176,7 +176,7 @@ const YearlyStatistics = ({ cases }) => {
             </div>
             <div className="p-4 w-[206px] h-[180px] border-[1px] border-green-300 rounded-[12px] relative overflow-hidden bg-green-100 text-green-800">
               <div className="text-[20px]">1st Offense</div>
-              <div className="absolute bottom-[-10px] right-[16px] text-[64px] font-bold zIndex-3">
+              <div className="absolute bottom-[-10px] right-[16px] text-[64px] font-bold z-30">
                 {firstOffCases?.length}
               </div>
               <div className="absolute bottom-[-90px] right-[-90px] w-[200px] h-[200px] rounded-[50%] bg-green-200 flex justify-center items-center">
@@ -185,7 +185,7 @@ const YearlyStatistics = ({ cases }) => {
             </div>
             <div className="p-4 w-[206px] h-[180px] border-[1px] border-yellow-300 rounded-[12px] relative overflow-hidden bg-yellow-100 text-yellow-800">
               <div className="text-[20px]">2nd Offense</div>
-              <div className="absolute bottom-[-10px] right-[16px] text-[64px] font-bold zIndex-3">
+              <div className="absolute bottom-[-10px] right-[16px] text-[64px] font-bold z-30">
                 {secondOffCases?.length}
               </div>
               <div className="absolute bottom-[-90px] left-[-90px] w-[200px] h-[200px] rounded-[50%] bg-yellow-200 flex justify-center items-center">
@@ -200,13 +200,13 @@ const YearlyStatistics = ({ cases }) => {
               <div className="absolute top-[-90px] right-[-90px] w-[200px] h-[200px] rounded-[50%] bg-orange-200 flex justify-center items-center">
                 <div className="w-[120px] h-[120px] rounded-[50%] bg-orange-100"></div>
               </div>
-              <div className="absolute bottom-[-10px] right-[16px] text-[64px] font-bold zIndex-3">
+              <div className="absolute bottom-[-10px] right-[16px] text-[64px] font-bold z-30">
                 {thirdOffCases?.length}
               </div>
             </div>
             <div className="p-4 w-[206px] h-[180px] border-[1px] border-red-300 rounded-[12px] relative overflow-hidden bg-red-100 text-red-800">
-              <div className="text-[20px] zIndex-3">4th Offense</div>
-              <div className="absolute bottom-[-10px] right-[16px] text-[64px] font-bold zIndex-3">
+              <div className="text-[20px] z-30">4th Offense</div>
+              <div className="absolute bottom-[-10px] right-[16px] text-[64px] font-bold z-30">
                 {fourthOffCases?.length}
               </div>
               <div className="absolute bottom-[-90px] left-[-90px] w-[200px] h-[200px] rounded-[50%] bg-red-200 flex justify-center items-center">
@@ -240,7 +240,7 @@ const YearlyStatistics = ({ cases }) => {
           <div className="flex justify-end flex-wrap gap-2 w-[100%]">
             <div className="p-4 w-[206px] h-[180px] rounded-[12px] relative overflow-hidden bg-[#007bff] flex justify-start items-start text-[white]">
               <div className="text-[20px]">Total</div>
-              <div className="absolute bottom-[-10px] right-[16px] text-[64px] font-bold zIndex-3">
+              <div className="absolute bottom-[-10px] right-[16px] text-[64px] font-bold z-30">
                 {totalOtherYearCases?.length}
               </div>
               <div className="absolute bottom-[-90px] left-[-90px] w-[200px] h-[200px] rounded-[50%] bg-blue-400 flex justify-center items-center">
@@ -249,7 +249,7 @@ const YearlyStatistics = ({ cases }) => {
             </div>
             <div className="p-4 w-[206px] h-[180px] border-[1px] border-blue-300 rounded-[12px] relative overflow-hidden bg-white text-[#007bff]">
               <div className="text-[20px]">Minor</div>
-              <div className="absolute bottom-[-10px] right-[16px] text-[64px] font-bold zIndex-3">
+              <div className="absolute bottom-[-10px] right-[16px] text-[64px] font-bold z-30">
                 {minorOtherYearCases?.length}
               </div>
               <div className="absolute top-[-90px] right-[-90px] w-[200px] h-[200px] rounded-[50%] bg-blue-200 flex justify-center items-center">
@@ -258,7 +258,7 @@ const YearlyStatistics = ({ cases }) => {
             </div>
             <div className="p-4 w-[206px] h-[180px] rounded-[12px] relative overflow-hidden bg-red-800 text-[white]">
               <div className="text-[20px]">Major</div>
-              <div className="absolute bottom-[-10px] right-[16px] text-[64px] font-bold zIndex-3">
+              <div className="absolute bottom-[-10px] right-[16px] text-[64px] font-bold z-30">
                 {majorOtherYearCases?.length}
               </div>
               <div className="absolute bottom-[-90px] left-[-90px] w-[200px] h-[200px] rounded-[50%] bg-red-200 flex justify-center items-center">
@@ -267,7 +267,7 @@ const YearlyStatistics = ({ cases }) => {
             </div>
             <div className="p-4 w-[206px] h-[180px] border-[1px] border-green-300 rounded-[12px] relative overflow-hidden bg-green-100 text-green-800">
               <div className="text-[20px]">1st Offense</div>
-              <div className="absolute bottom-[-10px] right-[16px] text-[64px] font-bold zIndex-3">
+              <div className="absolute bottom-[-10px] right-[16px] text-[64px] font-bold z-30">
                 {firstOffenseOtherYearCases?.length}
               </div>
               <div className="absolute bottom-[-90px] right-[-90px] w-[200px] h-[200px] rounded-[50%] bg-green-200 flex justify-center items-center">
@@ -276,7 +276,7 @@ const YearlyStatistics = ({ cases }) => {
             </div>
             <div className="p-4 w-[206px] h-[180px] border-[1px] border-yellow-300 rounded-[12px] relative overflow-hidden bg-yellow-100 text-yellow-800">
               <div className="text-[20px]">2nd Offense</div>
-              <div className="absolute bottom-[-10px] right-[16px] text-[64px] font-bold zIndex-3">
+              <div className="absolute bottom-[-10px] right-[16px] text-[64px] font-bold z-30">
                 {secondOffenseOtherYearCases?.length}
               </div>
               <div className="absolute bottom-[-90px] left-[-90px] w-[200px] h-[200px] rounded-[50%] bg-yellow-200 flex justify-center items-center">
@@ -284,10 +284,10 @@ const YearlyStatistics = ({ cases }) => {
               </div>
             </div>
             <div className="p-4 w-[206px] h-[180px] border-[1px] border-orange-300 rounded-[12px] relative overflow-hidden bg-orange-100 text-orange-800">
-              <div className="text-[20px] zIndex-3">
+              <div className="text-[20px] z-30">
                 3rd <br /> Offense
               </div>
-              <div className="absolute bottom-[-10px] right-[16px] text-[64px] font-bold zIndex-3">
+              <div className="absolute bottom-[-10px] right-[16px] text-[64px] font-bold z-30">
                 {thirdOffenseOtherYearCases?.length}
               </div>
               <div className="absolute top-[-90px] right-[-90px] w-[200px] h-[200px] rounded-[50%] bg-orange-200 flex justify-center items-center">
@@ -295,8 +295,8 @@ const YearlyStatistics = ({ cases }) => {
               </div>
             </div>
             <div className="p-4 w-[206px] h-[180px] border-[1px] border-red-300 rounded-[12px] relative overflow-hidden bg-red-100 text-red-800">
-              <div className="text-[20px] zIndex-3">4th Offense</div>
-              <div className="absolute bottom-[-10px] right-[16px] text-[64px] font-bold zIndex-3">
+              <div className="text-[20px] z-30">4th Offense</div>
+              <div className="absolute bottom-[-10px] right-[16px] text-[64px] font-bold z-30">
                 {fourthOffenseOtherYearCases?.length}
               </div>
               <div className="absolute bottom-[-90px] left-[-90px] w-[200px] h-[200px] rounded-[50%] bg-red-200 flex justify-center items-center">

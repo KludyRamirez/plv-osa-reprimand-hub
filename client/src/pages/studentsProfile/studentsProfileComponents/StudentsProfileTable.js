@@ -483,9 +483,9 @@ const StudentsProfileTable = ({
               <div className="w-[100%] border-[1px] h-[150px] rounded-bl-[8px] rounded-br-[8px] flex gap-4 ">
                 <div className="w-[210px] h-[100%]  flex justify-end">
                   {student.sex === 'Male' ? (
-                    <img className="mt-[-60px] w-[175px] h-[175px] rounded-[50%] zIndex-2" />
+                    <img className="mt-[-60px] w-[175px] h-[175px] rounded-[50%] z-20" />
                   ) : (
-                    <img className="mt-[-60px] w-[175px] h-[175px] rounded-[50%] zIndex-2" />
+                    <img className="mt-[-60px] w-[175px] h-[175px] rounded-[50%] z-20" />
                   )}
                 </div>
                 <div className="w-[400px] h-[100%] px-2 py-5 flex flex-col gap-2 ">

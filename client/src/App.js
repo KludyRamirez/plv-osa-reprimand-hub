@@ -52,6 +52,17 @@ function App() {
         ) : (
           <Routes>
             <Route
+              path="*"
+              element={
+                auth?.userDetails?.token ? (
+                  <Navigate to="/statistics" replace />
+                ) : (
+                  <Navigate to="/login" replace />
+                )
+              }
+            />
+
+            <Route
               path="/"
               element={
                 auth?.userDetails?.token ? (
@@ -63,16 +74,6 @@ function App() {
             />
 
             <Route path="/error" element={<Error />}></Route>
-
-            <Route
-              path="/forgot"
-              element={<Forgot auth={auth} toast={toast} />}
-            ></Route>
-
-            <Route
-              path="/reset-password/:id/:token"
-              element={<Reset toast={toast} />}
-            ></Route>
 
             {/* START OF PERSIST LOGIN */}
 
@@ -86,6 +87,28 @@ function App() {
                     <Navigate to="/statistics" replace />
                   ) : (
                     <Login setLoading={setLoading} />
+                  )
+                }
+              ></Route>
+
+              <Route
+                path="/forgot"
+                element={
+                  auth?.userDetails?.token ? (
+                    <Navigate to="/statistics" replace />
+                  ) : (
+                    <Forgot auth={auth} toast={toast} />
+                  )
+                }
+              ></Route>
+
+              <Route
+                path="/reset-password/:id/:token"
+                element={
+                  auth?.userDetails?.token ? (
+                    <Navigate to="/statistics" replace />
+                  ) : (
+                    <Reset toast={toast} />
                   )
                 }
               ></Route>

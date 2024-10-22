@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const ForgotForm = ({
   status,
@@ -10,14 +10,14 @@ const ForgotForm = ({
   countdown,
 }) => {
   return (
-    <div className="w-[500px] flex flex-col gap-4 zIndex-2">
+    <div className="w-[500px] flex flex-col gap-4 z-20">
       <div className="flex items-center justify-start relative">
         <FormTitle
           sx={{
             backgroundImage:
-              "radial-gradient(100% 100% at 100% 0, #007bff 0, #007bff 100%)",
-            fontSize: "36px",
-            lineHeight: "normal",
+              'radial-gradient(100% 100% at 100% 0, #007bff 0, #007bff 100%)',
+            fontSize: '36px',
+            lineHeight: 'normal',
           }}
         >
           Verify your email
@@ -33,7 +33,7 @@ const ForgotForm = ({
         onChange={(e) => handleGetEmail(e)}
         placeholder="e.g. example@domain.com"
         className={` py-3 px-6 border-[1px] hover:border-[#007bff] rounded-[48px] w-[100%] bg-white ${
-          emailError === "" ? "" : "border-[red]"
+          emailError === '' ? '' : 'border-[red]'
         } focus:outline-none focus:border-[#007bff]`}
       />
       {emailError && <p className="text-red-500">{emailError}</p>}
@@ -44,7 +44,7 @@ const ForgotForm = ({
         Submit
       </button>
       <div className="mt-4">
-        {status === "success" && (
+        {status === 'success' && (
           <div className="flex flex-col gap-4">
             <div className="bg-blue-200 py-4 px-6 w-[100%] text-blue-900 h-[80px] flex justify-center items-center rounded-[4px]">
               <span className="">
@@ -63,7 +63,7 @@ const ForgotForm = ({
             </div>
           </div>
         )}
-        {status === "error" && (
+        {status === 'error' && (
           <div className="bg-red-100 py-4 px-6 w-[100%] text-[#ff3131] h-[80px] flex justify-start items-center rounded-[4px]">
             <span className="">
               The email you entered does not exist on our database. Please try

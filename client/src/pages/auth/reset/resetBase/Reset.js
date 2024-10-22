@@ -1,35 +1,35 @@
-import React, { useState } from "react";
-import axios from "axios";
-import plvLogo from "../../../../images/PLVlogo.png";
-import { BsEnvelopeAt, BsMegaphone } from "react-icons/bs";
-import { Link } from "react-router-dom";
-import { styled } from "@mui/material/styles";
-import { useNavigate } from "react-router-dom";
-import ResetForm from "../resetComponents/ResetForm";
-import { useParams } from "react-router-dom";
-import LoginFooter from "../../login/loginComponents/LoginFooter";
+import React, { useState } from 'react';
+import axios from 'axios';
+import plvLogo from '../../../../images/PLVlogo.png';
+import { BsEnvelopeAt, BsMegaphone } from 'react-icons/bs';
+import { Link } from 'react-router-dom';
+import { styled } from '@mui/material/styles';
+import { useNavigate } from 'react-router-dom';
+import ResetForm from '../resetComponents/ResetForm';
+import { useParams } from 'react-router-dom';
+import LoginFooter from '../../login/loginComponents/LoginFooter';
 
-const FormTitle = styled("div")({
+const FormTitle = styled('div')({
   backgroundImage:
-    "radial-gradient(100% 100% at 100% 0, #122c8e 0, #07bbff 100%)",
-  backgroundSize: "100%",
-  backgroundRepeat: "repeat",
-  WebkitBackgroundClip: "text",
-  WebkitTextFillColor: "transparent",
-  MozBackgroundClip: "text",
-  MozTextFillColor: "transparent",
-  fontSize: "120px",
-  fontWeight: "600",
-  lineHeight: "134px",
-  zIndex: "2",
+    'radial-gradient(100% 100% at 100% 0, #122c8e 0, #07bbff 100%)',
+  backgroundSize: '100%',
+  backgroundRepeat: 'repeat',
+  WebkitBackgroundClip: 'text',
+  WebkitTextFillColor: 'transparent',
+  MozBackgroundClip: 'text',
+  MozTextFillColor: 'transparent',
+  fontSize: '120px',
+  fontWeight: '600',
+  lineHeight: '134px',
+  zIndex: '2',
 });
 
 const Reset = ({ auth, toast }) => {
   const [status, setStatus] = useState(null);
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [passwordError, setPasswordError] = useState("");
-  const [confirmPasswordError, setConfirmPasswordError] = useState("");
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [confirmPasswordError, setConfirmPasswordError] = useState('');
   const [countdown, setCountdown] = useState(10);
 
   const navigate = useNavigate();
@@ -48,7 +48,7 @@ const Reset = ({ auth, toast }) => {
         }
       );
       if (res?.status === 200) {
-        setStatus("success");
+        setStatus('success');
         toast.success(res.data.message);
 
         let timer;
@@ -65,17 +65,17 @@ const Reset = ({ auth, toast }) => {
         }, 1000);
 
         timer = setTimeout(() => {
-          navigate("/");
+          navigate('/');
         }, 10000);
       }
     } catch (error) {
       if (error?.response?.status === 400) {
-        setStatus("error");
+        setStatus('error');
         toast.error(error?.response?.data.message);
       } else {
         toast.error(
           error?.response?.data.message ||
-            "Something went wrong. Please try again"
+            'Something went wrong. Please try again'
         );
       }
     }
@@ -83,19 +83,19 @@ const Reset = ({ auth, toast }) => {
 
   const validatePassword = (value) => {
     if (value.length < 6) {
-      setPasswordError("Password must be at least 6 characters long.");
+      setPasswordError('Password must be at least 6 characters long.');
     } else if (value.length > 48) {
-      setPasswordError("Password must be at most 48 characters long.");
+      setPasswordError('Password must be at most 48 characters long.');
     } else {
-      setPasswordError("");
+      setPasswordError('');
     }
   };
 
   const validateConfirmPassword = (value) => {
     if (password !== value) {
-      setConfirmPasswordError("Password must be same.");
+      setConfirmPasswordError('Password must be same.');
     } else {
-      setConfirmPasswordError("");
+      setConfirmPasswordError('');
     }
   };
 
@@ -114,16 +114,16 @@ const Reset = ({ auth, toast }) => {
   return (
     <div className="w-full h-screen flex justify-center bg-white">
       <div className="w-full flex flex-col items-center gap-[60px]">
-        <div className="w-[100%] px-6 shadow-sm bg-white zIndex-2">
+        <div className="w-[100%] px-6 shadow-sm bg-white z-20">
           <div className="h-[90px] flex justify-between items-center gap-10">
             <div className="flex justify-center items-center gap-10">
               <div className="flex items-center gap-6">
                 <img src={plvLogo} alt="" className="w-[60px] h-[60px]" />
                 <FormTitle
                   sx={{
-                    fontSize: "22px",
+                    fontSize: '22px',
                     backgroundImage:
-                      "radial-gradient(100% 100% at 100% 0, #077bff 0, #122c8e 100%)",
+                      'radial-gradient(100% 100% at 100% 0, #077bff 0, #122c8e 100%)',
                   }}
                 >
                   Office of Student Affairs
@@ -158,17 +158,17 @@ const Reset = ({ auth, toast }) => {
         <div className="w-[100%]">
           <LoginFooter />
         </div>
-        <div className="absolute flex justify-center items-center w-[800px] h-[800px] rounded-[50%] border-[2px] border-[#f9f9f9] top-[-160px] right-[200px] zIndex-1 transform rotate-[45deg]">
-          <div className="flex justify-center items-center w-[760px] h-[760px] rounded-[50%] border-[2px] border-[#f9f9f9] top-[-200px] left-[-400px] zIndex-1">
-            <div className="flex justify-center items-center w-[720px] h-[720px] rounded-[50%] border-[2px] border-[#f9f9f9] top-[-200px] left-[-400px] zIndex-1">
-              <div className="flex justify-center items-center w-[680px] h-[680px] rounded-[50%] border-[2px] border-[#f9f9f9] top-[-200px] left-[-400px] zIndex-1">
-                <div className="flex justify-center items-center w-[640px] h-[640px] rounded-[50%] border-[2px] border-[#f9f9f9] top-[-200px] left-[-400px] zIndex-1">
-                  <div className="flex justify-center items-center w-[600px] h-[600px] rounded-[50%] border-[2px] border-[#f9f9f9] top-[-200px] left-[-400px] zIndex-1">
-                    <div className="flex justify-center items-center w-[560px] h-[560px] rounded-[50%] border-[2px] border-[#f9f9f9] top-[-200px] left-[-400px] zIndex-1">
-                      <div className="flex justify-center items-center w-[520px] h-[520px] rounded-[50%] border-[2px] border-[#f9f9f9] top-[-200px] left-[-400px] zIndex-1">
-                        <div className="flex justify-center items-center w-[480px] h-[480px] rounded-[50%] border-[2px] border-[#f9f9f9] top-[-200px] left-[-400px] zIndex-1">
-                          <div className="flex justify-center items-center w-[440px] h-[440px] rounded-[50%] border-[2px] border-[#f9f9f9] top-[-200px] left-[-400px] zIndex-1">
-                            <div className="flex justify-center items-center w-[400px] h-[400px] rounded-[50%] border-[2px] border-[#f9f9f9] top-[-200px] left-[-400px] zIndex-1">
+        <div className="absolute flex justify-center items-center w-[800px] h-[800px] rounded-[50%] border-[2px] border-[#f9f9f9] top-[-160px] right-[200px] z-10 transform rotate-[45deg]">
+          <div className="flex justify-center items-center w-[760px] h-[760px] rounded-[50%] border-[2px] border-[#f9f9f9] top-[-200px] left-[-400px] z-10">
+            <div className="flex justify-center items-center w-[720px] h-[720px] rounded-[50%] border-[2px] border-[#f9f9f9] top-[-200px] left-[-400px] z-10">
+              <div className="flex justify-center items-center w-[680px] h-[680px] rounded-[50%] border-[2px] border-[#f9f9f9] top-[-200px] left-[-400px] z-10">
+                <div className="flex justify-center items-center w-[640px] h-[640px] rounded-[50%] border-[2px] border-[#f9f9f9] top-[-200px] left-[-400px] z-10">
+                  <div className="flex justify-center items-center w-[600px] h-[600px] rounded-[50%] border-[2px] border-[#f9f9f9] top-[-200px] left-[-400px] z-10">
+                    <div className="flex justify-center items-center w-[560px] h-[560px] rounded-[50%] border-[2px] border-[#f9f9f9] top-[-200px] left-[-400px] z-10">
+                      <div className="flex justify-center items-center w-[520px] h-[520px] rounded-[50%] border-[2px] border-[#f9f9f9] top-[-200px] left-[-400px] z-10">
+                        <div className="flex justify-center items-center w-[480px] h-[480px] rounded-[50%] border-[2px] border-[#f9f9f9] top-[-200px] left-[-400px] z-10">
+                          <div className="flex justify-center items-center w-[440px] h-[440px] rounded-[50%] border-[2px] border-[#f9f9f9] top-[-200px] left-[-400px] z-10">
+                            <div className="flex justify-center items-center w-[400px] h-[400px] rounded-[50%] border-[2px] border-[#f9f9f9] top-[-200px] left-[-400px] z-10">
                               <BsEnvelopeAt className="text-[72px] text-[#f9f9f9]" />
                             </div>
                           </div>
