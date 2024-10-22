@@ -16,26 +16,26 @@ const StatisticsTable = ({ cases, students, getCases, toast }) => {
         Office of Student Affairs / Statistics
       </div>
       <div className="w-100 pb-6 flex flex-col gap-2">
-        <div className="text-[26px] text-[#077bff] font-bold flex justify-between items-center">
+        <div className="w-100 text-[26px] text-[#077bff] font-bold pb-6 flex justify-between items-center">
           <div>Statistics</div>
           <div className="flex justify-start items-center gap-2">
             <div
               onClick={() => handleSetActiveStats("Dynamic")}
-              className={`text-[18px] ${
+              className={`text-[16px] ${
                 activeStats === "Dynamic"
-                  ? "text-white bg-[#007bff] border-[#007bff]"
+                  ? "bg-gradient-to-br from-[#007bff] via-[#079bff] to-[#007bff] text-white"
                   : "text-[#505050] bg-gray-100 border-gray-100"
-              } font-normal py-1 px-4 rounded-[50px] border-[1px] cursor-pointer`}
+              } font-bold py-3 px-5 rounded-[32px] cursor-pointer tracking-wide`}
             >
               Dynamic
             </div>
             <div
               onClick={() => handleSetActiveStats("Yearly")}
-              className={`text-[18px] ${
+              className={`text-[16px] ${
                 activeStats === "Yearly"
-                  ? "text-white bg-[#007bff] border-[#007bff]"
+                  ? "bg-gradient-to-br from-[#007bff] via-[#079bff] to-[#007bff] text-white"
                   : "text-[#505050] bg-gray-100 border-gray-100"
-              } font-normal py-1 px-4 rounded-[50px] border-[1px] cursor-pointer`}
+              } font-bold py-3 px-6 rounded-[32px] cursor-pointer tracking-wide`}
             >
               Yearly
             </div>

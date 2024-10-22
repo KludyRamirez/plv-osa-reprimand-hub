@@ -345,7 +345,7 @@ const CasesTable = ({
 
       <div className="w-full overflow-x-auto">
         <div
-          className={`w-full h-[374px] flex flex-col rounded-[10px] border-[1px] text-[#505050] overflow-y-scroll`}
+          className={`w-full h-[444px] flex flex-col rounded-[10px] border-[1px] text-[#505050] overflow-y-scroll`}
         >
           <div className="w-[fit-content] flex items-center gap-4 px-6">
             <div className="w-[30px] h-[60px] flex justify-start items-center">
@@ -424,9 +424,7 @@ const CasesTable = ({
                 <div
                   className={`w-[fit-content]
               flex items-center gap-4 px-6 ${
-                k % 2 === 0
-                  ? 'bg-gradient-to-br from-gray-100 to-gray-100'
-                  : 'bg-white'
+                k % 2 === 0 ? 'bg-gray-100' : 'bg-white'
               }`}
                   key={k}
                 >

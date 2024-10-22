@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getActions } from '../../../../store/actions/AuthActions';
 import { styled } from '@mui/material/styles';
-import osaLogo from '../../../../images/osalogo.jpg';
+import osaLogo from '../../../../images/osalogo.png';
 import LoginInputs from '../loginComponents/LoginInputs';
 import LoginFooter from '../loginComponents/LoginFooter';
 

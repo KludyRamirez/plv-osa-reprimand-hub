@@ -253,7 +253,7 @@ const StudentsTable = ({
         </ModalBox>
       </Modal>
       <div className="w-full overflow-x-auto">
-        <div className="w-full h-[376px] flex flex-col rounded-[10px] border-[1px] text-[#505050] overflow-y-scroll">
+        <div className="w-full h-[444px] flex flex-col rounded-[10px] border-[1px] text-[#505050] overflow-y-scroll">
           <div className="w-[fit-content] flex items-center gap-4 pl-6 pr-2">
             <div className="w-[30px] h-[60px] flex justify-start items-center">
               <input
@@ -263,13 +263,13 @@ const StudentsTable = ({
                 onChange={toggleSelectAll}
               />
             </div>
-            <div className="w-[118px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+            <div className="w-[113px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
               Student No.
             </div>
-            <div className="w-[130px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+            <div className="w-[133px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
               Surname
             </div>
-            <div className="w-[130px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+            <div className="w-[133px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
               First name
             </div>
             <div className="w-[60px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
@@ -336,9 +336,10 @@ const StudentsTable = ({
 
                   return (
                     <div
-                      className={`w-[fit-content] flex items-center gap-4 px-6 ${
-                        k % 2 === 0 ? 'bg-gray-100' : 'bg-white'
-                      }`}
+                      className={`w-[fit-content]
+              flex items-center gap-4 px-6 ${
+                k % 2 === 0 ? 'bg-gray-100' : 'bg-white'
+              }`}
                       key={k}
                     >
                       <div className="w-[30px] h-[60px] flex justify-start items-center">
@@ -349,13 +350,13 @@ const StudentsTable = ({
                           className="w-[18px] h-[18px]"
                         />
                       </div>
-                      <div className="w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
+                      <div className="w-[113px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
                         {student?.studentNo}
                       </div>
-                      <div className="w-[130px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
+                      <div className="w-[133px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
                         {student?.surName}
                       </div>
-                      <div className="w-[130px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
+                      <div className="w-[133px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
                         {student?.firstName}
                       </div>
                       <div className="w-[60px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
@@ -386,22 +387,23 @@ const StudentsTable = ({
 
                       <div
                         className={`w-[118px] flex justify-start items-center gap-8 py-1 px-3 rounded-[4px] ${
-                          casesCount >= 2 && 'text-[#ff3131]'
-                        } ${casesCount === 1 && 'text-[#ffbf00]'} ${
-                          casesCount <= 0 && 'text-[#007bff]'
+                          casesCount >= 2
+                            ? 'text-[#ff3131]'
+                            : casesCount === 1
+                            ? 'text-[#ffbf00]'
+                            : 'text-[#007bff]'
                         }`}
                       >
                         <div>{casesCount}</div>
-
-                        {casesCount >= 2 && (
-                          <div className="w-[14px] h-[14px] rounded-[50%] bg-[#ff3131]"></div>
-                        )}
-                        {casesCount === 1 && (
-                          <div className="w-[14px] h-[14px] rounded-[50%] bg-[#ffbf00]"></div>
-                        )}
-                        {casesCount <= 0 && (
-                          <div className="w-[14px] h-[14px] rounded-[50%] bg-[#007bff]"></div>
-                        )}
+                        <div
+                          className={`w-[14px] h-[14px] rounded-[50%] ${
+                            casesCount >= 2
+                              ? 'bg-[#ff3131]'
+                              : casesCount === 1
+                              ? 'bg-[#ffbf00]'
+                              : 'bg-[#007bff]'
+                          }`}
+                        ></div>
                       </div>
                       <div className="w-[130px] whitespace-nowrap flex justify-start items-center gap-2">
                         {selectedStudents.length < 2 ? (

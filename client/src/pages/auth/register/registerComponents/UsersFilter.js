@@ -62,11 +62,8 @@ const UsersFilter = ({ users, getUsers, allowedRoles }) => {
             type="text"
             autoComplete="off"
             placeholder="Search by case number, student name, etc."
-            className="p-3 rounded-[6px] w-[97%] phone:w-[100%] bg-gradient-to-br from-gray-100 to-gray-100 focus:outline-none focus:border-[1px] focus:border-[#cdcdcd]"
+            className="p-3 rounded-[6px] w-[100%] bg-gradient-to-br from-gray-100 to-gray-100 focus:outline-none focus:border-[1px] focus:border-[#cdcdcd]"
           />
-          <div className="flex justify-center items-center w-[50px] h-[48px] rounded-[8px] bg-gradient-to-br from-[#07bbff] to-[#007bff] text-white phone:hidden">
-            <BsFilter className="text-[24px]" />
-          </div>
         </div>
 
         <div className="py-4 px-6 text-[18px] flex items-center gap-2">
@@ -78,9 +75,9 @@ const UsersFilter = ({ users, getUsers, allowedRoles }) => {
             <div className="phone:w-[49%] flex flex-col items-start gap-2">
               <div className="pl-2 w-[242px] phone:w-[100%] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
-                  <div>Status</div> <BsChevronBarDown />
+                  <div>Status</div> 
                 </div>
-                <BsCheckCircle />
+                <BsChevronBarDown />
               </div>
               <select
                 onChange={(e) => setSelectedStatus(e.target.value)}
@@ -95,9 +92,9 @@ const UsersFilter = ({ users, getUsers, allowedRoles }) => {
             <div className="phone:w-[48.8%] flex flex-col items-start gap-2">
               <div className="pl-2 w-[242px] phone:w-[100%] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
-                  <div>Role</div> <BsChevronBarDown />
+                  <div>Role</div> 
                 </div>
-                <BsGear className="text-[20px]" />
+                <BsChevronBarDown />
               </div>
               <select
                 onChange={(e) => setRole(e.target.value)}

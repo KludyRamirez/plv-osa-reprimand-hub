@@ -236,131 +236,148 @@ const UsersTable = ({
           />
         </ModalBox>
       </Modal>
-      <div
-        className={`w-100 h-[380px] bg-white flex flex-col rounded-[10px] border-[1px] text-[#505050] phone:overflow-x-scroll ${
-          users && users?.length > 5 ? 'overflow-y-scroll' : ''
-        }`}
-      >
-        <div className="phone:w-[fit-content] flex items-center gap-4 px-6">
-          <div className="w-[30px] h-[60px] flex justify-start items-center">
-            <input
-              type="checkbox"
-              className="w-[18px] h-[18px]"
-              checked={selectAll}
-              onChange={toggleSelectAll}
-            />
-          </div>
-          <div className="w-[60px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
-            UID
-          </div>
-          <div className="w-[160px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
-            Username
-          </div>
-          <div className="w-[160px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
-            Surname
-          </div>
-          <div className="w-[160px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
-            First name
-          </div>
-          <div className="w-[240px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
-            Email
-          </div>
-          <div className=" w-[140px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
-            Role
-          </div>
-          <div className=" w-[140px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
-            Contact No.
-          </div>
-          <div className=" w-[100px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
-            Status
-          </div>
-          {selectedUsers.length > 1 ? (
-            allowedRoles?.find((ar) =>
-              auth?.userDetails?.role?.includes(ar)
-            ) ? (
-              <>
-                <div className="w-[1px] h-[20px] border-[1px]"></div>
-                <div
-                  className="flex gap-2 justify-start items-center py-1 px-2 bg-[#ff3131] border-[1px] border-[#ff3131] text-white text-[14px] rounded-[4px] cursor-pointer"
-                  onClick={handleOpenModalDeleteMany}
-                >
-                  <span>Delete</span>
-                  <BsTrash3Fill className="text-[14px]" />
+      <div className="w-full overflow-x-auto">
+        <div className="w-full h-[374px] flex flex-col rounded-[10px] border-[1px] text-[#505050] overflow-y-scroll">
+          <div className="w-[fit-content] flex items-center gap-4 px-6">
+            <div className="w-[30px] h-[60px] flex justify-start items-center">
+              <input
+                type="checkbox"
+                className="w-[18px] h-[18px]"
+                checked={selectAll}
+                onChange={toggleSelectAll}
+              />
+            </div>
+            <div className="w-[60px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+              UID
+            </div>
+            <div className="w-[160px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+              Username
+            </div>
+            <div className="w-[180px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+              Surname
+            </div>
+            <div className="w-[180px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+              First name
+            </div>
+            <div className="w-[275px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+              Email
+            </div>
+            <div className="w-[140px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+              Role
+            </div>
+            <div className="w-[140px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+              Contact No.
+            </div>
+            <div className="w-[100px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+              Status
+            </div>
+            {selectedUsers.length > 1 ? (
+              allowedRoles?.find((ar) =>
+                auth?.userDetails?.role?.includes(ar)
+              ) ? (
+                <>
+                  <div className="flex justify-start items-center gap-2">
+                    <div
+                      className="flex gap-1 justify-start items-center py-1 px-2 bg-[#ff3131] border-[1px] border-[#ff3131] text-white text-[14px] rounded-[4px] cursor-pointer"
+                      onClick={handleOpenModalDeleteMany}
+                    >
+                      <span>Delete</span>
+                    </div>
+                    {/* <div
+                      className="flex gap-1 justify-start items-center py-1 px-2 bg-[green] border-[1px] border-[green] text-white text-[14px] rounded-[4px] cursor-pointer"
+                      onClick={exportPDF}
+                    >
+                      <span>Export</span>
+                    </div> */}
+                  </div>
+                </>
+              ) : (
+                <div className="w-[140px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+                  <span>Actions</span>
                 </div>
-              </>
+              )
             ) : (
               <div className="w-[140px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
                 <span>Actions</span>
               </div>
-            )
-          ) : (
-            <div className="w-[140px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
-              <span>Actions</span>
-            </div>
-          )}
-        </div>
+            )}
+          </div>
 
-        {users.length ? (
-          <>
-            {users?.map((user, k) => (
-              <div
-                className={`phone:w-[fit-content] flex items-center gap-4 px-6 ${
-                  k % 2 === 0 ? 'bg-gray-100' : 'bg-white'
-                }`}
-                key={k}
-              >
-                <div className="w-[30px] h-[60px] flex justify-start items-center">
-                  <input
-                    type="checkbox"
-                    checked={selectedUsers?.includes(user?._id)}
-                    onChange={() => toggleUserSelection(user?._id)}
-                    className="w-[18px] h-[18px]"
-                  />
-                </div>
-                <div className="w-[60px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px]">
-                  {user?.uid}
-                </div>
-                <div className="w-[160px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px]">
-                  {user?.userName}
-                </div>
-                <div className="w-[160px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px]">
-                  {user?.surName}
-                </div>
-                <div className="w-[160px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px]">
-                  {user?.firstName}
-                </div>
-                <div className="w-[240px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px]">
-                  {user?.email}
-                </div>
-                <div className="w-[140px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px] text-[#007bff]">
-                  {user?.role}
-                </div>
-                <div className="w-[140px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px]">
-                  {user?.contactNo}
-                </div>
-                <div className="w-[100px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px] text-[green]">
-                  {user?.statusOfUser}
-                </div>
-                <div className="w-[140px] whitespace-nowrap flex justify-start items-center py-1 px-1 rounded-[4px] gap-2">
-                  {selectedUsers?.length < 2 ? (
-                    allowedRoles?.find((ar) =>
-                      auth?.userDetails?.role?.includes(ar)
-                    ) ? (
-                      <>
-                        <div
-                          onClick={() => handleUserEditClick(user)}
-                          className="p-2 bg-[white] border-[1px] border-[#FFBF00] rounded-[18px] cursor-pointer"
-                        >
-                          <BsPen className="text-[18px] text-[#FFBF00]" />
-                        </div>
+          {users.length ? (
+            <>
+              {users?.map((user, k) => (
+                <div
+                  className={`w-[fit-content]
+              flex items-center gap-4 px-6 ${
+                k % 2 === 0
+                  ? 'bg-gradient-to-br from-gray-100 to-gray-100'
+                  : 'bg-white'
+              }`}
+                  key={k}
+                >
+                  <div className="w-[30px] h-[60px] flex justify-start items-center">
+                    <input
+                      type="checkbox"
+                      checked={selectedUsers?.includes(user?._id)}
+                      onChange={() => toggleUserSelection(user?._id)}
+                      className="w-[18px] h-[18px]"
+                    />
+                  </div>
+                  <div className="w-[60px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px]">
+                    {user?.uid}
+                  </div>
+                  <div className="w-[160px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px]">
+                    {user?.userName}
+                  </div>
+                  <div className="w-[180px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px]">
+                    {user?.surName}
+                  </div>
+                  <div className="w-[180px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px]">
+                    {user?.firstName}
+                  </div>
+                  <div className="w-[275px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px]">
+                    {user?.email}
+                  </div>
+                  <div className="w-[140px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px] text-[#007bff]">
+                    {user?.role}
+                  </div>
+                  <div className="w-[140px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px]">
+                    {user?.contactNo}
+                  </div>
+                  <div className="w-[100px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px] text-[green]">
+                    {user?.statusOfUser}
+                  </div>
+                  <div className="w-[140px] whitespace-nowrap flex justify-start items-center py-1 px-1 rounded-[4px] gap-2">
+                    {selectedUsers?.length < 2 ? (
+                      allowedRoles?.find((ar) =>
+                        auth?.userDetails?.role?.includes(ar)
+                      ) ? (
+                        <>
+                          <div
+                            onClick={() => handleUserEditClick(user)}
+                            className="p-2 bg-[white] border-[1px] border-[#FFBF00] rounded-[18px] cursor-pointer"
+                          >
+                            <BsPen className="text-[18px] text-[#FFBF00]" />
+                          </div>
 
-                        <div
-                          onClick={() => handleClickDelete(user?._id)}
-                          className="p-2 bg-[white] border-[1px] border-[#FF3131] rounded-[18px] cursor-pointer"
-                        >
-                          <BsTrash3 className="text-[18px] text-[#FF3131]" />
-                        </div>
-                      </>
+                          <div
+                            onClick={() => handleClickDelete(user?._id)}
+                            className="p-2 bg-[white] border-[1px] border-[#FF3131] rounded-[18px] cursor-pointer"
+                          >
+                            <BsTrash3 className="text-[18px] text-[#FF3131]" />
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          <div className="p-2 bg-gray-200 rounded-[18px]">
+                            <BsPenFill className="text-[18px] text-white" />
+                          </div>
+
+                          <div className="p-2 bg-gray-200 rounded-[18px]">
+                            <BsTrash3Fill className="text-[18px] text-white" />
+                          </div>
+                        </>
+                      )
                     ) : (
                       <>
                         <div className="p-2 bg-gray-200 rounded-[18px]">
@@ -371,28 +388,18 @@ const UsersTable = ({
                           <BsTrash3Fill className="text-[18px] text-white" />
                         </div>
                       </>
-                    )
-                  ) : (
-                    <>
-                      <div className="p-2 bg-gray-200 rounded-[18px]">
-                        <BsPenFill className="text-[18px] text-white" />
-                      </div>
-
-                      <div className="p-2 bg-gray-200 rounded-[18px]">
-                        <BsTrash3Fill className="text-[18px] text-white" />
-                      </div>
-                    </>
-                  )}
+                    )}
+                  </div>
                 </div>
-              </div>
-            ))}
-          </>
-        ) : (
-          <div className="w-100 h-[306px] flex flex-col justify-center items-center gap-2 text-[#707070] border-t-[1px] border-t-[#f0f0f0]">
-            <BsFolder2Open className="text-[42px]" />
-            <div className="text-[16px]">No users available</div>
-          </div>
-        )}
+              ))}
+            </>
+          ) : (
+            <div className="w-100 h-[306px] flex flex-col justify-center items-center gap-2 text-[#707070] border-t-[1px] border-t-[#f0f0f0]">
+              <BsFolder2Open className="text-[42px]" />
+              <div className="text-[16px]">No users available</div>
+            </div>
+          )}
+        </div>
       </div>
     </>
   );

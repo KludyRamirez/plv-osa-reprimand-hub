@@ -1,13 +1,12 @@
 import React from 'react';
 import { BsFacebook, BsGithub, BsLinkedin } from 'react-icons/bs';
 
-import { FaRegCopyright } from 'react-icons/fa6';
-import osaLogo from '../../../../images/osalogo.jpg';
+import osaLogo from '../../../../images/osalogo.png';
 
 const LoginFooter = () => {
   return (
     <div>
-      <div className="w-[100%] flex flex-col fixed bottom-0 items-center z-20">
+      <div className="w-[100%] flex flex-col fixed bottom-0 items-center z-30">
         <div className=" w-[96%] h-[100px] px-8 py-6 flex justify-between items-start bg-[#007bff] rounded-tl-[24px] rounded-tr-[24px]">
           <div className="flex flex-col gap-3">
             <div className="flex justify-start items-start text-[16px] text-white gap-4">

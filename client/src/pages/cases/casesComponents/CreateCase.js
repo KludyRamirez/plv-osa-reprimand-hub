@@ -251,7 +251,7 @@ const CreateCase = ({ toast, getCases, allowedRoles }) => {
       <div className="w-100 text-[14px] text-[#404040] pb-6 ">
         Office of Student Affairs / Cases
       </div>
-      <div className="w-100 text-[26px] text-[#077bff] font-semibold pb-6 flex justify-between items-center">
+      <div className="w-100 text-[26px] text-[#077bff] font-bold pb-6 flex justify-between items-center">
         <div>Cases List</div>
 
         {allowedRoles?.find((ar) => auth?.userDetails?.role?.includes(ar)) ? (

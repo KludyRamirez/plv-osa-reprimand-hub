@@ -25,7 +25,8 @@ import {
   BsStickyFill,
 } from 'react-icons/bs';
 import { logoutUtil } from '../../pages/auth/login/loginUtils/logoutUtil';
-import plvLogo from '../../images/PLVlogo.png';
+import plvlogo from '../../images/plvlogo.png';
+import osalogo from '../../images/osalogo.png';
 import drac from '../../images/drac.png';
 
 const AppNavBar = styled(AppBar)({
@@ -109,7 +110,7 @@ function Sidebar(props) {
             justifyContent: 'space-between',
             alignItems: 'center',
             width: '100%',
-            height: '100vh',
+            height: '100%',
             backgroundColor: '#007bff',
           }}
         >
@@ -124,8 +125,8 @@ function Sidebar(props) {
               padding: '16px',
             }}
           >
-            <div className="w-full flex justify-center items-center font-semibold text-white mb-[20px] mt-[8px]">
-              <img src={plvLogo} alt="" className="w-[100px] h-[100px]" />
+            <div className="w-full flex justify-center items-center font-semibold text-white mb-[20px] mt-[20px]">
+              <img src={osalogo} alt="" className="w-[100px] h-[100px]" />
             </div>
 
             <div className="w-full">
@@ -361,12 +362,10 @@ function Sidebar(props) {
           </div>
 
           <div className="flex flex-col justify-center items-center w-[100%] p-4 shadow-sm">
-            <div className="group flex justify-start items-center gap-4 w-[100%] bg-gray-100 p-4 rounded-tl-[14px] rounded-tr-[14px]">
-              <img
-                src={drac}
-                alt=""
-                className="w-[50px] h-[50px] transition-transform duration-300 transform group-hover:rotate-[360deg]"
-              />
+            <div className="group flex justify-start items-center gap-4 w-[100%] bg-white p-4 rounded-tl-[14px] rounded-tr-[14px]">
+              <div
+                className="rounded-[50%] flex justify-center items-center w-[50px] h-[50px] border-[1px] border-gray-200 transition-transform duration-300 transform group-hover:rotate-[360deg]"
+              ><span className='text-[#007bff] text-[32px] font-bold uppercase'>{auth.userDetails.userName.slice(0, 1)}</span></div>
               <div className="flex flex-col">
                 <div className="text-[#007bff] text-[18px] font-semibold hover:underline cursor-pointer">
                   {auth.userDetails.userName.slice(0, 10)}

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import plvLogo from '../../../../images/PLVlogo.png';
+import plvlogo from '../../../../images/plvlogo.png';
 import { BsEnvelopeAt, BsMegaphone } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
@@ -118,7 +118,7 @@ const Reset = ({ auth, toast }) => {
           <div className="h-[90px] flex justify-between items-center gap-10">
             <div className="flex justify-center items-center gap-10">
               <div className="flex items-center gap-6">
-                <img src={plvLogo} alt="" className="w-[60px] h-[60px]" />
+                <img src={plvlogo} alt="" className="w-[60px] h-[60px]" />
                 <FormTitle
                   sx={{
                     fontSize: '22px',

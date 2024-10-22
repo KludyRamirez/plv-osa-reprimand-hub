@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import ForgotForm from '../forgotComponents/ForgotForm';
-import osaLogo from '../../../../images/osalogo.jpg';
+import osaLogo from '../../../../images/osalogo.png';
 import { BsEnvelopeAt, BsMegaphone } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
