@@ -311,7 +311,7 @@ const CasesTable = ({
       >
         <ModalBox
           sx={{
-            width: '29%',
+            width: '35%',
             background: '#fafafa',
             borderRadius: '12px',
           }}
@@ -331,7 +331,7 @@ const CasesTable = ({
       >
         <ModalBox
           sx={{
-            width: '29%',
+            width: '35%',
             background: '#fafafa',
             borderRadius: '12px',
           }}
@@ -560,8 +560,8 @@ const CasesTable = ({
               ))}
             </>
           ) : (
-            <div className="w-100 h-[376px] flex flex-col justify-center items-center gap-2 text-[#707070] border-t-[1px] border-t-[#f0f0f0]">
-              <BsFolderMinus className="text-[42px]" />
+            <div className="w-100 h-[444px] flex flex-col justify-center items-center gap-2 text-[#007bff] border-t-[1px] border-t-[#f0f0f0]">
+              <BsFolder2Open className="text-[42px]" />
               <div className="text-[16px]">No cases available</div>
             </div>
           )}

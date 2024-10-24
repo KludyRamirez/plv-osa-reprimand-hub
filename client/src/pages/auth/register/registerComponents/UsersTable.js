@@ -190,6 +190,16 @@ const UsersTable = ({
     setShowEditUserModal(false);
   };
 
+  const sortedUsers = [...users].sort((a, b) => {
+    if (a.userName === auth?.userDetails?.userName) {
+      return -1;
+    }
+    if (b.userName === auth?.userDetails?.userName) {
+      return 1;
+    }
+    return 0;
+  });
+
   return (
     <>
       <Modal
@@ -215,7 +225,13 @@ const UsersTable = ({
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-        <ModalBox sx={{ width: '22%' }}>
+        <ModalBox
+          sx={{
+            width: '35%',
+            background: '#fafafa',
+            borderRadius: '12px',
+          }}
+        >
           <DeleteUserModal
             handleConfirmDelete={handleConfirmDelete}
             handleCloseModal={handleCloseModal}
@@ -229,7 +245,13 @@ const UsersTable = ({
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-        <ModalBox sx={{ width: '22%' }}>
+        <ModalBox
+          sx={{
+            width: '35%',
+            background: '#fafafa',
+            borderRadius: '12px',
+          }}
+        >
           <DeleteManyUserModal
             deleteSelectedUsers={deleteSelectedUsers}
             handleCloseModalDeleteMany={handleCloseModalDeleteMany}
@@ -237,7 +259,7 @@ const UsersTable = ({
         </ModalBox>
       </Modal>
       <div className="w-full overflow-x-auto">
-        <div className="w-full h-[374px] flex flex-col rounded-[10px] border-[1px] text-[#505050] overflow-y-scroll">
+        <div className="w-full h-[444px] flex flex-col rounded-[10px] border-[1px] text-[#505050] overflow-y-scroll">
           <div className="w-[fit-content] flex items-center gap-4 px-6">
             <div className="w-[30px] h-[60px] flex justify-start items-center">
               <input
@@ -303,9 +325,9 @@ const UsersTable = ({
             )}
           </div>
 
-          {users.length ? (
+          {sortedUsers.length ? (
             <>
-              {users?.map((user, k) => (
+              {sortedUsers?.map((user, k) => (
                 <div
                   className={`w-[fit-content]
               flex items-center gap-4 px-6 ${
@@ -353,19 +375,43 @@ const UsersTable = ({
                         auth?.userDetails?.role?.includes(ar)
                       ) ? (
                         <>
-                          <div
-                            onClick={() => handleUserEditClick(user)}
-                            className="p-2 bg-[white] border-[1px] border-[#FFBF00] rounded-[18px] cursor-pointer"
-                          >
-                            <BsPen className="text-[18px] text-[#FFBF00]" />
-                          </div>
+                          {user.userName === auth?.userDetails?.userName ? (
+                            ''
+                          ) : (
+                            <>
+                              <div
+                                onClick={() => handleUserEditClick(user)}
+                                className="relative container w-[36px] h-[36px] flex justify-center items-center bg-white border-[1px] border-[#ffbf00] rounded-[18px] cursor-pointer"
+                              >
+                                <BsPen className="text-[18px] text-[#FFBF00]" />
+                                <div className="absolute bg-gradient-to-br from-[#F4BB44] via-[#FFBF00] to-[#F4BB44] py-2 px-4 top-[-62px] left-[-14px] rounded-[32px] text-[#606060] additional-content z-40">
+                                  <span className="text-[16px] text-white">
+                                    Edit user
+                                  </span>
+                                </div>
+                                <div className="absolute top-[-38px] left-[7px] w-[20px] h-[20px] bg-gradient-to-br from-[#F4BB44] via-[#FFBF00] to-[#FFBF00] transform rotate-[45deg] additional-content z-10"></div>
+                              </div>
+                            </>
+                          )}
 
-                          <div
-                            onClick={() => handleClickDelete(user?._id)}
-                            className="p-2 bg-[white] border-[1px] border-[#FF3131] rounded-[18px] cursor-pointer"
-                          >
-                            <BsTrash3 className="text-[18px] text-[#FF3131]" />
-                          </div>
+                          {user.userName === auth?.userDetails?.userName ? (
+                            ''
+                          ) : (
+                            <>
+                              <div
+                                onClick={() => handleClickDelete(user?._id)}
+                                className="relative container w-[36px] h-[36px] flex justify-center items-center bg-white border-[1px] border-[#ff3131] rounded-[18px] cursor-pointer"
+                              >
+                                <BsTrash3 className="text-[18px] text-[#FF3131]" />
+                                <div className="absolute bg-gradient-to-br from-[#C41E3A] via-[#ff3131] to-[#ff3131] py-2 px-4 top-[-62px] right-[-14px] rounded-[32px] text-[#606060] additional-content z-40">
+                                  <span className="text-[16px] text-white">
+                                    Delete user
+                                  </span>
+                                </div>
+                                <div className="absolute top-[-38px] left-[7px] w-[20px] h-[20px] bg-gradient-to-br from-[#ff3131] via-[#ff3131] to-[#ff3131] transform rotate-[45deg] additional-content z-10"></div>
+                              </div>
+                            </>
+                          )}
                         </>
                       ) : (
                         <>
@@ -394,7 +440,7 @@ const UsersTable = ({
               ))}
             </>
           ) : (
-            <div className="w-100 h-[306px] flex flex-col justify-center items-center gap-2 text-[#707070] border-t-[1px] border-t-[#f0f0f0]">
+            <div className="w-100 h-[444px] flex flex-col justify-center items-center gap-2 text-[#007bff] border-t-[1px] border-t-[#f0f0f0]">
               <BsFolder2Open className="text-[42px]" />
               <div className="text-[16px]">No users available</div>
             </div>

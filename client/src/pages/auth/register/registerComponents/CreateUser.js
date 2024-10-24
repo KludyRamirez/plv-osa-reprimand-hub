@@ -173,7 +173,7 @@ const CreateUser = ({ register, getUsers, allowedRoles }) => {
 
   return (
     <>
-      <div className="w-100 text-[14px] text-[#404040] pb-6 ">
+      <div className="w-100 text-[14px] text-[#404040] pb-6">
         Office of Student Affairs / Users
       </div>
       <div className="w-100 text-[26px] text-[#077bff] font-bold pb-6 flex justify-between items-center">

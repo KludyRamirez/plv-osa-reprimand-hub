@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import CasesPerMonthFilter from "../statisticsComponents/CasesPerMonthFilter";
-import StudentsPerYearFilter from "../statisticsComponents/StudentsPerYearFilter";
-import YearlyStatistics from "../statisticsComponents/YearlyStatistics";
+import React, { useState } from 'react';
+import CasesPerMonthFilter from '../statisticsComponents/CasesPerMonthFilter';
+import StudentsPerYearFilter from '../statisticsComponents/StudentsPerYearFilter';
+import YearlyStatistics from '../statisticsComponents/YearlyStatistics';
 
 const StatisticsTable = ({ cases, students, getCases, toast }) => {
-  const [activeStats, setActiveStats] = useState("Dynamic");
+  const [activeStats, setActiveStats] = useState('Total');
 
   const handleSetActiveStats = (active) => {
     setActiveStats(active);
@@ -12,37 +12,37 @@ const StatisticsTable = ({ cases, students, getCases, toast }) => {
 
   return (
     <>
-      <div className="w-100 text-[14px] text-[#404040] pb-6 ">
+      <div className="w-100 text-[14px] text-[#404040] mb-6">
         Office of Student Affairs / Statistics
       </div>
-      <div className="w-100 pb-6 flex flex-col gap-2">
-        <div className="w-100 text-[26px] text-[#077bff] font-bold pb-6 flex justify-between items-center">
+      <div className="w-100 mb-6 flex flex-col gap-2">
+        <div className="w-100 text-[26px] text-[#077bff] font-bold mb-6 flex justify-between items-center">
           <div>Statistics</div>
           <div className="flex justify-start items-center gap-2">
             <div
-              onClick={() => handleSetActiveStats("Dynamic")}
+              onClick={() => handleSetActiveStats('Total')}
               className={`text-[16px] ${
-                activeStats === "Dynamic"
-                  ? "bg-gradient-to-br from-[#007bff] via-[#079bff] to-[#007bff] text-white"
-                  : "text-[#505050] bg-gray-100 border-gray-100"
-              } font-bold py-3 px-5 rounded-[32px] cursor-pointer tracking-wide`}
+                activeStats === 'Total'
+                  ? 'bg-gradient-to-br from-[#007bff] via-[#079bff] to-[#007bff] text-white'
+                  : 'text-[#505050] bg-gray-100 border-gray-100'
+              } font-bold py-3 px-5 rounded-[32px] cursor-pointer`}
             >
-              Dynamic
+              Total Statistics
             </div>
             <div
-              onClick={() => handleSetActiveStats("Yearly")}
+              onClick={() => handleSetActiveStats('Yearly')}
               className={`text-[16px] ${
-                activeStats === "Yearly"
-                  ? "bg-gradient-to-br from-[#007bff] via-[#079bff] to-[#007bff] text-white"
-                  : "text-[#505050] bg-gray-100 border-gray-100"
-              } font-bold py-3 px-6 rounded-[32px] cursor-pointer tracking-wide`}
+                activeStats === 'Yearly'
+                  ? 'bg-gradient-to-br from-[#007bff] via-[#079bff] to-[#007bff] text-white'
+                  : 'text-[#505050] bg-gray-100 border-gray-100'
+              } font-bold py-3 px-5 rounded-[32px] cursor-pointer`}
             >
-              Yearly
+              Yearly Comparison
             </div>
           </div>
         </div>
 
-        {activeStats === "Dynamic" ? (
+        {activeStats === 'Total' ? (
           <div className="flex flex-wrap justify-start gap-8">
             <div className="w-[100%] h-[fit-content] pt-2">
               <CasesPerMonthFilter

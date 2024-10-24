@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
-import Sidebar from "../../../externalComponents/sidebarBase/Sidebar";
-import axios from "axios";
-import { useSelector } from "react-redux";
-import { createSelector } from "reselect";
-import CreateCollegesAndDepartments from "../collegesComponents/CreateCollegesAndDepartments";
-import CollegesAndDepartmentsFilter from "../collegesComponents/CollegesAndDepartmentsFilter";
+import React, { useState, useEffect } from 'react';
+import Sidebar from '../../../externalComponents/sidebarBase/Sidebar';
+import axios from 'axios';
+import { useSelector } from 'react-redux';
+import { createSelector } from 'reselect';
+import CreateCollegesAndDepartments from '../collegesComponents/CreateCollegesAndDepartments';
+import CollegesAndDepartmentsFilter from '../collegesComponents/CollegesAndDepartmentsFilter';
 
 const selectAuth = (state) => state.auth;
 const authSelector = createSelector([selectAuth], (auth) => auth);
@@ -21,7 +21,7 @@ const Settings = ({ toast }) => {
   const getCads = async () => {
     try {
       if (!auth.userDetails.token) {
-        console.error("Authentication token not found.");
+        console.error('Authentication token not found.');
         return;
       }
       const url = `${process.env.REACT_APP_API_URI}/cad`;
@@ -34,16 +34,16 @@ const Settings = ({ toast }) => {
 
       setCads(res.data);
     } catch (err) {
-      console.error("Error fetching users!", err);
+      console.error('Error fetching users!', err);
     }
   };
 
   return (
     <>
-      <div className="flex justify-start">
+      <div className="w-full flex">
         <Sidebar />
-        <div className="w-[100%] flex justify-start bg-[#007bff]">
-          <div className="w-[100%] bg-[#fefefe] rounded-tl-[24px] phone:rounded-tl-[0px] mt-[80px] px-8 phone:px-4 pt-8">
+        <div className="w-[calc(100%-240px)] phone:w-full flex justify-start bg-[#007bff]">
+          <div className="w-full phone:mt-[75px] bg-[#fefefe] px-8 phone:px-4 pt-8">
             <CreateCollegesAndDepartments
               toast={toast}
               cads={cads}

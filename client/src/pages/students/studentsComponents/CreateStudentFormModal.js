@@ -15,7 +15,6 @@ const CreateStudentFormModal = ({
     studentNo,
     firstName,
     surName,
-    middleName,
     college,
     department,
     year,
@@ -72,8 +71,8 @@ const CreateStudentFormModal = ({
 
         <div className="flex flex-col gap-8 mt-10 pt-8 pl-10 pr-10 pb-11 bg-gray-100">
           <div className="text-[#606060] flex gap-3">
-            <div className="flex flex-col gap-2 w-[100%]">
-              <div className="">First Name</div>
+            <div className="flex flex-col gap-2 w-[50%]">
+              <div>First Name</div>
               <input
                 required
                 name="firstName"
@@ -91,8 +90,8 @@ const CreateStudentFormModal = ({
               )}
             </div>
 
-            <div className="flex flex-col gap-2 w-[100%]">
-              <div className="">Surname</div>
+            <div className="flex flex-col gap-2 w-[50%]">
+              <div>Surname</div>
               <input
                 required
                 name="surName"

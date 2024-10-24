@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { createSelector } from "reselect";
-import { BsFolderX, BsEscape } from "react-icons/bs";
-import TimeExtractor from "../../../externalUtils/TimeExtractor";
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { createSelector } from 'reselect';
+import { BsFolderX, BsEscape, BsChevronUp } from 'react-icons/bs';
+import TimeExtractor from '../../../externalUtils/TimeExtractor';
 
 const selectAuth = (state) => state.auth;
 const authSelector = createSelector([selectAuth], (auth) => auth);
@@ -51,13 +51,9 @@ const HistoryTable = ({
 
   return (
     <>
-      <div className="flex justify-start gap-8">
-        <div
-          className={`w-[100%] h-[366px] bg-white flex flex-col text-[#505050] phone:overflow-x-scroll ${
-            history && history.length > 5 ? "overflow-y-scroll" : ""
-          }`}
-        >
-          <div className="phone:w-[fit-content] flex items-center gap-4 px-6">
+      <div className="w-full overflow-x-auto">
+        <div className="w-full h-[444px] flex flex-col rounded-[10px] border-[1px] text-[#505050] overflow-y-scroll">
+          <div className="w-[fit-content] flex items-center gap-4 px-6">
             <div className="w-[30px] h-[60px] flex justify-start items-center">
               <input
                 type="checkbox"
@@ -66,38 +62,41 @@ const HistoryTable = ({
                 onChange={toggleSelectAll}
               />
             </div>
-            <div className="w-[60px] whitespace-nowrap flex justify-start items-center border-[1px] border-blue-200 py-1 px-3 rounded-[24px]">
+            <div className="w-[80px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
               UID
             </div>
-            <div className="w-[150px] whitespace-nowrap flex justify-start items-center border-[1px] border-blue-200 py-1 px-3 rounded-[24px]">
+            <div className="w-[200px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
               Username
             </div>
-            <div className="w-[180px] whitespace-nowrap flex justify-start items-center border-[1px] border-blue-200 py-1 px-3 rounded-[24px]">
+            <div className="w-[180px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
               Type
             </div>
-            <div className="w-[340px] whitespace-nowrap flex justify-start items-center border-[1px] border-blue-200 py-1 px-3 rounded-[24px]">
+            <div className="w-[380px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
               Message
             </div>
-            <div className="w-[120px] whitespace-nowrap flex justify-start items-center border-[1px] border-blue-200 py-1 px-3 rounded-[24px]">
+            <div className="w-[120px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
               Activity
             </div>
-            <div className="w-[150px] whitespace-nowrap flex justify-start items-center border-[1px] border-blue-200 py-1 px-3 rounded-[24px]">
+            <div className="w-[180px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
               <span>Date</span>
             </div>
-            <div className="w-[150px] whitespace-nowrap flex justify-start items-center border-[1px] border-blue-200 py-1 px-3 rounded-[24px]">
+            <div className="w-[150px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
               <span>Time</span>
             </div>
 
             {selectedHistory?.length > 1 ? (
               <>
-                <div className="w-[1px] h-[20px] border-[1px]"></div>
-                <div className="flex gap-2 justify-start items-center py-1 px-2 bg-[#007bff] border-[1px] border-[#007bff] text-white text-[14px] rounded-[4px] cursor-pointer">
-                  <span>Export</span>
-                  <BsEscape className="text-[14px]" />
+                <div className="flex justify-start items-center gap-2">
+                  <div
+                    className="flex gap-1 justify-start items-center py-1 px-2 bg-[green] border-[1px] border-[green] text-white text-[14px] rounded-[4px] cursor-pointer"
+                    // onClick={exportPDF}
+                  >
+                    <span>Export</span>
+                  </div>
                 </div>
               </>
             ) : (
-              <div className="w-[100px] whitespace-nowrap flex justify-start items-center border-[1px] border-blue-200 py-1 px-3 rounded-[24px]">
+              <div className="w-[101px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
                 <span>Actions</span>
               </div>
             )}
@@ -107,11 +106,9 @@ const HistoryTable = ({
             <>
               {history?.map((h, k) => (
                 <div
-                  className={`phone:w-[fit-content]
+                  className={`w-[fit-content]
               flex items-center gap-4 px-6 ${
-                k % 2 === 0
-                  ? "bg-gradient-to-br from-white to-[#f5fbff] border-[1px] border-blue-100 rounded-[8px]"
-                  : "bg-[#fefefe]"
+                k % 2 === 0 ? 'bg-gray-100' : 'bg-white'
               }`}
                   key={k}
                 >
@@ -123,54 +120,65 @@ const HistoryTable = ({
                       onChange={() => toggleHistorySelection(h?._id)}
                     />
                   </div>
-                  <div className="w-[60px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px] text-[#606060]">
+                  <div className="w-[80px] whitespace-nowrap flex justify-center items-center py-1 px-3 rounded-[4px] text-[#606060]">
                     {h?.userId?.uid}
                   </div>
-                  <div className="w-[150px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
+                  <div className="w-[200px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
                     {h?.userId?.userName}
                   </div>
                   <div className="w-[180px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
                     {h?.typeOfNotif}
                   </div>
-                  <div className="w-[340px] flex justify-start items-center py-1 px-3 rounded-[4px]">
+                  <div className="w-[380px] flex justify-start items-center py-1 px-3 rounded-[4px]">
                     {h?.message}..
                   </div>
                   <div className="w-[120px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px] text-[green]">
                     <span>{h?.actionOfNotif}</span>
                   </div>
-                  <div className="w-[150px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
-                    {new Date(h?.createdAt)?.toLocaleDateString("en-US", {
-                      month: "long",
-                      day: "numeric",
-                      year: "numeric",
+                  <div className="w-[180px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
+                    {new Date(h?.createdAt)?.toLocaleDateString('en-US', {
+                      month: 'long',
+                      day: 'numeric',
+                      year: 'numeric',
                     })}
                   </div>
                   <div className="w-[150px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px] text-[#007bff]">
                     <TimeExtractor date={h?.createdAt} />
                   </div>
-                  {selectedHistory.length < 2 ? (
-                    allowedRoles?.find((ar) =>
-                      auth?.userDetails?.role?.includes(ar)
-                    ) ? (
-                      <>
-                        <div className="flex gap-2 justify-start items-center px-2 py-1  bg-[#007bff] border-[1px] border-[#007bff] text-white text-[14px] rounded-[4px] cursor-pointer">
-                          <span>Export</span>
-                        </div>
-                      </>
+                  <div className="w-[101px] whitespace-nowrap flex justify-start items-center">
+                    {selectedHistory.length < 2 ? (
+                      allowedRoles?.find((ar) =>
+                        auth?.userDetails?.role?.includes(ar)
+                      ) ? (
+                        <>
+                          <div
+                            // onClick={() => handleCasePatchClick(c)}
+                            className="relative container w-[36px] h-[36px] flex justify-center items-center bg-white border-[1px] border-[#007bff] rounded-[18px] cursor-pointer"
+                          >
+                            <BsChevronUp className="text-[18px] text-[#007bff]" />
+                            <div className="absolute bg-gradient-to-br from-[#007bff] via-[#079bff] to-[#007bff] py-2 px-4 top-[-62px] left-[-16px] rounded-[32px] text-[#606060] additional-content z-40">
+                              <span className="text-[16px] text-white">
+                                Export
+                              </span>
+                            </div>
+                            <div className="absolute top-[-38px] left-[7px] w-[20px] h-[20px] bg-gradient-to-br from-[#007bff] via-[#079bff] to-[#079bff] transform rotate-[45deg] additional-content z-10"></div>
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          <div className="w-[36px] h-[36px] flex justify-center items-center bg-gray-200 rounded-[18px]">
+                            <BsChevronUp className="text-[18px] text-white" />
+                          </div>
+                        </>
+                      )
                     ) : (
                       <>
-                        <div className="flex gap-2 justify-start items-center px-2 py-1 bg-gray-100 border-[1px] border-gray-100 text-white text-[14px] rounded-[4px] cursor-pointer">
-                          <span>Export</span>
+                        <div className="w-[36px] h-[36px] flex justify-center items-center bg-gray-200 rounded-[18px]">
+                          <BsChevronUp className="text-[18px] text-white" />
                         </div>
                       </>
-                    )
-                  ) : (
-                    <>
-                      <div className="flex gap-2 justify-start items-center px-2 py-1 bg-gray-100 border-[1px] border-gray-100 text-white text-[14px] rounded-[4px] cursor-pointer">
-                        <span>Export</span>
-                      </div>
-                    </>
-                  )}
+                    )}
+                  </div>
                 </div>
               ))}
             </>
@@ -181,54 +189,6 @@ const HistoryTable = ({
             </div>
           )}
         </div>
-        {/* <div className="flex flex-col gap-4">
-          <div className="p-2 w-[236px] h-[179px] bg-white border-[1px] border-[#007bff] rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden">
-            <div className="mt-[-46px] w-[100%] h-[100%] flex justify-center items-end">
-              <div className=" text-[48px] text-[#007bff] font-bold">
-                {todayHistory?.length}
-              </div>
-            </div>
-            <div className="text-[16px] text-[#007bff]">Activities Today</div>
-            <svg
-              className="absolute top-0 left-0"
-              viewBox="0 0 500 500"
-              preserveAspectRatio="xMinYMin meet"
-            >
-              <path
-                d="M0,100 C150,200 350,0 500,100 L500,00 L0,0 Z"
-                style={{ stroke: "none", fill: "rgba(219, 234, 254, 1)" }}
-              ></path>
-            </svg>
-          </div>
-          <div className="p-2 w-[236px] h-[179px] bg-white border-[1px] border-[green] rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden">
-            <div className="pl-1 w-[100%] h-[100%] flex justify-center items-end"></div>
-            <div className="text-[16px] text-[green]"></div>
-            <svg
-              className="absolute top-0 left-0"
-              viewBox="0 0 500 500"
-              preserveAspectRatio="xMinYMin meet"
-            >
-              <path
-                d="M0,100 C150,200 350,0 500,100 L500,00 L0,0 Z"
-                style={{ stroke: "none", fill: "rgba(254, 249, 195, 1)" }}
-              ></path>
-            </svg>
-          </div>
-          <div className="p-2 w-[236px] h-[179px] bg-white border-[1px] border-[#FFA500] rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden">
-            <div className="pl-1 w-[100%] h-[100%] flex justify-center items-end"></div>
-            <div className="text-[16px] text-[#FFA500]"></div>
-            <svg
-              className="absolute top-0 left-0"
-              viewBox="0 0 500 500"
-              preserveAspectRatio="xMinYMin meet"
-            >
-              <path
-                d="M0,100 C150,200 350,0 500,100 L500,00 L0,0 Z"
-                style={{ stroke: "none", fill: "rgba(255, 237, 213, 1)" }}
-              ></path>
-            </svg>
-          </div>
-        </div> */}
       </div>
     </>
   );

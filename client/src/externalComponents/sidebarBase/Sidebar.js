@@ -11,23 +11,18 @@ import IconButton from '@mui/material/IconButton';
 import { useLocation } from 'react-router-dom';
 import { CgMenuLeft } from 'react-icons/cg';
 import {
-  BsBuilding,
-  BsGear,
   BsHourglass,
   BsHourglassSplit,
   BsPeople,
   BsPeopleFill,
-  BsPersonFillLock,
-  BsPersonLock,
   BsPieChart,
   BsPieChartFill,
   BsSticky,
   BsStickyFill,
 } from 'react-icons/bs';
+import { GoKey, GoLog, GoOrganization } from 'react-icons/go';
 import { logoutUtil } from '../../pages/auth/login/loginUtils/logoutUtil';
-import plvlogo from '../../images/plvlogo.png';
 import osalogo from '../../images/osalogo.png';
-import drac from '../../images/drac.png';
 
 const AppNavBar = styled(AppBar)({
   background: 'transparent',
@@ -181,7 +176,7 @@ function Sidebar(props) {
                     }}
                   >
                     <RouteCon>
-                      <BsStickyFill
+                      <GoLog
                         className={activeItem === '/cases' ? 'icon-active' : ''}
                       />
                       <p className="text-[18px]">Cases</p>
@@ -190,7 +185,7 @@ function Sidebar(props) {
                 ) : (
                   <SidebarOptions>
                     <RouteCon>
-                      <BsSticky />
+                      <GoLog />
                       <p className="text-[18px]">Cases</p>
                     </RouteCon>
                   </SidebarOptions>
@@ -250,7 +245,7 @@ function Sidebar(props) {
                       }}
                     >
                       <RouteCon>
-                        <BsPersonFillLock
+                        <GoKey
                           className={
                             activeItem === '/users' ? 'icon-active' : ''
                           }
@@ -261,7 +256,7 @@ function Sidebar(props) {
                   ) : (
                     <SidebarOptions>
                       <RouteCon>
-                        <BsPersonLock />
+                        <GoKey />
                         <p className="text-[18px]">Users</p>
                       </RouteCon>
                     </SidebarOptions>
@@ -335,7 +330,7 @@ function Sidebar(props) {
                             }}
                           >
                             <RouteCon>
-                              <BsBuilding
+                              <GoOrganization
                                 className={
                                   activeItem === '/settings'
                                     ? 'icon-active'
@@ -348,7 +343,7 @@ function Sidebar(props) {
                         ) : (
                           <SidebarOptions>
                             <RouteCon>
-                              <BsBuilding />
+                              <GoOrganization />
                               <p className="text-[18px]">Colleges</p>
                             </RouteCon>
                           </SidebarOptions>
@@ -363,15 +358,17 @@ function Sidebar(props) {
 
           <div className="flex flex-col justify-center items-center w-[100%] p-4 shadow-sm">
             <div className="group flex justify-start items-center gap-4 w-[100%] bg-white p-4 rounded-tl-[14px] rounded-tr-[14px]">
-              <div
-                className="rounded-[50%] flex justify-center items-center w-[50px] h-[50px] border-[1px] border-gray-200 transition-transform duration-300 transform group-hover:rotate-[360deg]"
-              ><span className='text-[#007bff] text-[32px] font-bold uppercase'>{auth.userDetails.userName.slice(0, 1)}</span></div>
+              <div className="rounded-[50%] flex justify-center items-center w-[50px] h-[50px] transition-transform duration-300 transform group-hover:rotate-[360deg]">
+                <span className="text-[#007bff] text-[32px] font-bold uppercase">
+                  {auth?.userDetails?.userName.slice(0, 1)}
+                </span>
+              </div>
               <div className="flex flex-col">
                 <div className="text-[#007bff] text-[18px] font-semibold hover:underline cursor-pointer">
-                  {auth.userDetails.userName.slice(0, 10)}
+                  {auth?.userDetails?.userName.slice(0, 10)}
                 </div>
                 <div className="text-[#606060] text-[14px]">
-                  {auth.userDetails.role?.slice(0, 5)}
+                  {auth?.userDetails?.role?.slice(0, 5)}
                 </div>
               </div>
             </div>

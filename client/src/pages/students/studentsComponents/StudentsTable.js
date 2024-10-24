@@ -231,7 +231,13 @@ const StudentsTable = ({
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-        <ModalBox sx={{ width: '22%' }}>
+        <ModalBox
+          sx={{
+            width: '35%',
+            background: '#fafafa',
+            borderRadius: '12px',
+          }}
+        >
           <DeleteStudentModal
             handleConfirmDelete={handleConfirmDelete}
             handleCloseModal={handleCloseModal}
@@ -239,7 +245,11 @@ const StudentsTable = ({
         </ModalBox>
       </Modal>
       <Modal
-        sx={{ border: 'none', outline: 'none' }}
+        sx={{
+          width: '35%',
+          background: '#fafafa',
+          borderRadius: '12px',
+        }}
         open={showDeleteManyStudentModal}
         onClose={handleCloseModalDeleteMany}
         aria-labelledby="parent-modal-title"
@@ -481,7 +491,7 @@ const StudentsTable = ({
                 })}
             </>
           ) : (
-            <div className="w-100 h-[306px] flex flex-col justify-center items-center gap-2 text-[#707070] border-t-[1px] border-t-[#f0f0f0]">
+            <div className="w-100 h-[444px] flex flex-col justify-center items-center gap-2 text-[#007bff] border-t-[1px] border-t-[#f0f0f0]">
               <BsFolder2Open className="text-[42px]" />
               <div className="text-[16px]">No students available</div>
             </div>
