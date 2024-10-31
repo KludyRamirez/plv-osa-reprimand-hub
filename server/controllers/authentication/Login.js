@@ -51,8 +51,8 @@ const login = async (req, res) => {
 
     res.cookie('jwt', refreshToken, {
       httpOnly: true,
-      secure: false,
-      sameSite: 'Lax',
+      secure: true,
+      sameSite: 'None',
       maxAge: 24 * 60 * 60 * 1000,
     });
 
@@ -136,8 +136,8 @@ const handleLogout = async (req, res) => {
     if (!account) {
       res.clearCookie('jwt', {
         httpOnly: true,
-        secure: false,
-        sameSite: 'Lax',
+        secure: true,
+        sameSite: 'None',
       });
       return res.status(404).send('Unknown user.');
     }
@@ -149,8 +149,8 @@ const handleLogout = async (req, res) => {
 
     res.clearCookie('jwt', {
       httpOnly: true,
-      secure: false,
-      sameSite: 'Lax',
+      secure: true,
+      sameSite: 'None',
     });
 
     res.status(200).json({ message: 'Sign out successfully.' });
