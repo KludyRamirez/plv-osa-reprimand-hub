@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
 import {
   BsCalendar4,
-  BsCheckCircle,
   BsFilter,
   BsChevronBarDown,
   BsSticky,
 } from 'react-icons/bs';
 import 'react-datepicker/dist/react-datepicker.css';
 import CollegesAndDepartmentsTable from './CollegesAndDepartmentsTable';
-import { FaPlus } from 'react-icons/fa6';
 
 const CollegesAndDepartmentsFilter = ({ cads, getCads }) => {
   const [searchTerm, setSearchTerm] = useState('All');
@@ -52,7 +50,7 @@ const CollegesAndDepartmentsFilter = ({ cads, getCads }) => {
             onChange={(e) => setSearchTerm(e.target.value)}
             type="text"
             autoComplete="off"
-            placeholder="Search by case number, student name, etc."
+            placeholder="Search by ID, college, department etc."
             className="p-3 rounded-[6px] w-[100%] bg-gradient-to-br from-gray-100 to-gray-100 focus:outline-none focus:border-[1px] focus:border-[#cdcdcd]"
           />
         </div>
@@ -66,9 +64,9 @@ const CollegesAndDepartmentsFilter = ({ cads, getCads }) => {
             <div className="phone:w-[50%] flex flex-col items-start gap-2">
               <div className="pl-2 w-[242px] phone:w-[100%] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
-                  <div>Colleges</div> <BsChevronBarDown />
+                  <div>Colleges</div>
                 </div>
-                <BsCalendar4 />
+                <BsChevronBarDown />
               </div>
               <select
                 onChange={(e) => setCollege(e.target.value)}
@@ -85,9 +83,9 @@ const CollegesAndDepartmentsFilter = ({ cads, getCads }) => {
             <div className="phone:w-[47.8%] flex flex-col items-start gap-2">
               <div className="pl-2 w-[242px] phone:w-[100%] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
-                  <div>Department</div> <BsChevronBarDown />
+                  <div>Department</div>
                 </div>
-                <BsSticky />
+                <BsChevronBarDown />
               </div>
               <select
                 onChange={(e) => setDepartment(e.target.value)}

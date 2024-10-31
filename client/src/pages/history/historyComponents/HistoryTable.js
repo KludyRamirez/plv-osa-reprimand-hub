@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
-import { BsFolderX, BsEscape, BsChevronUp } from 'react-icons/bs';
+import { BsFolderX, BsEscape, BsChevronUp, BsCapslock } from 'react-icons/bs';
 import TimeExtractor from '../../../externalUtils/TimeExtractor';
 
 const selectAuth = (state) => state.auth;
@@ -68,7 +68,7 @@ const HistoryTable = ({
             <div className="w-[200px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
               Username
             </div>
-            <div className="w-[180px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+            <div className="w-[170px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
               Type
             </div>
             <div className="w-[380px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
@@ -96,7 +96,7 @@ const HistoryTable = ({
                 </div>
               </>
             ) : (
-              <div className="w-[101px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+              <div className="w-[111px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
                 <span>Actions</span>
               </div>
             )}
@@ -126,13 +126,13 @@ const HistoryTable = ({
                   <div className="w-[200px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
                     {h?.userId?.userName}
                   </div>
-                  <div className="w-[180px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
+                  <div className="w-[170px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
                     {h?.typeOfNotif}
                   </div>
                   <div className="w-[380px] flex justify-start items-center py-1 px-3 rounded-[4px]">
                     {h?.message}..
                   </div>
-                  <div className="w-[120px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px] text-[green]">
+                  <div className="w-[120px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
                     <span>{h?.actionOfNotif}</span>
                   </div>
                   <div className="w-[180px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
@@ -142,10 +142,10 @@ const HistoryTable = ({
                       year: 'numeric',
                     })}
                   </div>
-                  <div className="w-[150px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px] text-[#007bff]">
+                  <div className="w-[150px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
                     <TimeExtractor date={h?.createdAt} />
                   </div>
-                  <div className="w-[101px] whitespace-nowrap flex justify-start items-center">
+                  <div className="w-[111px] whitespace-nowrap flex justify-start items-center">
                     {selectedHistory.length < 2 ? (
                       allowedRoles?.find((ar) =>
                         auth?.userDetails?.role?.includes(ar)
@@ -155,10 +155,10 @@ const HistoryTable = ({
                             // onClick={() => handleCasePatchClick(c)}
                             className="relative container w-[36px] h-[36px] flex justify-center items-center bg-white border-[1px] border-[#007bff] rounded-[18px] cursor-pointer"
                           >
-                            <BsChevronUp className="text-[18px] text-[#007bff]" />
+                            <BsCapslock className="text-[18px] text-[#007bff] transform rotate-[180deg] mt-[2px]" />
                             <div className="absolute bg-gradient-to-br from-[#007bff] via-[#079bff] to-[#007bff] py-2 px-4 top-[-62px] left-[-16px] rounded-[32px] text-[#606060] additional-content z-40">
                               <span className="text-[16px] text-white">
-                                Export
+                                Download PDF
                               </span>
                             </div>
                             <div className="absolute top-[-38px] left-[7px] w-[20px] h-[20px] bg-gradient-to-br from-[#007bff] via-[#079bff] to-[#079bff] transform rotate-[45deg] additional-content z-10"></div>
@@ -167,14 +167,14 @@ const HistoryTable = ({
                       ) : (
                         <>
                           <div className="w-[36px] h-[36px] flex justify-center items-center bg-gray-200 rounded-[18px]">
-                            <BsChevronUp className="text-[18px] text-white" />
+                            <BsCapslock className="text-[18px] text-white transform rotate-[180deg] mt-[2px]" />
                           </div>
                         </>
                       )
                     ) : (
                       <>
                         <div className="w-[36px] h-[36px] flex justify-center items-center bg-gray-200 rounded-[18px]">
-                          <BsChevronUp className="text-[18px] text-white" />
+                          <BsCapslock className="text-[18px] text-white transform rotate-[180deg] mt-[2px]" />
                         </div>
                       </>
                     )}
@@ -183,7 +183,7 @@ const HistoryTable = ({
               ))}
             </>
           ) : (
-            <div className="w-100 h-[323px] flex flex-col justify-center items-center gap-2 text-[#909090] border-t-[1px] border-t-[#f0f0f0]">
+            <div className="w-100 h-[444px] flex flex-col justify-center items-center gap-2 text-[#808080] border-t-[1px] border-t-[#f0f0f0]">
               <BsFolderX className="text-[42px]" />
               <div className="text-[16px]">No history available</div>
             </div>

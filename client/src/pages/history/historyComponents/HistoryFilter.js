@@ -107,12 +107,12 @@ const HistoryFilter = ({ history, getHistory, toast, allowedRoles }) => {
   //     ? filteredByDate
   //     : filteredByDate?.filter((h) => filteredByStatus?.includes(h));
 
-  const currentDate = new Date();
-  const formattedDate = currentDate.toLocaleDateString('en-PH', {
-    month: 'long',
-    day: 'numeric',
-    year: 'numeric',
-  });
+  // const currentDate = new Date();
+  // const formattedDate = currentDate.toLocaleDateString('en-PH', {
+  //   month: 'long',
+  //   day: 'numeric',
+  //   year: 'numeric',
+  // });
 
   // const todayHistory = history.filter(
   //   (h) =>
@@ -131,9 +131,9 @@ const HistoryFilter = ({ history, getHistory, toast, allowedRoles }) => {
       <div className="w-100 text-[26px] text-[#077bff] font-bold pb-6 flex justify-between items-center">
         <div>History List</div>
 
-        <div className="cursor-pointer py-3 px-4 bg-gradient-to-br from-[#007bff] via-[#079bff] to-[#007bff] text-[white] text-[16px] flex gap-2 items-center rounded-[32px]">
+        <div className="invisible cursor-pointer py-3 px-4 bg-gradient-to-br from-[#007bff] via-[#079bff] to-[#007bff] text-[white] text-[16px] flex gap-2 items-center rounded-[32px]">
           <FaPlus />
-          <div>Add Case</div>
+          <div>History</div>
         </div>
       </div>
 

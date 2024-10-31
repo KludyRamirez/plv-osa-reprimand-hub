@@ -491,7 +491,7 @@ const StudentsTable = ({
                 })}
             </>
           ) : (
-            <div className="w-100 h-[444px] flex flex-col justify-center items-center gap-2 text-[#007bff] border-t-[1px] border-t-[#f0f0f0]">
+            <div className="w-100 h-[444px] flex flex-col justify-center items-center gap-2 text-[#808080] border-t-[1px] border-t-[#f0f0f0]">
               <BsFolder2Open className="text-[42px]" />
               <div className="text-[16px]">No students available</div>
             </div>

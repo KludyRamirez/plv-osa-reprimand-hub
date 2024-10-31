@@ -180,7 +180,13 @@ const CollegesAndDepartmentsTable = ({
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-        <ModalBox sx={{ width: '22%' }}>
+        <ModalBox
+          sx={{
+            width: '35%',
+            background: '#fafafa',
+            borderRadius: '12px',
+          }}
+        >
           <DeleteCadModal
             handleConfirmDelete={handleConfirmDelete}
             handleCloseModal={handleCloseModal}
@@ -194,7 +200,13 @@ const CollegesAndDepartmentsTable = ({
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-        <ModalBox sx={{ width: '22%' }}>
+        <ModalBox
+          sx={{
+            width: '35%',
+            background: '#fafafa',
+            borderRadius: '12px',
+          }}
+        >
           <DeleteManyCadModal
             deleteSelectedCads={deleteSelectedCads}
             handleCloseModalDeleteMany={handleCloseModalDeleteMany}
@@ -217,10 +229,13 @@ const CollegesAndDepartmentsTable = ({
             <div className="w-[60px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
               ID
             </div>
-            <div className="w-[86px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+            <div className="w-[140px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
               College
             </div>
-            <div className="w-[574px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+            <div className="w-[140px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+              Abbreviation
+            </div>
+            <div className="w-[959px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
               Department
             </div>
 
@@ -235,7 +250,7 @@ const CollegesAndDepartmentsTable = ({
                 </div>
               </>
             ) : (
-              <div className="w-[100px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+              <div className="w-[140px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
                 <span>Actions</span>
               </div>
             )}
@@ -264,20 +279,31 @@ const CollegesAndDepartmentsTable = ({
                     <div className="w-[60px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
                       {cad?.uid}
                     </div>
-                    <div className="w-[86px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
+                    <div className="w-[140px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
                       {cad?.college}
                     </div>
-                    <div className="w-[574px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
-                      {cad?.department.slice(0, 64)}...
+                    <div className="w-[140px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
+                      {cad?.department?.split(' ')[0]}
                     </div>
-                    <div className="w-[100px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
-                      {selectedCads.length < 2 ? (
+                    <div className="w-[959px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
+                      {cad?.department?.slice(
+                        cad?.department?.indexOf(' ') + 1
+                      )}
+                    </div>
+                    <div className="w-[140px] whitespace-nowrap flex justify-start items-center px-1">
+                      {selectedCads?.length < 2 ? (
                         <>
                           <div
                             onClick={() => handleClickDelete(cad?._id)}
-                            className="p-2 bg-[white] border-[1px] border-[#FF3131] rounded-[18px] cursor-pointer"
+                            className="relative container w-[36px] h-[36px] flex justify-center items-center bg-white border-[1px] border-[#ff3131] rounded-[18px] cursor-pointer"
                           >
                             <BsTrash3 className="text-[18px] text-[#FF3131]" />
+                            <div className="absolute bg-gradient-to-br from-[#C41E3A] via-[#ff3131] to-[#ff3131] py-2 px-4 top-[-62px] left-[-16px] rounded-[32px] text-[#606060] additional-content z-40">
+                              <span className="text-[16px] text-white">
+                                Delete college
+                              </span>
+                            </div>
+                            <div className="absolute top-[-38px] left-[7px] w-[20px] h-[20px] bg-gradient-to-br from-[#ff3131] via-[#ff3131] to-[#ff3131] transform rotate-[45deg] additional-content z-10"></div>
                           </div>
                         </>
                       ) : (
@@ -293,7 +319,7 @@ const CollegesAndDepartmentsTable = ({
               })}
             </>
           ) : (
-            <div className="w-100 flex-grow flex flex-col justify-center items-center gap-2 text-[#787878] border-t-[1px] border-t-[#f0f0f0]">
+            <div className="w-100 h-[444px] flex flex-col justify-center items-center gap-2 text-[#808080] border-t-[1px] border-t-[#f0f0f0]">
               <BsFolder2Open className="text-[42px]" />
               <div className="text-[16px]">No colleges available</div>
             </div>

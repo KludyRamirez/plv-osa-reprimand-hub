@@ -11,16 +11,25 @@ import IconButton from '@mui/material/IconButton';
 import { useLocation } from 'react-router-dom';
 import { CgMenuLeft } from 'react-icons/cg';
 import {
+  BsBank,
+  BsBank2,
+  BsClockFill,
+  BsClockHistory,
   BsHourglass,
   BsHourglassSplit,
+  BsLamp,
+  BsLampFill,
+  BsMortarboard,
+  BsMortarboardFill,
   BsPeople,
   BsPeopleFill,
   BsPieChart,
   BsPieChartFill,
   BsSticky,
   BsStickyFill,
+  BsTencentQq,
 } from 'react-icons/bs';
-import { GoKey, GoLog, GoOrganization } from 'react-icons/go';
+import { GoKey, GoLog, GoMortarBoard, GoOrganization } from 'react-icons/go';
 import { logoutUtil } from '../../pages/auth/login/loginUtils/logoutUtil';
 import osalogo from '../../images/osalogo.png';
 
@@ -176,7 +185,7 @@ function Sidebar(props) {
                     }}
                   >
                     <RouteCon>
-                      <GoLog
+                      <BsStickyFill
                         className={activeItem === '/cases' ? 'icon-active' : ''}
                       />
                       <p className="text-[18px]">Cases</p>
@@ -185,7 +194,7 @@ function Sidebar(props) {
                 ) : (
                   <SidebarOptions>
                     <RouteCon>
-                      <GoLog />
+                      <BsSticky />
                       <p className="text-[18px]">Cases</p>
                     </RouteCon>
                   </SidebarOptions>
@@ -265,6 +274,53 @@ function Sidebar(props) {
               </div>
             ) : null}
 
+            <div
+              style={{
+                width: '100%',
+                display: 'flex',
+                justifyContent: 'flex-start',
+                alignItems: 'center',
+              }}
+            >
+              {auth?.userDetails?.role === 'Administrator' ? (
+                <div className="w-full">
+                  <Link to="/settings">
+                    {activeItem === '/settings' ? (
+                      <SidebarOptions
+                        sx={{
+                          color: '#007bff',
+                          background: 'white',
+                          borderRadius: '6px',
+                          '&:hover': {
+                            transform: 'translateY(0px)',
+                            color: '#007bff',
+                            background: 'white',
+                          },
+                          '&:active': { transform: 'translateY(0px)' },
+                        }}
+                      >
+                        <RouteCon>
+                          <BsBank
+                            className={
+                              activeItem === '/settings' ? 'icon-active' : ''
+                            }
+                          />
+                          <p className="text-[18px]">Colleges</p>
+                        </RouteCon>
+                      </SidebarOptions>
+                    ) : (
+                      <SidebarOptions>
+                        <RouteCon>
+                          <BsBank />
+                          <p className="text-[18px]">Colleges</p>
+                        </RouteCon>
+                      </SidebarOptions>
+                    )}
+                  </Link>
+                </div>
+              ) : null}
+            </div>
+
             {auth?.userDetails?.role === 'Administrator' ? (
               <>
                 <div className="w-full">
@@ -284,7 +340,7 @@ function Sidebar(props) {
                         }}
                       >
                         <RouteCon>
-                          <BsHourglassSplit
+                          <BsClockFill
                             className={
                               activeItem === '/notification'
                                 ? 'icon-active'
@@ -297,60 +353,12 @@ function Sidebar(props) {
                     ) : (
                       <SidebarOptions>
                         <RouteCon>
-                          <BsHourglass />
+                          <BsClockHistory />
                           <p className="text-[18px]">History</p>
                         </RouteCon>
                       </SidebarOptions>
                     )}
                   </Link>
-                </div>
-                <div
-                  style={{
-                    width: '100%',
-                    display: 'flex',
-                    justifyContent: 'flex-start',
-                    alignItems: 'center',
-                  }}
-                >
-                  {auth?.userDetails?.role === 'Administrator' ? (
-                    <div className="w-full">
-                      <Link to="/settings">
-                        {activeItem === '/settings' ? (
-                          <SidebarOptions
-                            sx={{
-                              color: '#007bff',
-                              background: 'white',
-                              borderRadius: '6px',
-                              '&:hover': {
-                                transform: 'translateY(0px)',
-                                color: '#007bff',
-                                background: 'white',
-                              },
-                              '&:active': { transform: 'translateY(0px)' },
-                            }}
-                          >
-                            <RouteCon>
-                              <GoOrganization
-                                className={
-                                  activeItem === '/settings'
-                                    ? 'icon-active'
-                                    : ''
-                                }
-                              />
-                              <p className="text-[18px]">Colleges</p>
-                            </RouteCon>
-                          </SidebarOptions>
-                        ) : (
-                          <SidebarOptions>
-                            <RouteCon>
-                              <GoOrganization />
-                              <p className="text-[18px]">Colleges</p>
-                            </RouteCon>
-                          </SidebarOptions>
-                        )}
-                      </Link>
-                    </div>
-                  ) : null}
                 </div>
               </>
             ) : null}
@@ -359,12 +367,10 @@ function Sidebar(props) {
           <div className="flex flex-col justify-center items-center w-[100%] p-4 shadow-sm">
             <div className="group flex justify-start items-center gap-4 w-[100%] bg-white p-4 rounded-tl-[14px] rounded-tr-[14px]">
               <div className="rounded-[50%] flex justify-center items-center w-[50px] h-[50px] transition-transform duration-300 transform group-hover:rotate-[360deg]">
-                <span className="text-[#007bff] text-[32px] font-bold uppercase">
-                  {auth?.userDetails?.userName.slice(0, 1)}
-                </span>
+                <BsTencentQq className="text-[#404040] ml-2 text-[38px]" />
               </div>
               <div className="flex flex-col">
-                <div className="text-[#007bff] text-[18px] font-semibold hover:underline cursor-pointer">
+                <div className="text-[#606060] text-[18px] font-semibold hover:underline cursor-pointer">
                   {auth?.userDetails?.userName.slice(0, 10)}
                 </div>
                 <div className="text-[#606060] text-[14px]">

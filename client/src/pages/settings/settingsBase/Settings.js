@@ -9,7 +9,7 @@ import CollegesAndDepartmentsFilter from '../collegesComponents/CollegesAndDepar
 const selectAuth = (state) => state.auth;
 const authSelector = createSelector([selectAuth], (auth) => auth);
 
-const Settings = ({ toast }) => {
+const Settings = ({ toast, allowedRoles }) => {
   const [cads, setCads] = useState([]);
 
   const auth = useSelector(authSelector);
@@ -48,6 +48,7 @@ const Settings = ({ toast }) => {
               toast={toast}
               cads={cads}
               getCads={getCads}
+              allowedRoles={allowedRoles}
             />
             <CollegesAndDepartmentsFilter
               toast={toast}
