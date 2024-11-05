@@ -1,5 +1,5 @@
-import React from "react";
-import { Chart } from "react-google-charts";
+import React from 'react';
+import { Chart } from 'react-google-charts';
 
 export function CasesPerCollegePieChart({ cases }) {
   const casesData = [...cases];
@@ -15,28 +15,25 @@ export function CasesPerCollegePieChart({ cases }) {
     }
   });
 
-  const data = [["Cases", "Cases per college"]];
+  const data = [['Cases', 'Cases per college']];
 
   for (const college in collegeCounts) {
     data.push([college, collegeCounts[college]]);
   }
 
   const options = {
-    is3D: true,
-    backgroundColor: "transparent",
+    backgroundColor: 'transparent',
   };
 
   return (
     <>
-      <div className="mt-[-4px]">
-        <Chart
-          chartType="PieChart"
-          data={data}
-          options={options}
-          width={"100%"}
-          height={"400px"}
-        />
-      </div>
+      <Chart
+        chartType="PieChart"
+        data={data}
+        options={options}
+        width={'100%'}
+        height={'269px'}
+      />
     </>
   );
 }

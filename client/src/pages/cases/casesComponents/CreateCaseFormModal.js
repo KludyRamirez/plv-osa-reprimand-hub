@@ -109,7 +109,7 @@ const CreateCaseFormModal = ({
           />
         </div>
 
-        <div className="flex flex-col gap-8 mt-10 pt-8 pl-10 pr-10 pb-11 bg-gray-100">
+        <div className="flex flex-col gap-8 mt-10 pt-8 px-10 pb-11 bg-gray-100">
           <div className="text-[#606060] flex flex-col gap-2 w-[100%]">
             <div className="flex gap-2 items-center">
               <span>Accused</span>

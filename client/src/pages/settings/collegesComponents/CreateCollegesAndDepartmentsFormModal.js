@@ -41,8 +41,8 @@ const CreateCollegesAndDepartmentsFormModal = ({
         </div>
         {collegeError && <p className="text-red-500 pt-2">{collegeError}</p>}
 
-        <div className="text-[#606060] mt-8 flex flex-col gap-2 px-10">
-          <div className="flex flex-col gap-2 w-[100%]">
+        <div className="flex flex-col gap-8 mt-10 pt-8 px-10 pb-11 bg-gray-100">
+          <div className="text-[#606060] flex flex-col gap-2 w-[100%]">
             <div>Department</div>
             <input
               required
@@ -62,7 +62,7 @@ const CreateCollegesAndDepartmentsFormModal = ({
           </div>
         </div>
 
-        <div className="w-[100%] pt-14 pb-11 px-10  flex justify-end items-center">
+        <div className="w-[100%] p-10 flex justify-end items-center">
           {collegeError === '' &&
           departmentError === '' &&
           college !== '' &&

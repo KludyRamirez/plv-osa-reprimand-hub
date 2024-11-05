@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import { createSelector } from "reselect";
-import { useParams } from "react-router-dom";
-import axios from "axios";
-import Sidebar from "../../../externalComponents/sidebarBase/Sidebar";
-import StudentsProfileTable from "../studentsProfileComponents/StudentsProfileTable";
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { createSelector } from 'reselect';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
+import Sidebar from '../../../externalComponents/sidebarBase/Sidebar';
+import StudentsProfileTable from '../studentsProfileComponents/StudentsProfileTable';
 
 const selectAuth = (state) => state.auth;
 const authSelector = createSelector([selectAuth], (auth) => auth);
 
 const StudentProfile = ({ allowedRoles }) => {
-  const [student, setStudent] = useState("");
+  const [student, setStudent] = useState('');
   const [students, setStudents] = useState([]);
   const [cases, setCases] = useState([]);
   const [cads, setCads] = useState([]);
@@ -28,7 +28,7 @@ const StudentProfile = ({ allowedRoles }) => {
 
   const getOneStudent = async () => {
     if (!auth?.userDetails?.token) {
-      console.error("Authentication token not found.");
+      console.error('Authentication token not found.');
       return;
     }
     try {
@@ -42,14 +42,14 @@ const StudentProfile = ({ allowedRoles }) => {
       );
       setStudent(res.data);
     } catch (err) {
-      console.error("Error fetching users:", err);
+      console.error('Error fetching users:', err);
     }
   };
 
   const getStudents = async () => {
     try {
       if (!auth.userDetails.token) {
-        console.error("Authentication token not found.");
+        console.error('Authentication token not found.');
         return;
       }
       const url = `${process.env.REACT_APP_API_URI}/student`;
@@ -61,14 +61,14 @@ const StudentProfile = ({ allowedRoles }) => {
       });
       setStudents(res.data);
     } catch (err) {
-      console.error("Error fetching users!", err);
+      console.error('Error fetching users!', err);
     }
   };
 
   const getCases = async () => {
     try {
       if (!auth.userDetails.token) {
-        console.error("Authentication token not found.");
+        console.error('Authentication token not found.');
         return;
       }
       const url = `${process.env.REACT_APP_API_URI}/case`;
@@ -81,14 +81,14 @@ const StudentProfile = ({ allowedRoles }) => {
 
       setCases(res.data);
     } catch (err) {
-      console.error("Error fetching cases!", err);
+      console.error('Error fetching cases!', err);
     }
   };
 
   const getCads = async () => {
     try {
       if (!auth.userDetails.token) {
-        console.error("Authentication token not found.");
+        console.error('Authentication token not found.');
         return;
       }
       const url = `${process.env.REACT_APP_API_URI}/cad`;
@@ -101,15 +101,15 @@ const StudentProfile = ({ allowedRoles }) => {
 
       setCads(res.data);
     } catch (err) {
-      console.error("Error fetching users!", err);
+      console.error('Error fetching users!', err);
     }
   };
 
   return (
-    <div className="flex justify-start">
+    <div className="flex">
       <Sidebar />
-      <div className="w-full h-[100%] flex justify-start bg-[#007bff]">
-        <div className="w-full h-[100%] bg-[#fefefe] mt-[80px] rounded-tl-[24px] phone:rounded-tl-[0px] mt-[80px] px-8 phone:px-4 pt-8">
+      <div className="w-full h-[100%] flex">
+        <div className="w-full h-[100%] px-8 pt-8 phone:px-4">
           <StudentsProfileTable
             student={student}
             students={students}

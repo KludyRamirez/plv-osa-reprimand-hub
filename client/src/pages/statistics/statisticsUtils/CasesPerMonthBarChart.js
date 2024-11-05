@@ -1,89 +1,75 @@
-import React, { useEffect, useRef, useMemo } from "react";
-import Chart from "chart.js/auto";
+import React, { useEffect, useRef, useMemo } from 'react';
+import Chart from 'chart.js/auto';
 
-const months = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
+const MONTHS = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
 ];
 
 const CasesPerMonthBarChart = ({ cases }) => {
   const chartContainer = useRef(null);
 
-  const casesByMonth = {};
+  const getCasesByMonth = (cases) => {
+    return MONTHS.reduce((acc, month) => {
+      const monthCasesCount = cases?.filter((c) => {
+        const incidentDate = new Date(c?.dateOfIncident);
+        return (
+          incidentDate.toLocaleString('en-PH', { month: 'long' }) === month
+        );
+      }).length;
+      acc[month] = monthCasesCount || 0; // Default to 0 if no cases
+      return acc;
+    }, {});
+  };
 
-  months.forEach((month) => {
-    const monthCases = cases?.filter((c) => {
-      const dateParts = new Date(c?.dateOfIncident)
-        .toLocaleDateString("en-PH", {
-          month: "long",
-          day: "numeric",
-          year: "numeric",
-        })
-        .split(" ");
-      return dateParts[0] === month;
-    });
+  const casesByMonth = useMemo(() => getCasesByMonth(cases), [cases]);
 
-    casesByMonth[month] = monthCases?.length;
-  });
-
-  const data = useMemo(() => {
-    return {
-      labels: [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December",
-      ],
+  const chartData = useMemo(
+    () => ({
+      labels: MONTHS,
       datasets: [
         {
-          label: "Cases",
-          data: months?.map((month) => casesByMonth[month]),
+          label: 'Cases',
+          data: MONTHS.map((month) => casesByMonth[month]),
           backgroundColor: [
-            "rgba(255, 99, 132, 0.2)",
-            "rgba(255, 159, 64, 0.2)",
-            "rgba(255, 205, 86, 0.2)",
-            "rgba(75, 192, 192, 0.2)",
-            "rgba(54, 162, 235, 0.2)",
-            "rgba(153, 102, 255, 0.2)",
-            "rgba(201, 203, 207, 0.2)",
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(255, 159, 64, 0.2)',
+            'rgba(255, 205, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(201, 203, 207, 0.2)',
           ],
           borderColor: [
-            "rgb(255, 99, 132)",
-            "rgb(255, 159, 64)",
-            "rgb(255, 205, 86)",
-            "rgb(75, 192, 192)",
-            "rgb(54, 162, 235)",
-            "rgb(153, 102, 255)",
-            "rgb(201, 203, 207)",
+            'rgb(255, 99, 132)',
+            'rgb(255, 159, 64)',
+            'rgb(255, 205, 86)',
+            'rgb(75, 192, 192)',
+            'rgb(54, 162, 235)',
+            'rgb(153, 102, 255)',
+            'rgb(201, 203, 207)',
           ],
           borderWidth: 1,
         },
       ],
-    };
-  }, [casesByMonth]);
+    }),
+    [casesByMonth]
+  );
 
-  const config = useMemo(() => {
-    return {
-      type: "bar",
-      data: data,
+  const chartConfig = useMemo(
+    () => ({
+      type: 'bar',
+      data: chartData,
       options: {
         scales: {
           y: {
@@ -91,22 +77,30 @@ const CasesPerMonthBarChart = ({ cases }) => {
           },
         },
       },
-    };
-  }, [data]);
+    }),
+    [chartData]
+  );
 
   useEffect(() => {
-    const ctx = chartContainer.current.getContext("2d");
-    const chart = new Chart(ctx, config);
+    const ctx = chartContainer.current.getContext('2d');
+    const chart = new Chart(ctx, chartConfig);
 
     return () => {
       chart.destroy();
     };
-  }, [config]);
+  }, [chartConfig]);
 
   return (
-    <div className="px-4 py-3 border-[1px] rounded-[8px]">
-      <canvas ref={chartContainer} />
-    </div>
+    <canvas
+      ref={chartContainer}
+      style={{
+        display: 'block',
+        boxSizing: 'border-box',
+        width: '100%',
+        padding: 0,
+        margin: 0,
+      }}
+    />
   );
 };
 

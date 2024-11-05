@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import Sidebar from "../../../externalComponents/sidebarBase/Sidebar";
-import axios from "axios";
-import { useSelector } from "react-redux";
-import { createSelector } from "reselect";
-import StatisticsTable from "./StatisticsTable";
+import React, { useState, useEffect } from 'react';
+import Sidebar from '../../../externalComponents/sidebarBase/Sidebar';
+import axios from 'axios';
+import { useSelector } from 'react-redux';
+import { createSelector } from 'reselect';
+import StatisticsTable from './StatisticsTable';
 
 const selectAuth = (state) => state.auth;
 const authSelector = createSelector([selectAuth], (auth) => auth);
@@ -22,7 +22,7 @@ const Statistics = ({ toast }) => {
   const getCases = async () => {
     try {
       if (!auth.userDetails.token) {
-        console.error("Authentication token not found.");
+        console.error('Authentication token not found.');
         return;
       }
       const url = `${process.env.REACT_APP_API_URI}/case`;
@@ -35,14 +35,14 @@ const Statistics = ({ toast }) => {
 
       setCases(res.data);
     } catch (err) {
-      console.error("Error fetching users!", err);
+      console.error('Error fetching users!', err);
     }
   };
 
   const getStudents = async () => {
     try {
       if (!auth.userDetails.token) {
-        console.error("Authentication token not found.");
+        console.error('Authentication token not found.');
         return;
       }
       const url = `${process.env.REACT_APP_API_URI}/student`;
@@ -54,7 +54,7 @@ const Statistics = ({ toast }) => {
       });
       setStudents(res.data);
     } catch (err) {
-      console.error("Error fetching users!", err);
+      console.error('Error fetching users!', err);
     }
   };
 
@@ -63,7 +63,7 @@ const Statistics = ({ toast }) => {
       <div className="flex justify-start">
         <Sidebar />
         <div className="w-full flex justify-start bg-[#007bff]">
-          <div className="w-full bg-[#fefefe] px-8 phone:px-4 pt-8">
+          <div className="w-full bg-[#fefefe] p-8 phone:px-4">
             <StatisticsTable
               toast={toast}
               getCases={getCases}

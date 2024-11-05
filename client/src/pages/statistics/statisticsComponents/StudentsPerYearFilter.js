@@ -1,13 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {
-  BsCalendar4,
-  BsCalendar4Event,
-  BsCalendar4Week,
-  BsChevronBarDown,
-  BsCheckCircle,
-  BsFilter,
-  BsFolderX,
-} from 'react-icons/bs';
+import { BsChevronBarDown, BsFilter, BsFolderX } from 'react-icons/bs';
 import { StudentsPerYearPieChart } from '../statisticsUtils/StudentsPerYearPieChart';
 import { CasesPerCollegePieChart } from '../statisticsUtils/CasesPerCollegePieChart';
 
@@ -160,8 +152,14 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
 
   return (
     <>
-      <div className="w-100 bg-[white] text-[#404040] rounded-[10px] flex flex-col border-[1px]">
-        <div className="px-3 w-100 h-[58px] flex justify-between gap-2 border-b-2 border-white">
+      <div className="w-100 mt-8">
+        <span className="text-[24px] text-[#007bff] font-semibold">
+          Pie Charts
+        </span>
+      </div>
+
+      <div className="w-100 text-[#404040] flex flex-col border-[1px] border-[1px] border-blue-200 bg-[#f6faff] rounded-[6px]">
+        <div className="px-3 w-100 h-[58px] flex justify-between gap-2 bg-[white] rounded-[6px]">
           <div className="flex justify-start items-center gap-2">
             <div
               onClick={() => handleMainFilterChange('All')}
@@ -200,7 +198,7 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
           </div>
         </div>
 
-        <div className="w-100 flex justify-start bg-gradient-to-br from-gray-100 to-gray-100 p-4 rounded-bl-[10px] rounded-br-[10px]">
+        <div className="w-100 flex justify-start to-white p-4">
           <div className="w-100 flex flex-wrap justify-start items-center gap-4 phone:gap-2">
             <div className="phone:w-[50%] flex flex-col items-start gap-2">
               <div className="pl-2 w-[200px] phone:w-[100%] flex justify-between items-center">
@@ -211,7 +209,7 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
               </div>
               <select
                 onChange={(e) => setReportedViolation(e.target.value)}
-                className="cursor-pointer px-3 py-2 w-[200px] phone:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
+                className="cursor-pointer px-3 py-2 w-[200px] phone:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none border-[1px] border-blue-200 focus:border-blue-300"
               >
                 <option value="All">All</option>
                 {activeMainFilter === 'All' ? (
@@ -291,7 +289,7 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
               </div>
               <select
                 onChange={(e) => setSelectedStatus(e.target.value)}
-                className="cursor-pointer px-3 py-2 w-[200px] phone:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
+                className="cursor-pointer px-3 py-2 w-[200px] phone:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none border-[1px] border-blue-200 focus:border-blue-300"
               >
                 <option value="All">All</option>
                 <option value="Pending">Pending</option>
@@ -322,7 +320,7 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
                 onChange={(e) => {
                   setDateOfIncident(e.target.value);
                 }}
-                className="cursor-pointer phone:w-[100%] px-3 py-2 w-[200px] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
+                className="cursor-pointer phone:w-[100%] px-3 py-2 w-[200px] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none border-[1px] border-blue-200 focus:border-blue-300"
               >
                 <option value="All">All</option>
                 {years.map((year) => (
@@ -345,7 +343,7 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
                 onChange={(e) => {
                   setMonthOfIncident(e.target.value);
                 }}
-                className="cursor-pointer phone:w-[100%] px-3 py-2 w-[200px] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
+                className="cursor-pointer phone:w-[100%] px-3 py-2 w-[200px] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none border-[1px] border-blue-200 focus:border-blue-300"
               >
                 <option value="All">All</option>
                 {months.map((month) => (
@@ -358,9 +356,10 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
           </div>
         </div>
       </div>
-      <div className="flex phone:flex-wrap justify-start gap-4 phone:gap-0">
-        <div className="mt-4 w-[50%] relative flex flex-col bg-blue-100 z-20">
-          <div className="p-4 z-20 text-[white] bg-[#007bff]">
+
+      <div className="w-[100%] flex phone:flex-wrap justify-start gap-1 rounded-tl-[8px]">
+        <div className="w-[50%] phone:w-[100%] relative flex flex-col bg-gradient-to-t from-white via-blue-100 to-white z-20 border-[1px] border-blue-200 rounded-tl-[6px] rounded-bl-[6px]">
+          <div className="p-4 z-20 text-[#007bff] text-[16px] rounded-tl-[10px] rounded-tr-[10px]">
             Cases Per Year Level
           </div>
           {combinedFilteredCases.length > 0 ? (
@@ -372,31 +371,103 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
               />
             </>
           ) : (
-            <div className="mt-[-20px] h-[297px] flex flex-col justify-center items-center gap-2">
-              <BsFolderX className="text-[80px] text-[#007bff]" />
-              <div className="text-[#007bff]">No cases available</div>
+            <div className="mt-[-20px] h-[600px] flex flex-col justify-center items-center gap-2">
+              <BsFolderX className="text-[48px] text-[#007bff]" />
+              <div className="text-[#007bff] text-[14px]">
+                No cases available
+              </div>
             </div>
           )}
         </div>
-
-        <div className="mt-4 w-[50%] relative flex flex-col bg-yellow-100 z-20">
-          <div className="p-4 z-20 text-[white] bg-[#FFBF00]">
-            Cases Per College
-          </div>
-          {combinedFilteredCases.length > 0 ? (
-            <>
-              <CasesPerCollegePieChart
-                cases={combinedFilteredCases}
-                students={students}
-                getCases={getCases}
-              />
-            </>
-          ) : (
-            <div className="mt-[-20px] h-[297px] flex flex-col justify-center items-center gap-2">
-              <BsFolderX className="text-[80px] text-[#FFBF00]" />
-              <div className="text-[#FFBF00]">No cases available</div>
+        <div className="w-[50%] phone:w-[100%] flex flex-col gap-1">
+          <div className="w-[100%] flex phone:flex-wrap gap-1">
+            <div className="w-[50%] phone:w-[100%] relative flex flex-col bg-gradient-to-t from-white via-blue-100 to-white z-20 border-[1px] border-blue-200">
+              <div className="p-4 z-20 text-[#007bff] text-[16px] rounded-tl-[10px] rounded-tr-[10px]">
+                Cases Per College
+              </div>
+              {combinedFilteredCases.length > 0 ? (
+                <>
+                  <CasesPerCollegePieChart
+                    cases={combinedFilteredCases}
+                    students={students}
+                    getCases={getCases}
+                  />
+                </>
+              ) : (
+                <div className="mt-[-20px] h-[300px] flex flex-col justify-center items-center gap-2">
+                  <BsFolderX className="text-[48px] text-[#007bff]" />
+                  <div className="text-[#007bff] text-[14px]">
+                    No cases available
+                  </div>
+                </div>
+              )}
             </div>
-          )}
+            <div className="w-[50%] phone:w-[100%] relative flex flex-col bg-gradient-to-t from-white via-blue-100 to-white z-20 border-[1px] border-blue-200 rounded-tr-[6px]">
+              <div className="p-4 z-20 text-[#007bff] text-[16px] rounded-tl-[10px] rounded-tr-[10px]">
+                Cases Per College
+              </div>
+              {combinedFilteredCases.length > 0 ? (
+                <>
+                  <CasesPerCollegePieChart
+                    cases={combinedFilteredCases}
+                    students={students}
+                    getCases={getCases}
+                  />
+                </>
+              ) : (
+                <div className="mt-[-20px] h-[300px] flex flex-col justify-center items-center gap-2">
+                  <BsFolderX className="text-[48px] text-[#007bff]" />
+                  <div className="text-[#007bff] text-[14px]">
+                    No cases available
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+          <div className="w-[100%] phone:flex-wrap flex gap-1">
+            <div className="w-[50%] phone:w-[100%] relative flex flex-col bg-gradient-to-t from-white via-blue-100 to-white z-20 border-[1px] border-blue-200">
+              <div className="p-4 z-20 text-[#007bff] text-[16px] rounded-tl-[10px] rounded-tr-[10px]">
+                Cases Per College
+              </div>
+              {combinedFilteredCases.length > 0 ? (
+                <>
+                  <CasesPerCollegePieChart
+                    cases={combinedFilteredCases}
+                    students={students}
+                    getCases={getCases}
+                  />
+                </>
+              ) : (
+                <div className="mt-[-20px] h-[300px] flex flex-col justify-center items-center gap-2">
+                  <BsFolderX className="text-[48px] text-[#007bff]" />
+                  <div className="text-[#007bff] text-[14px]">
+                    No cases available
+                  </div>
+                </div>
+              )}
+            </div>
+            <div className="w-[50%] phone:w-[100%] relative flex flex-col bg-gradient-to-t from-white via-blue-100 to-white z-20 border-[1px] border-blue-200 rounded-br-[6px]">
+              <div className="p-4 z-20 text-[#007bff] text-[16px] rounded-tl-[10px] rounded-tr-[10px]">
+                Cases Per College
+              </div>
+              {combinedFilteredCases.length > 0 ? (
+                <>
+                  <CasesPerCollegePieChart
+                    cases={combinedFilteredCases}
+                    students={students}
+                    getCases={getCases}
+                  />
+                </>
+              ) : (
+                <div className="mt-[-20px] h-[300px] flex flex-col justify-center items-center gap-2">
+                  <BsFolderX className="text-[48px] text-[#007bff]" />
+                  <div className="text-[#007bff] text-[14px]">
+                    No cases available
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
         </div>
       </div>
     </>
