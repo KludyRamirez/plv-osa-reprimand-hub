@@ -16,7 +16,7 @@ const CreateCollegesAndDepartmentsFormModal = ({
   return (
     <>
       <form onSubmit={handleCreateCad}>
-        <div className="text-[26px] text-[#077bff] font-semibold flex justify-between mt-10 px-10">
+        <div className="text-[26px] text-[#006bff] font-semibold flex justify-between mt-10 px-10">
           Add College
           <BsX
             onClick={handleCloseModal}
@@ -36,7 +36,7 @@ const CreateCollegesAndDepartmentsFormModal = ({
             placeholder="e.g. CEIT"
             className={`border-[1px] py-3 px-5 rounded-[32px] w-[100%] bg-white ${
               collegeError === '' ? 'border-gray-200' : 'border-[red]'
-            } focus:outline-none focus:border-[#007bff]`}
+            } focus:outline-none focus:border-[#006bff]`}
           />
         </div>
         {collegeError && <p className="text-red-500 pt-2">{collegeError}</p>}
@@ -54,7 +54,7 @@ const CreateCollegesAndDepartmentsFormModal = ({
               placeholder="e.g. BSIT Bachelor of Science in Information Technology"
               className={`border-[1px] py-3 px-5 rounded-[32px] w-[100%] bg-white ${
                 collegeError === '' ? 'border-gray-200' : 'border-[red]'
-              } focus:outline-none focus:border-[#007bff]`}
+              } focus:outline-none focus:border-[#006bff]`}
             />
             {departmentError && (
               <p className="text-red-500 pt-2">{departmentError}</p>
@@ -69,7 +69,7 @@ const CreateCollegesAndDepartmentsFormModal = ({
           department !== '' ? (
             <button
               type="submit"
-              className="cursor-pointer w-[100%] py-4 px-4 bg-[#007bff] text-[white] text-[16px] flex gap-2 justify-center items-center rounded-[32px]"
+              className="cursor-pointer w-[100%] py-4 px-4 bg-[#006bff] text-[white] text-[16px] flex gap-2 justify-center items-center rounded-[32px]"
             >
               <FaPlus />
               <div>Add College</div>
@@ -77,7 +77,7 @@ const CreateCollegesAndDepartmentsFormModal = ({
           ) : (
             <button
               disabled
-              className="cursor-pointer w-[100%] py-4 px-4 bg-[#007bff] text-[white] text-[16px] flex gap-2 justify-center items-center rounded-[32px]"
+              className="cursor-pointer w-[100%] py-4 px-4 bg-[#006bff] text-[white] text-[16px] flex gap-2 justify-center items-center rounded-[32px]"
             >
               <FaPlus />
               <div>Add College</div>

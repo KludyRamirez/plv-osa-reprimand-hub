@@ -128,26 +128,26 @@ const HistoryFilter = ({ history, getHistory, toast, allowedRoles }) => {
       <div className="text-[14px] text-[#404040] pb-6">
         Office of Student Affairs / History
       </div>
-      <div className="w-100 text-[26px] text-[#077bff] font-bold pb-6 flex justify-between items-center">
+      <div className="w-100 text-[26px] text-[#006bff] font-bold pb-6 flex justify-between items-center">
         <div>History List</div>
 
-        <div className="invisible cursor-pointer py-3 px-4 bg-gradient-to-br from-[#007bff] via-[#079bff] to-[#007bff] text-[white] text-[16px] flex gap-2 items-center rounded-[32px]">
+        <div className="invisible cursor-pointer py-3 px-4 bg-gradient-to-br from-[#006bff] via-[#079bff] to-[#006bff] text-[white] text-[16px] flex gap-2 items-center rounded-[32px]">
           <FaPlus />
           <div>History</div>
         </div>
       </div>
 
       {/* <div className="w-[100%]">
-        <div className="phone:overflow-x-scroll">
+        <div className="sm:overflow-x-scroll">
           <div className="w-[fit-content] flex justify-start items-center gap-4 pb-8">
             <div className="p-2 w-[200px] h-[174px] bg-white border-[1px] border-blue-200 rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden">
               <div className=" w-[100%] h-[100%] flex justify-center items-end">
-                <div className="text-[48px] text-[#007bff] font-bold">
+                <div className="text-[48px] text-[#006bff] font-bold">
                   {history?.length}
                   <span className="text-[20px]"></span>
                 </div>
               </div>
-              <div className="text-[16px] text-[#007bff]">Total History</div>
+              <div className="text-[16px] text-[#006bff]">Total History</div>
               <svg
                 className="absolute top-0 left-0"
                 viewBox="0 0 500 500"
@@ -161,12 +161,12 @@ const HistoryFilter = ({ history, getHistory, toast, allowedRoles }) => {
             </div>
             <div className="p-2 w-[200px] h-[174px] bg-white border-[1px] border-blue-200 rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden">
               <div className=" w-[100%] h-[100%] flex justify-center items-end">
-                <div className="text-[48px] text-[#007bff] font-bold">
+                <div className="text-[48px] text-[#006bff] font-bold">
                   {todayHistory?.length}
                   <span className="text-[20px]"></span>
                 </div>
               </div>
-              <div className="text-[16px] text-[#007bff]">Today's History</div>
+              <div className="text-[16px] text-[#006bff]">Today's History</div>
               <svg
                 className="absolute top-0 left-0"
                 viewBox="0 0 500 500"
@@ -211,9 +211,9 @@ const HistoryFilter = ({ history, getHistory, toast, allowedRoles }) => {
         </div>
 
         <div className="w-100 flex justify-start bg-gradient-to-br from-gray-100 to-gray-100 p-4 rounded-bl-[10px] rounded-br-[10px]">
-          <div className="w-100 flex flex-wrap justify-start items-center gap-4 phone:gap-2">
-            <div className="phone:w-[50%] flex flex-col items-start gap-2">
-              <div className="pl-2 w-[242px] phone:w-[100%] flex justify-between items-center">
+          <div className="w-100 flex flex-wrap justify-start items-center gap-4 sm:gap-2">
+            <div className="sm:w-[50%] flex flex-col items-start gap-2">
+              <div className="pl-2 w-[242px] sm:w-[100%] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
                   <div>Type</div>
                 </div>
@@ -221,7 +221,7 @@ const HistoryFilter = ({ history, getHistory, toast, allowedRoles }) => {
               </div>
               <select
                 onChange={(e) => setSelectedStatus(e.target.value)}
-                className="px-3 py-2 w-[242px] phone:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px]"
+                className="px-3 py-2 w-[242px] sm:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px]"
               >
                 <option value="All">All</option>
                 <option value="Authentication">Authentication</option>
@@ -232,8 +232,8 @@ const HistoryFilter = ({ history, getHistory, toast, allowedRoles }) => {
                 <option value="Utilities">Utilities</option>
               </select>
             </div>
-            <div className="phone:w-[47.8%] flex flex-col items-start gap-2">
-              <div className="pl-2 w-[242px] phone:w-[100%] flex justify-between items-center">
+            <div className="sm:w-[47.8%] flex flex-col items-start gap-2">
+              <div className="pl-2 w-[242px] sm:w-[100%] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
                   <div>Activity</div>
                 </div>
@@ -241,7 +241,7 @@ const HistoryFilter = ({ history, getHistory, toast, allowedRoles }) => {
               </div>
               <select
                 onChange={(e) => setActionNotif(e.target.value)}
-                className="px-3 py-2 w-[242px] phone:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px]"
+                className="px-3 py-2 w-[242px] sm:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px]"
               >
                 <option value="All">All</option>
                 <option value="Add">Add</option>
@@ -250,8 +250,8 @@ const HistoryFilter = ({ history, getHistory, toast, allowedRoles }) => {
                 <option value="Delete">Delete</option>
               </select>
             </div>
-            <div className="phone:w-[50%] flex flex-col items-start gap-2">
-              <div className="pl-2 w-[242px] phone:w-[100%] flex justify-between items-center">
+            <div className="sm:w-[50%] flex flex-col items-start gap-2">
+              <div className="pl-2 w-[242px] sm:w-[100%] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
                   <div>Date</div>
                 </div>
@@ -263,7 +263,7 @@ const HistoryFilter = ({ history, getHistory, toast, allowedRoles }) => {
                 onChange={(date) => {
                   setDate(date);
                 }}
-                className="px-3 py-2 w-[242px] phone:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px]"
+                className="px-3 py-2 w-[242px] sm:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px]"
               />
             </div>
           </div>

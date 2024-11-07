@@ -1,44 +1,44 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   BsCheckCircle,
   BsChevronBarDown,
   BsFilter,
   BsGear,
-} from "react-icons/bs";
+} from 'react-icons/bs';
 
-import UsersTable from "./UsersTable";
+import UsersTable from './UsersTable';
 
 const UsersFilter = ({ users, getUsers, allowedRoles }) => {
-  const [searchTerm, setSearchTerm] = useState("All");
-  const [selectedStatus, setSelectedStatus] = useState("All");
-  const [role, setRole] = useState("");
+  const [searchTerm, setSearchTerm] = useState('All');
+  const [selectedStatus, setSelectedStatus] = useState('All');
+  const [role, setRole] = useState('');
   const [selectedUsers, setSelectedUsers] = useState([]);
-  const [activeMainFilter, setActiveMainFilter] = useState("All");
+  const [activeMainFilter, setActiveMainFilter] = useState('All');
 
   const handleMainFilterChange = (filter) => {
     setActiveMainFilter(filter);
   };
 
   const filteredByStatus =
-    selectedStatus === "All"
+    selectedStatus === 'All'
       ? users
       : users?.filter((user) => user.statusOfUser === selectedStatus);
 
   const filteredBySearch = users?.filter((user) => {
     const searchMatch =
-      searchTerm === "All" ||
+      searchTerm === 'All' ||
       user?.firstName?.toLowerCase().includes(searchTerm?.toLowerCase()) ||
       user?.userName?.toLowerCase().includes(searchTerm?.toLowerCase()) ||
       user?.surName?.toLowerCase().includes(searchTerm?.toLowerCase()) ||
       user?.email?.toLowerCase().includes(searchTerm?.toLowerCase());
 
-    const roleMatch = role === "All" || user?.role?.includes(role);
+    const roleMatch = role === 'All' || user?.role?.includes(role);
 
     return searchMatch && roleMatch;
   });
 
   const combinedFilteredUsers =
-    selectedStatus === "All"
+    selectedStatus === 'All'
       ? filteredBySearch
       : filteredBySearch?.filter((user) => filteredByStatus?.includes(user));
 
@@ -47,9 +47,9 @@ const UsersFilter = ({ users, getUsers, allowedRoles }) => {
       <div className="w-100 bg-[white] text-[#404040] rounded-[10px] flex flex-col border-[1px]">
         <div className="px-3 w-100 h-[58px] flex justify-start gap-1 border-b-2 border-white ">
           <div
-            onClick={() => handleMainFilterChange("All")}
+            onClick={() => handleMainFilterChange('All')}
             className={`px-3 h-[58px] hover:border-b-2 border-blue-600 flex justify-center items-center text-[18px] ${
-              activeMainFilter === "All" ? "border-b-2 border-blue-600" : ""
+              activeMainFilter === 'All' ? 'border-b-2 border-blue-600' : ''
             }`}
           >
             All Users
@@ -71,17 +71,17 @@ const UsersFilter = ({ users, getUsers, allowedRoles }) => {
         </div>
 
         <div className="w-[100%] flex justify-start bg-gray-100 flex p-4 rounded-bl-[10px] rounded-br-[10px]">
-          <div className="w-[100%] flex flex-wrap justify-start items-center gap-4 phone:gap-2">
-            <div className="phone:w-[49%] flex flex-col items-start gap-2">
-              <div className="pl-2 w-[242px] phone:w-[100%] flex justify-between items-center">
+          <div className="w-[100%] flex flex-wrap justify-start items-center gap-4 sm:gap-2">
+            <div className="sm:w-[49%] flex flex-col items-start gap-2">
+              <div className="pl-2 w-[242px] sm:w-[100%] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
-                  <div>Status</div> 
+                  <div>Status</div>
                 </div>
                 <BsChevronBarDown />
               </div>
               <select
                 onChange={(e) => setSelectedStatus(e.target.value)}
-                className="px-3 py-2 w-[242px] phone:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
+                className="px-3 py-2 w-[242px] sm:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
               >
                 <option value="All">All</option>
                 <option value="Enabled">Enabled</option>
@@ -89,16 +89,16 @@ const UsersFilter = ({ users, getUsers, allowedRoles }) => {
               </select>
             </div>
 
-            <div className="phone:w-[48.8%] flex flex-col items-start gap-2">
-              <div className="pl-2 w-[242px] phone:w-[100%] flex justify-between items-center">
+            <div className="sm:w-[48.8%] flex flex-col items-start gap-2">
+              <div className="pl-2 w-[242px] sm:w-[100%] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
-                  <div>Role</div> 
+                  <div>Role</div>
                 </div>
                 <BsChevronBarDown />
               </div>
               <select
                 onChange={(e) => setRole(e.target.value)}
-                className="px-3 py-2 w-[242px] phone:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
+                className="px-3 py-2 w-[242px] sm:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
               >
                 <option value="All">All</option>
                 <option value="Student">Student</option>

@@ -135,12 +135,12 @@ const ChangeUserInfo = ({ toast }) => {
       <div className="w-[460px] flex flex-col gap-8 z-20">
         <div className="text-[#606060] flex flex-col gap-4 px-5 py-6 rounded-[8px]">
           <div className="flex items-center justify-start relative">
-            <div className="text-[36px] text-[#007bff] font-bold">
+            <div className="text-[36px] text-[#006bff] font-bold">
               Change Info
             </div>
           </div>
           <div className="flex flex-col gap-3 w-[100%]">
-            <div className="text-[16px] text-[#007bff] w-100 flex justify-between items-center">
+            <div className="text-[16px] text-[#006bff] w-100 flex justify-between items-center">
               <span>Email</span>
               <BsEnvelope className="text-[22px]" />
             </div>
@@ -162,7 +162,7 @@ const ChangeUserInfo = ({ toast }) => {
               {errors.email === '' && values.email !== '' ? (
                 <button
                   type="button"
-                  className="w-[100%] py-2 bg-[#007bff] text-[white] text-[16px] flex justify-center items-center rounded-[4px] gap-2"
+                  className="w-[100%] py-2 bg-[#006bff] text-[white] text-[16px] flex justify-center items-center rounded-[4px] gap-2"
                   onClick={handleUpdateEmail}
                 >
                   <div>Change</div>
@@ -179,7 +179,7 @@ const ChangeUserInfo = ({ toast }) => {
           </div>
 
           <div className="flex flex-col gap-3 w-[100%] pt-4">
-            <div className="text-[16px] text-[#007bff] w-100 flex justify-between items-center">
+            <div className="text-[16px] text-[#006bff] w-100 flex justify-between items-center">
               <span>Password</span>
               <BsCardText className="text-[22px]" />
             </div>
@@ -203,7 +203,7 @@ const ChangeUserInfo = ({ toast }) => {
               {errors.password === '' && values.password !== '' ? (
                 <button
                   type="button"
-                  className="w-[100%] py-2 bg-[#007bff] text-[white] text-[16px] flex justify-center items-center rounded-[4px] gap-2"
+                  className="w-[100%] py-2 bg-[#006bff] text-[white] text-[16px] flex justify-center items-center rounded-[4px] gap-2"
                   onClick={handleUpdatePassword}
                 >
                   <div>Change</div>

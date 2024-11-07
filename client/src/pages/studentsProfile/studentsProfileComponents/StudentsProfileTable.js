@@ -9,25 +9,35 @@ import toast from 'react-hot-toast';
 import DeleteManyCaseModal from '../../cases/casesComponents/DeleteCaseModal';
 import { useNavigate } from 'react-router-dom';
 import EditCase from '../../cases/casesComponents/EditCase';
-import sea from '../../../images/sea.jpg';
-import {
-  BsArrowDownShort,
-  BsArrowUpShort,
-  BsBoxArrowUpRight,
-  BsChevronUp,
-  BsFolderX,
-  BsGoogle,
-  BsPen,
-  BsPhoneFlip,
-  BsSticky,
-  BsTrash3,
-} from 'react-icons/bs';
-import { MdOutlineCall, MdOutlineEmail } from 'react-icons/md';
-import { VscComment } from 'react-icons/vsc';
 import EditStudent from '../../students/studentsComponents/EditStudent';
 import PatchCaseStatus from '../../cases/casesComponents/PatchCaseStatus';
 import RemarksCase from '../../cases/casesComponents/RemarksCase';
 import { Radio, RadioGroup, FormControlLabel } from '@mui/material';
+import {
+  BsBank,
+  BsBuildings,
+  BsEnvelope,
+  BsEnvelopeAt,
+  BsEye,
+  BsEyeFill,
+  BsGenderMale,
+  BsKey,
+  BsKeyFill,
+  BsPass,
+  BsPen,
+  BsPencilFill,
+  BsPenFill,
+  BsPersonBadge,
+  BsPersonVcard,
+  BsTelephone,
+  BsTelephoneInbound,
+  BsTrash3,
+  BsTrash3Fill,
+} from 'react-icons/bs';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/pagination';
 
 const ModalBox = styled('div')({
   position: 'absolute',
@@ -305,13 +315,6 @@ const StudentsProfileTable = ({
     window.location.reload();
   };
 
-  // filter cases
-
-  // const activeCases = cases?.filter((c) => c.statusOfCase !== "Case Solved");
-  // const caseSolvedCases = cases?.filter(
-  //   (c) => c.statusOfCase === "Case Solved"
-  // );
-
   // patch case status
 
   const handleCasePatchClick = (cas) => {
@@ -350,16 +353,14 @@ const StudentsProfileTable = ({
 
   const filteredCases = cases?.filter((c) => {
     if (casesFilter === 'All') {
-      return c.studentName === `${student.firstName} ${student.surName}`;
+      return c.student?._id === student?._id;
     } else if (casesFilter === 'Case Solved') {
       return (
-        c.studentName === `${student.firstName} ${student.surName}` &&
-        c.statusOfCase === 'Case Solved'
+        c.student?._id === student?._id && c?.statusOfCase === 'Case Solved'
       );
     } else if (casesFilter !== 'Case Solved' && casesFilter !== 'All') {
       return (
-        c.studentName === `${student.firstName} ${student.surName}` &&
-        c.statusOfCase !== 'Case Solved'
+        c.student?._id === student?._id && c?.statusOfCase !== 'Case Solved'
       );
     }
   });
@@ -466,39 +467,27 @@ const StudentsProfileTable = ({
           />
         </ModalBox>
       </Modal>
-      <div className="w-[100%] flex flex-wrap justify-center phone:justify-start gap-4">
-        <div className="phone:w-[100%] flex flex-col gap-4">
-          <div className="phone:overflow-x-scroll">
+      <div className="w-[100%] flex flex-col items-center xl:justify-start gap-12 xl:gap-8">
+        {/* <div className="xl:w-[100%] flex flex-col gap-4">
+          <div className="xl:overflow-x-scroll">
             <div className="w-[850px] h-[325px] flex flex-col">
               <div className="w-[100%] h-[175px] relative">
-                <img
-                  className="w-[100%] h-[100%] object-cover rounded-tl-[8px] rounded-tr-[8px]"
-                  src={sea}
-                  alt=""
-                />
                 <div className="absolute top-4 left-4 px-3 py-1 bg-[#505050] text-[white] text-[14px] rounded-[24px]">
                   {student.studentNo}
                 </div>
               </div>
               <div className="w-[100%] border-[1px] h-[150px] rounded-bl-[8px] rounded-br-[8px] flex gap-4 ">
-                <div className="w-[210px] h-[100%]  flex justify-end">
-                  {student.sex === 'Male' ? (
-                    <img className="mt-[-60px] w-[175px] h-[175px] rounded-[50%] z-20" />
-                  ) : (
-                    <img className="mt-[-60px] w-[175px] h-[175px] rounded-[50%] z-20" />
-                  )}
-                </div>
                 <div className="w-[400px] h-[100%] px-2 py-5 flex flex-col gap-2 ">
                   <span className="text-[27px] font-bold text-[#404040]">
                     {student.firstName} {student.surName}
                   </span>
-                  <div className="w-[100%] text-[15px] text-[#606060] flex justify-between">
+                  <div className="w-[100%] text-[15px] text-[#707070] flex justify-between">
                     <span>
                       {student?.department?.split(' ')[0]} {student.year}-
                       {student.section}
                     </span>
                   </div>
-                  <div className="w-[100%] text-[15px] flex justify-start gap-2 pt-2 text-[#007bff]"></div>
+                  <div className="w-[100%] text-[15px] flex justify-start gap-2 pt-2 text-[#707070]"></div>
                 </div>
                 <div className="w-[200px] h-[100%] px-3 py-5 flex justify-end items-start">
                   <div
@@ -513,9 +502,9 @@ const StudentsProfileTable = ({
             </div>
           </div>
 
-          <div className="w-[100%] h-[48px] flex justify-between phone:justify-start pt-8 relative">
+          <div className="w-[100%] h-[48px] flex justify-between xl:justify-start pt-8 relative">
             <div className="flex justify-start gap-3 items-center">
-              <div className="text-[24px] text-[#606060] font-bold phone:hidden">
+              <div className="text-[24px] text-[#707070] font-bold sm:hidden">
                 Cases
               </div>
             </div>
@@ -533,14 +522,13 @@ const StudentsProfileTable = ({
                   control={<Radio id="All" sx={{ display: 'none' }} />}
                   label={
                     <div
-                      className={`cursor-pointer py-2 px-4 rounded-[24px] text-[16px] flex gap-2 items-center text-[#007bff] ${
+                      className={`cursor-pointer py-2 px-4 rounded-[24px] text-[16px] flex gap-2 items-center text-[#707070] ${
                         casesFilter === 'All'
                           ? 'bg-[#007bff] text-white'
                           : 'text-[#404040] bg-[#f7f7f7]'
                       } `}
                     >
                       <div>Total</div>
-                      <BsSticky />
                     </div>
                   }
                 />
@@ -549,14 +537,13 @@ const StudentsProfileTable = ({
                   control={<Radio id="Case Solved" sx={{ display: 'none' }} />}
                   label={
                     <div
-                      className={`cursor-pointer py-2 px-4 rounded-[24px] text-[16px] flex gap-2 items-center text-[#007bff] ${
+                      className={`cursor-pointer py-2 px-4 rounded-[24px] text-[16px] flex gap-2 items-center text-[#707070] ${
                         casesFilter === 'Case Solved'
                           ? 'bg-[#007bff] text-white'
                           : 'text-[#404040] bg-[#f7f7f7]'
                       }`}
                     >
                       <div>Solved</div>
-                      <BsSticky />
                     </div>
                   }
                 />
@@ -572,118 +559,29 @@ const StudentsProfileTable = ({
                       }`}
                     >
                       <div>Active</div>
-                      <BsSticky />
                     </div>
                   }
                 />
               </div>
             </RadioGroup>
           </div>
-          <div className="w-[850px] rounded-[8px] flex flex-wrap justify-center gap-8 phone:gap-4 mt-6 mb-12">
-            {filteredCases.length > 0 ? (
-              <>
-                {filteredCases.map((c) => (
-                  <div
-                    key={c}
-                    className="cursor-pointer w-[409px] bg-[#ffffff] rounded-[0px] flex flex-col border-[1px] border-[#efefef] hover:border-blue-400"
-                  >
-                    <div className="flex h-[33px] justify-between items-center border-b-[1px] rounded-tr-[8px] rounded-tl-[8px] px-4">
-                      <div className="flex justify-center items-center text-[14px] text-[#606060]">
-                        ID {c.caseNo}
-                      </div>
-                      <div className="flex justify-center items-center text-[14px] text-[#606060]">
-                        {new Date(c.dateOfIncident)
-                          .toLocaleDateString('en-PH', {
-                            month: 'long',
-                            day: 'numeric',
-                            year: 'numeric',
-                          })
-                          .slice(0, -6)}
-                      </div>
-                    </div>
-                    <div className="flex flex-col gap-6 p-4">
-                      <div className="flex flex-col items-start gap-4">
-                        <div className="w-[100%] flex justify-between items-center">
-                          <div className="text-[20px] font-bold">
-                            <span className="text-[#007bff]">
-                              {c.typeOfViolation}
-                            </span>
-                          </div>
-                          <div className="text-[15px] text-[#606060] font-normal">
-                            {c.offense} offense
-                          </div>
-                        </div>
-                        <div className="w-[100%] h-[58px] text-[14px] text-[#606060] pt-2 rounded-[4px]">
-                          {c.reportedViolation}.
-                        </div>
-                      </div>
-                      <div className="flex justify-between items-end">
-                        <div className="flex justify-start gap-3">
-                          {allowedRoles?.find((ar) =>
-                            auth?.userDetails?.role?.includes(ar)
-                          ) ? (
-                            <>
-                              <div
-                                onClick={() => handleCaseEditClick(c)}
-                                className="cursor-pointer rounded-[50%] w-[36px] h-[35px] border-[1px] border-[#007bff] flex justify-center items-center hover:bg-[#007bff] hover:text-white text-[#007bff]"
-                              >
-                                <BsPen className="text-[18px]" />
-                              </div>
-                              <div
-                                onClick={() => handleClickDelete(c?._id)}
-                                className="cursor-pointer rounded-[50%] w-[36px] h-[35px] border-[1px] border-[#007bff] flex justify-center items-center hover:bg-[#007bff] hover:text-white text-[#007bff]"
-                              >
-                                <BsTrash3 className="text-[18px]" />
-                              </div>
-                              <div
-                                onClick={() => handleCasePatchClick(c)}
-                                className="cursor-pointer rounded-[50%] w-[36px] h-[35px] border-[1px] border-[#007bff] flex justify-center items-center hover:bg-[#007bff] hover:text-white text-[#007bff]"
-                              >
-                                <BsChevronUp className="text-[18px]" />
-                              </div>
-                            </>
-                          ) : null}
+        </div> */}
 
-                          <div
-                            onClick={() => handleCaseRemarksClick(c)}
-                            className="cursor-pointer rounded-[50%] w-[36px] h-[35px] border-[1px] border-[#007bff] flex justify-center items-center hover:bg-[#007bff] hover:text-white text-[#007bff]"
-                          >
-                            <VscComment className="text-[20px]" />
-                          </div>
-                        </div>
-
-                        <div className="rounded-[24px] px-4 py-2 border-[1px] border-[#007bff] text-[#007bff] flex justify-center items-center hover:bg-[#007bff] hover:text-white text-[#007bff]">
-                          {c.statusOfCase}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </>
-            ) : (
-              <div className="w-[100%] h-[240px] border-[1px] text-[#606060] flex flex-col gap-2 justify-center items-center rounded-[8px]">
-                <BsFolderX className="text-[32px]" />
-                <span className="text-[16px]">No cases available</span>
-              </div>
-            )}
-          </div>
-        </div>
-
-        <div className="flex flex-col gap-5">
+        {/* <div className="flex flex-col gap-5">
           <div className="w-[350px] rounded-[8px] text-[#404040]">
             <div className="w-[100%] px-6 py-4 text-[25px] font-bold">
               Connect
             </div>
             <div className="w-[100%] flex flex-col flex-grow px-6 pb-4 gap-4">
               <div className="w-[100%] flex justify-start gap-4 items-center">
-                <div className="p-2 rounded-[24px] border-[1px] border-[#007bff] text-[#007bff] hover:bg-[#007bff] hover:text-white cursor-pointer">
+                <div className="p-2 rounded-[24px] border-[1px] border-[#007bff] text-[#707070] hover:bg-[#007bff] hover:text-white cursor-pointer">
                   <MdOutlineEmail className="text-[24px]" />
                 </div>
                 <div className="">{student.email}</div>
-                <BsGoogle className="text-[24px] text-[#007bff]" />
+                <BsGoogle className="text-[24px] text-[#707070]" />
               </div>
               <div className="w-[100%] flex gap-4 items-center">
-                <div className="p-2 rounded-[24px] border-[1px] border-[#007bff] text-[#007bff] hover:bg-[#007bff] hover:text-white cursor-pointer">
+                <div className="p-2 rounded-[24px] border-[1px] border-[#007bff] text-[#707070] hover:bg-[#007bff] hover:text-white cursor-pointer">
                   <MdOutlineCall className="text-[24px]" />
                 </div>
                 <div className="">{student.contactNo}</div>
@@ -710,7 +608,7 @@ const StudentsProfileTable = ({
               {showMoreInfo ? (
                 <>
                   <div className="w-[100%] flex justify-start gap-4 items-center pt-2">
-                    <div className="p-2 rounded-[24px] border-[1px] border-[#007bff] text-[#007bff] hover:bg-[#007bff] hover:text-white cursor-pointer">
+                    <div className="p-2 rounded-[24px] border-[1px] border-[#007bff] text-[#707070] hover:bg-[#007bff] hover:text-white cursor-pointer">
                       <BsPhoneFlip className="text-[24px]" />
                     </div>
                     <div className="">{student.guardianContactNo}</div>
@@ -739,7 +637,7 @@ const StudentsProfileTable = ({
                       />
                     )}
 
-                    <div className="text-[16px] text-[#606060] ">
+                    <div className="text-[16px] text-[#707070] ">
                       {s.firstName} {s.surName}
                     </div>
                   </div>
@@ -754,6 +652,199 @@ const StudentsProfileTable = ({
               ))}
             </div>
           </div>
+        </div> */}
+
+        <div className="w-[100%] h-[100%] rounded-br-[12px] rounded-tl-[12px] flex xl:flex-wrap gap-1 xl:gap-8 px-8 xl:px-0">
+          <div className="w-[50%] xl:w-[100%] flex flex-col gap-2 xl:border-none xl:p-0">
+            <div className="text-[#707070] text-[18px]">Personal Details</div>
+            <div className="w-[100%] flex justify-between items-center gap-4 mb-6">
+              <div className="flex justify-center items-center text-[#707070] text-[42px] font-bold leading-tight">
+                {student.firstName} {student.surName}
+              </div>
+            </div>
+            <div className="w-[100%] flex justify-between items-center gap-4 mb-6">
+              <div className="px-3 flex justify-center items-center gap-2 py-1 bg-green-600 text-[#f0f9ff] text-[14px] rounded-[4px] font-bold border-[1px] border-green-600">
+                {student.statusOfStudent}
+              </div>
+            </div>
+            <div className="w-[100%] flex items-center gap-1">
+              <div className="flex justify-center items-center gap-2 py-1 text-[#707070] text-[16px] rounded-[4px] font-bold">
+                <BsPass size={30} /> {student.studentNo}
+              </div>
+            </div>
+            <div className="w-[100%] flex items-center gap-4">
+              <div className="flex justify-center items-center gap-2 py-1 text-[#707070] text-[16px] rounded-[4px] font-bold">
+                <BsBank size={30} /> {student.college}
+              </div>
+              <div className="flex justify-center items-center gap-2 py-1 text-[#707070] text-[16px] rounded-[4px] font-bold">
+                <BsBuildings size={30} /> {student?.department?.slice(0, 4)}{' '}
+                {student.year}-{student.section}
+              </div>
+            </div>
+            <div className="w-[100%] flex items-center gap-4">
+              <div className="flex justify-center items-center gap-2 py-1 text-[#707070] text-[16px] rounded-[4px] font-bold">
+                <BsTelephone size={30} /> {student?.contactNo}
+              </div>
+              <div className="flex justify-center items-center gap-2 py-1 text-[#707070] text-[16px] rounded-[4px] font-bold">
+                <BsTelephoneInbound size={30} /> {student?.guardianContactNo}
+              </div>
+            </div>
+            <div className="w-[100%] flex items-center gap-1">
+              <div className="flex justify-center items-center gap-2 py-1 text-[#707070] text-[16px] rounded-[4px] font-bold">
+                <BsEnvelopeAt size={30} /> {student?.email}
+              </div>
+            </div>
+            <div className="w-[100%] flex items-center gap-1">
+              <div className="flex justify-center items-center gap-2 py-1 text-[#707070] text-[16px] rounded-[4px] font-bold">
+                <BsGenderMale size={30} /> {student?.sex}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="w-[100%] flex xl:flex-wrap gap-2 px-8 xl:px-0">
+          <div className="w-[50%] xl:w-[100%] flex flex-col gap-4">
+            <div className="text-[18px] text-[#707070]">Personal</div>
+            <div className="text-[32px] text-[#707070] font-bold mt-[-16px]">
+              Cases
+            </div>
+            <div className="w-[100%] flex xl:flex-wrap justify-center items-center gap-2">
+              <div className="w-[100%] xl:w-[100%] h-[240px]">
+                <Swiper
+                  pagination={{
+                    dynamicBullets: true,
+                  }}
+                  spaceBetween="8"
+                  breakpoints={{
+                    599: {
+                      slidesPerView: 1,
+                    },
+                    768: {
+                      slidesPerView: 2,
+                    },
+                    1024: {
+                      slidesPerView: 2,
+                    },
+                    1200: {
+                      slidesPerView: 2,
+                    },
+                  }}
+                  modules={[Pagination]}
+                  className="mySwiper"
+                >
+                  {filteredCases.map((c) => (
+                    <SwiperSlide
+                      className="flex justify-center items-center bg-[rgb(250,255,255)] rounded-tl-[24px] rounded-tr-[24px] rounded-bl-[18px] rounded-br-[18px] border-[1px] border-blue-100"
+                      key={c._id}
+                    >
+                      <div className="w-[100%] py-4 flex justify-between items-start p-4">
+                        <div
+                          className={`${
+                            c.typeOfViolation === 'Major'
+                              ? 'text-red-500'
+                              : 'text-orange-500'
+                          }  text-[16px] font-bold`}
+                        >
+                          {c.typeOfViolation}
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <div className="group flex justify-center items-center p-1 text-white rounded-[50%] bg-blue-500 hover:p-2 transition-hover duration-300 ease-[cubic-bezier(0.4, 0, 0.2, 1)] cursor-pointer">
+                            <BsEye
+                              size={16}
+                              className="invisible group-hover:visible transition-group-hover duration-150 ease-[cubic-bezier(0.4, 0, 0.2, 1)]"
+                            />
+                          </div>
+                          <div className="group flex justify-center items-center p-1 text-white rounded-[50%] bg-yellow-500 hover:p-2 transition-hover duration-300 ease-[cubic-bezier(0.4, 0, 0.2, 1)] cursor-pointer">
+                            <BsPen
+                              size={16}
+                              className="invisible group-hover:visible transition-group-hover duration-150 ease-[cubic-bezier(0.4, 0, 0.2, 1)]"
+                            />
+                          </div>
+                          <div className="group flex justify-center items-center p-1 text-white rounded-[50%] bg-red-500 hover:p-2 transition-hover duration-300 ease-[cubic-bezier(0.4, 0, 0.2, 1)] cursor-pointer">
+                            <BsTrash3
+                              size={16}
+                              className="invisible group-hover:visible transition-group-hover duration-150 ease-[cubic-bezier(0.4, 0, 0.2, 1)]"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              </div>
+            </div>
+          </div>
+          {/* <div className="w-[50%] xl:w-[100%] flex flex-col gap-4">
+            <div className="text-[18px] text-[#707070]">Helpful</div>
+            <div className="text-[32px] text-[#707070] font-bold mt-[-16px]">
+              Remarks
+            </div>
+            <div className="w-[100%] flex xl:flex-wrap justify-center items-center gap-2">
+              <div className="w-[100%] h-[240px]">
+                <Swiper
+                  pagination={{
+                    dynamicBullets: true,
+                  }}
+                  spaceBetween="8"
+                  breakpoints={{
+                    599: {
+                      slidesPerView: 1,
+                    },
+                    768: {
+                      slidesPerView: 2,
+                    },
+                    1024: {
+                      slidesPerView: 2,
+                    },
+                    1200: {
+                      slidesPerView: 2,
+                    },
+                  }}
+                  modules={[Pagination]}
+                  className="mySwiper"
+                >
+                  {filteredCases.map((c) => (
+                    <SwiperSlide
+                      className="flex justify-center items-center bg-[rgb(250,255,255)] rounded-tl-[24px] rounded-tr-[24px] rounded-bl-[18px] rounded-br-[18px] border-[1px] border-blue-100"
+                      key={c._id}
+                    >
+                      <div className="w-[100%] py-4 flex justify-between items-start p-4">
+                        <div
+                          className={`${
+                            c.typeOfViolation === 'Major'
+                              ? 'text-red-500'
+                              : 'text-orange-500'
+                          }  text-[16px] font-bold`}
+                        >
+                          {c.typeOfViolation}
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <div className="group flex justify-center items-center p-1 text-white rounded-[50%] bg-blue-500 hover:p-2 transition-hover duration-300 ease-[cubic-bezier(0.4, 0, 0.2, 1)] cursor-pointer">
+                            <BsEye
+                              size={16}
+                              className="invisible group-hover:visible transition-group-hover duration-150 ease-[cubic-bezier(0.4, 0, 0.2, 1)]"
+                            />
+                          </div>
+                          <div className="group flex justify-center items-center p-1 text-white rounded-[50%] bg-yellow-500 hover:p-2 transition-hover duration-300 ease-[cubic-bezier(0.4, 0, 0.2, 1)] cursor-pointer">
+                            <BsPen
+                              size={16}
+                              className="invisible group-hover:visible transition-group-hover duration-150 ease-[cubic-bezier(0.4, 0, 0.2, 1)]"
+                            />
+                          </div>
+                          <div className="group flex justify-center items-center p-1 text-white rounded-[50%] bg-red-500 hover:p-2 transition-hover duration-300 ease-[cubic-bezier(0.4, 0, 0.2, 1)] cursor-pointer">
+                            <BsTrash3
+                              size={16}
+                              className="invisible group-hover:visible transition-group-hover duration-150 ease-[cubic-bezier(0.4, 0, 0.2, 1)]"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              </div>
+            </div>
+          </div> */}
         </div>
       </div>
     </>

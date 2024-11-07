@@ -480,7 +480,7 @@ const CasesTable = ({
                       className={`${
                         c?.statusOfCase === 'Case Solved'
                           ? 'text-[#32CD32]'
-                          : 'text-[#007bff]'
+                          : 'text-[#006bff]'
                       }`}
                     >
                       {c?.statusOfCase}
@@ -494,15 +494,15 @@ const CasesTable = ({
                         <>
                           <div
                             onClick={() => handleCasePatchClick(c)}
-                            className="relative container w-[36px] h-[36px] flex justify-center items-center bg-white border-[1px] border-[#007bff] rounded-[18px] cursor-pointer"
+                            className="relative container w-[36px] h-[36px] flex justify-center items-center bg-white border-[1px] border-[#006bff] rounded-[18px] cursor-pointer"
                           >
-                            <BsChevronUp className="text-[18px] text-[#007bff]" />
-                            <div className="absolute bg-gradient-to-br from-[#007bff] via-[#079bff] to-[#007bff] py-2 px-4 top-[-62px] left-[-16px] rounded-[32px] text-[#606060] additional-content z-40">
+                            <BsChevronUp className="text-[18px] text-[#006bff]" />
+                            <div className="absolute bg-gradient-to-br from-[#006bff] via-[#079bff] to-[#006bff] py-2 px-4 top-[-62px] left-[-16px] rounded-[32px] text-[#606060] additional-content z-40">
                               <span className="text-[16px] text-white">
                                 Update status
                               </span>
                             </div>
-                            <div className="absolute top-[-38px] left-[7px] w-[20px] h-[20px] bg-gradient-to-br from-[#007bff] via-[#079bff] to-[#079bff] transform rotate-[45deg] additional-content z-10"></div>
+                            <div className="absolute top-[-38px] left-[7px] w-[20px] h-[20px] bg-gradient-to-br from-[#006bff] via-[#079bff] to-[#079bff] transform rotate-[45deg] additional-content z-10"></div>
                           </div>
                           <div
                             onClick={() => handleCaseEditClick(c)}

@@ -68,7 +68,7 @@ const Login = ({ login, setLoading }) => {
                   sx={{
                     fontSize: '22px',
                     backgroundImage:
-                      'radial-gradient(100% 100% at 100% 0, #077bff 0, #122c8e 100%)',
+                      'radial-gradient(100% 100% at 100% 0, #006bff 0, #122c8e 100%)',
                   }}
                 >
                   Office of Student Affairs
@@ -77,13 +77,13 @@ const Login = ({ login, setLoading }) => {
             </div>
             {/* <div className="flex justify-center items-center gap-3">
               <div
-                className="flex items-center gap-2 text-base text-[#077bff] cursor-pointer bg-white border-[1px] border-[#077bff] px-3 py-2 rounded-[6px] hover:bg-[#007bff] hover:text-white hover:border-[1px]"
+                className="flex items-center gap-2 text-base text-[#006bff] cursor-pointer bg-white border-[1px] border-[#006bff] px-3 py-2 rounded-[6px] hover:bg-[#006bff] hover:text-white hover:border-[1px]"
                 onClick={() => handleActiveChange("Login")}
               >
                 Sign in
               </div>
               <div
-                className="flex items-center gap-2 text-base text-[#077bff] cursor-pointer bg-white border-[1px] border-[#077bff] px-3 py-2 rounded-[6px] hover:bg-[#007bff] hover:text-white hover:border-[1px]"
+                className="flex items-center gap-2 text-base text-[#006bff] cursor-pointer bg-white border-[1px] border-[#006bff] px-3 py-2 rounded-[6px] hover:bg-[#006bff] hover:text-white hover:border-[1px]"
                 onClick={() => handleActiveChange("Login")}
               >
                 <span>Announcements</span>
@@ -97,7 +97,7 @@ const Login = ({ login, setLoading }) => {
             <div className="p-8 gap-8 w-[500px] flex flex-col self-center rounded-[8px]">
               {activeSelect === 'Login' && (
                 <>
-                  <div className="w-100 flex justify-start items-center text-3xl font-semibold text-[#007bff] z-30">
+                  <div className="w-100 flex justify-start items-center text-3xl font-semibold text-[#006bff] z-30">
                     <span>Sign in</span>
                   </div>
                   <div className="z-30">
@@ -138,7 +138,7 @@ const Login = ({ login, setLoading }) => {
               <FormTitle
                 sx={{
                   backgroundImage:
-                    "radial-gradient(100% 100% at 100% 0, #07bbff 0, #007bff 100%)",
+                    "radial-gradient(100% 100% at 100% 0, #07bbff 0, #006bff 100%)",
                   textShadow: "0px 0px 4px rgba(0, 123, 255, 0.4)",
                 }}
               >
@@ -156,7 +156,7 @@ const Login = ({ login, setLoading }) => {
                 sx={{
                   marginTop: "-15px",
                   backgroundImage:
-                    "radial-gradient(100% 100% at 100% 0, #07bbff 0, #007bff 100%)",
+                    "radial-gradient(100% 100% at 100% 0, #07bbff 0, #006bff 100%)",
                   textShadow: "0px 0px 4px rgba(0, 123, 255, 0.4)",
                 }}
               >

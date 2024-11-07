@@ -146,7 +146,7 @@ const CasesPerMonthFilter = ({ cases, students, getCases }) => {
   const totalPercentage = () => {
     return (
       <>
-        <div className="text-[48px] text-[#007bff] font-bold">
+        <div className="text-[48px] text-[#006bff] font-bold">
           {cases.length}
           <span className="text-[20px]"></span>
         </div>
@@ -232,7 +232,7 @@ const CasesPerMonthFilter = ({ cases, students, getCases }) => {
 
     return (
       <>
-        <div className="pl-2 text-[48px] text-[#007bff] font-bold">
+        <div className="pl-2 text-[48px] text-[#006bff] font-bold">
           {percentage.toFixed(0)}
           <span className="text-[20px]">%</span>
         </div>
@@ -243,7 +243,7 @@ const CasesPerMonthFilter = ({ cases, students, getCases }) => {
   const firstOffenseNumber = () => {
     return (
       <>
-        <div className="text-[48px] text-[#007bff] font-bold">
+        <div className="text-[48px] text-[#006bff] font-bold">
           {firstOffenseCases.length}
         </div>
       </>
@@ -340,12 +340,12 @@ const CasesPerMonthFilter = ({ cases, students, getCases }) => {
   return (
     <>
       <div className="w-[100%] flex flex-wrap justify-start items-center gap-x-4 gap-y-4 mt-2">
-        <div className="phone:overflow-x-scroll">
+        <div className="sm:overflow-x-scroll">
           <div className="w-[fit-content] flex justify-start items-start flex-wrap gap-4 whitespace-nowrap">
             <div className="p-2 w-[214px] h-[196px] bg-white border-[1px] border-blue-200 rounded-[4px] flex flex-col items-center gap-5 relative overflow-hidden">
               <div className="w-[100%] h-[100%] flex flex-col justify-end items-center gap-6">
                 {totalPercentage()}
-                <div className="text-[16px] text-[#007bff]">Total Cases</div>
+                <div className="text-[16px] text-[#006bff]">Total Cases</div>
               </div>
               <svg
                 className="absolute top-0 left-0"
@@ -421,7 +421,7 @@ const CasesPerMonthFilter = ({ cases, students, getCases }) => {
           </div>
         </div>
 
-        <div className="phone:overflow-x-scroll">
+        <div className="sm:overflow-x-scroll">
           <div className="w-[fit-content] flex justify-start items-center flex-wrap gap-4 whitespace-nowrap">
             <div
               onClick={() => handleSetFirstOffensePercentageVar()}
@@ -433,7 +433,7 @@ const CasesPerMonthFilter = ({ cases, students, getCases }) => {
                 ) : (
                   <>{firstOffenseNumber()}</>
                 )}
-                <div className="text-[16px] text-[#007bff]">1st Offense</div>
+                <div className="text-[16px] text-[#006bff]">1st Offense</div>
               </div>
 
               <svg
@@ -543,7 +543,7 @@ const CasesPerMonthFilter = ({ cases, students, getCases }) => {
       </div>
 
       <div className="w-100 mt-8">
-        <span className="text-[24px] text-[#007bff] font-semibold">
+        <span className="text-[24px] text-[#006bff] font-semibold">
           Monthly Bar Chart
         </span>
       </div>
@@ -588,9 +588,9 @@ const CasesPerMonthFilter = ({ cases, students, getCases }) => {
         </div>
 
         <div className="w-100 flex justify-start p-4 rounded-bl-[10px] rounded-br-[10px]">
-          <div className="w-100 flex flex-wrap justify-start items-center gap-4 phone:gap-2">
-            <div className="phone:w-[50%] flex flex-col items-start gap-2">
-              <div className="pl-2 w-[240px] phone:w-[100%] flex justify-between items-center">
+          <div className="w-100 flex flex-wrap justify-start items-center gap-4 sm:gap-2">
+            <div className="sm:w-[50%] flex flex-col items-start gap-2">
+              <div className="pl-2 w-[240px] sm:w-[100%] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
                   <div>Violation</div>
                 </div>
@@ -598,7 +598,7 @@ const CasesPerMonthFilter = ({ cases, students, getCases }) => {
               </div>
               <select
                 onChange={(e) => setReportedViolation(e.target.value)}
-                className="cursor-pointer px-3 py-2 w-[240px] phone:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none border-[1px] border-blue-200 focus:border-blue-300"
+                className="cursor-pointer px-3 py-2 w-[240px] sm:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none border-[1px] border-blue-200 focus:border-blue-300"
               >
                 <option value="All">All</option>
                 {activeMainFilter === 'All' ? (
@@ -669,8 +669,8 @@ const CasesPerMonthFilter = ({ cases, students, getCases }) => {
                 ) : null}
               </select>
             </div>
-            <div className="phone:w-[47.8%] flex flex-col items-start gap-2">
-              <div className="w-[240px] phone:w-[100%] flex justify-between items-center">
+            <div className="sm:w-[47.8%] flex flex-col items-start gap-2">
+              <div className="w-[240px] sm:w-[100%] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
                   <div>Status</div>
                 </div>
@@ -678,7 +678,7 @@ const CasesPerMonthFilter = ({ cases, students, getCases }) => {
               </div>
               <select
                 onChange={(e) => setSelectedStatus(e.target.value)}
-                className="cursor-pointer px-3 py-2 w-[240px] phone:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none border-[1px] border-blue-200 focus:border-blue-300"
+                className="cursor-pointer px-3 py-2 w-[240px] sm:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none border-[1px] border-blue-200 focus:border-blue-300"
               >
                 <option value="All">All</option>
                 <option value="Pending">Pending</option>
@@ -697,8 +697,8 @@ const CasesPerMonthFilter = ({ cases, students, getCases }) => {
               </select>
             </div>
 
-            <div className="phone:w-[50%] flex flex-col items-start gap-2">
-              <div className="w-[240px] phone:w-[100%] flex justify-between items-center">
+            <div className="sm:w-[50%] flex flex-col items-start gap-2">
+              <div className="w-[240px] sm:w-[100%] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
                   <div>Year</div>
                 </div>
@@ -709,7 +709,7 @@ const CasesPerMonthFilter = ({ cases, students, getCases }) => {
                 onChange={(e) => {
                   setDateOfIncident(e.target.value);
                 }}
-                className="cursor-pointer px-3 py-2 w-[240px] phone:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none border-[1px] border-blue-200 focus:border-blue-300"
+                className="cursor-pointer px-3 py-2 w-[240px] sm:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none border-[1px] border-blue-200 focus:border-blue-300"
               >
                 <option value="All">All</option>
                 {years.map((year) => (

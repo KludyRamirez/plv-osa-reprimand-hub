@@ -106,21 +106,20 @@ const StudentProfile = ({ allowedRoles }) => {
   };
 
   return (
-    <div className="flex">
+    <div className="w-full flex">
       <Sidebar />
-      <div className="w-full h-[100%] flex">
-        <div className="w-full h-[100%] px-8 pt-8 phone:px-4">
-          <StudentsProfileTable
-            student={student}
-            students={students}
-            cases={cases}
-            getCases={getCases}
-            getOneStudent={getOneStudent}
-            getStudents={getStudents}
-            cads={cads}
-            allowedRoles={allowedRoles}
-          />
-        </div>
+
+      <div className="w-[calc(100%-240px)] sm:w-full h-[100vh] xl:h-[100%] flex justify-center items-center xl:items-start sm:mt-[75px] p-8 bg-white">
+        <StudentsProfileTable
+          student={student}
+          students={students}
+          cases={cases}
+          getCases={getCases}
+          getOneStudent={getOneStudent}
+          getStudents={getStudents}
+          cads={cads}
+          allowedRoles={allowedRoles}
+        />
       </div>
     </div>
   );

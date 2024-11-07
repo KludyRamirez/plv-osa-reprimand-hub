@@ -191,12 +191,12 @@ const CreateStudent = ({ toast, getStudents, cads, allowedRoles }) => {
       <div className="w-100 text-[14px] text-[#404040] pb-6 ">
         Office of Student Affairs / Students
       </div>
-      <div className="w-100 text-[26px] text-[#077bff] font-bold pb-6 flex justify-between items-center">
+      <div className="w-100 text-[26px] text-[#006bff] font-bold pb-6 flex justify-between items-center">
         <div>Students List</div>
         {allowedRoles?.find((ar) => auth?.userDetails?.role?.includes(ar)) ? (
           <div
             onClick={handleOpenModal}
-            className="cursor-pointer py-3 px-4 bg-gradient-to-br from-[#007bff] via-[#079bff] to-[#007bff] text-[white] text-[16px] flex gap-2 items-center rounded-[32px]"
+            className="cursor-pointer py-3 px-4 bg-gradient-to-br from-[#006bff] via-[#079bff] to-[#006bff] text-[white] text-[16px] flex gap-2 items-center rounded-[32px]"
           >
             <FaPlus />
             <div>Add Student</div>

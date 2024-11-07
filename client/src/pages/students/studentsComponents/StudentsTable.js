@@ -401,7 +401,7 @@ const StudentsTable = ({
                             ? 'text-[#ff3131]'
                             : casesCount === 1
                             ? 'text-[#ffbf00]'
-                            : 'text-[#007bff]'
+                            : 'text-[#006bff]'
                         }`}
                       >
                         <div>{casesCount}</div>
@@ -411,7 +411,7 @@ const StudentsTable = ({
                               ? 'bg-[#ff3131]'
                               : casesCount === 1
                               ? 'bg-[#ffbf00]'
-                              : 'bg-[#007bff]'
+                              : 'bg-[#006bff]'
                           }`}
                         ></div>
                       </div>
@@ -419,15 +419,15 @@ const StudentsTable = ({
                         {selectedStudents.length < 2 ? (
                           <div
                             onClick={() => handleClickProfile(student?._id)}
-                            className="relative container w-[36px] h-[36px] flex justify-center items-center bg-white border-[1px] border-[#007bff] rounded-[18px] cursor-pointer"
+                            className="relative container w-[36px] h-[36px] flex justify-center items-center bg-white border-[1px] border-[#006bff] rounded-[18px] cursor-pointer"
                           >
-                            <BsEye className="text-[18px] text-[#007bff]" />
-                            <div className="absolute bg-gradient-to-br from-[#007bff] via-[#079bff] to-[#007bff] py-2 px-4 top-[-62px] left-[-16px] rounded-[32px] text-[#606060] additional-content z-40">
+                            <BsEye className="text-[18px] text-[#006bff]" />
+                            <div className="absolute bg-gradient-to-br from-[#006bff] via-[#079bff] to-[#006bff] py-2 px-4 top-[-62px] left-[-16px] rounded-[32px] text-[#606060] additional-content z-40">
                               <span className="text-[16px] text-white">
                                 View student
                               </span>
                             </div>
-                            <div className="absolute top-[-38px] left-[7px] w-[20px] h-[20px] bg-gradient-to-br from-[#007bff] via-[#079bff] to-[#079bff] transform rotate-[45deg] additional-content z-10"></div>
+                            <div className="absolute top-[-38px] left-[7px] w-[20px] h-[20px] bg-gradient-to-br from-[#006bff] via-[#079bff] to-[#079bff] transform rotate-[45deg] additional-content z-10"></div>
                           </div>
                         ) : (
                           <div className="p-2 bg-gray-200 rounded-[18px]">

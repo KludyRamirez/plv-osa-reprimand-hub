@@ -94,7 +94,7 @@ const EditCaseFormModal = ({
   return (
     <>
       <form onSubmit={(e) => handleEditCase(e)}>
-        <div className="text-[26px] text-[#077bff] font-semibold flex justify-between mt-10 px-10">
+        <div className="text-[26px] text-[#006bff] font-semibold flex justify-between mt-10 px-10">
           Update Case
           <BsX
             onClick={handleCloseModalEdit}
@@ -127,7 +127,7 @@ const EditCaseFormModal = ({
               name="studentName"
               value={updatedValues?.studentName}
               onChange={handleCaseOwnerChange}
-              className="border-[1px] appearance-none py-3 px-5 rounded-[32px] focus:outline-none focus:border-[#007bff]"
+              className="border-[1px] appearance-none py-3 px-5 rounded-[32px] focus:outline-none focus:border-[#006bff]"
             >
               {filteredStudents
                 ?.sort((a, b) => {
@@ -164,7 +164,7 @@ const EditCaseFormModal = ({
                 placeholderText="Enter Date"
                 selected={selectedDateOfIncident}
                 onChange={(date) => handleDateOfIncidentChangeCombined(date)}
-                className={`border-[1px] py-3 px-5 rounded-[32px] w-[100%] focus:outline-none focus:border-[#007bff]`}
+                className={`border-[1px] py-3 px-5 rounded-[32px] w-[100%] focus:outline-none focus:border-[#006bff]`}
               />
             </div>
             <div className="flex flex-col gap-2 w-[100%]">
@@ -175,7 +175,7 @@ const EditCaseFormModal = ({
                 placeholderText="Enter Date"
                 selected={selectedDateReported}
                 onChange={(date) => handleDateReportedChangeCombined(date)}
-                className={`border-[1px] py-3 px-5 rounded-[32px] w-[100%] focus:outline-none focus:border-[#007bff]`}
+                className={`border-[1px] py-3 px-5 rounded-[32px] w-[100%] focus:outline-none focus:border-[#006bff]`}
               />
             </div>
           </div>
@@ -186,7 +186,7 @@ const EditCaseFormModal = ({
                 name="typeOfViolation"
                 value={updatedValues?.typeOfViolation}
                 onChange={handleChange}
-                className="appearance-none py-3 px-5 rounded-[32px] focus:outline-none border-[1px] focus:border-[#007bff]"
+                className="appearance-none py-3 px-5 rounded-[32px] focus:outline-none border-[1px] focus:border-[#006bff]"
               >
                 {typeOfViolations?.map((t) => (
                   <option key={t} value={t}>
@@ -201,7 +201,7 @@ const EditCaseFormModal = ({
                 name="reportedViolation"
                 value={updatedValues?.reportedViolation}
                 onChange={handleChange}
-                className="appearance-none py-3 px-5 rounded-[32px] focus:outline-none border-[1px] focus:border-[#007bff]"
+                className="appearance-none py-3 px-5 rounded-[32px] focus:outline-none border-[1px] focus:border-[#006bff]"
               >
                 {updatedValues?.typeOfViolation === 'Major' ? (
                   <>
@@ -233,7 +233,7 @@ const EditCaseFormModal = ({
           updatedValues?.typeOfViolation !== '' ? (
             <button
               type="submit"
-              className="cursor-pointer w-[100%] py-4 px-4 bg-[#007bff] text-[white] text-[16px] flex gap-2 justify-center items-center rounded-[32px]"
+              className="cursor-pointer w-[100%] py-4 px-4 bg-[#006bff] text-[white] text-[16px] flex gap-2 justify-center items-center rounded-[32px]"
             >
               <FaPlus />
               <div>Update Case</div>

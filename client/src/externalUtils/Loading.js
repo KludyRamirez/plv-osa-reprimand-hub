@@ -8,7 +8,7 @@ const Loading = () => {
         <div></div>
         <div></div>
       </div>
-      <span className="text-[18px] font-semibold text-[#007bff]">
+      <span className="text-[18px] font-semibold text-[#006bff]">
         Server is loading. Please wait...
       </span>
     </div>

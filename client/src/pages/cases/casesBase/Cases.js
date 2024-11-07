@@ -85,8 +85,8 @@ const Cases = ({ toast, allowedRoles }) => {
     <>
       <div className="w-full flex">
         <Sidebar />
-        <div className="w-[calc(100%-240px)] phone:w-full flex justify-start bg-[#007bff]">
-          <div className="w-full phone:mt-[75px] bg-[#fefefe] px-8 phone:px-4 pt-8">
+        <div className="w-[calc(100%-240px)] sm:w-full flex justify-start bg-[#006bff]">
+          <div className="w-full sm:mt-[75px] bg-[#fefefe] px-8 sm:px-4 pt-8">
             <CreateCase
               toast={toast}
               getCases={getCases}

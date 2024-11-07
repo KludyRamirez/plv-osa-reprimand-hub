@@ -12,15 +12,8 @@ import { useLocation } from 'react-router-dom';
 import { CgMenuLeft } from 'react-icons/cg';
 import {
   BsBank,
-  BsBank2,
   BsClockFill,
   BsClockHistory,
-  BsHourglass,
-  BsHourglassSplit,
-  BsLamp,
-  BsLampFill,
-  BsMortarboard,
-  BsMortarboardFill,
   BsPeople,
   BsPeopleFill,
   BsPieChart,
@@ -29,7 +22,7 @@ import {
   BsStickyFill,
   BsTencentQq,
 } from 'react-icons/bs';
-import { GoKey, GoLog, GoMortarBoard, GoOrganization } from 'react-icons/go';
+import { GoKey } from 'react-icons/go';
 import { logoutUtil } from '../../pages/auth/login/loginUtils/logoutUtil';
 import osalogo from '../../images/osalogo.png';
 
@@ -115,7 +108,7 @@ function Sidebar(props) {
             alignItems: 'center',
             width: '100%',
             height: '100%',
-            backgroundColor: '#007bff',
+            backgroundColor: '#006bff',
           }}
         >
           <div
@@ -138,12 +131,12 @@ function Sidebar(props) {
                 {activeItem === '/statistics' ? (
                   <SidebarOptions
                     sx={{
-                      color: '#007bff',
+                      color: '#006bff',
                       background: 'white',
                       borderRadius: '6px',
                       '&:hover': {
                         transform: 'translateY(0px)',
-                        color: '#007bff',
+                        color: '#006bff',
                         background: 'white',
                       },
                       '&:active': { transform: 'translateY(0px)' },
@@ -173,12 +166,12 @@ function Sidebar(props) {
                 {activeItem === '/cases' ? (
                   <SidebarOptions
                     sx={{
-                      color: '#007bff',
+                      color: '#006bff',
                       background: 'white',
                       borderRadius: '6px',
                       '&:hover': {
                         transform: 'translateY(0px)',
-                        color: '#007bff',
+                        color: '#006bff',
                         background: 'white',
                       },
                       '&:active': { transform: 'translateY(0px)' },
@@ -203,15 +196,16 @@ function Sidebar(props) {
             </div>
             <div className="w-full">
               <Link to="/students">
-                {activeItem === '/students' ? (
+                {activeItem === '/students' ||
+                activeItem.includes('/profile') ? (
                   <SidebarOptions
                     sx={{
-                      color: '#007bff',
+                      color: '#006bff',
                       background: 'white',
                       borderRadius: '6px',
                       '&:hover': {
                         transform: 'translateY(0px)',
-                        color: '#007bff',
+                        color: '#006bff',
                         background: 'white',
                       },
                       '&:active': { transform: 'translateY(0px)' },
@@ -220,7 +214,10 @@ function Sidebar(props) {
                     <RouteCon>
                       <BsPeopleFill
                         className={
-                          activeItem === '/student' ? 'icon-active' : ''
+                          activeItem === '/students' ||
+                          activeItem.includes('/profile')
+                            ? 'icon-active'
+                            : ''
                         }
                       />
                       <p className="text-[18px]">Students</p>
@@ -242,12 +239,12 @@ function Sidebar(props) {
                   {activeItem === '/users' ? (
                     <SidebarOptions
                       sx={{
-                        color: '#007bff',
+                        color: '#006bff',
                         background: 'white',
                         borderRadius: '6px',
                         '&:hover': {
                           transform: 'translateY(0px)',
-                          color: '#007bff',
+                          color: '#006bff',
                           background: 'white',
                         },
                         '&:active': { transform: 'translateY(0px)' },
@@ -288,12 +285,12 @@ function Sidebar(props) {
                     {activeItem === '/settings' ? (
                       <SidebarOptions
                         sx={{
-                          color: '#007bff',
+                          color: '#006bff',
                           background: 'white',
                           borderRadius: '6px',
                           '&:hover': {
                             transform: 'translateY(0px)',
-                            color: '#007bff',
+                            color: '#006bff',
                             background: 'white',
                           },
                           '&:active': { transform: 'translateY(0px)' },
@@ -328,12 +325,12 @@ function Sidebar(props) {
                     {activeItem === '/notification' ? (
                       <SidebarOptions
                         sx={{
-                          color: '#007bff',
+                          color: '#006bff',
                           background: 'white',
                           borderRadius: '6px',
                           '&:hover': {
                             transform: 'translateY(0px)',
-                            color: '#007bff',
+                            color: '#006bff',
                             background: 'white',
                           },
                           '&:active': { transform: 'translateY(0px)' },

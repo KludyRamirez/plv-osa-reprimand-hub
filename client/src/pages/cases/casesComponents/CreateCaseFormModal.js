@@ -86,7 +86,7 @@ const CreateCaseFormModal = ({
   return (
     <>
       <form onSubmit={(e) => handleCreateCase(e)}>
-        <div className="text-[26px] text-[#077bff] font-semibold flex justify-between mt-10 px-10">
+        <div className="text-[26px] text-[#006bff] font-semibold flex justify-between mt-10 px-10">
           Add Case
           <BsX
             onClick={handleCloseModal}
@@ -119,7 +119,7 @@ const CreateCaseFormModal = ({
               name="studentName"
               value={studentName}
               onChange={handleCaseOwnerChange}
-              className="border-[1px] appearance-none py-3 px-5 rounded-[32px] focus:outline-none focus:border-[#007bff]"
+              className="border-[1px] appearance-none py-3 px-5 rounded-[32px] focus:outline-none focus:border-[#006bff]"
             >
               <option value="">Select Student Below</option>
               {filteredStudents
@@ -156,7 +156,7 @@ const CreateCaseFormModal = ({
                 placeholderText="Enter Date"
                 selected={selectedDateOfIncident}
                 onChange={(date) => handleDateOfIncidentChangeCombined(date)}
-                className={`border-[1px] py-3 px-5 rounded-[32px] w-[100%] focus:outline-none focus:border-[#007bff]`}
+                className={`border-[1px] py-3 px-5 rounded-[32px] w-[100%] focus:outline-none focus:border-[#006bff]`}
               />
             </div>
             <div className="flex flex-col gap-2 w-[100%]">
@@ -166,7 +166,7 @@ const CreateCaseFormModal = ({
                 placeholderText="Enter Date"
                 selected={selectedDateReported}
                 onChange={(date) => handleDateReportedChangeCombined(date)}
-                className={`border-[1px] py-3 px-5 rounded-[32px] w-[100%] focus:outline-none focus:border-[#007bff]`}
+                className={`border-[1px] py-3 px-5 rounded-[32px] w-[100%] focus:outline-none focus:border-[#006bff]`}
               />
             </div>
           </div>
@@ -177,7 +177,7 @@ const CreateCaseFormModal = ({
                 name="typeOfViolation"
                 value={typeOfViolation}
                 onChange={handleChange}
-                className="appearance-none py-3 px-5 rounded-[32px] focus:outline-none border-[1px] focus:border-[#007bff]"
+                className="appearance-none py-3 px-5 rounded-[32px] focus:outline-none border-[1px] focus:border-[#006bff]"
               >
                 <option value="">Violation</option>
                 {typeOfViolations?.map((t) => (
@@ -193,7 +193,7 @@ const CreateCaseFormModal = ({
                 name="reportedViolation"
                 value={reportedViolation}
                 onChange={handleChange}
-                className="appearance-none py-3 px-5 rounded-[32px] focus:outline-none border-[1px] focus:border-[#007bff]"
+                className="appearance-none py-3 px-5 rounded-[32px] focus:outline-none border-[1px] focus:border-[#006bff]"
               >
                 <option value="All">All</option>
 
@@ -255,7 +255,7 @@ const CreateCaseFormModal = ({
           typeOfViolation !== '' ? (
             <button
               type="submit"
-              className="cursor-pointer w-[100%] py-4 px-4 bg-[#007bff] text-[white] text-[16px] flex gap-2 justify-center items-center rounded-[32px]"
+              className="cursor-pointer w-[100%] py-4 px-4 bg-[#006bff] text-[white] text-[16px] flex gap-2 justify-center items-center rounded-[32px]"
             >
               <FaPlus />
               <div>Add Case</div>

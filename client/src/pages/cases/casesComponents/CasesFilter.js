@@ -239,9 +239,9 @@ const CasesFilter = ({ cases, students, getCases, allowedRoles }) => {
         </div>
 
         <div className="w-100 flex justify-start bg-gradient-to-br from-gray-100 to-gray-100 p-4 rounded-bl-[10px] rounded-br-[10px]">
-          <div className="w-100 flex flex-wrap justify-start items-center gap-4 phone:gap-2">
-            <div className="phone:w-[50%] flex flex-col items-start gap-2">
-              <div className="pl-2 w-[242px] phone:w-[100%] flex justify-between items-center">
+          <div className="w-100 flex flex-wrap justify-start items-center gap-4 sm:gap-2">
+            <div className="sm:w-[50%] flex flex-col items-start gap-2">
+              <div className="pl-2 w-[242px] sm:w-[100%] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
                   <div>Violation</div>
                 </div>
@@ -249,7 +249,7 @@ const CasesFilter = ({ cases, students, getCases, allowedRoles }) => {
               </div>
               <select
                 onChange={(e) => setReportedViolation(e.target.value)}
-                className="px-3 py-2 w-[242px] phone:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px]"
+                className="px-3 py-2 w-[242px] sm:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px]"
               >
                 <option value="All">All</option>
                 {activeMainFilter === 'All' ? (
@@ -321,8 +321,8 @@ const CasesFilter = ({ cases, students, getCases, allowedRoles }) => {
               </select>
             </div>
 
-            <div className="phone:w-[47.8%] flex flex-col items-start gap-2">
-              <div className="w-[242px] phone:w-[100%] flex justify-between items-center">
+            <div className="sm:w-[47.8%] flex flex-col items-start gap-2">
+              <div className="w-[242px] sm:w-[100%] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
                   <div>Case Status</div>
                 </div>
@@ -330,7 +330,7 @@ const CasesFilter = ({ cases, students, getCases, allowedRoles }) => {
               </div>
               <select
                 onChange={(e) => setSelectedStatus(e.target.value)}
-                className="px-3 py-2 w-[242px] phone:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
+                className="px-3 py-2 w-[242px] sm:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
               >
                 <option value="All">All</option>
                 <option value="Pending">Pending</option>
@@ -349,8 +349,8 @@ const CasesFilter = ({ cases, students, getCases, allowedRoles }) => {
               </select>
             </div>
 
-            <div className="phone:w-[50%] flex flex-col items-start gap-2">
-              <div className="w-[242px] phone:w-[100%] flex justify-between items-center">
+            <div className="sm:w-[50%] flex flex-col items-start gap-2">
+              <div className="w-[242px] sm:w-[100%] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
                   <div>Date of Incident</div>
                 </div>
@@ -363,12 +363,12 @@ const CasesFilter = ({ cases, students, getCases, allowedRoles }) => {
                 onChange={(date) => {
                   setDateOfIncident(date);
                 }}
-                className="phone:w-[100%] px-3 py-2 w-[242px] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
+                className="sm:w-[100%] px-3 py-2 w-[242px] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
               />
             </div>
 
-            <div className="phone:w-[47.8%] flex flex-col items-start gap-2">
-              <div className="w-[242px] phone:w-[100%] flex justify-between items-center">
+            <div className="sm:w-[47.8%] flex flex-col items-start gap-2">
+              <div className="w-[242px] sm:w-[100%] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
                   <div>Date Reported</div>
                 </div>
@@ -381,7 +381,7 @@ const CasesFilter = ({ cases, students, getCases, allowedRoles }) => {
                 onChange={(date) => {
                   setDateReported(date);
                 }}
-                className="px-3 py-2 w-[242px] phone:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
+                className="px-3 py-2 w-[242px] sm:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
               />
             </div>
           </div>

@@ -18,7 +18,7 @@ const ResetForm = ({
         <FormTitle
           sx={{
             backgroundImage:
-              'radial-gradient(100% 100% at 100% 0, #007bff 0, #007bff 100%)',
+              'radial-gradient(100% 100% at 100% 0, #006bff 0, #006bff 100%)',
             fontSize: '36px',
             lineHeight: 'normal',
           }}
@@ -35,9 +35,9 @@ const ResetForm = ({
         value={password}
         onChange={(e) => handleGetPassword(e)}
         placeholder="Enter password"
-        className={` py-3 px-6 border-[1px] hover:border-[#007bff] rounded-[48px] w-[100%] bg-white ${
+        className={` py-3 px-6 border-[1px] hover:border-[#006bff] rounded-[48px] w-[100%] bg-white ${
           passwordError === '' ? '' : 'border-[red]'
-        } focus:outline-none focus:border-[#007bff]`}
+        } focus:outline-none focus:border-[#006bff]`}
       />
       {passwordError && <p className="text-red-500">{passwordError}</p>}
       <div className="mt-4 flex justify-start items-center gap-2 text-blue-900">
@@ -48,9 +48,9 @@ const ResetForm = ({
         value={confirmPassword}
         onChange={(e) => handleGetConfirmPassword(e)}
         placeholder="Confirm password"
-        className={` py-3 px-6 border-[1px] hover:border-[#007bff] rounded-[48px] w-[100%] bg-white ${
+        className={` py-3 px-6 border-[1px] hover:border-[#006bff] rounded-[48px] w-[100%] bg-white ${
           confirmPasswordError === '' ? '' : 'border-[red]'
-        } focus:outline-none focus:border-[#007bff]`}
+        } focus:outline-none focus:border-[#006bff]`}
       />
       {confirmPasswordError && (
         <p className="text-red-500">{confirmPasswordError}</p>
@@ -61,7 +61,7 @@ const ResetForm = ({
       confirmPasswordError === '' &&
       password === confirmPassword ? (
         <button
-          className="mt-3 p-3 border-[1px] border-[#007bff] rounded-[48px] w-[100%] bg-[#007bff] text-white"
+          className="mt-3 p-3 border-[1px] border-[#006bff] rounded-[48px] w-[100%] bg-[#006bff] text-white"
           onClick={handleSubmitPassword}
         >
           Submit
@@ -86,7 +86,7 @@ const ResetForm = ({
                 Redirecting you to login page in {countdown} seconds.
               </span>
               <div className="absolute bottom-[20px] left-[40px] w-[120px] h-[120px] rounded-[50%] bg-white flex justify-center items-center">
-                <div className="text-[36px] text-white flex justify-center items-center w-[100px] h-[100px] bg-[#007bff] rounded-[50%]">
+                <div className="text-[36px] text-white flex justify-center items-center w-[100px] h-[100px] bg-[#006bff] rounded-[50%]">
                   {countdown}
                 </div>
               </div>

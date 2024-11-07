@@ -360,7 +360,7 @@ const UsersTable = ({
                   <div className="w-[275px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px]">
                     {user?.email}
                   </div>
-                  <div className="w-[140px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px] text-[#007bff]">
+                  <div className="w-[140px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px] text-[#006bff]">
                     {user?.role}
                   </div>
                   <div className="w-[140px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px]">

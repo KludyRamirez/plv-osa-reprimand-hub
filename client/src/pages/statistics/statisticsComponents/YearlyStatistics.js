@@ -125,8 +125,8 @@ const YearlyStatistics = ({ cases }) => {
     <>
       <div className="w-[100%] h-[100%] rounded-[8px] flex justify-between relative mt-4">
         <div className="w-[45%] flex flex-col flex-wrap gap-4">
-          <div className="phone:w-[50%] flex flex-col items-start gap-2">
-            <div className="w-[200px] phone:w-[100%] flex justify-between items-center">
+          <div className="sm:w-[50%] flex flex-col items-start gap-2">
+            <div className="w-[200px] sm:w-[100%] flex justify-between items-center">
               <div className="flex gap-2 items-center">
                 <div>Year Now</div> <BsChevronBarDown />
               </div>
@@ -137,7 +137,7 @@ const YearlyStatistics = ({ cases }) => {
               onChange={(e) => {
                 setYear(e.target.value);
               }}
-              className="phone:w-[100%] px-3 py-2 w-[200px] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px]"
+              className="sm:w-[100%] px-3 py-2 w-[200px] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px]"
             >
               {years.map((year) => (
                 <option key={year} value={year}>
@@ -147,7 +147,7 @@ const YearlyStatistics = ({ cases }) => {
             </select>
           </div>
           <div className="flex justify-start flex-wrap gap-2 w-[100%]">
-            <div className="p-4 w-[206px] h-[180px] rounded-[12px] relative overflow-hidden bg-[#007bff] flex justify-start items-start text-[white]">
+            <div className="p-4 w-[206px] h-[180px] rounded-[12px] relative overflow-hidden bg-[#006bff] flex justify-start items-start text-[white]">
               <div className="text-[20px]">Total</div>
               <div className="absolute bottom-[-10px] right-[16px] text-[64px] font-bold z-30">
                 {totalCases?.length}
@@ -156,7 +156,7 @@ const YearlyStatistics = ({ cases }) => {
                 <div className="w-[120px] h-[120px] rounded-[50%] bg-blue-300"></div>
               </div>
             </div>
-            <div className="p-4 w-[206px] h-[180px] border-[1px] border-blue-300 rounded-[12px] relative overflow-hidden bg-white text-[#007bff]">
+            <div className="p-4 w-[206px] h-[180px] border-[1px] border-blue-300 rounded-[12px] relative overflow-hidden bg-white text-[#006bff]">
               <div className="text-[20px]">Minor</div>
               <div className="absolute bottom-[-10px] right-[16px] text-[64px] font-bold z-30">
                 {minorCases?.length}
@@ -216,8 +216,8 @@ const YearlyStatistics = ({ cases }) => {
           </div>
         </div>
         <div className="w-[45%] flex flex-col gap-4">
-          <div className="phone:w-[50%] flex flex-col items-end gap-2">
-            <div className="w-[200px] phone:w-[100%] flex justify-between items-center">
+          <div className="sm:w-[50%] flex flex-col items-end gap-2">
+            <div className="w-[200px] sm:w-[100%] flex justify-between items-center">
               <div className="flex gap-2 items-center">
                 <div>Past Year</div> <BsChevronBarDown />
               </div>
@@ -228,7 +228,7 @@ const YearlyStatistics = ({ cases }) => {
               onChange={(e) => {
                 setOtherYear(e.target.value);
               }}
-              className="phone:w-[100%] px-3 py-2 w-[200px] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
+              className="sm:w-[100%] px-3 py-2 w-[200px] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
             >
               {years.map((y) => (
                 <option key={y} value={y}>
@@ -238,7 +238,7 @@ const YearlyStatistics = ({ cases }) => {
             </select>
           </div>
           <div className="flex justify-end flex-wrap gap-2 w-[100%]">
-            <div className="p-4 w-[206px] h-[180px] rounded-[12px] relative overflow-hidden bg-[#007bff] flex justify-start items-start text-[white]">
+            <div className="p-4 w-[206px] h-[180px] rounded-[12px] relative overflow-hidden bg-[#006bff] flex justify-start items-start text-[white]">
               <div className="text-[20px]">Total</div>
               <div className="absolute bottom-[-10px] right-[16px] text-[64px] font-bold z-30">
                 {totalOtherYearCases?.length}
@@ -247,7 +247,7 @@ const YearlyStatistics = ({ cases }) => {
                 <div className="w-[120px] h-[120px] rounded-[50%] bg-blue-300"></div>
               </div>
             </div>
-            <div className="p-4 w-[206px] h-[180px] border-[1px] border-blue-300 rounded-[12px] relative overflow-hidden bg-white text-[#007bff]">
+            <div className="p-4 w-[206px] h-[180px] border-[1px] border-blue-300 rounded-[12px] relative overflow-hidden bg-white text-[#006bff]">
               <div className="text-[20px]">Minor</div>
               <div className="absolute bottom-[-10px] right-[16px] text-[64px] font-bold z-30">
                 {minorOtherYearCases?.length}

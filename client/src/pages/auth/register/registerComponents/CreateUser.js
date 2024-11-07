@@ -1,33 +1,33 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { createSelector } from "reselect";
-import Modal from "@mui/material/Modal";
-import { FaPlus } from "react-icons/fa6";
-import { styled } from "@mui/system";
-import { connect } from "react-redux";
-import { getActions } from "../../../../store/actions/AuthActions";
-import CreateUserFormModal from "./CreateUserFormModal";
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { createSelector } from 'reselect';
+import Modal from '@mui/material/Modal';
+import { FaPlus } from 'react-icons/fa6';
+import { styled } from '@mui/system';
+import { connect } from 'react-redux';
+import { getActions } from '../../../../store/actions/AuthActions';
+import CreateUserFormModal from './CreateUserFormModal';
 
-const ModalBox = styled("div")({
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  width: "44%",
-  borderRadius: "12px",
-  transform: "translate(-50%, -50%)",
-  background: "white",
-  border: "none",
-  outline: "none",
+const ModalBox = styled('div')({
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  width: '44%',
+  borderRadius: '12px',
+  transform: 'translate(-50%, -50%)',
+  background: 'white',
+  border: 'none',
+  outline: 'none',
 
-  "&:focus": {
-    border: "none",
+  '&:focus': {
+    border: 'none',
   },
 
-  "@media (max-width: 767px)": {
-    width: "100%",
-    height: "100%",
-    borderRadius: "0px",
-    border: "none",
+  '@media (max-width: 767px)': {
+    width: '100%',
+    height: '100%',
+    borderRadius: '0px',
+    border: 'none',
   },
 });
 
@@ -35,23 +35,23 @@ const selectAuth = (state) => state.auth;
 const authSelector = createSelector([selectAuth], (auth) => auth);
 
 const initialState = {
-  userName: "",
-  firstName: "",
-  surName: "",
-  email: "",
-  password: "",
-  roles: ["Student", "Instructor", "Administrator"],
-  role: "",
-  contactNo: "",
+  userName: '',
+  firstName: '',
+  surName: '',
+  email: '',
+  password: '',
+  roles: ['Student', 'Instructor', 'Administrator'],
+  role: '',
+  contactNo: '',
 };
 
 const errorsInitialState = {
-  userName: "",
-  firstName: "",
-  surName: "",
-  email: "",
-  password: "",
-  contactNo: "",
+  userName: '',
+  firstName: '',
+  surName: '',
+  email: '',
+  password: '',
+  contactNo: '',
 };
 
 const CreateUser = ({ register, getUsers, allowedRoles }) => {
@@ -85,7 +85,7 @@ const CreateUser = ({ register, getUsers, allowedRoles }) => {
       handleCloseModal();
       getUsers();
     } catch (error) {
-      console.error("Error while registering user:", error);
+      console.error('Error while registering user:', error);
     }
   };
 
@@ -99,61 +99,61 @@ const CreateUser = ({ register, getUsers, allowedRoles }) => {
 
     let formattedValue = value;
 
-    if (name === "firstName" || name === "surName") {
+    if (name === 'firstName' || name === 'surName') {
       formattedValue =
         value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
     }
 
     setValues({ ...values, [name]: formattedValue });
 
-    if (name === "firstName") {
+    if (name === 'firstName') {
       if (formattedValue.length < 3) {
-        newErrors[name] = "First name must be at least 3 characters long.";
+        newErrors[name] = 'First name must be at least 3 characters long.';
       } else if (formattedValue.length > 48) {
-        newErrors[name] = "First name must be at most 48 characters long.";
+        newErrors[name] = 'First name must be at most 48 characters long.';
       } else {
-        newErrors[name] = "";
+        newErrors[name] = '';
       }
-    } else if (name === "surName") {
+    } else if (name === 'surName') {
       if (formattedValue.length < 3) {
-        newErrors[name] = "Surname must be at least 3 characters long.";
+        newErrors[name] = 'Surname must be at least 3 characters long.';
       } else if (formattedValue.length > 48) {
-        newErrors[name] = "Surname must be at most 48 characters long.";
+        newErrors[name] = 'Surname must be at most 48 characters long.';
       } else {
-        newErrors[name] = "";
+        newErrors[name] = '';
       }
     } else {
-      if (name === "userName") {
+      if (name === 'userName') {
         if (value.length < 3) {
-          newErrors[name] = "Username must be at least 3 characters long.";
+          newErrors[name] = 'Username must be at least 3 characters long.';
         } else if (value.length > 48) {
-          newErrors[name] = "Username must be at most 48 characters long.";
+          newErrors[name] = 'Username must be at most 48 characters long.';
         } else {
-          newErrors[name] = "";
+          newErrors[name] = '';
         }
-      } else if (name === "email") {
+      } else if (name === 'email') {
         if (value.length < 3) {
-          newErrors[name] = "Email must be at least 3 characters long.";
+          newErrors[name] = 'Email must be at least 3 characters long.';
         } else if (value.length > 48) {
-          newErrors[name] = "Email must be at most 48 characters long.";
+          newErrors[name] = 'Email must be at most 48 characters long.';
         } else {
-          newErrors[name] = "";
+          newErrors[name] = '';
         }
-      } else if (name === "password") {
+      } else if (name === 'password') {
         if (value.length < 3) {
-          newErrors[name] = "Password must be at least 3 characters long.";
+          newErrors[name] = 'Password must be at least 3 characters long.';
         } else if (value.length > 48) {
-          newErrors[name] = "Password must be at most 48 characters long.";
+          newErrors[name] = 'Password must be at most 48 characters long.';
         } else {
-          newErrors[name] = "";
+          newErrors[name] = '';
         }
-      } else if (name === "contactNo") {
+      } else if (name === 'contactNo') {
         if (value.length < 3) {
-          newErrors[name] = "Contact No. must be at least 3 characters long.";
+          newErrors[name] = 'Contact No. must be at least 3 characters long.';
         } else if (value.length > 48) {
-          newErrors[name] = "Contact No. must be at most 48 characters long.";
+          newErrors[name] = 'Contact No. must be at most 48 characters long.';
         } else {
-          newErrors[name] = "";
+          newErrors[name] = '';
         }
       }
     }
@@ -176,12 +176,12 @@ const CreateUser = ({ register, getUsers, allowedRoles }) => {
       <div className="w-100 text-[14px] text-[#404040] pb-6">
         Office of Student Affairs / Users
       </div>
-      <div className="w-100 text-[26px] text-[#077bff] font-bold pb-6 flex justify-between items-center">
+      <div className="w-100 text-[26px] text-[#006bff] font-bold pb-6 flex justify-between items-center">
         <div>Users List</div>
         {allowedRoles?.find((ar) => auth?.userDetails?.role?.includes(ar)) ? (
           <div
             onClick={handleOpenModal}
-            className="cursor-pointer py-3 px-4 bg-gradient-to-br from-[#007bff] via-[#079bff] to-[#007bff] text-[white] text-[16px] flex gap-2 items-center rounded-[32px]"
+            className="cursor-pointer py-3 px-4 bg-gradient-to-br from-[#006bff] via-[#079bff] to-[#006bff] text-[white] text-[16px] flex gap-2 items-center rounded-[32px]"
           >
             <FaPlus />
             <div>Add User</div>
@@ -194,7 +194,7 @@ const CreateUser = ({ register, getUsers, allowedRoles }) => {
         )}
       </div>
       <Modal
-        sx={{ border: "none", outline: "none" }}
+        sx={{ border: 'none', outline: 'none' }}
         open={showCreateUserModal}
         onClose={handleCloseModal}
         aria-labelledby="parent-modal-title"

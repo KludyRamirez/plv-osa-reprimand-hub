@@ -109,7 +109,7 @@ const Forgot = ({ auth, toast }) => {
                   sx={{
                     fontSize: '22px',
                     backgroundImage:
-                      'radial-gradient(100% 100% at 100% 0, #077bff 0, #122c8e 100%)',
+                      'radial-gradient(100% 100% at 100% 0, #006bff 0, #122c8e 100%)',
                   }}
                 >
                   Office of Student Affairs
@@ -118,12 +118,12 @@ const Forgot = ({ auth, toast }) => {
             </div>
             {/* <div className="flex justify-center items-center gap-3">
               <Link to="/">
-                <div className="flex items-center gap-2 hover:border-[1px] text-base text-[#077bff] cursor-pointer bg-white border-[1px] border-[#077bff] px-3 py-2 rounded-[6px] hover:bg-[#007bff] hover:text-white">
+                <div className="flex items-center gap-2 hover:border-[1px] text-base text-[#006bff] cursor-pointer bg-white border-[1px] border-[#006bff] px-3 py-2 rounded-[6px] hover:bg-[#006bff] hover:text-white">
                   Sign in
                 </div>
               </Link>
               <Link to="/">
-                <div className="flex items-center gap-2 hover:border-[1px] text-base text-[#077bff] cursor-pointer bg-white border-[1px] border-[#077bff] px-3 py-2 rounded-[6px] hover:bg-[#007bff] hover:text-white">
+                <div className="flex items-center gap-2 hover:border-[1px] text-base text-[#006bff] cursor-pointer bg-white border-[1px] border-[#006bff] px-3 py-2 rounded-[6px] hover:bg-[#006bff] hover:text-white">
                   <span>Announcements</span>
                   <BsMegaphone />
                 </div>

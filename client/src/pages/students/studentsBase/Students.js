@@ -84,8 +84,8 @@ const Students = ({ toast, allowedRoles }) => {
     <>
       <div className="w-full flex">
         <Sidebar />
-        <div className="w-[calc(100%-240px)] phone:w-full flex justify-start bg-[#007bff]">
-          <div className="w-full bg-[#fefefe] px-8 phone:px-4 pt-8">
+        <div className="w-[calc(100%-240px)] sm:w-full flex justify-start bg-[#006bff]">
+          <div className="w-full bg-[#fefefe] px-8 sm:px-4 pt-8">
             <CreateStudent
               toast={toast}
               getStudents={getStudents}

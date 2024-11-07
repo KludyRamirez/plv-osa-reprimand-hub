@@ -56,7 +56,7 @@ const LoginInputs = ({
           placeholder="Enter username"
           className={`py-3 px-6  border-[1px] rounded-[24px] w-[100%] bg-white ${
             userNameError === '' ? '' : 'border-[red]'
-          } focus:outline-none  focus:border-[#007bff]`}
+          } focus:outline-none  focus:border-[#006bff]`}
         />
         {userNameError && <p className="text-red-500 mt-1">{userNameError}</p>}
       </div>
@@ -70,7 +70,7 @@ const LoginInputs = ({
           placeholder="Enter password"
           className={`py-3 px-6 border-[1px] rounded-[24px] w-[100%] bg-white ${
             passwordError === '' ? '' : 'border-[red]'
-          } focus:outline-none  focus:border-[#007bff]`}
+          } focus:outline-none  focus:border-[#006bff]`}
         />
         {passwordError && <p className="text-red-500 mt-1">{passwordError}</p>}
       </div>
@@ -87,7 +87,7 @@ const LoginInputs = ({
           <button
             type="button"
             onClick={handleLogin}
-            className="p-3 border-[1px] border-[#007bff] rounded-[48px] w-[100%] bg-[#007bff] text-white"
+            className="p-3 border-[1px] border-[#006bff] rounded-[48px] w-[100%] bg-[#006bff] text-white"
           >
             Sign In
           </button>

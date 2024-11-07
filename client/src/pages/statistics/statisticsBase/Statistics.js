@@ -62,8 +62,8 @@ const Statistics = ({ toast }) => {
     <>
       <div className="flex justify-start">
         <Sidebar />
-        <div className="w-full flex justify-start bg-[#007bff]">
-          <div className="w-full bg-[#fefefe] p-8 phone:px-4">
+        <div className="w-full flex justify-start bg-[#006bff]">
+          <div className="w-full bg-[#fefefe] p-8 sm:px-4">
             <StatisticsTable
               toast={toast}
               getCases={getCases}

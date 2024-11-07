@@ -49,10 +49,10 @@ body {
   width: 64px;
   height: 64px;
   margin: 8px;
-  border: 8px solid #007bff;
+  border: 8px solid #006bff;
   border-radius: 50%;
   animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-  border-color: #007bff transparent transparent transparent;
+  border-color: #006bff transparent transparent transparent;
 }
 
 .lds-ring div:nth-child(1) {
@@ -71,4 +71,21 @@ body {
   100% {
     transform: rotate(360deg);
   }
+}
+
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-wrapper {
+  width: 100%;
+  height: 100%;
+  padding-bottom: 20px;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  object-fit: cover;
 }

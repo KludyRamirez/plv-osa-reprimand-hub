@@ -7,7 +7,7 @@ const LoginFooter = () => {
   return (
     <div>
       <div className="w-[100%] flex flex-col fixed bottom-0 items-center z-30">
-        <div className=" w-[96%] h-[100px] px-8 py-6 flex justify-between items-start bg-[#007bff] rounded-tl-[24px] rounded-tr-[24px]">
+        <div className=" w-[96%] h-[100px] px-8 py-6 flex justify-between items-start bg-[#006bff] rounded-tl-[24px] rounded-tr-[24px]">
           <div className="flex flex-col gap-3">
             <div className="flex justify-start items-start text-[16px] text-white gap-4">
               <img
@@ -48,7 +48,7 @@ const LoginFooter = () => {
         </div>
         {/* <div className="w-[96%] py-4 px-8 border-l-[1px] border-r-[1px] border-b-[1px] flex justify-between items-center bg-white relative">
           <div className="flex flex-col gap-3">
-            <div className="flex justify-start items-center text-[16px] text-[#007bff] gap-2">
+            <div className="flex justify-start items-center text-[16px] text-[#006bff] gap-2">
               <FaRegCopyright />
               <span>
                 Copyright 2024 Kludy Ramirez, Kevin Clyde Fuerzas - All Rights

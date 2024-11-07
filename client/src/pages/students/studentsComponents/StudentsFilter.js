@@ -116,9 +116,9 @@ const StudentsFilter = ({
         </div>
 
         <div className=" w-100 flex justify-start bg-gray-100 flex p-4 rounded-bl-[10px] rounded-br-[10px]">
-          <div className="w-100 flex flex-wrap justify-start items-center gap-4 phone:gap-2">
-            <div className="phone:w-[49%] flex flex-col items-start gap-2">
-              <div className="pl-2 w-[210px] phone:w-[100%] flex justify-between items-center">
+          <div className="w-100 flex flex-wrap justify-start items-center gap-4 sm:gap-2">
+            <div className="sm:w-[49%] flex flex-col items-start gap-2">
+              <div className="pl-2 w-[210px] sm:w-[100%] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
                   <div>Status</div>
                 </div>
@@ -126,7 +126,7 @@ const StudentsFilter = ({
               </div>
               <select
                 onChange={(e) => setSelectedStatus(e.target.value)}
-                className="px-3 py-2 w-[210px] phone:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
+                className="px-3 py-2 w-[210px] sm:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
               >
                 <option value="All">All</option>
                 <option value="Enrolled">Enrolled</option>
@@ -134,8 +134,8 @@ const StudentsFilter = ({
               </select>
             </div>
 
-            <div className="phone:w-[48.8%] flex flex-col items-start gap-2">
-              <div className="pl-2 w-[210px] phone:w-[100%] flex justify-between items-center">
+            <div className="sm:w-[48.8%] flex flex-col items-start gap-2">
+              <div className="pl-2 w-[210px] sm:w-[100%] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
                   <div>Sex</div>
                 </div>
@@ -143,7 +143,7 @@ const StudentsFilter = ({
               </div>
               <select
                 onChange={(e) => setSex(e.target.value)}
-                className="px-3 py-2 w-[210px] phone:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
+                className="px-3 py-2 w-[210px] sm:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
               >
                 <option value="All">All</option>
                 <option value="Male">Male</option>
@@ -151,8 +151,8 @@ const StudentsFilter = ({
               </select>
             </div>
 
-            <div className="phone:w-[49%] flex flex-col items-start gap-2">
-              <div className="pl-1 w-[210px] phone:w-[100%] flex justify-between items-center">
+            <div className="sm:w-[49%] flex flex-col items-start gap-2">
+              <div className="pl-1 w-[210px] sm:w-[100%] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
                   <div>Year</div>
                 </div>
@@ -160,7 +160,7 @@ const StudentsFilter = ({
               </div>
               <select
                 onChange={(e) => setYear(e.target.value)}
-                className="px-3 py-2 w-[210px] phone:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px]"
+                className="px-3 py-2 w-[210px] sm:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px]"
               >
                 <option value="All">All</option>
                 {schoolYearArray.map((option) => (
@@ -171,8 +171,8 @@ const StudentsFilter = ({
               </select>
             </div>
 
-            <div className="phone:w-[48.8%] flex flex-col items-start gap-2">
-              <div className="pl-1 w-[210px] phone:w-[100%] flex justify-between items-center">
+            <div className="sm:w-[48.8%] flex flex-col items-start gap-2">
+              <div className="pl-1 w-[210px] sm:w-[100%] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
                   <div>Section</div>
                 </div>
@@ -180,7 +180,7 @@ const StudentsFilter = ({
               </div>
               <select
                 onChange={(e) => setSection(e.target.value)}
-                className="px-3 py-2 w-[210px] phone:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px]"
+                className="px-3 py-2 w-[210px] sm:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px]"
               >
                 <option value="All">All</option>
                 {sectionArray.map((option) => (
@@ -190,8 +190,8 @@ const StudentsFilter = ({
                 ))}
               </select>
             </div>
-            <div className="phone:w-[49%] flex flex-col items-start gap-2">
-              <div className="pl-1 w-[210px] phone:w-[100%] flex justify-between items-center">
+            <div className="sm:w-[49%] flex flex-col items-start gap-2">
+              <div className="pl-1 w-[210px] sm:w-[100%] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
                   <div>College</div>
                 </div>
@@ -199,7 +199,7 @@ const StudentsFilter = ({
               </div>
               <select
                 onChange={(e) => setCollege(e.target.value)}
-                className="px-3 py-2 w-[210px] phone:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px]"
+                className="px-3 py-2 w-[210px] sm:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px]"
               >
                 <option value="All">All</option>
                 {uniqueColleges?.map((c) => (
@@ -209,8 +209,8 @@ const StudentsFilter = ({
                 ))}
               </select>
             </div>
-            <div className="phone:w-[48.8%] flex flex-col items-start gap-2">
-              <div className="pl-1 w-[210px] phone:w-[100%] flex justify-between items-center">
+            <div className="sm:w-[48.8%] flex flex-col items-start gap-2">
+              <div className="pl-1 w-[210px] sm:w-[100%] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
                   <div>Department</div>
                 </div>
@@ -218,7 +218,7 @@ const StudentsFilter = ({
               </div>
               <select
                 onChange={(e) => setDepartment(e.target.value)}
-                className="px-3 py-2 w-[210px] phone:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px]"
+                className="px-3 py-2 w-[210px] sm:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px]"
               >
                 <option value="All">All</option>
                 {college === 'All' ? (

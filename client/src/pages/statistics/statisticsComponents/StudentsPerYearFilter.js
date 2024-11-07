@@ -153,7 +153,7 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
   return (
     <>
       <div className="w-100 mt-8">
-        <span className="text-[24px] text-[#007bff] font-semibold">
+        <span className="text-[24px] text-[#006bff] font-semibold">
           Pie Charts
         </span>
       </div>
@@ -199,9 +199,9 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
         </div>
 
         <div className="w-100 flex justify-start to-white p-4">
-          <div className="w-100 flex flex-wrap justify-start items-center gap-4 phone:gap-2">
-            <div className="phone:w-[50%] flex flex-col items-start gap-2">
-              <div className="pl-2 w-[200px] phone:w-[100%] flex justify-between items-center">
+          <div className="w-100 flex flex-wrap justify-start items-center gap-4 sm:gap-2">
+            <div className="sm:w-[50%] flex flex-col items-start gap-2">
+              <div className="pl-2 w-[200px] sm:w-[100%] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
                   <div>Violation</div>
                 </div>
@@ -209,7 +209,7 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
               </div>
               <select
                 onChange={(e) => setReportedViolation(e.target.value)}
-                className="cursor-pointer px-3 py-2 w-[200px] phone:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none border-[1px] border-blue-200 focus:border-blue-300"
+                className="cursor-pointer px-3 py-2 w-[200px] sm:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none border-[1px] border-blue-200 focus:border-blue-300"
               >
                 <option value="All">All</option>
                 {activeMainFilter === 'All' ? (
@@ -280,8 +280,8 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
                 ) : null}
               </select>
             </div>
-            <div className="phone:w-[47.8%] flex flex-col items-start gap-2">
-              <div className="w-[200px] phone:w-[100%] flex justify-between items-center">
+            <div className="sm:w-[47.8%] flex flex-col items-start gap-2">
+              <div className="w-[200px] sm:w-[100%] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
                   <div>Status</div>
                 </div>
@@ -289,7 +289,7 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
               </div>
               <select
                 onChange={(e) => setSelectedStatus(e.target.value)}
-                className="cursor-pointer px-3 py-2 w-[200px] phone:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none border-[1px] border-blue-200 focus:border-blue-300"
+                className="cursor-pointer px-3 py-2 w-[200px] sm:w-[100%] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none border-[1px] border-blue-200 focus:border-blue-300"
               >
                 <option value="All">All</option>
                 <option value="Pending">Pending</option>
@@ -308,8 +308,8 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
               </select>
             </div>
 
-            <div className="phone:w-[50%] flex flex-col items-start gap-2">
-              <div className="w-[200px] phone:w-[100%] flex justify-between items-center">
+            <div className="sm:w-[50%] flex flex-col items-start gap-2">
+              <div className="w-[200px] sm:w-[100%] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
                   <div>Year</div>
                 </div>
@@ -320,7 +320,7 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
                 onChange={(e) => {
                   setDateOfIncident(e.target.value);
                 }}
-                className="cursor-pointer phone:w-[100%] px-3 py-2 w-[200px] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none border-[1px] border-blue-200 focus:border-blue-300"
+                className="cursor-pointer sm:w-[100%] px-3 py-2 w-[200px] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none border-[1px] border-blue-200 focus:border-blue-300"
               >
                 <option value="All">All</option>
                 {years.map((year) => (
@@ -331,8 +331,8 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
               </select>
             </div>
 
-            <div className="phone:w-[47.8%] flex flex-col items-start gap-2">
-              <div className="w-[200px] phone:w-[100%] flex justify-between items-center">
+            <div className="sm:w-[47.8%] flex flex-col items-start gap-2">
+              <div className="w-[200px] sm:w-[100%] flex justify-between items-center">
                 <div className="flex gap-2 items-center">
                   <div>Month</div>
                 </div>
@@ -343,7 +343,7 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
                 onChange={(e) => {
                   setMonthOfIncident(e.target.value);
                 }}
-                className="cursor-pointer phone:w-[100%] px-3 py-2 w-[200px] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none border-[1px] border-blue-200 focus:border-blue-300"
+                className="cursor-pointer sm:w-[100%] px-3 py-2 w-[200px] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none border-[1px] border-blue-200 focus:border-blue-300"
               >
                 <option value="All">All</option>
                 {months.map((month) => (
@@ -357,9 +357,9 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
         </div>
       </div>
 
-      <div className="w-[100%] flex phone:flex-wrap justify-start gap-1 rounded-tl-[8px]">
-        <div className="w-[50%] phone:w-[100%] relative flex flex-col bg-gradient-to-t from-white via-blue-100 to-white z-20 border-[1px] border-blue-200 rounded-tl-[6px] rounded-bl-[6px]">
-          <div className="p-4 z-20 text-[#007bff] text-[16px] rounded-tl-[10px] rounded-tr-[10px]">
+      <div className="w-[100%] flex sm:flex-wrap justify-start gap-1 rounded-tl-[8px]">
+        <div className="w-[50%] sm:w-[100%] relative flex flex-col bg-gradient-to-t from-white via-blue-100 to-white z-20 border-[1px] border-blue-200 rounded-tl-[6px] rounded-bl-[6px]">
+          <div className="p-4 z-20 text-[#006bff] text-[16px] rounded-tl-[10px] rounded-tr-[10px]">
             Cases Per Year Level
           </div>
           {combinedFilteredCases.length > 0 ? (
@@ -372,17 +372,17 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
             </>
           ) : (
             <div className="mt-[-20px] h-[600px] flex flex-col justify-center items-center gap-2">
-              <BsFolderX className="text-[48px] text-[#007bff]" />
-              <div className="text-[#007bff] text-[14px]">
+              <BsFolderX className="text-[48px] text-[#006bff]" />
+              <div className="text-[#006bff] text-[14px]">
                 No cases available
               </div>
             </div>
           )}
         </div>
-        <div className="w-[50%] phone:w-[100%] flex flex-col gap-1">
-          <div className="w-[100%] flex phone:flex-wrap gap-1">
-            <div className="w-[50%] phone:w-[100%] relative flex flex-col bg-gradient-to-t from-white via-blue-100 to-white z-20 border-[1px] border-blue-200">
-              <div className="p-4 z-20 text-[#007bff] text-[16px] rounded-tl-[10px] rounded-tr-[10px]">
+        <div className="w-[50%] sm:w-[100%] flex flex-col gap-1">
+          <div className="w-[100%] flex sm:flex-wrap gap-1">
+            <div className="w-[50%] sm:w-[100%] relative flex flex-col bg-gradient-to-t from-white via-blue-100 to-white z-20 border-[1px] border-blue-200">
+              <div className="p-4 z-20 text-[#006bff] text-[16px] rounded-tl-[10px] rounded-tr-[10px]">
                 Cases Per College
               </div>
               {combinedFilteredCases.length > 0 ? (
@@ -395,15 +395,15 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
                 </>
               ) : (
                 <div className="mt-[-20px] h-[300px] flex flex-col justify-center items-center gap-2">
-                  <BsFolderX className="text-[48px] text-[#007bff]" />
-                  <div className="text-[#007bff] text-[14px]">
+                  <BsFolderX className="text-[48px] text-[#006bff]" />
+                  <div className="text-[#006bff] text-[14px]">
                     No cases available
                   </div>
                 </div>
               )}
             </div>
-            <div className="w-[50%] phone:w-[100%] relative flex flex-col bg-gradient-to-t from-white via-blue-100 to-white z-20 border-[1px] border-blue-200 rounded-tr-[6px]">
-              <div className="p-4 z-20 text-[#007bff] text-[16px] rounded-tl-[10px] rounded-tr-[10px]">
+            <div className="w-[50%] sm:w-[100%] relative flex flex-col bg-gradient-to-t from-white via-blue-100 to-white z-20 border-[1px] border-blue-200 rounded-tr-[6px]">
+              <div className="p-4 z-20 text-[#006bff] text-[16px] rounded-tl-[10px] rounded-tr-[10px]">
                 Cases Per College
               </div>
               {combinedFilteredCases.length > 0 ? (
@@ -416,17 +416,17 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
                 </>
               ) : (
                 <div className="mt-[-20px] h-[300px] flex flex-col justify-center items-center gap-2">
-                  <BsFolderX className="text-[48px] text-[#007bff]" />
-                  <div className="text-[#007bff] text-[14px]">
+                  <BsFolderX className="text-[48px] text-[#006bff]" />
+                  <div className="text-[#006bff] text-[14px]">
                     No cases available
                   </div>
                 </div>
               )}
             </div>
           </div>
-          <div className="w-[100%] phone:flex-wrap flex gap-1">
-            <div className="w-[50%] phone:w-[100%] relative flex flex-col bg-gradient-to-t from-white via-blue-100 to-white z-20 border-[1px] border-blue-200">
-              <div className="p-4 z-20 text-[#007bff] text-[16px] rounded-tl-[10px] rounded-tr-[10px]">
+          <div className="w-[100%] sm:flex-wrap flex gap-1">
+            <div className="w-[50%] sm:w-[100%] relative flex flex-col bg-gradient-to-t from-white via-blue-100 to-white z-20 border-[1px] border-blue-200">
+              <div className="p-4 z-20 text-[#006bff] text-[16px] rounded-tl-[10px] rounded-tr-[10px]">
                 Cases Per College
               </div>
               {combinedFilteredCases.length > 0 ? (
@@ -439,15 +439,15 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
                 </>
               ) : (
                 <div className="mt-[-20px] h-[300px] flex flex-col justify-center items-center gap-2">
-                  <BsFolderX className="text-[48px] text-[#007bff]" />
-                  <div className="text-[#007bff] text-[14px]">
+                  <BsFolderX className="text-[48px] text-[#006bff]" />
+                  <div className="text-[#006bff] text-[14px]">
                     No cases available
                   </div>
                 </div>
               )}
             </div>
-            <div className="w-[50%] phone:w-[100%] relative flex flex-col bg-gradient-to-t from-white via-blue-100 to-white z-20 border-[1px] border-blue-200 rounded-br-[6px]">
-              <div className="p-4 z-20 text-[#007bff] text-[16px] rounded-tl-[10px] rounded-tr-[10px]">
+            <div className="w-[50%] sm:w-[100%] relative flex flex-col bg-gradient-to-t from-white via-blue-100 to-white z-20 border-[1px] border-blue-200 rounded-br-[6px]">
+              <div className="p-4 z-20 text-[#006bff] text-[16px] rounded-tl-[10px] rounded-tr-[10px]">
                 Cases Per College
               </div>
               {combinedFilteredCases.length > 0 ? (
@@ -460,8 +460,8 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
                 </>
               ) : (
                 <div className="mt-[-20px] h-[300px] flex flex-col justify-center items-center gap-2">
-                  <BsFolderX className="text-[48px] text-[#007bff]" />
-                  <div className="text-[#007bff] text-[14px]">
+                  <BsFolderX className="text-[48px] text-[#006bff]" />
+                  <div className="text-[#006bff] text-[14px]">
                     No cases available
                   </div>
                 </div>

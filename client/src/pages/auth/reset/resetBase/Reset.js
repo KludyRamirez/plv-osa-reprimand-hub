@@ -1,34 +1,34 @@
-import React, { useState } from "react";
-import axios from "axios";
-import osalogo from "../../../../images/osalogo.png";
-import { BsEnvelopeAt } from "react-icons/bs";
-import { styled } from "@mui/material/styles";
-import { useNavigate } from "react-router-dom";
-import ResetForm from "../resetComponents/ResetForm";
-import { useParams } from "react-router-dom";
-import LoginFooter from "../../login/loginComponents/LoginFooter";
+import React, { useState } from 'react';
+import axios from 'axios';
+import osalogo from '../../../../images/osalogo.png';
+import { BsEnvelopeAt } from 'react-icons/bs';
+import { styled } from '@mui/material/styles';
+import { useNavigate } from 'react-router-dom';
+import ResetForm from '../resetComponents/ResetForm';
+import { useParams } from 'react-router-dom';
+import LoginFooter from '../../login/loginComponents/LoginFooter';
 
-const FormTitle = styled("div")({
+const FormTitle = styled('div')({
   backgroundImage:
-    "radial-gradient(100% 100% at 100% 0, #122c8e 0, #07bbff 100%)",
-  backgroundSize: "100%",
-  backgroundRepeat: "repeat",
-  WebkitBackgroundClip: "text",
-  WebkitTextFillColor: "transparent",
-  MozBackgroundClip: "text",
-  MozTextFillColor: "transparent",
-  fontSize: "120px",
-  fontWeight: "600",
-  lineHeight: "134px",
-  zIndex: "2",
+    'radial-gradient(100% 100% at 100% 0, #122c8e 0, #07bbff 100%)',
+  backgroundSize: '100%',
+  backgroundRepeat: 'repeat',
+  WebkitBackgroundClip: 'text',
+  WebkitTextFillColor: 'transparent',
+  MozBackgroundClip: 'text',
+  MozTextFillColor: 'transparent',
+  fontSize: '120px',
+  fontWeight: '600',
+  lineHeight: '134px',
+  zIndex: '2',
 });
 
 const Reset = ({ auth, toast }) => {
   const [status, setStatus] = useState(null);
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [passwordError, setPasswordError] = useState("");
-  const [confirmPasswordError, setConfirmPasswordError] = useState("");
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [confirmPasswordError, setConfirmPasswordError] = useState('');
   const [countdown, setCountdown] = useState(10);
 
   const navigate = useNavigate();
@@ -47,7 +47,7 @@ const Reset = ({ auth, toast }) => {
         }
       );
       if (res?.status === 200) {
-        setStatus("success");
+        setStatus('success');
         toast.success(res.data.message);
 
         let timer;
@@ -64,17 +64,17 @@ const Reset = ({ auth, toast }) => {
         }, 1000);
 
         timer = setTimeout(() => {
-          navigate("/");
+          navigate('/');
         }, 10000);
       }
     } catch (error) {
       if (error?.response?.status === 400) {
-        setStatus("error");
+        setStatus('error');
         toast.error(error?.response?.data.message);
       } else {
         toast.error(
           error?.response?.data.message ||
-            "Something went wrong. Please try again"
+            'Something went wrong. Please try again'
         );
       }
     }
@@ -82,19 +82,19 @@ const Reset = ({ auth, toast }) => {
 
   const validatePassword = (value) => {
     if (value.length < 6) {
-      setPasswordError("Password must be at least 6 characters long.");
+      setPasswordError('Password must be at least 6 characters long.');
     } else if (value.length > 48) {
-      setPasswordError("Password must be at most 48 characters long.");
+      setPasswordError('Password must be at most 48 characters long.');
     } else {
-      setPasswordError("");
+      setPasswordError('');
     }
   };
 
   const validateConfirmPassword = (value) => {
     if (password !== value) {
-      setConfirmPasswordError("Password must be same.");
+      setConfirmPasswordError('Password must be same.');
     } else {
-      setConfirmPasswordError("");
+      setConfirmPasswordError('');
     }
   };
 
@@ -120,9 +120,9 @@ const Reset = ({ auth, toast }) => {
                 <img src={osalogo} alt="" className="w-[60px] h-[60px]" />
                 <FormTitle
                   sx={{
-                    fontSize: "22px",
+                    fontSize: '22px',
                     backgroundImage:
-                      "radial-gradient(100% 100% at 100% 0, #077bff 0, #122c8e 100%)",
+                      'radial-gradient(100% 100% at 100% 0, #006bff 0, #122c8e 100%)',
                   }}
                 >
                   Office of Student Affairs
@@ -130,11 +130,11 @@ const Reset = ({ auth, toast }) => {
               </div>
             </div>
             {/* <div className="flex justify-center items-center gap-3">
-              <div className="flex items-center border-[1px] border-gray-100 gap-2 text-base text-[#077bff] cursor-pointer bg-[#f7f7f7] px-3 py-2 rounded-[6px]">
+              <div className="flex items-center border-[1px] border-gray-100 gap-2 text-base text-[#006bff] cursor-pointer bg-[#f7f7f7] px-3 py-2 rounded-[6px]">
                 Sign in
               </div>
 
-              <div className="flex items-center border-[1px] border-gray-100 gap-2 text-base text-[#077bff] cursor-pointer bg-[#f7f7f7] px-3 py-2 rounded-[6px] ">
+              <div className="flex items-center border-[1px] border-gray-100 gap-2 text-base text-[#006bff] cursor-pointer bg-[#f7f7f7] px-3 py-2 rounded-[6px] ">
                 <span>Announcements</span>
                 <BsMegaphone />
               </div>
