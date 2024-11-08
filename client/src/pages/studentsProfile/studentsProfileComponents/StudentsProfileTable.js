@@ -16,11 +16,19 @@ import { Radio, RadioGroup, FormControlLabel } from '@mui/material';
 import {
   BsBank,
   BsBuildings,
+  BsCardText,
+  BsChatSquare,
+  BsChatSquareDots,
+  BsCheck2Circle,
+  BsChevronUp,
   BsEnvelope,
   BsEnvelopeAt,
+  BsEnvelopeOpen,
+  BsEnvelopePaper,
   BsEye,
   BsEyeFill,
   BsGenderMale,
+  BsHash,
   BsKey,
   BsKeyFill,
   BsPass,
@@ -467,7 +475,7 @@ const StudentsProfileTable = ({
           />
         </ModalBox>
       </Modal>
-      <div className="w-[100%] flex flex-col items-center xl:justify-start gap-12 xl:gap-8">
+      <div className="w-[100%] flex flex-col items-center xl:justify-start gap-2 xl:gap-8">
         {/* <div className="xl:w-[100%] flex flex-col gap-4">
           <div className="xl:overflow-x-scroll">
             <div className="w-[850px] h-[325px] flex flex-col">
@@ -655,7 +663,7 @@ const StudentsProfileTable = ({
         </div> */}
 
         <div className="w-[100%] h-[100%] rounded-br-[12px] rounded-tl-[12px] flex xl:flex-wrap gap-1 xl:gap-8 px-8 xl:px-0">
-          <div className="w-[50%] xl:w-[100%] flex flex-col gap-2 xl:border-none xl:p-0">
+          <div className="w-[50%] xl:w-[100%] flex flex-col gap-2 px-4 xl:px-0 pb-4">
             <div className="text-[#707070] text-[18px]">Personal Details</div>
             <div className="w-[100%] flex justify-between items-center gap-4 mb-6">
               <div className="flex justify-center items-center text-[#707070] text-[42px] font-bold leading-tight">
@@ -663,58 +671,144 @@ const StudentsProfileTable = ({
               </div>
             </div>
             <div className="w-[100%] flex justify-between items-center gap-4 mb-6">
-              <div className="px-3 flex justify-center items-center gap-2 py-1 bg-green-600 text-[#f0f9ff] text-[14px] rounded-[4px] font-bold border-[1px] border-green-600">
+              <div className="px-3 flex justify-center items-center gap-2 py-1 bg-green-600 text-white text-[14px] rounded-[4px] font-bold border-[1px] border-green-600">
                 {student.statusOfStudent}
               </div>
             </div>
-            <div className="w-[100%] flex items-center gap-1">
-              <div className="flex justify-center items-center gap-2 py-1 text-[#707070] text-[16px] rounded-[4px] font-bold">
-                <BsPass size={30} /> {student.studentNo}
+            <div className="w-[100%] flex items-center gap-4">
+              <div className="flex justify-center items-center gap-2 text-[#707070] text-[16px] font-bold">
+                <div className="p-2 border-[1px] border-gray-400 rounded-[50%]">
+                  <BsPass size={24} />
+                </div>
+                {student.studentNo}
+              </div>
+              <div className="flex justify-center items-center gap-2 text-[#707070] text-[16px] rounded-[4px] font-bold">
+                <div className="p-2 border-[1px] border-gray-400 rounded-[50%]">
+                  <BsGenderMale size={24} />
+                </div>
+                {student?.sex}
               </div>
             </div>
             <div className="w-[100%] flex items-center gap-4">
-              <div className="flex justify-center items-center gap-2 py-1 text-[#707070] text-[16px] rounded-[4px] font-bold">
-                <BsBank size={30} /> {student.college}
+              <div className="flex justify-center items-center gap-2 text-[#707070] text-[16px] font-bold">
+                <div className="p-2 border-[1px] border-gray-400 rounded-[50%]">
+                  <BsBank size={24} />
+                </div>
+                {student.college}
               </div>
-              <div className="flex justify-center items-center gap-2 py-1 text-[#707070] text-[16px] rounded-[4px] font-bold">
-                <BsBuildings size={30} /> {student?.department?.slice(0, 4)}{' '}
-                {student.year}-{student.section}
+              <div className="flex justify-center items-center gap-2 text-[#707070] text-[16px] rounded-[4px] font-bold">
+                <div className="p-2 border-[1px] border-gray-400 rounded-[50%]">
+                  <BsBuildings size={24} />
+                </div>
+                {student?.department?.slice(0, 4)} {student.year}-
+                {student.section}
               </div>
             </div>
             <div className="w-[100%] flex items-center gap-4">
-              <div className="flex justify-center items-center gap-2 py-1 text-[#707070] text-[16px] rounded-[4px] font-bold">
-                <BsTelephone size={30} /> {student?.contactNo}
+              <div className="flex justify-center items-center gap-2 text-[#707070] text-[16px] rounded-[4px] font-bold">
+                <div className="p-2 border-[1px] border-gray-400 rounded-[50%]">
+                  <BsTelephone size={24} />
+                </div>
+                {student?.contactNo}
               </div>
-              <div className="flex justify-center items-center gap-2 py-1 text-[#707070] text-[16px] rounded-[4px] font-bold">
-                <BsTelephoneInbound size={30} /> {student?.guardianContactNo}
+              <div className="flex justify-center items-center gap-2 text-[#707070] text-[16px] rounded-[4px] font-bold">
+                <div className="p-2 border-[1px] border-gray-400 rounded-[50%]">
+                  <BsTelephone size={24} />
+                </div>
+                {student?.guardianContactNo}
               </div>
             </div>
             <div className="w-[100%] flex items-center gap-1">
-              <div className="flex justify-center items-center gap-2 py-1 text-[#707070] text-[16px] rounded-[4px] font-bold">
-                <BsEnvelopeAt size={30} /> {student?.email}
-              </div>
-            </div>
-            <div className="w-[100%] flex items-center gap-1">
-              <div className="flex justify-center items-center gap-2 py-1 text-[#707070] text-[16px] rounded-[4px] font-bold">
-                <BsGenderMale size={30} /> {student?.sex}
+              <div className="flex justify-center items-center gap-2 text-[#707070] text-[16px] rounded-[4px] font-bold">
+                <div className="p-2 border-[1px] border-gray-400 rounded-[50%]">
+                  <BsEnvelopePaper size={24} />
+                </div>
+                {student?.email}
               </div>
             </div>
           </div>
+          <div className="w-[50%] h-[100%] xl:w-[100%] py-2 px-4 xl:px-0 flex flex-col gap-4">
+            <div className="w-[100%] h-[100%] flex flex-col gap-2 p-4 border-[1px]">
+              <div className="text-[#707070] text-[16px]">Instructor's</div>
+              <div className="w-[100%] flex justify-between items-center gap-4">
+                <div className="flex justify-center items-center text-[#707070] text-[36px] font-bold leading-tight">
+                  Remarks
+                </div>
+              </div>
+            </div>
+            <Swiper
+              pagination={{
+                dynamicBullets: true,
+              }}
+              spaceBetween="16"
+              breakpoints={{
+                599: {
+                  slidesPerView: 1,
+                },
+                768: {
+                  slidesPerView: 2,
+                },
+                1024: {
+                  slidesPerView: 3,
+                },
+                1200: {
+                  slidesPerView: 3,
+                },
+              }}
+              modules={[Pagination]}
+              className="mySwiper"
+            >
+              {filteredCases.map((c) => (
+                <SwiperSlide key={c._id}>
+                  <div className="w-[100%] flex flex-col gap-4 p-4 border-[1px]">
+                    <div className="w-[100%] h-[220px] flex flex-col gap-4">
+                      <div className="w-[100%] flex justify-between items-start">
+                        <div className="flex justify-start gap-4">
+                          <div className="flex justify-center items-center gap-2">
+                            <div className="flex justify-center items-center gap-1">
+                              <BsHash size={24} className="text-[#707070]" />
+                              <div className="text-[#707070] font-bold">
+                                {c.caseNo}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="text-[#707070]">
+                        {c.reportedViolation}
+                      </div>
+                    </div>
+                    <div className="w-[100%] flex justify-between items-center gap-2">
+                      <div className="w-[fit-content] flex gap-2 justify-start items-center">
+                        <div className="group flex justify-center items-center p-2 text-blue-500 rounded-[50%] border-[1px] border-blue-500 hover:p-3 transition-hover duration-300 ease-[cubic-bezier(0.4, 0, 0.2, 1)] cursor-pointer">
+                          <BsCardText
+                            size={18}
+                            className="transition-group-hover duration-150 ease-[cubic-bezier(0.4, 0, 0.2, 1)]"
+                          />
+                        </div>
+                      </div>
+                      <div className="w-[fit-content] flex gap-2 justify-start items-center"></div>
+                    </div>
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
         </div>
 
-        <div className="w-[100%] flex xl:flex-wrap gap-2 px-8 xl:px-0">
-          <div className="w-[50%] xl:w-[100%] flex flex-col gap-4">
+        <div className="w-[100%] xl:flex-wrap flex justify-center gap-2 px-12 xl:px-0">
+          <div className="w-[100%] xl:w-[100%] flex flex-col gap-4">
             <div className="text-[18px] text-[#707070]">Personal</div>
             <div className="text-[32px] text-[#707070] font-bold mt-[-16px]">
               Cases
             </div>
             <div className="w-[100%] flex xl:flex-wrap justify-center items-center gap-2">
-              <div className="w-[100%] xl:w-[100%] h-[240px]">
+              <div className="w-[100%] xl:w-[100%] h-[280px]">
                 <Swiper
                   pagination={{
                     dynamicBullets: true,
                   }}
-                  spaceBetween="8"
+                  spaceBetween="16"
                   breakpoints={{
                     599: {
                       slidesPerView: 1,
@@ -723,49 +817,104 @@ const StudentsProfileTable = ({
                       slidesPerView: 2,
                     },
                     1024: {
-                      slidesPerView: 2,
+                      slidesPerView: 3,
                     },
                     1200: {
-                      slidesPerView: 2,
+                      slidesPerView: 3,
                     },
                   }}
                   modules={[Pagination]}
                   className="mySwiper"
                 >
                   {filteredCases.map((c) => (
-                    <SwiperSlide
-                      className="flex justify-center items-center bg-[rgb(250,255,255)] rounded-tl-[24px] rounded-tr-[24px] rounded-bl-[18px] rounded-br-[18px] border-[1px] border-blue-100"
-                      key={c._id}
-                    >
-                      <div className="w-[100%] py-4 flex justify-between items-start p-4">
-                        <div
-                          className={`${
-                            c.typeOfViolation === 'Major'
-                              ? 'text-red-500'
-                              : 'text-orange-500'
-                          }  text-[16px] font-bold`}
-                        >
-                          {c.typeOfViolation}
+                    <SwiperSlide key={c._id}>
+                      <div className="w-[100%] flex flex-col gap-4">
+                        <div className="w-[100%] h-[220px] flex flex-col gap-4 p-4 border-[1px]">
+                          <div className="w-[100%] flex justify-between items-start">
+                            <div className="flex justify-start gap-4">
+                              <div className="flex justify-center items-center gap-2">
+                                <div
+                                  className={`w-[14px] h-[14px] rounded-[50%] ${
+                                    c.typeOfViolation === 'Major'
+                                      ? 'bg-red-500'
+                                      : 'bg-orange-500'
+                                  }`}
+                                ></div>
+                                <div
+                                  className={`${
+                                    c.typeOfViolation === 'Major'
+                                      ? 'text-red-500'
+                                      : 'text-orange-500'
+                                  }  text-[16px] font-bold rounded-[32px]`}
+                                >
+                                  {c.typeOfViolation}
+                                </div>
+                              </div>
+                              <div className="flex justify-center items-center gap-2">
+                                {c.statusOfCase === 'Case Solved' ? (
+                                  <BsCheck2Circle
+                                    size={20}
+                                    className="text-green-500"
+                                  />
+                                ) : (
+                                  <div
+                                    className={`w-[14px] h-[14px] rounded-[50%] border-[2px] border-[#707070]`}
+                                  ></div>
+                                )}
+
+                                <div
+                                  className={`${
+                                    c.statusOfCase === 'Case Solved'
+                                      ? 'text-green-500'
+                                      : 'text-[#707070]'
+                                  }  text-[16px] rounded-[32px] font-bold`}
+                                >
+                                  {c.statusOfCase}
+                                </div>
+                              </div>
+                            </div>
+
+                            <div className="flex justify-start gap-4">
+                              <div className="flex justify-center items-center gap-1">
+                                <BsHash size={24} className="text-[#707070]" />
+                                <div className="text-[#707070] font-bold">
+                                  {c.caseNo}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="text-[#707070]">
+                            {c.reportedViolation}
+                          </div>
                         </div>
-                        <div className="flex items-center gap-2">
-                          <div className="group flex justify-center items-center p-1 text-white rounded-[50%] bg-blue-500 hover:p-2 transition-hover duration-300 ease-[cubic-bezier(0.4, 0, 0.2, 1)] cursor-pointer">
-                            <BsEye
-                              size={16}
-                              className="invisible group-hover:visible transition-group-hover duration-150 ease-[cubic-bezier(0.4, 0, 0.2, 1)]"
-                            />
+                        <div className="w-[100%] flex justify-between items-center gap-2">
+                          <div className="w-[fit-content] flex gap-2 justify-start items-center">
+                            <div className="group flex justify-center items-center p-2 text-blue-500 rounded-[50%] border-[1px] border-blue-500 hover:p-3 transition-hover duration-300 ease-[cubic-bezier(0.4, 0, 0.2, 1)] cursor-pointer">
+                              <BsChevronUp
+                                size={18}
+                                className="transition-group-hover duration-150 ease-[cubic-bezier(0.4, 0, 0.2, 1)]"
+                              />
+                            </div>
+                            <div className="group flex justify-center items-center p-2 text-yellow-500 rounded-[50%] border-[1px] border-yellow-500 hover:p-3 transition-hover duration-300 ease-[cubic-bezier(0.4, 0, 0.2, 1)] cursor-pointer">
+                              <BsPen
+                                size={18}
+                                className="transition-group-hover duration-150 ease-[cubic-bezier(0.4, 0, 0.2, 1)]"
+                              />
+                            </div>
+                            <div className="group flex justify-center items-center p-2 text-red-500 rounded-[50%] border-[1px] border-red-500 hover:p-3 transition-hover duration-300 ease-[cubic-bezier(0.4, 0, 0.2, 1)] cursor-pointer">
+                              <BsTrash3
+                                size={18}
+                                className="transition-group-hover duration-150 ease-[cubic-bezier(0.4, 0, 0.2, 1)]"
+                              />
+                            </div>
+                            <div className="group flex justify-center items-center p-2 text-blue-500 rounded-[50%] border-[1px] border-blue-500 hover:p-3 transition-hover duration-300 ease-[cubic-bezier(0.4, 0, 0.2, 1)] cursor-pointer">
+                              <BsCardText
+                                size={18}
+                                className="transition-group-hover duration-150 ease-[cubic-bezier(0.4, 0, 0.2, 1)]"
+                              />
+                            </div>
                           </div>
-                          <div className="group flex justify-center items-center p-1 text-white rounded-[50%] bg-yellow-500 hover:p-2 transition-hover duration-300 ease-[cubic-bezier(0.4, 0, 0.2, 1)] cursor-pointer">
-                            <BsPen
-                              size={16}
-                              className="invisible group-hover:visible transition-group-hover duration-150 ease-[cubic-bezier(0.4, 0, 0.2, 1)]"
-                            />
-                          </div>
-                          <div className="group flex justify-center items-center p-1 text-white rounded-[50%] bg-red-500 hover:p-2 transition-hover duration-300 ease-[cubic-bezier(0.4, 0, 0.2, 1)] cursor-pointer">
-                            <BsTrash3
-                              size={16}
-                              className="invisible group-hover:visible transition-group-hover duration-150 ease-[cubic-bezier(0.4, 0, 0.2, 1)]"
-                            />
-                          </div>
+                          <div className="w-[fit-content] flex gap-2 justify-start items-center"></div>
                         </div>
                       </div>
                     </SwiperSlide>
@@ -774,77 +923,6 @@ const StudentsProfileTable = ({
               </div>
             </div>
           </div>
-          {/* <div className="w-[50%] xl:w-[100%] flex flex-col gap-4">
-            <div className="text-[18px] text-[#707070]">Helpful</div>
-            <div className="text-[32px] text-[#707070] font-bold mt-[-16px]">
-              Remarks
-            </div>
-            <div className="w-[100%] flex xl:flex-wrap justify-center items-center gap-2">
-              <div className="w-[100%] h-[240px]">
-                <Swiper
-                  pagination={{
-                    dynamicBullets: true,
-                  }}
-                  spaceBetween="8"
-                  breakpoints={{
-                    599: {
-                      slidesPerView: 1,
-                    },
-                    768: {
-                      slidesPerView: 2,
-                    },
-                    1024: {
-                      slidesPerView: 2,
-                    },
-                    1200: {
-                      slidesPerView: 2,
-                    },
-                  }}
-                  modules={[Pagination]}
-                  className="mySwiper"
-                >
-                  {filteredCases.map((c) => (
-                    <SwiperSlide
-                      className="flex justify-center items-center bg-[rgb(250,255,255)] rounded-tl-[24px] rounded-tr-[24px] rounded-bl-[18px] rounded-br-[18px] border-[1px] border-blue-100"
-                      key={c._id}
-                    >
-                      <div className="w-[100%] py-4 flex justify-between items-start p-4">
-                        <div
-                          className={`${
-                            c.typeOfViolation === 'Major'
-                              ? 'text-red-500'
-                              : 'text-orange-500'
-                          }  text-[16px] font-bold`}
-                        >
-                          {c.typeOfViolation}
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <div className="group flex justify-center items-center p-1 text-white rounded-[50%] bg-blue-500 hover:p-2 transition-hover duration-300 ease-[cubic-bezier(0.4, 0, 0.2, 1)] cursor-pointer">
-                            <BsEye
-                              size={16}
-                              className="invisible group-hover:visible transition-group-hover duration-150 ease-[cubic-bezier(0.4, 0, 0.2, 1)]"
-                            />
-                          </div>
-                          <div className="group flex justify-center items-center p-1 text-white rounded-[50%] bg-yellow-500 hover:p-2 transition-hover duration-300 ease-[cubic-bezier(0.4, 0, 0.2, 1)] cursor-pointer">
-                            <BsPen
-                              size={16}
-                              className="invisible group-hover:visible transition-group-hover duration-150 ease-[cubic-bezier(0.4, 0, 0.2, 1)]"
-                            />
-                          </div>
-                          <div className="group flex justify-center items-center p-1 text-white rounded-[50%] bg-red-500 hover:p-2 transition-hover duration-300 ease-[cubic-bezier(0.4, 0, 0.2, 1)] cursor-pointer">
-                            <BsTrash3
-                              size={16}
-                              className="invisible group-hover:visible transition-group-hover duration-150 ease-[cubic-bezier(0.4, 0, 0.2, 1)]"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
-              </div>
-            </div>
-          </div> */}
         </div>
       </div>
     </>

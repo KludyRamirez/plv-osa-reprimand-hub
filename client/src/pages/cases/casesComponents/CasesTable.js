@@ -2,13 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
 import axios from 'axios';
-import {
-  BsChevronUp,
-  BsFolder2Open,
-  BsFolderMinus,
-  BsPen,
-  BsTrash3,
-} from 'react-icons/bs';
+import { BsChevronUp, BsFolder2Open, BsPen, BsTrash3 } from 'react-icons/bs';
 import Modal from '@mui/material/Modal';
 import { styled } from '@mui/system';
 import DeleteCaseModal from './DeleteCaseModal';
