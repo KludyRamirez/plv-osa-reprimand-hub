@@ -41,7 +41,7 @@ const login = (userDetails, navigate) => {
 };
 
 const register = (userDetails, authToken) => {
-  return async (dispatch) => {
+  return async () => {
     try {
       const response = await api.register(userDetails, authToken);
       if (response.error) {

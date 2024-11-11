@@ -198,7 +198,7 @@ const StudentsPerYear = ({ cases, students, getCases }) => {
           </div>
         </div>
 
-        <div className="w-100 flex justify-start to-white p-4">
+        <div className="w-100 flex justify-start p-4">
           <div className="w-100 flex flex-wrap justify-start items-center gap-4 sm:gap-2">
             <div className="sm:w-[50%] flex flex-col items-start gap-2">
               <div className="pl-2 w-[200px] sm:w-[100%] flex justify-between items-center">

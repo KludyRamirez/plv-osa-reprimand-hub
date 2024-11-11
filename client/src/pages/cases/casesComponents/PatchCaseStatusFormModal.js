@@ -37,6 +37,7 @@ const PatchCaseStatusFormModal = ({
               <div className="w-100 flex justify-start gap-x-1 gap-y-3 flex-wrap pl-3">
                 {statusOfCases.map((s) => (
                   <FormControlLabel
+                    key={s}
                     name="statusOfCase"
                     value={s}
                     control={<Radio id={s} sx={{ display: 'none' }} />}
