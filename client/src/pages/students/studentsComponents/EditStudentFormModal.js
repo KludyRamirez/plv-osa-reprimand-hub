@@ -1,6 +1,6 @@
-import React from 'react';
-import { BsChevronBarDown, BsX } from 'react-icons/bs';
-import { FaPlus } from 'react-icons/fa6';
+import React from "react";
+import { BsChevronBarDown, BsX } from "react-icons/bs";
+import { FaPlus } from "react-icons/fa6";
 
 const EditStudentFormModal = ({
   handleChange,
@@ -32,8 +32,8 @@ const EditStudentFormModal = ({
               handleCloseModalEdit
                 ? handleCloseModalEdit
                 : handleCloseModalEditStudent
-                ? handleCloseModalEditStudent
-                : handleCloseModalEdit
+                  ? handleCloseModalEditStudent
+                  : handleCloseModalEdit
             }
             className="text-[36px] cursor-pointer"
           />
@@ -47,14 +47,14 @@ const EditStudentFormModal = ({
           <input
             required
             name="studentNo"
-            value={updatedValues?.studentNo?.replace(/[^0-9-]/g, '')}
+            value={updatedValues?.studentNo?.replace(/[^0-9-]/g, "")}
             onChange={handleChange}
             type="text"
             maxLength="7"
             autoComplete="off"
             placeholder="e.g. 20-1130"
             className={`border-[1px] py-3 px-5 rounded-[32px] w-[100%] ${
-              studentNoError === '' ? 'border-gray-300' : 'border-[red]'
+              studentNoError === "" ? "border-gray-300" : "border-[red]"
             } focus:outline-none focus:border-blue-500`}
           />
           {studentNoError && (
@@ -75,7 +75,7 @@ const EditStudentFormModal = ({
                 autoComplete="off"
                 placeholder="e.g. Kludy"
                 className={`border-[1px] py-3 px-5 rounded-[32px] w-[100%] bg-white ${
-                  firstNameError === '' ? 'border-gray-200' : 'border-[red]'
+                  firstNameError === "" ? "border-gray-200" : "border-[red]"
                 } focus:outline-none focus:border-[#006bff]`}
               />
               {firstNameError && (
@@ -94,7 +94,7 @@ const EditStudentFormModal = ({
                 autoComplete="off"
                 placeholder="e.g. Ramirez"
                 className={`border-[1px] py-3 px-5 rounded-[32px] w-[100%] bg-white ${
-                  surNameError === '' ? 'border-gray-200' : 'border-[red]'
+                  surNameError === "" ? "border-gray-200" : "border-[red]"
                 } focus:outline-none focus:border-[#006bff]`}
               />
               {surNameError && (
@@ -225,7 +225,7 @@ const EditStudentFormModal = ({
                   autoComplete="off"
                   placeholder="e.g. example@gmail.com"
                   className={`py-3 px-5 rounded-[32px] w-[100%] bg-white border-[1px]  ${
-                    emailError === '' ? 'border-gray-200' : 'border-[red]'
+                    emailError === "" ? "border-gray-200" : "border-[red]"
                   } focus:outline-none focus:border-[#006bff]`}
                 />
                 {emailError && (
@@ -239,14 +239,14 @@ const EditStudentFormModal = ({
                 <input
                   required
                   name="contactNo"
-                  value={updatedValues?.contactNo?.replace(/[^0-9+]/g, '')}
+                  value={updatedValues?.contactNo?.replace(/[^0-9+]/g, "")}
                   onChange={handleChange}
                   type="text"
                   autoComplete="off"
                   placeholder="e.g. 09123456789"
                   maxLength="13"
                   className={`py-3 px-5 rounded-[32px] w-[100%] bg-white border-[1px]  ${
-                    contactNoError === '' ? 'border-gray-200' : 'border-[red]'
+                    contactNoError === "" ? "border-gray-200" : "border-[red]"
                   } focus:outline-none focus:border-[#006bff]`}
                 />
                 {contactNoError && (
@@ -260,7 +260,7 @@ const EditStudentFormModal = ({
                   name="guardianContactNo"
                   value={updatedValues?.guardianContactNo?.replace(
                     /[^0-9+]/g,
-                    ''
+                    "",
                   )}
                   onChange={handleChange}
                   type="text"
@@ -268,9 +268,9 @@ const EditStudentFormModal = ({
                   placeholder="e.g. 09123456789"
                   maxLength="13"
                   className={`py-3 px-5 rounded-[32px] w-[100%] bg-white border-[1px] ${
-                    guardianContactNoError === ''
-                      ? 'border-gray-200'
-                      : 'border-[red]'
+                    guardianContactNoError === ""
+                      ? "border-gray-200"
+                      : "border-[red]"
                   } focus:outline-none focus:border-[#006bff]`}
                 />
                 {guardianContactNoError && (
@@ -281,18 +281,16 @@ const EditStudentFormModal = ({
           </div>
         </div>
         <div className="w-[100%] p-10 flex justify-end items-center">
-          {studentNoError === '' &&
-          firstNameError === '' &&
-          middleNameError === '' &&
-          surNameError === '' &&
-          updatedValues?.college !== '' &&
-          updatedValues?.department !== '' &&
-          updatedValues?.year !== '' &&
-          updatedValues?.section !== '' &&
-          updatedValues?.sex !== '' &&
-          emailError === '' &&
-          contactNoError === '' &&
-          guardianContactNoError === '' ? (
+          {studentNoError === "" &&
+          firstNameError === "" &&
+          middleNameError === "" &&
+          surNameError === "" &&
+          updatedValues?.studentNo !== "" &&
+          updatedValues?.college !== "" &&
+          updatedValues?.department !== "" &&
+          updatedValues?.year !== "" &&
+          updatedValues?.section !== "" &&
+          updatedValues?.sex !== "" ? (
             <button
               type="submit"
               className="cursor-pointer w-[100%] py-4 px-4 bg-[#006bff] text-[white] text-[16px] flex gap-2 justify-center items-center rounded-[32px]"

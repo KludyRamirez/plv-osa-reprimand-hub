@@ -1,42 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Sidebar from '../../../externalComponents/sidebarBase/Sidebar';
-import axios from 'axios';
-import { useSelector } from 'react-redux';
-import { createSelector } from 'reselect';
 import ChangeUserInfo from '../accountSettingsComponents/ChangeUserInfo';
 import { BsEnvelopeCheck } from 'react-icons/bs';
 
-const selectAuth = (state) => state.auth;
-const authSelector = createSelector([selectAuth], (auth) => auth);
-
 const AccountSettings = ({ toast }) => {
-  const [cads, setCads] = useState([]);
 
-  const auth = useSelector(authSelector);
-
-  useEffect(() => {
-    getCads();
-  }, []);
-
-  const getCads = async () => {
-    try {
-      if (!auth.userDetails.token) {
-        console.error('Authentication token not found.');
-        return;
-      }
-      const url = `${process.env.REACT_APP_API_URI}/cad`;
-      const res = await axios.get(url, {
-        withCredentials: true,
-        headers: {
-          Authorization: `Bearer ${auth?.userDetails?.token}`,
-        },
-      });
-
-      setCads(res.data);
-    } catch (err) {
-      console.error('Error fetching users!', err);
-    }
-  };
 
   return (
     <>

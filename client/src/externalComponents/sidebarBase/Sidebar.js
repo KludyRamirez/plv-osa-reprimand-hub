@@ -20,7 +20,6 @@ import {
   BsPieChartFill,
   BsSticky,
   BsStickyFill,
-  BsTencentQq,
 } from "react-icons/bs";
 import { GoKey } from "react-icons/go";
 import { logoutUtil } from "../../pages/auth/login/loginUtils/logoutUtil";

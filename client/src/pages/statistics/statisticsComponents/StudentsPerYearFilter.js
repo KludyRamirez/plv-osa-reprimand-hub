@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BsChevronBarDown, BsFilter, BsFolderX } from 'react-icons/bs';
 import PieChart from '../statisticsUtils/PieChart';
-import { majorViolation, minorViolation, caseStatuses, months, chartColors } from '../statisticsUtils/constants';
+import { majorViolation, minorViolation, caseStatuses, months } from '../statisticsUtils/constants';
 
 const StudentsPerYear = ({ cases, students, getCases }) => {
   const [activeMainFilter, setActiveMainFilter] = useState('All');

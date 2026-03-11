@@ -24,6 +24,7 @@ const StudentProfile = ({ allowedRoles }) => {
     getStudents();
     getCases();
     getCads();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const getOneStudent = async () => {

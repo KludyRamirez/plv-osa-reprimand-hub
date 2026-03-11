@@ -15,6 +15,7 @@ const History = ({ toast, allowedRoles }) => {
 
   useEffect(() => {
     getHistory();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const getHistory = async () => {

@@ -30,16 +30,17 @@ const LoginFooter = () => {
               <div className="flex justify-end items-center gap-2">
                 <div className="text-[16px] text-[white]">
                   <div className="flex justify-end items-center gap-4 ">
-                    <a href="https://facebook.com" target="_blank">
+                    <a href="https://facebook.com" target="_blank" rel="noreferrer">
                       <BsFacebook className="text-[24px] text-white cursor-pointer" />
                     </a>
                     <a
                       href="https://www.linkedin.com/in/kludyramirez/"
                       target="_blank"
+                      rel="noreferrer"
                     >
                       <BsLinkedin className="text-[24px] text-white cursor-pointer" />
                     </a>
-                    <a href="https://github.com/KludyRamirez" target="_blank">
+                    <a href="https://github.com/KludyRamirez" target="_blank" rel="noreferrer">
                       <BsGithub className="text-[24px] text-white cursor-pointer" />
                     </a>
                   </div>

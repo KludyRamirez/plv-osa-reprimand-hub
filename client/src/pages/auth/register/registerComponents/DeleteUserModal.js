@@ -1,5 +1,5 @@
 import React from 'react';
-import { BsTrash3, BsX } from 'react-icons/bs';
+import { BsX } from 'react-icons/bs';
 
 const DeleteUserModal = ({ handleConfirmDelete, handleCloseModal }) => {
   const handleDeleteAndClose = () => {

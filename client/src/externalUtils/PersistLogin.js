@@ -28,6 +28,7 @@ const PersistLogin = () => {
 
   useEffect(() => {
     !auth?.userDetails?.token ? verifyRefreshToken() : setIsLoading(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return <>{isLoading ? <Loading /> : <Outlet />}</>;

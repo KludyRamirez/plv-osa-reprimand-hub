@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
 import axios from 'axios';
@@ -6,14 +6,10 @@ import Modal from '@mui/material/Modal';
 import { styled } from '@mui/system';
 import DeleteCaseModal from '../../cases/casesComponents/DeleteCaseModal';
 import toast from 'react-hot-toast';
-import DeleteManyCaseModal from '../../cases/casesComponents/DeleteCaseModal';
-import { useNavigate } from 'react-router-dom';
 import EditCase from '../../cases/casesComponents/EditCase';
 import EditStudent from '../../students/studentsComponents/EditStudent';
 import PatchCaseStatus from '../../cases/casesComponents/PatchCaseStatus';
 import RemarksCase from '../../cases/casesComponents/RemarksCase';
-import { Radio, RadioGroup, FormControlLabel } from '@mui/material';
-import { RiDoubleQuotesL, RiDoubleQuotesR } from 'react-icons/ri';
 import {
   BsBank,
   BsBuildings,
@@ -69,13 +65,10 @@ const StudentsProfileTable = ({
   cads,
   allowedRoles,
 }) => {
-  const [selectAll, setSelectAll] = useState(false);
   const [caseDeleteId, setCaseDeleteId] = useState('');
   const [showDeleteCaseModal, setShowDeleteCaseModal] = useState(false);
-  const [showDeleteManyCaseModal, setShowDeleteManyCaseModal] = useState(false);
   const [showEditCaseModal, setShowEditCaseModal] = useState(false);
   const [selectedCaseEdit, setSelectedCaseEdit] = useState('');
-  const [selectedCases, setSelectedCases] = useState('');
   const [showEditStudentModal, setShowEditStudentModal] = useState(false);
   const [selectedStudentEdit, setSelectedStudentEdit] = useState(null);
   const [showPatchCaseModal, setShowPatchCaseModal] = useState(false);
@@ -83,38 +76,14 @@ const StudentsProfileTable = ({
   const [showRemarksCaseModal, setShowRemarksCaseModal] = useState(false);
   const [selectedCaseRemarks, setSelectedCaseRemarks] = useState(null);
 
-  const [casesFilter, setCasesFilter] = useState('All');
+  const [casesFilter] = useState('All');
 
-  const [showMoreInfo, setShowMoreInfo] = useState(false);
 
-  const [randomStudents, setRandomStudents] = useState([]);
+
 
   const auth = useSelector(authSelector);
-  const navigate = useNavigate();
 
-  useEffect(() => {
-    const shuffleArray = (array) => {
-      for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-      }
-      return array;
-    };
 
-    const shuffledStudents = shuffleArray(
-      students.filter((s) => s._id !== student._id)
-    );
-
-    setRandomStudents(shuffledStudents.slice(0, 4));
-  }, [students, student._id]);
-
-  useEffect(() => {
-    if (cases.length > 0 && selectedCases.length === cases.length) {
-      setSelectAll(true);
-    } else {
-      setSelectAll(false);
-    }
-  }, [selectedCases, cases]);
 
   // const toggleCaseSelection = (caseId) => {
   //   let updatedSelectedCases = [...selectedCases];
@@ -138,46 +107,6 @@ const StudentsProfileTable = ({
   //   }
   // };
 
-  const toggleShowMoreInfo = () => {
-    setShowMoreInfo(!showMoreInfo);
-  };
-
-  const deleteSelectedCases = async () => {
-    try {
-      if (!auth.userDetails || !auth.userDetails.token) {
-        console.error('Authentication token not found.');
-        navigate('/');
-        return;
-      }
-
-      const res = await axios.delete(
-        `${process.env.REACT_APP_API_URI}/cases/deleteSelected`,
-        {
-          data: { cases: selectedCases },
-          withCredentials: true,
-          headers: {
-            Authorization: `Bearer ${auth.userDetails.token}`,
-          },
-        }
-      );
-      setSelectedCases([]);
-      setSelectAll(false);
-      getCases();
-      toast.success(res.data.message);
-    } catch (error) {
-      console.error('Error deleting selected Cases:', error);
-      if (error.response) {
-        if (error.response.status === 403) {
-          console.error('Unauthorized access. Please check your permissions.');
-          navigate('/forbidden');
-        } else {
-          toast.error(error.response.data.message);
-        }
-      } else {
-        toast.error('An error occurred while deleting the selected cases.');
-      }
-    }
-  };
 
   const deleteOneCase = async (id) => {
     try {
@@ -228,10 +157,6 @@ const StudentsProfileTable = ({
   // const handleOpenModalDeleteMany = () => {
   //   setShowDeleteManyCaseModal(true);
   // };
-
-  const handleCloseModalDeleteMany = () => {
-    setShowDeleteManyCaseModal(false);
-  };
 
   // edit Case functions
 
@@ -302,13 +227,6 @@ const StudentsProfileTable = ({
     setShowEditStudentModal(false);
   };
 
-  // click navigate params
-
-  const handleClickProfile = (id) => {
-    navigate(`/profile/${id}`);
-    window.location.reload();
-  };
-
   // patch case status
 
   const handleCasePatchClick = (cas) => {
@@ -352,11 +270,10 @@ const StudentsProfileTable = ({
       return (
         c.student?._id === student?._id && c?.statusOfCase === 'Case Solved'
       );
-    } else if (casesFilter !== 'Case Solved' && casesFilter !== 'All') {
-      return (
-        c.student?._id === student?._id && c?.statusOfCase !== 'Case Solved'
-      );
     }
+    return (
+      c.student?._id === student?._id && c?.statusOfCase !== 'Case Solved'
+    );
   });
 
   return (

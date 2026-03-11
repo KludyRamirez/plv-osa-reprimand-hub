@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import {
-  BsCalendar4,
   BsFilter,
   BsChevronBarDown,
-  BsSticky,
 } from 'react-icons/bs';
 import 'react-datepicker/dist/react-datepicker.css';
 import CollegesAndDepartmentsTable from './CollegesAndDepartmentsTable';

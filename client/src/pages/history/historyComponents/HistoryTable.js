@@ -1,17 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { createSelector } from "reselect";
 import {
   BsFolderX,
-  BsEscape,
-  BsChevronUp,
-  BsCapslock,
-  BsFileEarmarkPdf,
 } from "react-icons/bs";
 import TimeExtractor from "../../../externalUtils/TimeExtractor";
-
-const selectAuth = (state) => state.auth;
-const authSelector = createSelector([selectAuth], (auth) => auth);
 
 const HistoryTable = ({
   history,
@@ -20,8 +11,6 @@ const HistoryTable = ({
   allowedRoles,
 }) => {
   const [selectAll, setSelectAll] = useState(false);
-
-  const auth = useSelector(authSelector);
 
   useEffect(() => {
     if (history.length > 0 && selectedHistory.length === history.length) {

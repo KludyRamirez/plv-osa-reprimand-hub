@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import { createSelector } from "reselect";
 import axios from "axios";
 import {
-  BsBoxArrowUpRight,
   BsChevronUp,
   BsFolder2Open,
   BsPen,
@@ -64,7 +63,7 @@ const CasesTable = ({
   const [showPatchCaseModal, setShowPatchCaseModal] = useState(false);
   const [selectedCasePatch, setSelectedCasePatch] = useState(null);
   const [showRemarksCaseModal, setShowRemarksCaseModal] = useState(false);
-  const [selectedCaseRemarks, setSelectedCaseRemarks] = useState(null);
+  const [selectedCaseRemarks] = useState(null);
 
   const auth = useSelector(authSelector);
   const navigate = useNavigate();

@@ -52,6 +52,7 @@ const CreateCase = ({ toast, getCases, allowedRoles }) => {
 
   useEffect(() => {
     getStudents();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const getStudents = async () => {

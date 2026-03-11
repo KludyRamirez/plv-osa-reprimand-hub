@@ -17,6 +17,7 @@ const Statistics = ({ toast }) => {
   useEffect(() => {
     getCases();
     getStudents();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const getCases = async () => {

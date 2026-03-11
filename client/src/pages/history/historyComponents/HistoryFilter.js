@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
 import {
-  BsCalendar4Week,
   BsFilter,
   BsChevronBarDown,
-  BsFastForward,
-  BsKeyboard,
 } from 'react-icons/bs';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';

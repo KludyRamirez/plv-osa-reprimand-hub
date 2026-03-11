@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import {
-  BsCheckCircle,
   BsChevronBarDown,
   BsFilter,
-  BsGear,
 } from 'react-icons/bs';
 
 import UsersTable from './UsersTable';

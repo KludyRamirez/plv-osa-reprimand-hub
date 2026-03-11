@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
-import { BsCardText, BsEnvelope, BsPass } from 'react-icons/bs';
+import { BsCardText, BsEnvelope } from 'react-icons/bs';
 import axios from 'axios';
-import { MdOutlinePassword } from 'react-icons/md';
 
 const initialState = {
   email: '',

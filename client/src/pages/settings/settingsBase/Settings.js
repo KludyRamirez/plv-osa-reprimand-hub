@@ -16,6 +16,7 @@ const Settings = ({ toast, allowedRoles }) => {
 
   useEffect(() => {
     getCads();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const getCads = async () => {
