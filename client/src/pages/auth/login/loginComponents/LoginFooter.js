@@ -1,7 +1,7 @@
-import React from 'react';
-import { BsFacebook, BsGithub, BsLinkedin } from 'react-icons/bs';
+import React from "react";
+import { BsFacebook, BsGithub, BsLinkedin } from "react-icons/bs";
 
-import osaLogo from '../../../../images/osalogo.png';
+import osaLogo from "../../../../images/osalogo.png";
 
 const LoginFooter = () => {
   return (
@@ -16,10 +16,12 @@ const LoginFooter = () => {
                 className="w-[50px] h-[50px] rounded-[50%]"
               />
               <div className="flex flex-col items-start gap-[3px] mt-[2px]">
+                <div className="text-[14px]">
+                  Pamantasan ng Lungsod ng Valenzuela
+                </div>
                 <div className="text-[16px] text-white font-semibold ">
                   Office of Student Affairs
                 </div>
-                <div className="text-[14px]">PLV</div>
               </div>
             </div>
           </div>

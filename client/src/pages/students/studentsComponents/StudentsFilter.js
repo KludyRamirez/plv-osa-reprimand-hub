@@ -131,6 +131,8 @@ const StudentsFilter = ({
                 <option value="All">All</option>
                 <option value="Enrolled">Enrolled</option>
                 <option value="Dismissed">Dismissed</option>
+                <option value="Graduated">Graduated</option>
+                <option value="Subject For Dismissal">Subject For Dismissal</option>
               </select>
             </div>
 

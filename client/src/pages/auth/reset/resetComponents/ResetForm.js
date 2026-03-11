@@ -11,9 +11,25 @@ const ResetForm = ({
   passwordError,
   confirmPasswordError,
   countdown,
+  loading,
 }) => {
+  const isValid =
+    password !== '' &&
+    confirmPassword !== '' &&
+    passwordError === '' &&
+    confirmPasswordError === '' &&
+    password === confirmPassword &&
+    !loading;
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (isValid) {
+      handleSubmitPassword();
+    }
+  };
+
   return (
-    <div className="w-[500px] flex flex-col gap-4 z-20">
+    <form onSubmit={handleSubmit} className="w-[500px] flex flex-col gap-4 z-20">
       <div className="flex items-center justify-start relative">
         <FormTitle
           sx={{
@@ -31,7 +47,9 @@ const ResetForm = ({
         <span>Password</span>
       </div>
       <input
+        autoFocus
         type="password"
+        autoComplete="new-password"
         value={password}
         onChange={(e) => handleGetPassword(e)}
         placeholder="Enter password"
@@ -45,6 +63,7 @@ const ResetForm = ({
       </div>
       <input
         type="password"
+        autoComplete="new-password"
         value={confirmPassword}
         onChange={(e) => handleGetConfirmPassword(e)}
         placeholder="Confirm password"
@@ -55,19 +74,18 @@ const ResetForm = ({
       {confirmPasswordError && (
         <p className="text-red-500">{confirmPasswordError}</p>
       )}
-      {password !== '' &&
-      confirmPassword !== '' &&
-      passwordError === '' &&
-      confirmPasswordError === '' &&
-      password === confirmPassword ? (
+      {isValid ? (
         <button
+          type="submit"
           className="mt-3 p-3 border-[1px] border-[#006bff] rounded-[48px] w-[100%] bg-[#006bff] text-white"
-          onClick={handleSubmitPassword}
         >
-          Submit
+          {loading ? 'Submitting...' : 'Submit'}
         </button>
       ) : (
-        <button className="mt-3 p-3 border-[1px] border-blue-400 rounded-[48px] w-[100%] bg-blue-400 text-white">
+        <button
+          disabled
+          className="mt-3 p-3 border-[1px] border-blue-300 rounded-[48px] w-[100%] bg-white text-blue-300"
+        >
           Submit
         </button>
       )}
@@ -94,7 +112,7 @@ const ResetForm = ({
           </div>
         )}
       </div>
-    </div>
+    </form>
   );
 };
 

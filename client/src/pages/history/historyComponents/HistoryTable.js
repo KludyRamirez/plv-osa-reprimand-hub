@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { createSelector } from 'reselect';
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { createSelector } from "reselect";
 import {
   BsFolderX,
   BsEscape,
   BsChevronUp,
   BsCapslock,
   BsFileEarmarkPdf,
-} from 'react-icons/bs';
-import TimeExtractor from '../../../externalUtils/TimeExtractor';
+} from "react-icons/bs";
+import TimeExtractor from "../../../externalUtils/TimeExtractor";
 
 const selectAuth = (state) => state.auth;
 const authSelector = createSelector([selectAuth], (auth) => auth);
@@ -36,7 +36,7 @@ const HistoryTable = ({
 
     if (updatedSelectedHistory.includes(hId)) {
       updatedSelectedHistory = updatedSelectedHistory.filter(
-        (id) => id !== hId
+        (id) => id !== hId,
       );
     } else {
       updatedSelectedHistory = [...updatedSelectedHistory, hId];
@@ -89,23 +89,6 @@ const HistoryTable = ({
             <div className="w-[150px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
               <span>Time</span>
             </div>
-
-            {selectedHistory?.length > 1 ? (
-              <>
-                <div className="flex justify-start items-center gap-2">
-                  <div
-                    className="flex gap-1 justify-start items-center py-1 px-2 bg-[green] border-[1px] border-[green] text-white text-[14px] rounded-[4px] cursor-pointer"
-                    // onClick={exportPDF}
-                  >
-                    <span>Export</span>
-                  </div>
-                </div>
-              </>
-            ) : (
-              <div className="w-[111px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
-                <span>Actions</span>
-              </div>
-            )}
           </div>
 
           {history.length > 0 ? (
@@ -114,7 +97,7 @@ const HistoryTable = ({
                 <div
                   className={`w-[fit-content]
               flex items-center gap-4 px-6 ${
-                k % 2 === 0 ? 'bg-gray-100' : 'bg-white'
+                k % 2 === 0 ? "bg-gray-100" : "bg-white"
               }`}
                   key={k}
                 >
@@ -142,48 +125,14 @@ const HistoryTable = ({
                     <span>{h?.actionOfNotif}</span>
                   </div>
                   <div className="w-[180px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
-                    {new Date(h?.createdAt)?.toLocaleDateString('en-US', {
-                      month: 'long',
-                      day: 'numeric',
-                      year: 'numeric',
+                    {new Date(h?.createdAt)?.toLocaleDateString("en-US", {
+                      month: "long",
+                      day: "numeric",
+                      year: "numeric",
                     })}
                   </div>
                   <div className="w-[150px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
                     <TimeExtractor date={h?.createdAt} />
-                  </div>
-                  <div className="w-[111px] whitespace-nowrap flex justify-start items-center">
-                    {selectedHistory.length < 2 ? (
-                      allowedRoles?.find((ar) =>
-                        auth?.userDetails?.role?.includes(ar)
-                      ) ? (
-                        <>
-                          <div
-                            // onClick={() => handleCasePatchClick(c)}
-                            className="relative container w-[36px] h-[36px] flex justify-center items-center bg-white border-[1px] border-[#006bff] rounded-[18px] cursor-pointer"
-                          >
-                            <BsFileEarmarkPdf className="text-[18px] text-[#006bff]" />
-                            <div className="absolute bg-gradient-to-br from-[#006bff] via-[#079bff] to-[#006bff] py-2 px-4 top-[-62px] left-[-16px] rounded-[32px] text-[#606060] additional-content z-40">
-                              <span className="text-[16px] text-white">
-                                Download PDF
-                              </span>
-                            </div>
-                            <div className="absolute top-[-38px] left-[7px] w-[20px] h-[20px] bg-gradient-to-br from-[#006bff] via-[#079bff] to-[#079bff] transform rotate-[45deg] additional-content z-10"></div>
-                          </div>
-                        </>
-                      ) : (
-                        <>
-                          <div className="w-[36px] h-[36px] flex justify-center items-center bg-gray-200 rounded-[18px]">
-                            <BsFileEarmarkPdf className="text-[18px] text-white" />
-                          </div>
-                        </>
-                      )
-                    ) : (
-                      <>
-                        <div className="w-[36px] h-[36px] flex justify-center items-center bg-gray-200 rounded-[18px]">
-                          <BsFileEarmarkPdf className="text-[18px] text-white" />
-                        </div>
-                      </>
-                    )}
                   </div>
                 </div>
               ))}

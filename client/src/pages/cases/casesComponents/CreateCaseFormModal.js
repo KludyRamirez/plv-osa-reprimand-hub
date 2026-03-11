@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { BsChevronBarDown, BsFilter, BsX } from 'react-icons/bs';
-import { FaPlus } from 'react-icons/fa6';
-import DatePicker from 'react-datepicker';
-import moment from 'moment';
-import 'react-datepicker/dist/react-datepicker.css';
+import React, { useState } from "react";
+import { BsChevronBarDown, BsFilter, BsX } from "react-icons/bs";
+import { FaPlus } from "react-icons/fa6";
+import DatePicker from "react-datepicker";
+import moment from "moment";
+import "react-datepicker/dist/react-datepicker.css";
 
 const CreateCaseFormModal = ({
   handleChange,
@@ -21,10 +21,10 @@ const CreateCaseFormModal = ({
   const { reportedViolation, typeOfViolations, typeOfViolation, studentName } =
     values;
 
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [filteredStudents, setFilteredStudents] = useState(students);
-  const [selectedDateOfIncident, setSelectedDateOfIncident] = useState('');
-  const [selectedDateReported, setSelectedDateReported] = useState('');
+  const [selectedDateOfIncident, setSelectedDateOfIncident] = useState("");
+  const [selectedDateReported, setSelectedDateReported] = useState("");
 
   const handleSearchStudents = (e) => {
     const searchText = e.target.value.toLowerCase();
@@ -33,7 +33,7 @@ const CreateCaseFormModal = ({
       (student) =>
         student?.firstName?.toLowerCase().includes(searchText) ||
         student?.surName?.toLowerCase().includes(searchText) ||
-        student?.studentNo?.toLowerCase().includes(searchText)
+        student?.studentNo?.toLowerCase().includes(searchText),
     );
     setFilteredStudents(filtered);
 
@@ -42,16 +42,16 @@ const CreateCaseFormModal = ({
     if (filtered.length > 0) {
       setValues((prevValues) => ({
         ...prevValues,
-        studentName: filtered[0]?.firstName + ' ' + filtered[0]?.surName,
+        studentName: filtered[0]?.firstName + " " + filtered[0]?.surName,
         student: filtered[0]?._id,
         year: filtered[0]?.year,
       }));
     } else {
       setValues((prevValues) => ({
         ...prevValues,
-        studentName: '',
-        student: '',
-        year: '',
+        studentName: "",
+        student: "",
+        year: "",
       }));
     }
   };
@@ -67,8 +67,8 @@ const CreateCaseFormModal = ({
   const isDisabledDateReported = (date) => {
     return (
       moment(date).isAfter(
-        moment(selectedDateOfIncident).subtract(1, 'day'),
-        'day'
+        moment(selectedDateOfIncident).subtract(1, "day"),
+        "day",
       ) && !isSunday(date)
     );
   };
@@ -105,7 +105,7 @@ const CreateCaseFormModal = ({
             type="text"
             autoComplete="off"
             placeholder="Search case owner's student no., firstname, etc."
-            className={`border-[1px] py-3 px-5 rounded-[32px] w-[100%] bg-white focus:outline-none`}
+            className={`border-[1px] py-3 px-5 rounded-[8px] w-[100%] bg-white focus:outline-none`}
           />
         </div>
 
@@ -119,11 +119,11 @@ const CreateCaseFormModal = ({
               name="studentName"
               value={studentName}
               onChange={handleCaseOwnerChange}
-              className="border-[1px] appearance-none py-3 px-5 rounded-[32px] focus:outline-none focus:border-[#006bff]"
+              className="border-[1px] appearance-none py-3 px-5 rounded-[8px] focus:outline-none focus:border-[#006bff]"
             >
               <option value="">Select Student Below</option>
               {filteredStudents
-                ?.filter((s) => s.statusOfStudent === 'Enrolled')
+                ?.filter((s) => s.statusOfStudent !== "Graduated")
                 ?.sort((a, b) => {
                   const nameA = `${a.firstName} ${a.surName}`.toLowerCase();
                   const nameB = `${b.firstName} ${b.surName}`.toLowerCase();
@@ -156,7 +156,7 @@ const CreateCaseFormModal = ({
                 placeholderText="Enter Date"
                 selected={selectedDateOfIncident}
                 onChange={(date) => handleDateOfIncidentChangeCombined(date)}
-                className={`border-[1px] py-3 px-5 rounded-[32px] w-[100%] focus:outline-none focus:border-[#006bff]`}
+                className={`border-[1px] py-3 px-5 rounded-[8px] w-[100%] focus:outline-none focus:border-[#006bff]`}
               />
             </div>
             <div className="flex flex-col gap-2 w-[100%]">
@@ -166,7 +166,7 @@ const CreateCaseFormModal = ({
                 placeholderText="Enter Date"
                 selected={selectedDateReported}
                 onChange={(date) => handleDateReportedChangeCombined(date)}
-                className={`border-[1px] py-3 px-5 rounded-[32px] w-[100%] focus:outline-none focus:border-[#006bff]`}
+                className={`border-[1px] py-3 px-5 rounded-[8px] w-[100%] focus:outline-none focus:border-[#006bff]`}
               />
             </div>
           </div>
@@ -177,9 +177,8 @@ const CreateCaseFormModal = ({
                 name="typeOfViolation"
                 value={typeOfViolation}
                 onChange={handleChange}
-                className="appearance-none py-3 px-5 rounded-[32px] focus:outline-none border-[1px] focus:border-[#006bff]"
+                className="appearance-none py-3 px-5 rounded-[8px] focus:outline-none border-[1px] focus:border-[#006bff]"
               >
-                <option value="">Violation</option>
                 {typeOfViolations?.map((t) => (
                   <option key={t} value={t}>
                     {t}
@@ -193,11 +192,9 @@ const CreateCaseFormModal = ({
                 name="reportedViolation"
                 value={reportedViolation}
                 onChange={handleChange}
-                className="appearance-none py-3 px-5 rounded-[32px] focus:outline-none border-[1px] focus:border-[#006bff]"
+                className="appearance-none py-3 px-5 rounded-[8px] focus:outline-none border-[1px] focus:border-[#006bff]"
               >
-                <option value="All">All</option>
-
-                {typeOfViolation === 'Minor' ? (
+                {typeOfViolation === "Minor" ? (
                   <>
                     {minorViolation
                       ?.sort((a, b) => {
@@ -220,7 +217,7 @@ const CreateCaseFormModal = ({
                       ))}
                   </>
                 ) : null}
-                {typeOfViolation === 'Major' ? (
+                {typeOfViolation === "Major" ? (
                   <>
                     {majorViolation
                       ?.sort((a, b) => {
@@ -249,13 +246,13 @@ const CreateCaseFormModal = ({
         </div>
 
         <div className="w-[100%] p-10 flex justify-end items-center">
-          {selectedDateOfIncident !== '' &&
-          selectedDateReported !== '' &&
-          reportedViolation !== '' &&
-          typeOfViolation !== '' ? (
+          {selectedDateOfIncident !== "" &&
+          selectedDateReported !== "" &&
+          reportedViolation !== "" &&
+          typeOfViolation !== "" ? (
             <button
               type="submit"
-              className="cursor-pointer w-[100%] py-4 px-4 bg-[#006bff] text-[white] text-[16px] flex gap-2 justify-center items-center rounded-[32px]"
+              className="cursor-pointer w-[100%] py-4 px-4 bg-[#006bff] text-[white] text-[16px] flex gap-2 justify-center items-center rounded-[8px]"
             >
               <FaPlus />
               <div>Add Case</div>
@@ -263,7 +260,7 @@ const CreateCaseFormModal = ({
           ) : (
             <button
               disabled
-              className="py-4 px-4 w-[100%] bg-blue-300 text-[white] text-[16px] flex gap-2 justify-center items-center rounded-[32px]"
+              className="py-4 px-4 w-[100%] bg-blue-300 text-[white] text-[16px] flex gap-2 justify-center items-center rounded-[8px]"
             >
               <FaPlus />
               <div>Add Case</div>

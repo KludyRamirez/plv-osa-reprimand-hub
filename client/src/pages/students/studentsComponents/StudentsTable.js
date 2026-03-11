@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { createSelector } from 'reselect';
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { createSelector } from "reselect";
+import axios from "axios";
 import {
   BsEye,
   BsEyeFill,
@@ -10,35 +10,38 @@ import {
   BsPenFill,
   BsTrash3,
   BsTrash3Fill,
-} from 'react-icons/bs';
-import Modal from '@mui/material/Modal';
-import { styled } from '@mui/system';
-import DeleteStudentModal from './DeleteStudentModal';
-import toast from 'react-hot-toast';
-import DeleteManyStudentModal from './DeleteManyStudentModal';
-import { useNavigate } from 'react-router-dom';
-import EditStudent from './EditStudent';
+} from "react-icons/bs";
+import Modal from "@mui/material/Modal";
+import { styled } from "@mui/system";
+import DeleteStudentModal from "./DeleteStudentModal";
+import toast from "react-hot-toast";
+import DeleteManyStudentModal from "./DeleteManyStudentModal";
+import { useNavigate } from "react-router-dom";
+import EditStudent from "./EditStudent";
+import xlsxStudentsExporter from "../../../externalUtils/xlsxStudentsExporter";
+import { FaTrashCan } from "react-icons/fa6";
+import { RiFileExcel2Fill } from "react-icons/ri";
 
-const ModalBox = styled('div')({
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  width: '48%',
-  borderRadius: '12px',
-  transform: 'translate(-50%, -50%)',
-  background: 'white',
-  border: 'none',
-  outline: 'none',
+const ModalBox = styled("div")({
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  width: "48%",
+  borderRadius: "12px",
+  transform: "translate(-50%, -50%)",
+  background: "white",
+  border: "none",
+  outline: "none",
 
-  '&:focus': {
-    border: 'none',
+  "&:focus": {
+    border: "none",
   },
 
-  '@media (max-width: 767px)': {
-    width: '100%',
-    height: '100%',
-    borderRadius: '0px',
-    border: 'none',
+  "@media (max-width: 767px)": {
+    width: "100%",
+    height: "100%",
+    borderRadius: "0px",
+    border: "none",
   },
 });
 
@@ -55,12 +58,12 @@ const StudentsTable = ({
   allowedRoles,
 }) => {
   const [selectAll, setSelectAll] = useState(false);
-  const [studentDeleteId, setStudentDeleteId] = useState('');
+  const [studentDeleteId, setStudentDeleteId] = useState("");
   const [showDeleteStudentModal, setShowDeleteStudentModal] = useState(false);
   const [showDeleteManyStudentModal, setShowDeleteManyStudentModal] =
     useState(false);
   const [showEditStudentModal, setShowEditStudentModal] = useState(false);
-  const [selectedStudentEdit, setSelectedStudentEdit] = useState('');
+  const [selectedStudentEdit, setSelectedStudentEdit] = useState("");
 
   const auth = useSelector(authSelector);
   const navigate = useNavigate();
@@ -78,7 +81,7 @@ const StudentsTable = ({
 
     if (updatedSelectedStudents.includes(studentId)) {
       updatedSelectedStudents = updatedSelectedStudents.filter(
-        (id) => id !== studentId
+        (id) => id !== studentId,
       );
     } else {
       updatedSelectedStudents = [...updatedSelectedStudents, studentId];
@@ -100,8 +103,8 @@ const StudentsTable = ({
   const deleteSelectedStudents = async () => {
     try {
       if (!auth.userDetails || !auth.userDetails.token) {
-        console.error('Authentication token not found.');
-        navigate('/');
+        console.error("Authentication token not found.");
+        navigate("/");
         return;
       }
 
@@ -113,23 +116,23 @@ const StudentsTable = ({
           headers: {
             Authorization: `Bearer ${auth.userDetails.token}`,
           },
-        }
+        },
       );
       setSelectedStudents([]);
       setSelectAll(false);
       getStudents();
       toast.success(res.data.message);
     } catch (error) {
-      console.error('Error deleting selected students:', error);
+      console.error("Error deleting selected students:", error);
       if (error.response) {
         if (error.response.status === 403) {
-          console.error('Unauthorized access. Please check your permissions.');
-          navigate('/forbidden');
+          console.error("Unauthorized access. Please check your permissions.");
+          navigate("/forbidden");
         } else {
           toast.error(error.response.data.message);
         }
       } else {
-        toast.error('An error occurred while deleting the selected students.');
+        toast.error("An error occurred while deleting the selected students.");
       }
     }
   };
@@ -137,7 +140,7 @@ const StudentsTable = ({
   const deleteOneStudent = async (id) => {
     try {
       if (!auth.userDetails.token) {
-        console.error('Authentication token not found.');
+        console.error("Authentication token not found.");
         return;
       }
       const res = await axios.delete(
@@ -147,12 +150,12 @@ const StudentsTable = ({
           headers: {
             Authorization: `Bearer ${auth?.userDetails?.token}`,
           },
-        }
+        },
       );
       getStudents();
       toast.success(res.data.message);
     } catch (error) {
-      console.error('Error deleting student:', error);
+      console.error("Error deleting student:", error);
     }
   };
 
@@ -171,7 +174,7 @@ const StudentsTable = ({
         await deleteOneStudent(studentDeleteId);
       }
     } catch (error) {
-      console.error('Error deleting schedule:', error);
+      console.error("Error deleting schedule:", error);
     } finally {
       setShowDeleteStudentModal(false);
       getStudents();
@@ -203,12 +206,16 @@ const StudentsTable = ({
     setShowEditStudentModal(false);
   };
 
+  const exportXLSX = () => {
+    xlsxStudentsExporter(selectedStudents, students, cases);
+  };
+
   const casesData = [...cases];
 
   return (
     <>
       <Modal
-        sx={{ border: 'none', outline: 'none' }}
+        sx={{ border: "none", outline: "none" }}
         open={showEditStudentModal}
         onClose={handleCloseModalEdit}
         aria-labelledby="parent-modal-title"
@@ -225,7 +232,7 @@ const StudentsTable = ({
         </ModalBox>
       </Modal>
       <Modal
-        sx={{ border: 'none', outline: 'none' }}
+        sx={{ border: "none", outline: "none" }}
         open={showDeleteStudentModal}
         onClose={handleCloseModal}
         aria-labelledby="parent-modal-title"
@@ -233,9 +240,9 @@ const StudentsTable = ({
       >
         <ModalBox
           sx={{
-            width: '35%',
-            background: '#fafafa',
-            borderRadius: '12px',
+            width: "35%",
+            background: "#fafafa",
+            borderRadius: "12px",
           }}
         >
           <DeleteStudentModal
@@ -246,16 +253,16 @@ const StudentsTable = ({
       </Modal>
       <Modal
         sx={{
-          width: '35%',
-          background: '#fafafa',
-          borderRadius: '12px',
+          width: "35%",
+          background: "#fafafa",
+          borderRadius: "12px",
         }}
         open={showDeleteManyStudentModal}
         onClose={handleCloseModalDeleteMany}
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-        <ModalBox sx={{ width: '22%' }}>
+        <ModalBox sx={{ width: "22%" }}>
           <DeleteManyStudentModal
             deleteSelectedStudents={deleteSelectedStudents}
             handleCloseModalDeleteMany={handleCloseModalDeleteMany}
@@ -305,34 +312,25 @@ const StudentsTable = ({
               No. of Cases
             </div>
 
-            {selectedStudents.length > 1 ? (
-              allowedRoles?.find((ar) =>
-                auth?.userDetails?.role?.includes(ar)
-              ) ? (
-                <div className="flex justify-start items-center gap-2">
+            <div className="flex justify-start items-center gap-2">
+              {selectedStudents.length > 1 &&
+                allowedRoles?.find((ar) =>
+                  auth?.userDetails?.role?.includes(ar),
+                ) && (
                   <div
-                    className="flex gap-1 justify-start items-center py-1 px-2 bg-[#ff3131] border-[1px] border-[#ff3131] text-white text-[14px] rounded-[4px] cursor-pointer"
+                    className="relative container w-[36px] h-[36px] flex justify-center items-center bg-[#ff3131] border-[1px] border-[#ff3131] rounded-[18px] cursor-pointer"
                     onClick={handleOpenModalDeleteMany}
                   >
-                    <span>Delete</span>
+                    <FaTrashCan className="text-[18px] text-white" />
                   </div>
-                  {/* <div
-                    className="flex gap-1 justify-start items-center py-1 px-2 bg-[green] border-[1px] border-[green] text-white text-[14px] rounded-[4px] cursor-pointer"
-                    onClick={exportPDF}
-                  >
-                    <span>Export</span>
-                  </div> */}
-                </div>
-              ) : (
-                <div className="w-[118px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
-                  <span>Actions</span>
-                </div>
-              )
-            ) : (
-              <div className="w-[118px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
-                <span>Actions</span>
+                )}
+              <div
+                className="relative container w-[36px] h-[36px] flex justify-center items-center bg-[#32CD32] border-[1px] border-[#32CD32] rounded-[18px] cursor-pointer"
+                onClick={exportXLSX}
+              >
+                <RiFileExcel2Fill className="text-[18px] text-white" />
               </div>
-            )}
+            </div>
           </div>
 
           {students.length > 0 ? (
@@ -341,14 +339,14 @@ const StudentsTable = ({
                 ?.filter((student) => student.year <= 4)
                 .map((student, k) => {
                   const casesCount = casesData.filter(
-                    (c) => c?.student?.studentNo === student?.studentNo
+                    (c) => c?.student?.studentNo === student?.studentNo,
                   ).length;
 
                   return (
                     <div
                       className={`w-[fit-content]
               flex items-center gap-4 px-6 ${
-                k % 2 === 0 ? 'bg-gray-100' : 'bg-white'
+                k % 2 === 0 ? "bg-gray-100" : "bg-white"
               }`}
                       key={k}
                     >
@@ -387,9 +385,14 @@ const StudentsTable = ({
                       </div>
                       <div
                         className={`w-[118px] flex justify-start items-center py-1 px-3 rounded-[4px] ${
-                          student?.statusOfStudent === 'Dismissed'
-                            ? 'text-[red] font-bold'
-                            : 'text-[green]'
+                          student?.statusOfStudent === "Dismissed"
+                            ? "text-[red] font-bold"
+                            : student?.statusOfStudent ===
+                                "Subject For Dismissal"
+                              ? "text-[#ff8c00] font-bold"
+                              : student?.statusOfStudent === "Graduated"
+                                ? "text-[#2563eb] font-bold"
+                                : "text-[green]"
                         }`}
                       >
                         {student?.statusOfStudent}
@@ -398,20 +401,20 @@ const StudentsTable = ({
                       <div
                         className={`w-[118px] flex justify-start items-center gap-8 py-1 px-3 rounded-[4px] ${
                           casesCount >= 2
-                            ? 'text-[#ff3131]'
+                            ? "text-[#ff3131]"
                             : casesCount === 1
-                            ? 'text-[#ffbf00]'
-                            : 'text-[#006bff]'
+                              ? "text-[#ffbf00]"
+                              : "text-[#006bff]"
                         }`}
                       >
                         <div>{casesCount}</div>
                         <div
                           className={`w-[14px] h-[14px] rounded-[50%] ${
                             casesCount >= 2
-                              ? 'bg-[#ff3131]'
+                              ? "bg-[#ff3131]"
                               : casesCount === 1
-                              ? 'bg-[#ffbf00]'
-                              : 'bg-[#006bff]'
+                                ? "bg-[#ffbf00]"
+                                : "bg-[#006bff]"
                           }`}
                         ></div>
                       </div>
@@ -437,7 +440,7 @@ const StudentsTable = ({
 
                         {selectedStudents.length < 2 ? (
                           allowedRoles?.find((ar) =>
-                            auth?.userDetails?.role?.includes(ar)
+                            auth?.userDetails?.role?.includes(ar),
                           ) ? (
                             <>
                               <div

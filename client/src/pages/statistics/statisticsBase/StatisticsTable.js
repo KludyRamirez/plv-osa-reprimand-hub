@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
+import OverviewDashboard from '../statisticsComponents/OverviewDashboard';
 import CasesPerMonthFilter from '../statisticsComponents/CasesPerMonthFilter';
 import StudentsPerYearFilter from '../statisticsComponents/StudentsPerYearFilter';
 import YearlyStatistics from '../statisticsComponents/YearlyStatistics';
 
-const StatisticsTable = ({ cases, students, getCases, toast }) => {
-  const [activeStats, setActiveStats] = useState('Total');
+const tabs = [
+  { key: 'Overview', label: 'Overview' },
+  { key: 'Cases', label: 'Cases Analytics' },
+  { key: 'Yearly', label: 'Year Comparison' },
+];
 
-  const handleSetActiveStats = (active) => {
-    setActiveStats(active);
-  };
+const StatisticsTable = ({ cases, students, getCases, toast }) => {
+  const [activeStats, setActiveStats] = useState('Overview');
 
   return (
     <>
@@ -19,30 +22,27 @@ const StatisticsTable = ({ cases, students, getCases, toast }) => {
         <div className="w-100 text-[26px] text-[#006bff] font-bold mb-6 flex justify-between items-center">
           <div>Statistics</div>
           <div className="flex justify-start items-center gap-2">
-            <div
-              onClick={() => handleSetActiveStats('Total')}
-              className={`text-[16px] ${
-                activeStats === 'Total'
-                  ? 'bg-gradient-to-br from-[#006bff] via-[#079bff] to-[#006bff] text-white'
-                  : 'text-[#606060] bg-gray-100 border-gray-100'
-              } font-semibold py-3 px-5 rounded-[32px] cursor-pointer`}
-            >
-              All Stats
-            </div>
-            <div
-              onClick={() => handleSetActiveStats('Yearly')}
-              className={`text-[16px] ${
-                activeStats === 'Yearly'
-                  ? 'bg-gradient-to-br from-[#006bff] via-[#079bff] to-[#006bff] text-white'
-                  : 'text-[#606060] bg-gray-100 border-gray-100'
-              } font-semibold py-3 px-5 rounded-[32px] cursor-pointer`}
-            >
-              Yearly Stats
-            </div>
+            {tabs.map((tab) => (
+              <div
+                key={tab.key}
+                onClick={() => setActiveStats(tab.key)}
+                className={`text-[16px] ${
+                  activeStats === tab.key
+                    ? 'bg-gradient-to-br from-[#006bff] via-[#079bff] to-[#006bff] text-white'
+                    : 'text-[#606060] bg-gray-100 border-gray-100'
+                } font-semibold py-3 px-5 rounded-[32px] cursor-pointer`}
+              >
+                {tab.label}
+              </div>
+            ))}
           </div>
         </div>
 
-        {activeStats === 'Total' ? (
+        {activeStats === 'Overview' && (
+          <OverviewDashboard cases={cases} students={students} />
+        )}
+
+        {activeStats === 'Cases' && (
           <div className="flex flex-col gap-4">
             <CasesPerMonthFilter
               toast={toast}
@@ -57,7 +57,9 @@ const StatisticsTable = ({ cases, students, getCases, toast }) => {
               students={students}
             />
           </div>
-        ) : (
+        )}
+
+        {activeStats === 'Yearly' && (
           <YearlyStatistics cases={cases} />
         )}
       </div>

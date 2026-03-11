@@ -670,7 +670,15 @@ const StudentsProfileTable = ({
               </div>
             </div>
             <div className="w-[100%] flex justify-between items-center gap-4 mb-6">
-              <div className="px-3 flex justify-center items-center gap-2 py-1 bg-green-600 text-white text-[14px] rounded-[4px] font-bold border-[1px] border-green-600">
+              <div className={`px-3 flex justify-center items-center gap-2 py-1 text-white text-[14px] rounded-[4px] font-bold border-[1px] ${
+                student.statusOfStudent === 'Dismissed'
+                  ? 'bg-red-600 border-red-600'
+                  : student.statusOfStudent === 'Subject For Dismissal'
+                  ? 'bg-orange-500 border-orange-500'
+                  : student.statusOfStudent === 'Graduated'
+                  ? 'bg-blue-600 border-blue-600'
+                  : 'bg-green-600 border-green-600'
+              }`}>
                 {student.statusOfStudent}
               </div>
             </div>

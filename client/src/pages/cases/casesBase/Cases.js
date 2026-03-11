@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import Sidebar from '../../../externalComponents/sidebarBase/Sidebar';
-import axios from 'axios';
-import { useSelector } from 'react-redux';
-import { createSelector } from 'reselect';
-import CreateCase from '../casesComponents/CreateCase';
-import CasesFilter from '../casesComponents/CasesFilter';
+import React, { useState, useEffect } from "react";
+import Sidebar from "../../../externalComponents/sidebarBase/Sidebar";
+import axios from "axios";
+import { useSelector } from "react-redux";
+import { createSelector } from "reselect";
+import CreateCase from "../casesComponents/CreateCase";
+import CasesFilter from "../casesComponents/CasesFilter";
 
 const selectAuth = (state) => state.auth;
 const authSelector = createSelector([selectAuth], (auth) => auth);
@@ -25,7 +25,7 @@ const Cases = ({ toast, allowedRoles }) => {
   const getCases = async () => {
     try {
       if (!auth.userDetails.token) {
-        console.error('Authentication token not found.');
+        console.error("Authentication token not found.");
         return;
       }
       const url = `${process.env.REACT_APP_API_URI}/case`;
@@ -38,14 +38,14 @@ const Cases = ({ toast, allowedRoles }) => {
 
       setCases(res.data);
     } catch (err) {
-      console.error('Error fetching users!', err);
+      console.error("Error fetching users!", err);
     }
   };
 
   const getStudents = async () => {
     try {
       if (!auth.userDetails.token) {
-        console.error('Authentication token not found.');
+        console.error("Authentication token not found.");
         return;
       }
       const url = `${process.env.REACT_APP_API_URI}/student`;
@@ -57,14 +57,14 @@ const Cases = ({ toast, allowedRoles }) => {
       });
       setStudents(res.data);
     } catch (err) {
-      console.error('Error fetching users!', err);
+      console.error("Error fetching users!", err);
     }
   };
 
   const getCads = async () => {
     try {
       if (!auth.userDetails.token) {
-        console.error('Authentication token not found.');
+        console.error("Authentication token not found.");
         return;
       }
       const url = `${process.env.REACT_APP_API_URI}/cad`;
@@ -77,7 +77,7 @@ const Cases = ({ toast, allowedRoles }) => {
 
       setCads(res.data);
     } catch (err) {
-      console.error('Error fetching users!', err);
+      console.error("Error fetching users!", err);
     }
   };
 

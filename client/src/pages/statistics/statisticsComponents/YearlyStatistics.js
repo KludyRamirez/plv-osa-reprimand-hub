@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BsCalendar4Week, BsChevronBarDown } from 'react-icons/bs';
+import { BsCalendar4Week, BsChevronBarDown, BsArrowUp, BsArrowDown } from 'react-icons/bs';
 
 const currentYear = new Date().getFullYear();
 const previousYear = currentYear - 1;
@@ -17,116 +17,75 @@ const YearlyStatistics = ({ cases }) => {
     setYears(yearsArray);
   }, []);
 
-  const filterCases = (cases, year) => {
-    return cases.filter((c) => {
-      const yearMatch =
-        year === 'All' ||
-        new Date(c?.dateOfIncident).getFullYear() ===
-          new Date(year).getFullYear();
+  const filterByYear = (yr) =>
+    cases.filter((c) => new Date(c?.dateOfIncident).getFullYear() === new Date(yr).getFullYear());
 
-      return yearMatch;
-    });
+  const yearCases = filterByYear(year);
+  const otherYearCases = filterByYear(otherYear);
+
+  const getBreakdown = (filtered) => ({
+    total: filtered.length,
+    minor: filtered.filter((c) => c?.typeOfViolation === 'Minor').length,
+    major: filtered.filter((c) => c?.typeOfViolation === 'Major').length,
+    first: filtered.filter((c) => c?.offense === '1st').length,
+    second: filtered.filter((c) => c?.offense === '2nd').length,
+    third: filtered.filter((c) => c?.offense === '3rd').length,
+    fourth: filtered.filter((c) => c?.offense === '4th').length,
+  });
+
+  const current = getBreakdown(yearCases);
+  const past = getBreakdown(otherYearCases);
+
+  const getDelta = (curr, prev) => {
+    if (prev === 0 && curr === 0) return { value: 0, direction: 'same' };
+    if (prev === 0) return { value: 100, direction: 'up' };
+    const pct = (((curr - prev) / prev) * 100).toFixed(1);
+    return {
+      value: Math.abs(pct),
+      direction: pct > 0 ? 'up' : pct < 0 ? 'down' : 'same',
+    };
   };
 
-  const filteredCases = filterCases(cases, year);
+  const metrics = [
+    { label: 'Total', key: 'total', bg: 'bg-[#006bff]', text: 'text-white', border: '' },
+    { label: 'Minor', key: 'minor', bg: 'bg-white', text: 'text-[#006bff]', border: 'border border-blue-300' },
+    { label: 'Major', key: 'major', bg: 'bg-red-800', text: 'text-white', border: '' },
+    { label: '1st Offense', key: 'first', bg: 'bg-green-100', text: 'text-green-800', border: 'border border-green-300' },
+    { label: '2nd Offense', key: 'second', bg: 'bg-yellow-100', text: 'text-yellow-800', border: 'border border-yellow-300' },
+    { label: '3rd Offense', key: 'third', bg: 'bg-orange-100', text: 'text-orange-800', border: 'border border-orange-300' },
+    { label: '4th Offense', key: 'fourth', bg: 'bg-red-100', text: 'text-red-800', border: 'border border-red-300' },
+  ];
 
-  let combinedFilteredCases = [...filteredCases];
-
-  const totalCases = cases?.filter(
-    (c) =>
-      new Date(c?.dateOfIncident).getFullYear() === new Date(year).getFullYear()
-  );
-
-  const majorCases = combinedFilteredCases?.filter(
-    (c) => c?.typeOfViolation === 'Major'
-  );
-  const minorCases = combinedFilteredCases?.filter(
-    (c) => c?.typeOfViolation === 'Minor'
-  );
-
-  const firstOffCases = combinedFilteredCases?.filter(
-    (c) => c?.offense === '1st'
-  );
-  const secondOffCases = combinedFilteredCases?.filter(
-    (c) => c?.offense === '2nd'
-  );
-  const thirdOffCases = combinedFilteredCases?.filter(
-    (c) => c?.offense === '3rd'
-  );
-  const fourthOffCases = combinedFilteredCases?.filter(
-    (c) => c?.offense === '4th'
-  );
-
-  const filterOtherYearCases = (cases, otherYear) => {
-    return cases.filter((c) => {
-      const otherYearMatch =
-        otherYear === 'All' ||
-        new Date(c?.dateOfIncident).getFullYear() ===
-          new Date(otherYear).getFullYear();
-
-      return otherYearMatch;
-    });
-  };
-
-  const filteredOtherYearCases = filterOtherYearCases(cases, otherYear);
-
-  let filteredOtherYearCasesArray = [...filteredOtherYearCases];
-
-  const totalOtherYearCases = cases?.filter(
-    (c) =>
-      new Date(c?.dateOfIncident).getFullYear() ===
-      new Date(otherYear).getFullYear()
-  );
-
-  const majorOtherYearCases = filteredOtherYearCasesArray?.filter(
-    (c) => c?.typeOfViolation === 'Major'
-  );
-  const minorOtherYearCases = filteredOtherYearCasesArray?.filter(
-    (c) => c?.typeOfViolation === 'Minor'
-  );
-
-  const firstOffenseOtherYearCases = filteredOtherYearCasesArray?.filter(
-    (c) => c?.offense === '1st'
-  );
-  const secondOffenseOtherYearCases = filteredOtherYearCasesArray?.filter(
-    (c) => c?.offense === '2nd'
-  );
-  const thirdOffenseOtherYearCases = filteredOtherYearCasesArray?.filter(
-    (c) => c?.offense === '3rd'
-  );
-  const fourthOffenseOtherYearCases = filteredOtherYearCasesArray?.filter(
-    (c) => c?.offense === '4th'
-  );
-
-  const yearTotalCases = cases?.filter(
-    (c) =>
-      new Date(c?.dateOfIncident).getFullYear() === new Date(year).getFullYear()
-  );
-
-  const otherYearTotalCases = cases?.filter(
-    (c) =>
-      new Date(c?.dateOfIncident).getFullYear() ===
-      new Date(otherYear).getFullYear()
-  );
-
-  const subtractCasesTotalPerYear =
-    yearTotalCases?.length - otherYearTotalCases?.length;
-
-  const yearNowPercentage = Math.abs(subtractCasesTotalPerYear);
-
-  const fraction =
-    yearTotalCases?.length !== 0
-      ? yearNowPercentage / yearTotalCases?.length
-      : 0;
-
-  const percentage = (fraction * 100).toFixed(1);
+  const totalDelta = getDelta(current.total, past.total);
 
   return (
     <>
-      <div className="w-[100%] h-[100%] rounded-[8px] flex justify-between relative mt-4">
-        <div className="w-[45%] flex flex-col flex-wrap gap-4">
-          <div className="sm:w-[50%] flex flex-col items-start gap-2">
-            <div className="w-[200px] sm:w-[100%] flex justify-between items-center">
+      {/* Delta summary */}
+      <div className="w-full flex justify-center mt-4 mb-6">
+        <div className={`px-6 py-4 rounded-xl border ${totalDelta.direction === 'down' ? 'border-green-300 bg-green-50' : totalDelta.direction === 'up' ? 'border-red-300 bg-red-50' : 'border-gray-200 bg-gray-50'} flex items-center gap-3`}>
+          {totalDelta.direction === 'down' ? (
+            <BsArrowDown className="text-[24px] text-green-600" />
+          ) : totalDelta.direction === 'up' ? (
+            <BsArrowUp className="text-[24px] text-red-600" />
+          ) : null}
+          <div className="text-[16px]">
+            Cases have{' '}
+            <span className={`font-bold ${totalDelta.direction === 'down' ? 'text-green-700' : totalDelta.direction === 'up' ? 'text-red-700' : 'text-gray-700'}`}>
+              {totalDelta.direction === 'down' ? 'decreased' : totalDelta.direction === 'up' ? 'increased' : 'stayed the same'}
+            </span>
+            {totalDelta.direction !== 'same' && (
+              <> by <span className="font-bold text-[20px]">{totalDelta.value}%</span></>
+            )}
+            {' '}from {otherYear} to {year}
+          </div>
+        </div>
+      </div>
+
+      <div className="w-full flex sm:flex-col justify-between gap-6">
+        {/* Year Now */}
+        <div className="w-[48%] sm:w-full flex flex-col gap-4">
+          <div className="flex flex-col items-start gap-2">
+            <div className="w-[200px] flex justify-between items-center">
               <div className="flex gap-2 items-center">
                 <div>Year Now</div> <BsChevronBarDown />
               </div>
@@ -134,90 +93,30 @@ const YearlyStatistics = ({ cases }) => {
             </div>
             <select
               value={year}
-              onChange={(e) => {
-                setYear(e.target.value);
-              }}
-              className="sm:w-[100%] px-3 py-2 w-[200px] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px]"
+              onChange={(e) => setYear(e.target.value)}
+              className="px-3 py-2 w-[200px] rounded-[6px] bg-white appearance-none focus:outline-none border focus:border-[#aaaaaa]"
             >
-              {years.map((year) => (
-                <option key={year} value={year}>
-                  {year}
-                </option>
+              {years.map((y) => (
+                <option key={y} value={y}>{y}</option>
               ))}
             </select>
           </div>
-          <div className="flex justify-start flex-wrap gap-2 w-[100%]">
-            <div className="p-4 w-[206px] h-[180px] rounded-[12px] relative overflow-hidden bg-[#006bff] flex justify-start items-start text-[white]">
-              <div className="text-[20px]">Total</div>
-              <div className="absolute bottom-[-10px] right-[16px] text-[64px] font-bold z-30">
-                {totalCases?.length}
+          <div className="flex flex-wrap gap-3">
+            {metrics.map((m) => (
+              <div key={m.key} className={`p-4 w-[200px] h-[170px] rounded-xl relative overflow-hidden ${m.bg} ${m.text} ${m.border}`}>
+                <div className="text-[18px] font-medium">{m.label}</div>
+                <div className="absolute bottom-3 right-4 text-[56px] font-bold leading-none">
+                  {current[m.key]}
+                </div>
               </div>
-              <div className="absolute bottom-[-90px] left-[-90px] w-[200px] h-[200px] rounded-[50%] bg-blue-400 flex justify-center items-center">
-                <div className="w-[120px] h-[120px] rounded-[50%] bg-blue-300"></div>
-              </div>
-            </div>
-            <div className="p-4 w-[206px] h-[180px] border-[1px] border-blue-300 rounded-[12px] relative overflow-hidden bg-white text-[#006bff]">
-              <div className="text-[20px]">Minor</div>
-              <div className="absolute bottom-[-10px] right-[16px] text-[64px] font-bold z-30">
-                {minorCases?.length}
-              </div>
-              <div className="absolute top-[-90px] right-[-90px] w-[200px] h-[200px] rounded-[50%] bg-blue-200 flex justify-center items-center">
-                <div className="w-[120px] h-[120px] rounded-[50%] bg-blue-100"></div>
-              </div>
-            </div>
-            <div className="p-4 w-[206px] h-[180px] rounded-[12px] relative overflow-hidden bg-red-800 text-[white]">
-              <div className="text-[20px]">Major</div>
-              <div className="absolute bottom-[-10px] right-[16px] text-[64px] font-bold z-30">
-                {majorCases?.length}
-              </div>
-              <div className="absolute bottom-[-90px] left-[-90px] w-[200px] h-[200px] rounded-[50%] bg-red-200 flex justify-center items-center">
-                <div className="w-[120px] h-[120px] rounded-[50%] bg-red-100"></div>
-              </div>
-            </div>
-            <div className="p-4 w-[206px] h-[180px] border-[1px] border-green-300 rounded-[12px] relative overflow-hidden bg-green-100 text-green-800">
-              <div className="text-[20px]">1st Offense</div>
-              <div className="absolute bottom-[-10px] right-[16px] text-[64px] font-bold z-30">
-                {firstOffCases?.length}
-              </div>
-              <div className="absolute bottom-[-90px] right-[-90px] w-[200px] h-[200px] rounded-[50%] bg-green-200 flex justify-center items-center">
-                <div className="w-[120px] h-[120px] rounded-[50%] bg-green-100"></div>
-              </div>
-            </div>
-            <div className="p-4 w-[206px] h-[180px] border-[1px] border-yellow-300 rounded-[12px] relative overflow-hidden bg-yellow-100 text-yellow-800">
-              <div className="text-[20px]">2nd Offense</div>
-              <div className="absolute bottom-[-10px] right-[16px] text-[64px] font-bold z-30">
-                {secondOffCases?.length}
-              </div>
-              <div className="absolute bottom-[-90px] left-[-90px] w-[200px] h-[200px] rounded-[50%] bg-yellow-200 flex justify-center items-center">
-                <div className="w-[120px] h-[120px] rounded-[50%] bg-yellow-100"></div>
-              </div>
-            </div>
-
-            <div className="p-4 w-[206px] h-[180px] border-[1px] border-orange-300 rounded-[12px] relative overflow-hidden bg-orange-100 text-orange-800">
-              <div className="text-[20px]">
-                3rd <br /> Offense
-              </div>
-              <div className="absolute top-[-90px] right-[-90px] w-[200px] h-[200px] rounded-[50%] bg-orange-200 flex justify-center items-center">
-                <div className="w-[120px] h-[120px] rounded-[50%] bg-orange-100"></div>
-              </div>
-              <div className="absolute bottom-[-10px] right-[16px] text-[64px] font-bold z-30">
-                {thirdOffCases?.length}
-              </div>
-            </div>
-            <div className="p-4 w-[206px] h-[180px] border-[1px] border-red-300 rounded-[12px] relative overflow-hidden bg-red-100 text-red-800">
-              <div className="text-[20px] z-30">4th Offense</div>
-              <div className="absolute bottom-[-10px] right-[16px] text-[64px] font-bold z-30">
-                {fourthOffCases?.length}
-              </div>
-              <div className="absolute bottom-[-90px] left-[-90px] w-[200px] h-[200px] rounded-[50%] bg-red-200 flex justify-center items-center">
-                <div className="w-[120px] h-[120px] rounded-[50%] bg-red-100"></div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
-        <div className="w-[45%] flex flex-col gap-4">
-          <div className="sm:w-[50%] flex flex-col items-end gap-2">
-            <div className="w-[200px] sm:w-[100%] flex justify-between items-center">
+
+        {/* Past Year */}
+        <div className="w-[48%] sm:w-full flex flex-col gap-4">
+          <div className="flex flex-col items-end sm:items-start gap-2">
+            <div className="w-[200px] flex justify-between items-center">
               <div className="flex gap-2 items-center">
                 <div>Past Year</div> <BsChevronBarDown />
               </div>
@@ -225,109 +124,35 @@ const YearlyStatistics = ({ cases }) => {
             </div>
             <select
               value={otherYear}
-              onChange={(e) => {
-                setOtherYear(e.target.value);
-              }}
-              className="sm:w-[100%] px-3 py-2 w-[200px] rounded-[6px] bg-[#ffffff] appearance-none focus:outline-none focus:border-[#aaaaaa] focus:border-[1px] border-[1px] "
+              onChange={(e) => setOtherYear(e.target.value)}
+              className="px-3 py-2 w-[200px] rounded-[6px] bg-white appearance-none focus:outline-none border focus:border-[#aaaaaa]"
             >
               {years.map((y) => (
-                <option key={y} value={y}>
-                  {y}
-                </option>
+                <option key={y} value={y}>{y}</option>
               ))}
             </select>
           </div>
-          <div className="flex justify-end flex-wrap gap-2 w-[100%]">
-            <div className="p-4 w-[206px] h-[180px] rounded-[12px] relative overflow-hidden bg-[#006bff] flex justify-start items-start text-[white]">
-              <div className="text-[20px]">Total</div>
-              <div className="absolute bottom-[-10px] right-[16px] text-[64px] font-bold z-30">
-                {totalOtherYearCases?.length}
-              </div>
-              <div className="absolute bottom-[-90px] left-[-90px] w-[200px] h-[200px] rounded-[50%] bg-blue-400 flex justify-center items-center">
-                <div className="w-[120px] h-[120px] rounded-[50%] bg-blue-300"></div>
-              </div>
-            </div>
-            <div className="p-4 w-[206px] h-[180px] border-[1px] border-blue-300 rounded-[12px] relative overflow-hidden bg-white text-[#006bff]">
-              <div className="text-[20px]">Minor</div>
-              <div className="absolute bottom-[-10px] right-[16px] text-[64px] font-bold z-30">
-                {minorOtherYearCases?.length}
-              </div>
-              <div className="absolute top-[-90px] right-[-90px] w-[200px] h-[200px] rounded-[50%] bg-blue-200 flex justify-center items-center">
-                <div className="w-[120px] h-[120px] rounded-[50%] bg-blue-100"></div>
-              </div>
-            </div>
-            <div className="p-4 w-[206px] h-[180px] rounded-[12px] relative overflow-hidden bg-red-800 text-[white]">
-              <div className="text-[20px]">Major</div>
-              <div className="absolute bottom-[-10px] right-[16px] text-[64px] font-bold z-30">
-                {majorOtherYearCases?.length}
-              </div>
-              <div className="absolute bottom-[-90px] left-[-90px] w-[200px] h-[200px] rounded-[50%] bg-red-200 flex justify-center items-center">
-                <div className="w-[120px] h-[120px] rounded-[50%] bg-red-100"></div>
-              </div>
-            </div>
-            <div className="p-4 w-[206px] h-[180px] border-[1px] border-green-300 rounded-[12px] relative overflow-hidden bg-green-100 text-green-800">
-              <div className="text-[20px]">1st Offense</div>
-              <div className="absolute bottom-[-10px] right-[16px] text-[64px] font-bold z-30">
-                {firstOffenseOtherYearCases?.length}
-              </div>
-              <div className="absolute bottom-[-90px] right-[-90px] w-[200px] h-[200px] rounded-[50%] bg-green-200 flex justify-center items-center">
-                <div className="w-[120px] h-[120px] rounded-[50%] bg-green-100"></div>
-              </div>
-            </div>
-            <div className="p-4 w-[206px] h-[180px] border-[1px] border-yellow-300 rounded-[12px] relative overflow-hidden bg-yellow-100 text-yellow-800">
-              <div className="text-[20px]">2nd Offense</div>
-              <div className="absolute bottom-[-10px] right-[16px] text-[64px] font-bold z-30">
-                {secondOffenseOtherYearCases?.length}
-              </div>
-              <div className="absolute bottom-[-90px] left-[-90px] w-[200px] h-[200px] rounded-[50%] bg-yellow-200 flex justify-center items-center">
-                <div className="w-[120px] h-[120px] rounded-[50%] bg-yellow-100"></div>
-              </div>
-            </div>
-            <div className="p-4 w-[206px] h-[180px] border-[1px] border-orange-300 rounded-[12px] relative overflow-hidden bg-orange-100 text-orange-800">
-              <div className="text-[20px] z-30">
-                3rd <br /> Offense
-              </div>
-              <div className="absolute bottom-[-10px] right-[16px] text-[64px] font-bold z-30">
-                {thirdOffenseOtherYearCases?.length}
-              </div>
-              <div className="absolute top-[-90px] right-[-90px] w-[200px] h-[200px] rounded-[50%] bg-orange-200 flex justify-center items-center">
-                <div className="w-[120px] h-[120px] rounded-[50%] bg-orange-100"></div>
-              </div>
-            </div>
-            <div className="p-4 w-[206px] h-[180px] border-[1px] border-red-300 rounded-[12px] relative overflow-hidden bg-red-100 text-red-800">
-              <div className="text-[20px] z-30">4th Offense</div>
-              <div className="absolute bottom-[-10px] right-[16px] text-[64px] font-bold z-30">
-                {fourthOffenseOtherYearCases?.length}
-              </div>
-              <div className="absolute bottom-[-90px] left-[-90px] w-[200px] h-[200px] rounded-[50%] bg-red-200 flex justify-center items-center">
-                <div className="w-[120px] h-[120px] rounded-[50%] bg-red-100"></div>
-              </div>
-            </div>
+          <div className="flex flex-wrap justify-end sm:justify-start gap-3">
+            {metrics.map((m) => {
+              const delta = getDelta(current[m.key], past[m.key]);
+              return (
+                <div key={m.key} className={`p-4 w-[200px] h-[170px] rounded-xl relative overflow-hidden ${m.bg} ${m.text} ${m.border}`}>
+                  <div className="text-[18px] font-medium">{m.label}</div>
+                  <div className="absolute bottom-3 right-4 text-[56px] font-bold leading-none">
+                    {past[m.key]}
+                  </div>
+                  {delta.direction !== 'same' && (
+                    <div className={`absolute top-3 right-4 text-[12px] font-semibold px-2 py-1 rounded-full ${
+                      delta.direction === 'down' ? 'bg-green-200 text-green-800' : 'bg-red-200 text-red-800'
+                    }`}>
+                      {delta.direction === 'up' ? '+' : '-'}{delta.value}%
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
         </div>
-        {/* <div
-          className={`w-[340px] h-[340px] rounded-[50%] absolute top-[46%] left-[39.3%] flex flex-col justify-center items-center gap-1`}
-        >
-          {subtractCasesTotalPerYear < 0 ? (
-            <div className="text-[20px] text-center">
-              The number of cases in the most recent year has{" "}
-              <span className="text-green-800 font-bold">decreased</span> by:
-            </div>
-          ) : (
-            <div className="text-[20px] text-center">
-              The number of cases in the most recent year has{" "}
-              <span className="text-red-800 font-bold">increased</span> by:
-            </div>
-          )}
-
-          <div
-            className={`text-[54px] font-bold rounded-[12px] flex justify-center ${
-              subtractCasesTotalPerYear < 0 ? "text-green-800" : "text-red-800"
-            }`}
-          >
-            {percentage}%
-          </div>
-        </div> */}
       </div>
     </>
   );

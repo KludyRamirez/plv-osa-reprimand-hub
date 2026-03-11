@@ -96,8 +96,11 @@ const EditStudent = ({
     let formattedValue = value;
 
     if (name === 'firstName' || name === 'middleName' || name === 'surName') {
-      formattedValue =
-        value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
+      formattedValue = value
+        .toLowerCase()
+        .split(' ')
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ');
     }
 
     setUpdatedValues({ ...updatedValues, [name]: formattedValue });

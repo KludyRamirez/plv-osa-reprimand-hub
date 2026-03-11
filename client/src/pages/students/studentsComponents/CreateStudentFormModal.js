@@ -197,6 +197,9 @@ const CreateStudentFormModal = ({
                   <option value="10">10</option>
                   <option value="11">11</option>
                   <option value="12">12</option>
+                  <option value="13">13</option>
+                  <option value="14">14</option>
+                  <option value="15">15</option>
                 </select>
               </div>
             </div>
@@ -289,14 +292,12 @@ const CreateStudentFormModal = ({
           firstNameError === '' &&
           middleNameError === '' &&
           surNameError === '' &&
+          studentNo !== '' &&
           college !== '' &&
           department !== '' &&
           year !== '' &&
           section !== '' &&
-          sex !== '' &&
-          emailError === '' &&
-          contactNoError === '' &&
-          guardianContactNoError === '' ? (
+          sex !== '' ? (
             <button
               type="submit"
               className="cursor-pointer w-[100%] py-4 px-4 bg-[#006bff] text-[white] text-[16px] flex gap-2 justify-center items-center rounded-[32px]"

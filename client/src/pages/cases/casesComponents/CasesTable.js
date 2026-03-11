@@ -1,38 +1,46 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { createSelector } from 'reselect';
-import axios from 'axios';
-import { BsChevronUp, BsFolder2Open, BsPen, BsTrash3 } from 'react-icons/bs';
-import Modal from '@mui/material/Modal';
-import { styled } from '@mui/system';
-import DeleteCaseModal from './DeleteCaseModal';
-import toast from 'react-hot-toast';
-import DeleteManyCaseModal from './DeleteManyCaseModal';
-import { useNavigate } from 'react-router-dom';
-import EditCase from './EditCase';
-import PatchCaseStatus from './PatchCaseStatus';
-import RemarksCase from './RemarksCase';
-import pdfExporter from '../../../externalUtils/pdfExporter';
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { createSelector } from "reselect";
+import axios from "axios";
+import {
+  BsBoxArrowUpRight,
+  BsChevronUp,
+  BsFolder2Open,
+  BsPen,
+  BsTrash3,
+} from "react-icons/bs";
+import { RiFileExcel2Fill } from "react-icons/ri";
+import Modal from "@mui/material/Modal";
+import { styled } from "@mui/system";
+import DeleteCaseModal from "./DeleteCaseModal";
+import toast from "react-hot-toast";
+import DeleteManyCaseModal from "./DeleteManyCaseModal";
+import { useNavigate } from "react-router-dom";
+import EditCase from "./EditCase";
+import PatchCaseStatus from "./PatchCaseStatus";
+import RemarksCase from "./RemarksCase";
+import xlsxExporter from "../../../externalUtils/xlsxExporter";
+import { FaTrashCan } from "react-icons/fa6";
 
-const ModalBox = styled('div')({
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  width: '48%',
-  transform: 'translate(-50%, -50%)',
-  background: 'white',
-  border: 'none',
-  outline: 'none',
+const ModalBox = styled("div")({
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  width: "48%",
+  transform: "translate(-50%, -50%)",
+  background: "white",
+  border: "none",
+  outline: "none",
 
-  '&:focus': {
-    border: 'none',
+  "&:focus": {
+    border: "none",
   },
 
-  '@media (max-width: 767px)': {
-    width: '100%',
-    height: '100%',
-    borderRadius: '0px',
-    border: 'none',
+  "@media (max-width: 767px)": {
+    width: "100%",
+    height: "100%",
+    borderRadius: "0px",
+    border: "none",
   },
 });
 
@@ -48,7 +56,7 @@ const CasesTable = ({
   allowedRoles,
 }) => {
   const [selectAll, setSelectAll] = useState(false);
-  const [caseDeleteId, setCaseDeleteId] = useState('');
+  const [caseDeleteId, setCaseDeleteId] = useState("");
   const [showDeleteCaseModal, setShowDeleteCaseModal] = useState(false);
   const [showDeleteManyCaseModal, setShowDeleteManyCaseModal] = useState(false);
   const [showEditCaseModal, setShowEditCaseModal] = useState(false);
@@ -57,8 +65,6 @@ const CasesTable = ({
   const [selectedCasePatch, setSelectedCasePatch] = useState(null);
   const [showRemarksCaseModal, setShowRemarksCaseModal] = useState(false);
   const [selectedCaseRemarks, setSelectedCaseRemarks] = useState(null);
-
-  const [exportTrigger, setExportTrigger] = useState(false);
 
   const auth = useSelector(authSelector);
   const navigate = useNavigate();
@@ -96,8 +102,8 @@ const CasesTable = ({
   const deleteSelectedCases = async () => {
     try {
       if (!auth.userDetails || !auth.userDetails.token) {
-        console.error('Authentication token not found.');
-        navigate('/');
+        console.error("Authentication token not found.");
+        navigate("/");
         return;
       }
 
@@ -109,23 +115,23 @@ const CasesTable = ({
           headers: {
             Authorization: `Bearer ${auth?.userDetails?.token}`,
           },
-        }
+        },
       );
       setSelectedCases([]);
       setSelectAll(false);
       getCases();
       toast.success(res.data.message);
     } catch (error) {
-      console.error('Error deleting selected Cases:', error);
+      console.error("Error deleting selected Cases:", error);
       if (error.response) {
         if (error.response.status === 403) {
-          console.error('Unauthorized access. Please check your permissions.');
-          navigate('/forbidden');
+          console.error("Unauthorized access. Please check your permissions.");
+          navigate("/forbidden");
         } else {
           toast.error(error.response.data.message);
         }
       } else {
-        toast.error('An error occurred while deleting the selected cases.');
+        toast.error("An error occurred while deleting the selected cases.");
       }
     }
   };
@@ -133,7 +139,7 @@ const CasesTable = ({
   const deleteOneCase = async (id) => {
     try {
       if (!auth.userDetails.token) {
-        console.error('Authentication token not found.');
+        console.error("Authentication token not found.");
         return;
       }
       const res = await axios.delete(
@@ -143,12 +149,12 @@ const CasesTable = ({
           headers: {
             Authorization: `Bearer ${auth?.userDetails?.token}`,
           },
-        }
+        },
       );
       getCases();
       toast.success(res.data.message);
     } catch (error) {
-      console.error('Error deleting Case:', error);
+      console.error("Error deleting Case:", error);
     }
   };
 
@@ -163,7 +169,7 @@ const CasesTable = ({
         await deleteOneCase(caseDeleteId);
       }
     } catch (error) {
-      console.error('Error deleting schedule:', error);
+      console.error("Error deleting schedule:", error);
     } finally {
       setShowDeleteCaseModal(false);
       getCases();
@@ -190,7 +196,7 @@ const CasesTable = ({
     try {
       setSelectedCaseEdit(cas);
     } catch (error) {
-      console.error('Error handling case edit click:', error);
+      console.error("Error handling case edit click:", error);
     } finally {
       setShowEditCaseModal(true);
     }
@@ -206,7 +212,7 @@ const CasesTable = ({
     try {
       setSelectedCasePatch(cas);
     } catch (error) {
-      console.error('Error handling case Patch click:', error);
+      console.error("Error handling case Patch click:", error);
     } finally {
       setShowPatchCaseModal(true);
     }
@@ -233,20 +239,14 @@ const CasesTable = ({
     setShowRemarksCaseModal(false);
   };
 
-  // export to pdf
-
-  const exportPDF = () => {
-    setExportTrigger(true);
+  const exportXLSX = () => {
+    xlsxExporter(selectedCases, cases);
   };
-
-  if (exportTrigger) {
-    pdfExporter(selectedCases, cases, setExportTrigger);
-  }
 
   return (
     <>
       <Modal
-        sx={{ border: 'none', outline: 'none' }}
+        sx={{ border: "none", outline: "none" }}
         open={showEditCaseModal}
         onClose={handleCloseModalEdit}
         aria-labelledby="parent-modal-title"
@@ -263,13 +263,13 @@ const CasesTable = ({
         </ModalBox>
       </Modal>
       <Modal
-        sx={{ border: 'none', outline: 'none' }}
+        sx={{ border: "none", outline: "none" }}
         open={showPatchCaseModal}
         onClose={handleCloseModalPatch}
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-        <ModalBox sx={{ width: '40%' }}>
+        <ModalBox sx={{ width: "40%" }}>
           <PatchCaseStatus
             handleCloseModalPatch={handleCloseModalPatch}
             selectedCasePatch={selectedCasePatch}
@@ -280,13 +280,13 @@ const CasesTable = ({
         </ModalBox>
       </Modal>
       <Modal
-        sx={{ border: 'none', outline: 'none' }}
+        sx={{ border: "none", outline: "none" }}
         open={showRemarksCaseModal}
         onClose={handleCloseModalRemarks}
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-        <ModalBox sx={{ width: '38%' }}>
+        <ModalBox sx={{ width: "38%" }}>
           <RemarksCase
             handleCloseModalRemarks={handleCloseModalRemarks}
             selectedCaseRemarks={selectedCaseRemarks}
@@ -297,7 +297,7 @@ const CasesTable = ({
         </ModalBox>
       </Modal>
       <Modal
-        sx={{ border: 'none', outline: 'none' }}
+        sx={{ border: "none", outline: "none" }}
         open={showDeleteCaseModal}
         onClose={handleCloseModal}
         aria-labelledby="parent-modal-title"
@@ -305,9 +305,9 @@ const CasesTable = ({
       >
         <ModalBox
           sx={{
-            width: '35%',
-            background: '#fafafa',
-            borderRadius: '12px',
+            width: "35%",
+            background: "#fafafa",
+            borderRadius: "12px",
           }}
         >
           <DeleteCaseModal
@@ -317,7 +317,7 @@ const CasesTable = ({
         </ModalBox>
       </Modal>
       <Modal
-        sx={{ border: 'none', outline: 'none' }}
+        sx={{ border: "none", outline: "none" }}
         open={showDeleteManyCaseModal}
         onClose={handleCloseModalDeleteMany}
         aria-labelledby="parent-modal-title"
@@ -325,9 +325,9 @@ const CasesTable = ({
       >
         <ModalBox
           sx={{
-            width: '35%',
-            background: '#fafafa',
-            borderRadius: '12px',
+            width: "35%",
+            background: "#fafafa",
+            borderRadius: "12px",
           }}
         >
           <DeleteManyCaseModal
@@ -351,12 +351,15 @@ const CasesTable = ({
               />
             </div>
             <div className="w-[90px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
-              No. | Off
+              Case No.
             </div>
-            <div className="w-[110px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+            <div className="w-[90px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+              Offense
+            </div>
+            <div className="w-[120px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
               Student No.
             </div>
-            <div className="w-[170px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+            <div className="w-[200px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
               Name
             </div>
             <div className="w-[118px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
@@ -377,39 +380,28 @@ const CasesTable = ({
             <div className="w-[160px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
               Date Reported
             </div>
-            <div className="w-[144px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
+            <div className="w-[150px] whitespace-nowrap flex justify-center items-center border-[1px] py-1 px-3 rounded-[24px]">
               Case Status
             </div>
-            {selectedCases.length > 1 ? (
-              allowedRoles?.find((ar) =>
-                auth?.userDetails?.role?.includes(ar)
-              ) ? (
-                <>
-                  <div className="flex justify-start items-center gap-2">
-                    <div
-                      className="flex gap-1 justify-start items-center py-1 px-2 bg-[#ff3131] border-[1px] border-[#ff3131] text-white text-[14px] rounded-[4px] cursor-pointer"
-                      onClick={handleOpenModalDeleteMany}
-                    >
-                      <span>Delete</span>
-                    </div>
-                    <div
-                      className="flex gap-1 justify-start items-center py-1 px-2 bg-[green] border-[1px] border-[green] text-white text-[14px] rounded-[4px] cursor-pointer"
-                      onClick={exportPDF}
-                    >
-                      <span>Export</span>
-                    </div>
+            <div className="flex justify-start items-center gap-2">
+              {selectedCases.length > 1 &&
+                allowedRoles?.find((ar) =>
+                  auth?.userDetails?.role?.includes(ar),
+                ) && (
+                  <div
+                    className="relative container w-[36px] h-[36px] flex justify-center items-center bg-[#ff3131] border-[1px] border-[#ff3131] rounded-[18px] cursor-pointer"
+                    onClick={handleOpenModalDeleteMany}
+                  >
+                    <FaTrashCan className="text-[18px] text-white" />
                   </div>
-                </>
-              ) : (
-                <div className="w-[119px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
-                  <span>Actions</span>
-                </div>
-              )
-            ) : (
-              <div className="w-[119px] whitespace-nowrap flex justify-start items-center border-[1px] py-1 px-3 rounded-[24px]">
-                <span>Actions</span>
+                )}
+              <div
+                className="relative container w-[36px] h-[36px] flex justify-center items-center bg-[#32CD32] border-[1px] border-[#32CD32] rounded-[18px] cursor-pointer"
+                onClick={exportXLSX}
+              >
+                <RiFileExcel2Fill className="text-[18px] text-white" />
               </div>
-            )}
+            </div>
           </div>
 
           {cases.length > 0 ? (
@@ -418,7 +410,7 @@ const CasesTable = ({
                 <div
                   className={`w-[fit-content]
               flex items-center gap-4 px-6 ${
-                k % 2 === 0 ? 'bg-gray-100' : 'bg-white'
+                k % 2 === 0 ? "bg-gray-100" : "bg-white"
               }`}
                   key={k}
                 >
@@ -432,15 +424,17 @@ const CasesTable = ({
                   </div>
                   <div className="w-[90px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px]">
                     <span>{c?.caseNo}</span>
+                  </div>
+                  <div className="w-[90px] whitespace-nowrap flex justify-between items-center py-1 px-3 rounded-[4px]">
                     <span>{c?.offense}</span>
                   </div>
-                  <div className="w-[110px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
+                  <div className="w-[120px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
                     {c?.student?.studentNo}
                   </div>
-                  <div className="w-[170px] flex justify-start items-center py-1 px-3 rounded-[4px]">
+                  <div className="w-[200px] flex justify-start items-center py-1 px-3 rounded-[4px]">
                     {`${c?.student?.firstName} ${c?.student?.surName}`.slice(
                       0,
-                      32
+                      32,
                     )}
                   </div>
                   <div className=" w-[118px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
@@ -456,25 +450,25 @@ const CasesTable = ({
                     {c?.reportedViolation?.slice(0, 18)}...
                   </div>
                   <div className=" w-[160px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
-                    {new Date(c?.dateOfIncident)?.toLocaleDateString('en-US', {
-                      month: 'long',
-                      day: 'numeric',
-                      year: 'numeric',
+                    {new Date(c?.dateOfIncident)?.toLocaleDateString("en-US", {
+                      month: "long",
+                      day: "numeric",
+                      year: "numeric",
                     })}
                   </div>
                   <div className=" w-[160px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px]">
-                    {new Date(c?.dateReported)?.toLocaleDateString('en-US', {
-                      month: 'long',
-                      day: 'numeric',
-                      year: 'numeric',
+                    {new Date(c?.dateReported)?.toLocaleDateString("en-US", {
+                      month: "long",
+                      day: "numeric",
+                      year: "numeric",
                     })}
                   </div>
-                  <div className="container flex justify-start items-center w-[144px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px] gap-3">
+                  <div className="container flex justify-center items-center w-[150px] whitespace-nowrap flex justify-start items-center py-1 px-3 rounded-[4px] gap-3">
                     <div
                       className={`${
-                        c?.statusOfCase === 'Case Solved'
-                          ? 'text-[#32CD32]'
-                          : 'text-[#006bff]'
+                        c?.statusOfCase === "Case Solved"
+                          ? "text-[#32CD32]"
+                          : "text-[#006bff]"
                       }`}
                     >
                       {c?.statusOfCase}
@@ -483,7 +477,7 @@ const CasesTable = ({
                   <div className="w-[131px] whitespace-nowrap flex justify-start items-center gap-2">
                     {selectedCases.length < 2 ? (
                       allowedRoles?.find((ar) =>
-                        auth?.userDetails?.role?.includes(ar)
+                        auth?.userDetails?.role?.includes(ar),
                       ) ? (
                         <>
                           <div
@@ -491,12 +485,12 @@ const CasesTable = ({
                             className="relative container w-[36px] h-[36px] flex justify-center items-center bg-white border-[1px] border-[#006bff] rounded-[18px] cursor-pointer"
                           >
                             <BsChevronUp className="text-[18px] text-[#006bff]" />
-                            <div className="absolute bg-gradient-to-br from-[#006bff] via-[#079bff] to-[#006bff] py-2 px-4 top-[-62px] left-[-16px] rounded-[32px] text-[#606060] additional-content z-40">
+                            <div className="absolute bg-[#006bff] py-2 px-4 top-[-62px] left-[-16px] rounded-[32px] text-[#606060] additional-content z-40">
                               <span className="text-[16px] text-white">
                                 Update status
                               </span>
                             </div>
-                            <div className="absolute top-[-38px] left-[7px] w-[20px] h-[20px] bg-gradient-to-br from-[#006bff] via-[#079bff] to-[#079bff] transform rotate-[45deg] additional-content z-10"></div>
+                            <div className="absolute top-[-38px] left-[7px] w-[20px] h-[20px] bg-[#006bff] via-[#079bff] to-[#079bff] transform rotate-[45deg] additional-content z-10"></div>
                           </div>
                           <div
                             onClick={() => handleCaseEditClick(c)}

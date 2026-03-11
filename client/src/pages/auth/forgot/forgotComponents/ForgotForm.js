@@ -8,9 +8,19 @@ const ForgotForm = ({
   emailError,
   email,
   countdown,
+  loading,
 }) => {
+  const isValid = email !== '' && emailError === '' && !loading;
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (isValid) {
+      handleSubmitEmail();
+    }
+  };
+
   return (
-    <div className="w-[500px] flex flex-col gap-4 z-20">
+    <form onSubmit={handleSubmit} className="w-[500px] flex flex-col gap-4 z-20">
       <div className="flex items-center justify-start relative">
         <FormTitle
           sx={{
@@ -28,6 +38,7 @@ const ForgotForm = ({
         <span>Email</span>
       </div>
       <input
+        autoFocus
         type="email"
         value={email}
         onChange={(e) => handleGetEmail(e)}
@@ -37,12 +48,21 @@ const ForgotForm = ({
         } focus:outline-none focus:border-[#006bff]`}
       />
       {emailError && <p className="text-red-500">{emailError}</p>}
-      <button
-        className="mt-3 p-3 border-[1px] border-[#006bff] rounded-[48px] w-[100%] bg-[#006bff] text-white"
-        onClick={handleSubmitEmail}
-      >
-        Submit
-      </button>
+      {isValid ? (
+        <button
+          type="submit"
+          className="mt-3 p-3 border-[1px] border-[#006bff] rounded-[48px] w-[100%] bg-[#006bff] text-white"
+        >
+          {loading ? 'Submitting...' : 'Submit'}
+        </button>
+      ) : (
+        <button
+          disabled
+          className="mt-3 p-3 border-[1px] border-blue-300 rounded-[48px] w-[100%] bg-white text-blue-300"
+        >
+          Submit
+        </button>
+      )}
       <div className="mt-4">
         {status === 'success' && (
           <div className="flex flex-col gap-4">
@@ -72,7 +92,7 @@ const ForgotForm = ({
           </div>
         )}
       </div>
-    </div>
+    </form>
   );
 };
 

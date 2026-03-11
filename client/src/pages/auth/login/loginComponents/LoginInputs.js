@@ -43,8 +43,20 @@ const LoginInputs = ({
     validatePassword(value);
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (
+      userNameError === '' &&
+      passwordError === '' &&
+      userName !== '' &&
+      password !== ''
+    ) {
+      handleLogin();
+    }
+  };
+
   return (
-    <div className="flex flex-col gap-8 w-full z-20">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-8 w-full z-20">
       <div className="flex flex-col gap-2">
         <div className="w-100 text-base text-[#606060]">Username</div>
         <input
@@ -85,8 +97,7 @@ const LoginInputs = ({
         userName !== '' &&
         password !== '' ? (
           <button
-            type="button"
-            onClick={handleLogin}
+            type="submit"
             className="p-3 border-[1px] border-[#006bff] rounded-[48px] w-[100%] bg-[#006bff] text-white"
           >
             Sign In
@@ -100,7 +111,7 @@ const LoginInputs = ({
           </button>
         )}
       </div>
-    </div>
+    </form>
   );
 };
 
