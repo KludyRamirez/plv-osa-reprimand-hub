@@ -9,12 +9,10 @@ const forgot = async (req, res) => {
 
     const user = await User.findOne({ email });
     if (!user) {
-      return res
-        .status(404)
-        .json({
-          message:
-            "Sorry, cannot find email. Please enter email that is associated with this website.",
-        });
+      return res.status(404).json({
+        message:
+          "Sorry, cannot find email. Please enter email that is associated with this website.",
+      });
     }
 
     const token = jwt.sign({ id: user._id }, process.env.ACCESS_TOKEN, {
@@ -33,7 +31,7 @@ const forgot = async (req, res) => {
       from: process.env.EMAIL_USER,
       to: user.email,
       subject: "Reset Password Link",
-      text: `${process.env.FRONTEND_URL}/reset-password/${user._id}/${token}`,
+      text: `${process.env.CLIENT_URI}/reset-password/${user._id}/${token}`,
     };
 
     const info = await transporter.sendMail(mailOptions);
