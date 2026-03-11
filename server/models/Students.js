@@ -16,7 +16,7 @@ const studentsSchema = new mongoose.Schema(
     statusOfStudent: {
       type: String,
       default: "Enrolled",
-      enum: ["Enrolled", "Dismissed"],
+      enum: ["Enrolled", "Dismissed", "Graduated", "Subject For Dismissal"],
     },
   },
   { timestamps: true }

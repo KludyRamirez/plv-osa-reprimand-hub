@@ -50,6 +50,13 @@ router.delete(
   mainController.controllers.deleteOneCase
 );
 
+router.put(
+  "/cases/recalculate",
+  auth,
+  role(["Administrator"]),
+  mainController.controllers.recalculateOffenses
+);
+
 router.delete(
   "/cases/deleteSelected",
   auth,

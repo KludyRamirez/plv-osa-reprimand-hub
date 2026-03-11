@@ -1,5 +1,6 @@
 const Student = require("../models/Students");
 const Notification = require("../models/Notifications");
+const Settings = require("../models/Settings");
 
 const createStudent = async (req, res) => {
   try {
@@ -39,19 +40,88 @@ const createStudent = async (req, res) => {
   }
 };
 
+const autoPromoteStudents = async () => {
+  const currentDate = new Date();
+  const currentYear = currentDate.getFullYear();
+  const currentMonth = currentDate.getMonth();
+  const currentDay = currentDate.getDate();
+
+  if (currentMonth === 7 && currentDay === 1) {
+    const setting = await Settings.findOne({ key: "lastPromotionYear" });
+
+    if (!setting || setting.value < currentYear) {
+      const maxYear = 4;
+
+      // Graduate Year 4 Enrolled students only
+      await Student.updateMany(
+        { statusOfStudent: "Enrolled", year: maxYear },
+        { $set: { statusOfStudent: "Graduated" } }
+      );
+
+      // Promote Year 1-3 students (all statuses except Graduated)
+      await Student.updateMany(
+        {
+          statusOfStudent: { $ne: "Graduated" },
+          year: { $lt: maxYear },
+        },
+        { $inc: { year: 1 } }
+      );
+
+      await Settings.findOneAndUpdate(
+        { key: "lastPromotionYear" },
+        { value: currentYear },
+        { upsert: true }
+      );
+    }
+  }
+};
+
 const getStudents = async (req, res) => {
   try {
-    const currentDate = new Date();
-
-    if (currentDate.getMonth() === 11 && currentDate.getDate() === 31) {
-      await Student.updateMany({}, { $inc: { year: 1 } });
-    }
-
+    await autoPromoteStudents();
     const students = await Student.find();
-
     res.json(students);
   } catch (error) {
     return res.status(500).send("An error occurred, please try again!");
+  }
+};
+
+const promoteStudents = async (req, res) => {
+  try {
+    const userData = req.user;
+    const maxYear = 4;
+
+    // Graduate Year 4 Enrolled students only
+    const graduated = await Student.updateMany(
+      { statusOfStudent: "Enrolled", year: maxYear },
+      { $set: { statusOfStudent: "Graduated" } }
+    );
+
+    // Promote Year 1-3 students (all statuses except Graduated)
+    const promoted = await Student.updateMany(
+      {
+        statusOfStudent: { $ne: "Graduated" },
+        year: { $lt: maxYear },
+      },
+      { $inc: { year: 1 } }
+    );
+
+    await Notification.create({
+      userId: userData._id,
+      typeOfNotif: "Students",
+      actionOfNotif: "Update",
+      message: `Promoted ${promoted.modifiedCount} student(s) to the next year level. ${graduated.modifiedCount} student(s) graduated.`,
+      createdAt: new Date(),
+    });
+
+    res.status(200).json({
+      message: `Promoted ${promoted.modifiedCount} student(s) to the next year level. ${graduated.modifiedCount} student(s) graduated.`,
+      promotedCount: promoted.modifiedCount,
+      graduatedCount: graduated.modifiedCount,
+    });
+  } catch (error) {
+    console.error("Failed to promote students.", error);
+    res.status(500).send("An error occurred while promoting students, please try again!");
   }
 };
 
@@ -161,4 +231,5 @@ module.exports = {
   editStudent,
   deleteOneStudent,
   deleteManyStudent,
+  promoteStudents,
 };

@@ -14,128 +14,30 @@ const createCase = async (req, res) => {
       newCaseNo = parseInt(latestCase.caseNo) + 1;
     }
 
-    // Find the latest reset offense number
-    const latestResetOffense = await Case.findOne({})
-      .sort({ resetOffense: -1 })
-      .limit(1);
-    let newResetOffense = 1;
-    if (
-      latestResetOffense &&
-      !isNaN(parseInt(latestResetOffense.resetOffense))
-    ) {
-      newResetOffense = parseInt(latestResetOffense.resetOffense) + 1;
-    }
-
     // Find the user
     const studentNew = await Student.findById(student);
 
-    // Count existing cases with the same criteria
+    // Count all existing cases with the same student and violation
     const existingCasesCount = await Case.countDocuments({
-      studentNo: studentNew.studentNo,
+      student: student,
       reportedViolation: reportedViolation,
-      statusOfCase: {
-        $in: [
-          "Pending",
-          "Investigation",
-          "Evaluation",
-          "Undertaking",
-          "Dismissed",
-          "Categorization",
-          "Show Cause",
-          "Referral",
-          "Hearing",
-          "Decision",
-          "Appeal",
-          "Implementation",
-        ],
-      },
-      resetOffense: 0,
     });
-    console.log(existingCasesCount);
 
-    const existingMajorCasesCount = await Case.countDocuments({
-      studentNo: studentNew.studentNo,
-      statusOfCase: {
-        $in: [
-          "Pending",
-          "Investigation",
-          "Evaluation",
-          "Undertaking",
-          "Dismissed",
-          "Categorization",
-          "Show Cause",
-          "Referral",
-          "Hearing",
-          "Decision",
-          "Appeal",
-          "Implementation",
-        ],
-      },
-      resetOffense: 0,
-      typeOfViolation: "Major",
+    const offenseLabels = ["1st", "2nd", "3rd", "4th"];
+    const offenseIndex = Math.min(existingCasesCount, 3);
+    const offense = offenseLabels[offenseIndex];
+
+    await Case.create({
+      ...req.body,
+      caseNo: newCaseNo,
+      offense,
     });
-    console.log(existingMajorCasesCount);
 
-    if (existingCasesCount === 0) {
-      await Case.create({
-        ...req.body,
-        caseNo: newCaseNo,
-        offense: "1st",
-      });
-    } else if (existingCasesCount === 1) {
-      await Case.create({
-        ...req.body,
-        caseNo: newCaseNo,
-        offense: "2nd",
-      });
-    } else if (existingCasesCount === 2) {
-      await Case.create({
-        ...req.body,
-        caseNo: newCaseNo,
-        offense: "3rd",
-      });
-    } else if (existingCasesCount === 3) {
-      await Case.create({
-        ...req.body,
-        caseNo: newCaseNo,
-        offense: "4th",
-      });
-    } else if (existingCasesCount >= 4) {
-      await Case.updateMany(
-        {
-          studentNo: studentNew.studentNo,
-          violation: reportedViolation,
-          statusOfCase: {
-            $in: [
-              "Pending",
-              "Investigation",
-              "Evaluation",
-              "Undertaking",
-              "Dismissed",
-              "Categorization",
-              "Show Cause",
-              "Referral",
-              "Hearing",
-              "Decision",
-              "Appeal",
-              "Implementation",
-            ],
-          },
-        },
-        { resetOffense: newResetOffense }
-      );
-
-      await Case.create({
-        ...req.body,
-        caseNo: newCaseNo,
-        offense: "1st",
-      });
-    }
-
-    if (existingMajorCasesCount === 3) {
+    // 4th offense of the same violation → Subject For Dismissal
+    if (existingCasesCount === 3) {
       await Student.findByIdAndUpdate(
         student,
-        { statusOfStudent: "Dismissed" },
+        { statusOfStudent: "Subject For Dismissal" },
         { new: true }
       );
     }
@@ -353,6 +255,73 @@ const deleteManyCase = async (req, res) => {
   }
 };
 
+const recalculateOffenses = async (req, res) => {
+  try {
+    const offenseLabels = ["1st", "2nd", "3rd", "4th"];
+
+    // Get all unique student (ObjectId) + violation combos
+    const combos = await Case.aggregate([
+      {
+        $group: {
+          _id: { student: "$student", reportedViolation: "$reportedViolation" },
+        },
+      },
+    ]);
+
+    let updatedCount = 0;
+    const studentsWithFourthOffense = new Set();
+
+    for (const combo of combos) {
+      const { student, reportedViolation } = combo._id;
+
+      // Get all cases for this combo sorted oldest first
+      const cases = await Case.find({ student, reportedViolation }).sort({ createdAt: 1 });
+
+      for (let i = 0; i < cases.length; i++) {
+        const label = offenseLabels[Math.min(i, 3)];
+        if (cases[i].offense !== label) {
+          await Case.findByIdAndUpdate(cases[i]._id, { offense: label });
+          updatedCount++;
+        }
+      }
+
+      // If 4+ cases, mark student as Subject For Dismissal
+      if (cases.length >= 4) {
+        studentsWithFourthOffense.add(student.toString());
+        await Student.findByIdAndUpdate(
+          student,
+          { statusOfStudent: "Subject For Dismissal" }
+        );
+      }
+    }
+
+    // Reset students who are incorrectly marked as "Subject For Dismissal"
+    // (they don't actually have 4+ cases of the same violation)
+    const incorrectStudents = await Student.find({
+      statusOfStudent: "Subject For Dismissal",
+    });
+
+    let statusResetCount = 0;
+    for (const s of incorrectStudents) {
+      if (!studentsWithFourthOffense.has(s._id.toString())) {
+        await Student.findByIdAndUpdate(s._id, {
+          statusOfStudent: "Enrolled",
+        });
+        statusResetCount++;
+      }
+    }
+
+    res.status(200).json({
+      message: `Recalculated offenses. ${updatedCount} case(s) updated. ${statusResetCount} student(s) reset from "Subject For Dismissal" to "Enrolled".`,
+      updatedCount,
+      statusResetCount,
+    });
+  } catch (error) {
+    console.error("Failed to recalculate offenses.", error);
+    res.status(500).send("An error occurred while recalculating offenses.");
+  }
+};
+
 module.exports = {
   createCase,
   getCases,
@@ -361,4 +330,5 @@ module.exports = {
   remarksCase,
   deleteOneCase,
   deleteManyCase,
+  recalculateOffenses,
 };

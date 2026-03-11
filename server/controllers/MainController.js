@@ -17,6 +17,7 @@ const { getStudent } = require("../controllers/StudentsController");
 const { editStudent } = require("../controllers/StudentsController");
 const { deleteOneStudent } = require("../controllers/StudentsController");
 const { deleteManyStudent } = require("../controllers/StudentsController");
+const { promoteStudents } = require("../controllers/StudentsController");
 
 //users
 
@@ -34,6 +35,7 @@ const { patchCase } = require("../controllers/CasesController");
 const { remarksCase } = require("../controllers/CasesController");
 const { deleteOneCase } = require("../controllers/CasesController");
 const { deleteManyCase } = require("../controllers/CasesController");
+const { recalculateOffenses } = require("../controllers/CasesController");
 
 //notification
 
@@ -62,6 +64,7 @@ exports.controllers = {
   editStudent,
   deleteOneStudent,
   deleteManyStudent,
+  promoteStudents,
   //
   getUsers,
   editUser,
@@ -75,6 +78,7 @@ exports.controllers = {
   remarksCase,
   deleteOneCase,
   deleteManyCase,
+  recalculateOffenses,
   //
   getNotifications,
   //

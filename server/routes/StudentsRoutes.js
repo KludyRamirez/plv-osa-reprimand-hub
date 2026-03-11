@@ -43,6 +43,13 @@ router.delete(
   mainController.controllers.deleteOneStudent
 );
 
+router.put(
+  "/students/promote",
+  auth,
+  role(["Administrator"]),
+  mainController.controllers.promoteStudents
+);
+
 router.delete(
   "/students/deleteSelected",
   auth,

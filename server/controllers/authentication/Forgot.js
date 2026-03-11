@@ -33,7 +33,7 @@ const forgot = async (req, res) => {
       from: process.env.EMAIL_USER,
       to: user.email,
       subject: "Reset Password Link",
-      text: `http://localhost:3000/reset-password/${user._id}/${token}`,
+      text: `${process.env.FRONTEND_URL}/reset-password/${user._id}/${token}`,
     };
 
     const info = await transporter.sendMail(mailOptions);
