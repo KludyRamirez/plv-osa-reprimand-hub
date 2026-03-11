@@ -97,9 +97,8 @@ const deleteOneUser = async (req, res) => {
       message: `User ${deletedUser.userName} has been deleted successfully.`,
     });
   } catch (err) {
-    const deletedUser = await User.findByIdAndDelete(req.params.id);
     res.status(400).json({
-      message: `User ${deletedUser.userName} was not deleted.`,
+      message: "User was not deleted.",
     });
   }
 };
@@ -110,8 +109,8 @@ const deleteManyUser = async (req, res) => {
   try {
     const { users } = req.body;
 
-    if (!users) {
-      return res.status(404).json({ error: "Cannot find selected users." });
+    if (!Array.isArray(users) || users.length === 0) {
+      return res.status(400).json({ error: "Invalid users array." });
     }
 
     await User.deleteMany({ _id: { $in: users } });

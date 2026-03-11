@@ -5,6 +5,9 @@ const cors = require('cors');
 const fs = require('fs').promises;
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
+const helmet = require('helmet');
+const mongoSanitize = require('express-mongo-sanitize');
+const rateLimit = require('express-rate-limit');
 require('dotenv').config();
 
 const PORT = process.env.API_PORT;
@@ -16,12 +19,34 @@ const server = http.createServer(app);
 
 mongoose.set('strictQuery', true);
 
+const generalLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+  message: { message: 'Too many requests, please try again later.' },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 15,
+  message: { message: 'Too many attempts, please try again after 15 minutes.' },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
 const setupMiddleware = () => {
+  app.use(helmet());
   app.use(morgan('dev'));
   app.use(cors({ origin: CLIENT_URI, credentials: true }));
   app.use(cookieParser());
-  app.use(express.json());
+  app.use(express.json({ limit: '1mb' }));
   app.use(express.urlencoded({ extended: true }));
+  app.use(mongoSanitize());
+  app.use(generalLimiter);
+  app.use('/api/login', authLimiter);
+  app.use('/api/forgot', authLimiter);
+  app.use('/api/resetpassword', authLimiter);
 };
 
 const loadRoutes = async () => {

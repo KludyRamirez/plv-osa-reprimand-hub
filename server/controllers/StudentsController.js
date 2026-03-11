@@ -18,7 +18,15 @@ const createStudent = async (req, res) => {
         .send("Student no. already exist. Please try again.");
     }
 
-    const newStudent = await Student.create(req.body);
+    const {
+      middleName, college, department, year, section,
+      sex, contactNo, guardianContactNo, email, statusOfStudent,
+    } = req.body;
+
+    const newStudent = await Student.create({
+      studentNo, firstName, surName, middleName, college, department,
+      year, section, sex, contactNo, guardianContactNo, email, statusOfStudent,
+    });
 
     await Notification.create({
       userId: userData._id,
@@ -146,14 +154,18 @@ const editStudent = async (req, res) => {
 
     const { id } = req.params;
 
+    const {
+      firstName, surName, middleName, college, department,
+      year, section, sex, contactNo, guardianContactNo, email, statusOfStudent,
+    } = req.body;
+
     const student = await Student.findByIdAndUpdate(
       id,
       {
-        ...req.body,
+        studentNo, firstName, surName, middleName, college, department,
+        year, section, sex, contactNo, guardianContactNo, email, statusOfStudent,
       },
-      {
-        new: true,
-      }
+      { new: true }
     );
 
     await Notification.create({
@@ -206,6 +218,11 @@ const deleteManyStudent = async (req, res) => {
     const userData = req.user;
 
     const { students } = req.body;
+
+    if (!Array.isArray(students) || students.length === 0) {
+      return res.status(400).json({ message: "Invalid students array." });
+    }
+
     await Student.deleteMany({ _id: { $in: students } });
 
     await Notification.create({

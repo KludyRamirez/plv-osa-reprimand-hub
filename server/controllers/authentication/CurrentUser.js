@@ -8,8 +8,6 @@ const changeEmail = async (req, res) => {
 
     const userData = req.user;
 
-    console.log("email", email);
-
     const user = await User.findOne({ userName: userData.userName });
 
     if (!user) {
@@ -32,7 +30,7 @@ const changeEmail = async (req, res) => {
       .status(200)
       .json({ message: "Your email has been updated successfully." });
   } catch (error) {
-    return res.status(500).json({ message: "Error updating email", error });
+    return res.status(500).json({ message: "Error updating email." });
   }
 };
 
@@ -68,8 +66,7 @@ const changePassword = async (req, res) => {
       .status(200)
       .json({ message: "Your password has been updated successfully." });
   } catch (error) {
-    console.error(error);
-    return res.status(500).json({ message: "Error updating password", error });
+    return res.status(500).json({ message: "Error updating password." });
   }
 };
 

@@ -27,8 +27,16 @@ const createCase = async (req, res) => {
     const offenseIndex = Math.min(existingCasesCount, 3);
     const offense = offenseLabels[offenseIndex];
 
+    const {
+      studentNo, studentName, typeOfViolation,
+      dateOfIncident, dateReported, statusOfCase,
+      resetOffense, dismissalDate, appeal, caseSolvedDate, remarks, year,
+    } = req.body;
+
     await Case.create({
-      ...req.body,
+      student, reportedViolation, studentNo, studentName, typeOfViolation,
+      dateOfIncident, dateReported, statusOfCase,
+      resetOffense, dismissalDate, appeal, caseSolvedDate, remarks, year,
       caseNo: newCaseNo,
       offense,
     });
@@ -79,14 +87,20 @@ const editCase = async (req, res) => {
   try {
     const userData = req.user;
 
-    const { caseNo } = req.body;
+    const {
+      caseNo, student, studentNo, studentName, reportedViolation,
+      typeOfViolation, dateOfIncident, dateReported, statusOfCase,
+      offense, resetOffense, dismissalDate, appeal, caseSolvedDate, remarks, year,
+    } = req.body;
 
     const { id } = req.params;
 
     const theCase = await Case.findByIdAndUpdate(
       id,
       {
-        ...req.body,
+        caseNo, student, studentNo, studentName, reportedViolation,
+        typeOfViolation, dateOfIncident, dateReported, statusOfCase,
+        offense, resetOffense, dismissalDate, appeal, caseSolvedDate, remarks, year,
       },
       {
         new: true,
@@ -115,18 +129,14 @@ const patchCase = async (req, res) => {
   try {
     const userData = req.user;
 
-    const { caseNo } = req.body;
+    const { caseNo, statusOfCase } = req.body;
 
     const { id } = req.params;
 
     const theCase = await Case.findByIdAndUpdate(
       id,
-      {
-        ...req.body,
-      },
-      {
-        new: true,
-      }
+      { statusOfCase },
+      { new: true }
     );
 
     await Notification.create({
@@ -151,18 +161,14 @@ const remarksCase = async (req, res) => {
   try {
     const userData = req.user;
 
-    const { caseNo } = req.body;
+    const { caseNo, remarks } = req.body;
 
     const { id } = req.params;
 
     const theCase = await Case.findByIdAndUpdate(
       id,
-      {
-        ...req.body,
-      },
-      {
-        new: true,
-      }
+      { remarks },
+      { new: true }
     );
 
     await Notification.create({
@@ -237,6 +243,11 @@ const deleteManyCase = async (req, res) => {
     const userData = req.user;
 
     const { cases } = req.body;
+
+    if (!Array.isArray(cases) || cases.length === 0) {
+      return res.status(400).json({ message: "Invalid cases array." });
+    }
+
     await Case.deleteMany({ _id: { $in: cases } });
 
     await Notification.create({
