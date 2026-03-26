@@ -46,12 +46,14 @@ app.use("/api/login", authLimiter);
 app.use("/api/forgot", authLimiter);
 app.use("/api/resetpassword", authLimiter);
 
+const path = require("path");
+
 const loadRoutes = async () => {
   try {
-    const routeFiles = await fs.readdir("./routes");
+    const routeFiles = await fs.readdir(path.join(__dirname, "routes"));
     routeFiles.forEach((file) => {
       if (file.endsWith(".js")) {
-        const route = require(`./routes/${file}`);
+        const route = require(path.join(__dirname, "routes", file));
         app.use("/api", route);
       }
     });
