@@ -1,5 +1,4 @@
 const express = require('express');
-const http = require('http');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const fs = require('fs').promises;
@@ -15,7 +14,6 @@ const MONGO_URI = process.env.MONGO_URI;
 const CLIENT_URI = process.env.CLIENT_URI;
 
 const app = express();
-const server = http.createServer(app);
 
 mongoose.set('strictQuery', true);
 
@@ -63,26 +61,25 @@ const loadRoutes = async () => {
   }
 };
 
-const startServer = async () => {
+const initPromise = (async () => {
   try {
-    await mongoose.connect(MONGO_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    await mongoose.connect(MONGO_URI);
     console.log('Connected to MongoDB');
 
     setupMiddleware();
     await loadRoutes();
+  } catch (error) {
+    console.error('Failed to initialize server:', error);
+  }
+})();
 
-    server.listen(PORT, () => {
+// For local development
+if (PORT) {
+  initPromise.then(() => {
+    app.listen(PORT, () => {
       console.log(`Server is listening on port ${PORT}`);
     });
-  } catch (error) {
-    console.error(
-      'Failed to start the server or connect to the database:',
-      error
-    );
-  }
-};
+  });
+}
 
-startServer();
+module.exports = app;
