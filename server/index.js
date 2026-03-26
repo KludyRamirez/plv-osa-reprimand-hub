@@ -7,6 +7,7 @@ const cookieParser = require("cookie-parser");
 const helmet = require("helmet");
 const mongoSanitize = require("express-mongo-sanitize");
 const rateLimit = require("express-rate-limit");
+const path = require("path");
 require("dotenv").config();
 
 const PORT = process.env.API_PORT;
@@ -46,8 +47,6 @@ app.use("/api/login", authLimiter);
 app.use("/api/forgot", authLimiter);
 app.use("/api/resetpassword", authLimiter);
 
-const path = require("path");
-
 const loadRoutes = async () => {
   try {
     const routeFiles = await fs.readdir(path.join(__dirname, "routes"));
@@ -71,6 +70,12 @@ const initPromise = (async () => {
     console.error("Failed to initialize server:", error);
   }
 })();
+
+// Readiness gate — ensures DB and routes are ready before handling requests
+app.use(async (req, res, next) => {
+  await initPromise;
+  next();
+});
 
 // For local development
 if (PORT) {
